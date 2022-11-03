@@ -1,0 +1,30 @@
+{
+    "name": "Threatslayer",
+    "version": "0.0.0",
+    "description": "Automatically scan and block malicious websites..",
+    "manifest_version": 3,
+    "icons": { "16": "icon16.png",
+               "48": "icon48.png",
+               "128": "icon128.png" },
+    "author": "Interlock",
+    "action":{
+        "default_popup": "index.html",
+        "default_title": "Threatslayer Active."
+    },
+    "content_scripts": [
+        {
+        "matches": ["*://*/*"],
+        "js": ["script.js"]
+    }
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "permissions": ["scripting", "activeTab"],
+    "host_permissions": [
+        "http://bouncer.interlock.network/*",
+        "https://bouncer.interlock.network/*",
+        "http://www.bouncer.interlock.network/*",
+        "https://www.bouncer.interlock.network/*"
+    ]
+}
