@@ -47,6 +47,8 @@ outlined with a yellow dotted border.
 
 1. Open Chrome or compatible browser (Brave, etc.)
 
+1. Put browwser in dev-mode (if available)
+
 1. Go to "Manage extensions"
 
 1. Click "Load unpacked" button -- file browser will open
