@@ -41,6 +41,20 @@ outlined with a yellow dotted border.
 
 <img width="421" alt="ThreatSlayer reacting to a malicious link" src="docs/threatslayer-unscanned.png">
 
+# Installation
+
+1. Clone repo locally
+
+1. Open Chrome or compatible browser (Brave, etc.)
+
+1. Go to "Manage extensions"
+
+1. Click "Load unpacked" button -- file browser will open
+
+1. Browse to repo and select the `/source` directory
+
+1. ThreatSlayer should be installed and active!
+
 # Infrastructure
 
 All of ThreatSlayer's URL scanning is performed via Interlock's DigitalOcean
