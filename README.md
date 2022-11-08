@@ -2,10 +2,10 @@
 
 <img src="docs/icon.png" align="right" width="250" height="250"/>
 
-ThreatSlayer is a Chrome extension from Interlock that instantly 
-identifies and isolates malicious sites. It does this by querying our
+ThreatSlayer is an extension for Chrome and compatible browsers that instantly 
+identifies and isolates malicious sites. It does this by querying Interlock's
 database of known-malicious sites. If the site is new, we use our
-proprietary visual AI to identify 0-day phishing sites. Setup takes
+proprietary visual AI that identifies 0-day phishing sites. Setup takes
 just a minute or two and it begins protecting you instantly.
 
 ThreatSlayer is a project of [Interlock](https://www.interlock.network/), a web3 company that is
