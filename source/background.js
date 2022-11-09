@@ -1,5 +1,5 @@
 /**
- * This is the main background script for Threatslayer.
+ * This is the main background script for ThreatSlayer.
  */
 
 var APIUrl = "https://octahedron.interlock.network/malicious_p";
@@ -11,7 +11,7 @@ var APIKey = "threatslayer-api-key";
  * `chrome.runtime.sendMessage`.
  */
 chrome.runtime.onMessage.addListener(
-    function(request, sender, sendResponse) {
+    function(request, _sender, sendResponse) {
         if (request.contentScriptQuery == "queryURL") {
             fetch(APIUrl,
                   {
@@ -25,7 +25,8 @@ chrome.runtime.onMessage.addListener(
                   })
                 .then(response => response.json())
                 .then(response => sendResponse(response))
-                .catch(error => console.log(error))
+                .catch(error => console.log(`Error in addListener: ${error}`))
+                
             return true;
         }
     });
