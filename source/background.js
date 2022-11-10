@@ -2,7 +2,7 @@
  * This is the main background script for Threatslayer.
  */
 
-var APIUrl = "http://bouncer.interlock.network:4000/malicious_p";
+var APIUrl = "https://octahedron.interlock.network/malicious_p";
 var APIKey = "threatslayer-api-key";
 
 /**
