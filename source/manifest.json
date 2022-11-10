@@ -20,6 +20,12 @@
     "background": {
         "service_worker": "background.js"
     },
+    "web_accessible_resources": [
+        {
+          "resources": ["popup.html"],
+          "matches": ["<all_urls>"]
+        }
+      ],    
     "permissions": ["scripting", "activeTab"],
     "host_permissions": [
         "http://bouncer.interlock.network/*",

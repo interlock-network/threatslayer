@@ -1,4 +1,4 @@
-/** This script is the main content script used by ThreatSlayer. It is
+/** This script is the main content script used by Threatslayer. It is
  * executed every time the user visits a page.
  */
 
@@ -13,17 +13,32 @@
  *
  * @param {} response - the response from the API, an object with an attribute of `malicious`
  */
-function handleAPIResponse(response) {
-    const { href = undefined } = window.location;
+ function handleAPIResponse(response) {
+    const {href} = window.location;
+
     if (response == null) {
-        console.log(`API unresponsive. Cannot verify safety of: ${href}.`);
-        document.body.style.border = "4px dashed yellow";
+        console.log(`API Unresponsive. Cannot verify safety of URL ${href} .`);
     } else if (response.malicious == false) {
         console.log(`URL ${href} not classified as malicious.`);
     } else if (response.malicious == true) {
-        alert(`The URL you are visiting ${href} is potentially malicious! Proceed at your own risk.`);
-        document.body.style.border = "4px dashed red";
-    }
+        const iframe = document.createElement('iframe');
+
+        iframe.setAttribute('id', 'threatslayer-frame');
+        iframe.setAttribute(
+          'style',
+          `background: red;
+          bottom: 10px;
+            height: 150px;
+            position: fixed;
+            right: 10px;
+            width: 100%;
+            z-index: 2147483647;`
+        );
+        iframe.setAttribute('allow', '');
+        iframe.src = chrome.runtime.getURL('popup.html');
+
+        document.body.appendChild(iframe);
+      }
 }
 
 /**
@@ -35,7 +50,7 @@ function handleAPIResponse(response) {
 chrome.runtime.sendMessage(
     {contentScriptQuery: "queryURL", url: window.location.href},
     function (response) {
-        if (response?.length) {
+        if (response && response !== "") {
             handleAPIResponse(response);
         } else {
             handleAPIResponse(null);
