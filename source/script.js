@@ -37,10 +37,10 @@ function handleAPIResponse(response) {
         console.log("API Unresponsive. Cannot verify safety of: " +
                     window.location.href +
                     ".");
-		// finish up wrapped html and inject into body
-		box.style.border = "6px dashed yellow";
-		boxWrapper.appendChild(box);
-		document.body.insertBefore(boxWrapper, document.body.childNodes[0]);
+	// finish up wrapped html and inject into body
+	box.style.border = "6px dashed yellow";
+	boxWrapper.appendChild(box);
+	document.body.insertBefore(boxWrapper, document.body.childNodes[0]);
 
     } else if (response.malicious == false)
     {
@@ -53,10 +53,10 @@ function handleAPIResponse(response) {
         alert("The URL you are visiting: " + 
               window.location.href + 
               " is potentially malicious! Proceed at your own risk.");
-		// finish up wrapped html and inject into body
-		box.style.border = "6px dashed red";
-		boxWrapper.appendChild(box);
-		document.body.insertBefore(boxWrapper, document.body.childNodes[0]);
+	// finish up wrapped html and inject into body
+	box.style.border = "6px dashed red";
+	boxWrapper.appendChild(box);
+	document.body.insertBefore(boxWrapper, document.body.childNodes[0]);
     }
 }
 
