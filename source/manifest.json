@@ -3,8 +3,8 @@
     "version": "0.0.1",
     "description": "Automatically scan and block malicious websites.",
     "manifest_version": 3,
-    "icons": { "16": "icon16.png",
-               "48": "icon48.png",
+    "icons": { "16": "icon128.png",
+               "48": "icon128.png",
                "128": "icon128.png" },
     "author": "Interlock",
     "action":{

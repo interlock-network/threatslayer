@@ -29,8 +29,10 @@
           `background: red;
           bottom: 10px;
             height: 150px;
+            overflow: hidden;
+            overscroll-behavior: none;
             position: fixed;
-            right: 10px;
+            -webkit-overflow-scrolling: none;
             width: 100%;
             z-index: 2147483647;`
         );
