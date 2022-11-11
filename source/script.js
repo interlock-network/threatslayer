@@ -15,13 +15,7 @@
  */
 function handleAPIResponse(response) {
 	
-	// prepare visual indicator canvas object
-	//
-	// NOTE: The ideal way to accomplish this is to inject CSS and script via
-	//		 chrome.scripting.executeScript and chrome.scripting.insertCSS.
-	//		 I cannot however, figure out how to get chrome.scripting to work
-	//		 outside the background env. This is ugly and should be refactored.
-	//
+	// prepare dashed line visual indicator canvas object
 	var box = document.createElement("canvas");
 	var boxWrapper = document.createElement("div");
 	box.style.bottom = "auto";
@@ -30,7 +24,6 @@ function handleAPIResponse(response) {
 	box.style.height = "100%";
 	box.style.zIndex = "40000";
 	box.style.pointerEvents = "none";
-	
 	
     if (response == null)
     {
