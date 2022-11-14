@@ -14,7 +14,7 @@
  * @param {} response - the response from the API, an object with an attribute of `malicious`
  */
  function handleAPIResponse(response) {
-    const {href} = window.location;
+    let {href} = window.location;
 
     if (response == null) {
         console.log(`API Unresponsive. Cannot verify safety of URL ${href} .`);

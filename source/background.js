@@ -7,7 +7,7 @@ var APIUrl = "https://octahedron.interlock.network/malicious_p";
 var APIKey = "threatslayer-api-key";
 =======
  const APIUrl = "https://octahedron.interlock.network/malicious_p";
- const key = "threatslayer-api-key";
+ const APIkey = "threatslayer-api-key";
  
  /**
   * This listener is responsible for handling messages from content
@@ -27,7 +27,7 @@ var APIKey = "threatslayer-api-key";
                            'Accept': 'application/json',
                            'Content-Type': 'application/json'
                        },
-                       body: JSON.stringify({key, url})
+                       body: JSON.stringify({key: APIkey, url})
                    })
                  .then(response => response.json())
                  .then(response => sendResponse(response))
