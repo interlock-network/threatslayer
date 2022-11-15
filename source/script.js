@@ -15,31 +15,26 @@
  */
  function handleAPIResponse(response) {
     let {href} = window.location;
+    const maxZIndex = 2147483647;
 
     if (response == null) {
         console.log(`API Unresponsive. Cannot verify safety of URL ${href} .`);
     } else if (response.malicious == false) {
         console.log(`URL ${href} not classified as malicious.`);
     } else if (response.malicious == true) {
-        const iframe = document.createElement('iframe');
+        const popup = document.createElement('iframe');
 
-        iframe.setAttribute('id', 'threatslayer-frame');
-        iframe.setAttribute(
-          'style',
-          `background: red;
-          bottom: 10px;
-            height: 150px;
-            overflow: hidden;
-            overscroll-behavior: none;
-            position: fixed;
-            -webkit-overflow-scrolling: none;
-            width: 100%;
-            z-index: 2147483647;`
-        );
-        iframe.setAttribute('allow', '');
-        iframe.src = chrome.runtime.getURL('popup.html');
+        popup.setAttribute('id', 'threatslayer-popup');
+        popup.setAttribute('allow', '');
 
-        document.body.appendChild(iframe);
+        popup.style.top = '0px';
+        popup.style.position = 'fixed';
+        popup.style.width = '100%';
+        popup.style.height = '100%';
+        popup.style.zIndex = maxZIndex;
+        popup.src = chrome.runtime.getURL('popup.html');
+
+        document.body.appendChild(popup);
       }
 }
 

@@ -2,10 +2,6 @@
  * This is the main background script for Threatslayer.
  */
 
-<<<<<<< HEAD
-var APIUrl = "https://octahedron.interlock.network/malicious_p";
-var APIKey = "threatslayer-api-key";
-=======
  const APIUrl = "https://octahedron.interlock.network/malicious_p";
  const APIkey = "threatslayer-api-key";
  
@@ -17,7 +13,6 @@ var APIKey = "threatslayer-api-key";
  chrome.runtime.onMessage.addListener(
      function(request, _sender, sendResponse) {
         const {contentScriptQuery, url} = request;
->>>>>>> 21a51af (fixing iframes)
 
          if (contentScriptQuery == "queryURL") {
              fetch(APIUrl,

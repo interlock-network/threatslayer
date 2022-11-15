@@ -3,27 +3,29 @@
     "version": "0.0.1",
     "description": "Automatically scan and block malicious websites.",
     "manifest_version": 3,
-    "icons": { "16": "icon128.png",
-               "48": "icon128.png",
-               "128": "icon128.png" },
+    "icons": { 
+        "16": "icon128.png",
+        "48": "icon128.png",
+        "128": "icon128.png" 
+    },
     "author": "Interlock",
-    "action":{
+    "action": {
         "default_popup": "index.html",
         "default_title": "ThreatSlayer Active."
     },
     "content_scripts": [
         {
-        "matches": ["*://*/*"],
-        "js": ["script.js"]
-    }
+            "js": ["script.js"],
+            "matches": ["*://*/*"]
+        }
     ],
     "background": {
         "service_worker": "background.js"
     },
     "web_accessible_resources": [
         {
-          "resources": ["popup.html"],
-          "matches": ["<all_urls>"]
+            "matches": ["*://*/*"],
+            "resources": ["popup.html"]
         }
       ],    
     "permissions": ["scripting", "activeTab"],
