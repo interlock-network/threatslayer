@@ -1,7 +1,7 @@
-/** This script is the main content script used by Threatslayer. It is
+/**
+ * This script is the main content script used by Threatslayer. It is
  * executed every time the user visits a page.
  */
-
 
 /**
  * This function handles the response from the API. If the response
@@ -14,22 +14,19 @@
  * @param {} response - the response from the API, an object with an attribute of `malicious`
  */
 function handleAPIResponse(response) {
-
     if (response == null)
     {
         console.log("API Unresponsive. Cannot verify safety of: " +
                     window.location.href +
                     ".");
-
     } else if (response.malicious == false)
     {
         console.log("URL " +
                     window.location.href +
                     " not classified as malicious.");
-
     } else if (response.malicious == true)
     {
-	    chrome.runtime.sendMessage("injectBanner")
+        chrome.runtime.sendMessage("injectBanner")
     }
 }
 
@@ -41,7 +38,6 @@ function handleAPIResponse(response) {
  */
 chrome.runtime.sendMessage(
     {contentScriptQuery: "queryURL", url: window.location.href},
-
     function (response) {
         if (response != undefined && response != "") {
             handleAPIResponse(response);

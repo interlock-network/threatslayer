@@ -4,12 +4,12 @@
     "description": "Automatically scan and block malicious websites..",
     "manifest_version": 3,
     "icons": {
-		"16": "icon16.png",
+        "16": "icon16.png",
         "48": "icon48.png",
         "128": "icon128.png"
-	},
+    },
     "author": "Interlock",
-    "action":{
+    "action": {
         "default_popup": "index.html",
         "default_title": "Threatslayer Active."
     },
@@ -20,19 +20,19 @@
     }
     ],
     "web_accessible_resources": [
-	    {
-		    "resources": ["icon48.png"],
-		    "matches": ["*://*/*"]
-	    }
+        {
+            "resources": ["icon48.png"],
+            "matches": ["*://*/*"]
+        }
     ],
     "background": {
         "service_worker": "background.js"
     },
     "permissions": [
-	    "scripting"
+        "scripting"
     ],
     "host_permissions": [
-	"*://*/*",
+    "*://*/*",
         "http://bouncer.interlock.network/*",
         "https://bouncer.interlock.network/*",
         "http://www.bouncer.interlock.network/*",
