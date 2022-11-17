@@ -20,7 +20,7 @@
     "background": {
         "service_worker": "background.js"
     },
-    "permissions": ["scripting", "activeTab"],
+    "permissions": ["scripting", "activeTab", "storage"],
     "host_permissions": [
         "http://bouncer.interlock.network/*",
         "https://bouncer.interlock.network/*",

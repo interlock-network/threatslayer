@@ -6,7 +6,12 @@ let button1 = document.getElementById("getStats");
 let button2 = document.getElementById("goToSite");
 
 function getStats() {
-	window.close();
+
+	chrome.storage.sync.get(['visited', 'malicious'], function(result) {
+
+		alert("So far, Threatslayer scanned " + result.test +
+		      " websites, and blocked " + result.malicious + " malicious websites.");
+	});
 }
 
 function goToSite() {
