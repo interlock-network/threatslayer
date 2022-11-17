@@ -25,16 +25,15 @@ chrome.runtime.onMessage.addListener(
                 })
                 .then(response => response.json())
                 .then(response => sendResponse(response))
-                .catch(error => console.log(error))
+                .catch(error => console.log(error));
             return true;
         } else if (request == "injectBanner") {
-
             // inject styling
             chrome.scripting.insertCSS(
                 {
                     target: {tabId: sender.tab.id},
                     files: ["banner.css"]
-                })
+                });
             // inject script
             chrome.scripting.executeScript(
                 {
@@ -42,7 +41,7 @@ chrome.runtime.onMessage.addListener(
                     files: ["banner.js"]
                 })
                 .then(response => sendResponse(response))
-                .catch(error => console.log(error))
+                .catch(error => console.log(error));
             return true;
         }
     });

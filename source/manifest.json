@@ -17,7 +17,7 @@
         {
         "js": ["script.js"],
         "matches": ["*://*/*"]
-    }
+        }
     ],
     "web_accessible_resources": [
         {
@@ -32,7 +32,7 @@
         "scripting"
     ],
     "host_permissions": [
-    "*://*/*",
+        "*://*/*",
         "http://bouncer.interlock.network/*",
         "https://bouncer.interlock.network/*",
         "http://www.bouncer.interlock.network/*",

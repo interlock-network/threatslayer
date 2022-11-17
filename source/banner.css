@@ -45,7 +45,7 @@
 }
 
 #warningbanner-close:after {
-    content: 'CLOSE';
+    content: 'DISMISS';
 }
 
 #box {
