@@ -8,7 +8,7 @@
                "128": "icon128.png" },
     "author": "Interlock",
     "action":{
-        "default_popup": "index.html",
+        "default_popup": "dropdown.html",
         "default_title": "Threatslayer Active."
     },
     "content_scripts": [
