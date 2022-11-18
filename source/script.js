@@ -14,42 +14,65 @@
  * @param {} response - the response from the API, an object with an attribute of `malicious`
  */
 function handleAPIResponse(response) {
-	
-	// prepare dashed line visual indicator canvas object
-	var box = document.createElement("canvas");
-	var boxWrapper = document.createElement("div");
-	box.style.bottom = "auto";
-	box.style.position = "fixed";
-	box.style.width = "100%";
-	box.style.height = "100%";
-	box.style.zIndex = "40000";
-	box.style.pointerEvents = "none";
-	
+    
+    // prepare dashed line visual indicator canvas object
+    var box = document.createElement("canvas");
+    var boxWrapper = document.createElement("div");
+    box.style.bottom = "auto";
+    box.style.position = "fixed";
+    box.style.width = "100%";
+    box.style.height = "100%";
+    box.style.zIndex = "40000";
+    box.style.pointerEvents = "none";
+    
     if (response == null)
     {
         console.log("API Unresponsive. Cannot verify safety of: " +
                     window.location.href +
                     ".");
-	// finish up wrapped html and inject into body
-	box.style.border = "6px dashed yellow";
-	boxWrapper.appendChild(box);
-	document.body.insertBefore(boxWrapper, document.body.childNodes[0]);
+    // finish up wrapped html and inject into body
+    box.style.border = "6px dashed yellow";
+    boxWrapper.appendChild(box);
+    document.body.insertBefore(boxWrapper, document.body.childNodes[0]);
 
     } else if (response.malicious == false)
     {
+        chrome.storage.sync.get(['visited', 'malicious'], function(result) {
+        let visited;
+        if (result.visited == undefined) {
+            vistited = 1;
+        } else
+        {
+            visited= result.visited + 1;
+        }
+        chrome.storage.sync.set({'visited': visited}, function() {})
+        });
         console.log("URL " +
                     window.location.href +
                     " not classified as malicious.");
 
     } else if (response.malicious == true)
     {
+
+        chrome.storage.sync.get(['visited', 'malicious'], function(result) {
+        let malicious;
+        if (result.malicious == undefined) {
+            malicious = 1;
+        } else
+        {
+            malicious= result.malicious + 1;
+        }
+        chrome.storage.sync.set({'malicious': malicious}, function() {})
+        });
         alert("The URL you are visiting: " + 
               window.location.href + 
               " is potentially malicious! Proceed at your own risk.");
-	// finish up wrapped html and inject into body
-	box.style.border = "6px dashed red";
-	boxWrapper.appendChild(box);
-	document.body.insertBefore(boxWrapper, document.body.childNodes[0]);
+    // finish up wrapped html and inject into body
+    box.style.border = "6px dashed red";
+    boxWrapper.appendChild(box);
+    document.body.insertBefore(boxWrapper, document.body.childNodes[0]);
+
+
     }
 }
 
@@ -69,3 +92,8 @@ chrome.runtime.sendMessage(
             handleAPIResponse(null);
         }
     });
+
+
+
+
+
