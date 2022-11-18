@@ -26,7 +26,7 @@ function handleAPIResponse(response) {
                     " not classified as malicious.");
     } else if (response.malicious == true)
     {
-        chrome.runtime.sendMessage("injectBanner");
+        chrome.runtime.sendMessage("displayWarningBanner");
     }
 }
 

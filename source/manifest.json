@@ -32,7 +32,7 @@
         "scripting"
     ],
     "host_permissions": [
-        "*://*/*",
+        "<all_urls>",
         "http://bouncer.interlock.network/*",
         "https://bouncer.interlock.network/*",
         "http://www.bouncer.interlock.network/*",

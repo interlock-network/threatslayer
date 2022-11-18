@@ -34,18 +34,18 @@
     z-index:2147483647;
 }
 #warningbanner-close {
-    font: 18px/150% arial, sans-serif;
-    position: absolute;
-    right: 15px;
-    text-decoration: none;
-    top: 12px;
+    font:18px/150% arial, sans-serif;
+    position:absolute;
+    right:15px;
+    text-decoration:none;
+    top:12px;
     color:white;
     cursor:pointer;
     z-index:2147483647;
 }
 
 #warningbanner-close:after {
-    content: 'I TRUST THIS SITE';
+    content:'I TRUST THIS SITE';
 }
 
 #box {

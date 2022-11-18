@@ -27,14 +27,14 @@ chrome.runtime.onMessage.addListener(
                 .then(response => sendResponse(response))
                 .catch(error => console.log(error));
             return true;
-        } else if (request == "injectBanner") {
+        } else if (request == "displayWarningBanner") {
             // inject styling
             chrome.scripting.insertCSS(
                 {
                     target: {tabId: sender.tab.id},
                     files: ["banner.css"]
                 });
-            // inject script
+            // execute script
             chrome.scripting.executeScript(
                 {
                     target: {tabId: sender.tab.id},
