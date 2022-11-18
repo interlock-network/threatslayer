@@ -1,7 +1,7 @@
-/** This script is the main content script used by Threatslayer. It is
+/**
+ * This script is the main content script used by Threatslayer. It is
  * executed every time the user visits a page.
  */
-
 
 /**
  * This function handles the response from the API. If the response
@@ -14,42 +14,19 @@
  * @param {} response - the response from the API, an object with an attribute of `malicious`
  */
 function handleAPIResponse(response) {
-	
-	// prepare dashed line visual indicator canvas object
-	var box = document.createElement("canvas");
-	var boxWrapper = document.createElement("div");
-	box.style.bottom = "auto";
-	box.style.position = "fixed";
-	box.style.width = "100%";
-	box.style.height = "100%";
-	box.style.zIndex = "40000";
-	box.style.pointerEvents = "none";
-	
     if (response == null)
     {
         console.log("API Unresponsive. Cannot verify safety of: " +
                     window.location.href +
                     ".");
-	// finish up wrapped html and inject into body
-	box.style.border = "6px dashed yellow";
-	boxWrapper.appendChild(box);
-	document.body.insertBefore(boxWrapper, document.body.childNodes[0]);
-
     } else if (response.malicious == false)
     {
         console.log("URL " +
                     window.location.href +
                     " not classified as malicious.");
-
     } else if (response.malicious == true)
     {
-        alert("The URL you are visiting: " + 
-              window.location.href + 
-              " is potentially malicious! Proceed at your own risk.");
-	// finish up wrapped html and inject into body
-	box.style.border = "6px dashed red";
-	boxWrapper.appendChild(box);
-	document.body.insertBefore(boxWrapper, document.body.childNodes[0]);
+        chrome.runtime.sendMessage("displayWarningBanner");
     }
 }
 

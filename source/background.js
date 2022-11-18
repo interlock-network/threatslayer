@@ -14,18 +14,34 @@ chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
         if (request.contentScriptQuery == "queryURL") {
             fetch(APIUrl,
-                  {
-                      method: 'POST',
-                      headers: {
-                          'Accept': 'application/json',
-                          'Content-Type': 'application/json'
-                      },
-                      body: JSON.stringify({key: APIKey,
-                                            url: request.url})
-                  })
+                {
+                     method: 'POST',
+                     headers: {
+                         'Accept': 'application/json',
+                         'Content-Type': 'application/json'
+                     },
+                     body: JSON.stringify({key: APIKey,
+                                           url: request.url})
+                })
                 .then(response => response.json())
                 .then(response => sendResponse(response))
-                .catch(error => console.log(error))
+                .catch(error => console.log(error));
+            return true;
+        } else if (request == "displayWarningBanner") {
+            // inject styling
+            chrome.scripting.insertCSS(
+                {
+                    target: {tabId: sender.tab.id},
+                    files: ["banner.css"]
+                });
+            // execute script
+            chrome.scripting.executeScript(
+                {
+                    target: {tabId: sender.tab.id},
+                    files: ["banner.js"]
+                })
+                .then(response => sendResponse(response))
+                .catch(error => console.log(error));
             return true;
         }
     });
