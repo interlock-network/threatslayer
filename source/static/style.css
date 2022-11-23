@@ -2,7 +2,8 @@ body {
     background-color: #080b1a;
     color: #fefeff;
     margin: auto;
-    margin-top: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
     margin-left: 2rem;
     margin-right: 2rem;
     min-height: 12rem;
@@ -27,13 +28,15 @@ body {
 
 h1 {
     font-family: 'THICCBOI-Bold';
-    font-size: 1.25rem;
+    font-size: 2.5rem;
     margin-bottom: 1rem;
-}
+    background: -webkit-linear-gradient(#3fa8c6 0%,#3fa8c6 0%,#ff9ab2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;}
 
 h2 {
     font-family: 'THICCBOI-Bold';
-    font-size: 1rem;
+    font-size: 1.25rem;
     margin-bottom: 1rem;
 }
 
