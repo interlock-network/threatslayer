@@ -1,0 +1,44 @@
+body {
+    background-color: #080b1a;
+    color: #fefeff;
+    margin: auto;
+    margin-top: 1rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    min-height: 12rem;
+    min-width: 24rem;
+}
+
+@font-face {
+    font-family: 'THICCBOI';
+    src: url('/static/fonts/Webfont/THICCCBOI-Regular.woff2') format('woff'),
+         url('/static/fonts/TTF/THICCCBOI-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'THICCBOI-Bold';
+    src: url('/static/fonts/Webfont/THICCCBOI-Bold.woff2') format('woff'),
+         url('/static/fonts/TTF/THICCCBOI-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: bold;
+}
+
+h1 {
+    font-family: 'THICCBOI-Bold';
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+}
+
+h2 {
+    font-family: 'THICCBOI-Bold';
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+p {
+    font-family: 'THICCBOI';
+    font-size: 1rem;
+    line-height: 1.25rem;
+}
