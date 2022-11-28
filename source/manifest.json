@@ -1,6 +1,6 @@
 {
     "name": "Threatslayer",
-    "version": "0.0.0",
+    "version": "0.0.1",
     "description": "Automatically scan and block malicious websites..",
     "manifest_version": 3,
     "icons": {
