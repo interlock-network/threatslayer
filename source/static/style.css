@@ -2,7 +2,7 @@ body {
     background-color: #080b1a;
     color: #fefeff;
     margin: auto;
-    margin-top: 2rem;
+    margin-top: 1rem;
     margin-bottom: 2rem;
     margin-left: 2rem;
     margin-right: 2rem;
@@ -30,9 +30,8 @@ h1 {
     font-family: 'THICCBOI-Bold';
     font-size: 2.5rem;
     margin-bottom: 1rem;
-    background: -webkit-linear-gradient(#3fa8c6 0%,#3fa8c6 0%,#f87b98 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;}
+	margin-top: 0.5rem;
+}
 
 h2 {
     font-family: 'THICCBOI-Bold';
@@ -44,4 +43,85 @@ p {
     font-family: 'THICCBOI';
     font-size: 1rem;
     line-height: 1.25rem;
+}
+
+.logo {
+    background: -webkit-linear-gradient(#3fa8c6 0%,#3fa8c6 0%,#f87b98 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.dash-container {
+	margin-top: -1rem;
+	padding-bottom: 2.5rem;
+}
+
+.dash-row {
+	clear: both;
+	font-family: 'THICCBOI';
+    font-size: 1rem;
+    /* line-height: 1rem; */
+}
+
+.dash-heading {
+	float: left;
+	width: 100%;
+}
+
+.dash-item {
+	float: left;
+}
+
+.dash-value {
+	float: right;
+}
+
+.container--tabs {
+	margin: 2rem;
+}
+.container--tabs .nav-tabs {
+	float: left;
+	width: 100%;
+	margin: 0;
+	list-style-type: none;
+	border-bottom: 1px solid #ddd;
+}
+.container--tabs .nav-tabs > li {
+	float: left;
+	margin-bottom: -1px;
+}
+.container--tabs .nav-tabs > li > a {
+	float: left;
+	margin-right: 2px;
+	line-height: 1.42857143;
+	padding: 10px;
+	border: 1px solid transparent;
+	border-radius: 4px 4px 0 0;
+}
+.container--tabs .nav-tabs > li > a:hover {
+	border-color: #eee #eee #ddd;
+}
+.container--tabs .nav-tabs > li.active > a, .container--tabs .nav-tabs > li.active > a:hover, .container--tabs .nav-tabs > li.active > a:focus {
+	color: #555;
+	cursor: default;
+	/* background-color: #fff; */
+	border: 1px solid #ddd;
+	border-bottom-color: transparent;
+}
+.container--tabs .tab-content {
+	float: left;
+	width: 100%;
+}
+.container--tabs .tab-content > .tab-pane {
+	display: none;
+}
+.container--tabs .tab-content > .tab-pane.active {
+	display: block;
+	padding: 2.5% 3.5%;
+	min-height: 10rem;
+	/* background-color: #efefef; */
+}
+.container--tabs .tab-content > .active {
+	display: block;
 }
