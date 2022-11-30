@@ -103,7 +103,7 @@ p {
 	border-color: #eee #eee #ddd;
 }
 .container--tabs .nav-tabs > li.active > a, .container--tabs .nav-tabs > li.active > a:hover, .container--tabs .nav-tabs > li.active > a:focus {
-	color: #555;
+	color: #ddd;
 	cursor: default;
 	/* background-color: #fff; */
 	border: 1px solid #ddd;
