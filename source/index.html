@@ -6,25 +6,72 @@
     <link rel="stylesheet" href="/static/style.css">
   </head>
   <body>
-    <div>
-    <h1>ThreatSlayer</h1>
+    <div class="container--tabs">
+      <section class="row">
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#tab-1">Dashboard</a></li>
+          <li class=""><a href="#tab-2">About</a></li>
+          <li class=""><a href="#tab-3">Earn</a></li>
+        </ul>
+        <div class="tab-content">
+          <div id="tab-1" class="tab-pane active"> 
+            <span class="glyphicon glyphicon-leaf glyphicon--home--feature two columns text-center"></span>
+            <span class="col-md-10">
+              <h1>Dashboard</h1>
+              <div class="dash-container">
+              <h2 class="dash-heading">Your Stats</h2>
+                <div class="dash-row"><div class="dash-item">URLs scanned</div><div class="dash-value">xx,xxx</div></div>
+                <div class="dash-row"><div class="dash-item">Unique URLs scanned</div><div class="dash-value">xxx</div></div>
+                <div class="dash-row"><div class="dash-item">Malicious sites detected</div><div class="dash-value">xx</div></div>
+              <h2 class="dash-heading">Total Network Stats</h2>
+                <div class="dash-row"><div class="dash-item">Users Protected</div><div class="dash-value">xx,xxx</div></div>
+                <div class="dash-row"><div class="dash-item">URLs scanned</div><div class="dash-value">xx,xxx</div></div>
+                <div class="dash-row"><div class="dash-item">Unique URLs scanned</div><div class="dash-value">xx,xxx</div></div>
+                <div class="dash-row"><div class="dash-item">Malicious sites detected</div><div class="dash-value">xx</div></div>
+              </div>
+            </span>
+          </div> 
+          <div id="tab-2" class="tab-pane">
+            <span class="glyphicon glyphicon-fire glyphicon--home--feature two columns text-center"></span>
+            <span class="col-md-10">
+              <h1 class="logo">ThreatSlayer</h1>
 
-    <h2>Web3 security for everyone</h2>
+              <h2>Web3 security for everyone</h2>
+          
+              <p>Over $7 billion worth of crypto was stolen in 2021 alone.
+              ThreatSlayer protects your crypto assets by blocking phishing sites from taking your passwords or seed phrases.
+              In the future, ThreatSlayer will be powered by $ILOCK, our token coming in 2023.</p>
+          
+              <h2>How does ThreatSlayer terminate threats?</h2>
+          
+              <p>Interlock scans new URLs 24/7, every day, with our proprietary Visual AI.
+              When we find a new website that's an exact visual copy of an existing one, we flag it as a phishing site.
+              Those sites get blocked by ThreatSlayer.</p>
+          
+              <h2>Enterprise-grade security</h2>
+          
+              <p>Some of the biggest companies in web3 already use the Interlock tech that powers ThreatSlayer. 
+              Companies you've heard of. We built ThreatSlayer so users like you can be protected as much as the big guys.</p>
+            </span>
+          </div>
+          <div id="tab-3" class="tab-pane">
+            <span class="glyphicon glyphicon-tint glyphicon--home--feature two columns text-center"></span>
+            <span class="col-md-10">
+              <h1>Earning with <span class="logo">ThreatSlayer</span></h1>
 
-    <p>Over $7 billion worth of crypto was stolen in 2021 alone.
-    ThreatSlayer protects your crypto assets by blocking phishing sites from taking your passwords or seed phrases.
-    In the future, ThreatSlayer will be powered by $ILOCK, our token coming in 2023.</p>
-
-    <h2>How does ThreatSlayer terminate threats?</h2>
-
-    <p>Interlock scans new URLs 24/7, every day, with our proprietary Visual AI.
-    When we find a new website that's an exact visual copy of an existing one, we flag it as a phishing site.
-    Those sites get blocked by ThreatSlayer.</p>
-
-    <h2>Enterprise-grade security</h2>
-
-    <p>Some of the biggest companies in web3 already use the Interlock tech that powers ThreatSlayer. 
-    Companies you've heard of. We built ThreatSlayer so users like you can be protected as much as the big guys.</p>
+              <p>You will be able to earn $ILOCK, Interlock's token, after our token launch in early 2023.
+                You'll earn in exchange for sharing security data with us. We then take your (anonymized!)
+              data, combine it with the data of tens of thousands of other users, and then sell the combined
+              security data to tech companies so they can make themselves more secure -- and securing everyone
+              else in the process.</p>
+            </span>
+          </div>
+        </div>
+      </section>
     </div>
+    <div>
+
+    </div>
+    <script src="static/badge.js"></script>
   </body>
 </html>
