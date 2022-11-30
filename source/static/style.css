@@ -6,7 +6,7 @@ body {
     margin-bottom: 2rem;
     margin-left: 2rem;
     margin-right: 2rem;
-    min-height: 12rem;
+    min-height: 14rem;
     min-width: 24rem;
 }
 
@@ -17,7 +17,6 @@ body {
     font-weight: normal;
     font-style: normal;
 }
-
 @font-face {
     font-family: 'THICCBOI-Bold';
     src: url('/static/fonts/Webfont/THICCCBOI-Bold.woff2') format('woff'),
@@ -32,13 +31,11 @@ h1 {
     margin-bottom: 1rem;
 	margin-top: 0.5rem;
 }
-
 h2 {
     font-family: 'THICCBOI-Bold';
     font-size: 1.25rem;
     margin-bottom: 1rem;
 }
-
 p {
     font-family: 'THICCBOI';
     font-size: 1rem;
@@ -51,32 +48,33 @@ p {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-
+.dash-section {
+	padding-bottom: 2rem;
+}
 .dash-container {
 	margin-top: -1rem;
-	padding-bottom: 2.5rem;
+	padding-bottom: 3.5rem;
 }
-
 .dash-row {
 	clear: both;
 	font-family: 'THICCBOI';
     font-size: 1rem;
-    /* line-height: 1rem; */
 }
 
 .dash-heading {
 	float: left;
+	margin-bottom: 0.5rem;
 	width: 100%;
 }
-
 .dash-item {
 	float: left;
 }
-
+.dash-source {
+	font-style: oblique;
+}
 .dash-value {
 	float: right;
 }
-
 .container--tabs {
 	margin: 2rem;
 }
@@ -92,6 +90,7 @@ p {
 	margin-bottom: -1px;
 }
 .container--tabs .nav-tabs > li > a {
+	color: #3fa8c6;
 	float: left;
 	margin-right: 2px;
 	line-height: 1.42857143;
@@ -103,9 +102,8 @@ p {
 	border-color: #eee #eee #ddd;
 }
 .container--tabs .nav-tabs > li.active > a, .container--tabs .nav-tabs > li.active > a:hover, .container--tabs .nav-tabs > li.active > a:focus {
-	color: #ddd;
+	color: #f87b98;
 	cursor: default;
-	/* background-color: #fff; */
 	border: 1px solid #ddd;
 	border-bottom-color: transparent;
 }
@@ -119,8 +117,7 @@ p {
 .container--tabs .tab-content > .tab-pane.active {
 	display: block;
 	padding: 2.5% 3.5%;
-	min-height: 10rem;
-	/* background-color: #efefef; */
+	min-height: 14rem;
 }
 .container--tabs .tab-content > .active {
 	display: block;
