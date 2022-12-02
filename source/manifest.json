@@ -1,5 +1,5 @@
 {
-    "name": "Threatslayer",
+    "name": "ThreatSlayer",
     "version": "0.0.1",
     "description": "Automatically scan and block malicious websites..",
     "manifest_version": 3,
@@ -11,7 +11,7 @@
     "author": "Interlock",
     "action": {
         "default_popup": "index.html",
-        "default_title": "Threatslayer Active."
+        "default_title": "ThreatSlayer Active."
     },
     "content_scripts": [
         {

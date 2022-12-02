@@ -108,6 +108,8 @@ ul {
 	float: left;
 	width: 90%;
 	margin: 0;
+	margin-left: 10px;
+	padding-left: 1rem;
 	list-style-type: none;
 	border-bottom: 1px solid var(--logo-pink-color);
 }
@@ -121,7 +123,7 @@ ul {
 	margin-right: 1rem;
 	padding: 10px;
 	border: 1px solid transparent;
-	border-radius: 0 10px 0 0;
+	border-radius: 0 20px 0 0;
 }
 .container--tabs .nav-tabs > li > a:hover {
 	border-color: var(--logo-blue-color) var(--logo-blue-color) var(--logo-blue-color);
@@ -163,6 +165,7 @@ ul {
 	font-family: 'THICCBOI';
     font-size: 1rem;
 	font-style: oblique;
+	margin-top: -2px;
 	opacity: 1;
 	padding-left: 1.25rem;
 }
@@ -186,21 +189,21 @@ input[type=checkbox]{
 	border-radius: 3rem;
 	cursor: pointer;
 	display: block;
-	height: 3rem;
+	height: 2.5rem;
 	margin-top: -1rem;
 	position: relative;
 	text-indent: -9999px;
-	width: 6rem;
+	width: 5rem;
   }
   label:after {
 	content: '';
 	position: absolute;
 	top: 5px;
 	left: 5px;
-	width: 2.5rem;
-	height: 2.5rem;
+	width: 2rem;
+	height: 2rem;
 	background: var(--logo-pink-color);
-	border-radius: 2.5rem;
+	border-radius: 1rem;
 	transition: 0.3s;
   }
   input:checked + label {
