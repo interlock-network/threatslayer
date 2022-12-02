@@ -1,6 +1,7 @@
 window.addEventListener("load", function() {
 	const myTabs = document.querySelectorAll("ul.nav-tabs > li");
 	const toggle = this.document.getElementById("switch");
+	const toggleLabel = this.document.getElementById("toggle-label");
 	const notYet = this.document.getElementById("not-yet");
 
 	function myTabClicks(tabClickEvent) {
@@ -34,6 +35,7 @@ window.addEventListener("load", function() {
 		if (toggle.checked) {
 			setTimeout(() => {
 				toggle.checked = false;
+				toggleLabel.style.opacity = 0.4;
 				notYet.style.display = 'inherit';
 			}, 250);
 
