@@ -40,3 +40,5 @@ chrome.runtime.sendMessage(
             handleAPIResponse(null);
         }
     });
+
+chrome.runtime.sendMessage('urls_scanned_count');

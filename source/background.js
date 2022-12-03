@@ -1,9 +1,8 @@
 /**
  * This is the main background script for Threatslayer.
  */
-
-var APIUrl = "https://octahedron.interlock.network/malicious_p";
-var APIKey = "threatslayer-api-key";
+	const baseAPIUrl = `http://octahedron.interlock.network`;
+    const APIKey = "threatslayer-api-key";
 
 /**
  * This listener is responsible for handling messages from content
@@ -12,8 +11,8 @@ var APIKey = "threatslayer-api-key";
  */
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
-        if (request.contentScriptQuery == "queryURL") {
-            fetch(APIUrl,
+        if (request.contentScriptQuery === "queryURL") {
+            fetch("https://octahedron.interlock.network/malicious_p",
                 {
                      method: 'POST',
                      headers: {
@@ -27,7 +26,7 @@ chrome.runtime.onMessage.addListener(
                 .then(response => sendResponse(response))
                 .catch(error => console.log(error));
             return true;
-        } else if (request == "displayWarningBanner") {
+        } else if (request === "displayWarningBanner") {
             // inject styling
             chrome.scripting.insertCSS(
                 {
@@ -42,6 +41,27 @@ chrome.runtime.onMessage.addListener(
                 })
                 .then(response => sendResponse(response))
                 .catch(error => console.log(error));
+            return true;
+        } else if (request === "urls_scanned_count") {
+            console.log('here in urls_scanned_count');
+            fetch(`http://octahedron.interlock.network/urls_scanned_count`,
+                {
+                     method: 'POST',
+                     headers: {'Content-Type': 'application/json'},
+                     body: JSON.stringify({key: APIKey})
+                })
+                // .then(response => response.json())
+                .then(response => {
+                    console.log('response', response);
+                    return response;
+                })
+                .then(response => sendResponse(response))
+                .catch(error => {
+                    console.log('error', error);
+        
+                    return undefined;
+                });
+
             return true;
         }
     });

@@ -1,7 +1,7 @@
 {
     "name": "ThreatSlayer",
     "version": "0.0.1",
-    "description": "Automatically scan and block malicious websites..",
+    "description": "Automatically scan and block malicious websites.",
     "manifest_version": 3,
     "icons": {
         "16": "icon16.png",
@@ -15,7 +15,7 @@
     },
     "content_scripts": [
         {
-        "js": ["script.js"],
+        "js": ["script.js", "static/badge.js"],
         "matches": ["*://*/*"]
         }
     ],

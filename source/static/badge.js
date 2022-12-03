@@ -1,4 +1,7 @@
 window.addEventListener("load", function() {
+	
+	// console.log('urlsScannedCount', urlsScannedCount);
+
 	const myTabs = document.querySelectorAll("ul.nav-tabs > li");
 	const toggle = this.document.getElementById("switch");
 	const toggleLabel = this.document.getElementById("toggle-label");
