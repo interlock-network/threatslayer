@@ -51,13 +51,34 @@ chrome.runtime.onMessage.addListener(
                 })
                 .then(async response => {
                     const total = await response.text();
+
                     return total;
                 })
                 .then(response => sendResponse(response))
                 .catch(error => {
                     console.log('error', error);
         
-                    return undefined;
+                    return 'Error';
+                });
+
+            return true;
+        } else if (request === "malicious_urls_scanned_count") {
+            fetch(`https://octahedron.interlock.network/malicious_urls_scanned_count`,
+                {
+                     method: 'POST',
+                     headers: {'Content-Type': 'application/json'},
+                     body: JSON.stringify({key: APIKey})
+                })
+                .then(async response => {
+                    const total = await response.text();
+
+                    return total;
+                })
+                .then(response => sendResponse(response))
+                .catch(error => {
+                    console.log('error', error);
+        
+                    return 'Error';
                 });
 
             return true;
