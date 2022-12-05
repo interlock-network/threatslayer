@@ -25,6 +25,7 @@ chrome.runtime.onMessage.addListener(
                 .then(response => response.json())
                 .then(response => sendResponse(response))
                 .catch(error => console.log(error));
+
             return true;
         } else if (request === "displayWarningBanner") {
             // inject styling
@@ -41,13 +42,22 @@ chrome.runtime.onMessage.addListener(
                 })
                 .then(response => sendResponse(response))
                 .catch(error => console.log(error));
+
             return true;
-        } else if (request === "urls_scanned_count") {
+        }
+    });
+
+/**
+ * This listener is responsible for getting KPIs from the pipeline.
+ */
+chrome.runtime.onMessage.addListener(
+    function(request, _sender, sendResponse) {
+        if (request === "urls_scanned_count") {
             fetch(`https://octahedron.interlock.network/urls_scanned_count`,
                 {
-                     method: 'POST',
-                     headers: {'Content-Type': 'application/json'},
-                     body: JSON.stringify({key: APIKey})
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({key: APIKey})
                 })
                 .then(async response => {
                     const total = await response.text();
@@ -65,9 +75,9 @@ chrome.runtime.onMessage.addListener(
         } else if (request === "malicious_urls_scanned_count") {
             fetch(`https://octahedron.interlock.network/malicious_urls_scanned_count`,
                 {
-                     method: 'POST',
-                     headers: {'Content-Type': 'application/json'},
-                     body: JSON.stringify({key: APIKey})
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({key: APIKey})
                 })
                 .then(async response => {
                     const total = await response.text();
@@ -84,3 +94,5 @@ chrome.runtime.onMessage.addListener(
             return true;
         }
     });
+    
+        
