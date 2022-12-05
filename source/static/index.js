@@ -22,7 +22,7 @@ window.addEventListener("load", async function() {
 
     // get dashboard number for malicious URLs visited from local storage
     chrome.storage.local.get(["totalMaliciousURLsVisited"]).then((result) => {
-        const {totalMaliciousURLsVisited} = result || 0;
+        const {totalMaliciousURLsVisited = 0} = result;
         const localMaliciousURLsCount = document.getElementById("local-malicious-urls-scanned-count");
 
         localMaliciousURLsCount.innerHTML = totalMaliciousURLsVisited;
