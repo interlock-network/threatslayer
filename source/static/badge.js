@@ -1,5 +1,8 @@
-window.addEventListener("load", function() {
+window.addEventListener("load", async function() {
 	
+    var URLSScannedCount = document.getElementById("urls-scanned-count");
+    URLSScannedCount.innerHTML = await chrome.runtime.sendMessage('urls_scanned_count');
+
 	// console.log('urlsScannedCount', urlsScannedCount);
 
 	const myTabs = document.querySelectorAll("ul.nav-tabs > li");

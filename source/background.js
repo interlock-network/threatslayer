@@ -43,17 +43,15 @@ chrome.runtime.onMessage.addListener(
                 .catch(error => console.log(error));
             return true;
         } else if (request === "urls_scanned_count") {
-            console.log('here in urls_scanned_count');
-            fetch(`http://octahedron.interlock.network/urls_scanned_count`,
+            fetch(`https://octahedron.interlock.network/urls_scanned_count`,
                 {
                      method: 'POST',
                      headers: {'Content-Type': 'application/json'},
                      body: JSON.stringify({key: APIKey})
                 })
-                // .then(response => response.json())
-                .then(response => {
-                    console.log('response', response);
-                    return response;
+                .then(async response => {
+                    const total = await response.text();
+                    return total;
                 })
                 .then(response => sendResponse(response))
                 .catch(error => {

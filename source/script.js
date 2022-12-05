@@ -41,4 +41,3 @@ chrome.runtime.sendMessage(
         }
     });
 
-chrome.runtime.sendMessage('urls_scanned_count');
