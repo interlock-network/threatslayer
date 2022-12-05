@@ -5,16 +5,19 @@ window.addEventListener("load", async function() {
     URLsScannedCount.innerHTML = await chrome.runtime.sendMessage('urls_scanned_count');
     maliciousURLsScannedCount.innerHTML = await chrome.runtime.sendMessage('malicious_urls_scanned_count');
 
-    chrome.storage.local.get(["key"]).then((result) => {
+    chrome.storage.local.get(["totalURLsVisited"]).then((result) => {
         const localURLsScannedCount = document.getElementById("local-urls-scanned-count");
-        localURLsScannedCount.innerHTML = result.key;
+        localURLsScannedCount.innerHTML = result.totalURLsVisited;
 
         const localUniqueURLsScannedCount = document.getElementById("local-unique-urls-scanned-count");
         // Ratio 0.177 based on Interlock data sources
-        localUniqueURLsScannedCount.innerHTML = Math.ceil(result.key * 0.177);
+        localUniqueURLsScannedCount.innerHTML = Math.ceil(result.totalURLsVisited * 0.177);
     });
 
-    
+    chrome.storage.local.get(["totalMaliciousURLsVisited"]).then((result) => {
+        const totalMaliciousURLsVisited = document.getElementById("local-malicious-urls-scanned-count");
+        totalMaliciousURLsVisited.innerHTML = result.totalMaliciousURLsVisited || 0;
+    });
 
     const myTabs = document.querySelectorAll("ul.nav-tabs > li");
     const toggle = this.document.getElementById("switch");

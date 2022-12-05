@@ -1,8 +1,8 @@
 /**
  * This is the main background script for Threatslayer.
  */
-	const baseAPIUrl = `http://octahedron.interlock.network`;
-    const APIKey = "threatslayer-api-key";
+const baseAPIUrl = `http://octahedron.interlock.network`;
+const APIKey = "threatslayer-api-key";
 
 /**
  * This listener is responsible for handling messages from content
@@ -13,30 +13,39 @@ chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
         if (request.contentScriptQuery === "queryURL") {
 
-            chrome.storage.local.get(["key"]).then((result) => {
-                let totalURLsVisited = result.key || 0;
+            chrome.storage.local.get(["totalURLsVisited"]).then((result) => {
+                let totalURLsVisited = result.totalURLsVisited || 0;
                 totalURLsVisited++;
-                chrome.storage.local.set({ key: totalURLsVisited }).then(() => {
+                chrome.storage.local.set({ "totalURLsVisited": totalURLsVisited }).then(() => {
                     console.log("Total URLs set to:" + totalURLsVisited);
                 });
             });
 
             fetch("https://octahedron.interlock.network/malicious_p",
-                {
-                     method: 'POST',
-                     headers: {
-                         'Accept': 'application/json',
-                         'Content-Type': 'application/json'
-                     },
-                     body: JSON.stringify({key: APIKey,
-                                           url: request.url})
-                })
+                  {
+                      method: 'POST',
+                      headers: {
+                          'Accept': 'application/json',
+                          'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify({key: APIKey,
+                                            url: request.url})
+                  })
                 .then(response => response.json())
                 .then(response => sendResponse(response))
                 .catch(error => console.log(error));
 
             return true;
         } else if (request === "displayWarningBanner") {
+
+            chrome.storage.local.get(["totalMaliciousURLsVisited"]).then((result) => {
+                let totalMaliciousURLsVisited = result.totalMaliciousURLsVisited || 0;
+                totalMaliciousURLsVisited++;
+                chrome.storage.local.set({"totalMaliciousURLsVisited": totalMaliciousURLsVisited }).then(() => {
+                    console.log("Total malicious URLs set to:" + totalMaliciousURLsVisited);
+                });
+            });
+
             // inject styling
             chrome.scripting.insertCSS(
                 {
@@ -63,11 +72,11 @@ chrome.runtime.onMessage.addListener(
     function(request, _sender, sendResponse) {
         if (request === "urls_scanned_count") {
             fetch(`https://octahedron.interlock.network/urls_scanned_count`,
-                {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({key: APIKey})
-                })
+                  {
+                      method: 'POST',
+                      headers: {'Content-Type': 'application/json'},
+                      body: JSON.stringify({key: APIKey})
+                  })
                 .then(async response => {
                     const total = await response.text();
 
@@ -76,18 +85,18 @@ chrome.runtime.onMessage.addListener(
                 .then(response => sendResponse(response))
                 .catch(error => {
                     console.log('error', error);
-        
+                    
                     return 'Error';
                 });
 
             return true;
         } else if (request === "malicious_urls_scanned_count") {
             fetch(`https://octahedron.interlock.network/malicious_urls_scanned_count`,
-                {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify({key: APIKey})
-                })
+                  {
+                      method: 'POST',
+                      headers: {'Content-Type': 'application/json'},
+                      body: JSON.stringify({key: APIKey})
+                  })
                 .then(async response => {
                     const total = await response.text();
 
@@ -96,12 +105,12 @@ chrome.runtime.onMessage.addListener(
                 .then(response => sendResponse(response))
                 .catch(error => {
                     console.log('error', error);
-        
+                    
                     return 'Error';
                 });
 
             return true;
         }
     });
-    
-        
+
+
