@@ -1,7 +1,7 @@
 :root {
-	--logo-blue-color: #3fa8c6;
-	--logo-pink-color: #f87b98;
-	--text-white-color: #fefeff;
+    --logo-blue-color: #3fa8c6;
+    --logo-pink-color: #f87b98;
+    --text-white-color: #fefeff;
 }
 
 body {
@@ -32,22 +32,22 @@ body {
 }
 
 a {
-	text-decoration: none
+    text-decoration: none
 }
 a:link {
-	color: var(--logo-pink-color)
+    color: var(--logo-pink-color)
 }
 a:hover {
-	color: var(--logo-blue-color)
+    color: var(--logo-blue-color)
 }
 a:visited {
-	color: var(--logo-blue-color)
+    color: var(--logo-blue-color)
 }
 h1 {
     font-family: 'THICCBOI-Bold';
     font-size: 2.5rem;
     margin-bottom: 1rem;
-	margin-top: 0.5rem;
+    margin-top: 0.5rem;
 }
 h2 {
     font-family: 'THICCBOI-Bold';
@@ -58,10 +58,10 @@ p {
     font-family: 'THICCBOI';
     font-size: 1rem;
     line-height: 1.25rem;
-	opacity: 0.8;
+    opacity: 0.8;
 }
 ul {
-	padding-inline-start: 10px;
+    padding-inline-start: 10px;
 }
 
 .logo {
@@ -71,148 +71,148 @@ ul {
     -webkit-text-fill-color: transparent;
 }
 .dash-section {
-	padding-bottom: 2rem;
+    padding-bottom: 2rem;
 }
 .dash-container {
-	margin-top: -1rem;
-	padding-bottom: 3.5rem;
+    margin-top: -1rem;
+    padding-bottom: 3.5rem;
 }
 .dash-row {
-	clear: both;
-	font-family: 'THICCBOI';
+    clear: both;
+    font-family: 'THICCBOI';
     font-size: 1rem;
 }
 .dash-heading {
-	float: left;
-	margin-bottom: 0.5rem;
-	width: 100%;
+    float: left;
+    margin-bottom: 0.5rem;
+    width: 100%;
 }
 .dash-item {
-	float: left;
-	opacity: 0.8;
+    float: left;
+    opacity: 0.8;
 }
 .dash-value {
-	float: right;
-	opacity: 0.8;
+    float: right;
+    opacity: 0.8;
 }
 .dash-source {
-	font-style: oblique;
-	opacity: 0.8;
+    font-style: oblique;
+    opacity: 0.8;
 }
 
 .container--tabs {
-	margin-left: 2rem;
-	margin-right: 2rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
 }
 .container--tabs .nav-tabs {
-	float: left;
-	width: 90%;
-	margin: 0;
-	margin-left: 10px;
-	padding-left: 1rem;
-	list-style-type: none;
-	border-bottom: 1px solid var(--logo-pink-color);
+    float: left;
+    width: 90%;
+    margin: 0;
+    margin-left: 10px;
+    padding-left: 1rem;
+    list-style-type: none;
+    border-bottom: 1px solid var(--logo-pink-color);
 }
 .container--tabs .nav-tabs > li {
-	float: left;
-	margin-bottom: -1px;
+    float: left;
+    margin-bottom: -1px;
 }
 .container--tabs .nav-tabs > li > a {
-	color: var(--logo-blue-color);
-	float: left;
-	margin-right: 1rem;
-	padding: 10px;
-	border: 1px solid transparent;
-	border-radius: 0 20px 0 0;
+    color: var(--logo-blue-color);
+    float: left;
+    margin-right: 1rem;
+    padding: 10px;
+    border: 1px solid transparent;
+    border-radius: 0 20px 0 0;
 }
 .container--tabs .nav-tabs > li > a:hover {
-	border-color: var(--logo-blue-color) var(--logo-blue-color) var(--logo-blue-color);
+    border-color: var(--logo-blue-color) var(--logo-blue-color) var(--logo-blue-color);
 }
 .container--tabs .nav-tabs > li.active > a, .container--tabs .nav-tabs > li.active > a:hover, .container--tabs .nav-tabs > li.active > a:focus {
-	color: var(--logo-pink-color);
-	cursor: default;
-	border: 1px solid var(--logo-blue-color);
-	border-bottom-color: transparent;
+    color: var(--logo-pink-color);
+    cursor: default;
+    border: 1px solid var(--logo-blue-color);
+    border-bottom-color: transparent;
 }
 .container--tabs .tab-content {
-	float: left;
-	width: 100%;
-	min-height: 18rem;
+    float: left;
+    width: 100%;
+    min-height: 18rem;
 }
 .container--tabs .tab-content > .tab-pane {
-	display: none;
-	min-height: 18rem;
+    display: none;
+    min-height: 18rem;
 }
 .container--tabs .tab-content > .tab-pane.active {
-	display: block;
-	padding: 2.5% 3.5%;
+    display: block;
+    padding: 2.5% 3.5%;
 }
 .container--tabs .tab-content > .active {
-	display: block;
+    display: block;
 }
 
 .toggle-container {
-	display: inline-block;
-	width: 100%;
+    display: inline-block;
+    width: 100%;
 }
 .toggle {
-	float: left;
+    float: left;
 }
 
 #toggle-label {
-	color: var(--text-white-color);
-	float: left;
-	font-family: 'THICCBOI';
+    color: var(--text-white-color);
+    float: left;
+    font-family: 'THICCBOI';
     font-size: 1rem;
-	font-style: oblique;
-	margin-top: -2px;
-	opacity: 1;
-	padding-left: 1.25rem;
+    font-style: oblique;
+    margin-top: -2px;
+    opacity: 1;
+    padding-left: 1.25rem;
 }
 #not-yet {
-	color: var(--logo-pink-color);
-	display: none;
-	float: left;
-	font-family: 'THICCBOI';
+    color: var(--logo-pink-color);
+    display: none;
+    float: left;
+    font-family: 'THICCBOI';
     font-size: 1rem;
-	font-style: normal;
-	padding-left: 1.25rem;
-	padding-top: 0.25rem;
+    font-style: normal;
+    padding-left: 1.25rem;
+    padding-top: 0.25rem;
 }
 input[type=checkbox]{
-	height: 0;
-	visibility: hidden;
-	width: 0;
-  }
-  label {
-	background: gray;
-	border-radius: 3rem;
-	cursor: pointer;
-	display: block;
-	height: 2.5rem;
-	margin-top: -1rem;
-	position: relative;
-	text-indent: -9999px;
-	width: 5rem;
-  }
-  label:after {
-	content: '';
-	position: absolute;
-	top: 5px;
-	left: 5px;
-	width: 2rem;
-	height: 2rem;
-	background: var(--logo-pink-color);
-	border-radius: 1rem;
-	transition: 0.3s;
-  }
-  input:checked + label {
-	background: var(--logo-blue-color);
-  }
-  input:checked + label:after {
-	left: calc(100% - 5px);
-	transform: translateX(-100%);
-  }
-  label:active:after {
-	width: 2rem;
-  }
+    height: 0;
+    visibility: hidden;
+    width: 0;
+}
+label {
+    background: gray;
+    border-radius: 3rem;
+    cursor: pointer;
+    display: block;
+    height: 2.5rem;
+    margin-top: -1rem;
+    position: relative;
+    text-indent: -9999px;
+    width: 5rem;
+}
+label:after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 2rem;
+    height: 2rem;
+    background: var(--logo-pink-color);
+    border-radius: 1rem;
+    transition: 0.3s;
+}
+input:checked + label {
+    background: var(--logo-blue-color);
+}
+input:checked + label:after {
+    left: calc(100% - 5px);
+    transform: translateX(-100%);
+}
+label:active:after {
+    width: 2rem;
+}
