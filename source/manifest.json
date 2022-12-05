@@ -15,7 +15,7 @@
     },
     "content_scripts": [
         {
-        "js": ["script.js", "static/badge.js"],
+        "js": ["script.js"],
         "matches": ["*://*/*"]
         }
     ],
@@ -29,7 +29,7 @@
         "service_worker": "background.js"
     },
     "permissions": [
-        "scripting"
+        "scripting", "storage"
     ],
     "host_permissions": [
         "<all_urls>",

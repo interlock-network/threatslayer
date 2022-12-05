@@ -12,6 +12,15 @@
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
         if (request.contentScriptQuery === "queryURL") {
+
+            chrome.storage.local.get(["key"]).then((result) => {
+                let totalURLsVisited = result.key || 0;
+                totalURLsVisited++;
+                chrome.storage.local.set({ key: totalURLsVisited }).then(() => {
+                    console.log("Total URLs set to:" + totalURLsVisited);
+                });
+            });
+
             fetch("https://octahedron.interlock.network/malicious_p",
                 {
                      method: 'POST',

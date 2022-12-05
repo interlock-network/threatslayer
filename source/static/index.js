@@ -1,9 +1,20 @@
 window.addEventListener("load", async function() {
-    const URLSScannedCount = document.getElementById("urls-scanned-count");
-    const maliciousURLSScannedCount = this.document.getElementById("malicious-urls-scanned-count")
+    const URLsScannedCount = document.getElementById("urls-scanned-count");
+    const maliciousURLsScannedCount = this.document.getElementById("malicious-urls-scanned-count")
 
-    URLSScannedCount.innerHTML = await chrome.runtime.sendMessage('urls_scanned_count');
-    maliciousURLSScannedCount.innerHTML = await chrome.runtime.sendMessage('malicious_urls_scanned_count');
+    URLsScannedCount.innerHTML = await chrome.runtime.sendMessage('urls_scanned_count');
+    maliciousURLsScannedCount.innerHTML = await chrome.runtime.sendMessage('malicious_urls_scanned_count');
+
+    chrome.storage.local.get(["key"]).then((result) => {
+        const localURLsScannedCount = document.getElementById("local-urls-scanned-count");
+        localURLsScannedCount.innerHTML = result.key;
+
+        const localUniqueURLsScannedCount = document.getElementById("local-unique-urls-scanned-count");
+        // Ratio 0.177 based on Interlock data sources
+        localUniqueURLsScannedCount.innerHTML = Math.ceil(result.key * 0.177);
+    });
+
+    
 
     const myTabs = document.querySelectorAll("ul.nav-tabs > li");
     const toggle = this.document.getElementById("switch");
