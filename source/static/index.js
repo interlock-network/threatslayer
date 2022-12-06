@@ -1,4 +1,4 @@
-// convenience functino to stringify large numbers to local formats with commas etc.
+// convenience function to stringify large numbers to local formats with commas etc.
 const formatNumber = (num) => new Intl.NumberFormat().format(num);
 
 window.addEventListener("load", async function() {
@@ -31,7 +31,7 @@ window.addEventListener("load", async function() {
         const formattedTotalURLsVisited = formatNumber(totalURLsVisited);
         const formattedUniqueURLsVisited = formatNumber(uniqueURLsVisited);
 
-        localUniqueURLsScannedCount.innerHTML = formattedUniqueURLsVisited;
+        localUniqueURLsScannedCount.innerHTML = `≈ ${formattedUniqueURLsVisited}`;
         localURLsScannedCount.innerHTML = formattedTotalURLsVisited;
     });
 
