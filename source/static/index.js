@@ -1,31 +1,48 @@
+// convenience functino to stringify large numbers to local formats with commas etc.
+const formatNumber = (num) => new Intl.NumberFormat().format(num);
+
 window.addEventListener("load", async function() {
     // get HTML elements of dashboard numbers to fill in
-    const maliciousURLsScannedCount = document.getElementById("malicious-urls-scanned-count")
-    const URLsScannedCount = document.getElementById("urls-scanned-count");
-    const userCount = document.getElementById("user-count");
+    const maliciousURLsScannedElement = document.getElementById("malicious-urls-scanned-count")
+    const URLsScannedElement = document.getElementById("urls-scanned-count");
+    const userCountElement = document.getElementById("user-count");
 
-    // fills in the dashboard numbers with the values from the Interlock pipeline API
-    maliciousURLsScannedCount.innerHTML = await chrome.runtime.sendMessage('malicious_urls_scanned_count');
-    URLsScannedCount.innerHTML = await chrome.runtime.sendMessage('urls_scanned_count');
-    userCount.innerHTML = await chrome.runtime.sendMessage('user_count');
+    // get API counts from the Interlock pipeline
+    const maliciousURLsScannedCount = await chrome.runtime.sendMessage('malicious_urls_scanned_count');
+    const URLsScannedCount = await chrome.runtime.sendMessage('urls_scanned_count');
+    const userCount = await chrome.runtime.sendMessage('user_count');
+
+    // fills in the dashboard numbers with formatted values
+    maliciousURLsScannedElement.innerHTML = formatNumber(maliciousURLsScannedCount);
+    URLsScannedElement.innerHTML = formatNumber(URLsScannedCount);
+    userCountElement.innerHTML = formatNumber(userCount);
 
     // get dashboard number for total URLs visited from local storage
     chrome.storage.local.get(["totalURLsVisited"]).then((result) => {
         const {totalURLsVisited = 1} = result;
+
+        // get HTML elements of dashboard numbers to fill in
         const localUniqueURLsScannedCount = document.getElementById("local-unique-urls-scanned-count");
         const localURLsScannedCount = document.getElementById("local-urls-scanned-count");
 
         // Ratio 0.177 based on Interlock data sources
-        localUniqueURLsScannedCount.innerHTML = Math.ceil(totalURLsVisited * 0.177) || 1;
-        localURLsScannedCount.innerHTML = totalURLsVisited;
+        const uniqueURLsVisited = Math.ceil(totalURLsVisited * 0.177) || 1;
+
+        const formattedTotalURLsVisited = formatNumber(totalURLsVisited);
+        const formattedUniqueURLsVisited = formatNumber(uniqueURLsVisited);
+
+        localUniqueURLsScannedCount.innerHTML = formattedUniqueURLsVisited;
+        localURLsScannedCount.innerHTML = formattedTotalURLsVisited;
     });
 
     // get dashboard number for malicious URLs visited from local storage
     chrome.storage.local.get(["totalMaliciousURLsVisited"]).then((result) => {
         const {totalMaliciousURLsVisited = 0} = result;
+
+        const formattedTotalMaliciousURLsVisited = formatNumber(totalMaliciousURLsVisited);
         const localMaliciousURLsCount = document.getElementById("local-malicious-urls-scanned-count");
 
-        localMaliciousURLsCount.innerHTML = totalMaliciousURLsVisited;
+        localMaliciousURLsCount.innerHTML = formattedTotalMaliciousURLsVisited;
     });
 
     const myTabs = document.querySelectorAll("ul.nav-tabs > li");
