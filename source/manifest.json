@@ -10,7 +10,7 @@
     },
     "author": "Interlock",
     "action": {
-        "default_popup": "index.html",
+        "default_popup": "dashboard.html",
         "default_title": "ThreatSlayer Active."
     },
     "content_scripts": [
