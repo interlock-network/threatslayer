@@ -1,5 +1,14 @@
 // convenience function to stringify large numbers to local formats with commas etc.
-const formatNumber = (num) => new Intl.NumberFormat().format(num);
+    // also deals with doing the math for calculating unique URLs
+const formatRawResponse = (num, multiplier = 1) => {
+    if (typeof num !== 'number') {
+        return 'Error';
+    } else {
+        const rawNumber = Math.ceil(num * multiplier) || 1;
+
+        return new Intl.NumberFormat().format(rawNumber) ;
+    }
+};
 
 window.addEventListener("load", async function() {
     // get HTML elements of dashboard numbers to fill in
@@ -13,9 +22,9 @@ window.addEventListener("load", async function() {
     const userCount = await chrome.runtime.sendMessage('user_count');
 
     // fills in the dashboard numbers with formatted values
-    maliciousURLsScannedElement.innerHTML = formatNumber(maliciousURLsScannedCount);
-    URLsScannedElement.innerHTML = formatNumber(URLsScannedCount);
-    userCountElement.innerHTML = formatNumber(userCount);
+    maliciousURLsScannedElement.innerHTML = formatRawResponse(maliciousURLsScannedCount);
+    // URLsScannedElement.innerHTML = formatRawResponse(URLsScannedCount);
+    // userCountElement.innerHTML = formatRawResponse(userCount);
 
     // get dashboard number for total URLs visited from local storage
     chrome.storage.local.get(["totalURLsVisited"]).then((result) => {
@@ -26,20 +35,18 @@ window.addEventListener("load", async function() {
         const localURLsScannedCount = document.getElementById("local-urls-scanned-count");
 
         // Ratio 0.177 based on Interlock data sources
-        const uniqueURLsVisited = Math.ceil(totalURLsVisited * 0.177) || 1;
-
-        const formattedTotalURLsVisited = formatNumber(totalURLsVisited);
-        const formattedUniqueURLsVisited = formatNumber(uniqueURLsVisited);
+        const formattedTotalURLsVisited = formatRawResponse(totalURLsVisited, 0.177);
+        const formattedUniqueURLsVisited = formatRawResponse(uniqueURLsVisited);
 
         localUniqueURLsScannedCount.innerHTML = `≈ ${formattedUniqueURLsVisited}`;
-        localURLsScannedCount.innerHTML = formattedTotalURLsVisited;
+        // localURLsScannedCount.innerHTML = formattedTotalURLsVisited;
     });
 
     // get dashboard number for malicious URLs visited from local storage
     chrome.storage.local.get(["totalMaliciousURLsVisited"]).then((result) => {
         const {totalMaliciousURLsVisited = 0} = result;
 
-        const formattedTotalMaliciousURLsVisited = formatNumber(totalMaliciousURLsVisited);
+        const formattedTotalMaliciousURLsVisited = typeof totalMaliciousURLsVisited === 'number' ? formatRawResponse(totalMaliciousURLsVisited) : 'Error';
         const localMaliciousURLsCount = document.getElementById("local-malicious-urls-scanned-count");
 
         localMaliciousURLsCount.innerHTML = formattedTotalMaliciousURLsVisited;
@@ -89,5 +96,5 @@ window.addEventListener("load", async function() {
         }
     }
 
-    toggle.addEventListener("click", toggleReset)
+    // toggle.addEventListener("click", toggleReset)
 });
