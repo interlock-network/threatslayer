@@ -15,6 +15,15 @@
 * {
     box-sizing: border-box;
   }
+  a {
+    text-decoration: none
+    }
+    .tab-pane {
+        display: none;
+    }
+    .tab-pane.active {
+        display: block;
+    }
   body {
     font-size: 14px;
   }
