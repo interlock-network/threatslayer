@@ -30,7 +30,6 @@ body {
     background: linear-gradient(90deg, rgba(24,27,39,1) 0%, rgba(10,28,50,1) 60%);
     height: 83px;
     width: 100%;
-
 }
 
 #header-left {
@@ -45,20 +44,16 @@ body {
     margin-top: 53px;
 }
 
-#header-right ul > li {
-    display: inline-block;
-}
-
 #header-right ul {
     margin: 0;
     padding: 0;
 }
 
 .tab {
+    display: inline-block;
     line-height: 30px;
     font-family: 'THICCBOI';
     font-size: 16px;
-    display: inline-block;
     min-width: 130px;
     height: 30px;
     color: white;
@@ -75,4 +70,26 @@ body {
 
 #about-tab {
     background-color: #7c489e;
+}
+
+main {
+    margin-top: 56px;
+    margin-left: 39px;
+    margin-right: 39px;
+}
+
+h1 {
+    font-family: 'THICCBOI-bold';
+    font-size: 33px;
+}
+
+.subtext {
+    font-family: 'THICCBOI-bold';
+    font-size: 18px;
+    color: #9336E5;
+}
+
+.maintext {
+    font-family: 'THICCBOI';
+    font-size: 30px;
 }
