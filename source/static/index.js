@@ -4,18 +4,15 @@ const formatNumber = (num) => new Intl.NumberFormat().format(num);
 window.addEventListener("load", async function() {
     // get HTML elements of dashboard numbers to fill in
     const maliciousURLsScannedElement = document.getElementById("malicious-urls-scanned-count")
-    const URLsScannedElement = document.getElementById("urls-scanned-count");
-    const userCountElement = document.getElementById("user-count");
+    const URLsScannedElement = document.getElementById("urls-scanned");
 
     // get API counts from the Interlock pipeline
     const maliciousURLsScannedCount = await chrome.runtime.sendMessage('malicious_urls_scanned_count');
     const URLsScannedCount = await chrome.runtime.sendMessage('urls_scanned_count');
-    const userCount = await chrome.runtime.sendMessage('user_count');
 
     // fills in the dashboard numbers with formatted values
     maliciousURLsScannedElement.innerHTML = formatNumber(maliciousURLsScannedCount);
     URLsScannedElement.innerHTML = formatNumber(URLsScannedCount);
-    userCountElement.innerHTML = formatNumber(userCount);
 
     // get dashboard number for total URLs visited from local storage
     chrome.storage.local.get(["totalURLsVisited"]).then((result) => {
