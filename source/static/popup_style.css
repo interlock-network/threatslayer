@@ -83,13 +83,18 @@ h1 {
     font-size: 33px;
 }
 
-.subtext {
+.sub-text {
     font-family: 'THICCBOI-bold';
     font-size: 18px;
     color: #9336E5;
 }
 
-.maintext {
+.main-text {
     font-family: 'THICCBOI';
     font-size: 30px;
+}
+
+footer {
+    margin-left: 39px;
+    margin-right: 39px;
 }
