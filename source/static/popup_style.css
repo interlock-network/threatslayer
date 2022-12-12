@@ -32,6 +32,11 @@ body {
     width: 100%;
 }
 
+#header a {
+    text-decoration: none;
+    color: white;
+}
+
 #header-left {
     float: left;
     padding-top: 24px;
@@ -61,8 +66,12 @@ body {
 }
 
 .tab-selected {
-    color: black;
+    color: black !important;
     background-color: white !important;
+}
+
+.tab-selected a {
+    color: black !important;
 }
 
 #dashboard-tab {
