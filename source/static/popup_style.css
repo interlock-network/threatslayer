@@ -1,0 +1,78 @@
+@font-face {
+    font-family: 'THICCBOI-Bold';
+    src: url('/static/fonts/Webfont/THICCCBOI-Bold.woff2') format('woff'),
+         url('/static/fonts/TTF/THICCCBOI-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: bold;
+}
+
+@font-face {
+    font-family: 'THICCBOI';
+    src: url('/static/fonts/Webfont/THICCCBOI-Regular.woff2') format('woff'),
+         url('/static/fonts/TTF/THICCCBOI-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html {
+    background: url("/static/images/background_gradient.png") no-repeat center center fixed;
+    background-size: 100% 100%;
+}
+
+body {
+    width: 600px;
+    min-height: 500px;
+    margin: 0;
+}
+
+#header {
+    background: rgb(24,27,39);
+    background: linear-gradient(90deg, rgba(24,27,39,1) 0%, rgba(10,28,50,1) 60%);
+    height: 83px;
+    width: 100%;
+
+}
+
+#header-left {
+    float: left;
+    padding-top: 24px;
+    padding-left: 24px;
+}
+
+#header-right {
+    float: right;
+    text-align: right;
+    margin-top: 53px;
+}
+
+#header-right ul > li {
+    display: inline-block;
+}
+
+#header-right ul {
+    margin: 0;
+    padding: 0;
+}
+
+.tab {
+    line-height: 30px;
+    font-family: 'THICCBOI';
+    font-size: 16px;
+    display: inline-block;
+    min-width: 130px;
+    height: 30px;
+    color: white;
+    text-align: center;
+}
+
+#dashboard-tab {
+    background-color: #9533e6;
+}
+
+#earn-tab {
+    background-color: #ae0cfb;
+}
+
+#about-tab {
+    background-color: #7c489e;
+}
