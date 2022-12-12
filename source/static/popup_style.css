@@ -60,6 +60,11 @@ body {
     text-align: center;
 }
 
+.tab-selected {
+    color: black;
+    background-color: white !important;
+}
+
 #dashboard-tab {
     background-color: #9533e6;
 }
@@ -97,4 +102,11 @@ h1 {
 footer {
     margin-left: 39px;
     margin-right: 39px;
+}
+
+.content-box {
+    background-color: white;
+    border-radius: 5px;
+    box-shadow:  2px 2px 4px 1px rgba(0, 0, 0, 0.26);
+    -webkit-box-shadow:  2px 2px 4px 1px rgba(0, 0, 0, 0.26);
 }

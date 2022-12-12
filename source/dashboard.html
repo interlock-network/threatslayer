@@ -4,6 +4,49 @@
     <title>ThreatSlayer</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="/static/popup_style.css">
+    <style>
+      #urls-scanned {
+          border-radius: 50%;
+          width: 355px;
+          height: 355px;
+          border: 30px solid #9336E5;
+          text-align: center;
+          font-family: 'THICCBOI-Bold';
+          font-size: 123px;
+          line-height: 355px;
+          margin: auto;
+      }
+      #url-count {
+          display: inline-block;
+          vertical-align: middle;
+      }
+      #urls-scanned-sub-text {
+          font-family: 'THICCBOI';
+          font-size: 36px;
+          color: #717171;
+          text-align: center;
+          margin-top: 20px;
+      }
+      .statistic {
+          text-align: center;
+          margin-top: 30px;
+          margin-bottom: 30px;
+          width: 242px;
+          height: 131px;
+      }
+      .statistic-header {
+          font-size: 16px;
+          font-family: 'THICCBOI-bold';
+          color: #717171;
+          padding-top: 10px;
+      }
+      .statistic-value {
+          font-family: 'THICCBOI';
+          font-size: 56px;
+          color: #222222;
+          margin-top: 0;
+      }
+    </style>
   </head>
   <body>
     <header>
@@ -13,14 +56,39 @@
         </div>
         <div id="header-right">
           <ul>
-            <li id="dashboard-tab" class="tab">Dashboard</li>
-            <li id="earn-tab" class="tab">Earn</li>
+            <li id="dashboard-tab" class="tab tab-selected">Dashboard</li>
+            <li id="earn-tab" class="tab">Collect</li>
             <li id="about-tab" class="tab">About Us</li>
           </ul>
         </div>
       </div>
     </header>
     <main>
+      <div id="urls-scanned">0</div>
+      <div id="urls-scanned-sub-text">
+        URLs Scanned
+      </div>
+
+      <div style="float: left" class="content-box statistic">
+        <p class="statistic-header">
+          Unique URLs Scanned
+        </p>
+        <p class="statistic-value">
+          0
+        </p>
+      </div>
+
+      <div style="float: right" class="content-box statistic">
+        <p class="statistic-header">
+          Malicious Sites Detected
+        </p>
+        <p class="statistic-value">
+          0
+        </p>
+      </div>
+
     </main>
+    <footer>
+    </footer>
   </body>
 </html>
