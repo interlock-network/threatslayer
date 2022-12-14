@@ -4,14 +4,13 @@
     "description": "Automatically scan and block malicious websites.",
     "manifest_version": 3,
     "icons": {
-        "16": "icon16.png",
         "48": "icon48.png",
         "128": "icon128.png"
     },
     "author": "Interlock",
     "action": {
         "default_popup": "dashboard.html",
-        "default_title": "ThreatSlayer Active."
+        "default_title": "ThreatSlayer Active"
     },
     "content_scripts": [
         {

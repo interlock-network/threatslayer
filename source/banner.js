@@ -20,9 +20,9 @@
     bannerTitle.id = 'warningbanner-text';
     bannerText.id = 'warningbanner-text';
     closeButton.id = "warningbanner-close";
-    image.id = 'icon48';
+    image.id = 'hand48';
     // generate logo URL
-    imageURL = chrome.runtime.getURL('icon48.png');
+    imageURL = chrome.runtime.getURL('hand48.png');
     image.setAttribute('src', imageURL);
     // warning banner title
     bannerTitle.appendChild(
