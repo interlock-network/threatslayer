@@ -1,0 +1,7 @@
+Scripting Justification
+
+In order to protect the user from malicious websites, we need to know the URL they are viewing to verify it is not malicious.
+
+Storage Justification
+
+We use this to tell the user how many URLs they have visited, and how many of them were malicious.
