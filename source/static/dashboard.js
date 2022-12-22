@@ -1,23 +1,47 @@
 // convenience function to stringify large numbers to local formats with commas etc.
 const formatNumber = (num) => new Intl.NumberFormat().format(num);
 
+// takes an integer and returns a string to set font size
+const getFontSizeForTotal = (num) => {
+    const oneToThreeDigits = '123px';
+    const fourDigits = '110px';
+    const fiveDigits = '90px';
+    const sixDigits = '75px';
+    const sevenDigits = '60px';
+
+    if (num >= 10**6) {
+        result = sevenDigits;
+    } else if (num >= 10**5) {
+        result = sixDigits;
+    }  else if (num >= 10**4) {
+        result = fiveDigits;
+    } else if (num >= 10**3) {
+        result = fourDigits;
+    } else {
+        result = oneToThreeDigits;
+    }
+
+    return result;
+};
+
 window.addEventListener("load", async function() {
     // get dashboard number for total URLs visited from local storage
     chrome.storage.local.get(["totalURLsVisited"]).then((result) => {
         const {totalURLsVisited = 1} = result;
 
-        // get HTML elements of dashboard numbers to fill in
-        const localUniqueURLsScannedCount = document.getElementById("local-unique-urls-scanned-count");
+        // set and format *total* URLs
+        const formattedTotalURLsVisited = formatNumber(totalURLsVisited);
         const localURLsScannedCount = document.getElementById("local-urls-scanned-count");
 
-        // Ratio 0.177 based on Interlock data sources
-        const uniqueURLsVisited = Math.ceil(totalURLsVisited * 0.177) || 1;
+        localURLsScannedCount.style.fontSize = getFontSizeForTotal(totalURLsVisited);
+        localURLsScannedCount.innerHTML = formattedTotalURLsVisited;
 
-        const formattedTotalURLsVisited = formatNumber(totalURLsVisited);
+        // set and format unique URLs
         const formattedUniqueURLsVisited = formatNumber(uniqueURLsVisited);
+        const localUniqueURLsScannedCount = document.getElementById("local-unique-urls-scanned-count");
+        const uniqueURLsVisited = Math.ceil(totalURLsVisited * 0.177) || 1; // Ratio 0.177 based on Interlock data sources
 
         localUniqueURLsScannedCount.innerHTML = `≈ ${formattedUniqueURLsVisited}`;
-        localURLsScannedCount.innerHTML = formattedTotalURLsVisited;
     });
 
     // get dashboard number for malicious URLs visited from local storage
