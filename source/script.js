@@ -26,13 +26,29 @@ function handleAPIResponse(response) {
 }
 
 /**
+ * This helper function removes parameters from URLs sent to pipeline,
+ * in order to protect sensitive user info.
+ * From https://stackoverflow.com/questions/12023430/regex-url-path-from-url
+ * @param {} url - the complete URL string, including protocol and any params
+ */
+function removeParams(url) {
+    const parser = document.createElement('a');
+    parser.href = url;
+    const {hostname, protocol} = parser;
+
+    const result = `${protocol}//${hostname}`;
+
+    return result;
+}
+
+/**
  * Due to security concerns in content scripts, Chrome requires us to
  * execute cross-origin XHR using a service worker. Therefore, we send
  * a message to our service worker, which then performs the request,
  * and asynchronously provides a response.
  */
 chrome.runtime.sendMessage(
-    {contentScriptQuery: "queryURL", url: window.location.href},
+    {contentScriptQuery: "queryURL", url: removeParams(window.location.href)},
     function (response) {
         if (response !== undefined && response !== "") {
             handleAPIResponse(response);
