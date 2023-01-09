@@ -3,20 +3,19 @@
 <img src="docs/icon.png" align="right" width="250" height="250"/>
 
 [ThreatSlayer is an extension for Chrome](https://chrome.google.com/webstore/detail/threatslayer/mgcmocglffknmbhhfjihifeldhghihpj) 
-and compatible browsers (like Brave -- Firefox coming soon!) 
-that instantly protects you from malicious sites. 
-Our threat-detecting AI identifies 0-day phishing sites
+and compatible browsers (like Brave) that instantly protects 
+you from malicious sites. Our threat-detecting AI identifies 0-day phishing sites
 with no setup time required. ThreatSlayer protects you 
-as soon as you install it!
+as soon as you install it. Firefox version coming soon!
 
 ThreatSlayer is a project of [Interlock](https://www.interlock.network/),
 a web3 company that is decentralizing security. In the future,
 ThreatSlayer will be powered by $ILOCK, Interlock's token launching early 2023.
 
-# Detect and block malicious sites
+# Detect and Block Malicious Sites
 
-ThreatSlayer instantly blocks phishing sites. Its bright red banner prevents
-you from entering any sensitive data until you dismiss it.
+ThreatSlayer instantly blocks phishing sites and prevents
+you from entering any sensitive data.
 
 <img width="600" alt="ThreatSlayer reacting to a malicious link" src="docs/threatslayer-detect.png">
 
