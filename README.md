@@ -1,11 +1,13 @@
+<!-- @format -->
+
 # ThreatSlayer
 
 <img src="docs/icon.png" align="right" width="250" height="250"/>
 
-[ThreatSlayer is an extension for Chrome](https://chrome.google.com/webstore/detail/threatslayer/mgcmocglffknmbhhfjihifeldhghihpj) 
-and compatible browsers (like Brave) that instantly protects 
+[ThreatSlayer is an extension for Chrome](https://chrome.google.com/webstore/detail/threatslayer/mgcmocglffknmbhhfjihifeldhghihpj)
+and compatible browsers (like Brave) that instantly protects
 you from malicious sites. Our threat-detecting AI identifies 0-day phishing sites
-with no setup time required. ThreatSlayer protects you 
+with no setup time required. ThreatSlayer protects you
 as soon as you install it. Firefox version coming soon!
 
 ThreatSlayer is a project of [Interlock](https://www.interlock.network/),
@@ -17,7 +19,7 @@ ThreatSlayer will be powered by $ILOCK, Interlock's token launching early 2023.
 ThreatSlayer instantly blocks phishing sites and prevents
 you from entering any sensitive data.
 
-<img width="600" alt="ThreatSlayer reacting to a malicious link" src="docs/threatslayer-detect.png">
+<img width="600" alt="ThreatSlayer reacting to a malicious link" src="docs/screenshot.png">
 
 # Installation
 
@@ -26,7 +28,7 @@ and get protected instantly!
 
 # Infrastructure
 
-ThreatSlayer's AI runs entirely on Interlock's DigitalOcean droplet. 
+ThreatSlayer's AI runs entirely on Interlock's DigitalOcean droplet.
 
 # Status
 
