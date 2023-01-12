@@ -122,6 +122,38 @@ chrome.runtime.onMessage.addListener(
 
             return true;
         }
-    });
+    }
+);
 
 
+/**
+ * This listener does two things:
+ * - Opens the ThreatSlayer welcome page on installing the extension, and
+ * - Opens the welcome page on update
+ */
+chrome.runtime.onInstalled.addListener(function openWelcomeTab(details) {
+    const reason = details.reason
+    console.log('reason', reason);
+
+    switch (reason) {
+        // user has installed ThreatSlayer
+        case 'install':
+            chrome.tabs.create({
+                // TODO change this URL
+                url: 'https://yahoo.com'
+            });
+        break;
+        // user has updated their ThreatSlayer version
+       case 'update':
+          chrome.tabs.create({
+                // TODO change this URL
+            url: 'https://yahoo.com'
+          });
+          break;
+       case 'chrome_update':
+       case 'shared_module_update':
+       default:
+          break;
+    }
+});
+  
