@@ -125,3 +125,9 @@ chrome.runtime.onMessage.addListener(
     });
 
 
+/**
+ * This listener opens our survey in a new tab when users uninstall
+ */
+chrome.runtime.setUninstallURL(
+    'https://docs.google.com/forms/d/e/1FAIpQLSeo1gW6Sg_ITlAXxbTXliQdab2qt1cLBzu45mXpz-XJ8O1KPg/viewform',
+);
