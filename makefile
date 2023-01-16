@@ -1,6 +1,10 @@
 SHELL = /bin/sh
 
 
+.PHONY: help
+help:
+	@cat HELP
+
 clean:
 	rm threatslayer.zip
 

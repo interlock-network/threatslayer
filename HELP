@@ -1,0 +1,7 @@
+Usage:
+
+    make all                 # Compile ThreatSlayer for distribution.
+    make clean               # Clean the results of the previous compilation
+
+
+
