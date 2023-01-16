@@ -43,3 +43,9 @@ To understand what ThreatSlayer does in code, the best place to start is in
 # Maintainer
 
 The maintainer for ThreatSlayer is [@jmercouris](https://github.com/jmercouris).
+
+# Compilation
+
+Invoke the command `make all` to make the extension.
+
+Invoke the command `make clean` to clean the results of a previous compilation.
