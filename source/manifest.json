@@ -1,7 +1,8 @@
 {
     "name": "ThreatSlayer",
     "version": "0.0.3",
-    "description": "Free enterprise-grade security for your personal browser.",
+    "description": "__MSG_description__",
+    "default_locale": "en",
     "manifest_version": 3,
     "icons": {
         "48": "icon48.png",
@@ -10,7 +11,7 @@
     "author": "Interlock",
     "action": {
         "default_popup": "dashboard.html",
-        "default_title": "ThreatSlayer Active"
+        "default_title": "__MSG_popup_title__"
     },
     "content_scripts": [
         {
