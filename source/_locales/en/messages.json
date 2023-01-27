@@ -7,6 +7,16 @@
     "popup_title": {
         "message": "Threatslayer Active.",
         "description": "The title used for the popup when the extension icon is pressed."
-    }
+    },
+
+    "warning_text": {
+        "message": "This website may be malicious. Close this tab unless you know the site is safe.",
+        "description": "The text used in the warning banner."
+    },
+
+    "warning_header": {
+        "message": "THREATSLAYER ALERT!",
+        "description": "The text used in the warning banner."
+    },
 
 }

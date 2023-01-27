@@ -25,15 +25,9 @@
     imageURL = chrome.runtime.getURL('hand48.png');
     image.setAttribute('src', imageURL);
     // warning banner title
-    bannerTitle.appendChild(
-        document.createTextNode(
-        "THREATSLAYER ALERT!"
-    ));
+    bannerTitle.appendChild(document.createTextNode(chrome.i18n.getMessage("warning_header")));
     // warning banner text
-    bannerText.appendChild(
-        document.createTextNode(
-        "This website may be malicious. Close this tab unless you know the site is safe."
-    ));
+    bannerText.appendChild(document.createTextNode(chrome.i18n.getMessage("warning_text")));
     // build banner and underlying box
     banner.appendChild(image);
     banner.appendChild(bannerTitle);
