@@ -75,4 +75,9 @@ window.addEventListener("load", async function() {
         localMaliciousURLsCount.innerHTML = formattedTotalMaliciousURLsVisited;
     });
 
+    // localize text on page
+    document.getElementById("unique-urls-scanned-text").innerHTML = chrome.i18n.getMessage("unique_urls_scanned")
+    document.getElementById("urls-scanned-sub-text").innerHTML = chrome.i18n.getMessage("urls_scanned")
+    document.getElementById("malicious-sites-detected-text").innerHTML = chrome.i18n.getMessage("malicious_sites_detected")
+
 });

@@ -19,4 +19,20 @@
         "description": "The text used in the warning banner."
     },
 
+    "urls_scanned": {
+        "message": "URLs Scanned",
+        "description": "The text used to show how many URLs are scanned on the dashboard."
+    },
+
+
+    "unique_urls_scanned": {
+        "message": "Unique URLs Scanned",
+        "description": "The text used to show how many unique URLs are scanned on the dashboard."
+    },
+
+    "malicious_sites_detected": {
+        "message": "Malicious Sites Detected",
+        "description": "The text used to show how many malicious URLs are scanned on the dashboard."
+    }
+
 }
