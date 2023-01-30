@@ -1,0 +1,30 @@
+{
+    "description": {
+        "message": "Kişisel tarayıcınız için kurumsal düzeyde ücretsiz güvenlik.",
+        "description": "The description in the manifest."
+    },
+    "popup_title": {
+        "message": "ThreatSlayer Aktif.",
+        "description": "The title used for the popup when the extension icon is pressed."
+    },
+    "warning_text": {
+        "message": "Bu website kötü amaçı olabilir. Sitenin güvenliğinden emin değilseniz bu sekmeyi kapatın.",
+        "description": "The text used in the warning banner."
+    },
+    "warning_header": {
+        "message": "THREATSLAYER UYARISI!",
+        "description": "The text used in the warning banner."
+    },
+    "urls_scanned": {
+        "message": "Taranan URL Sayısı",
+        "description": "The text used to show how many URLs are scanned on the dashboard."
+    },
+    "unique_urls_scanned": {
+        "message": "Taranan Özgün URL Sayısı",
+        "description": "The text used to show how many unique URLs are scanned on the dashboard."
+    },
+    "malicious_sites_detected": {
+        "message": "Tespit Edilen Kötü Amaçlı Site Sayısı",
+        "description": "The text used to show how many malicious URLs are scanned on the dashboard."
+    }
+}
