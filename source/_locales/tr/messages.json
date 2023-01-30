@@ -8,7 +8,7 @@
         "description": "The title used for the popup when the extension icon is pressed."
     },
     "warning_text": {
-        "message": "Bu website kötü amaçı olabilir. Sitenin güvenliğinden emin değilseniz bu sekmeyi kapatın.",
+        "message": "Bu website kötü amaçlı olabilir. Sitenin güvenliğinden emin değilseniz bu sekmeyi kapatın.",
         "description": "The text used in the warning banner."
     },
     "warning_header": {
