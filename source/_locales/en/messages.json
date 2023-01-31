@@ -1,19 +1,19 @@
 {
+    "appDesc": {
+        "message": "Free enterprise-grade protection for your personal browser.\n\nJoin the rebellion against cyber threats with ThreatSlayer. Our security browser extension uses advanced AI threat detection and a collaborative network of cyber rebels to block dangerous websites and protect you from phishing attacks, scams and bad downloads.\n \nPlus, our blockchain-enabled version, rewards you for helping the community fight back. (coming soon)\n\nFeatures\n\n* Instant protection from browser-based threats: dangerous websites, phishing attacks and bad downloads\n\n* A.I. Threat Detection detects novel urls and dangerous sites in real-time\n\n* Rewards you for making the community safer\n\nAbout our A.I. Threat Detection\n\nThreatSlayer uses A.I. Threat Detection to protect you from harmful websites. It works by comparing a list of trusted and untrusted websites to a trained system called a classifier. This classifier uses supervised learning to understand the differences between safe and dangerous sites, and can accurately identify potential threats, in real time, to keep you safe online. \n\nMost security products use static databases, so they're unable to detect attacks in real time. ThreatSlayer is one step ahead of the cyber criminals.\n\nWhat Data Does ThreatSlayer Collect?\n\nThreatSlayer collects no personal information. The only data it sends is a URL, which we then scan with our threat detecting AI. ThreatSlayer saves anonymized URLs that cannot be associated with any individual user.",
+        "description": "The description of the extension, displayed in the web store."
+    },
     "description": {
         "message": "Free enterprise-grade security for your personal browser.",
         "description": "The description in the manifest."
     },
+    "malicious_sites_detected": {
+        "message": "Malicious Sites Detected",
+        "description": "The text used to show how many malicious URLs are scanned on the dashboard."
+    },
     "popup_title": {
         "message": "Threatslayer Active.",
         "description": "The title used for the popup when the extension icon is pressed."
-    },
-    "warning_text": {
-        "message": "This website may be malicious. Close this tab unless you know the site is safe.",
-        "description": "The text used in the warning banner."
-    },
-    "warning_header": {
-        "message": "THREATSLAYER ALERT!",
-        "description": "The text used in the warning banner."
     },
     "urls_scanned": {
         "message": "URLs Scanned",
@@ -23,8 +23,12 @@
         "message": "Unique URLs Scanned",
         "description": "The text used to show how many unique URLs are scanned on the dashboard."
     },
-    "malicious_sites_detected": {
-        "message": "Malicious Sites Detected",
-        "description": "The text used to show how many malicious URLs are scanned on the dashboard."
+    "warning_header": {
+        "message": "THREATSLAYER ALERT!",
+        "description": "The text used in the warning banner."
+    },
+    "warning_text": {
+        "message": "This website may be malicious. Close this tab unless you know the site is safe.",
+        "description": "The text used in the warning banner."
     }
 }
