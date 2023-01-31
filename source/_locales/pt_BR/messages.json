@@ -1,7 +1,7 @@
 {
     "appDesc": {
         "message": "Segurança gratuita de nível empresarial para o seu navegador pessoal.",
-        "description": "The description of the extension, displayed in the web store."
+        "description": "The description of the extension, displayed in the user's browser."
     },
     "description": {
         "message": "Free enterprise-grade security for your personal browser.",

@@ -1,7 +1,7 @@
 {
     "appDesc": {
         "message": "Kişisel tarayıcınız için kurumsal düzeyde ücretsiz koruma!",
-        "description": "The description of the extension, displayed in the web store."
+        "description": "The description of the extension, displayed in the user's browser."
     },
     "description": {
         "message": "Kişisel tarayıcınız için kurumsal düzeyde ücretsiz güvenlik.",
