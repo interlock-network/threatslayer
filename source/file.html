@@ -1,0 +1,77 @@
+<!-- Test PNG generation from SVG -->
+<svg id="svg" width="512" height="512"
+     xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink">
+  <style>
+    #slaycount {
+        font: bold 120px sans-serif;
+        dominant-baseline: middle;
+        text-anchor: middle;
+    }
+    #threatslayer {
+        font: bold 36px sans-serif;
+    }
+    #credit {
+        font: bold 14px sans-serif;
+    }
+    #title {
+        font: italic 70px sans-serif;
+        font-weight: bold;
+        text-anchor: middle;
+        fill: red;
+        stroke: black;
+        paint-order: stroke;
+        stroke-width: 14px;
+        dominant-baseline: middle;
+    }
+  </style>
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#fdf4fb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f1fafe;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="rainbow" x1="0" x2="0" y1="0" y2="10%" gradientUnits="userSpaceOnUse" >
+      <stop stop-color="#1f90f1" offset="30%"/>
+      <stop stop-color="#c417e0" offset="50%"/>
+      <stop stop-color="#e56a7a" offset="80%"/>
+      <stop stop-color="#fca531" offset="100%"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" fill="url(#grad1)" />
+  <circle cx="256" cy="256" r="164" stroke="#9336E5" stroke-width="36" fill="none" />
+  <text id="slaycount" x="50%" y="50%" class="count">129</text>
+  <text id="credit" x="38" y="64">Powered by Interlock</text>
+  <text id="threatslayer" x="32" y="42" fill="url(#rainbow)">Threatslayer</text>
+  <text id="title" x="50%" y="85%">URLS SLAYED!</text>
+</svg>
+
+<button title="download">Download Slaycount Image</button>
+<script>
+  var svg = document.getElementById('svg');
+  var slaycount = document.getElementById('slaycount');
+  slaycount.innerHTML = "11";
+
+  const output = {"name": "result.png", "width": 512, "height": 512}
+  document.querySelector("button").onclick = () => {
+      const svgElem = document.querySelector("svg")
+      const uriData = `data:image/svg+xml;base64,${btoa(new XMLSerializer().serializeToString(svgElem))}`
+      const img = new Image()
+      img.src = uriData
+      img.onload = () => {
+          const canvas = document.createElement("canvas");
+          [canvas.width, canvas.height] = [output.width, output.height]
+          const ctx = canvas.getContext("2d")
+          ctx.drawImage(img, 0, 0, output.width, output.height)
+
+          // Download
+          const a = document.createElement("a")
+          const quality = 1.0
+          a.href = canvas.toDataURL("image/png", quality)
+          a.download = output.name
+          a.dataset.downloadurl = ['png', a.download, a.href].join(':');
+          a.append(canvas)
+          a.click()
+          a.remove()
+      }
+  }
+</script>
