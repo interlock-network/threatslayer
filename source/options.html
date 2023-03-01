@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ThreatSlayer Extension Options</title>
+    <style>
+               body {
+                    color: #dfe2e6;
+                    font-family: Helvetica, sans-serif;
+                    -webkit-font-smoothing: antialiased;
+                    -moz-osx-font-smoothing: grayscale;
+                    margin-top: 60px;
+                    background-color: #060708;
+                    margin: auto;
+                    margin-top: 3rem;
+                    max-width: 600px;
+               }
+               label {
+                    display: block;
+                    font-size: 1.1rem;
+                    margin-bottom: 10px;
+               }
+               #title-start {
+                    color: #3b8de8;
+               }
+               #title-end {
+                    color: #963cf5;
+               }
+          </style>
+  </head>
+  <body>
+    <h1>
+      <span id="title-start">Threat</span><span id="title-end">Slayer</span>
+      Extension Options
+    </h1>
+    <br />
+    <form>
+      <label>
+        <input type="checkbox" id="betaAICheckbox" />
+        Enable beta AI Threat Detection (developers only)
+      </label>
+    </form>
+    <script src="options.js"></script>
+  </body>
+</html>
