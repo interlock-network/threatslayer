@@ -21,7 +21,7 @@
     ],
     "web_accessible_resources": [
         {
-            "resources": ["icon48.png", "static/style.css", "static/fonts/TTF", "static/fonts/Webfont"],
+            "resources": ["hand48.png", "static/style.css", "static/fonts/TTF", "static/fonts/Webfont"],
             "matches": ["*://*/*"]
         }
     ],

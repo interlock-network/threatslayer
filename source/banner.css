@@ -35,6 +35,7 @@
 }
 #warningbanner-close {
     font:18px/150% arial, sans-serif;
+    font-weight: bold;
     position:absolute;
     right:15px;
     text-decoration:none;
@@ -63,7 +64,7 @@
     background-color:black;
 }
 
-#icon48 {
+#hand48 {
     position:auto;
     margin:0;
     padding:0;
