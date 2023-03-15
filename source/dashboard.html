@@ -5,6 +5,18 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="/static/popup_style.css">
     <style>
+      button {
+          color: white;
+          background-color: #9336E5;
+          border: none;
+          border-radius: 3px;
+          margin: 5px;
+          border: 3px solid white;
+          font-size: 18px;
+      }
+      button:hover {
+          cursor: pointer;
+      }
       #local-urls-scanned-count {
           border-radius: 50%;
           width: 310px;
@@ -83,8 +95,55 @@
           0
         </p>
       </div>
-
     </main>
+
+    <svg id="svg" width="512" height="512"
+         xmlns="http://www.w3.org/2000/svg"
+         xmlns:xlink="http://www.w3.org/1999/xlink"
+         style="display:none">
+      <style>
+        #slay-count {
+            font: bold 120px sans-serif;
+            dominant-baseline: middle;
+            text-anchor: middle;
+        }
+        #threatslayer {
+            font: bold 36px sans-serif;
+        }
+        #credit {
+            font: bold 14px sans-serif;
+        }
+        #title {
+            font: italic 64px sans-serif;
+            font-weight: bold;
+            text-anchor: middle;
+            fill: red;
+            stroke: black;
+            paint-order: stroke;
+            stroke-width: 14px;
+            dominant-baseline: middle;
+        }
+      </style>
+      <defs>
+        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:#fdf4fb;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#f1fafe;stop-opacity:1" />
+        </linearGradient>
+        <linearGradient id="rainbow" x1="0" x2="0" y1="0" y2="10%" gradientUnits="userSpaceOnUse" >
+          <stop stop-color="#1f90f1" offset="30%"/>
+          <stop stop-color="#c417e0" offset="50%"/>
+          <stop stop-color="#e56a7a" offset="80%"/>
+          <stop stop-color="#fca531" offset="100%"/>
+        </linearGradient>
+      </defs>
+      <rect width="512" height="512" fill="url(#grad1)" />
+      <circle cx="256" cy="256" r="164" stroke="#9336E5" stroke-width="36" fill="none" />
+      <text id="slay-count" x="50%" y="50%" class="count">129</text>
+      <text id="credit" x="38" y="64">Powered by Interlock</text>
+      <text id="threatslayer" x="32" y="42" fill="url(#rainbow)">Threatslayer</text>
+      <text id="title" x="50%" y="85%">URLS SLAYED!</text>
+    </svg>
+    <button title="download" style="float:right">Download Slaycount Image</button>
     <footer>
     </footer>
     <script src="static/dashboard.js"></script>
