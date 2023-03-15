@@ -12,7 +12,7 @@
         "description": "The text used to show how many malicious URLs are scanned on the dashboard."
     },
     "popup_title": {
-        "message": "Threatslayer Active.",
+        "message": "ThreatSlayer Active.",
         "description": "The title used for the popup when the extension icon is pressed."
     },
     "urls_scanned": {
