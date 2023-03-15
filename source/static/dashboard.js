@@ -96,28 +96,50 @@ window.addEventListener("load", async function () {
         chrome.i18n.getMessage("malicious_sites_detected");
 });
 
-// Set-up button for downloading the ThreatSlayer slay count
-var svg = document.getElementById("svg");
+// Set-up button for downloading the ThreatSlayer Slay Count
 const output = { name: "SlayCount.png", width: 512, height: 512 };
+
 document.querySelector("button").onclick = () => {
     const svgElem = document.querySelector("svg");
+
     const uriData = `data:image/svg+xml;base64,${btoa(
         new XMLSerializer().serializeToString(svgElem)
     )}`;
+
     const img = new Image();
     img.src = uriData;
+
     img.onload = () => {
         const canvas = document.createElement("canvas");
         [canvas.width, canvas.height] = [output.width, output.height];
         const ctx = canvas.getContext("2d");
         ctx.drawImage(img, 0, 0, output.width, output.height);
 
-        // Download
+        // Copy to buffer, then alert user it's copied to buffer
+        canvas.toBlob(
+            (blob) => {
+                navigator.clipboard
+                    .write([
+                        new ClipboardItem({
+                            [blob.type]: blob,
+                        }),
+                    ])
+                    .then(() => {
+                        alert("SlayCount copied to clipboard!");
+                    });
+            },
+            "image/png",
+            1
+        );
+
+        // Download png
         const a = document.createElement("a");
         const quality = 1.0;
+
         a.href = canvas.toDataURL("image/png", quality);
         a.download = output.name;
         a.dataset.downloadurl = ["png", a.download, a.href].join(":");
+
         a.append(canvas);
         a.click();
         a.remove();
