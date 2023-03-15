@@ -50,12 +50,14 @@ window.addEventListener("load", async function() {
         // get HTML elements for total and unique URL counts
         const localURLsScannedCount = document.getElementById("local-urls-scanned-count");
         const localUniqueURLsScannedCount = document.getElementById("local-unique-urls-scanned-count");
+        const slayCount = document.getElementById('slay-count');
 
         // set and format *total* URLs
         const formattedTotalURLsVisited = formatNumber(totalURLsVisited);
 
         localURLsScannedCount.style.fontSize = getFontSizeForTotal(totalURLsVisited);
         localURLsScannedCount.innerHTML = formattedTotalURLsVisited;
+        slayCount.innerHTML = formattedTotalURLsVisited;
 
         // set and format unique URLs
         const uniqueURLsVisited = Math.ceil(totalURLsVisited * 0.177) || 1; // Ratio 0.177 based on Interlock data sources
@@ -81,3 +83,29 @@ window.addEventListener("load", async function() {
     document.getElementById("malicious-sites-detected-text").innerHTML = chrome.i18n.getMessage("malicious_sites_detected")
 
 });
+
+// Set-up button for downloading the ThreatSlayer slay count
+var svg = document.getElementById('svg');
+const output = {"name": "threatslayer_slaycount.png", "width": 512, "height": 512}
+document.querySelector("button").onclick = () => {
+    const svgElem = document.querySelector("svg")
+    const uriData = `data:image/svg+xml;base64,${btoa(new XMLSerializer().serializeToString(svgElem))}`
+    const img = new Image()
+    img.src = uriData
+    img.onload = () => {
+        const canvas = document.createElement("canvas");
+        [canvas.width, canvas.height] = [output.width, output.height]
+        const ctx = canvas.getContext("2d")
+        ctx.drawImage(img, 0, 0, output.width, output.height)
+
+        // Download
+        const a = document.createElement("a")
+        const quality = 1.0
+        a.href = canvas.toDataURL("image/png", quality)
+        a.download = output.name
+        a.dataset.downloadurl = ['png', a.download, a.href].join(':');
+        a.append(canvas)
+        a.click()
+        a.remove()
+    }
+}
