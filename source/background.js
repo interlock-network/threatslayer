@@ -95,3 +95,13 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 chrome.runtime.setUninstallURL(
     "https://docs.google.com/forms/d/e/1FAIpQLSeo1gW6Sg_ITlAXxbTXliQdab2qt1cLBzu45mXpz-XJ8O1KPg/viewform"
 );
+
+/**
+ * This listener opens the release notes in a new tab when users update the extension
+ */
+chrome.runtime.onInstalled.addListener(function(details) {
+    if(details.reason == "update") {
+      chrome.tabs.create({ url: "https://github.com/interlock-network/threatslayer/blob/master/docs/release_notes.md" });
+    }
+  });
+  
