@@ -1,6 +1,6 @@
 {
     "name": "ThreatSlayer",
-    "version": "0.0.7",
+    "version": "0.0.8",
     "description": "__MSG_appDesc__",
     "default_locale": "en",
     "manifest_version": 3,
