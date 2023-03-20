@@ -1,3 +1,5 @@
+![](./how_to_pin.gif)
+
 # ThreatSlayer Release Notes
 
 ### 0.0.8
