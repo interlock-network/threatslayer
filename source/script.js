@@ -34,9 +34,9 @@ function handleAPIResponse(response) {
 function removeParams(url) {
     const parser = document.createElement('a');
     parser.href = url;
-    const {hostname, protocol} = parser;
+    const {hostname, protocol, pathname} = parser;
 
-    const result = `${protocol}//${hostname}`;
+    const result = `${protocol}//${hostname}${pathname}`;
 
     return result;
 }
