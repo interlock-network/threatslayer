@@ -2,6 +2,10 @@
 
 # ThreatSlayer Release Notes
 
+### 0.0.9
+
+-   Bug fix
+
 ### 0.0.8
 
 -   Share your Slay Count!
