@@ -1,6 +1,6 @@
 {
-    "name": "ThreatSlayer",
-    "version": "0.0.8",
+    "name": "ThreatSlayer: AI Threat Detection for Web3",
+    "version": "0.0.9",
     "description": "__MSG_appDesc__",
     "default_locale": "en",
     "manifest_version": 3,
