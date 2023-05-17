@@ -50,8 +50,30 @@ If a user posts a safe URL, Interlock will retain the URL and the “safe” cla
 
 If a user wishes for anonymity, they can use Interlock ThreatSlayer without registering. In this case, there will be no data collected saving the connection between their browsing activity, and them.
 
+## Who We May Share or Sell Your Data To
+
+One of the ways Interlock makes money is to sell threat data to major internet companies. To do so, we may sell URLs that you navigate to and we classify as malicious. We may also sell related browsing data, like the site you navigated to that had the link to that malicious URL. We may also sell threat data and related browsing data to thid party brokers who bundle together threat data for sale to inernet companies.
+
+## Your Data Choices, Rights, and Controls
+
+Access: You have the right to confirm whether we are processing your personal information and to access your personal information.
+
+Opt-out: You can prevent Interlock from collecting any data about you by not registering for ThreatSlayer. We will never associate any part of your identity with any data you generate. We may still sell any URLs you navigate to that we classify as malicious. 
+
+Deletion: You can delete your account at any time. This will delete your association with any URLs you navigate to. Again, we may still sell any URLs you navigate to that we classify as malicious. 
+
+Correction: You have the right to request correction of your inaccurate personal information.
+
+Non-discrimination: We will not discriminate against you based on whether you are registered, unregistered, or deleted. You will receive the same protection against malicious URLs.
+
+Appeal: If you have any unresolved privacy concerns that we have not addressed satisfactorily after contacting us, you may have the right to appeal our decision by responding directly in your request or by sending another email and indicating that you are appealing our response to your previous request.
+
 ## Data Processing
 
-Discord message event data is processed on DigitalOcean infrastructure located in the United States. It is stored in a Digital Ocean virtual machine that is only accessible to Interlock employees.
+All ThreatSlayer data is processed on DigitalOcean infrastructure located in the United States. It is stored in a Digital Ocean virtual machine that is only accessible to Interlock employees.
+
+## How to Contact Us and Exercise Your Rights
+
+If you would like to exercise your right to delete your account and associated data, you can do so by clicking here (TODO: add URL)
 
 If you have any questions or concerns about ThreatSlayer, please email threatslayer@interlock.network
