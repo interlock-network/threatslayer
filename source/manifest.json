@@ -1,42 +1,19 @@
+
 {
-    "name": "ThreatSlayer: AI Threat Detection for Web3",
-    "version": "0.0.9",
-    "description": "__MSG_appDesc__",
-    "default_locale": "en",
     "manifest_version": 3,
-    "icons": {
-        "48": "icon48.png",
-        "128": "icon128.png"
-    },
-    "author": "Interlock",
-    "action": {
-        "default_popup": "dashboard.html",
-        "default_title": "__MSG_popup_title__"
-    },
-    "content_scripts": [
-        {
-        "js": ["script.js"],
-        "matches": ["*://*/*"]
-        }
-    ],
-    "web_accessible_resources": [
-        {
-            "resources": ["hand48.png", "static/style.css", "static/fonts/TTF", "static/fonts/Webfont"],
-            "matches": ["*://*/*"]
-        }
-    ],
+    "name": "My extension",
+    "description": "Extension that extends things",
+    "author": "Me",
+    "version": "0.1",
+    "icons": { 
+              "128":  "icon128.png"},
     "background": {
-        "service_worker": "background.js"
+      "service_worker": "background.js"
     },
-    "options_page": "options.html",
+    "action": {},
     "permissions": [
-        "scripting", "storage"
-    ],
-    "host_permissions": [
-        "<all_urls>",
-        "http://bouncer.interlock.network/*",
-        "https://bouncer.interlock.network/*",
-        "http://www.bouncer.interlock.network/*",
-        "https://www.bouncer.interlock.network/*"
-    ]
+      "storage",
+      "downloads",
+      "tabs"
+  ]
 }
