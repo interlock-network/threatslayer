@@ -15,6 +15,7 @@ const defaultConfig = {
  * scripts. It is invoked by script.js using
  * `chrome.runtime.sendMessage`.
  */
+
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     let selectedBaseAPIUrl = baseAPIUrl;
 
@@ -66,7 +67,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
                     .then(() => {
                         console.log(
                             "Total malicious URLs set to:" +
-                                totalMaliciousURLsVisited
+                            totalMaliciousURLsVisited
                         );
                     });
             });
@@ -89,6 +90,15 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     }
 });
 
+// Called when the user clicks on the browser action.
+chrome.action.onClicked.addListener(_tab => {
+    // Send a message to the active tab
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+        var activeTab = tabs[0];
+        chrome.tabs.sendMessage(activeTab.id, { "message": "clicked_browser_action" });
+        chrome.tabs.create({ 'url': chrome.runtime.getURL("dashboard.html"), 'active': true });
+    });
+});
 /**
  * This listener opens our survey in a new tab when users uninstall
  */
@@ -99,9 +109,8 @@ chrome.runtime.setUninstallURL(
 /**
  * This listener opens the release notes in a new tab when users update the extension
  */
-chrome.runtime.onInstalled.addListener(function(details) {
-    if(details.reason == "update") {
-      chrome.tabs.create({ url: "https://github.com/interlock-network/threatslayer/blob/master/docs/release_notes.md" });
+chrome.runtime.onInstalled.addListener(function (details) {
+    if (details.reason == "update") {
+        chrome.tabs.create({ url: "https://github.com/interlock-network/threatslayer/blob/master/docs/release_notes.md" });
     }
-  });
-  
+});

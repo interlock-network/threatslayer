@@ -9,20 +9,28 @@
         "128": "icon128.png"
     },
     "author": "Interlock",
-    "action": {
-        "default_popup": "dashboard.html",
-        "default_title": "__MSG_popup_title__"
-    },
+    "action": {},
     "content_scripts": [
         {
-        "js": ["script.js"],
-        "matches": ["*://*/*"]
+            "js": [
+                "script.js"
+            ],
+            "matches": [
+                "*://*/*"
+            ]
         }
     ],
     "web_accessible_resources": [
         {
-            "resources": ["hand48.png", "static/style.css", "static/fonts/TTF", "static/fonts/Webfont"],
-            "matches": ["*://*/*"]
+            "resources": [
+                "hand48.png",
+                "static/style.css",
+                "static/fonts/TTF",
+                "static/fonts/Webfont"
+            ],
+            "matches": [
+                "*://*/*"
+            ]
         }
     ],
     "background": {
@@ -30,7 +38,8 @@
     },
     "options_page": "options.html",
     "permissions": [
-        "scripting", "storage"
+        "scripting",
+        "storage"
     ],
     "host_permissions": [
         "<all_urls>",
