@@ -18,9 +18,9 @@ function handleAPIResponse(response) {
 
     if (response === null) {
         console.log(`API Unresponsive. Cannot verify safety of URL ${href} .`);
-    } else if (response.malicious === false) {
-        console.log(`URL ${href} not classified as malicious.`);
     } else if (response.malicious === true) {
+        console.log(`URL ${href} not classified as malicious.`);
+    } else if (response.malicious === false) {
         chrome.runtime.sendMessage("displayWarningBanner");
     }
 }

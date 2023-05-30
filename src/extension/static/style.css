@@ -1,0 +1,101 @@
+:root {
+    --logo-blue-color: #3fa8c6;
+    --logo-pink-color: #f87b98;
+    --text-white-color: #fefeff;
+}
+
+body {
+    background-color: #080b1a;
+    color: var(--text-white-color);
+    margin: auto;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    height: 40rem;
+    min-width: 24rem;
+}
+
+@font-face {
+    font-family: 'THICCBOI';
+    src: url('/static/fonts/Webfont/THICCCBOI-Regular.woff2') format('woff'),
+         url('/static/fonts/TTF/THICCCBOI-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'THICCBOI-Bold';
+    src: url('/static/fonts/Webfont/THICCCBOI-Bold.woff2') format('woff'),
+         url('/static/fonts/TTF/THICCCBOI-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: bold;
+}
+
+a {
+    text-decoration: none
+}
+a:link {
+    color: var(--logo-pink-color)
+}
+a:hover {
+    color: var(--logo-blue-color)
+}
+a:visited {
+    color: var(--logo-blue-color)
+}
+h1 {
+    font-family: 'THICCBOI-Bold';
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+}
+h2 {
+    font-family: 'THICCBOI-Bold';
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+p {
+    font-family: 'THICCBOI';
+    font-size: 1rem;
+    line-height: 1.25rem;
+    opacity: 0.8;
+}
+ul {
+    padding-inline-start: 10px;
+}
+
+.logo {
+    background: -webkit-linear-gradient(var(--logo-blue-color) 10%, var(--logo-pink-color) 90%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.dash-section {
+    padding-bottom: 2rem;
+}
+.dash-container {
+    margin-top: -1rem;
+    padding-bottom: 3.5rem;
+}
+.dash-row {
+    clear: both;
+    font-family: 'THICCBOI';
+    font-size: 1.15rem;
+}
+.dash-heading {
+    float: left;
+    margin-bottom: 0.5rem;
+    width: 100%;
+}
+.dash-item {
+    float: left;
+    opacity: 0.8;
+}
+.dash-value {
+    float: right;
+    opacity: 0.8;
+}
+.dash-source {
+    font-style: oblique;
+    opacity: 0.8;
+}

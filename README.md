@@ -48,4 +48,6 @@ The maintainer for ThreatSlayer is [@jmercouris](https://github.com/jmercouris).
 
 Invoke the command `make all` to make the extension.
 
+Invoke the command `make deploy` to deploy the extension to the Chrome store.
+
 Invoke the command `make clean` to clean the results of a previous compilation.
