@@ -80,19 +80,31 @@ export default {
                 { address, password, signature, termsOfService, unitedStates, username });
 
             if (response.status === 200) {
-                // TODO store encrypted mnemonic
                 this.submitted = true;
                 this.submitting = false;
                 this.submitButtonText = 'Success';
-            } else {
-                // TODO catch errors properly
-                this.submitting = false;
-                this.error = true;
-                this.submitButtonText = 'Error';
+
+                try {
+                    chrome.storage.local
+                        .set({ registered: true })
+                        .then(() => {
+                            console.log("User succesfully registered!");
+                        });
+                    try {
+                        chrome.storage.local
+                            .set({ loggedIn: true })
+                            .then(() => {
+                                console.log("User succesfully logged in");
+                            });
+                    } catch (err) {
+                        console.log('Error updating extension logged in status:', err);
+                    }
+                } catch (err) {
+                    console.log('Error updating extension registered and logged in status:', err);
+                }
             }
         }
-    }
-};
+    };
 </script>
 
 <style>
@@ -121,6 +133,7 @@ export default {
 .submit-active {
     border: 3px solid #3b8de8;
     color: #963cf5;
+    opacity: 1;
     outline: none;
     pointer-events: initial;
 }
@@ -132,6 +145,7 @@ export default {
 .disabled {
     border: 1px solid #d0d4d9;
     color: #d0d4d9;
+    opacity: 0.3;
     pointer-events: none;
 }
 </style>
