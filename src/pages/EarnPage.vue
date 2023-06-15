@@ -1,87 +1,92 @@
 <template>
-    <div id="wizard-container">
-        <PageBanner />
-        <WelcomeView :active="welcomeActive">
-            <div id="welcome-cta-container" v-if="welcomeActive">
-                <br />
-                <LineOfText msg="Check these boxes to continue:" :instruction="true" />
-                <div class="checkbox-container" @click="focusNextCheckbox">
-                    <input id="first-box" type="checkbox" v-model="termsOfService" tabindex="1">
-                    <label for="first-box">Agree to our <a href="https://interlock.network" target="_blank">
-                            Terms of Service</a></label>
-                </div>
-                <div class="checkbox-container">
-                    <input id="second-box" type="checkbox" v-model="unitedStates" tabindex="2">
-                    <label for="second-box" style="display: inline-flex;">Affirm you are not a US citizen or resident
-                        <InfoTip style="padding-right: 2.75rem;" v-if="welcomeActive"
-                            msg="Cryptocurrency is considered a security in the US so most US residents cannot purchase them." />
-                    </label>
-                </div>
-                <div class="bail-container">
-                    <BailLink msg="I can't check these" v-if="welcomeActive" tabindex="4" style="margin-right: 0.5rem;" />
-                    <br />
-                </div>
-            </div>
-        </WelcomeView>
-        <ConnectWalletView :active="connectWalletActive || submitActive">
+    <h1 id="page-banner">Start Earning</h1>
+    <WelcomeView :active="welcomeActive">
+        <div id="welcome-cta-container" v-if="welcomeActive">
             <br />
-            <div style="width: 100%; display: flex;">
-                <WalletButton msg="Connect Account" :active="connectAccountSelected" id="connectAccount"
-                    :action="connectAccount" tabindex="5" />
-                <WalletButton msg="Create New Account" :active="createAccountSelected" id="createAccount"
-                    :action="createAccount" tabindex="6" />
+            <LineOfText msg="Check these boxes to continue:" instruction />
+            <div class="checkbox-container" @click="focusNextCheckbox">
+                <input id="first-box" type="checkbox" v-model="termsOfService" tabindex="1">
+                <label for="first-box">Agree to our <a href="https://interlock.network" target="_blank">
+                        Terms of Service</a></label>
             </div>
+            <div class="checkbox-container">
+                <input id="second-box" type="checkbox" v-model="unitedStates" tabindex="2">
+                <label for="second-box" style="display: inline-flex;">Affirm you are not a US citizen or resident
+                    <InfoTip style="padding-right: 2.75rem;" v-if="welcomeActive"
+                        msg="Cryptocurrency is considered a security in the US so most US residents cannot purchase them." />
+                </label>
+            </div>
+            <div class="bail-container">
+                <BailLink msg="I can't check these" v-if="welcomeActive" tabindex="4" style="margin-right: 0.5rem;" />
+                <br />
+            </div>
+        </div>
+    </WelcomeView>
+    <ConnectWalletView :active="connectWalletActive || submitActive">
+        <br />
+        <div style="width: 100%; display: flex;">
+            <WalletButton msg="Connect Account" :active="connectAccountSelected" id="connectAccount"
+                :action="connectAccount" tabindex="5" />
+            <WalletButton msg="Create New Account" :active="createAccountSelected" id="createAccount"
+                :action="createAccount" tabindex="6" />
+        </div>
+        <div>
+            <br />
+            <ConnectInstructions v-if="connectAccountSelected && connectWalletActive"
+                :active="connectAccountSelected && connectWalletActive">
+                <textarea class="input-field-text" id="seed-input" @input="validateMenomic" v-model.trim="existingMnemonic"
+                    style="width: 100%" placeholder="12 or 22 word seed phrase here" tabindex="7"
+                    :style="mnemonicInputStyle" />
+                <LineOfText error v-for="message in mnemonicErrorMessage" :key="message" :msg="message" />
+            </ConnectInstructions>
+            <CreateInstructions v-if="createAccountSelected" :active="createAccountSelected && connectWalletActive">
+                <div id="seed-container">
+                    <div id="seed-text-container">
+                        <LineOfText :msg="generatedMnemonic" seed />
+                    </div>
+                    <div id="seed-button-container">
+                        <button @click="copy" class="small-button" id="copy-button" v-if="createAccountSelected">
+                            Copy
+                        </button>
+                    </div>
+                </div>
+            </CreateInstructions>
+        </div>
+        <br />
+        <LineOfText msg="Usernames can have characters A-Z, a-z and 0-9:" instruction />
+        <input class="input-field-text" id="username-input" @input="validateUsername" v-model.trim="username"
+            placeholder="Username up to 16 characters" tabindex="9" :style="usernameInputStyle" />
+        <LineOfText :msg="usernameErrorMessage" error v-if="usernameErrorMessage.length" />
+        <br />
+        <!-- password field with show/hide button -->
+        <LineOfText msg="Enter a password of at least 12 characters:" instruction />
+        <div style="width: 100%">
+            <input class="input-field-text password-input" :type="passwordInputType" v-model.trim="password"
+                placeholder="Password" tabindex="10" :style="passwordInputStyle" />
+            <button @click="togglePasswordInputType" class="small-button" id="show-toggle-button" style="float: left;">{{
+                passwordInputType === 'password' ? 'Show' : 'Hide' }}</button>
+        </div>
+        <LineOfText :msg="passwordErrorMessage" error v-if="passwordErrorMessage.length" />
+        <br />
+        <br />
+        <!-- password confirmation field -->
+        <div style="width: 100%">
             <div>
-                <br />
-                <ConnectInstructions v-if="connectAccountSelected && connectWalletActive"
-                    :active="connectAccountSelected && connectWalletActive">
-                    <textarea class="input-field-text" id="seed-input" @input="validateMenomic"
-                        v-model.trim="existingMnemonic" style="width: 100%" placeholder="12 or 22 word seed phrase here"
-                        tabindex="7" :style="mnemonicInputStyle" />
-                    <LineOfText :error="true" v-for="message in mnemonicErrorMessage" :key="message" :msg="message" />
-                </ConnectInstructions>
-                <CreateInstructions v-if="createAccountSelected" :active="createAccountSelected && connectWalletActive">
-                    <LineOfText :msg="generatedMnemonic" />
-                    <button @click="copy" class="small-button" id="copy-button" style="float: right;"
-                        v-if="createAccountSelected">Copy</button>
-                </CreateInstructions>
+                <input class="input-field-text password-input" :type="passwordInputType" @input="validateReenteredPassword"
+                    v-model.trim="reenteredPassword" placeholder="Confirm Password" tabindex="11"
+                    :style="passwordInputStyle" />
+                <BailLink msg="Maybe later" v-if="connectWalletActive || submitActive" tabindex="12" />
             </div>
-            <br />
-            <LineOfText msg="Usernames can have characters A-Z, a-z and 0-9:" :instruction="true" />
-            <input class="input-field-text" id="username-input" @input="validateUsername" v-model.trim="username"
-                placeholder="Username up to 16 characters" tabindex="9" :style="usernameInputStyle" />
-            <LineOfText :msg="usernameErrorMessage" :error="true" v-if="usernameErrorMessage.length" />
-            <br />
-            <!-- password field with show/hide button -->
-            <LineOfText msg="Enter a password of at least 12 characters:" :instruction="true" />
-            <div style="width: 100%">
-                <input class="input-field-text password-input" :type="passwordInputType" v-model.trim="password"
-                    placeholder="Password" tabindex="10" :style="passwordInputStyle" />
-                <button @click="togglePasswordInputType" class="small-button" id="show-toggle-button"
-                    style="float: left;">{{ passwordInputType === 'password' ? 'Show' : 'Hide' }}</button>
-            </div>
-            <LineOfText :msg="passwordErrorMessage" :error="true" v-if="passwordErrorMessage.length" />
-            <br />
-            <br />
-            <!-- password confirmation field -->
-            <div style="width: 100%">
-                <div>
-                    <input class="input-field-text password-input" :type="passwordInputType"
-                        @input="validateReenteredPassword" v-model.trim="reenteredPassword" placeholder="Confirm Password"
-                        tabindex="11" :style="passwordInputStyle" />
-                    <BailLink msg="Maybe later" v-if="connectWalletActive || submitActive" tabindex="12" />
-                </div>
-                <LineOfText :msg="reenteredPasswordErrorMessage" :error="true"
-                    v-if="reenteredPasswordErrorMessage.length" />
-            </div>
-        </ConnectWalletView>
-        <SubmitButton :active="submitActive" :password="password" :termsOfService="termsOfService"
-            :unitedStates="unitedStates" :username="username" :mnemonic="selectedMnemonic" tabindex="13" />
-    </div>
+            <LineOfText :msg="reenteredPasswordErrorMessage" error v-if="reenteredPasswordErrorMessage.length" />
+        </div>
+    </ConnectWalletView>
+    <SubmitButton :active="submitActive" :password="password" :termsOfService="termsOfService" :unitedStates="unitedStates"
+        :username="username" :mnemonic="selectedMnemonic" tabindex="13" />
 </template>
 <script>
 import axios from "axios";
 import { debounce } from 'debounce';
+import { findNonAlphanumericChars } from "../utilities";
 import { mnemonicGenerate, mnemonicValidate } from '@polkadot/util-crypto';
 
 import BailLink from "./components/subcomponents/BailLink.vue";
@@ -90,7 +95,6 @@ import ConnectWalletView from "./components/ConnectWalletView.vue";
 import CreateInstructions from "./components/CreateInstructions.vue";
 import InfoTip from "./components/subcomponents/InfoTip.vue";
 import LineOfText from "./components/subcomponents/LineOfText.vue";
-import PageBanner from "./components/PageBanner.vue";
 import SubmitButton from "./components/subcomponents/SubmitButton.vue";
 import WalletButton from "./components/subcomponents/WalletButton.vue";
 import WelcomeView from "./components/WelcomeView.vue";
@@ -111,7 +115,6 @@ export default {
         CreateInstructions,
         InfoTip,
         LineOfText,
-        PageBanner,
         SubmitButton,
         WalletButton,
         WelcomeView
@@ -176,6 +179,9 @@ export default {
         },
     },
     methods: {
+        clearUsernameErrors() {
+            this.usernameErrorMessage = '';
+        },
         connectAccount() {
             this.connectAccountSelected = true;
             this.createAccountSelected = false;
@@ -193,15 +199,6 @@ export default {
             if (!this.generatedMnemonic.length) {
                 this.generatedMnemonic = mnemonicGenerate();
             }
-        },
-        findNonAlphanumericChars(str) {
-            const regex = /[^A-Za-z0-9]/g;
-            const matchesArr = str.match(regex).map(char =>
-                char === ' ' ? 'whitespace' :
-                    char === ',' ? 'comma' : char
-            );
-
-            return [...new Set(matchesArr)]; // to remove duplicate chars
         },
         focusNextCheckbox() {
             const firstCheckBox = document.getElementById('first-box');
@@ -285,7 +282,10 @@ export default {
             const name = event?.target?.value;
 
             // bail out if no username yet, or else it will show an error and be annoying
-            if (!name || !name.length) { return true; }
+            if (!name || !name.length) {
+                this.clearUsernameErrors();
+                return true;
+            }
 
             const errorMessages = {
                 illegalChars: function (chars) { return `Username contains illegal characters: ${chars.join(', ')}` },
@@ -299,18 +299,21 @@ export default {
             if (name.length > maxPasswordLength) {
                 this.usernameErrorMessage = errorMessages.maxLength;
             } else if (containsIllegalChars) {
-                const illegalChars = this.findNonAlphanumericChars(name);
+                const illegalChars = findNonAlphanumericChars(name);
 
                 this.usernameErrorMessage = errorMessages.illegalChars(illegalChars);
             } else {
+                this.clearUsernameErrors();
+
                 // TODO update with endpoint URL
                 axios.post('/api/name', { name })
                     .then(() => {
-                        this.usernameErrorMessage = '';
+                        console.log('Username ${name} is available');
                     })
                     .catch(e => {
-                        const { errorMessage } = e.response.data;
-                        this.usernameErrorMessage = errorMessage;
+                        const { errorMessage } = e?.response?.data;
+
+                        this.usernameErrorMessage = errorMessage || '';
                     });
             }
         }, 250)
@@ -319,25 +322,6 @@ export default {
 </script>
   
 <style>
-a {
-    color: inherit;
-}
-
-a:focus {
-    border: 3px solid #3b8de8;
-    outline: none;
-}
-
-body {
-    background-color: #060708;
-    color: #d0d4d9;
-    font-size: 1rem;
-    margin-top: 1rem;
-    margin-left: 40%;
-    pointer-events: none;
-    width: 700px;
-}
-
 input[type="checkbox"] {
     margin-right: 0.5rem;
 }
@@ -356,10 +340,30 @@ input[type="checkbox"]:focus {
 }
 
 #copy-button {
+    background-color: #D0D4D9;
     border: none;
     color: #963cf5;
     float: right;
+    position: relative;
+}
+
+#seed-container {
+    background-color: #D0D4D9;
+    display: block;
+    height: 4rem;
     margin-bottom: 1rem;
+    width: 100%;
+}
+
+#seed-text-container {
+    height: 4rem;
+    position: relative;
+}
+
+#seed-button-container {
+    background-color: #D0D4D9;
+    height: 2rem;
+    position: inherit;
 }
 
 .password-input {
@@ -370,10 +374,6 @@ input[type="checkbox"]:focus {
     border: none;
     color: #963cf5;
     margin-top: 0.35rem;
-}
-
-#wizard-container {
-    margin-left: 2rem;
 }
 
 #seed-input {
@@ -400,6 +400,7 @@ input[type="checkbox"]:focus {
     background-color: #060708;
     border: 1px solid #d0d4d9;
     color: #d0d4d9;
+    font-size: 1rem;
     pointer-events: initial;
 }
 </style>
