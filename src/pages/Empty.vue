@@ -1,6 +1,5 @@
 <template>
-    <div id="">
-    </div>
+    <h1 id="page-banner">Page Name</h1>
 </template>
 <script>
 
