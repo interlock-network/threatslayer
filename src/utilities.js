@@ -1,3 +1,14 @@
+// finds characters not A-Z, a-z and 0-9
+export function findNonAlphanumericChars(str) {
+    const regex = /[^A-Za-z0-9]/g;
+    const matchesArr = str.match(regex).map(char =>
+        char === ' ' ? 'whitespace' :
+            char === ',' ? 'comma' : char
+    );
+
+    return [...new Set(matchesArr)]; // to remove duplicate chars
+}
+
 // convenience function to stringify large numbers to local formats with commas etc.
 export function formatNumber(num) {
     return new Intl.NumberFormat().format(num);
