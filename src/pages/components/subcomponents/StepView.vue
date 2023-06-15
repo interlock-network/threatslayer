@@ -1,15 +1,15 @@
 <template>
     <div id="stepview-container" :class="computedClass">
-        <StepHeader :msg="header"></StepHeader>
-        <StepText :msg="text"></StepText>
+        <StepHeader :msg="header" />
+        <LineOfText :msg="text" />
         <!-- CTAs etc are passed to the slot below -->
         <slot />
     </div>
 </template>
 
 <script>
+import LineOfText from "./LineOfText.vue";
 import StepHeader from "./StepHeader.vue";
-import StepText from "./StepText.vue";
 
 export default {
     name: "StepView",
@@ -19,12 +19,12 @@ export default {
         text: String,
     },
     components: {
+        LineOfText,
         StepHeader,
-        StepText,
     },
     computed: {
         computedClass() {
-            return this.active ? 'active' : 'inactive';
+            return this.active ? 'step-active' : 'step-inactive';
         }
     }
 };
@@ -37,14 +37,14 @@ export default {
     width: 450px;
 }
 
-.active {
+.step-active {
     opacity: 1;
     /* border: 1px solid #d0d4d9; */
     /* border-radius: 0.5rem; */
     /* padding: 1rem; */
 }
 
-.inactive {
+.step-inactive {
     opacity: 0.3;
 }
 </style>
