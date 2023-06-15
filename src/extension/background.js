@@ -38,6 +38,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
                 );
                 selectedBaseAPIUrl = betaBaseAPIUrl;
             }
+            console.log('selectedBaseAPIUrl', selectedBaseAPIUrl);
 
             fetch(`${selectedBaseAPIUrl}/malicious_p`, {
                 ...defaultConfig,
@@ -45,31 +46,35 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
             })
                 .then((response) => response.json())
                 .then((response) => sendResponse(response))
-                .catch((error) =>
-                    console.log(`Error getting malicious URL: ${error}`)
+                .catch((error) => { console.log(`Error getting malicious URL: ${error}`) }
                 );
         });
 
         return true;
     } else if (request === "displayWarningBanner") {
-        chrome.storage.local
-            .get(["totalMaliciousURLsVisited"])
-            .then((result) => {
-                let totalMaliciousURLsVisited =
-                    result.totalMaliciousURLsVisited || 0;
-                totalMaliciousURLsVisited++;
+        try {
+            chrome.storage.local
+                .get(["totalMaliciousURLsVisited"])
+                .then((result) => {
+                    let totalMaliciousURLsVisited =
+                        result.totalMaliciousURLsVisited || 0;
+                    totalMaliciousURLsVisited++;
 
-                chrome.storage.local
-                    .set({
-                        totalMaliciousURLsVisited: totalMaliciousURLsVisited,
-                    })
-                    .then(() => {
-                        console.log(
-                            "Total malicious URLs set to:" +
-                                totalMaliciousURLsVisited
-                        );
-                    });
-            });
+                    try {
+                        chrome.storage.local
+                            .set({
+                                totalMaliciousURLsVisited: totalMaliciousURLsVisited,
+                            })
+                            .then(() => {
+                                console.log(`Total malicious URLs set to: ${totalMaliciousURLsVisited}`);
+                            });
+                    } catch (err) {
+                        console.log('Error in setting totalMaliciousURLsVisited:', err);
+                    }
+                });
+        } catch (err) {
+            console.log('Error in getting totalMaliciousURLsVisited:', err);
+        }
 
         // inject styling
         chrome.scripting.insertCSS({
@@ -77,14 +82,16 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
             files: ["banner.css"],
         });
         // execute script
-        chrome.scripting
-            .executeScript({
-                target: { tabId: sender.tab.id },
-                files: ["banner.js"],
-            })
-            .then((response) => sendResponse(response))
-            .catch((error) => console.log(error));
-
+        try {
+            chrome.scripting
+                .executeScript({
+                    target: { tabId: sender.tab.id },
+                    files: ["banner.js"],
+                })
+                .then((response) => sendResponse(response));
+        } catch (err) {
+            console.log('Error in sendingResponse():', err);
+        }
         return true;
     }
 });
@@ -99,8 +106,8 @@ chrome.runtime.setUninstallURL(
 /**
  * This listener opens the release notes in a new tab when users update the extension
  */
-chrome.runtime.onInstalled.addListener(function(details) {
-    if(details.reason == "update") {
+chrome.runtime.onInstalled.addListener(function (details) {
+    if (details.reason == "update") {
         chrome.tabs.create({ url: "https://github.com/interlock-network/threatslayer/blob/master/docs/release_notes.md" });
     }
 });
@@ -110,9 +117,9 @@ chrome.runtime.onInstalled.addListener(function(details) {
  */
 chrome.action.onClicked.addListener(tab => {
     // Send a message to the active tab
-    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
         var activeTab = tabs[0];
-        chrome.tabs.sendMessage(activeTab.id, {"message": "clicked_browser_action"});
-        chrome.tabs.create({'url': chrome.runtime.getURL("index.html"), 'active': true});
+        chrome.tabs.sendMessage(activeTab.id, { "message": "clicked_browser_action" });
+        chrome.tabs.create({ 'url': chrome.runtime.getURL("index.html"), 'active': true });
     });
 });
