@@ -102,9 +102,13 @@ export default {
                 } catch (err) {
                     console.log('Error updating extension registered and logged in status:', err);
                 }
+            } else {
+                // TODO handle errors
+                console.log('Error submitting registration');
             }
         }
-    };
+    }
+};
 </script>
 
 <style>
