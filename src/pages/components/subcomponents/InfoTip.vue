@@ -16,13 +16,13 @@ export default {
 <style>
 .help-tip {
     cursor: default;
-    font-size: 0.8rem;
+    font-size: 1rem;
     margin-left: 0rem;
     pointer-events: initial;
 }
 
 .help-tip:before {
-    content: '?';
+    content: '*';
     font-weight: bold;
     color: #963cf5;
 }
