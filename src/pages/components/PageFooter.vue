@@ -2,8 +2,7 @@
     <div id="page-footer">
         <FooterLink msg="Privacy Policy" divider />
         <FooterLink msg="Do Not Sell My Personal Information." divider />
-        <FooterLink msg="Terms of Service" />
-        <br />
+        <FooterLink msg="Terms of Service" divider />
         <LineOfText msg="Interlock (c) 2023 All Rights Reserved" footer />
     </div>
 </template>
@@ -24,9 +23,9 @@ export default {
 <style>
 #page-footer {
     color: gray;
-    display: block;
+    display: flex;
     font-size: 0.8rem;
-    margin-top: 6rem;
+    justify-content: center;
     width: 100%;
 }
 </style>
