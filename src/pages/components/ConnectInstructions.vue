@@ -1,5 +1,5 @@
 <template>
-    <div class="line-of-text">
+    <div class="interrupted-line">
         Copy and paste the 12 or 22 word mnemonic seed phrase
         <span class="help-tip"><span class="help-tip">
                 This mnemonic seed phrase is used to generate a cryptographic signature to prove that you own the account.
@@ -25,7 +25,7 @@ export default {
 </script>
 
 <style>
-.line-of-text {
+.interrupted-line {
     color: #D0D4D9;
     display: block;
     opacity: 85%;
