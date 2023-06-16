@@ -16,7 +16,6 @@ export default {
 <style>
 .help-tip {
     cursor: default;
-    font-size: 1rem;
     margin-left: 0rem;
     pointer-events: initial;
 }
@@ -45,7 +44,7 @@ export default {
     border-radius: 3px;
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
     color: #E7E9EA;
-    font-size: 0.75rem;
+    font-size: 1rem;
     line-height: 0.8rem;
 }
 

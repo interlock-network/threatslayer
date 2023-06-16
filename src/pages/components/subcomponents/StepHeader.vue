@@ -15,8 +15,9 @@ export default {
 #headline {
     color: #E7E9EA;
     display: block;
-    width: 100%;
+    font-size: 1.5rem;
     margin-bottom: 0.25rem;
     margin-top: 0rem;
+    width: 100%;
 }
 </style>

@@ -22,7 +22,7 @@ export default {
 #bail-link {
     color: gray;
     float: right;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     cursor: pointer;
     min-width: 65px;
     pointer-events: initial;

@@ -24,8 +24,8 @@ export default {
 #page-footer {
     color: gray;
     display: flex;
-    font-size: 0.8rem;
-    justify-content: center;
+    font-size: 0.75rem;
+    /* justify-content: center; */
     width: 100%;
 }
 </style>

@@ -20,7 +20,6 @@ export default {
     display: inline-block;
     position: relative;
     cursor: pointer;
-    font-size: 1rem;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
