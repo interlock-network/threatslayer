@@ -17,9 +17,9 @@
       <SlayCount v-if="currentPage === 'slayCount'" />
       <AboutPage v-if="currentPage === 'about'" />
       <OptionsPage v-if="currentPage === 'options'" />
-    </div>
-    <div id="footer-container">
-      <PageFooter />
+      <div id="footer-container">
+        <PageFooter />
+      </div>
     </div>
   </div>
 </template>
@@ -57,7 +57,6 @@ export default {
   methods: {
     isLoggedIn() {
       // if unregistered, switch to earn page
-      // if registered, show slaycount
       try {
         chrome.storage.local.get('loggedIn', response => {
           const { loggedIn = false } = response;
@@ -71,7 +70,6 @@ export default {
       }
     },
     isRegistered() {
-      // if unregistered, switch to earn page
       // if registered, show slaycount
       try {
         chrome.storage.local.get('registered', response => {
@@ -127,7 +125,7 @@ a:focus {
 body {
   background-color: #060708;
   color: #d0d4d9;
-  font-size: 1rem;
+  font-size: 1.1rem;
   margin-top: 1rem;
   margin-left: 35%;
   pointer-events: none;
@@ -144,12 +142,6 @@ body {
   width: 75%;
 }
 
-#page-banner {
-  color: #E7E9EA;
-  display: block;
-  width: 100%;
-}
-
 #sidebar-banner {
   display: block;
   width: 100%;
@@ -163,6 +155,8 @@ body {
 
 #footer-container {
   align-items: flex-start;
+  margin-top: 4rem;
+  position: absolute;
   width: 100%;
 }
 
