@@ -1,5 +1,5 @@
 <template>
-    <h1 id="page-banner">Login</h1>
+    <PageBanner msg="Login" />
     <!-- username field -->
     <LineOfText msg="Username" instruction />
     <input class="input-field-text" id="login-username" @input="validateUsername" v-model.trim="username" tabindex="1"
@@ -16,12 +16,13 @@
         </button>
     </div>
     <LineOfText :msg="passwordErrorMessage" error v-if="passwordErrorMessage.length" />
-    <SubmitButton :active="submitActive" :password="password" :username="username" tabindex="3" />
+    <LoginButton :active="submitActive" :password="password" :username="username" tabindex="3" />
 </template>
 <script>
 import InfoTip from "./components/subcomponents/InfoTip.vue";
 import LineOfText from "./components/subcomponents/LineOfText.vue";
-import SubmitButton from "./components/subcomponents/SubmitButton.vue";
+import LoginButton from "./components/subcomponents/LoginButton.vue";
+import PageBanner from "./components/subcomponents/PageBanner.vue";
 
 import { debounce } from 'debounce';
 import { findNonAlphanumericChars } from "../utilities";
@@ -38,7 +39,8 @@ export default {
     components: {
         InfoTip,
         LineOfText,
-        SubmitButton,
+        LoginButton,
+        PageBanner,
     },
     data() {
         return {
@@ -59,10 +61,10 @@ export default {
             return this.passwordErrorMessage.length ? errorStyle : {};
         },
         submitActive() {
-            const submitActive = this.password.length
+            const submitActive = !!(this.password.length
                 && this.username.length
                 && !this.passwordErrorMessage.length
-                && !this.usernameErrorMessage.length;
+                && !this.usernameErrorMessage.length);
 
             return submitActive;
         },
@@ -109,17 +111,9 @@ export default {
 </script>
   
 <style>
-input[type="checkbox"] {
-    margin-right: 0.5rem;
-}
-
 input:focus {
     border: 3px solid #3b8de8;
     outline: none;
-}
-
-input[type="checkbox"]:focus {
-    outline: 2px solid #3b8de8;
 }
 
 .password-input {
@@ -137,7 +131,6 @@ input[type="checkbox"]:focus {
     border: 1px solid #d0d4d9;
     color: #d0d4d9;
     display: block;
-    font-size: 1rem;
     min-width: 275px;
     height: 1.5rem;
     pointer-events: initial;
@@ -147,7 +140,6 @@ input[type="checkbox"]:focus {
     background-color: #060708;
     border: 1px solid #d0d4d9;
     color: #d0d4d9;
-    font-size: 1rem;
     pointer-events: initial;
 }
 </style>

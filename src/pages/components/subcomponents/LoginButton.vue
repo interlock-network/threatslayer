@@ -1,8 +1,7 @@
 <template>
     <div id="login-button-container">
-        <!-- TODO fix this -->
-        <button id='login-button' @click="submitLogin()" @input="validateName" :class="error ? 'error' : computedClass"
-            :disabled="loggingIn || loggedIn">
+        <button id='login-button' @click="submitLogin()" :class="computedClass"
+            :disabled="loggingIn || loggedIn || !active">
             {{ loginButtonText }}
         </button>
     </div>
@@ -26,23 +25,25 @@ export default {
             loggedIn: false
         }
     },
-    watch: {
-        active: function (newVal, oldVal) {
-            if (!oldVal && newVal) {
-                document.getElementById('login-button').focus();
-            } else if (oldVal && !newVal) {
-                document.getElementById('login-button').blur();
-            }
-        },
-    },
     computed: {
         computedClass() {
-            return this.active && this.mnemonic && this.password && this.termsOfService && this.unitedStates && this.username ? 'login-active' : 'disabled';
-        },
+            let className = '';
+
+            if (this.error) {
+                className = 'login-button-error';
+            } else if (!this.active) {
+                className = 'disabled';
+            } else {
+                className = 'login-active';
+            }
+
+            return className;
+        }
     },
     methods: {
         async submitLogin() {
-            const { password, mnemonic, termsOfService, unitedStates, username, } = this;
+            const { password, username } = this;
+
             this.loggingIn = true;
             this.loginButtonText = 'Waiting...';
 
@@ -77,14 +78,8 @@ export default {
 </script>
 
 <style>
-#go-back-button {
-    border: none;
-    color: gray;
-    margin-top: 0.8rem;
-    width: 50%;
-}
-
 #login-button-container {
+    color: #d0d4d9;
     margin-top: 3rem;
     margin-bottom: 3rem;
     width: 450px;
@@ -94,9 +89,16 @@ export default {
     background: #060708;
     cursor: pointer;
     float: left;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
+    pointer-events: initial;
     width: 50%;
     padding: 0.5rem 0.75rem;
+}
+
+.disabled {
+    border: 1px solid #d0d4d9;
+    opacity: 0.3;
+    pointer-events: none;
 }
 
 .login-active {
@@ -107,14 +109,7 @@ export default {
     pointer-events: initial;
 }
 
-.error {
+.login-button-error {
     color: red;
-}
-
-.disabled {
-    border: 1px solid #d0d4d9;
-    color: #d0d4d9;
-    opacity: 0.3;
-    pointer-events: none;
 }
 </style>
