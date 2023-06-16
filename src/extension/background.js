@@ -38,7 +38,6 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
                 );
                 selectedBaseAPIUrl = betaBaseAPIUrl;
             }
-            console.log('selectedBaseAPIUrl', selectedBaseAPIUrl);
 
             fetch(`${selectedBaseAPIUrl}/malicious_p`, {
                 ...defaultConfig,
