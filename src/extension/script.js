@@ -18,9 +18,9 @@ function handleAPIResponse(response) {
 
     if (response === null) {
         console.log(`API Unresponsive. Cannot verify safety of URL ${href} .`);
-    } else if (response.malicious === true) {
-        console.log(`URL ${href} not classified as malicious.`);
     } else if (response.malicious === false) {
+        console.log(`URL ${href} not classified as malicious.`);
+    } else if (response.malicious === true) {
         chrome.runtime.sendMessage("displayWarningBanner");
     }
 }
@@ -34,7 +34,7 @@ function handleAPIResponse(response) {
 function removeParams(url) {
     const parser = document.createElement('a');
     parser.href = url;
-    const {hostname, protocol, pathname} = parser;
+    const { hostname, protocol, pathname } = parser;
 
     const result = `${protocol}//${hostname}${pathname}`;
 
@@ -48,7 +48,7 @@ function removeParams(url) {
  * and asynchronously provides a response.
  */
 chrome.runtime.sendMessage(
-    {contentScriptQuery: "queryURL", url: removeParams(window.location.href)},
+    { contentScriptQuery: "queryURL", url: removeParams(window.location.href) },
     function (response) {
         if (response !== undefined && response !== "") {
             handleAPIResponse(response);
