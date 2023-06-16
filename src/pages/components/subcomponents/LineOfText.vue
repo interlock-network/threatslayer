@@ -21,32 +21,35 @@ export default {
             default: false,
         },
         msg: String,
-        seed: {
+        subinstruction: {
             type: Boolean,
             default: false,
-        },
+        }
     },
     computed: {
         style() {
-            return this.error ?
-                { color: "red" }
-                : this.footer
-                    ? {
+            let styleObj;
+            const { error, footer, subinstruction } = this;
+
+            switch (true) {
+                case error:
+                    styleObj = { color: "red" };
+                    break;
+                case footer:
+                    styleObj = {
                         "color": "gray",
                         "display": "inline",
-                        "font-size": "0.8rem"
-                    }
-                    : this.error ?
-                        { color: "red" }
-                        : this.seed ?
-                            {
-                                "align-items": "center",
-                                color: "black",
-                                "font-family": "monospace",
-                                "padding-top": "1rem",
-                                width: "100%"
-                            }
-                            : { width: "100%" }
+                        "font-size": "0.75rem"
+                    };
+                    break;
+                case subinstruction:
+                    styleObj = { 'font-size': '1rem' };
+                    break;
+                default:
+                    styleObj = { width: "100%" };
+            }
+
+            return styleObj;
         },
     },
 };
@@ -56,7 +59,7 @@ export default {
 .line-of-text {
     color: #D0D4D9;
     display: inline-flex;
-    opacity: 85%;
     margin-bottom: 0.5rem;
+    /* opacity: 85%; */
 }
 </style>
