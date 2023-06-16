@@ -1,5 +1,5 @@
 <template>
-    <h1 id="page-banner">Extension Options</h1>
+    <PageBanner msg="Extension Options" />
     <OptionsView>
         <div class="options-container">
             <input type="checkbox" id="beta-ai-checkbox" @click="betaClassifier($event)" tabindex="1" />
@@ -11,11 +11,13 @@
 </template>
 <script>
 import OptionsView from "./components/OptionsView.vue";
+import PageBanner from "./components/subcomponents/PageBanner.vue";
 
 export default {
     name: 'OptionsPage',
     components: {
-        OptionsView
+        OptionsView,
+        PageBanner
     },
     data() {
         return {};

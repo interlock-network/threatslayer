@@ -1,5 +1,5 @@
 <template>
-    <h1 id="page-banner">Slay Count</h1>
+    <PageBanner msg="Slay Count" />
     <div id="slaycount-container">
         <div id="button-container">
             <button id="download-button" class="sharing-button" @click="download" title="Download Slay Count">
@@ -65,13 +65,17 @@
     </svg>
 </template>
 <script>
+import PageBanner from "./components/subcomponents/PageBanner.vue";
+
 import { formatNumber, getFontSizeForTotal, getFontSizeForUnique } from "../utilities";
 
 const output = { name: "SlayCount.png", width: 512, height: 512 };
 
 export default {
     name: 'SlayCount',
-    components: {},
+    components: {
+        PageBanner
+    },
     data() {
         return {
             fontSizeForTotal: '123px',
@@ -180,20 +184,6 @@ export default {
 </script>
   
 <style>
-button {
-    color: white;
-    background-color: #9336e5;
-    border: none;
-    border-radius: 3px;
-    margin: 5px;
-    border: 3px solid white;
-    font-size: 18px;
-}
-
-button:hover {
-    cursor: pointer;
-}
-
 #button-container {
     float: right;
     /* margin-top: -40px; */
@@ -202,6 +192,7 @@ button:hover {
 
 #slaycount-container {
     margin-top: 2rem;
+    margin-bottom: 8rem;
 }
 
 #local-urls-scanned-count {
@@ -229,10 +220,19 @@ button:hover {
 }
 
 .sharing-button {
-    /* background-color: transparent; */
+    background-color: #9336e5;
     border: none;
+    /* border: 3px solid white; */
+    border-radius: 3px;
+    color: white;
+    font-size: 18px;
+    margin: 5px;
     padding: 0;
     pointer-events: initial;
+}
+
+.sharing-button:hover {
+    cursor: pointer;
 }
 
 .button-img {
@@ -243,9 +243,8 @@ button:hover {
 .statistic {
     text-align: center;
     margin-top: 30px;
-    margin-bottom: 30px;
     width: 242px;
-    height: 131px;
+    /* height: 131px; */
 }
 
 .statistic-header {

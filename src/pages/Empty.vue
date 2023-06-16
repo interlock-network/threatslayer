@@ -1,12 +1,13 @@
 <template>
-    <h1 id="page-banner">Page Name</h1>
+    <PageBanner msg="Page Name" />
 </template>
 <script>
+import PageBanner from "./components/subcomponents/PageBanner.vue";
 
 export default {
     name: '',
     components: {
-
+        PageBanner
     },
     data() {
         return {
