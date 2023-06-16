@@ -1,13 +1,15 @@
 <template>
-    <div class="interrupted-line">
-        Please save this mnemonic seed phrase
-        <span class="help-tip"><span class="help-tip">
-                This mnemonic seed phrase is used to generate a cryptographic signature to prove that you own the account.
-                The seed itself is never sent to Interlock.
-            </span></span>
-        somewhere secure. It cannot be retrieved. If you lose it, you will lose all access to the tokens in this account!
-    </div>
-    <slot />
+    <table>
+        <tr style="width: 100%">
+            <td style="width: 66%">
+                <LineOfText msg="We recommend SubWallet if you don't already have an Aleph Zero-compatible wallet."
+                    instruction />
+            </td>
+            <td style="width: 33%">
+                <slot />
+            </td>
+        </tr>
+    </table>
 </template>
 
 <script>

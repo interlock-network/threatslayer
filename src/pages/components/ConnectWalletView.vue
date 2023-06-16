@@ -1,6 +1,6 @@
 <template>
     <StepView header="Connect Your Wallet" :active="active"
-        text="To receive $ILOCK token, connect your Aleph Zero-compatible account. Then choose a username and password.">
+        text="To receive $ILOCK token, connect your Aleph Zero-compatible wallet.">
         <slot />
     </StepView>
 </template>

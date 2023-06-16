@@ -1,12 +1,5 @@
 <template>
-    <div class="interrupted-line">
-        Copy and paste the 12 or 22 word mnemonic seed phrase
-        <span class="help-tip"><span class="help-tip">
-                This mnemonic seed phrase is used to generate a cryptographic signature to prove that you own the account.
-                The seed itself is never sent to Interlock.
-            </span></span>
-        for your Aleph Zero blockchain address. If you do not have one, click "Create New Account".
-    </div>
+    <LineOfText msg="Paste the address for your Aleph Zero-compatible wallet." instruction />
     <slot />
 </template>
 
