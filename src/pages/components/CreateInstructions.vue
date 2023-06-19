@@ -1,15 +1,5 @@
 <template>
-    <table>
-        <tr style="width: 100%">
-            <td style="width: 66%">
-                <LineOfText msg="We recommend SubWallet if you don't already have an Aleph Zero-compatible wallet."
-                    instruction />
-            </td>
-            <td style="width: 33%">
-                <slot />
-            </td>
-        </tr>
-    </table>
+    <LineOfText msg="After you create a wallet, click 'Connect Wallet' and enter your wallet address." instruction />
 </template>
 
 <script>
@@ -19,9 +9,6 @@ export default {
     name: "CreateInstructions",
     components: {
         LineOfText,
-    },
-    props: {
-        active: Boolean
     },
 };
 </script>
