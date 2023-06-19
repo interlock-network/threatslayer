@@ -1,8 +1,6 @@
 <template>
     <div id="submit-button-container">
-        <!-- TODO fix this -->
-        <button id='submit-button' @click="submitForm()" @input="validateName" :class="error ? 'error' : computedClass"
-            :disabled="submitting || submitted">
+        <button id='submit-button' @click="submitForm()" :class="computedClass" :disabled="submitting || submitted">
             {{ submitButtonText }}
         </button>
     </div>
@@ -19,7 +17,7 @@ export default {
     name: "SubmitButton",
     props: {
         active: Boolean,
-        mnemonic: String,
+        address: String,
         password: String,
         termsOfService: Boolean,
         unitedStates: Boolean,
@@ -33,18 +31,19 @@ export default {
             submitted: false
         }
     },
-    watch: {
-        active: function (newVal, oldVal) {
-            if (!oldVal && newVal) {
-                document.getElementById('submit-button').focus();
-            } else if (oldVal && !newVal) {
-                document.getElementById('submit-button').blur();
-            }
-        },
-    },
     computed: {
         computedClass() {
-            return this.active && this.mnemonic && this.password && this.termsOfService && this.unitedStates && this.username ? 'submit-active' : 'disabled';
+            let className = '';
+
+            if (this.error) {
+                className = 'error';
+            } else if (!this.active) {
+                className = 'disabled';
+            } else {
+                className = 'submit-active';
+            }
+
+            return className;
         },
     },
     methods: {
