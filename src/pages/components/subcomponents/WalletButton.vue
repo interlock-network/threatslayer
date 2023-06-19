@@ -1,5 +1,5 @@
 <template>
-    <button :id="id" class="wallet-button" @click="clickAction()">
+    <button :id="id" class="wallet-button" :class="active ? 'selected-wallet-button' : ''" @click="clickAction()">
         {{ msg }}
     </button>
 </template>
@@ -47,20 +47,13 @@ export default {
 }
 
 .wallet-button:focus {
+    border: 3px solid #d0d4d9;
+}
+
+.selected-wallet-button {
     border: 3px solid #3b8de8;
     color: #963cf5;
     outline: none;
-}
 
-.error {
-    color: red;
-}
-
-.enabled {
-    pointer-events: initial;
-}
-
-.disabled {
-    pointer-events: none;
 }
 </style>
