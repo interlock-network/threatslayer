@@ -1,5 +1,5 @@
 <template>
-    <h1 id="page-banner">Start Earning</h1>
+    <PageBanner msg="Start Earning" />
     <WelcomeView :active="welcomeActive">
         <div id="welcome-cta-container" v-if="welcomeActive">
             <br />
@@ -25,32 +25,20 @@
     <ConnectWalletView :active="connectWalletActive || submitActive">
         <br />
         <div style="width: 100%; display: flex;">
-            <WalletButton msg="Connect Account" :active="connectAccountSelected" id="connectAccount"
-                :action="connectAccount" tabindex="5" />
-            <WalletButton msg="Create New Account" :active="createAccountSelected" id="createAccount"
-                :action="createAccount" tabindex="6" />
+            <WalletButton msg="Connect Wallet" :active="connectWalletButtonActive" id="connectWallet"
+                :action="connectWallet" tabindex="5" />
+            <WalletButton :action="createWallet" msg="Create Wallet" :active="createWalletButtonActive" id="createWallet"
+                tabindex="6" />
         </div>
         <div>
             <br />
             <ConnectInstructions v-if="connectAccountSelected && connectWalletActive"
                 :active="connectAccountSelected && connectWalletActive">
-                <textarea class="input-field-text" id="seed-input" @input="validateMenomic" v-model.trim="existingMnemonic"
-                    style="width: 100%" placeholder="12 or 22 word seed phrase here" tabindex="7"
-                    :style="mnemonicInputStyle" />
-                <LineOfText error v-for="message in mnemonicErrorMessage" :key="message" :msg="message" />
+                <textarea class="input-field-text" id="address-input" @input="validateAddress" v-model.trim="walletAddress"
+                    style="width: 100%" placeholder="Paste your wallet address here" tabindex="7" />
+                <LineOfText error v-for="message in addressErrorMessage" :key="message" :msg="message" />
             </ConnectInstructions>
-            <CreateInstructions v-if="createAccountSelected" :active="createAccountSelected && connectWalletActive">
-                <div id="seed-container">
-                    <div id="seed-text-container">
-                        <LineOfText :msg="generatedMnemonic" seed />
-                    </div>
-                    <div id="seed-button-container">
-                        <button @click="copy" class="small-button" id="copy-button" v-if="createAccountSelected">
-                            Copy
-                        </button>
-                    </div>
-                </div>
-            </CreateInstructions>
+            <CreateInstructions v-if="createAccountSelected" />
         </div>
         <br />
         <LineOfText msg="Usernames can have characters A-Z, a-z and 0-9:" instruction />
@@ -80,14 +68,15 @@
             <LineOfText :msg="reenteredPasswordErrorMessage" error v-if="reenteredPasswordErrorMessage.length" />
         </div>
     </ConnectWalletView>
-    <SubmitButton :active="submitActive" :password="password" :termsOfService="termsOfService" :unitedStates="unitedStates"
-        :username="username" :mnemonic="selectedMnemonic" tabindex="13" />
+    <SubmitButton :active="submitActive" :address="walletAddress" :password="password" :termsOfService="termsOfService"
+        :unitedStates="unitedStates" :username="username" tabindex="13" />
 </template>
 <script>
 import axios from "axios";
 import { debounce } from 'debounce';
 import { findNonAlphanumericChars } from "../utilities";
-import { mnemonicGenerate, mnemonicValidate } from '@polkadot/util-crypto';
+import { decodeAddress, encodeAddress } from '@polkadot/keyring';
+import { hexToU8a, isHex } from '@polkadot/util';
 
 import BailLink from "./components/subcomponents/BailLink.vue";
 import ConnectInstructions from "./components/ConnectInstructions.vue";
@@ -95,6 +84,7 @@ import ConnectWalletView from "./components/ConnectWalletView.vue";
 import CreateInstructions from "./components/CreateInstructions.vue";
 import InfoTip from "./components/subcomponents/InfoTip.vue";
 import LineOfText from "./components/subcomponents/LineOfText.vue";
+import PageBanner from "./components/subcomponents/PageBanner.vue";
 import SubmitButton from "./components/subcomponents/SubmitButton.vue";
 import WalletButton from "./components/subcomponents/WalletButton.vue";
 import WelcomeView from "./components/WelcomeView.vue";
@@ -115,17 +105,16 @@ export default {
         CreateInstructions,
         InfoTip,
         LineOfText,
+        PageBanner,
         SubmitButton,
         WalletButton,
         WelcomeView
     },
     data() {
         return {
+            addressErrorMessage: [],
             connectAccountSelected: true,
             createAccountSelected: false,
-            existingMnemonic: '',
-            generatedMnemonic: '',
-            mnemonicErrorMessage: [],
             password: '',
             passwordErrorMessage: '',
             passwordInputType: 'password',
@@ -135,34 +124,29 @@ export default {
             unitedStates: false,
             username: '',
             usernameErrorMessage: '',
+            walletAddress: ''
         };
     },
-    mounted() {
+    async mounted() {
         const firstCheckBox = document.getElementById('first-box')
 
         firstCheckBox.focus();
     },
     computed: {
-        existingMnemonicLength() {
-            return this.existingMnemonic.split(" ").filter(word => word.length).length;
-        },
         connectWalletActive() {
             const previousStepActive = this.welcomeActive;
             const usernameAndWalletIdValidated = this.validateWalletInputs();
 
             return !previousStepActive && !usernameAndWalletIdValidated;
         },
-        mnemonicInputStyle() {
-            return this.mnemonicErrorMessage.length ? errorStyle : {};
+        connectWalletButtonActive() {
+            return (this.connectWalletActive || this.submitActive) && this.connectAccountSelected;
         },
-        mnemonicIsValid() {
-            return mnemonicValidate(this.existingMnemonic);
+        createWalletButtonActive() {
+            return (this.connectWalletActive || this.submitActive) && this.createAccountSelected;
         },
         passwordInputStyle() {
             return this.passwordErrorMessage.length ? errorStyle : {};
-        },
-        selectedMnemonic() {
-            return this.createAccountSelected ? this.generatedMnemonic : this.existingMnemonic;
         },
         submitActive() {
             const previousStepsComplete = !this.welcomeActive && this.validateWalletInputs();
@@ -182,23 +166,14 @@ export default {
         clearUsernameErrors() {
             this.usernameErrorMessage = '';
         },
-        connectAccount() {
+        connectWallet() {
             this.connectAccountSelected = true;
             this.createAccountSelected = false;
         },
-        async copy() {
-            document.getElementById('createAccount').focus();
-            await navigator.clipboard.writeText(this.generatedMnemonic);
-
-            alert('Mnemonic seed phrase phrase copied to clipboard');
-        },
-        createAccount() {
+        createWallet() {
             this.connectAccountSelected = false;
             this.createAccountSelected = true;
-
-            if (!this.generatedMnemonic.length) {
-                this.generatedMnemonic = mnemonicGenerate();
-            }
+            window.open('https://chrome.google.com/webstore/detail/subwallet-polkadot-wallet/onhogfjeacnfoofkfgppdlbmlmnplgbn');
         },
         focusNextCheckbox() {
             const firstCheckBox = document.getElementById('first-box');
@@ -209,38 +184,41 @@ export default {
                 secondCheckBox.focus();
             }
         },
+        legitPolkadot(address) {
+            try {
+                encodeAddress(
+                    isHex(address)
+                        ? hexToU8a(address)
+                        : decodeAddress(address)
+                );
+
+                return true;
+            } catch (_error) {
+                return false;
+            }
+        },
         togglePasswordInputType() {
             this.passwordInputType = this.passwordInputType === 'password' ? 'text' : 'password';
         },
-        validateMenomic: debounce(function (event) {
-            const mnemonic = event?.target?.value;
-            this.mnemonicErrorMessage = [];
+        validateAddress: debounce(function (event) {
+            const address = event?.target?.value;
+            // this.addressErrorMessage = [];
 
-            if (!mnemonic || !mnemonic.length) {
-                this.mnemonicErrorMessage = [];
+            if (!address || !address.length) {
+                this.addressErrorMessage = [];
 
-                return true;
+                // return true;
             }
 
+            const addressIsValid = this.legitPolkadot(address);
+
             // happy case
-            if (this.mnemonicIsValid) {
-                this.mnemonicErrorMessage = [];
+            if (addressIsValid) {
+                this.addressErrorMessage = [];
 
-                return true;
+                // return true;
             } else {
-                // error cases
-                const hasForbiddenChars = /[^A-Za-z ]/.test(mnemonic);
-
-                if (hasForbiddenChars) {
-                    this.mnemonicErrorMessage.push('Seed can only have characters A-Z a-z');
-                }
-                if (this.existingMnemonicLength !== 12 && this.existingMnemonicLength !== 22) {
-                    this.mnemonicErrorMessage.push(`Seed should have 12 or 22 words, yours has ${this.existingMnemonicLength}`)
-                }
-                if (!hasForbiddenChars && this.existingMnemonicLength === 12) {
-                    // only shown when the more specific errors above have been eliminated
-                    this.mnemonicErrorMessage = ['Invalid seed phrase. Please try again.'];
-                }
+                this.addressErrorMessage.push('Not a valid address');
             }
         }, 250),
         validateReenteredPassword() {
@@ -273,7 +251,7 @@ export default {
             }
         },
         validateWalletInputs() {
-            const walletIsValid = this.createAccountSelected || this.mnemonicIsValid;
+            const walletIsValid = this.createAccountSelected || this.addressIsValid;
             const passwordIsValid = this.password.length && this.password === this.reenteredPassword && !this.passwordErrorMessage.length && !this.reenteredPasswordErrorMessage.length;
 
             return !!(walletIsValid && this.username.length > 2 && this.usernameErrorMessage === '' && passwordIsValid);
@@ -323,6 +301,7 @@ export default {
   
 <style>
 input[type="checkbox"] {
+    height: 0.75rem;
     margin-right: 0.5rem;
 }
 
@@ -376,8 +355,8 @@ input[type="checkbox"]:focus {
     margin-top: 0.35rem;
 }
 
-#seed-input {
-    height: 5rem;
+#address-input {
+    height: 2rem;
 }
 
 .input-field-text {
@@ -385,7 +364,6 @@ input[type="checkbox"]:focus {
     border: 1px solid #d0d4d9;
     color: #d0d4d9;
     display: block;
-    font-size: 1rem;
     min-width: 275px;
     height: 1.5rem;
     pointer-events: initial;
@@ -400,7 +378,6 @@ input[type="checkbox"]:focus {
     background-color: #060708;
     border: 1px solid #d0d4d9;
     color: #d0d4d9;
-    font-size: 1rem;
     pointer-events: initial;
 }
 </style>
