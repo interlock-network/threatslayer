@@ -22,7 +22,7 @@
             </div>
         </div>
     </WelcomeView>
-    <ConnectWalletView :active="connectWalletActive || submitActive">
+    <CreateAccountView :active="createAccountActive">
         <br />
         <div style="width: 100%; display: flex;">
             <WalletButton msg="Connect Wallet" :active="connectWalletButtonActive" id="connectWallet"
@@ -32,25 +32,32 @@
         </div>
         <div>
             <br />
-            <ConnectInstructions v-if="connectAccountSelected && connectWalletActive"
-                :active="connectAccountSelected && connectWalletActive">
+            <ConnectInstructions v-if="connectAccountSelected && createAccountActive">
                 <textarea class="input-field-text" id="address-input" @input="validateAddress" v-model.trim="walletAddress"
-                    style="width: 100%" placeholder="Paste your wallet address here" tabindex="7" />
-                <LineOfText error v-for="message in addressErrorMessage" :key="message" :msg="message" />
+                    style="width: 100%" placeholder="Paste your wallet address here" tabindex="7" required />
+                <LineOfText error v-if="addressErrorMessage.length" :msg="addressErrorMessage" />
             </ConnectInstructions>
             <CreateInstructions v-if="createAccountSelected" />
         </div>
         <br />
-        <LineOfText msg="Usernames can have characters A-Z, a-z and 0-9:" instruction />
+        <!-- email -->
+        <LineOfText msg="Email" instruction />
+        <input type="email" class="input-field-text" @input="validateEmail" v-model.trim="email" required
+            placeholder="We need your email for verification" />
+        <LineOfText :msg="emailErrorMessage" error v-if="emailErrorMessage.length" />
+        <br />
+        <!-- username -->
+        <LineOfText msg="Username" instruction />
         <input class="input-field-text" id="username-input" @input="validateUsername" v-model.trim="username"
-            placeholder="Username up to 16 characters" tabindex="9" :style="usernameInputStyle" />
+            placeholder="Allowed characters are A-Z, a-z and 0-9" tabindex="9" :style="usernameInputStyle" required />
         <LineOfText :msg="usernameErrorMessage" error v-if="usernameErrorMessage.length" />
         <br />
-        <!-- password field with show/hide button -->
-        <LineOfText msg="Enter a password of at least 12 characters:" instruction />
+        <!-- password with show/hide button -->
+        <LineOfText msg="Password" instruction />
         <div style="width: 100%">
             <input class="input-field-text password-input" :type="passwordInputType" v-model.trim="password"
-                placeholder="Password" tabindex="10" :style="passwordInputStyle" />
+                placeholder="Enter a password of at least 12 characters" tabindex="10" :style="passwordInputStyle"
+                required />
             <button @click="togglePasswordInputType" class="small-button" id="show-toggle-button" style="float: left;">{{
                 passwordInputType === 'password' ? 'Show' : 'Hide' }}</button>
         </div>
@@ -62,14 +69,14 @@
             <div>
                 <input class="input-field-text password-input" :type="passwordInputType" @input="validateReenteredPassword"
                     v-model.trim="reenteredPassword" placeholder="Confirm Password" tabindex="11"
-                    :style="passwordInputStyle" />
-                <BailLink msg="Maybe later" v-if="connectWalletActive || submitActive" tabindex="12" />
+                    :style="passwordInputStyle" required />
+                <BailLink msg="Maybe later" v-if="createAccountActive" tabindex="12" />
             </div>
             <LineOfText :msg="reenteredPasswordErrorMessage" error v-if="reenteredPasswordErrorMessage.length" />
         </div>
-    </ConnectWalletView>
-    <SubmitButton :active="submitActive" :address="walletAddress" :password="password" :termsOfService="termsOfService"
-        :unitedStates="unitedStates" :username="username" tabindex="13" />
+    </CreateAccountView>
+    <SubmitButton :active="submitActive" :address="walletAddress" :password="password" :email='email'
+        :termsOfService="termsOfService" :unitedStates="unitedStates" :username="username" tabindex="13" />
 </template>
 <script>
 import axios from "axios";
@@ -80,7 +87,7 @@ import { hexToU8a, isHex } from '@polkadot/util';
 
 import BailLink from "./components/subcomponents/BailLink.vue";
 import ConnectInstructions from "./components/ConnectInstructions.vue";
-import ConnectWalletView from "./components/ConnectWalletView.vue";
+import CreateAccountView from "./components/CreateAccountView.vue";
 import CreateInstructions from "./components/CreateInstructions.vue";
 import InfoTip from "./components/subcomponents/InfoTip.vue";
 import LineOfText from "./components/subcomponents/LineOfText.vue";
@@ -101,7 +108,7 @@ export default {
     components: {
         BailLink,
         ConnectInstructions,
-        ConnectWalletView,
+        CreateAccountView,
         CreateInstructions,
         InfoTip,
         LineOfText,
@@ -112,9 +119,11 @@ export default {
     },
     data() {
         return {
-            addressErrorMessage: [],
+            addressErrorMessage: '',
             connectAccountSelected: true,
             createAccountSelected: false,
+            email: '',
+            emailErrorMessage: '',
             password: '',
             passwordErrorMessage: '',
             passwordInputType: 'password',
@@ -135,22 +144,24 @@ export default {
     computed: {
         connectWalletActive() {
             const previousStepActive = this.welcomeActive;
-            const usernameAndWalletIdValidated = this.validateWalletInputs();
+            const usernameAndWalletIdValidated = this.validateAccountInputs();
 
             return !previousStepActive && !usernameAndWalletIdValidated;
         },
         connectWalletButtonActive() {
-            return (this.connectWalletActive || this.submitActive) && this.connectAccountSelected;
+            return this.createAccountActive && this.connectAccountSelected;
+        },
+        createAccountActive() {
+            return (this.connectWalletActive || this.submitActive);
         },
         createWalletButtonActive() {
-            return (this.connectWalletActive || this.submitActive) && this.createAccountSelected;
+            return this.createAccountActive && this.createAccountSelected;
         },
         passwordInputStyle() {
             return this.passwordErrorMessage.length ? errorStyle : {};
         },
         submitActive() {
-            const previousStepsComplete = !this.welcomeActive && this.validateWalletInputs();
-
+            const previousStepsComplete = !this.welcomeActive && this.validateAccountInputs();
             return previousStepsComplete;
         },
         usernameInputStyle() {
@@ -202,25 +213,32 @@ export default {
         },
         validateAddress: debounce(function (event) {
             const address = event?.target?.value;
-            // this.addressErrorMessage = [];
+            this.addressErrorMessage = '';
 
             if (!address || !address.length) {
-                this.addressErrorMessage = [];
-
-                // return true;
+                this.addressErrorMessage = '';
             }
 
             const addressIsValid = this.legitPolkadot(address);
 
             // happy case
             if (addressIsValid) {
-                this.addressErrorMessage = [];
-
-                // return true;
+                this.addressErrorMessage = '';
             } else {
-                this.addressErrorMessage.push('Not a valid address');
+                this.addressErrorMessage = 'Not a valid address';
             }
         }, 250),
+        validateEmail() {
+            const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/;
+
+            if (!this.email.length) {
+                this.emailErrorMessage = '';
+            } if (!emailRegex.test(this.email)) {
+                this.emailErrorMessage = 'Invalid email address';
+            } else {
+                this.emailErrorMessage = '';
+            }
+        },
         validateReenteredPassword() {
             // number of characters
             const minLength = 12;
@@ -250,11 +268,16 @@ export default {
                 this.reenteredPasswordErrorMessage = '';
             }
         },
-        validateWalletInputs() {
-            const walletIsValid = this.createAccountSelected || this.addressIsValid;
-            const passwordIsValid = this.password.length && this.password === this.reenteredPassword && !this.passwordErrorMessage.length && !this.reenteredPasswordErrorMessage.length;
+        validateAccountInputs() {
+            const walletIsValid = !this.addressErrorMessage.length && this.walletAddress.length > 0;
+            const emailIsValid = this.email.length > 2 && !this.emailErrorMessage.length;
+            const usernameIsValid = this.username.length > 2 && !this.usernameErrorMessage.length;
+            const passwordsMatch = this.password === this.reenteredPassword;
+            const noPasswordErrors = !this.passwordErrorMessage.length && !this.reenteredPasswordErrorMessage.length;
 
-            return !!(walletIsValid && this.username.length > 2 && this.usernameErrorMessage === '' && passwordIsValid);
+            const passwordIsValid = this.password.length && passwordsMatch && noPasswordErrors;
+
+            return walletIsValid && emailIsValid && usernameIsValid && passwordIsValid;
         },
         validateUsername: debounce(function (event) {
             const name = event?.target?.value;
@@ -284,15 +307,15 @@ export default {
                 this.clearUsernameErrors();
 
                 // TODO update with endpoint URL
-                axios.post('/api/name', { name })
-                    .then(() => {
-                        console.log('Username ${name} is available');
-                    })
-                    .catch(e => {
-                        const { errorMessage } = e?.response?.data;
+                // axios.post('/api/name', { name })
+                //     .then(() => {
+                //         console.log('Username ${name} is available');
+                //     })
+                //     .catch(e => {
+                //         const { errorMessage } = e?.response?.data;
 
-                        this.usernameErrorMessage = errorMessage || '';
-                    });
+                //         this.usernameErrorMessage = errorMessage || '';
+                //     });
             }
         }, 250)
     }
