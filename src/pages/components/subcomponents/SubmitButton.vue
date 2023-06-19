@@ -8,16 +8,13 @@
 
 <script>
 import axios from "axios";
-import { Buffer } from "buffer";
-import { Keyring } from '@polkadot/keyring';
-import { stringToU8a } from '@polkadot/util';
-import { createMessage, encrypt, readMessage } from 'openpgp';
 
 export default {
     name: "SubmitButton",
     props: {
         active: Boolean,
         address: String,
+        email: String,
         password: String,
         termsOfService: Boolean,
         unitedStates: Boolean,
@@ -47,36 +44,15 @@ export default {
         },
     },
     methods: {
-        // TODO encrypt the mnemonic to store in the browser
-        async encrypt() {
-            const mnemonicBuffer = Buffer.from(this.mnemonic);
-            const message = await createMessage({ binary: mnemonicBuffer });
-            const encrypted = await encrypt({
-                message,
-                passwords: [this.password],
-                format: 'binary'
-            });
-
-            const encryptedArray = Buffer.from(encrypted);
-            const encryptedMessage = await readMessage({ binaryMessage: encryptedArray });
-
-            return encryptedMessage;
-        },
         async submitForm() {
-            const { password, mnemonic, termsOfService, unitedStates, username, } = this;
+            const { address, email, password, termsOfService, unitedStates, username } = this;
+
             this.submitting = true;
             this.submitButtonText = 'Waiting...';
 
-            const keyring = new Keyring();
-            const pair = keyring.addFromUri(mnemonic, { name: username }, 'ed25519');
-
-            const address = pair.address;
-            const message = stringToU8a(username);
-            const signature = pair.sign(message);
-
             // TODO update with endpoint URL
             const response = await axios.post('/api/submit',
-                { address, password, signature, termsOfService, unitedStates, username });
+                { address, email, password, termsOfService, unitedStates, username });
 
             if (response.status === 200) {
                 this.submitted = true;
@@ -93,7 +69,7 @@ export default {
                         chrome.storage.local
                             .set({ loggedIn: true })
                             .then(() => {
-                                console.log("User succesfully logged in");
+                                console.log("User succesfully logged in.");
                             });
                     } catch (err) {
                         console.log('Error updating extension logged in status:', err);
