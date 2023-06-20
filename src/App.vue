@@ -127,7 +127,7 @@ body {
   color: #d0d4d9;
   font-size: 1.1rem;
   margin-top: 1rem;
-  margin-left: 35%;
+  margin-left: 25%;
   pointer-events: none;
   width: 700px;
 }

@@ -1,5 +1,5 @@
 <template>
-    <button class="bail-button" @click="bailOut()">
+    <button class="bail-button" @click="bailOut">
         Maybe later
     </button>
 </template>
@@ -7,9 +7,6 @@
 <script>
 export default {
     name: "BailButton",
-    props: {
-        active: Boolean,
-    },
     methods: {
         bailOut() {
             window.open('https://interlock.network');
