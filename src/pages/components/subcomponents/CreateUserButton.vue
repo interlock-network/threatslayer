@@ -10,7 +10,7 @@
 import axios from "axios";
 
 export default {
-    name: "SubmitButton",
+    name: "CreateUserButton",
     props: {
         active: Boolean,
         address: String,
@@ -78,7 +78,8 @@ export default {
                     console.log('Error updating extension registered and logged in status:', err);
                 }
             } else {
-                // TODO handle errors
+                this.error = true;
+                this.submitButtonText = 'Try again later';
                 console.log('Error submitting registration');
             }
         }
