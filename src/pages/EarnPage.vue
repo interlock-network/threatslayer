@@ -10,14 +10,15 @@
                         Terms of Service</a></label>
             </div>
             <div class="checkbox-container">
-                <input id="second-box" type="checkbox" v-model="unitedStates" tabindex="2">
+                <input id="second-box" type="checkbox" v-model="unitedStates" tabindex="4">
                 <label for="second-box" style="display: inline-flex;">Affirm you are not a US citizen or resident
                     <InfoTip style="padding-right: 2.75rem;" v-if="welcomeActive"
                         msg="Cryptocurrency is considered a security in the US so most US residents cannot purchase them." />
                 </label>
             </div>
+            <br />
             <div class="bail-container">
-                <BailLink msg="I can't check these" v-if="welcomeActive" tabindex="4" style="margin-right: 0.5rem;" />
+                <BailLink msg="I can't check these" v-if="welcomeActive" tabindex="8" style="margin-right: 0.5rem;" />
                 <br />
             </div>
         </div>
@@ -26,15 +27,15 @@
         <br />
         <div style="width: 100%; display: flex;">
             <WalletButton msg="Connect Wallet" :active="connectWalletButtonActive" id="connectWallet"
-                :action="connectWallet" tabindex="5" />
+                :action="connectWallet" tabindex="10" />
             <WalletButton :action="createWallet" msg="Create Wallet" :active="createWalletButtonActive" id="createWallet"
-                tabindex="6" />
+                tabindex="12" />
         </div>
         <div>
             <br />
             <ConnectInstructions v-if="connectAccountSelected && createAccountActive">
                 <textarea class="input-field-text" id="address-input" @input="validateAddress" v-model.trim="walletAddress"
-                    style="width: 100%" placeholder="Paste your wallet address here" tabindex="7" required />
+                    style="width: 100%" placeholder="Paste your wallet address here" tabindex="14" required />
                 <LineOfText error v-if="addressErrorMessage.length" :msg="addressErrorMessage" />
             </ConnectInstructions>
             <CreateInstructions v-if="createAccountSelected" />
@@ -43,20 +44,20 @@
         <!-- email -->
         <LineOfText msg="Email" instruction />
         <input type="email" class="input-field-text" @input="validateEmail" v-model.trim="email" required
-            placeholder="We need your email for verification" />
+            placeholder="We need your email for verification" tabindex="16" />
         <LineOfText :msg="emailErrorMessage" error v-if="emailErrorMessage.length" />
         <br />
         <!-- username -->
         <LineOfText msg="Username" instruction />
         <input class="input-field-text" id="username-input" @input="validateUsername" v-model.trim="username"
-            placeholder="Allowed characters are A-Z, a-z and 0-9" tabindex="9" :style="usernameInputStyle" required />
+            placeholder="Allowed characters are A-Z, a-z and 0-9" tabindex="18" :style="usernameInputStyle" required />
         <LineOfText :msg="usernameErrorMessage" error v-if="usernameErrorMessage.length" />
         <br />
         <!-- password with show/hide button -->
         <LineOfText msg="Password" instruction />
         <div style="width: 100%">
             <input class="input-field-text password-input" :type="passwordInputType" v-model.trim="password"
-                placeholder="Enter a password of at least 12 characters" tabindex="10" :style="passwordInputStyle"
+                placeholder="Enter a password of at least 12 characters" tabindex="20" :style="passwordInputStyle"
                 required />
             <button @click="togglePasswordInputType" class="small-button" id="show-toggle-button" style="float: left;">{{
                 passwordInputType === 'password' ? 'Show' : 'Hide' }}</button>
@@ -68,15 +69,15 @@
         <div style="width: 100%">
             <div>
                 <input class="input-field-text password-input" :type="passwordInputType" @input="validateReenteredPassword"
-                    v-model.trim="reenteredPassword" placeholder="Confirm Password" tabindex="11"
+                    v-model.trim="reenteredPassword" placeholder="Confirm Password" tabindex="22"
                     :style="passwordInputStyle" required />
-                <BailLink msg="Maybe later" v-if="createAccountActive" tabindex="12" />
             </div>
             <LineOfText :msg="reenteredPasswordErrorMessage" error v-if="reenteredPasswordErrorMessage.length" />
         </div>
     </CreateAccountView>
     <SubmitButton :active="submitActive" :address="walletAddress" :password="password" :email='email'
-        :termsOfService="termsOfService" :unitedStates="unitedStates" :username="username" tabindex="13" />
+        :termsOfService="termsOfService" :unitedStates="unitedStates" :username="username" tabindex="26" />
+    <BailButton v-if="createAccountActive" tabindex="30" />
 </template>
 <script>
 import axios from "axios";
@@ -85,6 +86,7 @@ import { findNonAlphanumericChars } from "../utilities";
 import { decodeAddress, encodeAddress } from '@polkadot/keyring';
 import { hexToU8a, isHex } from '@polkadot/util';
 
+import BailButton from "./components/subcomponents/BailButton.vue";
 import BailLink from "./components/subcomponents/BailLink.vue";
 import ConnectInstructions from "./components/ConnectInstructions.vue";
 import CreateAccountView from "./components/CreateAccountView.vue";
@@ -106,6 +108,7 @@ const maxPasswordLength = 16; // number of characters
 export default {
     name: 'EarnPage',
     components: {
+        BailButton,
         BailLink,
         ConnectInstructions,
         CreateAccountView,
