@@ -1,3 +1,19 @@
+// basic email validation
+export function findEmailError(email) {
+    let errorMessage = '';
+    const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/;
+
+    if (!email.length) {
+        errorMessage = '';
+    } if (!emailRegex.test(email)) {
+        errorMessage = 'Invalid email address';
+    } else {
+        errorMessage = '';
+    }
+
+    return errorMessage;
+}
+
 // finds characters not A-Z, a-z and 0-9
 export function findNonAlphanumericChars(str) {
     const regex = /[^A-Za-z0-9]/g;

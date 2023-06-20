@@ -75,14 +75,14 @@
             <LineOfText :msg="reenteredPasswordErrorMessage" error v-if="reenteredPasswordErrorMessage.length" />
         </div>
     </CreateAccountView>
-    <SubmitButton :active="submitActive" :address="walletAddress" :password="password" :email='email'
+    <CreateUserButton :active="submitActive" :address="walletAddress" :password="password" :email='email'
         :termsOfService="termsOfService" :unitedStates="unitedStates" :username="username" tabindex="26" />
     <BailButton v-if="createAccountActive" tabindex="30" />
 </template>
 <script>
 import axios from "axios";
 import { debounce } from 'debounce';
-import { findNonAlphanumericChars } from "../utilities";
+import { findEmailError, findNonAlphanumericChars } from "../utilities";
 import { decodeAddress, encodeAddress } from '@polkadot/keyring';
 import { hexToU8a, isHex } from '@polkadot/util';
 
@@ -94,7 +94,7 @@ import CreateInstructions from "./components/CreateInstructions.vue";
 import InfoTip from "./components/subcomponents/InfoTip.vue";
 import LineOfText from "./components/subcomponents/LineOfText.vue";
 import PageBanner from "./components/subcomponents/PageBanner.vue";
-import SubmitButton from "./components/subcomponents/SubmitButton.vue";
+import CreateUserButton from "./components/subcomponents/CreateUserButton.vue";
 import WalletButton from "./components/subcomponents/WalletButton.vue";
 import WelcomeView from "./components/WelcomeView.vue";
 
@@ -116,7 +116,7 @@ export default {
         InfoTip,
         LineOfText,
         PageBanner,
-        SubmitButton,
+        CreateUserButton,
         WalletButton,
         WelcomeView
     },
@@ -140,7 +140,7 @@ export default {
         };
     },
     async mounted() {
-        const firstCheckBox = document.getElementById('first-box')
+        const firstCheckBox = document.getElementById('first-box');
 
         firstCheckBox.focus();
     },
@@ -232,15 +232,7 @@ export default {
             }
         }, 250),
         validateEmail() {
-            const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/;
-
-            if (!this.email.length) {
-                this.emailErrorMessage = '';
-            } if (!emailRegex.test(this.email)) {
-                this.emailErrorMessage = 'Invalid email address';
-            } else {
-                this.emailErrorMessage = '';
-            }
+            this.emailErrorMessage = findEmailError(this.email);
         },
         validateReenteredPassword() {
             // number of characters
