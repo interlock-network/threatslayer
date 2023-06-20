@@ -1,31 +1,51 @@
 <template>
     <PageBanner msg="Login" />
-    <!-- username field -->
-    <LineOfText msg="Username" instruction />
-    <input class="input-field-text" id="login-username" @input="validateUsername" v-model.trim="username" tabindex="1"
-        :style="usernameInputStyle" />
-    <LineOfText :msg="usernameErrorMessage" error v-if="usernameErrorMessage.length" />
-    <br />
-    <!-- password field with show/hide button -->
-    <LineOfText msg="Password" instruction />
-    <div style="width: 100%">
-        <input id="login-password" class="input-field-text password-input" :type="passwordInputType" v-model.trim="password"
-            tabindex="2" :style="passwordInputStyle" />
-        <button @click="togglePasswordInputType" class="small-button" id="show-toggle-button" style="float: left;">
-            {{ passwordInputType === 'password' ? 'Show' : 'Hide' }}
-        </button>
-    </div>
-    <LineOfText :msg="passwordErrorMessage" error v-if="passwordErrorMessage.length" />
-    <LoginButton :active="submitActive" :password="password" :username="username" tabindex="3" />
+    <LoginView :active="!forgotUsernamePassword">
+        <br />
+        <div v-if="!forgotUsernamePassword">
+            <!-- username field -->
+            <LineOfText msg="Username" instruction />
+            <input class="input-field-text" id="login-username" @input="validateUsername" v-model.trim="username"
+                tabindex="1" :style="usernameInputStyle" />
+            <LineOfText :msg="usernameErrorMessage" error v-if="usernameErrorMessage.length" />
+            <br />
+            <!-- password field with show/hide button -->
+            <LineOfText msg="Password" instruction />
+            <div style="width: 100%">
+                <input id="login-password" class="input-field-text password-input" :type="passwordInputType"
+                    v-model.trim="password" tabindex="4" :style="passwordInputStyle" />
+                <button @click="togglePasswordInputType" class="small-button" id="show-toggle-button" style="float: left;">
+                    {{ passwordInputType === 'password' ? 'Show' : 'Hide' }}
+                </button>
+            </div>
+            <LineOfText :msg="passwordErrorMessage" error v-if="passwordErrorMessage.length" />
+        </div>
+        <LoginButton :active="submitActive" :password="password" :username="username" tabindex="6" />
+        <ForgotLoginButton msg="Forgot Username / Password" :action="toggleForgot" tabindex="8" />
+    </LoginView>
+    <!-- Forgot username / password flow -->
+    <ForgotView :active="forgotUsernamePassword" v-if="forgotUsernamePassword">
+        <br />
+        <br />
+        <input type="email" class="input-field-text" id="forgot-info-email" @input="validateEmail" v-model.trim="email"
+            required placeholder="Enter your email" tabindex="10" />
+        <LineOfText :msg="emailErrorMessage" error v-if="emailErrorMessage.length" />
+        <!-- TODO update active -->
+        <GetLoginInfoButton :active="true" :email="email" tabindex="12" />
+        <ForgotLoginButton msg="Enter Username / Password" :action="toggleForgot" tabindex="14" />
+    </ForgotView>
 </template>
 <script>
-import InfoTip from "./components/subcomponents/InfoTip.vue";
+import { debounce } from 'debounce';
+import { findEmailError, findNonAlphanumericChars } from "../utilities";
+
+import ForgotLoginButton from "./components/subcomponents/ForgotLoginButton.vue";
 import LineOfText from "./components/subcomponents/LineOfText.vue";
+import LoginView from "./components/LoginView.vue";
+import ForgotView from "./components/ForgotView.vue";
+import GetLoginInfoButton from "./components/subcomponents/GetLoginInfoButton.vue";
 import LoginButton from "./components/subcomponents/LoginButton.vue";
 import PageBanner from "./components/subcomponents/PageBanner.vue";
-
-import { debounce } from 'debounce';
-import { findNonAlphanumericChars } from "../utilities";
 
 const errorStyle = {
     border: "3px solid red",
@@ -37,13 +57,18 @@ const maxPasswordLength = 16; // number of characters
 export default {
     name: 'EarnPage',
     components: {
-        InfoTip,
+        ForgotLoginButton,
+        ForgotView,
+        GetLoginInfoButton,
         LineOfText,
         LoginButton,
+        LoginView,
         PageBanner,
     },
     data() {
         return {
+            emailErrorMessage: '',
+            forgotUsernamePassword: false,
             password: '',
             passwordErrorMessage: '',
             passwordInputType: 'password',
@@ -75,6 +100,28 @@ export default {
     methods: {
         clearUsernameErrors() {
             this.usernameErrorMessage = '';
+        },
+        validateEmail() {
+            this.emailErrorMessage = findEmailError(this.email);
+        },
+        toggleForgot() {
+            this.forgotUsernamePassword = !this.forgotUsernamePassword;
+
+
+            if (this.forgotUsernamePassword) {
+                setTimeout(() => {
+                    const emailInput = document.getElementById('forgot-info-email');
+
+                    emailInput.focus();
+                }, 100);
+            } else {
+                setTimeout(() => {
+                    const usernameInput = document.getElementById('login-username');
+
+                    usernameInput.focus();
+                }, 100);
+
+            }
         },
         togglePasswordInputType() {
             this.passwordInputType = this.passwordInputType === 'password' ? 'text' : 'password';
