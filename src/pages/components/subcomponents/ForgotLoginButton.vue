@@ -1,5 +1,5 @@
 <template>
-    <button class="bail-button" @click="action">{{ msg }}</button>
+    <button class="forgot-login-button" @click="action">{{ msg }}</button>
 </template>
 
 <script>
@@ -13,7 +13,7 @@ export default {
 </script>
 
 <style>
-.bail-button {
+.forgot-login-button {
     border: none;
     background: #060708;
     color: gray;
@@ -22,7 +22,7 @@ export default {
     width: 50%;
 }
 
-.bail-button:focus {
+.forgot-login-button:focus {
     border: 3px solid #d0d4d9;
 }
 </style>

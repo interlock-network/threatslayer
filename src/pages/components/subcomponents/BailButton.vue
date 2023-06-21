@@ -21,9 +21,8 @@ export default {
     background: #060708;
     color: gray;
     pointer-events: initial;
-    /* font-size: 1.25rem; */
     padding-top: 1rem;
-    width: 50%;
+    /* width: 50%; */
 }
 
 .bail-button:focus {

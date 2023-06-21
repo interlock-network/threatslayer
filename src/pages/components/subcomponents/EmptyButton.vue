@@ -1,5 +1,5 @@
 <template>
-    <button class="bail-button" @click="action">
+    <button class="empty-button" @click="action">
         {{ msg }}
         <slot />
     </button>
@@ -23,10 +23,10 @@ export default {
     pointer-events: initial;
     padding-top: 1rem;
     padding-bottom: 0.8rem;
-    width: 50%;
+    /* width: 50%; */
 }
 
-.bail-button:focus {
+.empty-button:focus {
     border: 3px solid #d0d4d9;
 }
 </style>

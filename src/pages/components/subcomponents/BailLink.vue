@@ -1,18 +1,14 @@
 <template>
     <div id="bail-link-container">
-        <EmptyButton :msg="msg" :action="openTab" />
+        <a href="https://interlock.network" id="bail-link">{{ msg }}</a>
     </div>
 </template>
 
 <script>
 
-import EmptyButton from "./EmptyButton.vue";
-
 export default {
     name: "BailLink",
-    components: {
-        EmptyButton,
-    },
+    components: {},
     props: {
         msg: String,
     },
@@ -28,5 +24,19 @@ export default {
 #bail-link-container {
     display: block;
     float: right;
+}
+
+#bail-link {
+    border: none;
+    background: #060708;
+    color: gray;
+    font-size: 0.75rem;
+    pointer-events: initial;
+    padding-top: 1rem;
+    padding-bottom: 0.8rem;
+}
+
+#bail-link:focus {
+    border: 3px solid #d0d4d9;
 }
 </style>
