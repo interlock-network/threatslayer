@@ -16,11 +16,6 @@
                         msg="Cryptocurrency is considered a security in the US so most US residents cannot purchase them." />
                 </label>
             </div>
-            <br />
-            <div class="bail-container">
-                <BailLink msg="I can't check these" v-if="welcomeActive" tabindex="8" style="margin-right: 0.5rem;" />
-                <br />
-            </div>
         </div>
     </WelcomeView>
     <CreateAccountView :active="createAccountActive">
@@ -87,7 +82,6 @@ import { decodeAddress, encodeAddress } from '@polkadot/keyring';
 import { hexToU8a, isHex } from '@polkadot/util';
 
 import BailButton from "./components/subcomponents/BailButton.vue";
-import BailLink from "./components/subcomponents/BailLink.vue";
 import ConnectInstructions from "./components/ConnectInstructions.vue";
 import CreateAccountView from "./components/CreateAccountView.vue";
 import CreateInstructions from "./components/CreateInstructions.vue";
@@ -109,7 +103,6 @@ export default {
     name: 'EarnPage',
     components: {
         BailButton,
-        BailLink,
         ConnectInstructions,
         CreateAccountView,
         CreateInstructions,

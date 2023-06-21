@@ -22,7 +22,7 @@ export default {
     color: gray;
     pointer-events: initial;
     padding-top: 1rem;
-    /* width: 50%; */
+    width: 50%;
 }
 
 .bail-button:focus {
