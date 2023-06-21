@@ -1,6 +1,6 @@
 <template>
-    <StepView header="Get username or change password" text="Enter your email to get your username or change your password."
-        :active="active">
+    <StepView header="Get username or forgot password"
+        text="Enter your email to get your username or a link to change your password." :active="active">
         <slot />
     </StepView>
 </template>
