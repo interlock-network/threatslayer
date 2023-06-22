@@ -1,6 +1,6 @@
 <template>
-    <div id="login-button-container">
-        <button id='login-button' @click="submitLogin()" :class="computedClass"
+    <div class="login-page-submit-button-container">
+        <button class='login-page-submit-button' @click="submitLogin()" :class="computedClass"
             :disabled="loggingIn || loggedIn || !active">
             {{ loginButtonText }}
         </button>
@@ -15,14 +15,13 @@ export default {
     props: {
         active: Boolean,
         password: String,
-        username: String,
+        usernameOrEmail: String,
     },
     data() {
         return {
             error: false,
-            loginButtonText: 'Login',
-            loggingIn: false,
-            loggedIn: false
+            loggedIn: false,
+            loggingIn: false
         }
     },
     computed: {
@@ -30,7 +29,7 @@ export default {
             let className = '';
 
             if (this.error) {
-                className = 'login-button-error';
+                className = 'login-page-submit-button-error';
             } else if (!this.active) {
                 className = 'disabled';
             } else {
@@ -38,78 +37,72 @@ export default {
             }
 
             return className;
+        },
+        loginButtonText() {
+            let result = '';
+
+            if (this.loggedIn) {
+                result = 'Success!';
+            } else if (this.loggingIn) {
+                result = 'Waiting...';
+            } else if (this.error) {
+                result = "Try again later";
+            } else {
+                result = 'Login';
+            }
+
+            return result;
         }
     },
     methods: {
         async submitLogin() {
-            const { password, username } = this;
+            const { password, usernameOrEmail } = this;
 
+            this.error = false;
             this.loggingIn = true;
-            this.loginButtonText = 'Waiting...';
 
             // TODO update with endpoint URL
-            const response = await axios.post('/api/login', { password, username });
+            const response = await axios.post('/api/login', { password, usernameOrEmail })
+                .then(res => {
+                    return res;
+                }).catch(err => {
+                    return err;
+                });
 
-            if (response.status === 200) {
-                // TODO store encrypted mnemonic
+            if (response?.status === 200) {
                 this.loggedIn = true;
                 this.loggingIn = false;
-                this.loginButtonText = 'Success';
 
-                // TODO add error handling
                 chrome.storage.local
                     .set({ registered: true })
                     .then(() => {
                         console.log("Confirmed registered status!");
                     });
 
-                // TODO add error handling
-                chrome.storage.local
+                const loggedIn = await chrome.storage.local
                     .set({ loggedIn: true })
                     .then(() => {
                         console.log("User succesfully logged in");
+                        return true;
                     });
+
+                if (loggedIn) {
+                    this.loggedIn = true;
+                    this.loggingIn = false;
+                } else {
+                    // TODO add better error handling
+                }
             } else {
+                console.log('Login error:', response.code)
+                // if API doesn't return a 200
                 // TODO catch errors properly
+                this.error = true;
+                this.loggedIn = false;
+                this.loggingIn = false;
             }
         }
     }
 };
 </script>
 
-<style>
-#login-button-container {
-    color: #d0d4d9;
-    margin-top: 3rem;
-    margin-bottom: 3rem;
-    width: 450px;
-}
-
-#login-button {
-    background: #060708;
-    cursor: pointer;
-    float: left;
-    font-size: 1.5rem;
-    pointer-events: initial;
-    width: 50%;
-    padding: 0.5rem 0.75rem;
-}
-
-.disabled {
-    border: 1px solid #d0d4d9;
-    opacity: 0.3;
-    pointer-events: none;
-}
-
-.login-active {
-    border: 3px solid #3b8de8;
-    color: #963cf5;
-    opacity: 1;
-    outline: none;
-    pointer-events: initial;
-}
-
-.login-button-error {
-    color: red;
-}
-</style>
+<style></style>
