@@ -4,24 +4,23 @@
         <br />
         <div v-if="!forgotUsernamePassword">
             <!-- username field -->
-            <LineOfText msg="Username" instruction />
-            <input class="input-field-text" id="login-username" @input="validateUsername" v-model.trim="username"
-                tabindex="1" :style="usernameInputStyle" />
+            <input class="input-field-text" id="login-username-or-email" @input="validateUsername"
+                v-model.trim="usernameOrEmail" placeholder="Username or email" tabindex="1" :style="usernameInputStyle" />
             <LineOfText :msg="usernameErrorMessage" error v-if="usernameErrorMessage.length" />
             <br />
             <!-- password field with show/hide button -->
             <LineOfText msg="Password" instruction />
             <div style="width: 100%">
                 <input id="login-password" class="input-field-text password-input" :type="passwordInputType"
-                    v-model.trim="password" tabindex="4" :style="passwordInputStyle" />
+                    v-model.trim="password" placeholder="Password" tabindex="4" :style="passwordInputStyle" />
                 <button @click="togglePasswordInputType" class="small-button" id="show-toggle-button" style="float: left;">
                     {{ passwordInputType === 'password' ? 'Show' : 'Hide' }}
                 </button>
             </div>
             <LineOfText :msg="passwordErrorMessage" error v-if="passwordErrorMessage.length" />
         </div>
-        <LoginButton :active="submitActive" :password="password" :username="username" tabindex="6" />
-        <ForgotLoginButton msg="Forgot Username / Password" :action="toggleForgot" tabindex="8" />
+        <LoginButton :active="submitActive" :password="password" :usernameOrEmail="usernameOrEmail" tabindex="6" />
+        <ForgotLoginButton msg="Forgot Password" :action="toggleForgot" tabindex="8" />
     </LoginView>
     <!-- Forgot username / password flow -->
     <ForgotView :active="forgotUsernamePassword" v-if="forgotUsernamePassword">
@@ -31,8 +30,8 @@
             required placeholder="Enter your email" tabindex="10" />
         <LineOfText :msg="emailErrorMessage" error v-if="emailErrorMessage.length" />
         <!-- TODO update active -->
-        <GetLoginInfoButton :active="true" :email="email" tabindex="12" />
-        <ForgotLoginButton msg="Enter Username / Password" :action="toggleForgot" tabindex="14" />
+        <ForgotPasswordButton :email="email" tabindex="12" />
+        <ForgotLoginButton msg="Login" :action="toggleForgot" tabindex="14" />
     </ForgotView>
 </template>
 <script>
@@ -40,6 +39,7 @@ import { debounce } from 'debounce';
 import { findEmailError, findNonAlphanumericChars } from "../utilities";
 
 import ForgotLoginButton from "./components/subcomponents/ForgotLoginButton.vue";
+import ForgotPasswordButton from "./components/subcomponents/ForgotPasswordButton.vue";
 import LineOfText from "./components/subcomponents/LineOfText.vue";
 import LoginView from "./components/LoginView.vue";
 import ForgotView from "./components/ForgotView.vue";
@@ -58,6 +58,7 @@ export default {
     name: 'EarnPage',
     components: {
         ForgotLoginButton,
+        ForgotPasswordButton,
         ForgotView,
         GetLoginInfoButton,
         LineOfText,
@@ -72,12 +73,12 @@ export default {
             password: '',
             passwordErrorMessage: '',
             passwordInputType: 'password',
-            username: '',
+            usernameOrEmail: '',
             usernameErrorMessage: '',
         };
     },
     mounted() {
-        const usernameInput = document.getElementById('login-username')
+        const usernameInput = document.getElementById('login-username-or-email')
 
         usernameInput.focus();
     },
@@ -87,7 +88,7 @@ export default {
         },
         submitActive() {
             const submitActive = !!(this.password.length
-                && this.username.length
+                && this.usernameOrEmail.length
                 && !this.passwordErrorMessage.length
                 && !this.usernameErrorMessage.length);
 
@@ -116,7 +117,7 @@ export default {
                 }, 100);
             } else {
                 setTimeout(() => {
-                    const usernameInput = document.getElementById('login-username');
+                    const usernameInput = document.getElementById('login-username-or-email');
 
                     usernameInput.focus();
                 }, 100);
@@ -181,6 +182,41 @@ input:focus {
     min-width: 275px;
     height: 1.5rem;
     pointer-events: initial;
+}
+
+.login-page-submit-button-container {
+    color: #d0d4d9;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    width: 450px;
+}
+
+.login-page-submit-button {
+    background: #060708;
+    cursor: pointer;
+    float: left;
+    font-size: 1.5rem;
+    pointer-events: initial;
+    width: 50%;
+    padding: 0.5rem 0.75rem;
+}
+
+.disabled {
+    border: 1px solid #d0d4d9;
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.login-active {
+    border: 3px solid #3b8de8;
+    color: #963cf5;
+    opacity: 1;
+    outline: none;
+    pointer-events: initial;
+}
+
+.login-page-submit-button-error {
+    color: red;
 }
 
 .small-button {
