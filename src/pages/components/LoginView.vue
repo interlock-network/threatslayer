@@ -1,6 +1,5 @@
 <template>
-    <StepView header="Enter or retrieve info" text="Login to your account or request your account login information."
-        :active="active">
+    <StepView header="Enter or retrieve info" text="Login to your account, or change your password." :active="active">
         <slot />
     </StepView>
 </template>
