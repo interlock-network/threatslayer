@@ -3,6 +3,7 @@
 node_modules/
 /dist
 /public
+.DS_Store
 
 # Log files
 npm-debug.log*
