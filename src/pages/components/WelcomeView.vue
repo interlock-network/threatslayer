@@ -1,5 +1,5 @@
 <template>
-    <StepView header="Earn While You Browse"
+    <StepView header="Sign up for ThreatSlayer"
         text="ThreatSlayer will protect you from phishing attacks and reward you for browsing." :active="active">
         <slot />
     </StepView>

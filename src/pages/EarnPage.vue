@@ -38,22 +38,21 @@
         <br />
         <!-- email -->
         <LineOfText msg="Email" instruction />
-        <input type="email" class="input-field-text" @input="validateEmail" v-model.trim="email" required
-            placeholder="We need your email for verification" tabindex="16" />
+        <input type="email" @input="validateEmail" v-model.trim="email" required tabindex="16"
+            placeholder="We need your email for verification" />
         <LineOfText :msg="emailErrorMessage" error v-if="emailErrorMessage.length" />
         <br />
         <!-- username -->
         <LineOfText msg="Username" instruction />
-        <input class="input-field-text" id="username-input" @input="validateUsername" v-model.trim="username"
-            placeholder="Allowed characters are A-Z, a-z and 0-9" tabindex="18" :style="usernameInputStyle" required />
+        <input id="username-input" @input="validateUsername" v-model.trim="username" required tabindex="18"
+            placeholder="Allowed characters are A-Z, a-z and 0-9" :style="usernameInputStyle" />
         <LineOfText :msg="usernameErrorMessage" error v-if="usernameErrorMessage.length" />
         <br />
         <!-- password with show/hide button -->
         <LineOfText msg="Password" instruction />
         <div style="width: 100%">
-            <input class="input-field-text password-input" :type="passwordInputType" v-model.trim="password"
-                placeholder="Enter a password of at least 12 characters" tabindex="20" :style="passwordInputStyle"
-                required />
+            <input class="password-input" :type="passwordInputType" v-model.trim="password" required
+                placeholder="Enter a password of at least 12 characters" tabindex="20" :style="passwordInputStyle" />
             <button @click="togglePasswordInputType" class="small-button" id="show-toggle-button" style="float: left;">{{
                 passwordInputType === 'password' ? 'Show' : 'Hide' }}</button>
         </div>
@@ -63,7 +62,7 @@
         <!-- password confirmation field -->
         <div style="width: 100%">
             <div>
-                <input class="input-field-text password-input" :type="passwordInputType" @input="validateReenteredPassword"
+                <input class="password-input" :type="passwordInputType" @input="validateReenteredPassword"
                     v-model.trim="reenteredPassword" placeholder="Confirm Password" tabindex="22"
                     :style="passwordInputStyle" required />
             </div>
@@ -325,8 +324,28 @@ input:focus {
     outline: none;
 }
 
+input[type="checkbox"] {
+    width: 10px;
+    height: 10px;
+    background: #FFFFFF;
+}
+
 input[type="checkbox"]:focus {
     outline: 2px solid #3b8de8;
+}
+
+textarea {
+    box-sizing: border-box;
+    background: #0F0818;
+    border: 1px solid #818181;
+    border-radius: 2px;
+    color: #818181;
+    /* display: block; */
+    height: 4rem;
+    margin-bottom: 1rem;
+    padding-left: 0.75rem;
+    pointer-events: initial;
+    width: 100%;
 }
 
 #bail-container {
@@ -372,16 +391,6 @@ input[type="checkbox"]:focus {
 
 #address-input {
     height: 2rem;
-}
-
-.input-field-text {
-    background: #060708;
-    border: 1px solid #d0d4d9;
-    color: #d0d4d9;
-    display: block;
-    min-width: 275px;
-    height: 1.5rem;
-    pointer-events: initial;
 }
 
 .checkbox-container {

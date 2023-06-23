@@ -1,6 +1,7 @@
 <template>
     <div id="submit-button-container">
-        <button id='submit-button' @click="submitForm()" :class="computedClass" :disabled="submitting || submitted">
+        <button id='submit-button' @click="submitForm()" class="submit-button" :class="computedClass"
+            :disabled="submitting || submitted">
             {{ submitButtonText }}
         </button>
     </div>
@@ -34,11 +35,11 @@ export default {
             let className = '';
 
             if (this.error) {
-                className = 'error';
+                className = 'submit-button-error';
             } else if (!this.active) {
-                className = 'disabled';
+                className = 'submit-button-disabled';
             } else {
-                className = 'submit-active';
+                className = 'submit-button-active';
             }
 
             return className;
@@ -105,45 +106,4 @@ export default {
 };
 </script>
 
-<style>
-#go-back-button {
-    border: none;
-    color: gray;
-    margin-top: 0.8rem;
-    width: 50%;
-}
-
-#submit-button-container {
-    margin-top: 3rem;
-    margin-bottom: 3rem;
-    width: 450px;
-}
-
-#submit-button {
-    background: #060708;
-    cursor: pointer;
-    float: left;
-    font-size: 1.25rem;
-    width: 50%;
-    padding: 0.5rem 0.75rem;
-}
-
-.submit-active {
-    border: 3px solid #3b8de8;
-    color: #963cf5;
-    opacity: 1;
-    outline: none;
-    pointer-events: initial;
-}
-
-.error {
-    color: red;
-}
-
-.disabled {
-    border: 1px solid #d0d4d9;
-    color: #d0d4d9;
-    opacity: 0.3;
-    pointer-events: none;
-}
-</style>
+<style></style>

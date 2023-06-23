@@ -179,16 +179,6 @@ input:focus {
     margin-top: 0.35rem;
 }
 
-.input-field-text {
-    background: #060708;
-    border: 1px solid #d0d4d9;
-    color: #d0d4d9;
-    display: block;
-    min-width: 275px;
-    height: 1.5rem;
-    pointer-events: initial;
-}
-
 .login-page-submit-button-container {
     color: #d0d4d9;
     margin-top: 3rem;
@@ -196,7 +186,7 @@ input:focus {
     width: 450px;
 }
 
-.login-page-submit-button {
+/* .login-page-submit-button {
     background: #060708;
     cursor: pointer;
     float: left;
@@ -204,7 +194,7 @@ input:focus {
     pointer-events: initial;
     width: 50%;
     padding: 0.5rem 0.75rem;
-}
+} */
 
 .disabled {
     border: 1px solid #d0d4d9;
@@ -220,7 +210,7 @@ input:focus {
     pointer-events: initial;
 }
 
-.login-page-submit-button-error {
+.submit-button-error {
     color: red;
 }
 

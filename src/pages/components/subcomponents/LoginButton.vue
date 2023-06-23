@@ -1,6 +1,6 @@
 <template>
     <div class="login-page-submit-button-container">
-        <button class='login-page-submit-button' @click="submitLogin()" :class="computedClass"
+        <button class='submit-button' @click="submitLogin()" :class="computedClass"
             :disabled="loggingIn || loggedIn || !active">
             {{ loginButtonText }}
         </button>
@@ -30,9 +30,9 @@ export default {
             let className = '';
 
             if (this.error) {
-                className = 'login-page-submit-button-error';
+                className = 'submit-button-error';
             } else if (!this.active) {
-                className = 'disabled';
+                className = 'submit-button-disabled';
             } else {
                 className = 'login-active';
             }

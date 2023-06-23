@@ -167,13 +167,27 @@ a:focus {
 }
 
 body {
-  background-color: #060708;
+  background-color: #0F0818;
   color: #d0d4d9;
   font-size: 1.1rem;
   margin-top: 1rem;
   margin-left: 25%;
   pointer-events: none;
   width: 700px;
+}
+
+input {
+  box-sizing: border-box;
+  background: #0F0818;
+  border: 1px solid #818181;
+  border-radius: 12px;
+  color: #818181;
+  /* display: block; */
+  height: 2.25rem;
+  margin-bottom: 1rem;
+  padding-left: 0.75rem;
+  pointer-events: initial;
+  width: 400px;
 }
 
 #app-container {
@@ -230,5 +244,41 @@ body {
 .selected-sidebar-item {
   font-weight: 900;
   opacity: 1;
+}
+
+.submit-button {
+  background: linear-gradient(216.99deg, #BB00FD 22.5%, #51066B 112.78%);
+  border-radius: 12px;
+  color: #FFFFFF;
+  cursor: pointer;
+  float: left;
+  font-size: 1.25rem;
+  padding: 0.5rem 0.75rem;
+  width: 50%;
+}
+
+#submit-button-container {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  width: 450px;
+}
+
+.submit-button-active {
+  /* border: 3px solid #3b8de8; */
+  /* color: #963cf5; */
+  opacity: 1;
+  /* outline: none; */
+  pointer-events: initial;
+}
+
+.submit-button-error {
+  color: red;
+}
+
+.submit-button-disabled {
+  /* border: 1px solid #d0d4d9; */
+  color: #FFFFFF;
+  opacity: 0.3;
+  pointer-events: none;
 }
 </style>

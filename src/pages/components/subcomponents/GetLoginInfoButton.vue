@@ -1,6 +1,7 @@
 <template>
     <div id="get-info-button-container">
-        <button id='get-info-button' @click="submitForm()" :class="computedClass" :disabled="submitting || submitted">
+        <button id='get-info-button' @click="submitForm()" class="submit-button" :class="computedClass"
+            :disabled="submitting || submitted">
             {{ getLoginInfoText }}
         </button>
     </div>
@@ -28,9 +29,9 @@ export default {
             let className = '';
 
             if (this.error) {
-                className = 'error';
+                className = 'submit-button-error';
             } else if (!this.active) {
-                className = 'disabled';
+                className = 'submit-button-disabled';
             } else {
                 className = 'get-info-active';
             }
@@ -62,13 +63,6 @@ export default {
 </script>
 
 <style>
-#go-back-button {
-    border: none;
-    color: gray;
-    margin-top: 0.8rem;
-    width: 50%;
-}
-
 #get-info-button-container {
     margin-top: 3rem;
     margin-bottom: 3rem;
@@ -90,16 +84,5 @@ export default {
     opacity: 1;
     outline: none;
     pointer-events: initial;
-}
-
-.error {
-    color: red;
-}
-
-.disabled {
-    border: 1px solid #d0d4d9;
-    color: #d0d4d9;
-    opacity: 0.3;
-    pointer-events: none;
 }
 </style>

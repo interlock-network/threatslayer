@@ -12,11 +12,11 @@ export default {
 
 <style>
 #username-input {
-    border: 1px solid #d0d4d9;
-    background: #060708;
-    color: #d0d4d9;
-    font-size: 1rem;
-    cursor: pointer;
+    /* border: 1px solid #d0d4d9; */
+    /* background: #060708; */
+    /* color: #d0d4d9; */
+    /* font-size: 1rem; */
+    /* cursor: pointer; */
     min-width: 65px;
     min-width: 65px;
 }
