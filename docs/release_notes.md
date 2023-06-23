@@ -2,6 +2,10 @@
 
 # ThreatSlayer Release Notes
 
+### 0.0.10
+
+-   Added more translations
+
 ### 0.0.9
 
 -   Bug fix

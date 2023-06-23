@@ -1,6 +1,6 @@
 {
     "name": "ThreatSlayer: AI Threat Detection for Web3",
-    "version": "0.0.9",
+    "version": "0.0.10",
     "description": "__MSG_appDesc__",
     "default_locale": "en",
     "manifest_version": 3,
@@ -15,14 +15,25 @@
     },
     "content_scripts": [
         {
-        "js": ["script.js"],
-        "matches": ["*://*/*"]
+            "js": [
+                "script.js"
+            ],
+            "matches": [
+                "*://*/*"
+            ]
         }
     ],
     "web_accessible_resources": [
         {
-            "resources": ["hand48.png", "static/style.css", "static/fonts/TTF", "static/fonts/Webfont"],
-            "matches": ["*://*/*"]
+            "resources": [
+                "hand48.png",
+                "static/style.css",
+                "static/fonts/TTF",
+                "static/fonts/Webfont"
+            ],
+            "matches": [
+                "*://*/*"
+            ]
         }
     ],
     "background": {
@@ -30,7 +41,8 @@
     },
     "options_page": "options.html",
     "permissions": [
-        "scripting", "storage"
+        "scripting",
+        "storage"
     ],
     "host_permissions": [
         "<all_urls>",

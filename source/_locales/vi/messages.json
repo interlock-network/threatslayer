@@ -1,0 +1,34 @@
+{
+    "appDesc": {
+        "message": "Bảo vệ cấp doanh nghiệp miễn phí cho trình duyệt cá nhân của bạn.",
+        "description": "The description of the extension, displayed in the user's browser."
+    },
+    "description": {
+        "message": "Bảo mật cấp doanh nghiệp miễn phí cho trình duyệt cá nhân của bạn.",
+        "description": "The description in the manifest."
+    },
+    "malicious_sites_detected": {
+        "message": "Trang web độc hại được phát hiện",
+        "description": "The text used to show how many malicious URLs are scanned on the dashboard."
+    },
+    "popup_title": {
+        "message": "ThreatSlayer tích cực.",
+        "description": "The title used for the popup when the extension icon is pressed."
+    },
+    "urls_scanned": {
+        "message": "URL được quét",
+        "description": "The text used to show how many URLs are scanned on the dashboard."
+    },
+    "unique_urls_scanned": {
+        "message": "URL duy nhất được quét",
+        "description": "The text used to show how many unique URLs are scanned on the dashboard."
+    },
+    "warning_header": {
+        "message": "THREATSLAYER BÁO ĐỘNG!",
+        "description": "The text used in the warning banner."
+    },
+    "warning_text": {
+        "message": "Trang web này có thể độc hại. Đóng tab này trừ khi bạn biết trang web an toàn.",
+        "description": "The text used in the warning banner."
+    }
+}
