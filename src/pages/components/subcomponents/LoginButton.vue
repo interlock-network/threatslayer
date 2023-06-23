@@ -14,6 +14,7 @@ export default {
     name: "SubmitButton",
     props: {
         active: Boolean,
+        changePage: Function,
         password: String,
         usernameOrEmail: String,
     },
@@ -89,11 +90,14 @@ export default {
                 if (loggedIn) {
                     this.loggedIn = true;
                     this.loggingIn = false;
+
+                    // navigate to user page after logging in
+                    this.changePage('user');
                 } else {
                     // TODO add better error handling
                 }
             } else {
-                console.log('Login error:', response.code)
+                console.log('Login error:', response?.code)
                 // if API doesn't return a 200
                 // TODO catch errors properly
                 this.error = true;

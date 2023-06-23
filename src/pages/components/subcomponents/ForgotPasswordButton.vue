@@ -63,10 +63,12 @@ export default {
                 });
 
             if (response?.status === 200) {
+                console.log('Password forget request submitted.');
+
                 this.loggedIn = true;
                 this.loggingIn = false;
             } else {
-                console.log('Forgot password error:', response.code)
+                console.log('Forgot password error:', response?.code)
 
                 this.error = true;
                 this.loggedIn = false;

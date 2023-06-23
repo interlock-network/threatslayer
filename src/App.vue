@@ -20,8 +20,8 @@
       <button @click="_toggleLogin" style="pointer-events: initial;">Toggle Login</button>
     </div>
     <div id="page-container">
-      <EarnPage v-if="currentPage === 'earn'" />
-      <LoginPage v-if="currentPage === 'login'" />
+      <EarnPage v-if="currentPage === 'earn'" :changePage="changePage" />
+      <LoginPage v-if="currentPage === 'login'" :changePage="changePage" />
       <SlayCount v-if="currentPage === 'slayCount'" />
       <AboutPage v-if="currentPage === 'about'" />
       <OptionsPage v-if="currentPage === 'options'" />
@@ -62,7 +62,7 @@ export default {
   },
   computed: {
     showRegisterPage() {
-      return !this.registered;
+      return !this.registered && !this.loggedIn;
     },
     showLoginPage() {
       return !this.loggedIn;
@@ -78,6 +78,9 @@ export default {
     _toggleRegistered() {
       chrome.storage.local.set({ 'registered': !this.registered });
       this.isRegistered();
+    },
+    changePage(pageName) {
+      this.currentPage = pageName;
     },
     async isLoggedIn() {
       // if logged in, hide register and login pages

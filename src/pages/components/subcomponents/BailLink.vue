@@ -14,7 +14,7 @@ export default {
     },
     methods: {
         openTab() {
-            window.open('https://interlock.network')
+            window.open('https://interlock.network');
         },
     },
 };

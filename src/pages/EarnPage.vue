@@ -70,8 +70,9 @@
             <LineOfText :msg="reenteredPasswordErrorMessage" error v-if="reenteredPasswordErrorMessage.length" />
         </div>
     </CreateAccountView>
-    <CreateUserButton :active="submitActive" :address="walletAddress" :password="password" :email='email'
-        :termsOfService="termsOfService" :unitedStates="unitedStates" :username="username" tabindex="26" />
+    <CreateUserButton :active="submitActive" :address="walletAddress" :changePage="changePage" :email='email'
+        :password="password" :termsOfService="termsOfService" :unitedStates="unitedStates" :username="username"
+        tabindex="26" />
     <BailButton v-if="createAccountActive" tabindex="30" />
 </template>
 <script>
@@ -101,6 +102,9 @@ const maxPasswordLength = 16; // number of characters
 
 export default {
     name: 'EarnPage',
+    props: {
+        changePage: Function,
+    },
     components: {
         BailButton,
         ConnectInstructions,

@@ -14,6 +14,7 @@ export default {
     props: {
         active: Boolean,
         address: String,
+        changePage: Function,
         email: String,
         password: String,
         termsOfService: Boolean,
@@ -51,36 +52,53 @@ export default {
             this.submitButtonText = 'Waiting...';
 
             // TODO update with endpoint URL
-            const response = await axios.post('/api/submit',
-                { address, email, password, termsOfService, unitedStates, username });
+            const response = await axios.post('/api/submit', { address, email, password, termsOfService, unitedStates, username })
+                .then(res => {
+                    return res;
+                }).catch(err => {
+                    return err;
+                });
 
-            if (response.status === 200) {
+            if (response?.status === 200) {
                 this.submitted = true;
                 this.submitting = false;
                 this.submitButtonText = 'Success';
+
+                let loggedInSynched = false;
+
+                // TODO improve this try/catch block
+                try {
+                    loggedInSynched = await chrome.storage.local
+                        .set({ loggedIn: true })
+                        .then(() => {
+                            console.log("User succesfully logged in.");
+
+                            return true;
+                        });
+                } catch (err) {
+                    console.log('Error updating extension logged in status:', err);
+                }
 
                 try {
                     chrome.storage.local
                         .set({ registered: true })
                         .then(() => {
                             console.log("User succesfully registered!");
+
+                            return true;
                         });
-                    try {
-                        chrome.storage.local
-                            .set({ loggedIn: true })
-                            .then(() => {
-                                console.log("User succesfully logged in.");
-                            });
-                    } catch (err) {
-                        console.log('Error updating extension logged in status:', err);
-                    }
                 } catch (err) {
                     console.log('Error updating extension registered and logged in status:', err);
                 }
+
+                if (loggedInSynched) {
+                    changePage('user');
+                }
             } else {
+                console.log('Error submitting registration:', response?.code);
+
                 this.error = true;
                 this.submitButtonText = 'Try again later';
-                console.log('Error submitting registration');
             }
         }
     }

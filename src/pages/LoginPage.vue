@@ -19,7 +19,8 @@
             </div>
             <LineOfText :msg="passwordErrorMessage" error v-if="passwordErrorMessage.length" />
         </div>
-        <LoginButton :active="submitActive" :password="password" :usernameOrEmail="usernameOrEmail" tabindex="6" />
+        <LoginButton :active="submitActive" :password="password" :usernameOrEmail="usernameOrEmail" :changePage="changePage"
+            tabindex="6" />
         <ForgotLoginButton msg="Forgot Password" :action="toggleForgot" tabindex="8" />
     </LoginView>
     <!-- Forgot username / password flow -->
@@ -56,6 +57,9 @@ const maxPasswordLength = 16; // number of characters
 
 export default {
     name: 'EarnPage',
+    props: {
+        changePage: Function,
+    },
     components: {
         ForgotLoginButton,
         ForgotPasswordButton,
@@ -78,6 +82,7 @@ export default {
         };
     },
     mounted() {
+
         const usernameInput = document.getElementById('login-username-or-email')
 
         usernameInput.focus();
