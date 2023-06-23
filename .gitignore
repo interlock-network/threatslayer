@@ -1,2 +1,5 @@
 # Ignore ZIP files
 *.zip
+node_modules
+.DS_Store
+dist
