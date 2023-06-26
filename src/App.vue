@@ -147,14 +147,38 @@ export default {
 </script>
 
 <style>
+@font-face {
+  font-family: "THICCCBOI";
+  src: local("THICCCBOI");
+  src: url('./extension/static/fonts/TTF/THICCCBOI-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "THICCCBOI";
+  src: local("THICCCBOI-ExtraBold");
+  src: url('./extension/static/fonts/TTF/THICCCBOI-ExtraBold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+/* @font-face {
+  font-family: "THICCCBOI";
+  src: local("THICCCBOI-ExtraBold");
+  src: url('./extension/static/fonts/TTF/THICCCBOI-ExtraBold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+} */
+
 #app {
-  font-family: Helvetica, sans-serif;
+  font-family: "THICCCBOI", Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 * {
-  font-family: Helvetica;
+  font-family: "THICCCBOI";
 }
 
 a {
@@ -174,6 +198,11 @@ body {
   margin-left: 25%;
   pointer-events: none;
   width: 700px;
+}
+
+h1,
+h2 {
+  font-family: "THICCCBOI";
 }
 
 input {
