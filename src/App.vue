@@ -1,9 +1,7 @@
 <template>
   <div id="app-container">
     <div id="sidebar-nav">
-      <h3 id="sidebar-banner">
-        <span class="name-start">Threat</span><span class="name-end">Slayer</span>
-      </h3>
+      <img id="threatslayer-logo" src="/src/assets/images/threatslayer_logo.png">
       <div id="sidebar-earn" v-if="showRegisterPage" class="sidebar-item selected-sidebar-item"
         @click="selectPage('earn')">
         <img class="sidebar-icon" src="/src/assets/images/home.png"><span class=sidebar-text>Start Earning</span>
@@ -33,9 +31,9 @@
       <br />
       <br />
       <br />
-      <button @click="_toggleRegistered" style="pointer-events: initial;">Toggle Register</button>
+      <button class="hidden-item" @click="_toggleRegistered" style="pointer-events: initial;">Toggle Register</button>
       <br />
-      <button @click="_toggleLogin" style="pointer-events: initial;">Toggle Login</button>
+      <button class="hidden-item" @click="_toggleLogin" style="pointer-events: initial;">Toggle Login</button>
     </div>
     <div id="view-container">
       <EarnPage v-if="currentPage === 'earn'" :changePage="changePage" />
@@ -99,6 +97,7 @@ export default {
     },
     changePage(pageName) {
       this.currentPage = pageName;
+      this.selectPage(pageName);
     },
     async isLoggedIn() {
       // if logged in, hide register and login pages
@@ -215,7 +214,6 @@ body {
   background-color: #0F0818;
   color: #d0d4d9;
   font-size: 1.1rem;
-  /* margin-top: 1rem; */
   pointer-events: none;
 }
 
@@ -265,6 +263,14 @@ input {
   position: absolute;
   top: 4rem;
   width: 14rem;
+}
+
+#threatslayer-logo {
+  height: 250px;
+  margin-left: -3rem;
+  margin-bottom: -3rem;
+  margin-top: -2rem;
+  width: 250px;
 }
 
 #footer-container {
