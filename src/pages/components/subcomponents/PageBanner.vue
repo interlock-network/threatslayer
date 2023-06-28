@@ -1,5 +1,5 @@
 <template>
-    <h1 class="page-banner">{{ msg }}</h1>
+    <h3 class="page-banner">{{ msg }}</h3>
 </template>
 
 <script>
@@ -15,7 +15,6 @@ export default {
 .page-banner {
     color: #E7E9EA;
     display: block;
-    font-size: 2rem;
-    width: 100%;
+    margin-bottom: 0.5rem;
 }
 </style>
