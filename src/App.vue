@@ -19,7 +19,7 @@
       <br />
       <button @click="_toggleLogin" style="pointer-events: initial;">Toggle Login</button>
     </div>
-    <div id="page-container">
+    <div id="view-container">
       <EarnPage v-if="currentPage === 'earn'" :changePage="changePage" />
       <LoginPage v-if="currentPage === 'login'" :changePage="changePage" />
       <SlayCount v-if="currentPage === 'slayCount'" />
@@ -194,10 +194,8 @@ body {
   background-color: #0F0818;
   color: #d0d4d9;
   font-size: 1.1rem;
-  margin-top: 1rem;
-  margin-left: 25%;
+  /* margin-top: 1rem; */
   pointer-events: none;
-  width: 700px;
 }
 
 h1,
@@ -223,10 +221,13 @@ input {
   width: 100%;
 }
 
-#page-container {
-  float: right;
+#view-container {
+  height: 90vh;
+  left: 18rem;
   margin-bottom: 2rem;
-  width: 75%;
+  padding-left: 2rem;
+  position: absolute;
+  top: 4rem;
 }
 
 #sidebar-banner {
@@ -235,9 +236,14 @@ input {
 }
 
 #sidebar-nav {
-  float: left;
-  margin-bottom: 2rem;
-  width: 25%;
+  background: #211037;
+  border-radius: 10px;
+  left: 2rem;
+  height: 90vh;
+  padding-left: 2rem;
+  position: absolute;
+  top: 4rem;
+  width: 14rem;
 }
 
 #footer-container {
@@ -249,7 +255,6 @@ input {
 
 .link-button-icon {
   height: 1rem;
-  /* padding-left: 0.25rem; */
 }
 
 .name-start {
@@ -262,7 +267,7 @@ input {
 
 .sidebar-item {
   line-height: 2rem;
-  opacity: 0.9;
+  /* opacity: 0.9; */
   pointer-events: initial;
 }
 
@@ -271,12 +276,18 @@ input {
 }
 
 .selected-sidebar-item {
-  font-weight: 900;
-  opacity: 1;
+  background: #BB00FD;
+  border-radius: 6px;
+  left: 50px;
+  margin-left: -0.5rem;
+  padding-left: 0.5rem;
+  top: 276px;
+  width: 90%;
 }
 
 .submit-button {
   background: linear-gradient(216.99deg, #BB00FD 22.5%, #51066B 112.78%);
+  border: none;
   border-radius: 12px;
   color: #FFFFFF;
   cursor: pointer;
