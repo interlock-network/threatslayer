@@ -8,6 +8,10 @@
 export default {
     name: "LineOfText",
     props: {
+        bold: {
+            type: Boolean,
+            default: false,
+        },
         error: {
             type: Boolean,
             default: false,
@@ -29,16 +33,22 @@ export default {
     computed: {
         style() {
             let styleObj;
-            const { error, footer, subinstruction } = this;
+            const { bold, error, footer, subinstruction } = this;
 
             switch (true) {
+                case bold:
+                    styleObj = {
+                        display: "block",
+                        "font-weight": "bold"
+                    };
+                    break;
                 case error:
                     styleObj = { color: "red" };
                     break;
                 case footer:
                     styleObj = {
-                        "color": "gray",
-                        "display": "inline",
+                        color: "gray",
+                        display: "inline",
                         "font-size": "0.75rem"
                     };
                     break;
