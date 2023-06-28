@@ -1,16 +1,34 @@
 <template>
   <div id="app-container">
     <div id="sidebar-nav">
-      <h3 id="sidebar-banner"><span class="name-start">Threat</span><span class="name-end">Slayer</span></h3>
+      <h3 id="sidebar-banner">
+        <span class="name-start">Threat</span><span class="name-end">Slayer</span>
+      </h3>
       <div id="sidebar-earn" v-if="showRegisterPage" class="sidebar-item selected-sidebar-item"
-        @click="selectPage('earn', $event)">Start Earning</div>
-      <div id="sidebar-login" v-if="showLoginPage" class="sidebar-item" @click="selectPage('login', $event)">Login</div>
-      <div id="sidebar-collect" class="sidebar-item" @click="selectPage('collect', $event)">Collect</div>
-      <div id="sidebar-slayCount" class="sidebar-item" @click="selectPage('slayCount', $event)">Slay Count</div>
-      <div id="sidebar-about" class="sidebar-item" @click="selectPage('about', $event)">About Us</div>
-      <div id="sidebar-privacy" class="sidebar-item" @click="selectPage('privacy', $event)">Privacy <img
-          class="link-button-icon" src="/src/assets/images/external_link.png"></div>
-      <div id="sidebar-options" class="sidebar-item" @click="selectPage('options', $event)">Options</div>
+        @click="selectPage('earn')">
+        <img class="sidebar-icon" src="/src/assets/images/home.png"><span class=sidebar-text>Start Earning</span>
+      </div>
+      <div id="sidebar-login" v-if="showLoginPage" class="sidebar-item" @click="selectPage('login')">
+        <div style="position: relative">
+          <img class="sidebar-icon" src="/src/assets/images/home.png"><span class="sidebar-text">Login</span>
+        </div>
+      </div>
+      <div id="sidebar-collect" class="sidebar-item" @click="selectPage('collect')">
+        <img class="sidebar-icon" src="/src/assets/images/home.png">Collect
+      </div>
+      <div id="sidebar-slayCount" class="sidebar-item" @click="selectPage('slayCount')">
+        <img class="sidebar-icon" src="/src/assets/images/home.png">Slay Count
+      </div>
+      <div id="sidebar-about" class="sidebar-item" @click="selectPage('about')">
+        <img class="sidebar-icon" src="/src/assets/images/home.png">About Us
+      </div>
+      <div id="sidebar-privacy" class="sidebar-item" @click="selectPage('privacy')">
+        <img class="sidebar-icon" src="/src/assets/images/home.png">Privacy <img class="link-button-icon"
+          src="/src/assets/images/external_link.png">
+      </div>
+      <div id="sidebar-options" class="sidebar-item" @click="selectPage('options')">
+        <img class="sidebar-icon" src="/src/assets/images/home.png">Options
+      </div>
       <!-- TODO delete these two buttons -->
       <br />
       <br />
@@ -123,7 +141,7 @@ export default {
         console.log("isRegistered err", err);
       }
     },
-    selectPage(page, event) {
+    selectPage(page) {
       if (page === 'privacy') {
         // TODO update to real privacy page URL
         window.open('https://interlock.network');
@@ -139,7 +157,10 @@ export default {
           item.classList.remove('selected-sidebar-item');
         }
 
-        event.target.classList.add('selected-sidebar-item');
+        const targetId = `sidebar-${page}`;
+        console.log('targetId', targetId);
+        const targetElement = document.getElementById(targetId);
+        targetElement.classList.add('selected-sidebar-item');
       }
     }
   }
@@ -253,6 +274,10 @@ input {
   width: 100%;
 }
 
+.hidden-item {
+  display: none;
+}
+
 .link-button-icon {
   height: 1rem;
 }
@@ -267,22 +292,31 @@ input {
 
 .sidebar-item {
   line-height: 2rem;
-  /* opacity: 0.9; */
+  margin-bottom: 1rem;
   pointer-events: initial;
-}
-
-.hidden-item {
-  display: none;
 }
 
 .selected-sidebar-item {
   background: #BB00FD;
   border-radius: 6px;
-  left: 50px;
+  /* left: 50px; */
   margin-left: -0.5rem;
   padding-left: 0.5rem;
-  top: 276px;
+  /* top: 276px; */
   width: 90%;
+}
+
+.sidebar-icon {
+  height: 20px;
+  padding-right: 0.5rem;
+  /* position: absolute; */
+  top: 5px;
+  width: 20px;
+}
+
+.sidebar-text {
+  /* position: absolute; */
+  left: 25px;
 }
 
 .submit-button {
