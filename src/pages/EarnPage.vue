@@ -50,11 +50,12 @@
         <br />
         <!-- password with show/hide button -->
         <LineOfText msg="Password" instruction />
-        <div style="width: 100%">
+        <div style="width: 100%; position: relative;">
             <input class="password-input" :type="passwordInputType" v-model.trim="password" required
                 placeholder="Enter a password of at least 12 characters" tabindex="20" :style="passwordInputStyle" />
-            <button @click="togglePasswordInputType" class="small-button" id="show-toggle-button" style="float: left;">{{
-                passwordInputType === 'password' ? 'Show' : 'Hide' }}</button>
+            <button @click="togglePasswordInputType" class="small-button" id="show-toggle-button">
+                {{ passwordInputType === 'password' ? 'Show' : 'Hide' }}
+            </button>
         </div>
         <LineOfText :msg="passwordErrorMessage" error v-if="passwordErrorMessage.length" />
         <br />
@@ -63,7 +64,7 @@
         <div style="width: 100%">
             <div>
                 <input class="password-input" :type="passwordInputType" @input="validateReenteredPassword"
-                    v-model.trim="reenteredPassword" placeholder="Confirm Password" tabindex="22"
+                    v-model.trim="reenteredPassword" placeholder="Enter your password again" tabindex="22"
                     :style="passwordInputStyle" required />
             </div>
             <LineOfText :msg="reenteredPasswordErrorMessage" error v-if="reenteredPasswordErrorMessage.length" />
@@ -386,7 +387,11 @@ textarea {
 #show-toggle-button {
     border: none;
     color: #963cf5;
+    float: left;
     margin-top: 0.35rem;
+    padding-top: 0.25rem;
+    position: absolute;
+    right: 3.5rem;
 }
 
 #address-input {
