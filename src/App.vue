@@ -219,7 +219,8 @@ body {
 }
 
 h1,
-h2 {
+h2,
+h3 {
   font-family: "THICCCBOI";
 }
 
@@ -247,15 +248,10 @@ input {
   background-color: #0F0818;
   height: 90%;
   left: 18rem;
-  margin-bottom: 2rem;
   padding-left: 2rem;
   position: absolute;
   top: 4rem;
-}
-
-#sidebar-banner {
-  display: block;
-  width: 100%;
+  width: 450px;
 }
 
 #sidebar-nav {
@@ -282,9 +278,8 @@ input {
   bottom: 0;
   left: 2rem;
   height: 15%;
-  /* margin-top: 4rem; */
   position: absolute;
-  width: 650px;
+  width: 750px;
 }
 
 .clear-button {
@@ -322,11 +317,9 @@ input {
 .selected-sidebar-item {
   background: #BB00FD;
   border-radius: 6px;
-  /* left: 50px; */
   margin-left: -0.5rem;
   padding-left: 0.5rem;
-  /* top: 276px; */
-  width: 90%;
+  width: 80%;
 }
 
 .sidebar-icon {
@@ -342,6 +335,13 @@ input {
   left: 25px;
 }
 
+.small-button {
+  background-color: #060708;
+  border: 1px solid #d0d4d9;
+  color: #d0d4d9;
+  pointer-events: initial;
+}
+
 .submit-button {
   background: linear-gradient(216.99deg, #BB00FD 22.5%, #51066B 112.78%);
   border: none;
@@ -352,10 +352,6 @@ input {
   font-size: 1.25rem;
   padding: 0.5rem 0.75rem;
   width: 400px;
-}
-
-#submit-button-container {
-  width: 450px;
 }
 
 .submit-button-active {
