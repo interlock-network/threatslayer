@@ -1,39 +1,31 @@
 <template>
-    <PageBanner msg="Login" />
-    <LoginView :active="!forgotUsernamePassword">
-        <br />
-        <div v-if="!forgotUsernamePassword">
-            <!-- username field -->
-            <input class="input-field-text" id="login-username-or-email" @input="validateUsername"
-                v-model.trim="usernameOrEmail" placeholder="Username or email" tabindex="1" :style="usernameInputStyle" />
-            <LineOfText :msg="usernameErrorMessage" error v-if="usernameErrorMessage.length" />
-            <br />
-            <!-- password field with show/hide button -->
-            <LineOfText msg="Password" instruction />
-            <div style="width: 100%">
-                <input id="login-password" class="input-field-text password-input" :type="passwordInputType"
-                    v-model.trim="password" placeholder="Password" tabindex="4" :style="passwordInputStyle" />
-                <button @click="togglePasswordInputType" class="small-button" id="show-toggle-button" style="float: left;">
-                    {{ passwordInputType === 'password' ? 'Show' : 'Hide' }}
-                </button>
-            </div>
-            <LineOfText :msg="passwordErrorMessage" error v-if="passwordErrorMessage.length" />
-        </div>
-        <LoginButton :active="submitActive" :password="password" :usernameOrEmail="usernameOrEmail" :changePage="changePage"
-            tabindex="6" />
-        <ForgotLoginButton msg="Forgot Password" :action="toggleForgot" tabindex="8" />
-    </LoginView>
+    <PageBanner msg="Login to ThreatSlayer" />
+    <br />
+    <!-- username field -->
+    <LineOfText msg="Username or Email" bold />
+    <input class="input-field-text" id="login-username-or-email" v-model.trim="usernameOrEmail"
+        placeholder="Username or email" tabindex="2" :style="usernameInputStyle" />
+    <LineOfText :msg="usernameErrorMessage" error v-if="usernameErrorMessage.length" />
+    <br />
+    <!-- password field with show/hide button -->
+    <LineOfText msg="Password" bold />
+    <input id="login-password" class="input-field-text password-input" :type="passwordInputType" v-model.trim="password"
+        placeholder="Password" tabindex="4" :style="passwordInputStyle" />
+    <button @click="togglePasswordInputType" class="small-button" id="show-toggle-button" tabindex="5">
+        {{ passwordInputType === 'password' ? 'Show' : 'Hide' }}
+    </button>
+    <LineOfText :msg="passwordErrorMessage" error v-if="passwordErrorMessage.length" />
+    <br />
+    <LoginButton :password="password" :usernameOrEmail="usernameOrEmail" :changePage="changePage" tabindex="6" />
     <!-- Forgot username / password flow -->
-    <ForgotView :active="forgotUsernamePassword" v-if="forgotUsernamePassword">
-        <br />
-        <br />
-        <input type="email" class="input-field-text" id="forgot-info-email" @input="validateEmail" v-model.trim="email"
-            required placeholder="Enter your email" tabindex="10" />
-        <LineOfText :msg="emailErrorMessage" error v-if="emailErrorMessage.length" />
-        <!-- TODO update active -->
-        <ForgotPasswordButton :email="email" tabindex="12" />
-        <ForgotLoginButton msg="Login" :action="toggleForgot" tabindex="14" />
-    </ForgotView>
+    <br />
+    <br />
+    <br />
+    <LineOfText msg="Forgot password?" bold style="margin-top: 5rem;" />
+    <input type="email" class="input-field-text" id="forgot-info-email" @input="validateEmail" v-model.trim="email" required
+        placeholder="Enter your email to change your password" tabindex="8" />
+    <LineOfText :msg="emailErrorMessage" error v-if="emailErrorMessage.length" />
+    <ForgotPasswordButton :email="email" tabindex="10" />
 </template>
 <script>
 import { debounce } from 'debounce';
@@ -42,7 +34,6 @@ import { findEmailError, findNonAlphanumericChars } from "../utilities";
 import ForgotLoginButton from "./components/subcomponents/ForgotLoginButton.vue";
 import ForgotPasswordButton from "./components/subcomponents/ForgotPasswordButton.vue";
 import LineOfText from "./components/subcomponents/LineOfText.vue";
-import LoginView from "./components/LoginView.vue";
 import ForgotView from "./components/ForgotView.vue";
 import GetLoginInfoButton from "./components/subcomponents/GetLoginInfoButton.vue";
 import LoginButton from "./components/subcomponents/LoginButton.vue";
@@ -67,7 +58,6 @@ export default {
         GetLoginInfoButton,
         LineOfText,
         LoginButton,
-        LoginView,
         PageBanner,
     },
     data() {
@@ -90,14 +80,6 @@ export default {
     computed: {
         passwordInputStyle() {
             return this.passwordErrorMessage.length ? errorStyle : {};
-        },
-        submitActive() {
-            const submitActive = !!(this.password.length
-                && this.usernameOrEmail.length
-                && !this.passwordErrorMessage.length
-                && !this.usernameErrorMessage.length);
-
-            return submitActive;
         },
         usernameInputStyle() {
             return this.usernameErrorMessage?.length ? errorStyle : {};
@@ -173,17 +155,15 @@ input:focus {
     float: left;
 }
 
-#show-toggle-button {
+/* #show-toggle-button {
     border: none;
     color: #963cf5;
     margin-top: 0.35rem;
-}
+} */
 
 .login-page-submit-button-container {
     color: #d0d4d9;
-    margin-top: 3rem;
-    margin-bottom: 3rem;
-    width: 450px;
+    width: 400px;
 }
 
 /* .login-page-submit-button {

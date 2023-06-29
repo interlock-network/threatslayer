@@ -1,6 +1,6 @@
 <template>
     <div class="login-page-submit-button-container">
-        <button class='submit-button' @click="submitForgotPassword()" :class="computedClass">
+        <button class='clear-button' @click="submitForgotPassword()" :class="computedClass">
             {{ forgotPasswordButtonText }}
         </button>
     </div>

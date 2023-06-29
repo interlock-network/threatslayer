@@ -13,7 +13,6 @@ import axios from "axios";
 export default {
     name: "SubmitButton",
     props: {
-        active: Boolean,
         changePage: Function,
         password: String,
         usernameOrEmail: String,
@@ -31,8 +30,6 @@ export default {
 
             if (this.error) {
                 className = 'submit-button-error';
-            } else if (!this.active) {
-                className = 'submit-button-disabled';
             } else {
                 className = 'login-active';
             }
