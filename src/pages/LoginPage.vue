@@ -1,5 +1,9 @@
 <template>
     <PageBanner msg="Login to ThreatSlayer" />
+    <LineOfText msg="" instruction>
+        <span>Don't have an account?<button id="login-button" @click="unregister">Register</button></span>
+    </LineOfText>
+    <br />
     <br />
     <!-- username field -->
     <LineOfText msg="Username or Email" bold />
@@ -11,7 +15,8 @@
     <LineOfText msg="Password" bold />
     <input id="login-password" class="input-field-text password-input" :type="passwordInputType" v-model.trim="password"
         placeholder="Password" tabindex="4" :style="passwordInputStyle" />
-    <button @click="togglePasswordInputType" class="small-button" id="show-toggle-button" tabindex="5">
+    <button @click="togglePasswordInputType" class="small-button" id="show-toggle-button" style="right: 0.5rem;"
+        tabindex="5">
         {{ passwordInputType === 'password' ? 'Show' : 'Hide' }}
     </button>
     <LineOfText :msg="passwordErrorMessage" error v-if="passwordErrorMessage.length" />
@@ -34,7 +39,6 @@ import { findEmailError, findNonAlphanumericChars } from "../utilities";
 import ForgotLoginButton from "./components/subcomponents/ForgotLoginButton.vue";
 import ForgotPasswordButton from "./components/subcomponents/ForgotPasswordButton.vue";
 import LineOfText from "./components/subcomponents/LineOfText.vue";
-import ForgotView from "./components/ForgotView.vue";
 import GetLoginInfoButton from "./components/subcomponents/GetLoginInfoButton.vue";
 import LoginButton from "./components/subcomponents/LoginButton.vue";
 import PageBanner from "./components/subcomponents/PageBanner.vue";
@@ -54,7 +58,6 @@ export default {
     components: {
         ForgotLoginButton,
         ForgotPasswordButton,
-        ForgotView,
         GetLoginInfoButton,
         LineOfText,
         LoginButton,
@@ -72,7 +75,6 @@ export default {
         };
     },
     mounted() {
-
         const usernameInput = document.getElementById('login-username-or-email')
 
         usernameInput.focus();
@@ -88,9 +90,6 @@ export default {
     methods: {
         clearUsernameErrors() {
             this.usernameErrorMessage = '';
-        },
-        validateEmail() {
-            this.emailErrorMessage = findEmailError(this.email);
         },
         toggleForgot() {
             this.forgotUsernamePassword = !this.forgotUsernamePassword;
@@ -113,6 +112,13 @@ export default {
         },
         togglePasswordInputType() {
             this.passwordInputType = this.passwordInputType === 'password' ? 'text' : 'password';
+        },
+        unregister() {
+            chrome.storage.local.set({ 'registered': false });
+            this.changePage('earn');
+        },
+        validateEmail() {
+            this.emailErrorMessage = findEmailError(this.email);
         },
         validateUsername: debounce(function (event) {
             const name = event?.target?.value;
