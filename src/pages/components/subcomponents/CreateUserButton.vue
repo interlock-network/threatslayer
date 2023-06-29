@@ -1,7 +1,6 @@
 <template>
-    <div id="submit-button-container">
-        <button id='submit-button' @click="submitForm()" class="submit-button" :class="computedClass"
-            :disabled="submitting || submitted">
+    <div>
+        <button @click="submitForm()" class="submit-button" :class="computedClass" :disabled="submitting || submitted">
             {{ submitButtonText }}
         </button>
     </div>
