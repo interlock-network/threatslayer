@@ -13,11 +13,11 @@ import axios from "axios";
 export default {
     name: "CreateUserButton",
     props: {
-        active: Boolean,
         address: String,
         changePage: Function,
         email: String,
         password: String,
+        referrer: String,
         termsOfService: Boolean,
         unitedStates: Boolean,
         username: String,
@@ -36,8 +36,6 @@ export default {
 
             if (this.error) {
                 className = 'submit-button-error';
-            } else if (!this.active) {
-                className = 'submit-button-disabled';
             } else {
                 className = 'submit-button-active';
             }
@@ -47,13 +45,19 @@ export default {
     },
     methods: {
         async submitForm() {
-            const { address, email, password, termsOfService, unitedStates, username } = this;
+            const { address, email, password, referrer, termsOfService, unitedStates, username } = this;
 
             this.submitting = true;
             this.submitButtonText = 'Waiting...';
 
+            if (!address.length || email.length || password.length || termsOfService || unitedStates || username.length) {
+                this.submitButtonText = 'Incomplete';
+                this.error = true;
+
+                return;
+            }
             // TODO update with endpoint URL
-            const response = await axios.post('/api/submit', { address, email, password, termsOfService, unitedStates, username })
+            const response = await axios.post('/api/submit', { address, email, password, referrer, termsOfService, unitedStates, username })
                 .then(res => {
                     return res;
                 }).catch(err => {
@@ -72,7 +76,7 @@ export default {
                     loggedInSynched = await chrome.storage.local
                         .set({ loggedIn: true })
                         .then(() => {
-                            console.log("User succesfully logged in.");
+                            console.log('User succesfully logged in.');
 
                             return true;
                         });
@@ -84,7 +88,7 @@ export default {
                     chrome.storage.local
                         .set({ registered: true })
                         .then(() => {
-                            console.log("User succesfully registered!");
+                            console.log('User succesfully registered!');
 
                             return true;
                         });

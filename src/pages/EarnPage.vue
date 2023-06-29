@@ -1,79 +1,64 @@
 <template>
-    <PageBanner msg="Start Earning" />
-    <WelcomeView :active="welcomeActive">
-        <div id="welcome-cta-container" v-if="welcomeActive">
-            <br />
-            <LineOfText msg="Check these boxes to continue:" instruction />
-            <div class="checkbox-container" @click="focusNextCheckbox">
-                <input id="first-box" type="checkbox" v-model="termsOfService" tabindex="1">
-                <label for="first-box">Agree to our <a href="https://interlock.network" target="_blank">
-                        Terms of Service</a></label>
-            </div>
-            <div class="checkbox-container">
-                <input id="second-box" type="checkbox" v-model="unitedStates" tabindex="4">
-                <label for="second-box" style="display: inline-flex;">Affirm you are not a US citizen or resident
-                    <InfoTip style="padding-right: 2.75rem;" v-if="welcomeActive"
-                        msg="Cryptocurrency is considered a security in the US so most US residents cannot purchase them." />
-                </label>
-            </div>
-        </div>
-    </WelcomeView>
-    <CreateAccountView :active="createAccountActive">
-        <br />
-        <div style="width: 100%; display: flex;">
-            <WalletButton msg="Connect Wallet" :active="connectWalletButtonActive" id="connectWallet"
-                :action="connectWallet" tabindex="10" />
-            <WalletButton :action="createWallet" msg="Create Wallet" :active="createWalletButtonActive" id="createWallet"
-                tabindex="12" />
-        </div>
-        <div>
-            <br />
-            <ConnectInstructions v-if="connectAccountSelected && createAccountActive">
-                <textarea class="input-field-text" id="address-input" @input="validateAddress" v-model.trim="walletAddress"
-                    style="width: 100%" placeholder="Paste your wallet address here" tabindex="14" required />
-                <LineOfText error v-if="addressErrorMessage.length" :msg="addressErrorMessage" />
-            </ConnectInstructions>
-            <CreateInstructions v-if="createAccountSelected" />
-        </div>
-        <br />
-        <!-- email -->
-        <LineOfText msg="Email" instruction />
-        <input type="email" @input="validateEmail" v-model.trim="email" required tabindex="16"
-            placeholder="We need your email for verification" />
-        <LineOfText :msg="emailErrorMessage" error v-if="emailErrorMessage.length" />
-        <br />
-        <!-- username -->
-        <LineOfText msg="Username" instruction />
-        <input id="username-input" @input="validateUsername" v-model.trim="username" required tabindex="18"
-            placeholder="Allowed characters are A-Z, a-z and 0-9" :style="usernameInputStyle" />
-        <LineOfText :msg="usernameErrorMessage" error v-if="usernameErrorMessage.length" />
-        <br />
-        <!-- password with show/hide button -->
-        <LineOfText msg="Password" instruction />
-        <div style="width: 100%; position: relative;">
-            <input class="password-input" :type="passwordInputType" v-model.trim="password" required
-                placeholder="Enter a password of at least 12 characters" tabindex="20" :style="passwordInputStyle" />
-            <button @click="togglePasswordInputType" class="small-button" id="show-toggle-button">
-                {{ passwordInputType === 'password' ? 'Show' : 'Hide' }}
-            </button>
-        </div>
-        <LineOfText :msg="passwordErrorMessage" error v-if="passwordErrorMessage.length" />
-        <br />
-        <br />
-        <!-- password confirmation field -->
-        <div style="width: 100%">
-            <div>
-                <input class="password-input" :type="passwordInputType" @input="validateReenteredPassword"
-                    v-model.trim="reenteredPassword" placeholder="Enter your password again" tabindex="22"
-                    :style="passwordInputStyle" required />
-            </div>
-            <LineOfText :msg="reenteredPasswordErrorMessage" error v-if="reenteredPasswordErrorMessage.length" />
-        </div>
-    </CreateAccountView>
+    <PageBanner msg="Sign up for ThreatSlayer" />
+    <LineOfText msg="" instruction>
+        <span>Already have an account?<button id="login-button" @click="changePage('login')">Login</button></span>
+    </LineOfText>
+    <br />
+    <br />
+    <LineOfText msg="Wallet Address" bold />
+    <input id="address-input" @input="validateAddress" v-model.trim="walletAddress"
+        placeholder="Paste your wallet address here" tabindex="2" required />
+    <LineOfText error v-if="addressErrorMessage.length" :msg="addressErrorMessage" />
+    <!-- username -->
+    <LineOfText msg="Username" bold />
+    <input id="username-input" @input="validateUsername" v-model.trim="username" required tabindex="4"
+        placeholder="Allowed characters are A-Z, a-z and 0-9" :style="usernameInputStyle" />
+    <LineOfText :msg="usernameErrorMessage" error v-if="usernameErrorMessage.length" />
+    <br />
+    <!-- email -->
+    <LineOfText msg="Email" bold />
+    <input type="email" @input="validateEmail" v-model.trim="email" required tabindex="6"
+        placeholder="We need your email for verification" />
+    <LineOfText :msg="emailErrorMessage" error v-if="emailErrorMessage.length" />
+    <br />
+    <!-- password with show/hide button -->
+    <LineOfText msg="Password" bold />
+    <div style="width: 100%; position: relative;">
+        <input class="password-input" :type="passwordInputType" v-model.trim="password" required
+            placeholder="Enter a password of at least 12 characters" tabindex="8" :style="passwordInputStyle" />
+        <button @click="togglePasswordInputType" class="small-button" id="show-toggle-button" tabindex="9">
+            {{ passwordInputType === 'password' ? 'Show' : 'Hide' }}
+        </button>
+    </div>
+    <LineOfText :msg="passwordErrorMessage" error v-if="passwordErrorMessage.length" />
+    <br />
+    <br />
+    <!-- password confirmation field -->
+    <div style="width: 100%">
+        <input class="password-input" :type="passwordInputType" @input="validateReenteredPassword"
+            v-model.trim="reenteredPassword" placeholder="Enter your password again" tabindex="10"
+            :style="passwordInputStyle" required />
+        <LineOfText :msg="reenteredPasswordErrorMessage" error v-if="reenteredPasswordErrorMessage.length" />
+    </div>
+    <!-- referrer -->
+    <LineOfText msg="Referred by another user? (Optional)" bold />
+    <input v-model.trim="referrer" tabindex="12" placeholder="Enter referrer username" />
+    <div class="checkbox-container" @click="focusNextCheckbox">
+        <input id="first-box" type="checkbox" v-model="termsOfService" tabindex="14">
+        <label for="first-box">Agree to our <a href="https://interlock.network" target="_blank">
+                Terms of Service</a></label>
+    </div>
+    <div class="checkbox-container">
+        <input id="second-box" type="checkbox" v-model="unitedStates" tabindex="16">
+        <label for="second-box" style="display: inline-flex;">Affirm you are not a US citizen or resident
+            <InfoTip style="padding-right: 2.75rem;"
+                msg="Cryptocurrency is considered a security in the US so most US residents cannot purchase them." />
+        </label>
+    </div>
     <CreateUserButton :active="submitActive" :address="walletAddress" :changePage="changePage" :email='email'
-        :password="password" :termsOfService="termsOfService" :unitedStates="unitedStates" :username="username"
-        tabindex="26" />
-    <BailButton v-if="createAccountActive" tabindex="30" />
+        :password="password" :referrer="referrer" :termsOfService="termsOfService" :unitedStates="unitedStates"
+        :username="username" tabindex="26" />
+    <BailButton v-if="createAccountActive" tabindex="16" />
 </template>
 <script>
 import axios from "axios";
@@ -84,14 +69,10 @@ import { hexToU8a, isHex } from '@polkadot/util';
 
 import BailButton from "./components/subcomponents/BailButton.vue";
 import ConnectInstructions from "./components/ConnectInstructions.vue";
-import CreateAccountView from "./components/CreateAccountView.vue";
-import CreateInstructions from "./components/CreateInstructions.vue";
 import InfoTip from "./components/subcomponents/InfoTip.vue";
 import LineOfText from "./components/subcomponents/LineOfText.vue";
 import PageBanner from "./components/subcomponents/PageBanner.vue";
 import CreateUserButton from "./components/subcomponents/CreateUserButton.vue";
-import WalletButton from "./components/subcomponents/WalletButton.vue";
-import WelcomeView from "./components/WelcomeView.vue";
 
 const errorStyle = {
     border: "3px solid red",
@@ -108,14 +89,10 @@ export default {
     components: {
         BailButton,
         ConnectInstructions,
-        CreateAccountView,
-        CreateInstructions,
         InfoTip,
         LineOfText,
         PageBanner,
         CreateUserButton,
-        WalletButton,
-        WelcomeView
     },
     data() {
         return {
@@ -129,6 +106,7 @@ export default {
             passwordInputType: 'password',
             reenteredPassword: '',
             reenteredPasswordErrorMessage: '',
+            referrer: '',
             termsOfService: false,
             unitedStates: false,
             username: '',
@@ -137,9 +115,9 @@ export default {
         };
     },
     async mounted() {
-        const firstCheckBox = document.getElementById('first-box');
+        const firstInput = document.getElementById('address-input');
 
-        firstCheckBox.focus();
+        firstInput.focus();
     },
     computed: {
         connectWalletActive() {
@@ -335,49 +313,17 @@ input[type="checkbox"]:focus {
     outline: 2px solid #3b8de8;
 }
 
-textarea {
-    box-sizing: border-box;
-    background: #0F0818;
-    border: 1px solid #818181;
-    border-radius: 2px;
-    color: #818181;
-    /* display: block; */
-    height: 4rem;
-    margin-bottom: 1rem;
-    padding-left: 0.75rem;
-    pointer-events: initial;
-    width: 100%;
-}
-
 #bail-container {
     display: block;
 }
 
-#copy-button {
-    background-color: #D0D4D9;
+#login-button {
+    background-color: #0F0818;
     border: none;
     color: #963cf5;
-    float: right;
-    position: relative;
-}
-
-#seed-container {
-    background-color: #D0D4D9;
-    display: block;
-    height: 4rem;
-    margin-bottom: 1rem;
-    width: 100%;
-}
-
-#seed-text-container {
-    height: 4rem;
-    position: relative;
-}
-
-#seed-button-container {
-    background-color: #D0D4D9;
-    height: 2rem;
-    position: inherit;
+    font-size: 1.1rem;
+    font-weight: bold;
+    pointer-events: initial;
 }
 
 .password-input {
