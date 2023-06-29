@@ -25,7 +25,9 @@ export default {
     color: gray;
     display: flex;
     font-size: 0.75rem;
-    /* justify-content: center; */
+    padding-left: 2rem;
+    position: absolute;
+    top: 2rem;
     width: 100%;
 }
 </style>

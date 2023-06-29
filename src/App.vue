@@ -41,9 +41,9 @@
       <SlayCount v-if="currentPage === 'slayCount'" />
       <AboutPage v-if="currentPage === 'about'" />
       <OptionsPage v-if="currentPage === 'options'" />
-      <div id="footer-container">
-        <PageFooter />
-      </div>
+    </div>
+    <div id="footer-container">
+      <PageFooter />
     </div>
   </div>
 </template>
@@ -211,6 +211,7 @@ a:focus {
 }
 
 body {
+  background: url("/src/assets/images/grid_background.png") repeat;
   background-color: #0F0818;
   color: #d0d4d9;
   font-size: 1.1rem;
@@ -228,7 +229,6 @@ input {
   border: 1px solid #818181;
   border-radius: 12px;
   color: #818181;
-  /* display: block; */
   height: 2.25rem;
   margin-bottom: 1rem;
   padding-left: 0.75rem;
@@ -237,11 +237,15 @@ input {
 }
 
 #app-container {
+  background-color: #0F0818;
+  background: url("/src/assets/images/grid_background.png") repeat;
+  height: 100%;
   width: 100%;
 }
 
 #view-container {
-  height: 90vh;
+  background-color: #0F0818;
+  height: 90%;
   left: 18rem;
   margin-bottom: 2rem;
   padding-left: 2rem;
@@ -258,11 +262,11 @@ input {
   background: #211037;
   border-radius: 10px;
   left: 2rem;
-  height: 90vh;
+  height: 90%;
   padding-left: 2rem;
   position: absolute;
   top: 4rem;
-  width: 14rem;
+  width: 250px;
 }
 
 #threatslayer-logo {
@@ -274,10 +278,23 @@ input {
 }
 
 #footer-container {
-  align-items: flex-start;
-  margin-top: 4rem;
+  background-color: #0F0818;
+  bottom: 0;
+  left: 2rem;
+  height: 15%;
+  /* margin-top: 4rem; */
   position: absolute;
-  width: 100%;
+  width: 650px;
+}
+
+.clear-button {
+  background-color: #0F0818;
+  border: #d0d4d9 solid 1px;
+  border-radius: 12px;
+  color: #d0d4d9;
+  font-size: 1.25rem;
+  padding: 0.5rem 0.75rem;
+  width: 400px;
 }
 
 .hidden-item {
@@ -334,12 +351,10 @@ input {
   float: left;
   font-size: 1.25rem;
   padding: 0.5rem 0.75rem;
-  width: 50%;
+  width: 400px;
 }
 
 #submit-button-container {
-  margin-top: 3rem;
-  margin-bottom: 3rem;
   width: 450px;
 }
 
