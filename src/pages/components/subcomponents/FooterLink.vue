@@ -1,5 +1,6 @@
 <template>
-    <a :href="url" target="_blank" id='footer-link'>{{ msg }}</a> <span id="divider" v-if="divider">|
+    <span style="margin-top: 0.5rem">
+        <a :href="url" target="_blank" id='footer-link'>{{ msg }}</a> <span id="divider" v-if="divider">|</span>
     </span>
 </template>
 
@@ -7,11 +8,11 @@
 export default {
     name: "FooterLink",
     props: {
-        msg: String,
         divider: {
             type: Boolean,
             default: false,
         },
+        msg: String,
         url: {
             type: String,
             default: 'https://interlock.network',
@@ -27,7 +28,8 @@ export default {
 }
 
 #footer-link {
-    cursor: pointer;
+    /* cursor: pointer; */
     pointer-events: initial;
+    text-decoration: none;
 }
 </style>

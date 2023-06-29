@@ -1,9 +1,26 @@
 <template>
     <div id="page-footer">
-        <FooterLink msg="Privacy Policy" divider />
-        <FooterLink msg="Do Not Sell My Personal Information." divider />
-        <FooterLink msg="Terms of Service" divider />
-        <LineOfText msg="Interlock (c) 2023 All Rights Reserved" footer />
+        <table style="width: 100%;">
+            <tr>
+                <td style="min-width: 10%;"></td>
+                <td style="width: 40%;">
+                    <img id="logo-white" src="/src/assets/images/logo_white.svg"><br />
+                    <div id="left-hand-block">
+                        <LineOfText msg="Interlock © 2023 All Rights Reserved" footer />
+                    </div>
+                </td>
+                <td style="width: 40%; line-height: 1.25rem;">
+                    <LineOfText msg="Company" footer bold />
+                    <FooterLink msg="Privacy Policy" /><br />
+                    <FooterLink msg="Do Not Sell My Personal Information." /><br />
+                    <FooterLink msg="Terms of Service" />
+                </td>
+                <td>
+                    <div style="width: 10%;"></div>
+                </td>
+            </tr>
+        </table>
+
     </div>
 </template>
 
@@ -21,13 +38,23 @@ export default {
 </script>
 
 <style>
+#left-hand-block {
+    transform: translate(0, -14px);
+}
+
+#logo-white {
+    opacity: 0.8;
+    margin-left: -0.7rem;
+    transform: translate(0, -14px) scale(0.75);
+}
+
 #page-footer {
     color: gray;
     display: flex;
     font-size: 0.75rem;
     padding-left: 2rem;
     position: absolute;
-    top: 2rem;
+    top: 1rem;
     width: 100%;
 }
 </style>
