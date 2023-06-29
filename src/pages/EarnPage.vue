@@ -23,24 +23,21 @@
     <br />
     <!-- password with show/hide button -->
     <LineOfText msg="Password" bold />
-    <div style="width: 100%; position: relative;">
-        <input class="password-input" :type="passwordInputType" v-model.trim="password" required
-            placeholder="Enter a password of at least 12 characters" tabindex="8" :style="passwordInputStyle" />
-        <button @click="togglePasswordInputType" class="small-button" id="show-toggle-button" tabindex="9">
-            {{ passwordInputType === 'password' ? 'Show' : 'Hide' }}
-        </button>
-    </div>
+    <input class="password-input" :type="passwordInputType" v-model.trim="password" required
+        placeholder="Enter a password of at least 12 characters" tabindex="8" :style="passwordInputStyle" />
+    <button @click="togglePasswordInputType" class="small-button" id="show-toggle-button" tabindex="9">
+        {{ passwordInputType === 'password' ? 'Show' : 'Hide' }}
+    </button>
     <LineOfText :msg="passwordErrorMessage" error v-if="passwordErrorMessage.length" />
     <br />
-    <br />
     <!-- password confirmation field -->
-    <div style="width: 100%">
-        <input class="password-input" :type="passwordInputType" @input="validateReenteredPassword"
-            v-model.trim="reenteredPassword" placeholder="Enter your password again" tabindex="10"
-            :style="passwordInputStyle" required />
-        <LineOfText :msg="reenteredPasswordErrorMessage" error v-if="reenteredPasswordErrorMessage.length" />
-    </div>
+    <input class="password-input" :type="passwordInputType" @input="validateReenteredPassword"
+        v-model.trim="reenteredPassword" placeholder="Enter your password again" tabindex="10" :style="passwordInputStyle"
+        required />
+    <LineOfText :msg="reenteredPasswordErrorMessage" error v-if="reenteredPasswordErrorMessage.length" />
     <!-- referrer -->
+    <br />
+    <br />
     <LineOfText msg="Referred by another user? (Optional)" bold />
     <input v-model.trim="referrer" tabindex="12" placeholder="Enter referrer username" />
     <div class="checkbox-container" @click="focusNextCheckbox">
@@ -51,14 +48,12 @@
     <div class="checkbox-container">
         <input id="second-box" type="checkbox" v-model="unitedStates" tabindex="16">
         <label for="second-box" style="display: inline-flex;">Affirm you are not a US citizen or resident
-            <InfoTip style="padding-right: 2.75rem;"
-                msg="Cryptocurrency is considered a security in the US so most US residents cannot purchase them." />
+            <InfoTip msg="Cryptocurrency is considered a security in the US so most US residents cannot purchase them." />
         </label>
     </div>
-    <CreateUserButton :active="submitActive" :address="walletAddress" :changePage="changePage" :email='email'
-        :password="password" :referrer="referrer" :termsOfService="termsOfService" :unitedStates="unitedStates"
-        :username="username" tabindex="26" />
-    <BailButton v-if="createAccountActive" tabindex="16" />
+    <CreateUserButton :address="walletAddress" :changePage="changePage" :email='email' :password="password"
+        :referrer="referrer" :termsOfService="termsOfService" :unitedStates="unitedStates" :username="username"
+        tabindex="26" />
 </template>
 <script>
 import axios from "axios";
@@ -67,7 +62,6 @@ import { findEmailError, findNonAlphanumericChars } from "../utilities";
 import { decodeAddress, encodeAddress } from '@polkadot/keyring';
 import { hexToU8a, isHex } from '@polkadot/util';
 
-import BailButton from "./components/subcomponents/BailButton.vue";
 import ConnectInstructions from "./components/ConnectInstructions.vue";
 import InfoTip from "./components/subcomponents/InfoTip.vue";
 import LineOfText from "./components/subcomponents/LineOfText.vue";
@@ -87,7 +81,6 @@ export default {
         changePage: Function,
     },
     components: {
-        BailButton,
         ConnectInstructions,
         InfoTip,
         LineOfText,
@@ -120,49 +113,16 @@ export default {
         firstInput.focus();
     },
     computed: {
-        connectWalletActive() {
-            const previousStepActive = this.welcomeActive;
-            const usernameAndWalletIdValidated = this.validateAccountInputs();
-
-            return !previousStepActive && !usernameAndWalletIdValidated;
-        },
-        connectWalletButtonActive() {
-            return this.createAccountActive && this.connectAccountSelected;
-        },
-        createAccountActive() {
-            return (this.connectWalletActive || this.submitActive);
-        },
-        createWalletButtonActive() {
-            return this.createAccountActive && this.createAccountSelected;
-        },
         passwordInputStyle() {
             return this.passwordErrorMessage.length ? errorStyle : {};
         },
-        submitActive() {
-            const previousStepsComplete = !this.welcomeActive && this.validateAccountInputs();
-            return previousStepsComplete;
-        },
         usernameInputStyle() {
             return this.usernameErrorMessage?.length ? errorStyle : {};
-        },
-        welcomeActive() {
-            const notCompletedYet = this.termsOfService && this.unitedStates;
-
-            return !notCompletedYet;
         },
     },
     methods: {
         clearUsernameErrors() {
             this.usernameErrorMessage = '';
-        },
-        connectWallet() {
-            this.connectAccountSelected = true;
-            this.createAccountSelected = false;
-        },
-        createWallet() {
-            this.connectAccountSelected = false;
-            this.createAccountSelected = true;
-            window.open('https://chrome.google.com/webstore/detail/subwallet-polkadot-wallet/onhogfjeacnfoofkfgppdlbmlmnplgbn');
         },
         focusNextCheckbox() {
             const firstCheckBox = document.getElementById('first-box');
@@ -238,17 +198,6 @@ export default {
                 this.reenteredPasswordErrorMessage = '';
             }
         },
-        validateAccountInputs() {
-            const walletIsValid = !this.addressErrorMessage.length && this.walletAddress.length > 0;
-            const emailIsValid = this.email.length > 2 && !this.emailErrorMessage.length;
-            const usernameIsValid = this.username.length > 2 && !this.usernameErrorMessage.length;
-            const passwordsMatch = this.password === this.reenteredPassword;
-            const noPasswordErrors = !this.passwordErrorMessage.length && !this.reenteredPasswordErrorMessage.length;
-
-            const passwordIsValid = this.password.length && passwordsMatch && noPasswordErrors;
-
-            return walletIsValid && emailIsValid && usernameIsValid && passwordIsValid;
-        },
         validateUsername: debounce(function (event) {
             const name = event?.target?.value;
 
@@ -294,23 +243,19 @@ export default {
   
 <style>
 input[type="checkbox"] {
-    height: 0.75rem;
+    background: #FFFFFF;
+    height: 10px;
     margin-right: 0.5rem;
+    width: 10px;
+}
+
+input[type="checkbox"]:focus {
+    outline: 2px solid #3b8de8;
 }
 
 input:focus {
     border: 3px solid #3b8de8;
     outline: none;
-}
-
-input[type="checkbox"] {
-    width: 10px;
-    height: 10px;
-    background: #FFFFFF;
-}
-
-input[type="checkbox"]:focus {
-    outline: 2px solid #3b8de8;
 }
 
 #bail-container {
@@ -340,19 +285,8 @@ input[type="checkbox"]:focus {
     right: 3.5rem;
 }
 
-#address-input {
-    height: 2rem;
-}
-
 .checkbox-container {
     display: block;
-    pointer-events: initial;
-}
-
-.small-button {
-    background-color: #060708;
-    border: 1px solid #d0d4d9;
-    color: #d0d4d9;
     pointer-events: initial;
 }
 </style>
