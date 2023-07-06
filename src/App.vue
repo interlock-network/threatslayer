@@ -1,50 +1,50 @@
 <template>
   <div id="app-container">
-    <div id="sidebar-nav">
-      <img id="threatslayer-logo" src="/src/assets/images/threatslayer_logo.png">
-      <div id="sidebar-earn" v-if="showRegisterPage" class="sidebar-item selected-sidebar-item"
-        @click="selectPage('earn')">
-        <img class="sidebar-icon" src="/src/assets/images/home.png"><span class=sidebar-text>Start Earning</span>
-      </div>
-      <div id="sidebar-login" v-if="showLoginPage" class="sidebar-item" @click="selectPage('login')">
-        <div style="position: relative">
-          <img class="sidebar-icon" src="/src/assets/images/home.png"><span class="sidebar-text">Login</span>
+    <div id="top-container">
+      <div id="sidebar-nav">
+        <img id="threatslayer-logo" src="/src/assets/images/threatslayer_logo.png">
+        <div id="sidebar-earn" v-if="showRegisterPage" class="sidebar-item selected-sidebar-item"
+          @click="selectPage('earn')">
+          <img class="sidebar-icon" src="/src/assets/images/home.png"><span class=sidebar-text>Start Earning</span>
         </div>
+        <div id="sidebar-login" v-if="showLoginPage" class="sidebar-item" @click="selectPage('login')">
+          <div style="position: relative">
+            <img class="sidebar-icon" src="/src/assets/images/home.png"><span class="sidebar-text">Login</span>
+          </div>
+        </div>
+        <div id="sidebar-collect" class="sidebar-item" @click="selectPage('collect')">
+          <img class="sidebar-icon" src="/src/assets/images/home.png">Collect
+        </div>
+        <div id="sidebar-slayCount" class="sidebar-item" @click="selectPage('slayCount')">
+          <img class="sidebar-icon" src="/src/assets/images/home.png">Slay Count
+        </div>
+        <div id="sidebar-about" class="sidebar-item" @click="selectPage('about')">
+          <img class="sidebar-icon" src="/src/assets/images/home.png">About Us
+        </div>
+        <div id="sidebar-privacy" class="sidebar-item" @click="selectPage('privacy')">
+          <img class="sidebar-icon" src="/src/assets/images/home.png">Privacy <img class="link-button-icon"
+            src="/src/assets/images/external_link.png">
+        </div>
+        <div id="sidebar-options" class="sidebar-item" @click="selectPage('options')">
+          <img class="sidebar-icon" src="/src/assets/images/home.png">Options
+        </div>
+        <!-- TODO delete these two buttons -->
+        <br />
+        <br />
+        <br />
+        <button class="hidden-item" @click="_toggleRegistered" style="pointer-events: initial;">Toggle Register</button>
+        <br />
+        <button class="hidden-item" @click="_toggleLogin" style="pointer-events: initial;">Toggle Login</button>
       </div>
-      <div id="sidebar-collect" class="sidebar-item" @click="selectPage('collect')">
-        <img class="sidebar-icon" src="/src/assets/images/home.png">Collect
+      <div id="view-container">
+        <EarnPage v-if="currentPage === 'earn'" :changePage="changePage" />
+        <LoginPage v-if="currentPage === 'login'" :changePage="changePage" />
+        <SlayCount v-if="currentPage === 'slayCount'" />
+        <AboutPage v-if="currentPage === 'about'" />
+        <OptionsPage v-if="currentPage === 'options'" />
       </div>
-      <div id="sidebar-slayCount" class="sidebar-item" @click="selectPage('slayCount')">
-        <img class="sidebar-icon" src="/src/assets/images/home.png">Slay Count
-      </div>
-      <div id="sidebar-about" class="sidebar-item" @click="selectPage('about')">
-        <img class="sidebar-icon" src="/src/assets/images/home.png">About Us
-      </div>
-      <div id="sidebar-privacy" class="sidebar-item" @click="selectPage('privacy')">
-        <img class="sidebar-icon" src="/src/assets/images/home.png">Privacy <img class="link-button-icon"
-          src="/src/assets/images/external_link.png">
-      </div>
-      <div id="sidebar-options" class="sidebar-item" @click="selectPage('options')">
-        <img class="sidebar-icon" src="/src/assets/images/home.png">Options
-      </div>
-      <!-- TODO delete these two buttons -->
-      <br />
-      <br />
-      <br />
-      <button class="hidden-item" @click="_toggleRegistered" style="pointer-events: initial;">Toggle Register</button>
-      <br />
-      <button class="hidden-item" @click="_toggleLogin" style="pointer-events: initial;">Toggle Login</button>
     </div>
-    <div id="view-container">
-      <EarnPage v-if="currentPage === 'earn'" :changePage="changePage" />
-      <LoginPage v-if="currentPage === 'login'" :changePage="changePage" />
-      <SlayCount v-if="currentPage === 'slayCount'" />
-      <AboutPage v-if="currentPage === 'about'" />
-      <OptionsPage v-if="currentPage === 'options'" />
-    </div>
-    <div id="footer-container">
-      <PageFooter />
-    </div>
+    <PageFooter />
   </div>
 </template>
 <script>
@@ -215,7 +215,7 @@ body {
   background-color: #0F0818;
   color: #d0d4d9;
   font-size: 1.1rem;
-  pointer-events: none;
+  /* pointer-events: none; */
 }
 
 h1,
@@ -246,23 +246,30 @@ input {
 
 #view-container {
   background-color: #0F0818;
-  height: 90%;
-  left: 18rem;
+  float: right;
+  height: 90vh;
+  /* left: 18rem; */
   padding-left: 2rem;
-  position: absolute;
-  top: 4rem;
+  /* position: absolute; */
+  margin-top: 2rem;
   width: 450px;
 }
 
 #sidebar-nav {
   background: #211037;
-  border-radius: 10px;
-  left: 2rem;
-  height: 90%;
+  border-top-left-radius: 10px;
+  /* left: 2rem; */
+  float: left;
+  height: 90vh;
   padding-left: 2rem;
-  position: absolute;
-  top: 4rem;
+  /* position: absolute; */
+  margin-top: 2rem;
   width: 250px;
+}
+
+#top-container {
+  margin: auto;
+  width: 765px;
 }
 
 #threatslayer-logo {
@@ -273,18 +280,9 @@ input {
   width: 250px;
 }
 
-#footer-container {
-  background-color: #0F0818;
-  bottom: 0;
-  left: 2rem;
-  height: 15%;
-  position: absolute;
-  width: 750px;
-}
-
 .clear-button {
   background-color: #0F0818;
-  border: #d0d4d9 solid 1px;
+  border: #BB00FD solid 1px;
   border-radius: 12px;
   color: #d0d4d9;
   font-size: 1.25rem;
