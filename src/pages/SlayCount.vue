@@ -201,7 +201,8 @@ export default {
     height: 310px;
     border: 30px solid #9336e5;
     text-align: center;
-    font-family: "THICCBOI-Bold";
+    font-family: "THICCBOI";
+    font-weight: bold;
     line-height: 310px;
     margin: auto;
 }
@@ -249,7 +250,8 @@ export default {
 
 .statistic-header {
     font-size: 16px;
-    font-family: "THICCBOI-bold";
+    font-family: "THICCBOI";
+    font-weight: bold;
     color: #717171;
 }
 
