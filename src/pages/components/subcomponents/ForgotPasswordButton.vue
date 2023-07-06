@@ -43,7 +43,7 @@ export default {
             } else if (this.error) {
                 result = "Try again later";
             } else {
-                result = 'Change password';
+                result = 'Change Password';
             }
 
             return result;
