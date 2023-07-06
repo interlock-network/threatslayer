@@ -15,8 +15,7 @@
     <LineOfText msg="Password" bold />
     <input id="login-password" class="input-field-text password-input" :type="passwordInputType" v-model.trim="password"
         placeholder="Password" tabindex="4" :style="passwordInputStyle" />
-    <button @click="togglePasswordInputType" class="small-button" id="show-toggle-button" style="right: 3.25rem;"
-        tabindex="5">
+    <button @click="togglePasswordInputType" class="small-button" id="show-toggle-button" tabindex="5">
         {{ passwordInputType === 'password' ? 'Show' : 'Hide' }}
     </button>
     <LineOfText :msg="passwordErrorMessage" error v-if="passwordErrorMessage.length" />

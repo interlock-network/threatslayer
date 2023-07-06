@@ -244,9 +244,9 @@ export default {
 <style>
 input[type="checkbox"] {
     background: #FFFFFF;
-    height: 10px;
+    height: 0.9rem;
     margin-right: 0.5rem;
-    width: 10px;
+    width: 0.9rem;
 }
 
 input[type="checkbox"]:focus {
@@ -278,11 +278,11 @@ input:focus {
 #show-toggle-button {
     border: none;
     color: #963cf5;
-    float: left;
-    margin-top: 0.35rem;
+    /* float: left; */
+    margin-top: 0.4rem;
     padding-top: 0.25rem;
     position: absolute;
-    right: 3.5rem;
+    right: 30%;
 }
 
 .checkbox-container {
