@@ -300,14 +300,6 @@ input {
   height: 1rem;
 }
 
-.name-start {
-  color: #3b8de8;
-}
-
-.name-end {
-  color: #963cf5;
-}
-
 .sidebar-item {
   line-height: 2rem;
   margin-bottom: 1rem;
