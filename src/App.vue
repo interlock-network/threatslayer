@@ -1,47 +1,7 @@
 <template>
   <div id="app-container">
     <div id="top-container">
-      <div id="sidebar-nav">
-        <img id="threatslayer-logo" src="/src/assets/images/threatslayer_logo.png">
-        <div id="sidebar-earn" v-if="showRegisterPage" class="sidebar-item selected-sidebar-item"
-          @click="selectPage('earn')">
-          <img class="sidebar-icon" src="/src/assets/images/start_earning.png"><span class=sidebar-text>Start
-            Earning</span>
-        </div>
-        <div id="sidebar-wallet" v-if="showRegisterPage" class="sidebar-item" @click="selectPage('wallet')">
-          <img class="sidebar-icon" style="height: 17px; width: 17px; top: 2px;" src="/src/assets/images/wallet.png"><span
-            class=sidebar-text>Create Wallet</span>
-        </div>
-        <div id="sidebar-login" v-if="showLoginPage" class="sidebar-item" @click="selectPage('login')">
-          <div style="position: relative">
-            <img class="sidebar-icon" src="/src/assets/images/login.png"><span class="sidebar-text">Login</span>
-          </div>
-        </div>
-        <div id="sidebar-collect" class="sidebar-item" @click="selectPage('collect')">
-          <img class="sidebar-icon" src="/src/assets/images/home.png">Collect
-        </div>
-        <div id="sidebar-slayCount" class="sidebar-item" @click="selectPage('slayCount')">
-          <img class="sidebar-icon" src="/src/assets/images/slay_count.png">Slay Count
-        </div>
-        <div id="sidebar-about" class="sidebar-item" @click="selectPage('about')">
-          <img class="sidebar-icon" src="/src/assets/images/about.png">About Us
-        </div>
-        <div id="sidebar-privacy" class="sidebar-item" @click="selectPage('privacy')">
-          <img class="sidebar-icon" src="/src/assets/images/privacy.png"
-            style="height: 17px; width: 17px; top: 2px;">Privacy <img class="link-button-icon"
-            src="/src/assets/images/external_link.png">
-        </div>
-        <div id="sidebar-options" class="sidebar-item" @click="selectPage('options')">
-          <img class="sidebar-icon" src="/src/assets/images/options.png">Options
-        </div>
-        <!-- TODO delete these two buttons -->
-        <br />
-        <br />
-        <br />
-        <button class="hidden-item" @click="_toggleRegistered" style="pointer-events: initial;">Toggle Register</button>
-        <br />
-        <button class="hidden-item" @click="_toggleLogin" style="pointer-events: initial;">Toggle Login</button>
-      </div>
+      <SideBar :loggedIn="loggedIn" :registered="registered" :selectPage="selectPage" />
       <div id="view-container">
         <EarnPage v-if="currentPage === 'earn'" :changePage="changePage" />
         <WalletPage v-if="currentPage === 'wallet'" :changePage="changePage" />
@@ -60,6 +20,7 @@ import EarnPage from "./pages/EarnPage.vue";
 import LoginPage from "./pages/LoginPage.vue";
 import OptionsPage from "./pages/OptionsPage.vue";
 import PageFooter from "./pages/components/PageFooter.vue";
+import SideBar from "./pages/SideBar.vue";
 import SlayCount from "./pages/SlayCount.vue";
 import WalletPage from "./pages/WalletPage.vue";
 
@@ -71,6 +32,7 @@ export default {
     LoginPage,
     OptionsPage,
     PageFooter,
+    SideBar,
     SlayCount,
     WalletPage
   },
@@ -257,36 +219,14 @@ input {
   background-color: #0F0818;
   float: right;
   height: 90vh;
-  /* left: 18rem; */
   padding-left: 2rem;
-  /* position: absolute; */
   margin-top: 2rem;
   width: 450px;
-}
-
-#sidebar-nav {
-  background: #211037;
-  border-top-left-radius: 10px;
-  /* left: 2rem; */
-  float: left;
-  height: 90vh;
-  padding-left: 2rem;
-  /* position: absolute; */
-  margin-top: 2rem;
-  width: 250px;
 }
 
 #top-container {
   margin: auto;
   width: 765px;
-}
-
-#threatslayer-logo {
-  height: 250px;
-  margin-left: -3rem;
-  margin-bottom: -3rem;
-  margin-top: -2rem;
-  width: 250px;
 }
 
 .clear-button {
@@ -299,34 +239,8 @@ input {
   width: 400px;
 }
 
-.hidden-item {
-  display: none;
-}
-
 .link-button-icon {
   height: 1rem;
-}
-
-.sidebar-item {
-  line-height: 2rem;
-  margin-bottom: 1rem;
-  pointer-events: initial;
-}
-
-.selected-sidebar-item {
-  background: #BB00FD;
-  border-radius: 6px;
-  margin-left: -0.5rem;
-  padding-left: 0.5rem;
-  width: 80%;
-}
-
-.sidebar-icon {
-  height: 20px;
-  padding-right: 0.5rem;
-  position: relative;
-  top: 5px;
-  width: 20px;
 }
 
 .banner-icon {
@@ -335,11 +249,6 @@ input {
   position: relative;
   top: 3px;
   width: 20px;
-}
-
-.sidebar-text {
-  /* position: absolute; */
-  left: 25px;
 }
 
 .small-button {
@@ -362,10 +271,7 @@ input {
 }
 
 .submit-button-active {
-  /* border: 3px solid #3b8de8; */
-  /* color: #963cf5; */
   opacity: 1;
-  /* outline: none; */
   pointer-events: initial;
 }
 
@@ -374,7 +280,6 @@ input {
 }
 
 .submit-button-disabled {
-  /* border: 1px solid #d0d4d9; */
   color: #FFFFFF;
   opacity: 0.3;
   pointer-events: none;
