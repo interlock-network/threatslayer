@@ -2,7 +2,8 @@
     <PageBanner msg="Extension Options">
         <img class="banner-icon" src="/src/assets/images/options.png">
     </PageBanner>
-    <LineOfText msg="Select from the following:" instruction />
+    <br />
+    <LineOfText msg="Select from the following:" bold />
     <div class="options-container">
         <input type="checkbox" id="beta-ai-checkbox" @click="betaClassifier($event)" tabindex="1" />
         <label for="beta-ai-checkboxbox">

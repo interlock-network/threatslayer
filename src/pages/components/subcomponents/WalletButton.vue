@@ -1,6 +1,6 @@
 <template>
     <button :id="id" class='submit-button' @click="openTab()">
-        Create a wallet
+        Create Wallet
     </button>
 </template>
 

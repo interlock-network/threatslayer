@@ -1,9 +1,10 @@
 <template>
-    <PageBanner msg="Create a Wallet">
+    <PageBanner msg="Create Wallet">
         <img class="banner-icon" src="/src/assets/images/wallet.png">
     </PageBanner>
-    <LineOfText msg="In order to use ThreatSlayer, you will need to create an Aleph Zero compatible wallet." />
-    <LineOfText msg="Please click the link to be redirected to a Chrome Web Page extension to create a SubWallet." />
+    <LineOfText msg="In order to use ThreatSlayer, you will need to create an Aleph Zero-compatible wallet." />
+    <br />
+    <LineOfText msg="Please click 'Create Wallet' to be redirected to a Chrome Web Page extension to create a SubWallet." />
     <br />
     <br />
     <WalletButton tabindex="2" />
