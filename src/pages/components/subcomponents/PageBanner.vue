@@ -1,13 +1,15 @@
 <template>
-    <h3 class="page-banner">{{ msg }}</h3>
+    <h3 class="page-banner">
+        <slot />{{ msg }}
+    </h3>
 </template>
 
 <script>
 export default {
     name: "PageBanner",
     props: {
-        msg: String,
-    },
+        msg: String
+    }
 };
 </script>
 
