@@ -12,23 +12,27 @@
             </button>
         </div>
         <!-- Total URLs big donut -->
-        <div id="local-urls-scanned-count" :style="totalURLsVisitedStyle">{{ totalURLsVisited }}</div>
+        <div id="local-urls-scanned-count" :style="totalURLsVisitedStyle">
+            <div id="slaycount-circle">
+                {{ totalURLsVisited }}
+            </div>
+        </div>
         <div id="urls-scanned-sub-text">URLs Scanned</div>
-
+        <!-- Unique URLs small left number -->
         <div style="float: left" class="content-box statistic">
             <p class="statistic-header" id="unique-urls-scanned-text">
                 Unique URLs Scanned
             </p>
-            <p id="local-unique-urls-scanned-count" class="statistic-value" :style="totalUniqueVisitedStyle">
+            <p id="local-unique-urls-scanned-count" class="statistic-value" :style="uniqueVisitedStyle">
                 {{ formattedUniqueUrls }}
             </p>
         </div>
-
-        <div style="float: right" class="content-box statistic">
+        <!-- Malicious URLs small right number -->
+        <div style="float: right; margin-right: 2.5rem;" class="content-box statistic">
             <p class="statistic-header" id="malicious-sites-detected-text">
                 Malicious Sites Detected
             </p>
-            <p id="local-malicious-urls-scanned-count" class="statistic-value" style="font-size: 56px">
+            <p id="local-malicious-urls-scanned-count" class="statistic-value" :style="maliciousVisitedStyle">
                 {{ totalMaliciousURLsVisited }}
             </p>
         </div>
@@ -49,18 +53,18 @@
         </defs>
         <rect width="512" height="512" fill="url(#grad1)" />
         <circle cx="256" cy="280" r="164" stroke="#9336E5" stroke-width="36" fill="none" />
-        <text id="slay-count" x="50%" y="55%" class="count" font-family="sans-serif" font-weight="bold" font-size="120px"
+        <text id="slay-count" x="50%" y="55%" class="count" font-family="THICCCBOI" font-weight="bold" font-size="120px"
             text-anchor="middle" dominant-baseline="middle">
             {{ totalURLsVisited }}
         </text>
-        <text id="credit" x="38" y="64" font-size="14px" font-family="sans-serif" font-weight="bold">Powered by
+        <text id="credit" x="38" y="64" font-size="14px" font-family="THICCCBOI" font-weight="bold">Powered by
             Interlock
         </text>
-        <text id="threatslayer" x="32" y="42" font-size="36px" font-family="sans-serif" font-weight="bold"
+        <text id="threatslayer" x="32" y="42" font-size="36px" font-family="THICCCBOI" font-weight="bold"
             fill="url(#rainbow)">
             ThreatSlayer
         </text>
-        <text x="48%" y="72%" font-style="italic" font-size="64px" font-family="sans-serif" font-weight="bold"
+        <text x="48%" y="72%" font-style="italic" font-size="64px" font-family="THICCCBOI" font-weight="bold"
             text-anchor="middle" stroke="black" fill="red" stroke-width="8px" dominant-baseline="middle">
             SLAY COUNT
         </text>
@@ -82,6 +86,7 @@ export default {
         return {
             fontSizeForTotal: '123px',
             fontSizeForUnique: '56px',
+            fontSizeForMalicious: '56px',
             formattedUniqueUrls: '0',
             totalURLsVisited: '0',
             totalMaliciousURLsVisited: '0',
@@ -92,7 +97,10 @@ export default {
         this.getExtensionState('totalURLsVisited');
     },
     computed: {
-        totalUniqueVisitedStyle() {
+        maliciousVisitedStyle() {
+            return { "font-size": this.fontSizeForUnique }
+        },
+        uniqueVisitedStyle() {
             return { "font-size": this.fontSizeForUnique }
         },
         totalURLsVisitedStyle() {
@@ -188,8 +196,8 @@ export default {
 <style>
 #button-container {
     float: right;
-    /* margin-top: -40px; */
-    /* margin-right: -25px; */
+    margin-top: -3.75rem;
+    transform: scale(0.75);
 }
 
 #slaycount-container {
@@ -198,15 +206,18 @@ export default {
 }
 
 #local-urls-scanned-count {
-    border-radius: 50%;
-    width: 310px;
+    color: white;
+    width: 370px;
     height: 310px;
-    border: 30px solid #9336e5;
     text-align: center;
-    font-family: "THICCBOI";
+    font-family: "THICCCBOI";
     font-weight: bold;
-    line-height: 310px;
+    line-height: 360px;
     margin: auto;
+}
+
+#slaycount-circle {
+    background: url("/src/assets/images/slaycount_circle.svg");
 }
 
 #url-count {
@@ -215,11 +226,12 @@ export default {
 }
 
 #urls-scanned-sub-text {
-    font-family: "THICCBOI";
+    font-family: "THICCCBOI";
+    font-weight: 600;
     font-size: 36px;
-    color: #717171;
+    color: white;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 4rem;
 }
 
 .sharing-button {
@@ -244,20 +256,18 @@ export default {
 .statistic {
     text-align: center;
     margin-top: 30px;
-    width: 242px;
-    /* height: 131px; */
 }
 
 .statistic-header {
     font-size: 16px;
-    font-family: "THICCBOI";
+    font-family: "THICCCBOI";
     font-weight: bold;
-    color: #717171;
+    color: white;
 }
 
 .statistic-value {
-    font-family: "THICCBOI";
-    color: #222222;
+    font-family: "THICCCBOI";
+    color: white;
     margin-top: 0;
 }
 
