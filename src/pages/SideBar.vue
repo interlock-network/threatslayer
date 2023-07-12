@@ -15,14 +15,14 @@
                 <img class="sidebar-icon" src="/src/assets/images/login.png"><span class="sidebar-text">Login</span>
             </div>
         </div>
-        <div id="sidebar-collect" class="sidebar-item" @click="selectPage('collect')">
-            <img class="sidebar-icon" src="/src/assets/images/home.png">Collect
-        </div>
         <div id="sidebar-slayCount" class="sidebar-item" @click="selectPage('slayCount')">
             <img class="sidebar-icon" src="/src/assets/images/slay_count.png">Slay Count
         </div>
         <div id="sidebar-about" class="sidebar-item" @click="selectPage('about')">
             <img class="sidebar-icon" src="/src/assets/images/about.png">About Us
+        </div>
+        <div id="sidebar-faq" class="sidebar-item" @click="selectPage('faq')">
+            <img class="sidebar-icon" src="/src/assets/images/faq.png">FAQ
         </div>
         <div id="sidebar-privacy" class="sidebar-item" @click="selectPage('privacy')">
             <img class="sidebar-icon" src="/src/assets/images/privacy.png"
