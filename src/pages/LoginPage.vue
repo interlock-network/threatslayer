@@ -1,5 +1,7 @@
 <template>
-    <PageBanner msg="Login to ThreatSlayer" />
+    <PageBanner msg="Login to ThreatSlayer">
+        <img class="banner-icon" src="/src/assets/images/login.png">
+    </PageBanner>
     <LineOfText msg="" instruction>
         <span>Don't have an account?<button id="login-button" @click="unregister">Register</button></span>
     </LineOfText>

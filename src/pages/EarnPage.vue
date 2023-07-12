@@ -1,5 +1,7 @@
 <template>
-    <PageBanner msg="Sign up for ThreatSlayer" />
+    <PageBanner msg="Sign up for ThreatSlayer">
+        <img class="banner-icon" src="/src/assets/images/start_earning.png">
+    </PageBanner>
     <LineOfText msg="" instruction>
         <span>Already have an account?<button id="login-button" @click="changePage('login')">Login</button></span>
     </LineOfText>

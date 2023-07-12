@@ -1,5 +1,7 @@
 <template>
-    <PageBanner msg="Extension Options" />
+    <PageBanner msg="Extension Options">
+        <img class="banner-icon" src="/src/assets/images/options.png">
+    </PageBanner>
     <LineOfText msg="Select from the following:" instruction />
     <div class="options-container">
         <input type="checkbox" id="beta-ai-checkbox" @click="betaClassifier($event)" tabindex="1" />

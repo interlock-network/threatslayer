@@ -1,6 +1,7 @@
 <template>
-    <PageBanner msg="About Us" />
-    <AboutView />
+    <PageBanner msg="About Us">
+        <img class="banner-icon" src="/src/assets/images/about.png">
+    </PageBanner>
     <LineOfText msg="Stay up to date with our socials:" />
     <div style="pointer-events: initial;">
         <a href="https://bit.ly/ilocktwitter" target="_blank" class="socials-icon" style="padding-left: -1rem;">
@@ -17,12 +18,14 @@
 <script>
 import AboutView from "./components/AboutView.vue";
 import LineOfText from "./components/subcomponents/LineOfText.vue";
+import PageBanner from "./components/subcomponents/PageBanner.vue";
 
 export default {
     name: 'AboutPage',
     components: {
         AboutView,
-        LineOfText
+        LineOfText,
+        PageBanner
     },
     data() {
         return {

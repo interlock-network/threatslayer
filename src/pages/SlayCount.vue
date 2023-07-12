@@ -1,5 +1,7 @@
 <template>
-    <PageBanner msg="Slay Count" />
+    <PageBanner msg="Slay Count">
+        <img class="banner-icon" src="/src/assets/images/slay_count.png">
+    </PageBanner>
     <div id="slaycount-container">
         <div id="button-container">
             <button id="download-button" class="sharing-button" @click="download" title="Download Slay Count">
@@ -221,11 +223,9 @@ export default {
 }
 
 .sharing-button {
-    background-color: #9336e5;
+    background-color: #0f0818;
     border: none;
-    /* border: 3px solid white; */
     border-radius: 3px;
-    color: white;
     font-size: 18px;
     margin: 5px;
     padding: 0;
