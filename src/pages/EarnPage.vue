@@ -5,6 +5,9 @@
     <LineOfText msg="" instruction>
         <span>Already have an account?<button id="login-button" @click="changePage('login')">Login</button></span>
     </LineOfText>
+    <LineOfText msg="" instruction>
+        <span>Don't have a wallet?<button id="login-button" @click="changePage('wallet')">Create one</button></span>
+    </LineOfText>
     <br />
     <br />
     <LineOfText msg="Wallet Address" bold />
