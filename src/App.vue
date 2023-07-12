@@ -5,28 +5,34 @@
         <img id="threatslayer-logo" src="/src/assets/images/threatslayer_logo.png">
         <div id="sidebar-earn" v-if="showRegisterPage" class="sidebar-item selected-sidebar-item"
           @click="selectPage('earn')">
-          <img class="sidebar-icon" src="/src/assets/images/home.png"><span class=sidebar-text>Start Earning</span>
+          <img class="sidebar-icon" src="/src/assets/images/start_earning.png"><span class=sidebar-text>Start
+            Earning</span>
+        </div>
+        <div id="sidebar-wallet" v-if="showRegisterPage" class="sidebar-item" @click="selectPage('wallet')">
+          <img class="sidebar-icon" style="height: 17px; width: 17px; top: 2px;" src="/src/assets/images/wallet.png"><span
+            class=sidebar-text>Create Wallet</span>
         </div>
         <div id="sidebar-login" v-if="showLoginPage" class="sidebar-item" @click="selectPage('login')">
           <div style="position: relative">
-            <img class="sidebar-icon" src="/src/assets/images/home.png"><span class="sidebar-text">Login</span>
+            <img class="sidebar-icon" src="/src/assets/images/login.png"><span class="sidebar-text">Login</span>
           </div>
         </div>
         <div id="sidebar-collect" class="sidebar-item" @click="selectPage('collect')">
           <img class="sidebar-icon" src="/src/assets/images/home.png">Collect
         </div>
         <div id="sidebar-slayCount" class="sidebar-item" @click="selectPage('slayCount')">
-          <img class="sidebar-icon" src="/src/assets/images/home.png">Slay Count
+          <img class="sidebar-icon" src="/src/assets/images/slay_count.png">Slay Count
         </div>
         <div id="sidebar-about" class="sidebar-item" @click="selectPage('about')">
-          <img class="sidebar-icon" src="/src/assets/images/home.png">About Us
+          <img class="sidebar-icon" src="/src/assets/images/about.png">About Us
         </div>
         <div id="sidebar-privacy" class="sidebar-item" @click="selectPage('privacy')">
-          <img class="sidebar-icon" src="/src/assets/images/home.png">Privacy <img class="link-button-icon"
+          <img class="sidebar-icon" src="/src/assets/images/privacy.png"
+            style="height: 17px; width: 17px; top: 2px;">Privacy <img class="link-button-icon"
             src="/src/assets/images/external_link.png">
         </div>
         <div id="sidebar-options" class="sidebar-item" @click="selectPage('options')">
-          <img class="sidebar-icon" src="/src/assets/images/home.png">Options
+          <img class="sidebar-icon" src="/src/assets/images/options.png">Options
         </div>
         <!-- TODO delete these two buttons -->
         <br />
@@ -38,6 +44,7 @@
       </div>
       <div id="view-container">
         <EarnPage v-if="currentPage === 'earn'" :changePage="changePage" />
+        <WalletPage v-if="currentPage === 'wallet'" :changePage="changePage" />
         <LoginPage v-if="currentPage === 'login'" :changePage="changePage" />
         <SlayCount v-if="currentPage === 'slayCount'" />
         <AboutPage v-if="currentPage === 'about'" />
@@ -54,6 +61,7 @@ import LoginPage from "./pages/LoginPage.vue";
 import OptionsPage from "./pages/OptionsPage.vue";
 import PageFooter from "./pages/components/PageFooter.vue";
 import SlayCount from "./pages/SlayCount.vue";
+import WalletPage from "./pages/WalletPage.vue";
 
 export default {
   name: 'App',
@@ -63,7 +71,8 @@ export default {
     LoginPage,
     OptionsPage,
     PageFooter,
-    SlayCount
+    SlayCount,
+    WalletPage
   },
   data() {
     return {
@@ -315,8 +324,16 @@ input {
 .sidebar-icon {
   height: 20px;
   padding-right: 0.5rem;
-  /* position: absolute; */
+  position: relative;
   top: 5px;
+  width: 20px;
+}
+
+.banner-icon {
+  height: 20px;
+  padding-right: 0.5rem;
+  position: relative;
+  top: 3px;
   width: 20px;
 }
 
