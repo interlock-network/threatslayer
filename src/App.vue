@@ -8,6 +8,7 @@
         <LoginPage v-if="currentPage === 'login'" :changePage="changePage" />
         <SlayCount v-if="currentPage === 'slayCount'" />
         <AboutPage v-if="currentPage === 'about'" />
+        <FAQPage v-if="currentPage === 'faq'" />
         <OptionsPage v-if="currentPage === 'options'" />
       </div>
     </div>
@@ -17,6 +18,7 @@
 <script>
 import AboutPage from "./pages/AboutPage.vue";
 import EarnPage from "./pages/EarnPage.vue";
+import FAQPage from "./pages/FAQPage.vue";
 import LoginPage from "./pages/LoginPage.vue";
 import OptionsPage from "./pages/OptionsPage.vue";
 import PageFooter from "./pages/components/PageFooter.vue";
@@ -29,6 +31,7 @@ export default {
   components: {
     AboutPage,
     EarnPage,
+    FAQPage,
     LoginPage,
     OptionsPage,
     PageFooter,
@@ -128,7 +131,6 @@ export default {
         }
 
         const targetId = `sidebar-${page}`;
-        console.log('targetId', targetId);
         const targetElement = document.getElementById(targetId);
         targetElement.classList.add('selected-sidebar-item');
       }
@@ -220,7 +222,7 @@ input {
   float: right;
   height: 90vh;
   padding-left: 2rem;
-  margin-top: 2rem;
+  margin-top: 1rem;
   width: 450px;
 }
 
