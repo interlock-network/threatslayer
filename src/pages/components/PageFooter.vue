@@ -3,11 +3,13 @@
         <div id="page-footer">
             <table style="width: 100%;">
                 <tr>
-                    <td style="width: 32%;"></td>
-                    <td style="width: 18%;">
+                    <td style="width: 30%;"></td>
+                    <!-- this column wider to make more space between columns -->
+                    <td style="width: 22%;">
                         <img id="logo-white" src="/src/assets/images/logo_white.svg"><br />
                         <div id="left-hand-block">
                             <LineOfText msg="Interlock © 2023 All Rights Reserved" footer />
+                            <FooterIcons />
                         </div>
                     </td>
                     <td style="width: 18%; line-height: 1.25rem;">
@@ -17,7 +19,7 @@
                         <FooterLink msg="Terms of Service" />
                     </td>
                     <td>
-                        <div style="width: 32%;"></div>
+                        <div style="width: 30%;"></div>
                     </td>
                 </tr>
             </table>
@@ -26,12 +28,14 @@
 </template>
 
 <script>
+import FooterIcons from "./subcomponents/FooterIcons.vue";
 import FooterLink from "./subcomponents/FooterLink.vue";
 import LineOfText from "./subcomponents/LineOfText.vue";
 
 export default {
     name: "PageFooter",
     components: {
+        FooterIcons,
         FooterLink,
         LineOfText
     }
