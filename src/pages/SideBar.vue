@@ -7,8 +7,7 @@
                 Earning</span>
         </div>
         <div id="sidebar-wallet" v-if="showRegisterPage" class="sidebar-item" @click="selectPage('wallet')">
-            <img class="sidebar-icon" style="height: 17px; width: 17px; top: 2px;" src="/src/assets/images/wallet.png"><span
-                class=sidebar-text>Create Wallet</span>
+            <img class="sidebar-icon" src="/src/assets/images/wallet.png"><span class=sidebar-text>Create Wallet</span>
         </div>
         <div id="sidebar-login" v-if="showLoginPage" class="sidebar-item" @click="selectPage('login')">
             <div style="position: relative">
@@ -25,8 +24,7 @@
             <img class="sidebar-icon" src="/src/assets/images/faq.png">FAQ
         </div>
         <div id="sidebar-privacy" class="sidebar-item" @click="selectPage('privacy')">
-            <img class="sidebar-icon" src="/src/assets/images/privacy.png"
-                style="height: 17px; width: 17px; top: 2px;">Privacy <img class="link-button-icon"
+            <img class="sidebar-icon" src="/src/assets/images/privacy.png">Privacy <img class="link-button-icon"
                 src="/src/assets/images/external_link.png">
         </div>
         <div id="sidebar-options" class="sidebar-item" @click="selectPage('options')">
