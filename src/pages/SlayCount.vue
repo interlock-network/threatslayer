@@ -19,7 +19,7 @@
         </div>
         <div id="urls-scanned-sub-text">URLs Scanned</div>
         <!-- Unique URLs small left number -->
-        <div style="float: left" class="content-box statistic">
+        <div style="float: left" class="statistic">
             <p class="statistic-header" id="unique-urls-scanned-text">
                 Unique URLs Scanned
             </p>
@@ -28,7 +28,7 @@
             </p>
         </div>
         <!-- Malicious URLs small right number -->
-        <div style="float: right; margin-right: 2.5rem;" class="content-box statistic">
+        <div style="float: right; margin-right: 2.5rem;" class="statistic">
             <p class="statistic-header" id="malicious-sites-detected-text">
                 Malicious Sites Detected
             </p>
@@ -37,13 +37,30 @@
             </p>
         </div>
     </div>
-    <svg id="svg" width="512" height="512" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-        style="display: none">
+    <!-- Exported SVG code -->
+    <svg id="svg" width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" fill="none"
+        xmlns:xlink="http://www.w3.org/1999/xlink" style="background-color:black; display: none;">
         <defs>
-            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" style="stop-color: #fdf4fb; stop-opacity: 1" />
-                <stop offset="100%" style="stop-color: #f1fafe; stop-opacity: 1" />
+            <filter id="filter0_d_622_766" x="0" y="0" width="365" height="365" filterUnits="userSpaceOnUse"
+                color-interpolation-filters="sRGB">
+                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                    result="hardAlpha" />
+                <feOffset dy="4" />
+                <feGaussianBlur stdDeviation="2" />
+                <feComposite in2="hardAlpha" operator="out" />
+                <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_622_766" />
+                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_622_766" result="shape" />
+            </filter>
+            <linearGradient id="paint0_linear_622_766" x1="34.5" y1="100" x2="182.5" y2="356"
+                gradientUnits="userSpaceOnUse">
+                <stop stop-color="#01ADEF" />
+                <stop offset="0.479167" stop-color="#9336E5" />
+                <stop offset="1" stop-color="#FEAB2A" />
             </linearGradient>
+        </defs>
+        <defs>
             <linearGradient id="rainbow" x1="0" x2="0" y1="0" y2="10%" gradientUnits="userSpaceOnUse">
                 <stop stop-color="#1f90f1" offset="30%" />
                 <stop stop-color="#c417e0" offset="50%" />
@@ -51,21 +68,28 @@
                 <stop stop-color="#fca531" offset="100%" />
             </linearGradient>
         </defs>
-        <rect width="512" height="512" fill="url(#grad1)" />
-        <circle cx="256" cy="280" r="164" stroke="#9336E5" stroke-width="36" fill="none" />
-        <text id="slay-count" x="50%" y="55%" class="count" font-family="THICCCBOI" font-weight="bold" font-size="120px"
-            text-anchor="middle" dominant-baseline="middle">
-            {{ totalURLsVisited }}
-        </text>
-        <text id="credit" x="38" y="64" font-size="14px" font-family="THICCCBOI" font-weight="bold">Powered by
+        <g filter="url(#filter0_d_622_766)" transform="translate(75, 90)">
+            <path fill-rule="evenodd" clip-rule="evenodd"
+                d="M360 178.5C360 276.531 280.531 356 182.5 356C84.4695 356 5 276.531 5 178.5C5 80.4695 84.4695 1 182.5 1C280.531 1 360 80.4695 360 178.5ZM182.5 323.231C262.433 323.231 327.231 258.433 327.231 178.5C327.231 98.5674 262.433 33.7692 182.5 33.7692C102.567 33.7692 37.7692 98.5674 37.7692 178.5C37.7692 258.433 102.567 323.231 182.5 323.231Z"
+                fill="url(#paint0_linear_622_766)" />
+            <path
+                d="M182.5 356.5C280.807 356.5 360.5 276.807 360.5 178.5C360.5 80.1933 280.807 0.5 182.5 0.5C84.1933 0.5 4.5 80.1933 4.5 178.5C4.5 276.807 84.1933 356.5 182.5 356.5ZM326.731 178.5C326.731 258.156 262.156 322.731 182.5 322.731C102.844 322.731 38.2692 258.156 38.2692 178.5C38.2692 98.8436 102.844 34.2692 182.5 34.2692C262.156 34.2692 326.731 98.8436 326.731 178.5Z"
+                stroke="black" />
+        </g>
+        <text id="credit" x="38" y="64" font-size="14px" font-family="THICCCBOI" font-weight="bold" fill="white">Powered by
             Interlock
         </text>
         <text id="threatslayer" x="32" y="42" font-size="36px" font-family="THICCCBOI" font-weight="bold"
             fill="url(#rainbow)">
             ThreatSlayer
         </text>
+        <text id="slay-count" x="50%" y="55%" class="count" font-family="THICCCBOI" font-weight="bold"
+            :font-size="totalVisitedFontSize" text-anchor="middle" dominant-baseline="middle" stroke="white" fill="white"
+            stroke-width="2px">
+            {{ totalURLsVisited }}
+        </text>
         <text x="48%" y="72%" font-style="italic" font-size="64px" font-family="THICCCBOI" font-weight="bold"
-            text-anchor="middle" stroke="black" fill="red" stroke-width="8px" dominant-baseline="middle">
+            text-anchor="middle" stroke="black" fill="red" stroke-width="1px" dominant-baseline="middle">
             SLAY COUNT
         </text>
     </svg>
@@ -98,13 +122,24 @@ export default {
     },
     computed: {
         maliciousVisitedStyle() {
-            return { "font-size": this.fontSizeForUnique }
+            return { "font-size": this.fontSizeForUnique };
+        },
+        totalVisitedFontSize() {
+            let size = 120; // default size for up to 9999
+
+            if (this.totalURLsVisited >= 10 ** 5) {
+                size = 80;
+            } else if (this.totalURLsVisited >= 10 ** 4) {
+                size = 100;
+            }
+
+            return `${size}px`;
         },
         uniqueVisitedStyle() {
-            return { "font-size": this.fontSizeForUnique }
+            return { "font-size": this.fontSizeForUnique };
         },
         totalURLsVisitedStyle() {
-            return { "font-size": this.fontSizeForTotal }
+            return { "font-size": this.totalVisitedFontSize };
         }
     },
     methods: {
@@ -282,18 +317,8 @@ export default {
 }
 
 #credit {
+    color: white;
     font: bold 14px sans-serif;
-}
-
-#title {
-    font: italic 64px sans-serif;
-    font-weight: bold;
-    text-anchor: middle;
-    fill: red;
-    stroke: black;
-    paint-order: stroke;
-    stroke-width: 14px;
-    dominant-baseline: middle;
 }
 </style>
   
