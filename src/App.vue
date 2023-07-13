@@ -21,7 +21,7 @@ import EarnPage from "./pages/EarnPage.vue";
 import FAQPage from "./pages/FAQPage.vue";
 import LoginPage from "./pages/LoginPage.vue";
 import OptionsPage from "./pages/OptionsPage.vue";
-import PageFooter from "./pages/components/PageFooter.vue";
+import PageFooter from "./pages/PageFooter.vue";
 import SideBar from "./pages/SideBar.vue";
 import SlayCount from "./pages/SlayCount.vue";
 import WalletPage from "./pages/WalletPage.vue";
