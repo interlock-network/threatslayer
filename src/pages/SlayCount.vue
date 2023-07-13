@@ -208,7 +208,8 @@ export default {
             try {
                 chrome.storage.local
                     .get(key, response => {
-                        const numberResponse = Number(response[key]);
+                        // sets number to 0 if its undefined
+                        const numberResponse = Number(response[key]) || 0;
 
                         if (key === 'totalURLsVisited') {
                             this.fontSizeForTotal = getFontSizeForTotal(numberResponse);
