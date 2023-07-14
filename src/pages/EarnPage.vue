@@ -3,10 +3,10 @@
         <img class="banner-icon" src="/src/assets/images/start_earning.png">
     </PageBanner>
     <LineOfText msg="" instruction>
-        <span>Already have an account?<button id="login-button" @click="changePage('login')">Login</button></span>
+        <span>Already have an account?<button id="login-button" @click="selectPage('login')">Login</button></span>
     </LineOfText>
     <LineOfText msg="" instruction>
-        <span>Don't have a wallet?<button id="login-button" @click="changePage('wallet')">Create one</button></span>
+        <span>Don't have a wallet?<button id="login-button" @click="selectPage('wallet')">Create one</button></span>
     </LineOfText>
     <br />
     <br />
@@ -56,7 +56,7 @@
             <InfoTip msg="Cryptocurrency is considered a security in the US so most US residents cannot purchase them." />
         </label>
     </div>
-    <CreateUserButton :address="walletAddress" :changePage="changePage" :email='email' :password="password"
+    <CreateUserButton :address="walletAddress" :selectPage="selectPage" :email='email' :password="password"
         :referrer="referrer" :termsOfService="termsOfService" :unitedStates="unitedStates" :username="username"
         tabindex="26" />
 </template>
@@ -83,7 +83,7 @@ const maxPasswordLength = 16; // number of characters
 export default {
     name: 'EarnPage',
     props: {
-        changePage: Function,
+        selectPage: Function,
     },
     components: {
         ConnectInstructions,
@@ -283,11 +283,10 @@ input:focus {
 #show-toggle-button {
     border: none;
     color: #963cf5;
-    /* float: left; */
     margin-top: 0.4rem;
     padding-top: 0.25rem;
     position: absolute;
-    right: 30%;
+    right: 23%;
 }
 
 .checkbox-container {

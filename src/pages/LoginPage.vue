@@ -22,7 +22,7 @@
     </button>
     <LineOfText :msg="passwordErrorMessage" error v-if="passwordErrorMessage.length" />
     <br />
-    <LoginButton :password="password" :usernameOrEmail="usernameOrEmail" :changePage="changePage" tabindex="6" />
+    <LoginButton :password="password" :usernameOrEmail="usernameOrEmail" :selectPage="selectPage" tabindex="6" />
     <!-- Forgot username / password flow -->
     <br />
     <br />
@@ -51,7 +51,7 @@ const maxPasswordLength = 16; // number of characters
 export default {
     name: 'EarnPage',
     props: {
-        changePage: Function,
+        selectPage: Function,
     },
     components: {
         ForgotPasswordButton,
@@ -92,7 +92,7 @@ export default {
         },
         unregister() {
             chrome.storage.local.set({ 'registered': false });
-            this.changePage('earn');
+            this.selectPage('earn');
         },
         validateEmail() {
             this.emailErrorMessage = findEmailError(this.email);
