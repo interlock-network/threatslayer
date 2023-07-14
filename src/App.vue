@@ -1,11 +1,15 @@
 <template>
   <div id="app-container">
     <div id="top-container">
-      <SideBar :loggedIn="loggedIn" :registered="registered" :selectPage="selectPage" />
+      <!-- TODO delete these -->
+      <!-- Registered: {{ registered }}
+      Logged In: {{ loggedIn }} -->
+      <SideBar :loggedIn="loggedIn" :registered="registered" :selectPage="selectPage" :isLoggedIn="isLoggedIn"
+        :isRegistered="isRegistered" />
       <div id="view-container">
-        <EarnPage v-if="currentPage === 'earn'" :changePage="changePage" />
-        <WalletPage v-if="currentPage === 'wallet'" :changePage="changePage" />
-        <LoginPage v-if="currentPage === 'login'" :changePage="changePage" />
+        <EarnPage v-if="currentPage === 'earn'" :selectPage="selectPage" />
+        <WalletPage v-if="currentPage === 'wallet'" :selectPage="selectPage" />
+        <LoginPage v-if="currentPage === 'login'" :selectPage="selectPage" />
         <SlayCount v-if="currentPage === 'slayCount'" />
         <AboutPage v-if="currentPage === 'about'" />
         <FAQPage v-if="currentPage === 'faq'" />
@@ -25,6 +29,8 @@ import PageFooter from "./pages/PageFooter.vue";
 import SideBar from "./pages/SideBar.vue";
 import SlayCount from "./pages/SlayCount.vue";
 import WalletPage from "./pages/WalletPage.vue";
+
+import { getChromeStorage } from './utilities.js';
 
 export default {
   name: 'App',
@@ -59,59 +65,27 @@ export default {
     }
   },
   methods: {
-    // TODO delete this
-    _toggleLogin() {
-      chrome.storage.local.set({ 'loggedIn': !this.loggedIn });
-      this.isLoggedIn();
-    },
-    // TODO delete this
-    _toggleRegistered() {
-      chrome.storage.local.set({ 'registered': !this.registered });
-      this.isRegistered();
-    },
-    changePage(pageName) {
-      this.currentPage = pageName;
-      this.selectPage(pageName);
-    },
     async isLoggedIn() {
       // if logged in, hide register and login pages
       // then navigate to the profile page
 
-      try {
-        const storageLoggedIn = await chrome.storage.local.get('loggedIn')
-          .then(response => {
-            const { loggedIn } = response;
-            console.log('loggedIn', loggedIn);
-            return loggedIn;
-          });
+      const storageLoggedIn = await getChromeStorage('loggedIn');
 
-        this.loggedIn = storageLoggedIn;
-        // TODO uncomment
-        // if (storageLoggedIn) {
-        //   this.currentPage = 'profile';
-        // }
-      } catch (err) {
-        console.log("isLoggedIn err", err);
-      }
+      this.loggedIn = storageLoggedIn;
+      // TODO uncomment when profile page is done
+      // if (storageLoggedIn) {
+      //   this.selectPage('profile');
+      // }
     },
     async isRegistered() {
-      try {
-        const storageRegistered = await chrome.storage.local.get('registered')
-          .then(response => {
-            const { registered } = response;
+      const storageRegistered = await getChromeStorage('registered');
 
-            return registered;
-          });
+      this.registered = storageRegistered;
 
-        this.registered = storageRegistered;
-
-        // if registered (but not logged in), switch to login page
-        // otherwise user stays on the "earn" page via the mounted() lifecycle call
-        if (storageRegistered) {
-          this.currentPage = 'login';
-        }
-      } catch (err) {
-        console.log("isRegistered err", err);
+      // if registered (but not logged in), switch to login page
+      // otherwise user stays on the "earn" page via the mounted() lifecycle call
+      if (storageRegistered) {
+        this.selectPage('login');
       }
     },
     selectPage(page) {
