@@ -2,9 +2,14 @@
     <PageBanner msg="Create Wallet">
         <img class="banner-icon" src="/src/assets/images/wallet.png">
     </PageBanner>
+    <LineOfText msg="" instruction>
+        <span>Already have a wallet?<button id="login-button" @click="selectPage('earn')">Register</button></span>
+    </LineOfText>
+    <br />
+    <br />
     <LineOfText msg="In order to use ThreatSlayer, you will need to create an Aleph Zero-compatible wallet." />
     <br />
-    <LineOfText msg="Please click 'Create Wallet' to be redirected to a Chrome Web Page extension to create a SubWallet." />
+    <LineOfText msg="Please click 'Create Wallet' to be redirected to a Chrome browser extension to create a SubWallet." />
     <br />
     <br />
     <WalletButton tabindex="2" />
@@ -20,6 +25,9 @@ export default {
         LineOfText,
         PageBanner,
         WalletButton
+    },
+    props: {
+        selectPage: Function,
     },
     data() {
         return {};
