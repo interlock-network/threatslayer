@@ -70,3 +70,35 @@ export function getFontSizeForUnique(num) {
 
     return result;
 }
+
+export function getChromeStorage(key, successMsg = 'Chrome state succesfully retrieved for ', errorMsg = 'Error getting Chrome state for ') {
+    try {
+        return chrome.storage.local
+            .get([key])
+            .then(response => {
+                console.log(`${successMsg} ${key}`);
+
+                return response[key];
+            });
+    } catch (err) {
+        console.log(`${errorMsg} ${key}:`, err);
+
+        return null;
+    }
+}
+
+export function setChromeStorage(storageObj, successMsg = 'Chrome state succesfully set.', errorMsg = 'Error setting Chrome state.') {
+    try {
+        return chrome.storage.local
+            .set(storageObj)
+            .then(() => {
+                console.log(successMsg);
+
+                return true;
+            });
+    } catch (err) {
+        console.log(errorMsg, err);
+
+        return false;
+    }
+}
