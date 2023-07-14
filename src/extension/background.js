@@ -1,13 +1,19 @@
 /**
  * This is the main background script for ThreatSlayer.
  */
-const APIKey = "threatslayer-api-key";
+const key = chrome.storage.local.get(["key"]).then((result) => {
+    console.log('result for key', result);
+    const key = result.key || 'threatslayer-api-key';
+    console.log('key', key);
+
+    return key;
+});
 const baseAPIUrl = `https://octahedron.interlock.network`;
 const betaBaseAPIUrl = `https://beta.octahedron.interlock.network`;
 const defaultConfig = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ key: APIKey }),
+    body: JSON.stringify({ key }),
 };
 
 /**
@@ -41,7 +47,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 
             fetch(`${selectedBaseAPIUrl}/malicious_p`, {
                 ...defaultConfig,
-                body: JSON.stringify({ key: APIKey, url: request.url }),
+                body: JSON.stringify({ key, url: request.url }),
             })
                 .then((response) => response.json())
                 .then((response) => sendResponse(response))
@@ -55,15 +61,12 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
             chrome.storage.local
                 .get(["totalMaliciousURLsVisited"])
                 .then((result) => {
-                    let totalMaliciousURLsVisited =
-                        result.totalMaliciousURLsVisited || 0;
+                    let totalMaliciousURLsVisited = result.totalMaliciousURLsVisited || 0;
                     totalMaliciousURLsVisited++;
 
                     try {
                         chrome.storage.local
-                            .set({
-                                totalMaliciousURLsVisited: totalMaliciousURLsVisited,
-                            })
+                            .set({ totalMaliciousURLsVisited })
                             .then(() => {
                                 console.log(`Total malicious URLs set to: ${totalMaliciousURLsVisited}`);
                             });
@@ -94,7 +97,6 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         return true;
     }
 });
-
 /**
  * This listener opens our survey in a new tab when users uninstall
  */
