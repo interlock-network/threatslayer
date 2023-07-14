@@ -4,22 +4,25 @@
             :disabled="loggingIn || loggedIn || !active">
             {{ loginButtonText }}
         </button>
+        <!-- TODO add error message here -->
     </div>
 </template>
 
 <script>
 import axios from "axios";
+import { setChromeStorage } from '../../../utilities.js';
 
 export default {
     name: "SubmitButton",
     props: {
-        changePage: Function,
+        selectPage: Function,
         password: String,
         usernameOrEmail: String,
     },
     data() {
         return {
             error: false,
+            errorArr: [],
             loggedIn: false,
             loggingIn: false
         }
@@ -61,43 +64,45 @@ export default {
 
             // TODO update with endpoint URL
             const response = await axios.post('/api/login', { password, usernameOrEmail })
-                .then(res => {
-                    return res;
-                }).catch(err => {
-                    return err;
-                });
+                .then(res => res)
+                .catch(err => err);
 
-            if (response?.status === 200) {
+            // TODO test this
+            if (!response.errors?.length) {
                 this.loggedIn = true;
                 this.loggingIn = false;
 
-                chrome.storage.local
-                    .set({ registered: true })
-                    .then(() => {
-                        console.log("Confirmed registered status!");
-                    });
+                // set API key with user's unique key
+                setChromeStorage({ key: response.key }, 'Chrome state for unique API key set after successful login.', 'Error setting Chrome state user API key after successful login:');
 
-                const loggedIn = await chrome.storage.local
-                    .set({ loggedIn: true })
-                    .then(() => {
-                        console.log("User succesfully logged in");
-                        return true;
-                    });
+                const loggedInSynched = setChromeStorage({ loggedIn: true }, 'Chrome state set to logged in.', 'Error setting Chrome state to logged in.');
+                // TODO improve this try/catch block
+                if (loggedInSynched) {
+                    try {
+                        setChromeStorage({ registered: true }, 'Chrome state set to registered.', 'Chrome state not succesfully set to registered.');
+                    } finally {
+                        selectPage('user');
+                    }
+                } else {
+                    // TODO update error message to be an object
+                    this.errorArr.push('Error logging in. Please try again later.')
+                }
 
-                if (loggedIn) {
+                if (loggedInSynched) {
                     this.loggedIn = true;
                     this.loggingIn = false;
 
                     // navigate to user page after logging in
-                    this.changePage('user');
+                    this.selectPage('user');
                 } else {
-                    // TODO add better error handling
+                    // TODO add error handling?
                 }
             } else {
-                console.log('Login error:', response?.code)
-                // if API doesn't return a 200
-                // TODO catch errors properly
+                // TODO show errors
+                console.log('Login error:', response.errors)
+
                 this.error = true;
+                this.errorArr = response.errors;
                 this.loggedIn = false;
                 this.loggingIn = false;
             }
