@@ -2,9 +2,7 @@
  * This is the main background script for ThreatSlayer.
  */
 const key = chrome.storage.local.get(["key"]).then((result) => {
-    console.log('result for key', result);
     const key = result.key || 'threatslayer-api-key';
-    console.log('key', key);
 
     return key;
 });

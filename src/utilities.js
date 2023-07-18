@@ -71,7 +71,7 @@ export function getFontSizeForUnique(num) {
     return result;
 }
 
-export function getChromeStorage(key, successMsg = 'Chrome state succesfully retrieved for ', errorMsg = 'Error getting Chrome state for ') {
+export function getChromeStorage(key, successMsg = 'Chrome state succesfully retrieved for', errorMsg = 'Error getting Chrome state for') {
     try {
         return chrome.storage.local
             .get([key])
