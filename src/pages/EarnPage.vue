@@ -67,7 +67,6 @@ import { findEmailError, findNonAlphanumericChars } from "../utilities";
 import { decodeAddress, encodeAddress } from '@polkadot/keyring';
 import { hexToU8a, isHex } from '@polkadot/util';
 
-import ConnectInstructions from "./components/ConnectInstructions.vue";
 import InfoTip from "./components/subcomponents/InfoTip.vue";
 import LineOfText from "./components/subcomponents/LineOfText.vue";
 import PageBanner from "./components/subcomponents/PageBanner.vue";
@@ -86,7 +85,6 @@ export default {
         selectPage: Function,
     },
     components: {
-        ConnectInstructions,
         InfoTip,
         LineOfText,
         PageBanner,
