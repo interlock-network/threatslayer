@@ -86,7 +86,7 @@ export default {
                     try {
                         setChromeStorage({ registered: true }, 'Chrome state set to registered after successful registration.', 'Chrome state not succesfully set to registered after successful registration.');
                     } finally {
-                        selectPage('user');
+                        this.selectPage('user');
                     }
                 } else {
                     // TODO update error message to be an object
