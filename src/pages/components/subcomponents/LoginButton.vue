@@ -13,7 +13,7 @@ import axios from "axios";
 import { setChromeStorage } from '../../../utilities.js';
 
 export default {
-    name: "SubmitButton",
+    name: "LoginButton",
     props: {
         selectPage: Function,
         password: String,
@@ -78,11 +78,7 @@ export default {
                 const loggedInSynched = setChromeStorage({ loggedIn: true }, 'Chrome state set to logged in.', 'Error setting Chrome state to logged in.');
                 // TODO improve this try/catch block
                 if (loggedInSynched) {
-                    try {
-                        setChromeStorage({ registered: true }, 'Chrome state set to registered.', 'Chrome state not succesfully set to registered.');
-                    } finally {
-                        selectPage('user');
-                    }
+                    setChromeStorage({ registered: true }, 'Chrome state set to registered.', 'Chrome state not succesfully set to registered.');
                 } else {
                     // TODO update error message to be an object
                     this.errorArr.push('Error logging in. Please try again later.')
