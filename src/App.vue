@@ -1,11 +1,7 @@
 <template>
   <div id="app-container">
     <div id="top-container">
-      <!-- TODO delete these -->
-      <!-- Registered: {{ registered }}
-      Logged In: {{ loggedIn }} -->
-      <SideBar :loggedIn="loggedIn" :registered="registered" :selectPage="selectPage" :isLoggedIn="isLoggedIn"
-        :isRegistered="isRegistered" />
+      <SideBar :selectPage="selectPage" />
       <div id="view-container">
         <EarnPage v-if="currentPage === 'earn'" :selectPage="selectPage" />
         <WalletPage v-if="currentPage === 'wallet'" :selectPage="selectPage" />
@@ -30,8 +26,6 @@ import SideBar from "./pages/SideBar.vue";
 import SlayCount from "./pages/SlayCount.vue";
 import WalletPage from "./pages/WalletPage.vue";
 
-import { getChromeStorage } from './utilities.js';
-
 export default {
   name: 'App',
   components: {
@@ -48,46 +42,9 @@ export default {
   data() {
     return {
       currentPage: 'earn',
-      loggedIn: false,
-      registered: false,
     };
   },
-  mounted() {
-    this.isLoggedIn();
-    this.isRegistered();
-  },
-  computed: {
-    showRegisterPage() {
-      return !this.registered && !this.loggedIn;
-    },
-    showLoginPage() {
-      return !this.loggedIn;
-    }
-  },
   methods: {
-    async isLoggedIn() {
-      // if logged in, hide register and login pages
-      // then navigate to the profile page
-
-      const storageLoggedIn = await getChromeStorage('loggedIn');
-
-      this.loggedIn = storageLoggedIn;
-      // TODO uncomment when profile page is done
-      // if (storageLoggedIn) {
-      //   this.selectPage('profile');
-      // }
-    },
-    async isRegistered() {
-      const storageRegistered = await getChromeStorage('registered');
-
-      this.registered = storageRegistered;
-
-      // if registered (but not logged in), switch to login page
-      // otherwise user stays on the "earn" page via the mounted() lifecycle call
-      if (storageRegistered) {
-        this.selectPage('login');
-      }
-    },
     selectPage(page) {
       if (page === 'privacy') {
         // TODO update to real privacy page URL
@@ -105,8 +62,13 @@ export default {
         }
 
         const targetId = `sidebar-${page}`;
-        const targetElement = document.getElementById(targetId);
-        targetElement.classList.add('selected-sidebar-item');
+        if (targetId) {
+          const targetElement = document.getElementById(targetId);
+          targetElement.classList.add('selected-sidebar-item');
+        } else {
+          // TODO delete this -- for debugging only
+          console.log('targetId', targetId);
+        }
       }
     }
   }
