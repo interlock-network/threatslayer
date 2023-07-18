@@ -1,5 +1,6 @@
 <template>
     <div id="sidebar-nav">
+        Key: {{ key }}, Username: {{ username }}
         <img id="threatslayer-logo" src="/src/assets/images/threatslayer_logo.png">
         <div id="sidebar-earn" v-if="showRegisterPage" class="sidebar-item selected-sidebar-item"
             @click="selectPage('earn')">
@@ -9,7 +10,7 @@
         <div id="sidebar-wallet" v-if="showRegisterPage" class="sidebar-item" @click="selectPage('wallet')">
             <img class="sidebar-icon" src="/src/assets/images/wallet.png"><span class=sidebar-text>Create Wallet</span>
         </div>
-        <div id="sidebar-login" v-if="showLoginPage" class="sidebar-item" @click="selectPage('login')">
+        <div id="sidebar-login" v-if="!showLoginPage" class="sidebar-item" @click="selectPage('login')">
             <div style="position: relative">
                 <img class="sidebar-icon" src="/src/assets/images/login.png"><span class="sidebar-text">Login</span>
             </div>
@@ -30,48 +31,94 @@
         <div id="sidebar-options" class="sidebar-item" @click="selectPage('options')">
             <img class="sidebar-icon" src="/src/assets/images/options.png">Options
         </div>
-        <!-- TODO delete these two buttons -->
+        <LogoutButton v-if="!showLoginPage" :selectPage="selectPage" />
+        <!-- TODO delete these three buttons -->
+        <button class="" @click="_toggleRegistered" style="pointer-events: initial;">Toggle Register</button>
         <br />
+        <button class="" @click="_toggleLoggedIn" style="pointer-events: initial;">Toggle Login</button>
         <br />
-        <br />
-        <button class="hidden-item" @click="_toggleRegistered" style="pointer-events: initial;">Toggle
-            Register</button>
-        <br />
-        <button class="hidden-item" @click="_toggleLogin" style="pointer-events: initial;">Toggle Login</button>
+        <button class="" @click="_clearLogin" style="pointer-events: initial;">Clear Login</button>
     </div>
 </template>
 <script>
+import LogoutButton from "./components/subcomponents/LogoutButton.vue";
+
+import { getChromeStorage, setChromeStorage } from '../utilities.js';
+
 export default {
     name: 'SideBar',
     props: {
-        currentPage: String,
-        loggedIn: String,
-        registered: String,
-        selectPage: Function
+        selectPage: Function,
+    },
+    components: {
+        LogoutButton
+    },
+    data() {
+        return {
+            key: '',
+            registered: false,
+            username: ''
+        }
+    },
+    mounted() {
+        this.checkState();
     },
     computed: {
         showRegisterPage() {
-            return !this.registered && !this.loggedIn;
+            return !this.registered;
         },
         showLoginPage() {
-            return !this.loggedIn;
+            return this.key && this.username;
         }
     },
     methods: {
-        // TODO delete this
-        _toggleLogin() {
-            chrome.storage.local.set({ 'loggedIn': !this.loggedIn });
-            this.isLoggedIn();
+        async checkState() {
+            console.log('in checkState');
+            // if logged in, hide register and login pages
+            // then navigate to the profile page
+            const isRegistered = await getChromeStorage('registered');
+            const key = await getChromeStorage('key');
+            const username = await getChromeStorage('username');
+
+            this.registered = isRegistered;
+            this.key = key;
+            this.username = username;
+
+            if (key.length && username.length) {
+                // TODO delete this
+                this.selectPage('slayCount');
+            } else if (isRegistered) {
+                this.selectPage('login');
+            } else {
+                this.selectPage('earn');
+            }
         },
         // TODO delete this
-        _toggleRegistered() {
-            chrome.storage.local.set({ 'registered': !this.registered });
-            this.isRegistered();
+        async _clearLogin() {
+            setChromeStorage({ key: null });
+            setChromeStorage({ username: null });
+
+            this.checkState();
         },
-        changePage(pageName) {
-            this.currentPage = pageName;
-            this.selectPage(pageName);
+        // TODO delete this
+        async _toggleLoggedIn() {
+            console.log('this.key', this.key);
+            console.log('this.username', this.username);
+            const nextKey = this.key ? undefined : 'abc-456'
+            const nextUsername = this.username ? undefined : 'alice';
+
+            const keySet = await setChromeStorage({ key: nextKey }, `Set key as ${nextKey}`, `Error setting key as ${nextKey}`);
+            const usernameSet = await setChromeStorage({ username: nextUsername }, `Set username as ${nextUsername}`, `Error setting key as ${nextUsername}`);
+            console.log('keySet', keySet);
+            console.log('usernameSet', usernameSet);
+            if (keySet && usernameSet) this.checkState()
         },
+        // TODO delete this
+        async _toggleRegistered() {
+            setChromeStorage({ 'registered': !this.registered });
+
+            this.checkState();
+        }
     }
 }
 </script>
