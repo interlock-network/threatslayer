@@ -1,43 +1,49 @@
 <template>
     <div id="sidebar-nav">
-        Key: {{ key }}, Username: {{ username }}
+        <!-- Key: {{ key }}, Username: {{ username }} -->
         <img id="threatslayer-logo" src="/src/assets/images/threatslayer_logo.png">
-        <div id="sidebar-earn" v-if="showRegisterPage" class="sidebar-item selected-sidebar-item"
-            @click="selectPage('earn')">
+        <div id="sidebar-earn" v-if="showRegisterPage" class="sidebar-item"
+            :class="currentPage === 'earn' ? 'selected-sidebar-item' : ''" @click="selectPage('earn')">
             <img class="sidebar-icon" src="/src/assets/images/start_earning.png"><span class=sidebar-text>Start
                 Earning</span>
         </div>
-        <div id="sidebar-wallet" v-if="showRegisterPage" class="sidebar-item" @click="selectPage('wallet')">
+        <div id="sidebar-wallet" v-if="showRegisterPage" class="sidebar-item"
+            :class="currentPage === 'wallet' ? 'selected-sidebar-item' : ''" @click="selectPage('wallet')">
             <img class="sidebar-icon" src="/src/assets/images/wallet.png"><span class=sidebar-text>Create Wallet</span>
         </div>
-        <div id="sidebar-login" v-if="!showLoginPage" class="sidebar-item" @click="selectPage('login')">
+        <div id="sidebar-login" v-if="showLoginPage" class="sidebar-item"
+            :class="currentPage === 'login' ? 'selected-sidebar-item' : ''" @click="selectPage('login')">
             <div style="position: relative">
                 <img class="sidebar-icon" src="/src/assets/images/login.png"><span class="sidebar-text">Login</span>
             </div>
         </div>
-        <div id="sidebar-slayCount" class="sidebar-item" @click="selectPage('slayCount')">
+        <div id="sidebar-slayCount" class="sidebar-item" :class="currentPage === 'slayCount' ? 'selected-sidebar-item' : ''"
+            @click="selectPage('slayCount')">
             <img class="sidebar-icon" src="/src/assets/images/slay_count.png">Slay Count
         </div>
-        <div id="sidebar-about" class="sidebar-item" @click="selectPage('about')">
+        <div id="sidebar-about" class="sidebar-item" :class="currentPage === 'about' ? 'selected-sidebar-item' : ''"
+            @click="selectPage('about')">
             <img class="sidebar-icon" src="/src/assets/images/about.png">About Us
         </div>
-        <div id="sidebar-faq" class="sidebar-item" @click="selectPage('faq')">
+        <div id="sidebar-faq" class="sidebar-item" :class="currentPage === 'faq' ? 'selected-sidebar-item' : ''"
+            @click="selectPage('faq')">
             <img class="sidebar-icon" src="/src/assets/images/faq.png">FAQ
         </div>
-        <div id="sidebar-privacy" class="sidebar-item" @click="selectPage('privacy')">
+        <div id="sidebar-privacy" class="sidebar-item" :class="currentPage === 'privacy' ? 'selected-sidebar-item' : ''"
+            @click="selectPage('privacy')">
             <img class="sidebar-icon" src="/src/assets/images/privacy.png">Privacy <img class="link-button-icon"
                 src="/src/assets/images/external_link.png">
         </div>
-        <div id="sidebar-options" class="sidebar-item" @click="selectPage('options')">
+        <div id="sidebar-options" class="sidebar-item" :class="currentPage === 'options' ? 'selected-sidebar-item' : ''"
+            @click="selectPage('options');">
             <img class="sidebar-icon" src="/src/assets/images/options.png">Options
         </div>
-        <LogoutButton v-if="!showLoginPage" :selectPage="selectPage" />
-        <!-- TODO delete these three buttons -->
-        <button class="" @click="_toggleRegistered" style="pointer-events: initial;">Toggle Register</button>
-        <br />
-        <button class="" @click="_toggleLoggedIn" style="pointer-events: initial;">Toggle Login</button>
-        <br />
-        <button class="" @click="_clearLogin" style="pointer-events: initial;">Clear Login</button>
+        <LogoutButton v-if="showLogoutButton" :checkState="checkState" :selectPage="selectPage" />
+        <!-- TODO delete these four buttons? -->
+        <button v-if="devMode" class="" @click="_toggleRegistered" style="pointer-events: initial;">Toggle Register</button>
+        <button v-if="devMode" class="" @click="_toggleLoggedIn" style="pointer-events: initial;">Toggle Login</button>
+        <button v-if="devMode" class="" @click="_clearLogin" style="pointer-events: initial;">Clear Login</button>
+        <button v-if="devMode" class="" @click="checkState" style="pointer-events: initial;">Check State</button>
     </div>
 </template>
 <script>
@@ -48,6 +54,7 @@ import { getChromeStorage, setChromeStorage } from '../utilities.js';
 export default {
     name: 'SideBar',
     props: {
+        currentPage: String,
         selectPage: Function,
     },
     components: {
@@ -55,9 +62,10 @@ export default {
     },
     data() {
         return {
-            key: '',
+            devMode: false,
+            key: null,
             registered: false,
-            username: ''
+            username: null
         }
     },
     mounted() {
@@ -68,23 +76,27 @@ export default {
             return !this.registered;
         },
         showLoginPage() {
+            return !this.showLogoutButton;
+        },
+        showLogoutButton() {
             return this.key && this.username;
         }
     },
     methods: {
         async checkState() {
-            console.log('in checkState');
             // if logged in, hide register and login pages
             // then navigate to the profile page
+            const devMode = await getChromeStorage('devMode');
             const isRegistered = await getChromeStorage('registered');
             const key = await getChromeStorage('key');
             const username = await getChromeStorage('username');
 
+            this.devMode = devMode;
             this.registered = isRegistered;
             this.key = key;
             this.username = username;
 
-            if (key.length && username.length) {
+            if (key && username) {
                 // TODO delete this
                 this.selectPage('slayCount');
             } else if (isRegistered) {
@@ -102,15 +114,12 @@ export default {
         },
         // TODO delete this
         async _toggleLoggedIn() {
-            console.log('this.key', this.key);
-            console.log('this.username', this.username);
-            const nextKey = this.key ? undefined : 'abc-456'
-            const nextUsername = this.username ? undefined : 'alice';
+            const nextKey = this.key ? null : 'abc-456'
+            const nextUsername = this.username ? null : 'alice';
 
             const keySet = await setChromeStorage({ key: nextKey }, `Set key as ${nextKey}`, `Error setting key as ${nextKey}`);
             const usernameSet = await setChromeStorage({ username: nextUsername }, `Set username as ${nextUsername}`, `Error setting key as ${nextUsername}`);
-            console.log('keySet', keySet);
-            console.log('usernameSet', usernameSet);
+
             if (keySet && usernameSet) this.checkState()
         },
         // TODO delete this
