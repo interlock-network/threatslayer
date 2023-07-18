@@ -38,8 +38,13 @@
             @click="selectPage('options');">
             <img class="sidebar-icon" src="/src/assets/images/options.png">Options
         </div>
-        <LogoutButton style="position: absolute; bottom: 23vh;" v-if="showLogoutButton" :checkState="checkState"
-            :selectPage="selectPage" />
+        <div style="position: absolute; bottom: 23vh;">
+            <div id="sidebar-options" class="sidebar-item" :class="currentPage === 'account' ? 'selected-sidebar-item' : ''"
+                @click="selectPage('account');">
+                <img class="sidebar-icon" src="/src/assets/images/account.png">{{ username }}
+            </div>
+            <LogoutButton v-if="showLogoutButton" :checkState="checkState" :selectPage="selectPage" />
+        </div>
         <!-- TODO delete these four buttons? -->
         <button v-if="devMode" class="" @click="_toggleRegistered" style="pointer-events: initial;">Toggle Register</button>
         <button v-if="devMode" class="" @click="_toggleLoggedIn" style="pointer-events: initial;">Toggle Login</button>
