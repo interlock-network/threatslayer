@@ -12,7 +12,7 @@ import { getChromeStorage, setChromeStorage } from '../../../utilities.js';
 export default {
     name: "LogoutButton",
     props: {
-        clearValues: Function,
+        checkState: Function,
         selectPage: Function,
     },
     data() {
@@ -64,16 +64,8 @@ export default {
                 if (!response.errors?.length) {
                     this.loggingOut = false;
 
-                    const keyClearedFromState = setChromeStorage({ key: undefined }, 'Chrome state for unique API key cleared after successful logout.', 'Error clearing Chrome state user API key after successful logout:');
-                    const usernameClearedFromState = setChromeStorage({ username: undefined }, 'Chrome state for username cleared after successful logout.', 'Error clearing Chrome state username after successful logout:');
-
-                    if (keyClearedFromState) {
-                        this.clearValues('key');
-                    }
-
-                    if (usernameClearedFromState) {
-                        this.clearValues('username');
-                    }
+                    const keyClearedFromState = setChromeStorage({ key: null }, 'Chrome state for unique API key cleared after successful logout.', 'Error clearing Chrome state user API key after successful logout:');
+                    const usernameClearedFromState = setChromeStorage({ username: null }, 'Chrome state for username cleared after successful logout.', 'Error clearing Chrome state username after successful logout:');
 
                     const loggedOutSynched = keyClearedFromState && usernameClearedFromState;
 
@@ -89,9 +81,10 @@ export default {
 
                         // navigate to user page after logging out
                         this.selectPage('login');
+                        this.checkState();
                     } else {
                         // TODO add error handling?
-                    } 1
+                    }
                 } else {
                     // TODO show errors
                     console.log('Logout error:', response.errors)
