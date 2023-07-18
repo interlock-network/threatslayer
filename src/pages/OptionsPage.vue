@@ -5,15 +5,22 @@
     <br />
     <LineOfText msg="Select from the following:" bold />
     <div class="options-container">
-        <input type="checkbox" id="beta-ai-checkbox" @click="betaClassifier($event)" tabindex="1" />
+        <input type="checkbox" id="beta-ai-checkbox" @click="betaClassifier($event)" tabindex="2" />
         <label for="beta-ai-checkboxbox">
             Enable beta AI Threat Detection (developers only)
+        </label>
+    </div>
+    <div class="options-container">
+        <input type="checkbox" id="dev-mode-checkbox" @click="devMode($event)" tabindex="4" />
+        <label for="dev-mode-checkbox">
+            Dev mode (Interlock engineers only)
         </label>
     </div>
 </template>
 <script>
 import LineOfText from "./components/subcomponents/LineOfText.vue";
 import PageBanner from "./components/subcomponents/PageBanner.vue";
+import { getChromeStorage, setChromeStorage } from '../utilities.js';
 
 export default {
     name: 'OptionsPage',
@@ -24,25 +31,32 @@ export default {
     data() {
         return {};
     },
-    mounted() {
+    async mounted() {
         const betaAICheckbox = document.getElementById('beta-ai-checkbox');
+        const devModeCheckbox = document.getElementById('dev-mode-checkbox');
 
         betaAICheckbox.focus();
 
         // Load the user's preference for beta AI Threat Detection from storage
-        chrome.storage.sync.get("betaAISelected", function (data) {
-            betaAICheckbox.checked = data.betaAISelected;
-        });
+        const betaAISelected = await getChromeStorage("betaAISelected");
+        betaAICheckbox.checked = betaAISelected;
+
+        // same for devmode
+        const devMode = await getChromeStorage("devMode");
+        devModeCheckbox.checked = devMode;
     },
-    computed: {},
     methods: {
         betaClassifier(event) {
             const betaAISelected = event.target.checked;
 
             // Store the user's preference for beta AI Threat Detection in storage
-            chrome.storage.sync.set({ betaAISelected: betaAISelected }, function () {
-                console.log('Setting betaAISelected set to', betaAISelected);
-            });
+            setChromeStorage({ betaAISelected });
+        },
+        devMode(event) {
+            const devMode = event.target.checked;
+
+            // Store the user's preference for beta AI Threat Detection in storage
+            setChromeStorage({ devMode })
         }
     }
 }
