@@ -38,7 +38,8 @@
             @click="selectPage('options');">
             <img class="sidebar-icon" src="/src/assets/images/options.png">Options
         </div>
-        <LogoutButton v-if="showLogoutButton" :checkState="checkState" :selectPage="selectPage" />
+        <LogoutButton style="position: absolute; bottom: 23vh;" v-if="showLogoutButton" :checkState="checkState"
+            :selectPage="selectPage" />
         <!-- TODO delete these four buttons? -->
         <button v-if="devMode" class="" @click="_toggleRegistered" style="pointer-events: initial;">Toggle Register</button>
         <button v-if="devMode" class="" @click="_toggleLoggedIn" style="pointer-events: initial;">Toggle Login</button>
@@ -137,7 +138,7 @@ export default {
     background: #211037;
     border-top-left-radius: 10px;
     float: left;
-    height: 90vh;
+    height: 83vh;
     padding-left: 2rem;
     margin-top: 2rem;
     width: 250px;
