@@ -1,7 +1,7 @@
 <template>
   <div id="app-container">
     <div id="top-container">
-      <SideBar :selectPage="selectPage" />
+      <SideBar :selectPage="selectPage" :currentPage="currentPage" />
       <div id="view-container">
         <EarnPage v-if="currentPage === 'earn'" :selectPage="selectPage" />
         <WalletPage v-if="currentPage === 'wallet'" :selectPage="selectPage" />
@@ -52,23 +52,6 @@ export default {
       } else {
         // change the main page content
         this.currentPage = page;
-
-        // highlight the selected sidebar item
-        const sidebarItems = document.getElementsByClassName('sidebar-item');
-
-        for (let i = 0; i < sidebarItems.length; i++) {
-          const item = sidebarItems[i];
-          item.classList.remove('selected-sidebar-item');
-        }
-
-        const targetId = `sidebar-${page}`;
-        if (targetId) {
-          const targetElement = document.getElementById(targetId);
-          targetElement.classList.add('selected-sidebar-item');
-        } else {
-          // TODO delete this -- for debugging only
-          console.log('targetId', targetId);
-        }
       }
     }
   }
