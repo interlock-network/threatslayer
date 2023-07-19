@@ -67,13 +67,17 @@ export default {
                 .then(res => res)
                 .catch(err => err);
 
+            const { address, email, key } = response;
+
             // TODO test this
             if (!response.errors?.length) {
                 this.loggedIn = true;
                 this.loggingIn = false;
 
                 // set API key with user's unique key
-                setChromeStorage({ key: response.key }, 'Chrome state for unique API key set after successful login.', 'Error setting Chrome state user API key after successful login:');
+                setChromeStorage({ address }, 'Chrome state for wallet address set after successful login.', 'Error setting Chrome state wallet address after successful login:');
+                setChromeStorage({ email }, 'Chrome state for user email set after successful login.', 'Error setting Chrome state user email after successful login:');
+                setChromeStorage({ key }, 'Chrome state for unique API key set after successful login.', 'Error setting Chrome state user API key after successful login:');
 
                 const loggedInSynched = setChromeStorage({ loggedIn: true }, 'Chrome state set to logged in.', 'Error setting Chrome state to logged in.');
                 // TODO improve this try/catch block
