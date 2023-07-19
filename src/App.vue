@@ -10,6 +10,7 @@
         <AboutPage v-if="currentPage === 'about'" />
         <FAQPage v-if="currentPage === 'faq'" />
         <OptionsPage v-if="currentPage === 'options'" />
+        <AccountPage v-if="currentPage === 'account'" />
       </div>
     </div>
     <PageFooter />
@@ -22,6 +23,7 @@ import FAQPage from "./pages/FAQPage.vue";
 import LoginPage from "./pages/LoginPage.vue";
 import OptionsPage from "./pages/OptionsPage.vue";
 import PageFooter from "./pages/PageFooter.vue";
+import AccountPage from "./pages/AccountPage.vue";
 import SideBar from "./pages/SideBar.vue";
 import SlayCount from "./pages/SlayCount.vue";
 import WalletPage from "./pages/WalletPage.vue";
@@ -35,6 +37,7 @@ export default {
     LoginPage,
     OptionsPage,
     PageFooter,
+    AccountPage,
     SideBar,
     SlayCount,
     WalletPage
