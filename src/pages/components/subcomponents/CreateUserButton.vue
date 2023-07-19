@@ -78,7 +78,10 @@ export default {
                 this.submitButtonText = 'Success';
 
                 // set API key with user's unique key
+                setChromeStorage({ address }, 'Chrome state for address set after successful registration.', 'Error setting Chrome state for address after successful registration:');
+                setChromeStorage({ email }, 'Chrome state for email set after successful registration.', 'Error setting Chrome state for email after successful registration:');
                 setChromeStorage({ key: response.key }, 'Chrome state for unique API key set after successful registration.', 'Error setting Chrome state for API key after successful registration:');
+                setChromeStorage({ username }, 'Chrome state for username set after successful registration.', 'Error setting Chrome state for username after successful registration:');
 
                 const loggedInSynched = setChromeStorage({ loggedIn: true }, 'Chrome state set to logged in after successful registration.', 'Chrome state not set to logged in after successful registration.');
                 // TODO improve this try/catch block
