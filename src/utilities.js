@@ -102,3 +102,19 @@ export function setChromeStorage(storageObj, successMsg = 'Chrome state succesfu
         return false;
     }
 }
+
+export function clearChromeStorage(key, successMsg = 'Chrome state succesfully cleared.', errorMsg = 'Error clearing Chrome state.') {
+    try {
+        return chrome.storage.local
+            .set({ key: null })
+            .then(() => {
+                console.log(successMsg);
+
+                return true;
+            });
+    } catch (err) {
+        console.log(errorMsg, err);
+
+        return false;
+    }
+}
