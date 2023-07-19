@@ -44,7 +44,7 @@
     <br />
     <br />
     <LineOfText msg="Referred by another user? (Optional)" bold />
-    <input v-model.trim="referrer" tabindex="12" placeholder="Enter referrer username" />
+    <input v-model.trim="referrer" tabindex="12" placeholder="Enter their username" />
     <div class="checkbox-container" @click="focusNextCheckbox">
         <input id="first-box" type="checkbox" v-model="termsOfService" tabindex="14">
         <label for="first-box">Agree to our <a href="https://interlock.network" target="_blank">
@@ -61,7 +61,6 @@
         tabindex="26" />
 </template>
 <script>
-import axios from "axios";
 import { debounce } from 'debounce';
 import { findEmailError, findNonAlphanumericChars } from "../utilities";
 import { decodeAddress, encodeAddress } from '@polkadot/keyring';
@@ -227,17 +226,6 @@ export default {
                 this.usernameErrorMessage = errorMessages.illegalChars(illegalChars);
             } else {
                 this.clearUsernameErrors();
-
-                // TODO update with endpoint URL
-                // axios.post('/api/name', { name })
-                //     .then(() => {
-                //         console.log('Username ${name} is available');
-                //     })
-                //     .catch(e => {
-                //         const { errorMessage } = e?.response?.data;
-
-                //         this.usernameErrorMessage = errorMessage || '';
-                //     });
             }
         }, 250)
     }
