@@ -7,13 +7,15 @@
 
 <script>
 import axios from "axios";
-import { getChromeStorage, setChromeStorage } from '../../../utilities.js';
+import { clearChromeStorage, setChromeStorage } from '../../../utilities.js';
 
 export default {
     name: "LogoutButton",
     props: {
         checkState: Function,
+        key: String,
         selectPage: Function,
+        username: String
     },
     data() {
         return {
@@ -49,8 +51,7 @@ export default {
             if (!this.confirmed) {
                 this.confirmed = true;
             } else {
-                const key = await getChromeStorage('key');
-                const username = await getChromeStorage('username');
+                const { key, username } = this;
 
                 this.error = false;
                 this.loggingOut = true;
@@ -64,10 +65,11 @@ export default {
                 if (!response.errors?.length) {
                     this.loggingOut = false;
 
-                    const keyClearedFromState = setChromeStorage({ key: null }, 'Chrome state for unique API key cleared after successful logout.', 'Error clearing Chrome state user API key after successful logout:');
-                    const usernameClearedFromState = setChromeStorage({ username: null }, 'Chrome state for username cleared after successful logout.', 'Error clearing Chrome state username after successful logout:');
+                    const keyClearedFromState = await clearChromeStorage('key', 'Chrome state for unique API key cleared after successful logout.', 'Error clearing Chrome state user API key after successful logout:');
+                    const loggedOut = await setChromeStorage({ loggedIn: false }, 'Chrome state set to logged out after successful logout.', 'Chrome state not set to logged out after successful logout.');
+                    const usernameClearedFromState = await clearChromeStorage('username', 'Chrome state for username cleared after successful logout.', 'Error clearing Chrome state username after successful logout:');
 
-                    const loggedOutSynched = keyClearedFromState && usernameClearedFromState;
+                    const loggedOutSynched = keyClearedFromState && loggedOut && usernameClearedFromState;
 
                     // TODO improve this try/catch block
                     if (!loggedOutSynched) {
