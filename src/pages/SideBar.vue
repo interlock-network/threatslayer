@@ -38,12 +38,12 @@
             @click="selectPage('options');">
             <img class="sidebar-icon" src="/src/assets/images/options.png">Options
         </div>
-        <div style="position: absolute; bottom: 23vh;">
-            <div id="sidebar-options" class="sidebar-item" :class="currentPage === 'account' ? 'selected-sidebar-item' : ''"
+        <div v-if="showLogoutButton" id="bottom-sidebar-items">
+            <div id="sidebar-account" class="sidebar-item" :class="currentPage === 'account' ? 'selected-sidebar-item' : ''"
                 @click="selectPage('account');">
                 <img class="sidebar-icon" src="/src/assets/images/account.png">{{ username }}
             </div>
-            <LogoutButton v-if="showLogoutButton" :checkState="checkState" :selectPage="selectPage" />
+            <LogoutButton :checkState="checkState" :key="key" :selectPage="selectPage" :username="username" />
         </div>
         <!-- TODO delete these four buttons? -->
         <button v-if="devMode" class="" @click="_toggleRegistered" style="pointer-events: initial;">Toggle Register</button>
@@ -55,7 +55,7 @@
 <script>
 import LogoutButton from "./components/subcomponents/LogoutButton.vue";
 
-import { getChromeStorage, setChromeStorage } from '../utilities.js';
+import { clearChromeStorage, getChromeStorage, setChromeStorage } from '../utilities.js';
 
 export default {
     name: 'SideBar',
@@ -70,6 +70,7 @@ export default {
         return {
             devMode: false,
             key: null,
+            loggedIn: false,
             registered: false,
             username: null
         }
@@ -82,10 +83,10 @@ export default {
             return !this.registered;
         },
         showLoginPage() {
-            return !this.showLogoutButton;
+            return !this.loggedIn;
         },
         showLogoutButton() {
-            return this.key && this.username;
+            return this.loggedIn;
         }
     },
     methods: {
@@ -95,14 +96,16 @@ export default {
             const devMode = await getChromeStorage('devMode');
             const isRegistered = await getChromeStorage('registered');
             const key = await getChromeStorage('key');
+            const loggedIn = await getChromeStorage('loggedIn');
             const username = await getChromeStorage('username');
 
             this.devMode = devMode;
             this.registered = isRegistered;
             this.key = key;
+            this.loggedIn = loggedIn;
             this.username = username;
 
-            if (key && username) {
+            if (loggedIn) {
                 // TODO delete this
                 this.selectPage('slayCount');
             } else if (isRegistered) {
@@ -113,24 +116,41 @@ export default {
         },
         // TODO delete this
         async _clearLogin() {
-            setChromeStorage({ key: null });
-            setChromeStorage({ username: null });
+            await clearChromeStorage('key');
+            await clearChromeStorage('username');
+            await setChromeStorage({ loggedIn: false });
 
             this.checkState();
         },
         // TODO delete this
         async _toggleLoggedIn() {
-            const nextKey = this.key ? null : 'abc-456'
-            const nextUsername = this.username ? null : 'alice';
+            const address = this.loggedIn ? null : '5GrpknVvGGrGH3EFuURXeMrWHvbpj3VfER1oX5jFtuGbfzCE';
+            const email = this.loggedIn ? null : 'alice@example.com';
+            const key = this.loggedIn ? null : 'abc-456';
+            const loggedIn = !this.loggedIn;
+            const username = this.loggedIn ? null : 'alice';
 
-            const keySet = await setChromeStorage({ key: nextKey }, `Set key as ${nextKey}`, `Error setting key as ${nextKey}`);
-            const usernameSet = await setChromeStorage({ username: nextUsername }, `Set username as ${nextUsername}`, `Error setting key as ${nextUsername}`);
+            const addressSet = await setChromeStorage({ address }, `Set address as ${address}`, `Error setting key as ${address}`);
+            const emailSet = await setChromeStorage({ email }, `Set email as ${email}`, `Error setting email as ${email}`);
+            const keySet = await setChromeStorage({ key }, `Set key as ${key}`, `Error setting key as ${key}`);
+            const loggedInSet = await setChromeStorage({ loggedIn }, `Set loggedIn as ${loggedIn}`, `Error setting loggedIn as ${loggedIn}`);
+            const usernameSet = await setChromeStorage({ username }, `Set username as ${username}`, `Error setting key as ${username}`);
 
-            if (keySet && usernameSet) this.checkState()
+            if (emailSet && keySet && loggedInSet && usernameSet && addressSet) this.checkState();
         },
         // TODO delete this
         async _toggleRegistered() {
-            setChromeStorage({ 'registered': !this.registered });
+            const nextRegistered = !this.registered;
+
+            await setChromeStorage({ registered: nextRegistered });
+            await setChromeStorage({ loggedIn: nextRegistered });
+
+            if (nextRegistered) {
+                await clearChromeStorage('address');
+                await clearChromeStorage('email');
+                await clearChromeStorage('key');
+                await clearChromeStorage('username');
+            }
 
             this.checkState();
         }
@@ -155,6 +175,12 @@ export default {
     margin-bottom: -3rem;
     margin-top: -2rem;
     width: 250px;
+}
+
+#bottom-sidebar-items {
+    bottom: 23vh;
+    position: absolute;
+    width: 240px;
 }
 
 .hidden-item {
