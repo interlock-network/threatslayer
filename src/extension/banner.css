@@ -2,6 +2,7 @@
 body {
     background-color: #0F0818;
     color: #d0d4d9;
+    /* font-family: 'THICCCBOI'; */
     font-size: 1.1rem;
     font-weight: lighter;
 }
@@ -79,6 +80,7 @@ p {
 }
 
 #dismiss-button-text {
+    color: white;
     font-size: 0.75rem;
     font-weight: bold;
 }
@@ -96,6 +98,7 @@ p {
 }
 
 #warning {
+    /* font-family: 'THICCCBOI-Bold'; */
     font-weight: bold;
     padding-bottom: 1.75rem;
     width: 100%;
