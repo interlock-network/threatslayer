@@ -23,12 +23,16 @@
         "message": "Unique URLs Scanned",
         "description": "The text used to show how many unique URLs are scanned on the dashboard."
     },
+    "warning": {
+        "message": "Warning!",
+        "description": "The text used in the warning banner."
+    },
     "warning_header": {
-        "message": "THREATSLAYER ALERT!",
+        "message": "This website may be malicious.",
         "description": "The text used in the warning banner."
     },
     "warning_text": {
-        "message": "This website may be malicious. Close this tab unless you know the site is safe.",
+        "message": "Close the tab unless you know this site is safe!",
         "description": "The text used in the warning banner."
     }
 }
