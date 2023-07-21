@@ -1,17 +1,11 @@
 /**
  * This is the main background script for ThreatSlayer.
  */
-const key = chrome.storage.local.get(["key"]).then((result) => {
-    const key = result.key || 'threatslayer-api-key';
-
-    return key;
-});
 const baseAPIUrl = `https://octahedron.interlock.network`;
 const betaBaseAPIUrl = `https://beta.octahedron.interlock.network`;
 const defaultConfig = {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ key }),
+    headers: { "Content-Type": "application/json" }
 };
 
 /**
@@ -28,29 +22,30 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
             totalURLsVisited++;
 
             chrome.storage.local
-                .set({ totalURLsVisited: totalURLsVisited })
+                .set({ totalURLsVisited })
                 .then(() => {
                     console.log(`Total URLs set to: ${totalURLsVisited}`);
                 });
         });
 
-        chrome.storage.sync.get("betaAISelected", function (data) {
+        chrome.storage.sync.get("betaAISelected", async function (data) {
             if (data.betaAISelected && data.betaAISelected === true) {
-                console.log(
-                    "Querying beta AI Threat Detection at",
-                    betaBaseAPIUrl
-                );
+                console.log("Querying beta AI Threat Detection at", betaBaseAPIUrl);
                 selectedBaseAPIUrl = betaBaseAPIUrl;
             }
 
-            fetch(`${selectedBaseAPIUrl}/malicious_p`, {
-                ...defaultConfig,
-                body: JSON.stringify({ key, url: request.url }),
-            })
-                .then((response) => response.json())
-                .then((response) => sendResponse(response))
-                .catch((error) => { console.log(`Error getting malicious URL: ${error}`) }
-                );
+            chrome.storage.local.get(["key"]).then((result) => {
+                const key = result.key || 'threatslayer-api-key';
+
+                fetch(`${selectedBaseAPIUrl}/malicious_p`, {
+                    ...defaultConfig,
+                    body: JSON.stringify({ key, url: request.url })
+                })
+                    .then((response) => response.json())
+                    .then((response) => sendResponse(response))
+                    .catch((error) => { console.log(`Error getting malicious URL: ${error}`) }
+                    );
+            });
         });
 
         return true;
@@ -117,7 +112,8 @@ chrome.runtime.onInstalled.addListener(function (details) {
 chrome.action.onClicked.addListener(tab => {
     // Send a message to the active tab
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-        var activeTab = tabs[0];
+        let activeTab = tabs[0];
+
         chrome.tabs.sendMessage(activeTab.id, { "message": "clicked_browser_action" });
         chrome.tabs.create({ 'url': chrome.runtime.getURL("index.html"), 'active': true });
     });
