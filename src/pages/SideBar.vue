@@ -12,7 +12,8 @@
             <img class="sidebar-icon" src="/src/assets/images/wallet.png"><span class=sidebar-text>Create Wallet</span>
         </div>
         <div id="sidebar-login" v-if="showLoginPage" class="sidebar-item"
-            :class="currentPage === 'login' ? 'selected-sidebar-item' : ''" @click="selectPage('login')">
+            :class="currentPage === 'login' ? 'selected-sidebar-item' : ''" @click="selectPage('login')"
+            :checkState="checkState">
             <div style="position: relative">
                 <img class="sidebar-icon" src="/src/assets/images/login.png"><span class="sidebar-text">Login</span>
             </div>
@@ -83,7 +84,7 @@ export default {
             return !this.registered;
         },
         showLoginPage() {
-            return !this.loggedIn;
+            return !this.loggedIn || !this.registered;
         },
         showLogoutButton() {
             return this.loggedIn;
@@ -119,6 +120,7 @@ export default {
             await clearChromeStorage('key');
             await clearChromeStorage('username');
             await setChromeStorage({ loggedIn: false });
+            await setChromeStorage({ allowlist: null });
 
             this.checkState();
         },
@@ -126,7 +128,7 @@ export default {
         async _toggleLoggedIn() {
             const address = this.loggedIn ? null : '5GrpknVvGGrGH3EFuURXeMrWHvbpj3VfER1oX5jFtuGbfzCE';
             const email = this.loggedIn ? null : 'alice@example.com';
-            const key = this.loggedIn ? null : 'abc-456';
+            const key = this.loggedIn ? null : 'threatslayer-api-key';
             const loggedIn = !this.loggedIn;
             const username = this.loggedIn ? null : 'alice';
 
@@ -193,7 +195,7 @@ export default {
 
 .sidebar-item {
     line-height: 2rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     pointer-events: initial;
 }
 
