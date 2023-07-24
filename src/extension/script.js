@@ -13,16 +13,25 @@
  *
  * @param {} response - the response from the API, an object with an attribute of `malicious`
  */
+
+// TODO clean up commented cruft here
+// function handleAPIResponse() {
 function handleAPIResponse(response) {
     let { href } = window.location;
+    chrome.runtime.sendMessage({
+        action: "displayWarningBanner",
+        url: href
+    });
 
-    if (response === null) {
-        console.log(`API Unresponsive. Cannot verify safety of URL ${href} .`);
-    } else if (response.malicious === false) {
-        console.log(`URL ${href} not classified as malicious.`);
-    } else if (response.malicious === true) {
-        chrome.runtime.sendMessage("displayWarningBanner");
-    }
+    // if (response === null) {
+    //     console.log(`API Unresponsive. Cannot verify safety of URL ${url} .`);
+    // } else if (response.malicious === false) {
+    //     console.log(`URL ${url} not classified as malicious.`);
+    // } else if (response.malicious === true) {
+    //     chrome.runtime.sendMessage({
+    //         action: "displayWarningBanner",
+    //         url: url
+    //     });
 }
 
 /**
@@ -31,14 +40,10 @@ function handleAPIResponse(response) {
  * From https://stackoverflow.com/questions/12023430/regex-url-path-from-url
  * @param {} url - the complete URL string, including protocol and any params
  */
-function removeParams(url) {
-    const parser = document.createElement('a');
-    parser.href = url;
-    const { hostname, protocol, pathname } = parser;
+function getFormattedUrl() {
+    let { href } = window.location;
 
-    const result = `${protocol}//${hostname}${pathname}`;
-
-    return result;
+    return href;
 }
 
 /**
@@ -48,7 +53,7 @@ function removeParams(url) {
  * and asynchronously provides a response.
  */
 chrome.runtime.sendMessage(
-    { contentScriptQuery: "queryURL", url: removeParams(window.location.href) },
+    { contentScriptQuery: "queryURL", url: getFormattedUrl() },
     function (response) {
         if (response !== undefined && response !== "") {
             handleAPIResponse(response);
