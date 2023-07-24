@@ -51,7 +51,8 @@ const maxPasswordLength = 16; // number of characters
 export default {
     name: 'EarnPage',
     props: {
-        selectPage: Function,
+        checkState: Function,
+        selectPage: Function
     },
     components: {
         ForgotPasswordButton,
@@ -90,8 +91,9 @@ export default {
         togglePasswordInputType() {
             this.passwordInputType = this.passwordInputType === 'password' ? 'text' : 'password';
         },
-        unregister() {
-            chrome.storage.local.set({ 'registered': false });
+        async unregister() {
+            const unregistered = await chrome.storage.local.set({ 'registered': false });
+            if (unregistered) { console.log('unregistered', unregistered); checkState() };
             this.selectPage('earn');
         },
         validateEmail() {
