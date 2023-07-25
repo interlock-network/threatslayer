@@ -1,24 +1,27 @@
 <template>
     <PageBanner>
-        <img class="banner-icon" src="/src/assets/images/account.png">Account info for {{ username }}
+        <img class="banner-icon" src="/src/assets/images/account.png">Account Info for {{ username }}
     </PageBanner>
     <br />
     <LineOfText msg="Email" bold />
-    <LineOfText>{{ email }}</LineOfText>
-    <br />
+    <LineOfText :msg="email" />
     <br />
     <br />
     <LineOfText msg="Wallet Address" bold />
-    <LineOfText mono>{{ address }}</LineOfText>
+    <LineOfText mono :msg="address" />
     <br />
     <br />
-    <br />
-    <LineOfText @click="sort" bold>{{ allowlistHeader }}</LineOfText>
+    <LineOfText @click="sort" msg="Allowlisted Sites" bold>{{ sortHeader }}</LineOfText>
     <div id="url-container">
         <LineOfText v-for="url in sortedAllowlist" mono>
-            <button @click="clearUrl(url)" class="x-button">X</button>{{ url }}
+            <div style="position: relative">
+                <img @click="clearUrl(url)" class="sidebar-icon" src="/src/assets/images/x-icon.png">
+                {{ url }}
+                <!-- <button @click="clearUrl(url)" class="x-button">X</button> -->
+            </div>
         </LineOfText>
         <LineOfText v-if="!showClearButton" msg="No URLs allowlisted" />
+        <br />
         <button v-if="showClearButton" @click="clearAllUrls" id="clear-allowlist">Clear all allowlisted URLs</button>
     </div>
 </template>
@@ -38,7 +41,7 @@ export default {
         return {
             address: '',
             allowlist: null,
-            currentSortDir: 'chron', //defaults to chronological / API order
+            currentSortDir: 'chron', // defaults to chronological / API order
             email: '',
             sortedAllowlist: [],
             username: '',
@@ -49,15 +52,21 @@ export default {
         this.getAllowlist();
     },
     computed: {
-        allowlistHeader() {
-            const sortInfo = this.currentSortDir === 'asc' ? '▲' :
-                this.currentSortDir === 'desc' ? '▼' : '(click to sort)';
+        sortHeader() {
+            let result;
 
-            return `Allowlisted Sites ${sortInfo}`;
+            if (!this.allowlist?.length || this.allowlist.length === 1) {
+                result = '';
+            } else {
+                result = this.currentSortDir === 'asc' ? ' ▲' :
+                    this.currentSortDir === 'desc' ? ' ▼' : ' (click to sort)';
+            }
+
+            return result;
         },
         // TODO fix this to update correctly
         showClearButton() {
-            return this.allowlist;
+            return this.allowlist?.length;
         },
         sortedAllowlist() {
             if (!this.allowlist) return [];
@@ -84,9 +93,14 @@ export default {
         async clearUrl(urlToClear) {
             const allowlist = await getChromeStorage('allowlist');
 
-            this.allowlist = allowlist.filter(url => url !== urlToClear);
+            if (!allowlist) {
+                return;
+            }
 
-            setChromeStorage({ allowlist: this.allowlist });
+            const updatedAllowlist = allowlist.filter(url => url !== urlToClear);
+            this.allowlist = updatedAllowlist
+
+            setChromeStorage({ allowlist: updatedAllowlist });
         },
         async getAllowlist() {
             const allowlist = await getChromeStorage('allowlist');
