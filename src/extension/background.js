@@ -51,7 +51,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         chrome.storage.local.get(["allowlist"]).then((result) => {
             const allowlist = result.allowlist || [];
             // bail condition
-            if (allowlist.includes(url)) {
+            if (allowlist?.includes(url)) {
                 console.log('URL allowlisted by user:', url);
                 return;
             }
