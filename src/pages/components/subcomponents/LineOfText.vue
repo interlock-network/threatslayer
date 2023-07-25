@@ -1,7 +1,8 @@
 <template>
-    <span class="line-of-text" :style="style">{{ msg }}
+    <div>
+        <span class="line-of-text" :style="style">{{ msg }}</span>
         <slot />
-    </span>
+    </div>
 </template>
 
 <script>
@@ -41,10 +42,7 @@ export default {
 
             switch (true) {
                 case bold:
-                    styleObj = {
-                        display: "block",
-                        "font-weight": "bold"
-                    };
+                    styleObj = { "font-weight": "bold" };
                     break;
                 case error:
                     styleObj = { color: "red" };
@@ -58,6 +56,7 @@ export default {
                     break;
                 case mono:
                     styleObj = {
+                        display: "block",
                         'font-family': 'monospace',
                         'font-size': '0.9rem',
                         width: '375px'
