@@ -35,15 +35,10 @@ function handleAPIResponse(response) {
 }
 
 /**
- * This helper function removes parameters from URLs sent to pipeline,
- * in order to protect sensitive user info.
- * From https://stackoverflow.com/questions/12023430/regex-url-path-from-url
- * @param {} url - the complete URL string, including protocol and any params
+ * This function returns the current URL.
  */
 function getFormattedUrl() {
-    let { href } = window.location;
-
-    return href;
+    return window.location.href;
 }
 
 /**
