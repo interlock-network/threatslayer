@@ -1,20 +1,26 @@
-// basic email validation
+/**
+ * This convenience function perforns basic email validation
+ * @param {string} email - an email string
+ */
 export function findEmailError(email) {
-    let errorMessage = '';
+    let result = '';
     const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/;
 
-    if (!email.length) {
-        errorMessage = '';
-    } if (!emailRegex.test(email)) {
-        errorMessage = 'Invalid email address';
+    if (!email?.length) {
+        result = '';
+    } else if (!emailRegex.test(email)) {
+        result = 'Invalid email address';
     } else {
-        errorMessage = '';
+        result = '';
     }
 
-    return errorMessage;
+    return result;
 }
 
-// finds characters not A-Z, a-z and 0-9
+/**
+ * This convenience function finds characters not A-Z, a-z and 0-9
+ * @param {string} str - a username string
+ */
 export function findNonAlphanumericChars(str) {
     const regex = /[^A-Za-z0-9]/g;
     const matchesArr = str.match(regex).map(char =>
@@ -25,12 +31,18 @@ export function findNonAlphanumericChars(str) {
     return [...new Set(matchesArr)]; // to remove duplicate chars
 }
 
-// convenience function to stringify large numbers to local formats with commas etc.
+/**
+ * This convenience function to stringify large numbers to local formats with commas etc.
+ * @param {number} num - Unix time in seconds
+ */
 export function formatNumber(num) {
     return new Intl.NumberFormat().format(num);
 }
 
-// takes an integer and returns a string to set font size
+/**
+ * This convenience function takes an integer and returns a string to set font size
+ * @param {number} num - a dashboard value for total number of URLs scanned.
+ */
 export function getFontSizeForTotal(num) {
     const oneToThreeDigits = "123px";
     const fourDigits = "110px";
@@ -55,7 +67,10 @@ export function getFontSizeForTotal(num) {
     return result;
 }
 
-// takes an integer and returns a string to set font size
+/**
+ * This convenience function takes an integer and returns a string to set font size
+ * @param {number} num - a dashboard value for number of unique URLs scanned.
+ */
 export function getFontSizeForUnique(num) {
     const defaultSize = "56px";
     const sixDigits = "40px";
@@ -71,49 +86,68 @@ export function getFontSizeForUnique(num) {
     return result;
 }
 
-export function getChromeStorage(key, successMsg = 'Chrome state succesfully retrieved for', errorMsg = 'Error getting Chrome state for') {
+/**
+ * This function gets a single value from Chrome local storage
+ * @param {string} key - The key for a value in Chrome local storage
+ */
+export function getChromeStorage(key) {
     try {
         return chrome.storage.local
             .get([key])
             .then(response => {
-                console.log(`${successMsg} ${key}`);
+                const result = response[key];
+                console.log(`Chrome state succesfully retrieved for ${key}: ${result}`);
 
-                return response[key];
+                return result;
             });
     } catch (err) {
-        console.log(`${errorMsg} ${key}:`, err);
+        console.log(`Error getting Chrome state for ${key}: ${err}`);
 
         return null;
     }
 }
 
-export function setChromeStorage(storageObj, successMsg = 'Chrome state succesfully set.', errorMsg = 'Error setting Chrome state.') {
+/**
+ * This function gets a single value from Chrome local storage
+ * @param {Object} storageObj - A key/value pair to set in Chrome local storage
+ * @param {Array.<string>} storageObj.allowlist - A list of URLs
+ * @param {string} storageObj.key - User's specific API key
+ * @param {Boolean} storageObj.loggedIn - A key/value pair to set in Chrome local storage
+ * @param {Boolean} storageObj.registered - A key/value pair to set in Chrome local storage
+ */
+export function setChromeStorage(storageObj) {
     try {
         return chrome.storage.local
             .set(storageObj)
             .then(() => {
-                console.log(successMsg);
+                const key = Object.key(storageObj);
+                const value = storageObj[key];
+                console.log(`Chrome state succesfully set for ${key}: ${value}`);
 
                 return true;
             });
     } catch (err) {
-        console.log(errorMsg, err);
+        console.log(`Error setting Chrome state for ${key}: ${value}. Error: ${err}`);
 
         return false;
     }
 }
 
-export function clearChromeStorage(key, successMsg = 'Chrome state succesfully cleared.', errorMsg = 'Error clearing Chrome state.') {
+/**
+ * This function gets a single value from Chrome local storage
+ * @param {string} key - The key for a value to set to null in Chrome local storage
+ */
+export function clearChromeStorage(key) {
     try {
         return chrome.storage.local
-            .set({ key: null })
+            .set({ [key]: null })
             .then(() => {
-                console.log(successMsg);
+                console.log(`Chrome state succesfully cleared for ${key}`);
 
                 return true;
             });
     } catch (err) {
-        console.log(errorMsg, err);
+        console.log(`Error clearing Chrome state for ${key}. Error: ${err}`);
 
         return false;
     }
