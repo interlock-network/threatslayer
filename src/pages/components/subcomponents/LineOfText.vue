@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div :style="divStyle">
         <span class="line-of-text" :style="style">{{ msg }}</span>
         <slot />
     </div>
@@ -36,6 +36,18 @@ export default {
         },
     },
     computed: {
+        divStyle() {
+            return this.error ? {
+                'margin-top': '-0.75rem',
+                'margin-bottom': '0rem'
+            } :
+                this.mono ? {
+                    display: "block",
+                    'font-family': 'monospace',
+                    'font-size': '0.9rem',
+                    width: '375px'
+                } : {};
+        },
         style() {
             let styleObj;
             const { bold, error, footer, mono, subinstruction } = this;
