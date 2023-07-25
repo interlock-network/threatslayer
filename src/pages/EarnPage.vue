@@ -2,30 +2,28 @@
     <PageBanner msg="Sign up for ThreatSlayer">
         <img class="banner-icon" src="/src/assets/images/start_earning.png">
     </PageBanner>
-    <LineOfText msg="" instruction>
+    <LineOfText class="subhead" msg="" instruction>
         <span>Already have an account?<button id="login-button" @click="selectPage('login')">Login</button></span>
     </LineOfText>
-    <LineOfText msg="" instruction>
+    <LineOfText class="subhead" msg="" instruction>
         <span>Don't have a wallet?<button id="login-button" @click="selectPage('wallet')">Create one</button></span>
     </LineOfText>
     <br />
-    <br />
+    <!-- wallet -->
     <LineOfText msg="Wallet Address" bold />
-    <input id="address-input" @input="validateAddress" v-model.trim="walletAddress"
-        placeholder="Paste your wallet address here" tabindex="2" required />
-    <LineOfText error v-if="addressErrorMessage.length" :msg="addressErrorMessage" />
+    <input id="address-input" @input="validateAddress" v-model.trim="address" placeholder="Paste your wallet address here"
+        tabindex="2" :style="addressInputStyle" required />
+    <LineOfText v-if="addressErrorMessage.length" :msg="addressErrorMessage" error />
     <!-- username -->
     <LineOfText msg="Username" bold />
     <input id="username-input" @input="validateUsername" v-model.trim="username" required tabindex="4"
         placeholder="Allowed characters are A-Z, a-z and 0-9" :style="usernameInputStyle" />
-    <LineOfText :msg="usernameErrorMessage" error v-if="usernameErrorMessage.length" />
-    <br />
+    <LineOfText v-if="usernameErrorMessage.length" :msg="usernameErrorMessage" error />
     <!-- email -->
     <LineOfText msg="Email" bold />
-    <input type="email" @input="validateEmail" v-model.trim="email" required tabindex="6"
+    <input type="email" @input="validateEmail" v-model.trim="email" required tabindex="6" :style="emailInputStyle"
         placeholder="We need your email for verification" />
-    <LineOfText :msg="emailErrorMessage" error v-if="emailErrorMessage.length" />
-    <br />
+    <LineOfText v-if="emailErrorMessage.length" :msg="emailErrorMessage" error />
     <!-- password with show/hide button -->
     <LineOfText msg="Password" bold />
     <input class="password-input" :type="passwordInputType" v-model.trim="password" required
@@ -33,16 +31,13 @@
     <button @click="togglePasswordInputType" class="small-button" id="show-toggle-button" tabindex="9">
         {{ passwordInputType === 'password' ? 'Show' : 'Hide' }}
     </button>
-    <LineOfText :msg="passwordErrorMessage" error v-if="passwordErrorMessage.length" />
-    <br />
+    <LineOfText v-if="passwordErrorMessage.length" :msg="passwordErrorMessage" error />
     <!-- password confirmation field -->
-    <input class="password-input" :type="passwordInputType" @input="validateReenteredPassword"
+    <input class="password-input" style="margin-top: -0.5rem;" :type="passwordInputType" @input="validateReenteredPassword"
         v-model.trim="reenteredPassword" placeholder="Enter your password again" tabindex="10" :style="passwordInputStyle"
         required />
-    <LineOfText :msg="reenteredPasswordErrorMessage" error v-if="reenteredPasswordErrorMessage.length" />
+    <LineOfText v-if="reenteredPasswordErrorMessage.length" :msg="reenteredPasswordErrorMessage" error />
     <!-- referrer -->
-    <br />
-    <br />
     <LineOfText msg="Referred by another user? (Optional)" bold />
     <input v-model.trim="referrer" tabindex="12" placeholder="Enter their username" />
     <div class="checkbox-container" @click="focusNextCheckbox">
@@ -50,15 +45,14 @@
         <label for="first-box">Agree to our <a href="https://interlock.network" target="_blank">
                 Terms of Service</a></label>
     </div>
-    <div class="checkbox-container">
+    <div class="checkbox-container" style="margin-top: -0.5rem;">
         <input id="second-box" type="checkbox" v-model="unitedStates" tabindex="16">
         <label for="second-box" style="display: inline-flex;">Affirm you are not a US citizen or resident
             <InfoTip msg="Cryptocurrency is considered a security in the US so most US residents cannot purchase them." />
         </label>
     </div>
-    <CreateUserButton :address="walletAddress" :selectPage="selectPage" :email='email' :password="password"
-        :referrer="referrer" :termsOfService="termsOfService" :unitedStates="unitedStates" :username="username"
-        tabindex="26" />
+    <CreateUserButton :address="address" :selectPage="selectPage" :email='email' :password="password" :referrer="referrer"
+        :termsOfService="termsOfService" :unitedStates="unitedStates" :username="username" tabindex="26" />
 </template>
 <script>
 import { debounce } from 'debounce';
@@ -74,6 +68,7 @@ import CreateUserButton from "./components/subcomponents/CreateUserButton.vue";
 const errorStyle = {
     border: "3px solid red",
     color: 'red',
+    // 'margin-bottom': '0rem'
 };
 const maxPasswordLength = 16; // number of characters
 
@@ -91,6 +86,7 @@ export default {
     },
     data() {
         return {
+            address: '',
             addressErrorMessage: '',
             connectAccountSelected: true,
             createAccountSelected: false,
@@ -105,8 +101,7 @@ export default {
             termsOfService: false,
             unitedStates: false,
             username: '',
-            usernameErrorMessage: '',
-            walletAddress: ''
+            usernameErrorMessage: ''
         };
     },
     async mounted() {
@@ -115,8 +110,14 @@ export default {
         firstInput.focus();
     },
     computed: {
+        addressInputStyle() {
+            return this.addressErrorMessage?.length ? errorStyle : {};
+        },
+        emailInputStyle() {
+            return this.emailErrorMessage?.length ? errorStyle : {};
+        },
         passwordInputStyle() {
-            return this.passwordErrorMessage.length ? errorStyle : {};
+            return this.passwordErrorMessage?.length ? errorStyle : {};
         },
         usernameInputStyle() {
             return this.usernameErrorMessage?.length ? errorStyle : {};
@@ -164,14 +165,16 @@ export default {
             // happy case
             if (addressIsValid) {
                 this.addressErrorMessage = '';
+            } else if (!address || !address.length) {
+                this.addressErrorMessage = '';
             } else {
                 this.addressErrorMessage = 'Not a valid address';
             }
         }, 250),
-        validateEmail() {
+        validateEmail: debounce(function () {
             this.emailErrorMessage = findEmailError(this.email);
-        },
-        validateReenteredPassword() {
+        }, 250),
+        validateReenteredPassword: debounce(function () {
             // number of characters
             const minLength = 12;
             const maxLength = 512;
@@ -179,12 +182,9 @@ export default {
             // validate initial password first
             const password = this.password;
 
-            // bail out if no username yet, or else it will show an error and be annoying
-            if (!password || !password.length) {
+            if (!password?.length) {
                 this.passwordErrorMessage = '';
-            }
-
-            if (password.length < minLength) {
+            } else if (password.length < minLength) {
                 this.passwordErrorMessage = `Password must be at least ${minLength} characters`;
             } else if (password.length > maxLength) {
                 this.passwordErrorMessage = `Password cannot be more than ${maxLength} characters`;
@@ -199,7 +199,7 @@ export default {
             } else {
                 this.reenteredPasswordErrorMessage = '';
             }
-        },
+        }, 250),
         validateUsername: debounce(function (event) {
             const name = event?.target?.value;
 
@@ -262,17 +262,21 @@ input:focus {
     pointer-events: initial;
 }
 
-.password-input {
-    float: left;
-}
-
 #show-toggle-button {
     border: none;
     color: #963cf5;
     margin-top: 0.4rem;
     padding-top: 0.25rem;
     position: absolute;
-    right: 23%;
+    right: 30%;
+}
+
+.password-input {
+    float: left;
+}
+
+.subhead {
+    margin-top: -1rem;
 }
 
 .checkbox-container {
