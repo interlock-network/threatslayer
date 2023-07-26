@@ -5,11 +5,11 @@
 
 /**
  * This function handles the response from the API. If the response
- * indicates that a URL is malicious, the user will be prompted 
+ * indicates that a URL is malicious, the user will be prompted
  * in a new window. If the URL is *not* malicious,
  * a console message will be logged. If the API is unresponsive, or
- * fails to provide a response for some other reason, a console 
- * message will be logged. 
+ * fails to provide a response for some other reason, a console
+ * message will be logged.
  *
  * @param {} response - the response from the API, an object with an attribute of `malicious`
  */
