@@ -2,8 +2,8 @@
     <PageBanner msg="Login to ThreatSlayer">
         <img class="banner-icon" src="/src/assets/images/login.png">
     </PageBanner>
-    <LineOfText msg="" instruction>
-        <span>Don't have an account?<button id="login-button" @click="unregister">Register</button></span>
+    <LineOfText instruction>
+        <span>Don't have an account?<button class="login-button" @click="unregister">Register</button></span>
     </LineOfText>
     <br />
     <br />
@@ -129,7 +129,7 @@ export default {
     }
 }
 </script>
-  
+
 <style>
 input:focus {
     border: 3px solid #3b8de8;
@@ -163,4 +163,3 @@ input:focus {
     color: red;
 }
 </style>
-  

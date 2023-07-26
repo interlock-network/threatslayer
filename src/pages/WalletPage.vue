@@ -2,8 +2,8 @@
     <PageBanner msg="Create Wallet">
         <img class="banner-icon" src="/src/assets/images/wallet.png">
     </PageBanner>
-    <LineOfText msg="" instruction>
-        <span>Already have a wallet?<button id="login-button" @click="selectPage('earn')">Register</button></span>
+    <LineOfText instruction>
+        <span>Already have a wallet?<button class="login-button" @click="selectPage('earn')">Register</button></span>
     </LineOfText>
     <br />
     <br />
@@ -28,13 +28,8 @@ export default {
     },
     props: {
         selectPage: Function,
-    },
-    data() {
-        return {};
-    },
-    methods: {}
+    }
 }
 </script>
-  
+
 <style></style>
-  

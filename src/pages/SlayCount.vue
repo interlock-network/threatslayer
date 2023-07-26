@@ -228,7 +228,7 @@ export default {
     }
 }
 </script>
-  
+
 <style>
 #button-container {
     float: right;
@@ -322,4 +322,3 @@ export default {
     font: bold 14px sans-serif;
 }
 </style>
-  

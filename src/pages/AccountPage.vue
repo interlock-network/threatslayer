@@ -123,7 +123,7 @@ export default {
     }
 }
 </script>
-  
+
 <style>
 #clear-allowlist {
     background-color: #0F0818;
@@ -146,4 +146,3 @@ export default {
     color: red;
 }
 </style>
-  

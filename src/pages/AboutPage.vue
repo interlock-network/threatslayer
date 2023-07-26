@@ -33,26 +33,13 @@ export default {
     components: {
         LineOfText,
         PageBanner
-    },
-    data() {
-        return {
-
-        };
-    },
-    mounted() {
-
-    },
-    computed: {
-
-    },
-    methods: {}
+    }
 }
 </script>
-  
+
 <style>
 .socials-icon {
     padding-left: 1rem;
     padding-right: 1rem;
 }
 </style>
-  

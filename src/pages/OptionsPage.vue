@@ -28,9 +28,6 @@ export default {
         LineOfText,
         PageBanner
     },
-    data() {
-        return {};
-    },
     async mounted() {
         const betaAICheckbox = document.getElementById('beta-ai-checkbox');
         const devModeCheckbox = document.getElementById('dev-mode-checkbox');
@@ -61,10 +58,9 @@ export default {
     }
 }
 </script>
-  
+
 <style>
 .options-container {
     margin-top: 1rem;
 }
 </style>
-  
