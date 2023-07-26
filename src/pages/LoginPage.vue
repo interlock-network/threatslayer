@@ -2,35 +2,35 @@
     <PageBanner msg="Login to ThreatSlayer">
         <img class="banner-icon" src="/src/assets/images/login.png">
     </PageBanner>
-    <LineOfText instruction>
-        <span>Don't have an account?<button class="login-button" @click="unregister">Register</button></span>
-    </LineOfText>
+    <TextComponent msg="Don't have an account?" instruction /><button class="login-button"
+        @click="unregister">Register</button>
     <br />
     <br />
     <!-- username field -->
-    <LineOfText msg="Username or Email" bold />
+    <TextComponent msg="Username or Email" class="input-header" bold />
     <input class="input-field-text" id="login-username-or-email" v-model.trim="usernameOrEmail"
         placeholder="Username or email" tabindex="2" :style="usernameInputStyle" />
-    <LineOfText :msg="usernameErrorMessage" error v-if="usernameErrorMessage.length" />
+    <TextComponent :msg="usernameErrorMessage" error v-if="usernameErrorMessage.length" />
     <br />
     <!-- password field with show/hide button -->
-    <LineOfText msg="Password" bold />
+    <TextComponent msg="Password" class="input-header" bold />
     <input id="login-password" class="input-field-text password-input" :type="passwordInputType" v-model.trim="password"
         placeholder="Password" tabindex="4" :style="passwordInputStyle" />
     <button @click="togglePasswordInputType" class="small-button" id="show-toggle-button" tabindex="5">
         {{ passwordInputType === 'password' ? 'Show' : 'Hide' }}
     </button>
-    <LineOfText :msg="passwordErrorMessage" error v-if="passwordErrorMessage.length" />
+    <TextComponent :msg="passwordErrorMessage" error v-if="passwordErrorMessage.length" />
+    <br />
     <br />
     <LoginButton :password="password" :usernameOrEmail="usernameOrEmail" :selectPage="selectPage" tabindex="6" />
     <!-- Forgot username / password flow -->
     <br />
     <br />
     <br />
-    <LineOfText msg="Forgot password?" bold style="margin-top: 5rem;" />
+    <TextComponent msg="Forgot password?" class="input-header" bold style="margin-top: 5rem;" />
     <input type="email" class="input-field-text" id="forgot-info-email" @input="validateEmail" v-model.trim="email" required
         placeholder="Enter your email to change your password" tabindex="8" />
-    <LineOfText :msg="emailErrorMessage" error v-if="emailErrorMessage.length" />
+    <TextComponent :msg="emailErrorMessage" error v-if="emailErrorMessage.length" />
     <ForgotPasswordButton :email="email" tabindex="10" />
 </template>
 <script>
@@ -38,9 +38,9 @@ import { debounce } from 'debounce';
 import { findEmailError, findNonAlphanumericChars } from "../utilities";
 
 import ForgotPasswordButton from "./components/ForgotPasswordButton.vue";
-import LineOfText from "./components/LineOfText.vue";
 import LoginButton from "./components/LoginButton.vue";
 import PageBanner from "./components/PageBanner.vue";
+import TextComponent from "./components/TextComponent.vue";
 
 const errorStyle = {
     border: "3px solid red",
@@ -56,9 +56,9 @@ export default {
     },
     components: {
         ForgotPasswordButton,
-        LineOfText,
         LoginButton,
         PageBanner,
+        TextComponent
     },
     data() {
         return {
