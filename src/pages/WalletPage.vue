@@ -6,11 +6,13 @@
         @click="selectPage('earn')">Register</button>
     <br />
     <br />
-    <TextComponent msg="In order to use ThreatSlayer, you will need to create an Aleph Zero-compatible wallet." />
-    <br />
-    <br />
-    <TextComponent
-        msg="Please click 'Create Wallet' to be redirected to a Chrome browser extension to create a SubWallet." />
+    <div style="padding-right: 2rem;">
+        <TextComponent msg="In order to use ThreatSlayer, you will need to create an Aleph Zero-compatible wallet." />
+        <br />
+        <br />
+        <TextComponent
+            msg="Please click 'Create Wallet' to be redirected to a Chrome browser extension to create a SubWallet." />
+    </div>
     <br />
     <br />
     <WalletButton tabindex="2" />
