@@ -36,37 +36,6 @@ export default {
         },
     },
     computed: {
-        divStyle() {
-            let result = { 'padding-right': '2rem' };
-
-            if (!this.msg) {
-                result = {
-                    ...result,
-                    'margin-top': '-1.25rem'
-                };
-            } else if (!this.msg && this.error) {
-                result = {
-                    ...result,
-                    'margin-top': '-2rem'
-                };
-            } else if (this.error) {
-                result = {
-                    ...result,
-                    'margin-top': '-0.75rem',
-                    'margin-bottom': '0rem'
-                }
-            } else if (this.mono) {
-                result = {
-                    ...result,
-                    display: "block",
-                    'font-family': 'monospace',
-                    'font-size': '0.9rem',
-                    width: '375px'
-                }
-            }
-
-            return result;
-        },
         style() {
             let result = {};
             const { bold, error, footer, mono, subinstruction } = this;
@@ -87,10 +56,8 @@ export default {
                     break;
                 case mono:
                     result = {
-                        display: "block",
                         'font-family': 'monospace',
-                        'font-size': '0.9rem',
-                        width: '375px'
+                        'font-size': '0.9rem'
                     };
                     break;
                 case subinstruction:
