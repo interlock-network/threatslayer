@@ -120,7 +120,7 @@ export function setChromeStorage(storageObj) {
         return chrome.storage.local
             .set(storageObj)
             .then(() => {
-                const key = Object.key(storageObj);
+                const key = Object.keys(storageObj);
                 const value = storageObj[key];
                 console.log(`Chrome state succesfully set for ${key}: ${value}`);
 
