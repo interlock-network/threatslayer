@@ -2,12 +2,11 @@
     <PageBanner msg="Sign up for ThreatSlayer">
         <img class="banner-icon" src="/src/assets/images/start_earning.png">
     </PageBanner>
-    <LineOfText class="subhead" msg="" instruction>
-        <span>Already have an account?<button id="login-button" @click="selectPage('login')">Login</button></span>
-    </LineOfText>
-    <LineOfText class="subhead" msg="" instruction>
-        <span>Don't have a wallet?<button id="login-button" @click="selectPage('wallet')">Create one</button></span>
-    </LineOfText>
+    <TextComponent msg="Already have an account?" /><button class="login-button" @click="selectPage('login')">Login</button>
+    <br />
+    <TextComponent msg="Don't have a wallet?" /><button class="login-button" @click="selectPage('wallet')">Create
+        one</button>
+    <br />
     <br />
     <!-- wallet -->
     <LineOfText msg="Wallet Address" bold />
@@ -55,20 +54,21 @@
         :termsOfService="termsOfService" :unitedStates="unitedStates" :username="username" tabindex="26" />
 </template>
 <script>
+import { decodeAddress, encodeAddress } from '@polkadot/keyring';
 import { debounce } from 'debounce';
 import { findEmailError, findNonAlphanumericChars } from "../utilities";
-import { decodeAddress, encodeAddress } from '@polkadot/keyring';
 import { hexToU8a, isHex } from '@polkadot/util';
 
+import CreateUserButton from "./components/subcomponents/CreateUserButton.vue";
 import InfoTip from "./components/subcomponents/InfoTip.vue";
 import LineOfText from "./components/subcomponents/LineOfText.vue";
 import PageBanner from "./components/subcomponents/PageBanner.vue";
-import CreateUserButton from "./components/subcomponents/CreateUserButton.vue";
+import TextComponent from "./components/subcomponents/TextComponent.vue";
+
 
 const errorStyle = {
     border: "3px solid red",
-    color: 'red',
-    // 'margin-bottom': '0rem'
+    color: 'red'
 };
 const maxPasswordLength = 16; // number of characters
 
@@ -79,10 +79,11 @@ export default {
         selectPage: Function,
     },
     components: {
+        CreateUserButton,
         InfoTip,
         LineOfText,
         PageBanner,
-        CreateUserButton,
+        TextComponent
     },
     data() {
         return {
@@ -231,7 +232,7 @@ export default {
     }
 }
 </script>
-  
+
 <style>
 input[type="checkbox"] {
     background: #FFFFFF;
@@ -251,15 +252,6 @@ input:focus {
 
 #bail-container {
     display: block;
-}
-
-#login-button {
-    background-color: #0F0818;
-    border: none;
-    color: #963cf5;
-    font-size: 1.1rem;
-    font-weight: bold;
-    pointer-events: initial;
 }
 
 #show-toggle-button {
@@ -284,4 +276,3 @@ input:focus {
     pointer-events: initial;
 }
 </style>
-  
