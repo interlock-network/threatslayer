@@ -3,7 +3,7 @@
         <img class="banner-icon" src="/src/assets/images/options.png">
     </PageBanner>
     <br />
-    <LineOfText msg="Select from the following:" bold />
+    <TextComponent msg="Select from the following:" bold />
     <div class="options-container">
         <input type="checkbox" id="beta-ai-checkbox" @click="betaClassifier($event)" tabindex="2" />
         <label for="beta-ai-checkboxbox">
@@ -18,14 +18,15 @@
     </div>
 </template>
 <script>
-import LineOfText from "./components/LineOfText.vue";
 import PageBanner from "./components/PageBanner.vue";
+import TextComponent from "./components/TextComponent.vue";
+
 import { getChromeStorage, setChromeStorage } from '../utilities.js';
 
 export default {
     name: 'OptionsPage',
     components: {
-        LineOfText,
+        TextComponent,
         PageBanner
     },
     async mounted() {

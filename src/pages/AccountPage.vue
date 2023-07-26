@@ -3,12 +3,12 @@
         <img class="banner-icon" src="/src/assets/images/account.png">Account Info for {{ username }}
     </PageBanner>
     <br />
-    <LineOfText msg="Email" bold />
-    <LineOfText :msg="email" />
+    <TextComponent msg="Email" bold /> <br />
+    <TextComponent :msg="email" />
     <br />
     <br />
-    <LineOfText msg="Wallet Address" bold />
-    <LineOfText mono :msg="address" />
+    <TextComponent msg="Wallet Address" bold /> <br />
+    <TextComponent mono :msg="address" />
     <br />
     <br />
     <LineOfText @click="sort" msg="Allowlisted Sites" bold>{{ sortHeader }}</LineOfText>
@@ -20,7 +20,7 @@
                 <!-- <button @click="clearUrl(url)" class="x-button">X</button> -->
             </div>
         </LineOfText>
-        <LineOfText v-if="!showClearButton" msg="No URLs allowlisted" />
+        <TextComponent v-if="!showClearButton" msg="No URLs allowlisted" />
         <br />
         <button v-if="showClearButton" @click="clearAllUrls" id="clear-allowlist">Clear all allowlisted URLs</button>
     </div>
@@ -28,6 +28,7 @@
 <script>
 import LineOfText from "./components/LineOfText.vue";
 import PageBanner from "./components/PageBanner.vue";
+import TextComponent from "./components/TextComponent.vue";
 
 import { getChromeStorage, setChromeStorage } from '../utilities.js';
 
@@ -35,7 +36,8 @@ export default {
     name: 'AccountPage',
     components: {
         LineOfText,
-        PageBanner
+        PageBanner,
+        TextComponent
     },
     data() {
         return {
@@ -137,6 +139,7 @@ export default {
 
 #url-container {
     height: 25vh;
+    margin-top: -0.75rem;
     overflow: scroll;
 }
 
