@@ -29,7 +29,10 @@ export default {
             type: Boolean,
             default: false,
         },
-        msg: String,
+        msg: {
+            type: String,
+            default: undefined,
+        },
         subinstruction: {
             type: Boolean,
             default: false,
@@ -37,16 +40,35 @@ export default {
     },
     computed: {
         divStyle() {
-            return this.error ? {
-                'margin-top': '-0.75rem',
-                'margin-bottom': '0rem'
-            } :
-                this.mono ? {
+            let result = { 'padding-right': '2rem' };
+
+            if (!this.msg) {
+                result = {
+                    ...result,
+                    'margin-top': '-1.25rem'
+                };
+            } else if (!this.msg && this.error) {
+                result = {
+                    ...result,
+                    'margin-top': '-2rem'
+                };
+            } else if (this.error) {
+                result = {
+                    ...result,
+                    'margin-top': '-0.75rem',
+                    'margin-bottom': '0rem'
+                }
+            } else if (this.mono) {
+                result = {
+                    ...result,
                     display: "block",
                     'font-family': 'monospace',
                     'font-size': '0.9rem',
                     width: '375px'
-                } : {};
+                }
+            }
+
+            return result;
         },
         style() {
             let styleObj;
