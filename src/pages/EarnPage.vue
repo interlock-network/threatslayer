@@ -2,42 +2,42 @@
     <PageBanner msg="Sign up for ThreatSlayer">
         <img class="banner-icon" src="/src/assets/images/start_earning.png">
     </PageBanner>
-    <TextComponent msg="Already have an account?" /><button class="login-button" @click="selectPage('login')">Login</button>
-    <br />
+    <TextComponent msg="Already have an account?" /><button class="login-button"
+        @click="selectPage('login')">Login</button><br />
     <TextComponent msg="Don't have a wallet?" /><button class="login-button" @click="selectPage('wallet')">Create
         one</button>
     <br />
     <br />
     <!-- wallet -->
-    <LineOfText msg="Wallet Address" bold />
+    <TextComponent msg="Wallet Address" class="input-header" bold />
     <input id="address-input" @input="validateAddress" v-model.trim="address" placeholder="Paste your wallet address here"
         tabindex="2" :style="addressInputStyle" required />
-    <LineOfText v-if="addressErrorMessage.length" :msg="addressErrorMessage" error />
+    <TextComponent v-if="addressErrorMessage.length" :msg="addressErrorMessage" error />
     <!-- username -->
-    <LineOfText msg="Username" bold />
+    <TextComponent msg="Username" class="input-header" bold />
     <input id="username-input" @input="validateUsername" v-model.trim="username" required tabindex="4"
         placeholder="Allowed characters are A-Z, a-z and 0-9" :style="usernameInputStyle" />
-    <LineOfText v-if="usernameErrorMessage.length" :msg="usernameErrorMessage" error />
+    <TextComponent v-if="usernameErrorMessage.length" :msg="usernameErrorMessage" error />
     <!-- email -->
-    <LineOfText msg="Email" bold />
+    <TextComponent msg="Email" class="input-header" bold />
     <input type="email" @input="validateEmail" v-model.trim="email" required tabindex="6" :style="emailInputStyle"
         placeholder="We need your email for verification" />
-    <LineOfText v-if="emailErrorMessage.length" :msg="emailErrorMessage" error />
+    <TextComponent v-if="emailErrorMessage.length" :msg="emailErrorMessage" error />
     <!-- password with show/hide button -->
-    <LineOfText msg="Password" bold />
+    <TextComponent msg="Password" class="input-header" bold />
     <input class="password-input" :type="passwordInputType" v-model.trim="password" required
         placeholder="Enter a password of at least 12 characters" tabindex="8" :style="passwordInputStyle" />
     <button @click="togglePasswordInputType" class="small-button" id="show-toggle-button" tabindex="9">
         {{ passwordInputType === 'password' ? 'Show' : 'Hide' }}
     </button>
-    <LineOfText v-if="passwordErrorMessage.length" :msg="passwordErrorMessage" error />
+    <TextComponent v-if="passwordErrorMessage.length" :msg="passwordErrorMessage" error />
     <!-- password confirmation field -->
     <input class="password-input" style="margin-top: -0.5rem;" :type="passwordInputType" @input="validateReenteredPassword"
         v-model.trim="reenteredPassword" placeholder="Enter your password again" tabindex="10" :style="passwordInputStyle"
         required />
-    <LineOfText v-if="reenteredPasswordErrorMessage.length" :msg="reenteredPasswordErrorMessage" error />
+    <TextComponent v-if="reenteredPasswordErrorMessage.length" :msg="reenteredPasswordErrorMessage" error />
     <!-- referrer -->
-    <LineOfText msg="Referred by another user? (Optional)" bold />
+    <TextComponent msg="Referred by another user? (Optional)" class="input-header" bold />
     <input v-model.trim="referrer" tabindex="12" placeholder="Enter their username" />
     <div class="checkbox-container" @click="focusNextCheckbox">
         <input id="first-box" type="checkbox" v-model="termsOfService" tabindex="14">
@@ -261,6 +261,11 @@ input:focus {
     padding-top: 0.25rem;
     position: absolute;
     right: 30%;
+}
+
+.input-header {
+    display: block;
+    margin-bottom: 0.5rem;
 }
 
 .password-input {
