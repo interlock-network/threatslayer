@@ -37,10 +37,10 @@
 import { debounce } from 'debounce';
 import { findEmailError, findNonAlphanumericChars } from "../utilities";
 
-import ForgotPasswordButton from "./components/subcomponents/ForgotPasswordButton.vue";
-import LineOfText from "./components/subcomponents/LineOfText.vue";
-import LoginButton from "./components/subcomponents/LoginButton.vue";
-import PageBanner from "./components/subcomponents/PageBanner.vue";
+import ForgotPasswordButton from "./components/ForgotPasswordButton.vue";
+import LineOfText from "./components/LineOfText.vue";
+import LoginButton from "./components/LoginButton.vue";
+import PageBanner from "./components/PageBanner.vue";
 
 const errorStyle = {
     border: "3px solid red",

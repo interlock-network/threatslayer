@@ -7,7 +7,7 @@
 
 <script>
 import axios from "axios";
-import { clearChromeStorage, setChromeStorage } from '../../../utilities.js';
+import { clearChromeStorage, setChromeStorage } from '../../utilities.js';
 
 export default {
     name: "LogoutButton",

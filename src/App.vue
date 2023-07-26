@@ -18,12 +18,12 @@
 </template>
 <script>
 import AboutPage from "./pages/AboutPage.vue";
+import AccountPage from "./pages/AccountPage.vue";
 import EarnPage from "./pages/EarnPage.vue";
 import FAQPage from "./pages/FAQPage.vue";
 import LoginPage from "./pages/LoginPage.vue";
 import OptionsPage from "./pages/OptionsPage.vue";
 import PageFooter from "./pages/PageFooter.vue";
-import AccountPage from "./pages/AccountPage.vue";
 import SideBar from "./pages/SideBar.vue";
 import SlayCount from "./pages/SlayCount.vue";
 import WalletPage from "./pages/WalletPage.vue";
@@ -151,6 +151,16 @@ input {
 #top-container {
   margin: auto;
   width: 765px;
+}
+
+
+.login-button {
+  background-color: #0F0818;
+  border: none;
+  color: #963cf5;
+  font-size: 1.1rem;
+  font-weight: bold;
+  pointer-events: initial;
 }
 
 .clear-button {

@@ -28,9 +28,9 @@
 </template>
 
 <script>
-import FooterIcons from "./components/subcomponents/FooterIcons.vue";
-import FooterLink from "./components/subcomponents/FooterLink.vue";
-import LineOfText from "./components/subcomponents/LineOfText.vue";
+import FooterIcons from "./components/FooterIcons.vue";
+import FooterLink from "./components/FooterLink.vue";
+import LineOfText from "./components/LineOfText.vue";
 
 export default {
     name: "PageFooter",

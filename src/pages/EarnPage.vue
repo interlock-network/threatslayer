@@ -59,11 +59,11 @@ import { debounce } from 'debounce';
 import { findEmailError, findNonAlphanumericChars } from "../utilities";
 import { hexToU8a, isHex } from '@polkadot/util';
 
-import CreateUserButton from "./components/subcomponents/CreateUserButton.vue";
-import InfoTip from "./components/subcomponents/InfoTip.vue";
-import LineOfText from "./components/subcomponents/LineOfText.vue";
-import PageBanner from "./components/subcomponents/PageBanner.vue";
-import TextComponent from "./components/subcomponents/TextComponent.vue";
+import CreateUserButton from "./components/CreateUserButton.vue";
+import InfoTip from "./components/InfoTip.vue";
+import LineOfText from "./components/LineOfText.vue";
+import PageBanner from "./components/PageBanner.vue";
+import TextComponent from "./components/TextComponent.vue";
 
 
 const errorStyle = {

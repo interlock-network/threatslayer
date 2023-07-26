@@ -25,8 +25,8 @@
     </div>
 </template>
 <script>
-import LineOfText from "./components/subcomponents/LineOfText.vue";
-import PageBanner from "./components/subcomponents/PageBanner.vue";
+import LineOfText from "./components/LineOfText.vue";
+import PageBanner from "./components/PageBanner.vue";
 
 export default {
     name: 'AboutPage',

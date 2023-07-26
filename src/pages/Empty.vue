@@ -2,7 +2,7 @@
     <PageBanner msg="Page Name" />
 </template>
 <script>
-import PageBanner from "./components/subcomponents/PageBanner.vue";
+import PageBanner from "./components/PageBanner.vue";
 
 export default {
     name: '',

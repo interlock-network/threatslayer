@@ -15,9 +15,9 @@
     <WalletButton tabindex="2" />
 </template>
 <script>
-import LineOfText from "./components/subcomponents/LineOfText.vue";
-import PageBanner from "./components/subcomponents/PageBanner.vue";
-import WalletButton from "./components/subcomponents/WalletButton.vue";
+import LineOfText from "./components/LineOfText.vue";
+import PageBanner from "./components/PageBanner.vue";
+import WalletButton from "./components/WalletButton.vue";
 
 export default {
     name: 'AboutPage',

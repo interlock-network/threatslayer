@@ -54,7 +54,7 @@
     </div>
 </template>
 <script>
-import LogoutButton from "./components/subcomponents/LogoutButton.vue";
+import LogoutButton from "./components/LogoutButton.vue";
 
 import { clearChromeStorage, getChromeStorage, setChromeStorage } from '../utilities.js';
 

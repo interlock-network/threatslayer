@@ -95,7 +95,7 @@
     </svg>
 </template>
 <script>
-import PageBanner from "./components/subcomponents/PageBanner.vue";
+import PageBanner from "./components/PageBanner.vue";
 
 import { formatNumber, getFontSizeForTotal, getFontSizeForUnique } from "../utilities";
 
