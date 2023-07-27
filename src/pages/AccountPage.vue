@@ -11,8 +11,9 @@
     <TextComponent mono :msg="address" />
     <br />
     <br />
-    <LineOfText @click="sort" msg="Allowlisted Sites" style="margin-bottom: 1rem;" bold>{{ sortHeader }}</LineOfText>
-    <div id="url-container">
+    <LineOfText v-if="!showClearButton" msg="No allowlisted sites to show" style="margin-bottom: 1rem;" bold />
+    <div v-if="showClearButton" id="url-container">
+        <LineOfText @click="sort" msg="Allowlisted Sites" id="url-allowlist-header" bold>{{ sortHeader }}</LineOfText>
         <table style="margin-left: -7px;">
             <tr v-for="url in sortedAllowlist" style="margin-bottom: 1rem;">
                 <td class="icon-column">
@@ -23,10 +24,9 @@
                 </td>
             </tr>
         </table>
-        <TextComponent v-if="!showClearButton" msg="No URLs allowlisted" />
         <br />
-        <button v-if="showClearButton" @click="clearAllUrls" id="clear-allowlist">Clear all allowlisted URLs</button>
     </div>
+    <button v-if="showClearButton" @click="clearAllUrls" id="clear-allowlist">Clear all allowlisted URLs</button>
 </template>
 <script>
 import LineOfText from "./components/LineOfText.vue";
@@ -134,17 +134,27 @@ export default {
     background-color: #0F0818;
     border: #BB00FD solid 1px;
     border-radius: 12px;
+    bottom: 10rem;
     color: #d0d4d9;
     font-size: 1.25rem;
+    position: absolute;
     padding: 0.5rem 0rem;
     width: 400px;
 }
 
+#url-allowlist-header {
+    margin-bottom: 1rem;
+    position: relative;
+    vertical-align: top;
+}
+
 #url-container {
-    height: 25vh;
+    bottom: 14rem;
+    min-height: 25vh;
     max-height: 25vh;
     margin-top: -0.75rem;
     overflow-y: scroll;
+    position: absolute;
 }
 
 #url-container::-webkit-scrollbar {
