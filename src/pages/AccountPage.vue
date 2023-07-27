@@ -138,8 +138,25 @@ export default {
 
 #url-container {
     height: 25vh;
+    max-height: 25vh;
     margin-top: -0.75rem;
-    overflow: scroll;
+    overflow-y: scroll;
+}
+
+#url-container::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 4px;
+}
+
+#url-container::-webkit-scrollbar-track {
+    background: inherit;
+    border-radius: 2px;
+}
+
+#url-container::-webkit-scrollbar-thumb {
+    background: #d0d4d9;
+    border-radius: 2px;
+    -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
 }
 
 .x-button {

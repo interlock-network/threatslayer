@@ -81,5 +81,6 @@ export default {
 .simple-text {
     color: #D0D4D9;
     margin-bottom: 0.5rem;
+    word-wrap: break-word;
 }
 </style>
