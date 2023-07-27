@@ -45,7 +45,11 @@ export default {
                     result = { "font-weight": "bold" };
                     break;
                 case error:
-                    result = { color: "red" };
+                    result = {
+                        color: "red",
+                        display: 'block',
+                        'margin-top': '-0.5rem'
+                    };
                     break;
                 case footer:
                     result = {
