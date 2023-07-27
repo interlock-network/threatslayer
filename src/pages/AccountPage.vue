@@ -11,14 +11,18 @@
     <TextComponent mono :msg="address" />
     <br />
     <br />
-    <LineOfText @click="sort" msg="Allowlisted Sites" bold>{{ sortHeader }}</LineOfText>
+    <LineOfText @click="sort" msg="Allowlisted Sites" style="margin-bottom: 1rem;" bold>{{ sortHeader }}</LineOfText>
     <div id="url-container">
-        <LineOfText v-for="url in sortedAllowlist" mono>
-            <div style="position: relative">
-                <img @click="clearUrl(url)" class="sidebar-icon" src="/src/assets/images/x-icon.png">
-                <TextComponent :msg="url" mono />
-            </div>
-        </LineOfText>
+        <table style="margin-left: -7px;">
+            <tr v-for="url in sortedAllowlist" style="margin-bottom: 1rem;">
+                <td class="icon-column">
+                    <img @click="clearUrl(url)" class="sidebar-icon" src="/src/assets/images/x-icon.png">
+                </td>
+                <td class="url-column">
+                    <TextComponent :msg="url" mono />
+                </td>
+            </tr>
+        </table>
         <TextComponent v-if="!showClearButton" msg="No URLs allowlisted" />
         <br />
         <button v-if="showClearButton" @click="clearAllUrls" id="clear-allowlist">Clear all allowlisted URLs</button>
@@ -132,7 +136,7 @@ export default {
     border-radius: 12px;
     color: #d0d4d9;
     font-size: 1.25rem;
-    padding: 0.5rem 0.75rem;
+    padding: 0.5rem 0rem;
     width: 400px;
 }
 
@@ -157,6 +161,19 @@ export default {
     background: #d0d4d9;
     border-radius: 2px;
     -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+}
+
+.icon-column {
+    margin-left: -3px;
+    padding-bottom: 1rem;
+    width: 1rem;
+}
+
+.url-column {
+    max-width: 389px;
+    padding-bottom: 1rem;
+    width: 389px;
+    word-wrap: break-word;
 }
 
 .x-button {
