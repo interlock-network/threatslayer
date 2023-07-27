@@ -20,7 +20,7 @@
 <script>
 import PageBanner from "./components/PageBanner.vue";
 import TextComponent from "./components/TextComponent.vue";
-import WalletButton from "./components/WalletButton.vue";
+import WalletButton from "./components/buttons/WalletButton.vue";
 
 export default {
     name: 'AboutPage',

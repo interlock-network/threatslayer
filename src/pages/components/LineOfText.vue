@@ -45,7 +45,7 @@ export default {
             if (!this.msg) {
                 result = {
                     ...result,
-                    'margin-top': '-1.25rem'
+                    'margin-top': '-.25rem'
                 };
             } else if (!this.msg && this.error) {
                 result = {

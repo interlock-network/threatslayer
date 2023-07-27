@@ -9,7 +9,7 @@
 
 <script>
 import axios from "axios";
-import { setChromeStorage } from '../../utilities.js';
+import { setChromeStorage } from '../../../utilities.js';
 
 export default {
     name: "CreateUserButton",

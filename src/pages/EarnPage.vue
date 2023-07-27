@@ -59,7 +59,7 @@ import { debounce } from 'debounce';
 import { findEmailError, findNonAlphanumericChars } from "../utilities";
 import { hexToU8a, isHex } from '@polkadot/util';
 
-import CreateUserButton from "./components/CreateUserButton.vue";
+import CreateUserButton from "./components/buttons/CreateUserButton.vue";
 import InfoTip from "./components/InfoTip.vue";
 import LineOfText from "./components/LineOfText.vue";
 import PageBanner from "./components/PageBanner.vue";

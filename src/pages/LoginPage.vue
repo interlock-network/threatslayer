@@ -21,7 +21,6 @@
     </button>
     <TextComponent :msg="passwordErrorMessage" error v-if="passwordErrorMessage.length" />
     <br />
-    <br />
     <LoginButton :password="password" :usernameOrEmail="usernameOrEmail" :selectPage="selectPage" tabindex="6" />
     <!-- Forgot username / password flow -->
     <br />
@@ -37,8 +36,8 @@
 import { debounce } from 'debounce';
 import { findEmailError, findNonAlphanumericChars } from "../utilities";
 
-import ForgotPasswordButton from "./components/ForgotPasswordButton.vue";
-import LoginButton from "./components/LoginButton.vue";
+import ForgotPasswordButton from "./components/buttons/ForgotPasswordButton.vue";
+import LoginButton from "./components/buttons/LoginButton.vue";
 import PageBanner from "./components/PageBanner.vue";
 import TextComponent from "./components/TextComponent.vue";
 

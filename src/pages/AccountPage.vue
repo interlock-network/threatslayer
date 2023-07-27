@@ -16,8 +16,7 @@
         <LineOfText v-for="url in sortedAllowlist" mono>
             <div style="position: relative">
                 <img @click="clearUrl(url)" class="sidebar-icon" src="/src/assets/images/x-icon.png">
-                {{ url }}
-                <!-- <button @click="clearUrl(url)" class="x-button">X</button> -->
+                <TextComponent :msg="url" mono />
             </div>
         </LineOfText>
         <TextComponent v-if="!showClearButton" msg="No URLs allowlisted" />
