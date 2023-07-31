@@ -12,8 +12,7 @@
             <img class="sidebar-icon" src="/src/assets/images/wallet.png"><span class=sidebar-text>Create Wallet</span>
         </div>
         <div id="sidebar-login" v-if="showLoginPage" class="sidebar-item"
-            :class="currentPage === 'login' ? 'selected-sidebar-item' : ''" @click="selectPage('login')"
-            :checkState="checkState">
+            :class="currentPage === 'login' ? 'selected-sidebar-item' : ''" @click="selectPage('login')">
             <div style="position: relative">
                 <img class="sidebar-icon" src="/src/assets/images/login.png"><span class="sidebar-text">Login</span>
             </div>
@@ -56,11 +55,12 @@
 <script>
 import LogoutButton from "./components/buttons/LogoutButton.vue";
 
-import { clearChromeStorage, getChromeStorage, setChromeStorage } from '../utilities.js';
+import { clearChromeStorage, setChromeStorage } from '../utilities.js';
 
 export default {
     name: 'SideBar',
     props: {
+        checkState: Function,
         currentPage: String,
         selectPage: Function,
     },
@@ -91,30 +91,6 @@ export default {
         }
     },
     methods: {
-        async checkState() {
-            // if logged in, hide register and login pages
-            // then navigate to the profile page
-            const devMode = await getChromeStorage('devMode');
-            const isRegistered = await getChromeStorage('registered');
-            const key = await getChromeStorage('key');
-            const loggedIn = await getChromeStorage('loggedIn');
-            const username = await getChromeStorage('username');
-
-            this.devMode = devMode;
-            this.registered = isRegistered;
-            this.key = key;
-            this.loggedIn = loggedIn;
-            this.username = username;
-
-            if (loggedIn) {
-                // TODO delete this
-                this.selectPage('slayCount');
-            } else if (isRegistered) {
-                this.selectPage('login');
-            } else {
-                this.selectPage('earn');
-            }
-        },
         // TODO delete this
         async _clearLogin() {
             await clearChromeStorage('key');

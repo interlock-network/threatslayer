@@ -1,16 +1,16 @@
 <template>
   <div id="app-container">
     <div id="top-container">
-      <SideBar :selectPage="selectPage" :currentPage="currentPage" />
+      <SideBar :checkState="checkState" :currentPage="currentPage" :selectPage="selectPage" />
       <div id="view-container">
         <EarnPage v-if="currentPage === 'earn'" :selectPage="selectPage" />
         <WalletPage v-if="currentPage === 'wallet'" :selectPage="selectPage" />
-        <LoginPage v-if="currentPage === 'login'" :selectPage="selectPage" />
+        <LoginPage v-if="currentPage === 'login'" :checkState="checkState" :selectPage="selectPage" />
         <SlayCount v-if="currentPage === 'slayCount'" />
         <AboutPage v-if="currentPage === 'about'" />
         <FAQPage v-if="currentPage === 'faq'" />
         <OptionsPage v-if="currentPage === 'options'" />
-        <AccountPage v-if="currentPage === 'account'" />
+        <AccountPage v-if="currentPage === 'account'" :checkState="checkState" />
       </div>
     </div>
     <PageFooter />
@@ -28,6 +28,8 @@ import SideBar from "./pages/SideBar.vue";
 import SlayCount from "./pages/SlayCount.vue";
 import WalletPage from "./pages/WalletPage.vue";
 
+import { getChromeStorage } from './utilities.js';
+
 export default {
   name: 'App',
   components: {
@@ -44,10 +46,34 @@ export default {
   },
   data() {
     return {
-      currentPage: 'earn',
+      currentPage: 'account',
     };
   },
   methods: {
+    async checkState() {
+      // if logged in, hide register and login pages
+      // then navigate to the profile page
+      const devMode = await getChromeStorage('devMode');
+      const isRegistered = await getChromeStorage('registered');
+      const key = await getChromeStorage('key');
+      const loggedIn = await getChromeStorage('loggedIn');
+      const username = await getChromeStorage('username');
+
+      this.devMode = devMode;
+      this.registered = isRegistered;
+      this.key = key;
+      this.loggedIn = loggedIn;
+      this.username = username;
+
+      if (loggedIn) {
+        // TODO delete this
+        this.selectPage('slayCount');
+      } else if (isRegistered) {
+        this.selectPage('login');
+      } else {
+        this.selectPage('earn');
+      }
+    },
     selectPage(page) {
       if (page === 'privacy') {
         // TODO update to real privacy page URL
