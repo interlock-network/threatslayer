@@ -34,7 +34,7 @@
 </template>
 <script>
 import { debounce } from 'debounce';
-import { findEmailError, findNonAlphanumericChars } from "../utilities";
+import { findEmailError, findNonAlphanumericChars, setChromeStorage } from "../utilities";
 
 import ForgotPasswordButton from "./components/buttons/ForgotPasswordButton.vue";
 import LoginButton from "./components/buttons/LoginButton.vue";
@@ -91,8 +91,13 @@ export default {
             this.passwordInputType = this.passwordInputType === 'password' ? 'text' : 'password';
         },
         async unregister() {
-            const unregistered = await chrome.storage.local.set({ 'registered': false });
-            if (unregistered) { console.log('unregistered', unregistered); checkState() };
+            const unregistered = await setChromeStorage({ 'registered': false });
+
+            if (unregistered) {
+                // this forces a check to make the "Start Earning" tab appear in the sidebar
+                await this.checkState();
+            };
+
             this.selectPage('earn');
         },
         validateEmail() {
