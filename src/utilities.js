@@ -1,3 +1,5 @@
+export const baseUrl = 'http://104.131.68.48';
+
 /**
  * This convenience function perforns basic email validation
  * @param {string} email - an email string
@@ -105,6 +107,21 @@ export function getChromeStorage(key) {
 
         return null;
     }
+}
+
+/**
+ * This convenience function perforns basic email validation
+ * @param {string} usernameOrPassword - an email string
+ */
+export function isEmail(usernameOrPassword) {
+    let result = true;
+    const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/;
+
+    if (!emailRegex.test(usernameOrPassword)) {
+        result = false;
+    }
+
+    return result;
 }
 
 /**
