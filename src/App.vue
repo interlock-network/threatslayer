@@ -81,8 +81,7 @@ export default {
     },
     selectPage(page) {
       if (page === 'privacy') {
-        // TODO update to real privacy page URL
-        window.open('https://interlock.network');
+        window.open('https://github.com/interlock-network/knowledgebase-public/blob/main/what/privacy-policy.md');
       } else {
         // change the main page content
         this.currentPage = page;
@@ -156,8 +155,9 @@ input {
   border: 1px solid #818181;
   border-radius: 12px;
   color: #818181;
-  height: 2.25rem;
-  margin-bottom: 1rem;
+  height: 2rem;
+  margin-bottom: 0.75rem;
+  margin-right: 50px;
   padding-left: 0.75rem;
   pointer-events: initial;
   width: 400px;
@@ -189,7 +189,7 @@ input {
   background-color: #0F0818;
   border: none;
   color: #963cf5;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: bold;
   pointer-events: initial;
 }
