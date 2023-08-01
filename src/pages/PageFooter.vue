@@ -6,7 +6,8 @@
                     <td style="width: 30%;"></td>
                     <!-- this column wider to make more space between columns -->
                     <td style="width: 22%;">
-                        <img id="logo-white" src="/src/assets/images/logo_white.svg"><br />
+                        <a href="https://www.interlock.network/" target="_blank">
+                            <img id="logo-white" src="/src/assets/images/logo_white.svg"></a><br />
                         <div id="left-hand-block">
                             <LineOfText msg="Interlock © 2023 All Rights Reserved" footer />
                             <FooterIcons />
