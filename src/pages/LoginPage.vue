@@ -2,7 +2,7 @@
     <PageBanner msg="Login to ThreatSlayer">
         <img class="banner-icon" src="/src/assets/images/login.png">
     </PageBanner>
-    <TextComponent msg="Don't have an account?" instruction /><button class="login-button"
+    <TextComponent msg="Don't have an account?" subinstruction /><button class="login-button"
         @click="unregister">Register</button>
     <br />
     <br />
@@ -21,12 +21,11 @@
     </button>
     <TextComponent :msg="passwordErrorMessage" error v-if="passwordErrorMessage.length" />
     <br />
-    <LoginButton :password="password" :usernameOrEmail="usernameOrEmail" :selectPage="selectPage" tabindex="6" />
+    <LoginButton v-bind="{ password, usernameOrEmail, selectPage }" tabindex="6" />
     <!-- Forgot username / password flow -->
     <br />
     <br />
-    <br />
-    <TextComponent msg="Forgot password?" class="input-header" bold style="margin-top: 5rem;" />
+    <TextComponent msg="Forgot password?" class="input-header" bold style="margin-top: 3rem;" />
     <input type="email" class="input-field-text" id="forgot-info-email" @input="validateEmail" v-model.trim="email" required
         placeholder="Enter your email to change your password" tabindex="8" />
     <TextComponent :msg="emailErrorMessage" error v-if="emailErrorMessage.length" />
@@ -146,6 +145,7 @@ input:focus {
 
 .login-page-submit-button-container {
     color: #d0d4d9;
+    margin-top: 2rem;
     width: 400px;
 }
 
@@ -161,9 +161,5 @@ input:focus {
     opacity: 1;
     outline: none;
     pointer-events: initial;
-}
-
-.submit-button-error {
-    color: red;
 }
 </style>

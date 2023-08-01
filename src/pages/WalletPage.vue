@@ -2,7 +2,7 @@
     <PageBanner msg="Create Wallet">
         <img class="banner-icon" src="/src/assets/images/wallet.png">
     </PageBanner>
-    <TextComponent msg="Already have a wallet?" instruction /><button class="login-button"
+    <TextComponent msg="Already have a wallet?" subinstruction /><button class="login-button"
         @click="selectPage('earn')">Register</button>
     <br />
     <br />
