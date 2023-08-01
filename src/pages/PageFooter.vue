@@ -15,7 +15,9 @@
                     </td>
                     <td style="width: 18%; line-height: 1.25rem;">
                         <LineOfText msg="Company" footer bold />
-                        <FooterLink msg="Privacy Policy" /><br />
+                        <FooterLink msg="Privacy Policy"
+                            url="https://github.com/interlock-network/knowledgebase-public/blob/main/what/privacy-policy.md" />
+                        <br />
                         <FooterLink msg="Do Not Sell My Personal Information." /><br />
                         <FooterLink msg="Terms of Service" />
                     </td>
