@@ -43,7 +43,7 @@
                 @click="selectPage('account');">
                 <img class="sidebar-icon" src="/src/assets/images/account.png">{{ username }}
             </div>
-            <LogoutButton :checkState="checkState" :key="key" :selectPage="selectPage" :username="username" />
+            <LogoutButton v-bind="{ checkState, key, selectPage, username }" />
         </div>
         <!-- TODO delete these four buttons? -->
         <button v-if="devMode" class="" @click="_toggleRegistered" style="pointer-events: initial;">Toggle Register</button>
@@ -62,19 +62,15 @@ export default {
     props: {
         checkState: Function,
         currentPage: String,
+        devMode: Boolean,
+        key: String,
+        loggedIn: Boolean,
+        registered: Boolean,
         selectPage: Function,
+        username: String
     },
     components: {
         LogoutButton
-    },
-    data() {
-        return {
-            devMode: false,
-            key: null,
-            loggedIn: false,
-            registered: false,
-            username: null
-        }
     },
     mounted() {
         this.checkState();

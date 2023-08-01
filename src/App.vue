@@ -1,7 +1,7 @@
 <template>
   <div id="app-container">
     <div id="top-container">
-      <SideBar :checkState="checkState" :currentPage="currentPage" :selectPage="selectPage" />
+      <SideBar v-bind="{ checkState, currentPage, devMode, key, loggedIn, registered, selectPage, username }" />
       <div id="view-container">
         <EarnPage v-if="currentPage === 'earn'" :selectPage="selectPage" />
         <WalletPage v-if="currentPage === 'wallet'" :selectPage="selectPage" />
@@ -47,6 +47,11 @@ export default {
   data() {
     return {
       currentPage: 'account',
+      devMode: false,
+      key: null,
+      loggedIn: false,
+      registered: false,
+      username: null
     };
   },
   methods: {
