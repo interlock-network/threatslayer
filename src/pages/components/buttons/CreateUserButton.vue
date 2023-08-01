@@ -9,7 +9,7 @@
 
 <script>
 import axios from "axios";
-import { setChromeStorage } from '../../../utilities.js';
+import { baseUrl, setChromeStorage } from '../../../utilities.js';
 
 export default {
     name: "CreateUserButton",
@@ -47,12 +47,12 @@ export default {
     },
     methods: {
         async submitForm() {
-            const { address, email, password, referrer, termsOfService, unitedStates, username } = this;
-
+            const { address, email, password, referrer, termsOfService: terms_of_service, unitedStates: united_states, username } = this;
+            const key = 'threatslayer-api-key';
             this.submitting = true;
             this.submitButtonText = 'Waiting...';
 
-            if (!address.length || email.length || password.length || termsOfService || unitedStates || username.length) {
+            if (!address.length || !email.length || !password.length || !terms_of_service || !united_states || !username.length) {
                 this.submitButtonText = 'Incomplete';
                 this.error = true;
 
@@ -60,11 +60,12 @@ export default {
             }
 
             // TODO update with endpoint URL
-            const response = await axios.post('/api/submit', { address, email, password, referrer, termsOfService, unitedStates, username })
+            const response = await axios.post(`${baseUrl}/user-create`, { address, email, key, password, referrer, terms_of_service, united_states, username })
                 .then(res => {
+                    console.log('res', res);
                     return res;
                 }).catch(err => {
-                    console.log('Error logging in:', err);
+                    console.log('Error registering:', err);
                     // TODO update error object
                     return { errors: ['Error submitting to API.'] }
                 });
@@ -78,25 +79,25 @@ export default {
                 this.submitButtonText = 'Success';
 
                 // set API key with user's unique key
-                setChromeStorage({ address }, 'Chrome state for address set after successful registration.', 'Error setting Chrome state for address after successful registration:');
-                setChromeStorage({ email }, 'Chrome state for email set after successful registration.', 'Error setting Chrome state for email after successful registration:');
-                setChromeStorage({ key: response.key }, 'Chrome state for unique API key set after successful registration.', 'Error setting Chrome state for API key after successful registration:');
-                setChromeStorage({ username }, 'Chrome state for username set after successful registration.', 'Error setting Chrome state for username after successful registration:');
+                setChromeStorage({ address });
+                setChromeStorage({ email });
+                setChromeStorage({ key: response.data.key });
+                setChromeStorage({ username });
 
-                const loggedInSynched = setChromeStorage({ loggedIn: true }, 'Chrome state set to logged in after successful registration.', 'Chrome state not set to logged in after successful registration.');
+                const loggedInSynched = await setChromeStorage({ loggedIn: true });
                 // TODO improve this try/catch block
                 if (loggedInSynched) {
                     try {
-                        setChromeStorage({ registered: true }, 'Chrome state set to registered after successful registration.', 'Chrome state not succesfully set to registered after successful registration.');
+                        setChromeStorage({ registered: true });
                     } finally {
-                        this.selectPage('user');
+                        this.selectPage('faq');
                     }
                 } else {
                     // TODO update error message to be an object
-                    this.errorArr.push('Error logging in. Please try again later.')
+                    this.errorArr.push('Error registering. Please try again later.')
                 }
             } else {
-                console.log('Error submitting registration:', response.errors);
+                console.log('Error submitting registration:', errors);
 
                 this.error = true;
                 this.errorArr = [errors, ...this.errorArr];
