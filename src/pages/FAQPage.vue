@@ -3,13 +3,14 @@
         <img class="banner-icon" src="/src/assets/images/faq.png">
     </PageBanner>
     <br />
-    <br />
     <div style="padding-right: 2rem;">
         <TextComponent msg="How does ThreatSlayer protect me?" bold /><br />
-        <br />
-        <TextComponent
-            msg="ThreatSlayer uses threat-detecting AI to instantly block malicious sites and prevent them from stealing your data." />
-        <br />
+        <div>
+            <LineOfText>
+                <span>ThreatSlayer uses <a href="https://www.interlock.network/" target="_blank">Interlock's</a>
+                    threat-detecting AI to instantly block malicious sites and prevent them from stealing your data.</span>
+            </LineOfText>
+        </div>
         <br />
         <br />
         <TextComponent msg="How does ThreatSlayer reward me with $ILOCK?" bold /><br />
