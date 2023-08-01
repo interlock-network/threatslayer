@@ -1,7 +1,6 @@
 <template>
     <div class="login-page-submit-button-container">
-        <button class='submit-button' @click="submitLogin()" :class="computedClass"
-            :disabled="loggingIn || loggedIn || !active">
+        <button class='submit-button' @click="submitLogin()" :class="computedClass" :disabled="loggingIn || loggedIn">
             {{ loginButtonText }}
         </button>
         <!-- TODO add error message here -->
@@ -10,7 +9,7 @@
 
 <script>
 import axios from "axios";
-import { setChromeStorage } from '../../../utilities.js';
+import { baseUrl, isEmail, setChromeStorage } from '../../../utilities.js';
 
 export default {
     name: "LoginButton",
@@ -58,24 +57,34 @@ export default {
     methods: {
         async submitLogin() {
             const { password, usernameOrEmail } = this;
+            const requestBody = { password };
+
+            if (isEmail(usernameOrEmail)) {
+                requestBody.email = usernameOrEmail;
+                requestBody.username = '';
+            } else {
+                requestBody.email = '';
+                requestBody.username = usernameOrEmail;
+            }
 
             this.error = false;
             this.loggingIn = true;
 
             // TODO update with endpoint URL
-            const response = await axios.post('/api/login', { password, usernameOrEmail })
+            const response = await axios.post(`${baseUrl}/user-login`, requestBody)
                 .then(res => res)
                 .catch(err => err);
 
-            const { address, email, key } = response;
+            const { data: { address = '', email = '', key = '' } = {}, errors = [] } = response;
 
             // TODO test this
-            if (!response.errors?.length) {
+            if (!errors.length) {
                 this.loggedIn = true;
                 this.loggingIn = false;
 
                 // set API key with user's unique key
-                setChromeStorage({ address }, 'Chrome state for wallet address set after successful login.', 'Error setting Chrome state wallet address after successful login:');
+                // TODO uncomment this once it's implemented
+                // setChromeStorage({ address }, 'Chrome state for wallet address set after successful login.', 'Error setting Chrome state wallet address after successful login:');
                 setChromeStorage({ email }, 'Chrome state for user email set after successful login.', 'Error setting Chrome state user email after successful login:');
                 setChromeStorage({ key }, 'Chrome state for unique API key set after successful login.', 'Error setting Chrome state user API key after successful login:');
 
@@ -93,16 +102,16 @@ export default {
                     this.loggingIn = false;
 
                     // navigate to user page after logging in
-                    this.selectPage('user');
+                    this.selectPage('slayCount');
                 } else {
                     // TODO add error handling?
                 }
             } else {
                 // TODO show errors
-                console.log('Login error:', response.errors)
+                console.log('Login error:', errors)
 
                 this.error = true;
-                this.errorArr = response.errors;
+                this.errorArr = errors;
                 this.loggedIn = false;
                 this.loggingIn = false;
             }
