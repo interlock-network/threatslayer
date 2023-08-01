@@ -1,13 +1,18 @@
 <template>
     <div class="login-page-submit-button-container">
-        <button class='submit-button' @click="submitLogin()" :class="computedClass" :disabled="loggingIn || loggedIn">
+        <button class='submit-button' @click="submitLogin" :class="computedClass" :disabled="disabled"
+            style="margin-bottom: 1rem; margin-top: 1rem;">
             {{ loginButtonText }}
         </button>
-        <!-- TODO add error message here -->
+        <br />
+        <br />
+        <TextComponent v-for="errorMessage in errorArr" :msg="errorMessage" style="margin-bottom: -1rem;" error />
     </div>
 </template>
 
 <script>
+import TextComponent from "../TextComponent.vue";
+
 import axios from "axios";
 import { baseUrl, isEmail, setChromeStorage } from '../../../utilities.js';
 
@@ -18,9 +23,11 @@ export default {
         password: String,
         usernameOrEmail: String,
     },
+    components: {
+        TextComponent
+    },
     data() {
         return {
-            error: false,
             errorArr: [],
             loggedIn: false,
             loggingIn: false
@@ -30,13 +37,18 @@ export default {
         computedClass() {
             let className = '';
 
-            if (this.error) {
+            if (this.errorArr.length) {
                 className = 'submit-button-error';
             } else {
                 className = 'login-active';
             }
 
             return className;
+        },
+        disabled() {
+            const { loggedIn, loggingIn, password, usernameOrEmail } = this;
+
+            return !password || !usernameOrEmail || loggedIn || loggingIn;
         },
         loginButtonText() {
             let result = '';
@@ -45,7 +57,7 @@ export default {
                 result = 'Success!';
             } else if (this.loggingIn) {
                 result = 'Waiting...';
-            } else if (this.error) {
+            } else if (this.errorArr.length) {
                 result = "Try again later";
             } else {
                 result = 'Login';
@@ -58,6 +70,12 @@ export default {
         async submitLogin() {
             const { password, usernameOrEmail } = this;
             const requestBody = { password };
+            this.errorArr = [];
+            this.loggingIn = true;
+
+            if (!usernameOrEmail?.length) {
+                return;
+            }
 
             if (isEmail(usernameOrEmail)) {
                 requestBody.email = usernameOrEmail;
@@ -67,16 +85,21 @@ export default {
                 requestBody.username = usernameOrEmail;
             }
 
-            this.error = false;
-            this.loggingIn = true;
-
-            // TODO update with endpoint URL
             const response = await axios.post(`${baseUrl}/user-login`, requestBody)
                 .then(res => res)
                 .catch(err => err);
+            console.log('response', response);
+            const { data: { address = '', email = '', key = '' } = {}, errors = [], response: { status = 200, statusText = '' } = {} } = response;
 
-            const { data: { address = '', email = '', key = '' } = {}, errors = [] } = response;
+            if (status >= 400) {
+                console.log(`Forgot password error. Code: ${status}, status text: ${statusText}`);
 
+                this.loggedIn = false;
+                this.loggingIn = false;
+                this.errorArr.push(`Error: ${statusText}`);
+
+                return;
+            }
             // TODO test this
             if (!errors.length) {
                 this.loggedIn = true;
@@ -107,10 +130,8 @@ export default {
                     // TODO add error handling?
                 }
             } else {
-                // TODO show errors
                 console.log('Login error:', errors)
 
-                this.error = true;
                 this.errorArr = errors;
                 this.loggedIn = false;
                 this.loggingIn = false;
