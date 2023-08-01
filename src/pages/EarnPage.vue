@@ -2,14 +2,17 @@
     <PageBanner msg="Sign up for ThreatSlayer">
         <img class="banner-icon" src="/src/assets/images/start_earning.png">
     </PageBanner>
-    <TextComponent msg="Already have an account?" /><button class="login-button"
+    <TextComponent msg="Already have an account?" subinstruction /><button class="login-button"
         @click="selectPage('login')">Login</button><br />
-    <TextComponent msg="Don't have a wallet?" /><button class="login-button" @click="selectPage('wallet')">Create
+    <TextComponent msg="Don't have a wallet?" subinstruction /><button class="login-button"
+        @click="selectPage('wallet')">Create
         one</button>
     <br />
     <br />
     <!-- wallet -->
-    <TextComponent msg="Wallet Address" class="input-header" bold />
+    <!-- 5GrpknVvGGrGH3EFuURXeMrWHvbpj3VfER1oX5jFtuGbfzCE -->
+    <TextComponent msg="Wallet Address" class="input-header" style="display: inline-block" bold /><span> (Aleph
+        Zero-compatible)</span>
     <input id="address-input" @input="validateAddress" v-model.trim="address" placeholder="Paste your wallet address here"
         tabindex="2" :style="addressInputStyle" required />
     <TextComponent v-if="addressErrorMessage.length" :msg="addressErrorMessage" error />
@@ -38,7 +41,7 @@
     <TextComponent v-if="reenteredPasswordErrorMessage.length" :msg="reenteredPasswordErrorMessage" error />
     <!-- referrer -->
     <TextComponent msg="Referred by another user? (Optional)" class="input-header" bold />
-    <input v-model.trim="referrer" tabindex="12" placeholder="Enter their username" />
+    <input v-model.trim="referrer" tabindex="12" placeholder="Enter their ThreatSlayer username" />
     <div class="checkbox-container" @click="focusNextCheckbox">
         <input id="first-box" type="checkbox" v-model="termsOfService" tabindex="14">
         <label for="first-box">Agree to our <a href="https://interlock.network" target="_blank">
@@ -50,8 +53,8 @@
             <InfoTip msg="Cryptocurrency is considered a security in the US so most US residents cannot purchase them." />
         </label>
     </div>
-    <CreateUserButton :address="address" :selectPage="selectPage" :email='email' :password="password" :referrer="referrer"
-        :termsOfService="termsOfService" :unitedStates="unitedStates" :username="username" tabindex="26" />
+    <CreateUserButton v-bind="{ address, selectPage, email, password, referrer, termsOfService, unitedStates, username }"
+        tabindex="26" />
 </template>
 <script>
 import { decodeAddress, encodeAddress } from '@polkadot/keyring';
@@ -64,7 +67,6 @@ import InfoTip from "./components/InfoTip.vue";
 import LineOfText from "./components/LineOfText.vue";
 import PageBanner from "./components/PageBanner.vue";
 import TextComponent from "./components/TextComponent.vue";
-
 
 const errorStyle = {
     border: "3px solid red",
@@ -236,9 +238,9 @@ export default {
 <style>
 input[type="checkbox"] {
     background: #FFFFFF;
-    height: 0.9rem;
+    height: 0.7rem;
     margin-right: 0.5rem;
-    width: 0.9rem;
+    width: 0.7rem;
 }
 
 input[type="checkbox"]:focus {
@@ -255,12 +257,13 @@ input:focus {
 }
 
 #show-toggle-button {
+    background-color: #0F0818;
     border: none;
     color: #963cf5;
     margin-top: 0.4rem;
     padding-top: 0.25rem;
     position: absolute;
-    right: 30%;
+    right: 28%;
 }
 
 .input-header {
@@ -278,6 +281,7 @@ input:focus {
 
 .checkbox-container {
     display: block;
+    font-size: 0.9rem;
     pointer-events: initial;
 }
 </style>
