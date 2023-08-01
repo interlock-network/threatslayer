@@ -8,16 +8,19 @@
     <br />
     <br />
     <TextComponent msg="Wallet Address" bold /> <br />
-    <TextComponent mono :msg="address" />
+    <TextComponent :msg="address" mono />
     <br />
     <br />
     <LineOfText v-if="!showClearButton" msg="No allowlisted sites to show" style="margin-bottom: 1rem;" bold />
     <div v-if="showClearButton" id="url-container">
         <LineOfText @click="sort" msg="Allowlisted Sites" id="url-allowlist-header" bold>{{ sortHeader }}</LineOfText>
+        <TextComponent msg="These are URLs you have marked as safe." subinstruction /><br />
+        <TextComponent msg="They will never be blocked by ThreatSlayer." subinstruction />
         <table style="margin-left: -7px;">
             <tr v-for="url in sortedAllowlist" style="margin-bottom: 1rem;">
                 <td class="icon-column">
-                    <img @click="clearUrl(url)" class="sidebar-icon" src="/src/assets/images/x-icon.png">
+                    <img @click="clearUrl(url)" class="sidebar-icon" style="padding-left: 1px; padding-bottom: 3px;"
+                        src="/src/assets/images/x-icon.png">
                 </td>
                 <td class="url-column">
                     <TextComponent :msg="url" mono />
@@ -41,6 +44,9 @@ export default {
         LineOfText,
         PageBanner,
         TextComponent
+    },
+    props: {
+        checkState: Function,
     },
     data() {
         return {
@@ -143,7 +149,7 @@ export default {
 }
 
 #url-allowlist-header {
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
     position: relative;
     vertical-align: top;
 }
