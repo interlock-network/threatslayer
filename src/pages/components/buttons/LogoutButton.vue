@@ -7,7 +7,7 @@
 
 <script>
 import axios from "axios";
-import { clearChromeStorage, setChromeStorage } from '../../../utilities.js';
+import { baseUrl, clearChromeStorage, setChromeStorage } from '../../../utilities.js';
 
 export default {
     name: "LogoutButton",
@@ -19,7 +19,7 @@ export default {
     },
     data() {
         return {
-            confirmed: false,
+            clickedOnce: false,
             error: false,
             errorArr: [],
             loggingOut: false
@@ -27,7 +27,7 @@ export default {
     },
     computed: {
         computedClass() {
-            return this.error ? 'submit-button-error' : '';
+            return this.error || this.clickedOnce ? 'submit-button-error' : '';
         },
         logoutButtonText() {
             let result = '';
@@ -36,7 +36,7 @@ export default {
                 result = 'Logging Out';
             } else if (this.error) {
                 result = "Try again later";
-            } else if (this.confirmed) {
+            } else if (this.clickedOnce) {
                 result = "Are you sure?";
             } else {
                 result = 'Logout';
@@ -48,8 +48,8 @@ export default {
     methods: {
         async submitLogout() {
             // user must confirm before they are logged out
-            if (!this.confirmed) {
-                this.confirmed = true;
+            if (!this.clickedOnce) {
+                this.clickedOnce = true;
             } else {
                 const { key, username } = this;
 
@@ -57,7 +57,7 @@ export default {
                 this.loggingOut = true;
 
                 // TODO update with endpoint URL
-                const response = await axios.post('/api/logout', { key, username })
+                const response = await axios.post(`${baseUrl}/user-logout`, { key, username })
                     .then(res => res)
                     .catch(err => err);
 
@@ -78,7 +78,7 @@ export default {
                     }
 
                     if (loggedOutSynched) {
-                        this.confirmed = false;
+                        this.clickedOnce = false;
                         this.loggingOut = false;
 
                         // navigate to user page after logging out
