@@ -20,21 +20,21 @@
         <div id="urls-scanned-sub-text">URLs Scanned</div>
         <!-- Unique URLs small left number -->
         <div style="float: left" class="statistic">
-            <p class="statistic-header" id="unique-urls-scanned-text">
+            <span class="statistic-header" id="unique-urls-scanned-text">
                 Unique URLs Scanned
-            </p>
-            <p id="local-unique-urls-scanned-count" class="statistic-value" :style="uniqueVisitedStyle">
+            </span>
+            <span id="local-unique-urls-scanned-count" class="statistic-value" :style="uniqueVisitedStyle">
                 {{ formattedUniqueUrls }}
-            </p>
+            </span>
         </div>
         <!-- Malicious URLs small right number -->
         <div style="float: right; margin-right: 2.5rem;" class="statistic">
-            <p class="statistic-header" id="malicious-sites-detected-text">
+            <span class="statistic-header" id="malicious-sites-detected-text">
                 Malicious Sites Detected
-            </p>
-            <p id="local-malicious-urls-scanned-count" class="statistic-value" :style="maliciousVisitedStyle">
+            </span>
+            <span id="local-malicious-urls-scanned-count" class="statistic-value" :style="maliciousVisitedStyle">
                 {{ totalMaliciousURLsVisited }}
-            </p>
+            </span>
         </div>
     </div>
     <!-- Exported SVG code -->
@@ -97,7 +97,7 @@
 <script>
 import PageBanner from "./components/PageBanner.vue";
 
-import { formatNumber, getFontSizeForTotal, getFontSizeForUnique } from "../utilities";
+import { formatNumber, getFontSizeForTotal, getFontSizeForSmallerNums } from "../utilities";
 
 const output = { name: "SlayCount.png", width: 512, height: 512 };
 
@@ -109,8 +109,8 @@ export default {
     data() {
         return {
             fontSizeForTotal: '123px',
-            fontSizeForUnique: '56px',
-            fontSizeForMalicious: '56px',
+            fontSizeForSmallerNums: '50px',
+            fontSizeForMalicious: '50px',
             formattedUniqueUrls: '0',
             totalURLsVisited: '0',
             totalMaliciousURLsVisited: '0',
@@ -122,7 +122,7 @@ export default {
     },
     computed: {
         maliciousVisitedStyle() {
-            return { "font-size": this.fontSizeForUnique };
+            return { "font-size": this.fontSizeForSmallerNums };
         },
         totalVisitedFontSize() {
             let size = 120; // default size for up to 9999
@@ -136,7 +136,7 @@ export default {
             return `${size}px`;
         },
         uniqueVisitedStyle() {
-            return { "font-size": this.fontSizeForUnique };
+            return { "font-size": this.fontSizeForSmallerNums };
         },
         totalURLsVisitedStyle() {
             return { "font-size": this.totalVisitedFontSize };
@@ -215,7 +215,7 @@ export default {
                             this.fontSizeForTotal = getFontSizeForTotal(numberResponse);
 
                             const rawUniqueEstimate = Math.floor(numberResponse / 8);
-                            this.fontSizeForUnique = getFontSizeForUnique(rawUniqueEstimate);
+                            this.fontSizeForSmallerNums = getFontSizeForSmallerNums(rawUniqueEstimate);
                             this.formattedUniqueUrls = formatNumber(Math.max(rawUniqueEstimate, 1));
                         }
 
@@ -291,20 +291,23 @@ export default {
 
 .statistic {
     text-align: center;
-    margin-top: 30px;
+    margin-top: 15px;
 }
 
 .statistic-header {
+    color: white;
+    display: block;
     font-size: 16px;
     font-family: "THICCCBOI";
     font-weight: bold;
-    color: white;
+    margin-bottom: 0.5rem;
+    margin-top: 1.25rem;
 }
 
 .statistic-value {
+    display: block;
     font-family: "THICCCBOI";
     color: white;
-    margin-top: 0;
 }
 
 #slay-count {

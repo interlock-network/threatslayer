@@ -73,8 +73,8 @@ export function getFontSizeForTotal(num) {
  * This convenience function takes an integer and returns a string to set font size
  * @param {number} num - a dashboard value for number of unique URLs scanned.
  */
-export function getFontSizeForUnique(num) {
-    const defaultSize = "56px";
+export function getFontSizeForSmallerNums(num) {
+    const defaultSize = "50px";
     const sixDigits = "40px";
 
     let result;
