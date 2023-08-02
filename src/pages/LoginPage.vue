@@ -21,7 +21,7 @@
     </button>
     <TextComponent :msg="passwordErrorMessage" error v-if="passwordErrorMessage.length" />
     <br />
-    <LoginButton v-bind="{ password, usernameOrEmail, selectPage }" tabindex="6" />
+    <LoginButton v-bind="{ checkState, password, selectPage, usernameOrEmail }" tabindex="6" />
     <!-- Forgot username / password flow -->
     <br />
     <br />
