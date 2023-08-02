@@ -19,8 +19,9 @@ import { baseUrl, isEmail, setChromeStorage } from '../../../utilities.js';
 export default {
     name: "LoginButton",
     props: {
-        selectPage: Function,
+        checkState: Function,
         password: String,
+        selectPage: Function,
         usernameOrEmail: String,
     },
     components: {
@@ -89,7 +90,7 @@ export default {
                 .then(res => res)
                 .catch(err => err);
             console.log('response', response);
-            const { data: { address = '', email = '', key = '' } = {}, errors = [], response: { status = 200, statusText = '' } = {} } = response;
+            const { data: { address = '', email = '', key = '', username = '' } = {}, errors = [], response: { status = 200, statusText = '' } = {} } = response;
 
             if (status >= 400) {
                 console.log(`Forgot password error. Code: ${status}, status text: ${statusText}`);
@@ -105,36 +106,37 @@ export default {
                 this.loggedIn = true;
                 this.loggingIn = false;
 
-                // set API key with user's unique key
+                // set API key with user's unique key and other values
                 // TODO uncomment this once it's implemented
                 // setChromeStorage({ address }, 'Chrome state for wallet address set after successful login.', 'Error setting Chrome state wallet address after successful login:');
-                setChromeStorage({ email }, 'Chrome state for user email set after successful login.', 'Error setting Chrome state user email after successful login:');
-                setChromeStorage({ key }, 'Chrome state for unique API key set after successful login.', 'Error setting Chrome state user API key after successful login:');
+                const emailSet = await setChromeStorage({ email });
+                const keySet = await setChromeStorage({ key });
+                const setUsername = await setChromeStorage({ username });
 
-                const loggedInSynched = setChromeStorage({ loggedIn: true }, 'Chrome state set to logged in.', 'Error setting Chrome state to logged in.');
-                // TODO improve this try/catch block
-                if (loggedInSynched) {
-                    setChromeStorage({ registered: true }, 'Chrome state set to registered.', 'Chrome state not succesfully set to registered.');
+                if (emailSet && keySet && setUsername) {
+                    this.checkState()
+                    const loggedInSynched = setChromeStorage({ loggedIn: true });
+
+                    // TODO improve this try/catch block
+                    if (loggedInSynched) {
+                        this.loggedIn = true;
+                        this.loggingIn = false;
+
+                        await setChromeStorage({ registered: true });
+                        // navigate to user page after logging in
+                        this.selectPage('slayCount');
+                        this.checkState()
+                    } else {
+                        // TODO update error message to be an object
+                        this.errorArr.push('Error logging in. Please try again later.')
+                    }
                 } else {
-                    // TODO update error message to be an object
-                    this.errorArr.push('Error logging in. Please try again later.')
-                }
+                    console.log('Login error:', errors)
 
-                if (loggedInSynched) {
-                    this.loggedIn = true;
+                    this.errorArr = errors;
+                    this.loggedIn = false;
                     this.loggingIn = false;
-
-                    // navigate to user page after logging in
-                    this.selectPage('slayCount');
-                } else {
-                    // TODO add error handling?
                 }
-            } else {
-                console.log('Login error:', errors)
-
-                this.errorArr = errors;
-                this.loggedIn = false;
-                this.loggingIn = false;
             }
         }
     }
