@@ -4,16 +4,16 @@
     </PageBanner>
     <br />
     <TextComponent msg="Email" bold /> <br />
-    <TextComponent :msg="email" />
+    <TextComponent :msg="email" mono /> <br />
     <br />
     <br />
     <TextComponent msg="Wallet Address" bold /> <br />
-    <TextComponent :msg="address" mono />
+    <TextComponent :msg="address" mono /><br />
     <br />
     <br />
-    <LineOfText v-if="!showClearButton" msg="No allowlisted sites to show" style="margin-bottom: 1rem;" bold />
+    <LineOfText v-if="!showClearButton" msg="No allowlisted sites to show" bold />
     <div v-if="showClearButton" id="url-container">
-        <LineOfText @click="sort" msg="Allowlisted Sites" id="url-allowlist-header" bold>{{ sortHeader }}</LineOfText>
+        <LineOfText @click="sort" msg="Allowlisted Sites" bold>{{ sortHeader }}</LineOfText>
         <TextComponent msg="These are URLs you have marked as safe." subinstruction /><br />
         <TextComponent msg="They will never be blocked by ThreatSlayer." subinstruction />
         <table style="margin-left: -7px;">
@@ -148,19 +148,9 @@ export default {
     width: 400px;
 }
 
-#url-allowlist-header {
-    margin-bottom: 0.5rem;
-    position: relative;
-    vertical-align: top;
-}
-
 #url-container {
-    bottom: 14rem;
     min-height: 25vh;
-    max-height: 25vh;
-    margin-top: -0.75rem;
     overflow-y: scroll;
-    position: absolute;
 }
 
 #url-container::-webkit-scrollbar {
