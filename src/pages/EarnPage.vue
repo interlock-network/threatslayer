@@ -11,50 +11,46 @@
     <br />
     <!-- address -->
     <!-- 5GrpknVvGGrGH3EFuURXeMrWHvbpj3VfER1oX5jFtuGbfzCE -->
-    <TextComponent msg="Wallet Address" class="input-header" style="display: inline-block" bold /><span> (Aleph
-        Zero-compatible)</span>
+    <TextComponent msg="You must have an Aleph Zero-compatible wallet" class="input-header" id="earn-page-top-line" />
     <input id="address-input" @input="validateAddress" v-model.trim="address" :style="addressInputStyle"
         placeholder="Paste your SubWallet / Polkadot / Nova / etc. address here" tabindex="2" required />
     <TextComponent v-if="addressErrorMessage.length" :msg="addressErrorMessage" error />
     <!-- username -->
-    <TextComponent msg="Username" class="input-header" bold />
     <input id="username-input" @input="validateUsername" v-model.trim="username" required tabindex="4"
-        placeholder="Allowed characters are A-Z, a-z and 0-9" :style="usernameInputStyle" />
+        placeholder="Enter a username" :style="usernameInputStyle" />
     <TextComponent v-if="usernameErrorMessage.length" :msg="usernameErrorMessage" error />
     <!-- email -->
-    <TextComponent msg="Email" class="input-header" bold />
     <input type="email" @input="validateEmail" v-model.trim="email" required tabindex="6" :style="emailInputStyle"
-        placeholder="We need your email for verification" />
+        placeholder="Enter your email" />
     <TextComponent v-if="emailErrorMessage.length" :msg="emailErrorMessage" error />
     <!-- password with show/hide button -->
-    <TextComponent msg="Password" class="input-header" bold />
-    <input class="password-input" :type="passwordInputType" v-model.trim="password" required
-        placeholder="Enter a password of at least 12 characters" tabindex="8" :style="passwordInputStyle" />
-    <button @click="togglePasswordInputType" class="small-button" id="show-toggle-button" tabindex="9">
-        {{ passwordInputType === 'password' ? 'Show' : 'Hide' }}
-    </button>
+    <div>
+        <input class="password-input" :type="passwordInputType" v-model.trim="password" required
+            placeholder="Enter a password of at least 12 characters" tabindex="8" :style="passwordInputStyle" />
+        <button @click="togglePasswordInputType" class="small-button" id="show-toggle-button" tabindex="9">
+            {{ passwordInputType === 'password' ? 'Show' : 'Hide' }}
+        </button>
+    </div>
     <TextComponent v-if="passwordErrorMessage.length" :msg="passwordErrorMessage" error />
     <!-- password confirmation field -->
-    <input class="password-input" style="margin-top: -0.5rem;" :type="passwordInputType" @input="validateReenteredPassword"
-        v-model.trim="reenteredPassword" placeholder="Enter your password again" tabindex="10" :style="passwordInputStyle"
-        required />
+    <input class="password-input" :type="passwordInputType" @input="validateReenteredPassword" :style="passwordInputStyle"
+        v-model.trim="reenteredPassword" placeholder="Enter your password again" tabindex="10" required />
     <TextComponent v-if="reenteredPasswordErrorMessage.length" :msg="reenteredPasswordErrorMessage" error />
     <!-- referrer -->
-    <TextComponent msg="Referred by another user? (Optional)" class="input-header" bold />
-    <input v-model.trim="referrer" tabindex="12" placeholder="Enter their ThreatSlayer username" />
-    <div class="checkbox-container" @click="focusNextCheckbox">
+    <input v-model.trim="referrer" tabindex="12" placeholder="Optional: Enter referrer username" />
+    <div class="checkbox-container" style="margin-top: 0.8rem;" @click="focusNextCheckbox">
         <input id="first-box" type="checkbox" v-model="termsOfService" tabindex="14">
         <label for="first-box">Agree to our <a href="https://interlock.network" target="_blank">
                 Terms of Service</a></label>
     </div>
-    <div class="checkbox-container" style="margin-top: -0.5rem;">
+    <div class="checkbox-container">
         <input id="second-box" type="checkbox" v-model="unitedStates" tabindex="16">
         <label for="second-box" style="display: inline-flex;">Affirm you are not a US citizen or resident
             <InfoTip msg="Cryptocurrency is considered a security in the US so most US residents cannot purchase them." />
         </label>
     </div>
-    <CreateUserButton v-bind="{ address, selectPage, email, password, referrer, termsOfService, unitedStates, username }"
-        tabindex="26" />
+    <CreateUserButton style="margin-top: 1.1rem;" tabindex="26"
+        v-bind="{ address, selectPage, email, password, referrer, termsOfService, unitedStates, username }" />
 </template>
 <script>
 import { decodeAddress, encodeAddress } from '@polkadot/keyring';
@@ -257,11 +253,18 @@ input:focus {
     display: block;
 }
 
+#earn-page-top-line {
+    display: block;
+    font-size: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
 #show-toggle-button {
     background-color: #0F0818;
     border: none;
     color: #963cf5;
-    margin-top: 0.4rem;
+    margin-top: 0.3rem;
     padding-top: 0.25rem;
     position: absolute;
     right: 28%;
@@ -270,14 +273,6 @@ input:focus {
 .input-header {
     display: block;
     margin-bottom: 0.5rem;
-}
-
-.password-input {
-    float: left;
-}
-
-.subhead {
-    margin-top: -1rem;
 }
 
 .checkbox-container {
