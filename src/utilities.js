@@ -98,7 +98,7 @@ export function getChromeStorage(key) {
             .get([key])
             .then(response => {
                 const result = response[key];
-                console.log(`Chrome state succesfully retrieved for ${key}: ${result}`);
+                console.log(`Chrome state retrieved for ${key}: ${result}`);
 
                 return result;
             });
@@ -139,7 +139,7 @@ export function setChromeStorage(storageObj) {
             .then(() => {
                 const key = Object.keys(storageObj);
                 const value = storageObj[key];
-                console.log(`Chrome state succesfully set for ${key}: ${value}`);
+                console.log(`Chrome state set for ${key}: ${value}`);
 
                 return true;
             });
@@ -159,7 +159,7 @@ export function clearChromeStorage(key) {
         return chrome.storage.local
             .set({ [key]: null })
             .then(() => {
-                console.log(`Chrome state succesfully cleared for ${key}`);
+                console.log(`Chrome state cleared for ${key}`);
 
                 return true;
             });
