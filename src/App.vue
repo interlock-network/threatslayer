@@ -3,14 +3,14 @@
     <div id="top-container">
       <SideBar v-bind="{ checkState, currentPage, devMode, key, loggedIn, registered, selectPage, username }" />
       <div id="view-container">
-        <EarnPage v-if="currentPage === 'earn'" :selectPage="selectPage" />
+        <EarnPage v-if="currentPage === 'earn'" :checkState="checkState" :selectPage="selectPage" />
         <WalletPage v-if="currentPage === 'wallet'" :selectPage="selectPage" />
         <LoginPage v-if="currentPage === 'login'" :checkState="checkState" :selectPage="selectPage" />
         <SlayCount v-if="currentPage === 'slayCount'" />
         <AboutPage v-if="currentPage === 'about'" />
         <FAQPage v-if="currentPage === 'faq'" />
         <OptionsPage v-if="currentPage === 'options'" />
-        <AccountPage v-if="currentPage === 'account'" :checkState="checkState" />
+        <AccountPage v-if="currentPage === 'account'" v-bind="{ checkState, selectPage, username }" />
       </div>
     </div>
     <PageFooter />
