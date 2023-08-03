@@ -60,13 +60,18 @@ export default {
                 this.errorArr = [];
                 this.loggingOut = true;
 
-                // TODO update with endpoint URL
                 const response = await axios.post(`${baseUrl}/user-logout`, { key, username })
                     .then(res => res)
                     .catch(err => err);
 
-                // TODO test this
-                if (!response.errors?.length) {
+                const { errors = [], response: { status = 200, statusText = '' } = {} } = response;
+
+                if (status >= 400) {
+                    console.log(`Logout user error. Code: ${status}, status text: ${statusText}`);
+
+                    this.loggingOut = false;
+                    this.errorArr.push(`Error: ${statusText}`);
+                } else if (!errors.length) {
                     this.loggingOut = false;
 
                     const keyClearedFromState = await clearChromeStorage('key');
@@ -75,9 +80,7 @@ export default {
 
                     const loggedOutSynched = keyClearedFromState && loggedOut && usernameClearedFromState;
 
-                    // TODO improve this try/catch block
                     if (!loggedOutSynched) {
-                        // TODO update error message to be an object
                         this.errorArr.push('Error logging in. Please try again later.')
                     }
 
@@ -92,7 +95,6 @@ export default {
                         // TODO add error handling?
                     }
                 } else {
-                    // TODO show errors
                     console.log('Logout error:', response.errors)
 
                     this.errorArr = [response.errors];
