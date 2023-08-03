@@ -1,11 +1,13 @@
 <template>
-    <div class="sidebar-item" @click="submitLogout()" :class="computedClass" :disabled="loggingOut">
+    <div class="sidebar-item" @click="submitLogout" :class="computedClass" :disabled="loggingOut">
         <img class="sidebar-icon" src="/src/assets/images/logout.png">{{ logoutButtonText }}
     </div>
-    <!-- TODO add error message here -->
+    <TextComponent v-for="errorMessage in errorArr" :msg="errorMessage" error />
 </template>
 
 <script>
+import TextComponent from "../TextComponent.vue";
+
 import axios from "axios";
 import { baseUrl, clearChromeStorage, setChromeStorage } from '../../../utilities.js';
 
@@ -17,24 +19,26 @@ export default {
         selectPage: Function,
         username: String
     },
+    components: {
+        TextComponent
+    },
     data() {
         return {
             clickedOnce: false,
-            error: false,
             errorArr: [],
             loggingOut: false
         }
     },
     computed: {
         computedClass() {
-            return this.error || this.clickedOnce ? 'submit-button-error' : '';
+            return this.errorArr.length || this.clickedOnce ? 'submit-button-error' : '';
         },
         logoutButtonText() {
             let result = '';
 
             if (this.loggingOut) {
                 result = 'Logging Out';
-            } else if (this.error) {
+            } else if (this.errorArr.length) {
                 result = "Try again later";
             } else if (this.clickedOnce) {
                 result = "Are you sure?";
@@ -53,7 +57,7 @@ export default {
             } else {
                 const { key, username } = this;
 
-                this.error = false;
+                this.errorArr = [];
                 this.loggingOut = true;
 
                 // TODO update with endpoint URL
@@ -65,9 +69,9 @@ export default {
                 if (!response.errors?.length) {
                     this.loggingOut = false;
 
-                    const keyClearedFromState = await clearChromeStorage('key', 'Chrome state for unique API key cleared after successful logout.', 'Error clearing Chrome state user API key after successful logout:');
-                    const loggedOut = await setChromeStorage({ loggedIn: false }, 'Chrome state set to logged out after successful logout.', 'Chrome state not set to logged out after successful logout.');
-                    const usernameClearedFromState = await clearChromeStorage('username', 'Chrome state for username cleared after successful logout.', 'Error clearing Chrome state username after successful logout:');
+                    const keyClearedFromState = await clearChromeStorage('key');
+                    const loggedOut = await setChromeStorage({ loggedIn: false });
+                    const usernameClearedFromState = await clearChromeStorage('username');
 
                     const loggedOutSynched = keyClearedFromState && loggedOut && usernameClearedFromState;
 
@@ -91,8 +95,7 @@ export default {
                     // TODO show errors
                     console.log('Logout error:', response.errors)
 
-                    this.error = true;
-                    this.errorArr = response.errors;
+                    this.errorArr = [response.errors];
                     this.loggingOut = false;
                 }
             }
