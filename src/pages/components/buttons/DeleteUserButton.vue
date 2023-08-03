@@ -5,7 +5,6 @@
             :disabled="disabled">
             <img class="sidebar-icon" src="/src/assets/images/delete-user.png">Delete Account
         </button>
-        <TextComponent v-for="errorMessage in errorArr" :msg="errorMessage" error />
         <div v-if="clickedOnce" style="font-size: 1rem;">
             <TextComponent msg="Are you sure?" id="delete-user-confirm-text" /><br />
             <TextComponent msg="Your account will be deleted forever." /><br />
@@ -13,6 +12,8 @@
             <!-- password input field -->
             <input v-model.trim="password" id="delete-user-password-input"
                 placeholder="Enter password to permanently delete account" />
+            <!-- error message -->
+            <TextComponent v-for="errorMessage in errorArr" :msg="errorMessage" error />
             <!-- delete user button -->
             <button @click="submitDeleteUser" id="delete-user-button" :class="computedClass" :disabled="disabled">
                 {{ deleteUserButtonText }}
@@ -89,8 +90,14 @@ export default {
                     .then(res => res)
                     .catch(err => err);
 
-                // TODO test this
-                if (!response.errors?.length) {
+                const { errors = [], response: { status = 200, statusText = '' } = {} } = response;
+
+                if (status >= 400) {
+                    console.log(`Delete user error. Code: ${status}, status text: ${statusText}`);
+
+                    this.deleting = false;
+                    this.errorArr.push(`Error: ${statusText}`);
+                } else if (!errors.length) {
                     this.deleting = false;
 
                     const keyClearedFromState = await clearChromeStorage('key');
@@ -101,7 +108,6 @@ export default {
 
                     // TODO improve this try/catch block
                     if (!deletedSynched) {
-                        // TODO update error message to be an object
                         this.errorArr.push('Error logging in. Please try again later.')
                     }
 
