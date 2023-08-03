@@ -3,35 +3,40 @@
         <img class="banner-icon" src="/src/assets/images/account.png">Account Info for {{ username }}
     </PageBanner>
     <br />
-    <TextComponent msg="Email" bold /> <br />
-    <TextComponent :msg="email" mono /> <br />
-    <br />
-    <br />
-    <TextComponent msg="Wallet Address" bold /> <br />
-    <TextComponent :msg="address" mono /><br />
-    <br />
-    <br />
-    <LineOfText v-if="!showClearButton" msg="No allowlisted sites to show" bold />
-    <div v-if="showClearButton" id="url-container">
-        <LineOfText @click="sort" msg="Allowlisted Sites" bold>{{ sortHeader }}</LineOfText>
-        <TextComponent msg="These are URLs you have marked as safe." subinstruction /><br />
-        <TextComponent msg="They will never be blocked by ThreatSlayer." subinstruction />
-        <table style="margin-left: -7px;">
-            <tr v-for="url in sortedAllowlist" style="margin-bottom: 1rem;">
-                <td class="icon-column">
-                    <img @click="clearUrl(url)" class="sidebar-icon" style="padding-left: 1px; padding-bottom: 3px;"
-                        src="/src/assets/images/x-icon.png">
-                </td>
-                <td class="url-column">
-                    <TextComponent :msg="url" mono />
-                </td>
-            </tr>
-        </table>
+    <div :style="computedStyle">
+        <TextComponent msg="Email" bold /> <br />
+        <TextComponent :msg="email" mono /> <br />
         <br />
+        <br />
+        <TextComponent msg="Wallet Address" bold /> <br />
+        <TextComponent :msg="address" mono /><br />
+        <br />
+        <br />
+        <LineOfText v-if="!showClearButton" msg="No allowlisted sites to show" bold />
+        <div v-if="showClearButton" id="url-container">
+            <LineOfText @click="sort" msg="Allowlisted Sites" bold>{{ sortHeader }}</LineOfText>
+            <TextComponent msg="These are URLs you have marked as safe." subinstruction /><br />
+            <TextComponent msg="They will never be blocked by ThreatSlayer." subinstruction />
+            <table style="margin-left: -7px;">
+                <tr v-for="url in sortedAllowlist" style="margin-bottom: 1rem;">
+                    <td class="icon-column">
+                        <img @click="clearUrl(url)" class="sidebar-icon" style="padding-left: 1px; padding-bottom: 3px;"
+                            src="/src/assets/images/x-icon.png">
+                    </td>
+                    <td class="url-column">
+                        <TextComponent :msg="url" mono />
+                    </td>
+                </tr>
+            </table>
+            <br />
+        </div>
+        <!-- Note: Commented out until there's a better place for it -->
+        <!-- <button v-if="showClearButton" @click="clearAllUrls" id="clear-allowlist">Clear all allowlisted URLs</button> -->
     </div>
-    <button v-if="showClearButton" @click="clearAllUrls" id="clear-allowlist">Clear all allowlisted URLs</button>
+    <DeleteUserButton v-bind="{ checkState, fadeAccountPage, selectPage, username }" />
 </template>
 <script>
+import DeleteUserButton from "./components/buttons/DeleteUserButton.vue";
 import LineOfText from "./components/LineOfText.vue";
 import PageBanner from "./components/PageBanner.vue";
 import TextComponent from "./components/TextComponent.vue";
@@ -41,18 +46,22 @@ import { getChromeStorage, setChromeStorage } from '../utilities.js';
 export default {
     name: 'AccountPage',
     components: {
+        DeleteUserButton,
         LineOfText,
         PageBanner,
         TextComponent
     },
     props: {
         checkState: Function,
+        selectPage: Function,
+        username: String
     },
     data() {
         return {
             address: '',
             allowlist: null,
             currentSortDir: 'chron', // defaults to chronological / API order
+            deleteAccountClicked: false,
             email: '',
             sortedAllowlist: [],
             username: '',
@@ -63,6 +72,9 @@ export default {
         this.getAllowlist();
     },
     computed: {
+        computedStyle() {
+            return this.deleteAccountClicked ? { opacity: '10%' } : {};
+        },
         sortHeader() {
             let result;
 
@@ -70,12 +82,11 @@ export default {
                 result = '';
             } else {
                 result = this.currentSortDir === 'asc' ? ' ▲' :
-                    this.currentSortDir === 'desc' ? ' ▼' : ' (click to sort)';
+                    this.currentSortDir === 'desc' ? ' ▼' : ' (click here to sort)';
             }
 
             return result;
         },
-        // TODO fix this to update correctly
         showClearButton() {
             return this.allowlist?.length;
         },
@@ -127,10 +138,13 @@ export default {
             this.username = username;
             this.address = address;
         },
-        sort: function () {
+        sort() {
             this.currentSortDir = this.currentSortDir === 'asc' ? 'desc' :
                 this.currentSortDir === 'desc' ? 'chron' : 'asc';
         },
+        fadeAccountPage(bool) {
+            this.deleteAccountClicked = bool;
+        }
     }
 }
 </script>
@@ -140,10 +154,8 @@ export default {
     background-color: #0F0818;
     border: #BB00FD solid 1px;
     border-radius: 12px;
-    bottom: 10rem;
     color: #d0d4d9;
     font-size: 1.25rem;
-    position: absolute;
     padding: 0.5rem 0rem;
     width: 400px;
 }
@@ -151,6 +163,7 @@ export default {
 #url-container {
     min-height: 25vh;
     overflow-y: scroll;
+    margin-bottom: 4rem;
 }
 
 #url-container::-webkit-scrollbar {
