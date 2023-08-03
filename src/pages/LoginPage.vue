@@ -7,13 +7,11 @@
     <br />
     <br />
     <!-- username field -->
-    <TextComponent msg="Username or Email" class="input-header" bold />
-    <input class="input-field-text" id="login-username-or-email" v-model.trim="usernameOrEmail"
-        placeholder="Username or email" tabindex="2" :style="usernameInputStyle" />
+    <input class="input-field-text" id="login-username-or-email" v-model.trim="usernameOrEmail" placeholder="Username"
+        tabindex="2" :style="usernameInputStyle" />
     <TextComponent :msg="usernameErrorMessage" error v-if="usernameErrorMessage.length" />
     <br />
     <!-- password field with show/hide button -->
-    <TextComponent msg="Password" class="input-header" bold />
     <input id="login-password" class="input-field-text password-input" :type="passwordInputType" v-model.trim="password"
         placeholder="Password" tabindex="4" :style="passwordInputStyle" />
     <button @click="togglePasswordInputType" class="small-button" id="show-toggle-button" tabindex="5">
@@ -25,11 +23,11 @@
     <!-- Forgot username / password flow -->
     <br />
     <br />
-    <TextComponent msg="Forgot password?" class="input-header" bold style="margin-top: 3rem;" />
+    <TextComponent msg="Forgot password?" class="input-header" bold style="margin-top: 3rem; margin-bottom: 1rem;" />
     <input type="email" class="input-field-text" id="forgot-info-email" @input="validateEmail" v-model.trim="email" required
         placeholder="Enter your email to change your password" tabindex="8" />
     <TextComponent :msg="emailErrorMessage" error v-if="emailErrorMessage.length" />
-    <ForgotPasswordButton :email="email" tabindex="10" />
+    <ForgotPasswordButton :email="email" style="margin-top: 0.75rem;" tabindex="10" />
 </template>
 <script>
 import { debounce } from 'debounce';
@@ -156,10 +154,8 @@ input:focus {
 }
 
 .login-active {
-    border: 3px solid #3b8de8;
+    border: none;
     color: #963cf5;
-    opacity: 1;
-    outline: none;
     pointer-events: initial;
 }
 </style>
