@@ -48,6 +48,7 @@ export default {
                     result = {
                         color: "red",
                         display: 'block',
+                        'font-size': '1rem',
                         'margin-top': '-0.5rem'
                     };
                     break;
