@@ -9,12 +9,12 @@
         one</button>
     <br />
     <br />
-    <!-- wallet -->
+    <!-- address -->
     <!-- 5GrpknVvGGrGH3EFuURXeMrWHvbpj3VfER1oX5jFtuGbfzCE -->
     <TextComponent msg="Wallet Address" class="input-header" style="display: inline-block" bold /><span> (Aleph
         Zero-compatible)</span>
-    <input id="address-input" @input="validateAddress" v-model.trim="address" placeholder="Paste your wallet address here"
-        tabindex="2" :style="addressInputStyle" required />
+    <input id="address-input" @input="validateAddress" v-model.trim="address" :style="addressInputStyle"
+        placeholder="Paste your SubWallet / Polkadot / Nova / etc. address here" tabindex="2" required />
     <TextComponent v-if="addressErrorMessage.length" :msg="addressErrorMessage" error />
     <!-- username -->
     <TextComponent msg="Username" class="input-header" bold />
@@ -78,6 +78,7 @@ const maxPasswordLength = 16; // number of characters
 export default {
     name: 'EarnPage',
     props: {
+        checkState: Function,
         selectPage: Function,
     },
     components: {
