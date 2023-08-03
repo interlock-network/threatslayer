@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button @click="submitForm()" class="submit-button" :class="computedClass" :disabled="disabled">
+        <button @click="submitForm" class="submit-button" :class="computedClass" :disabled="disabled">
             {{ submitButtonText }}
         </button>
         <TextComponent v-for="errorMessage in errorArr" :msg="errorMessage" error />
@@ -17,10 +17,11 @@ export default {
     name: "CreateUserButton",
     props: {
         address: String,
-        selectPage: Function,
+        checkState: Function,
         email: String,
         password: String,
         referrer: String,
+        selectPage: Function,
         termsOfService: Boolean,
         unitedStates: Boolean,
         username: String,
@@ -74,7 +75,6 @@ export default {
             const key = 'threatslayer-api-key';
             this.submitting = true;
 
-            // TODO update with endpoint URL
             const response = await axios.post(`${baseUrl}/user-create`, { address, email, key, password, referrer, terms_of_service, united_states, username })
                 .then(res => res)
                 .catch(err => err);
@@ -88,32 +88,27 @@ export default {
                 this.submitting = false;
                 this.errorArr.push(`Error: ${statusText}`);
             } else if (!errors?.length) {
-                // TODO test this
                 this.submitted = true;
                 this.submitting = false;
 
                 // set API key with user's unique key
-                setChromeStorage({ address });
-                setChromeStorage({ email });
-                setChromeStorage({ key: response.data.key });
-                setChromeStorage({ username });
-
+                const setAddress = await setChromeStorage({ address });
+                const setEmail = await setChromeStorage({ email });
+                const setKey = await setChromeStorage({ key: response.data.key });
+                const setUsername = await setChromeStorage({ username });
                 const loggedInSynched = await setChromeStorage({ loggedIn: true });
-                // TODO improve this try/catch block
-                if (loggedInSynched) {
-                    try {
-                        setChromeStorage({ registered: true });
-                    } finally {
-                        this.selectPage('faq');
-                    }
+                const registeredSynched = await setChromeStorage({ registered: true });
+
+                if (setAddress && setEmail && setKey && setUsername && loggedInSynched & registeredSynched) {
+                    this.selectPage('faq');
+                    this.checkState();
                 } else {
-                    // TODO update error message to be an object
                     this.errorArr.push('Error registering. Please try again later.')
                 }
             } else {
                 console.log('Error submitting registration:', errors);
 
-                this.errorArr = [errors, ...this.errorArr];
+                this.errorArr = [...errors, ...this.errorArr];
             }
         }
     }
