@@ -61,9 +61,7 @@ export default {
   },
   methods: {
     async checkState() {
-      // if logged in, hide register and login pages
-      // then navigate to the profile page
-      const address = await getChromeStorage('address');
+      const address = await getChromeStorage('address'); // optional, may be missing
       const apiKey = await getChromeStorage('apiKey');
       const devMode = await getChromeStorage('devMode');
       const email = await getChromeStorage('email');
