@@ -9,12 +9,6 @@
         one</button>
     <br />
     <br />
-    <!-- address -->
-    <!-- 5GrpknVvGGrGH3EFuURXeMrWHvbpj3VfER1oX5jFtuGbfzCE -->
-    <TextComponent msg="You must have an Aleph Zero-compatible wallet" class="input-header" id="earn-page-top-line" />
-    <input id="address-input" @input="validateAddress" v-model.trim="address" :style="addressInputStyle"
-        placeholder="Paste your SubWallet / Polkadot / Nova / etc. address here" tabindex="2" required />
-    <TextComponent v-if="addressErrorMessage.length" :msg="addressErrorMessage" error />
     <!-- username -->
     <input id="username-input" @input="validateUsername" v-model.trim="username" required tabindex="4"
         placeholder="Enter a username" :style="usernameInputStyle" />
@@ -36,7 +30,12 @@
     <input class="password-input" :type="passwordInputType" @input="validateReenteredPassword" :style="passwordInputStyle"
         v-model.trim="reenteredPassword" placeholder="Enter your password again" tabindex="10" required />
     <TextComponent v-if="reenteredPasswordErrorMessage.length" :msg="reenteredPasswordErrorMessage" error />
-    <!-- referrer -->
+    <!-- address (optional) -->
+    <!-- 5GrpknVvGGrGH3EFuURXeMrWHvbpj3VfER1oX5jFtuGbfzCE -->
+    <input id="address-input" @input="validateAddress" v-model.trim="address" :style="addressInputStyle"
+        placeholder="Optional: Paste your Aleph Zero-compatible wallet address" tabindex="11" />
+    <TextComponent v-if="addressErrorMessage.length" :msg="addressErrorMessage" error />
+    <!-- referrer (optional) -->
     <input v-model.trim="referrer" tabindex="12" placeholder="Optional: Enter referrer username" />
     <div class="checkbox-container" style="margin-top: 0.8rem;" @click="focusNextCheckbox">
         <input id="first-box" type="checkbox" v-model="termsOfService" tabindex="14">
@@ -65,11 +64,10 @@ import PageBanner from "./components/PageBanner.vue";
 import TextComponent from "./components/TextComponent.vue";
 
 const errorStyle = {
-    border: "3px solid red",
+    border: '3px solid red',
     color: 'red'
 };
 const maxPasswordLength = 16; // number of characters
-
 
 export default {
     name: 'EarnPage',
