@@ -5,6 +5,7 @@
     <br />
     <TextComponent msg="Why Choose ThreatSlayer?" bold />
     <br />
+    <br />
     <div style="padding-right: 2rem;">
         <TextComponent
             msg="In a world where cyber threats are becoming increasingly sophisticated and common, it's crucial to have a solution that not only reacts swiftly but also proactively prevents threats." />

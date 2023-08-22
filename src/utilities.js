@@ -1,4 +1,4 @@
-export const baseUrl = 'http://104.131.68.48';
+export const baseUrl = 'http://159.89.252.13';
 
 /**
  * This convenience function perforns basic email validation
@@ -128,7 +128,7 @@ export function isEmail(usernameOrPassword) {
  * This function gets a single value from Chrome local storage
  * @param {Object} storageObj - A key/value pair to set in Chrome local storage
  * @param {Array.<string>} storageObj.allowlist - A list of URLs
- * @param {string} storageObj.key - User's specific API key
+ * @param {string} storageObj.apiKey - User's specific API key
  * @param {Boolean} storageObj.loggedIn - A key/value pair to set in Chrome local storage
  * @param {Boolean} storageObj.registered - A key/value pair to set in Chrome local storage
  */
