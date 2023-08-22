@@ -1,7 +1,7 @@
 <template>
   <div id="app-container">
     <div id="top-container">
-      <SideBar v-bind="{ checkState, currentPage, devMode, key, loggedIn, registered, selectPage, username }" />
+      <SideBar v-bind="{ apiKey, checkState, currentPage, devMode, loggedIn, registered, selectPage, username }" />
       <div id="view-container">
         <EarnPage v-if="currentPage === 'earn'" :checkState="checkState" :selectPage="selectPage" />
         <WalletPage v-if="currentPage === 'wallet'" :selectPage="selectPage" />
@@ -10,7 +10,7 @@
         <AboutPage v-if="currentPage === 'about'" />
         <FAQPage v-if="currentPage === 'faq'" />
         <OptionsPage v-if="currentPage === 'options'" />
-        <AccountPage v-if="currentPage === 'account'" v-bind="{ checkState, selectPage, username }" />
+        <AccountPage v-if="currentPage === 'account'" v-bind="{ address, checkState, email, selectPage, username }" />
       </div>
     </div>
     <PageFooter />
@@ -46,37 +46,46 @@ export default {
   },
   data() {
     return {
+      address: null,
+      apiKey: null,
       currentPage: 'account',
       devMode: false,
-      key: null,
+      email: null,
       loggedIn: false,
       registered: false,
       username: null
     };
   },
+  mounted() {
+    this.checkState();
+  },
   methods: {
     async checkState() {
       // if logged in, hide register and login pages
       // then navigate to the profile page
+      const address = await getChromeStorage('address');
+      const apiKey = await getChromeStorage('apiKey');
       const devMode = await getChromeStorage('devMode');
-      const isRegistered = await getChromeStorage('registered');
-      const key = await getChromeStorage('key');
+      const email = await getChromeStorage('email');
       const loggedIn = await getChromeStorage('loggedIn');
+      const isRegistered = await getChromeStorage('registered');
       const username = await getChromeStorage('username');
 
       this.devMode = devMode;
-      this.registered = isRegistered;
-      this.key = key;
       this.loggedIn = loggedIn;
-      this.username = username;
+      this.registered = isRegistered;
 
-      if (loggedIn) {
-        // TODO delete this
-        this.selectPage('slayCount');
-      } else if (isRegistered) {
-        this.selectPage('login');
-      } else {
+      if (isRegistered === false) {
         this.selectPage('earn');
+      } else if (loggedIn === false) {
+        this.selectPage('login');
+      } else if (apiKey && email && username) {
+        this.address = address;
+        this.apiKey = apiKey;
+        this.email = email;
+        this.username = username;
+
+        this.selectPage('slayCount');
       }
     },
     selectPage(page) {
@@ -183,7 +192,6 @@ input {
   margin: auto;
   width: 765px;
 }
-
 
 .login-button {
   background-color: #0F0818;
