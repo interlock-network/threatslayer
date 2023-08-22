@@ -8,8 +8,31 @@
         <TextComponent :msg="email" mono /> <br />
         <br />
         <br />
+        <!-- 5GrpknVvGGrGH3EFuURXeMrWHvbpj3VfER1oX5jFtuGbfzCE -->
         <TextComponent msg="Wallet Address" bold /> <br />
-        <TextComponent :msg="address" mono /><br />
+        <div v-if="!address?.length">
+            <TextComponent msg="You must add a wallet address to receive $ILOCK token" subinstruction />
+            <input @input="validateAddress" v-model.trim="newAddress" :style="addressInputStyle" style="margin-top: 0.5rem;"
+                placeholder="Paste your Aleph Zero-compatible wallet address" tabindex="2" />
+            <TextComponent v-if="newAddressErrorMessage.length" :msg="newAddressErrorMessage" error />
+            <!-- password field with show/hide button -->
+            <div v-if="clickedOnce">
+                <TextComponent msg="Enter your password to update your wallet address" subinstruction />
+            </div>
+            <div v-if="clickedOnce">
+                <input id="login-password" class="input-field-text password-input" :type="passwordInputType"
+                    style="margin-top: 0.5rem;" v-model.trim="password" placeholder="Password" tabindex="4"
+                    :style="passwordInputStyle" />
+                <button @click="togglePasswordInputType" class="small-button" id="show-toggle-button"
+                    style="padding-top: 0.75rem;" tabindex="5">
+                    {{ passwordInputType === 'password' ? 'Show' : 'Hide' }}
+                </button>
+                <TextComponent :msg="passwordErrorMessage" error v-if="passwordErrorMessage.length" />
+            </div>
+            <UpdateAddressButton :disabled="disableUpdateAddressButton"
+                v-bind="{ checkState, clickedOnce, newAddress, password, toggleClickedOnce, username }" />
+        </div>
+        <TextComponent v-if="address?.length" :msg="address" mono /><br />
         <br />
         <br />
         <LineOfText v-if="!showClearButton" msg="No allowlisted sites to show" bold />
@@ -40,8 +63,17 @@ import DeleteUserButton from "./components/buttons/DeleteUserButton.vue";
 import LineOfText from "./components/LineOfText.vue";
 import PageBanner from "./components/PageBanner.vue";
 import TextComponent from "./components/TextComponent.vue";
+import UpdateAddressButton from "./components/buttons/UpdateAddressButton.vue";
 
+import { decodeAddress, encodeAddress } from '@polkadot/keyring';
+import { debounce } from 'debounce';
 import { getChromeStorage, setChromeStorage } from '../utilities.js';
+import { hexToU8a, isHex } from '@polkadot/util';
+
+const errorStyle = {
+    border: '3px solid red',
+    color: 'red'
+};
 
 export default {
     name: 'AccountPage',
@@ -49,7 +81,8 @@ export default {
         DeleteUserButton,
         LineOfText,
         PageBanner,
-        TextComponent
+        TextComponent,
+        UpdateAddressButton
     },
     props: {
         address: String,
@@ -61,8 +94,14 @@ export default {
     data() {
         return {
             allowlist: null,
+            clickedOnce: false,
             currentSortDir: 'chron', // defaults to chronological / API order
             deleteAccountClicked: false,
+            newAddress: '',
+            newAddressErrorMessage: '',
+            password: '',
+            passwordErrorMessage: '',
+            passwordInputType: 'password',
             sortedAllowlist: [],
         };
     },
@@ -70,8 +109,14 @@ export default {
         this.getAllowlist();
     },
     computed: {
+        addressInputStyle() {
+            return this.newAddressErrorMessage?.length ? errorStyle : {};
+        },
         computedStyle() {
             return this.deleteAccountClicked ? { opacity: '10%' } : {};
+        },
+        disableUpdateAddressButton() {
+            return !this.clickedOnce;
         },
         sortHeader() {
             let result;
@@ -88,6 +133,9 @@ export default {
         showClearButton() {
             return this.allowlist?.length;
         },
+        showUpdateAddressButton() {
+            return this.newAddress.length && !this.newAddressErrorMessage.length;
+        },
         sortedAllowlist() {
             if (!this.allowlist) return [];
 
@@ -102,7 +150,7 @@ export default {
             }
 
             return result;
-        },
+        }
     },
     methods: {
         async clearAllUrls() {
@@ -122,18 +170,56 @@ export default {
 
             setChromeStorage({ allowlist: updatedAllowlist });
         },
+        fadeAccountPage(bool) {
+            this.deleteAccountClicked = bool;
+        },
         async getAllowlist() {
             const allowlist = await getChromeStorage('allowlist');
 
             this.allowlist = allowlist;
         },
+        legitPolkadot(address) {
+            try {
+                encodeAddress(
+                    isHex(address)
+                        ? hexToU8a(address)
+                        : decodeAddress(address)
+                );
+
+                return true;
+            } catch (_error) {
+                return false;
+            }
+        },
         sort() {
             this.currentSortDir = this.currentSortDir === 'asc' ? 'desc' :
                 this.currentSortDir === 'desc' ? 'chron' : 'asc';
         },
-        fadeAccountPage(bool) {
-            this.deleteAccountClicked = bool;
-        }
+        toggleClickedOnce() {
+            this.clickedOnce = true;
+        },
+        togglePasswordInputType() {
+            this.passwordInputType = this.passwordInputType === 'password' ? 'text' : 'password';
+        },
+        validateAddress: debounce(function (event) {
+            const address = event?.target?.value;
+            this.newAddressErrorMessage = '';
+
+            if (!address || !address.length) {
+                this.newAddressErrorMessage = '';
+            }
+
+            const addressIsValid = this.legitPolkadot(address);
+
+            // happy case
+            if (addressIsValid) {
+                this.newAddressErrorMessage = '';
+            } else if (!address || !address.length) {
+                this.newAddressErrorMessage = '';
+            } else {
+                this.newAddressErrorMessage = 'Not a valid address';
+            }
+        }, 250)
     }
 }
 </script>
