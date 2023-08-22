@@ -50,7 +50,7 @@
         </label>
     </div>
     <CreateUserButton style="margin-top: 1.1rem;" tabindex="26"
-        v-bind="{ address, selectPage, email, password, referrer, termsOfService, unitedStates, username }" />
+        v-bind="{ address, checkState, selectPage, email, password, referrer, termsOfService, unitedStates, username }" />
 </template>
 <script>
 import { decodeAddress, encodeAddress } from '@polkadot/keyring';
