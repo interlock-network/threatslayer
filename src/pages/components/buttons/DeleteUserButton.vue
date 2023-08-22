@@ -100,7 +100,7 @@ export default {
                 } else if (!errors.length) {
                     this.deleting = false;
 
-                    const keyClearedFromState = await clearChromeStorage('key');
+                    const keyClearedFromState = await clearChromeStorage('apiKey');
                     const loggedOut = await setChromeStorage({ loggedIn: false });
                     const usernameClearedFromState = await clearChromeStorage('username');
 

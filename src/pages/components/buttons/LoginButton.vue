@@ -89,7 +89,7 @@ export default {
             const response = await axios.post(`${baseUrl}/user-login`, requestBody)
                 .then(res => res)
                 .catch(err => err);
-            console.log('response', response);
+
             const { data: { address = '', email = '', key = '', username = '' } = {}, errors = [], response: { status = 200, statusText = '' } = {} } = response;
 
             if (status >= 400) {
@@ -110,7 +110,7 @@ export default {
                 // TODO uncomment this once it's implemented
                 // setChromeStorage({ address }, 'Chrome state for wallet address set after successful login.', 'Error setting Chrome state wallet address after successful login:');
                 const emailSet = await setChromeStorage({ email });
-                const keySet = await setChromeStorage({ key });
+                const keySet = await setChromeStorage({ apiKey: key });
                 const setUsername = await setChromeStorage({ username });
 
                 if (emailSet && keySet && setUsername) {
