@@ -64,16 +64,16 @@ export default {
             return result;
         },
         disabled() {
-            const { address, email, password, submitting, submitted, termsOfService: terms_of_service, unitedStates: united_states, username } = this;
+            const { email, password, submitting, submitted, termsOfService: terms_of_service, unitedStates: united_states, username } = this;
 
-            return (!address?.length || !email?.length || !password?.length || submitting || submitted || !terms_of_service || !united_states || !username?.length);
+            return (!email?.length || !password?.length || submitting || submitted || !terms_of_service || !united_states || !username?.length);
         }
     },
     methods: {
         async submitCreateUser() {
             this.errorArr = [];
 
-            const { address, email, password, referrer, termsOfService: terms_of_service, unitedStates: united_states, username } = this;
+            const { address = '', email, password, referrer, termsOfService: terms_of_service, unitedStates: united_states, username } = this;
             const key = 'threatslayer-api-key';
             this.submitting = true;
 
