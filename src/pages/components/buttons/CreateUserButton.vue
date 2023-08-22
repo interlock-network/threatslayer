@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button @click="submitForm" class="submit-button" :class="computedClass" :disabled="disabled">
+        <button @click="submitCreateUser" class="submit-button" :class="computedClass" :disabled="disabled">
             {{ submitButtonText }}
         </button>
         <TextComponent v-for="errorMessage in errorArr" :msg="errorMessage" error />
@@ -66,11 +66,13 @@ export default {
         disabled() {
             const { address, email, password, submitting, submitted, termsOfService: terms_of_service, unitedStates: united_states, username } = this;
 
-            return (!address?.length || !email?.length || !password?.length || submitting || submitted || !terms_of_service || !united_states || !username?.length)
+            return (!address?.length || !email?.length || !password?.length || submitting || submitted || !terms_of_service || !united_states || !username?.length);
         }
     },
     methods: {
-        async submitForm() {
+        async submitCreateUser() {
+            this.errorArr = [];
+
             const { address, email, password, referrer, termsOfService: terms_of_service, unitedStates: united_states, username } = this;
             const key = 'threatslayer-api-key';
             this.submitting = true;
@@ -86,24 +88,29 @@ export default {
 
                 this.submitted = false;
                 this.submitting = false;
-                this.errorArr.push(`Error: ${statusText}`);
+
+                if (errors.length) {
+                    this.errorArr = [...errors];
+                } else {
+                    this.errorArr.push(`Error: ${statusText}`);
+                }
             } else if (!errors?.length) {
                 this.submitted = true;
                 this.submitting = false;
 
                 // set API key with user's unique key
-                const setAddress = await setChromeStorage({ address });
-                const setEmail = await setChromeStorage({ email });
-                const setKey = await setChromeStorage({ key: response.data.key });
-                const setUsername = await setChromeStorage({ username });
                 const loggedInSynched = await setChromeStorage({ loggedIn: true });
                 const registeredSynched = await setChromeStorage({ registered: true });
+                const setAddress = await setChromeStorage({ address });
+                const setApiKey = await setChromeStorage({ apiKey: response.data.key });
+                const setEmail = await setChromeStorage({ email });
+                const setUsername = await setChromeStorage({ username });
 
-                if (setAddress && setEmail && setKey && setUsername && loggedInSynched & registeredSynched) {
+                if (loggedInSynched & registeredSynched && setAddress && setApiKey && setEmail && setUsername) {
                     this.selectPage('faq');
                     this.checkState();
                 } else {
-                    this.errorArr.push('Error registering. Please try again later.')
+                    this.errorArr.push('Error registering. Please try again later.');
                 }
             } else {
                 console.log('Error submitting registration:', errors);
