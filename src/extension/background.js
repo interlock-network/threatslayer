@@ -33,8 +33,8 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
                 selectedBaseAPIUrl = betaBaseAPIUrl;
             }
 
-            chrome.storage.local.get(["key"]).then((result) => {
-                const key = result.key || 'threatslayer-api-key';
+            chrome.storage.local.get(['apiKey']).then((result) => {
+                const key = result.apiKey || 'threatslayer-api-key';
 
                 fetch(`${selectedBaseAPIUrl}/malicious_p`, {
                     ...defaultConfig,

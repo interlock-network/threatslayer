@@ -15,7 +15,7 @@ export default {
     name: "LogoutButton",
     props: {
         checkState: Function,
-        key: String,
+        apiKey: String,
         selectPage: Function,
         username: String
     },
@@ -55,12 +55,12 @@ export default {
             if (!this.clickedOnce) {
                 this.clickedOnce = true;
             } else {
-                const { key, username } = this;
+                const { apiKey, username } = this;
 
                 this.errorArr = [];
                 this.loggingOut = true;
 
-                const response = await axios.post(`${baseUrl}/user-logout`, { key, username })
+                const response = await axios.post(`${baseUrl}/user-logout`, { key: apiKey, username })
                     .then(res => res)
                     .catch(err => err);
 
@@ -74,11 +74,13 @@ export default {
                 } else if (!errors.length) {
                     this.loggingOut = false;
 
-                    const keyClearedFromState = await clearChromeStorage('key');
+                    const addressClearedFromState = await clearChromeStorage('address');
+                    const emailClearedFromState = await clearChromeStorage('email');
+                    const keyClearedFromState = await clearChromeStorage('apiKey');
                     const loggedOut = await setChromeStorage({ loggedIn: false });
                     const usernameClearedFromState = await clearChromeStorage('username');
 
-                    const loggedOutSynched = keyClearedFromState && loggedOut && usernameClearedFromState;
+                    const loggedOutSynched = addressClearedFromState && emailClearedFromState && keyClearedFromState && loggedOut && usernameClearedFromState;
 
                     if (!loggedOutSynched) {
                         this.errorArr.push('Error logging in. Please try again later.')

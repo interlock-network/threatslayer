@@ -1,6 +1,5 @@
 <template>
     <div id="sidebar-nav">
-        <!-- Key: {{ key }}, Username: {{ username }} -->
         <img id="threatslayer-logo" src="/src/assets/images/threatslayer_logo.png">
         <div id="sidebar-earn" v-if="showRegisterPage" class="sidebar-item"
             :class="currentPage === 'earn' ? 'selected-sidebar-item' : ''" @click="selectPage('earn')">
@@ -43,9 +42,9 @@
                 @click="selectPage('account');">
                 <img class="sidebar-icon" src="/src/assets/images/account.png">{{ username }}
             </div>
-            <LogoutButton v-bind="{ checkState, key, selectPage, username }" />
+            <LogoutButton v-bind="{ apiKey, checkState, selectPage, username }" />
         </div>
-        <!-- TODO delete these four buttons? -->
+        <!-- TODO delete these four buttons -->
         <button v-if="devMode" class="" @click="_toggleRegistered" style="pointer-events: initial;">Toggle Register</button>
         <button v-if="devMode" class="" @click="_toggleLoggedIn" style="pointer-events: initial;">Toggle Login</button>
         <button v-if="devMode" class="" @click="_clearLogin" style="pointer-events: initial;">Clear Login</button>
@@ -60,10 +59,10 @@ import { clearChromeStorage, setChromeStorage } from '../utilities.js';
 export default {
     name: 'SideBar',
     props: {
+        apiKey: String,
         checkState: Function,
         currentPage: String,
         devMode: Boolean,
-        key: String,
         loggedIn: Boolean,
         registered: Boolean,
         selectPage: Function,
@@ -77,10 +76,10 @@ export default {
     },
     computed: {
         showRegisterPage() {
-            return !this.registered;
+            return this.registered === false;
         },
         showLoginPage() {
-            return !this.loggedIn || !this.registered;
+            return this.loggedIn === false || this.registered === false;
         },
         showLogoutButton() {
             return this.loggedIn;
@@ -89,7 +88,9 @@ export default {
     methods: {
         // TODO delete this
         async _clearLogin() {
-            await clearChromeStorage('key');
+            await clearChromeStorage('address');
+            await clearChromeStorage('apiKey');
+            await clearChromeStorage('email');
             await clearChromeStorage('username');
             await setChromeStorage({ loggedIn: false });
             await setChromeStorage({ allowlist: null });
@@ -106,7 +107,7 @@ export default {
 
             const addressSet = await setChromeStorage({ address }, `Set address as ${address}`, `Error setting key as ${address}`);
             const emailSet = await setChromeStorage({ email }, `Set email as ${email}`, `Error setting email as ${email}`);
-            const keySet = await setChromeStorage({ key }, `Set key as ${key}`, `Error setting key as ${key}`);
+            const keySet = await setChromeStorage({ apiKey: key }, `Set key as ${key}`, `Error setting key as ${key}`);
             const loggedInSet = await setChromeStorage({ loggedIn }, `Set loggedIn as ${loggedIn}`, `Error setting loggedIn as ${loggedIn}`);
             const usernameSet = await setChromeStorage({ username }, `Set username as ${username}`, `Error setting key as ${username}`);
 
@@ -121,8 +122,8 @@ export default {
 
             if (nextRegistered) {
                 await clearChromeStorage('address');
+                await clearChromeStorage('apiKey');
                 await clearChromeStorage('email');
-                await clearChromeStorage('key');
                 await clearChromeStorage('username');
             }
 
