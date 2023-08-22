@@ -52,23 +52,21 @@ export default {
         TextComponent
     },
     props: {
+        address: String,
         checkState: Function,
+        email: String,
         selectPage: Function,
         username: String
     },
     data() {
         return {
-            address: '',
             allowlist: null,
             currentSortDir: 'chron', // defaults to chronological / API order
             deleteAccountClicked: false,
-            email: '',
             sortedAllowlist: [],
-            username: '',
         };
     },
     mounted() {
-        this.getUserInfo();
         this.getAllowlist();
     },
     computed: {
@@ -128,15 +126,6 @@ export default {
             const allowlist = await getChromeStorage('allowlist');
 
             this.allowlist = allowlist;
-        },
-        async getUserInfo() {
-            const email = await getChromeStorage('email');
-            const username = await getChromeStorage('username');
-            const address = await getChromeStorage('address');
-
-            this.email = email;
-            this.username = username;
-            this.address = address;
         },
         sort() {
             this.currentSortDir = this.currentSortDir === 'asc' ? 'desc' :
