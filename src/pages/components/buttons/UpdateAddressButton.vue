@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button @click="submitUpdateAddress" class="submit-button" :class="computedClass" :disabled="disabled"
+        <button @click="submitUpdateAddress" class="secondary-hollow-button" :class="computedClass" :disabled="disabled"
             style="margin-right: 10%;">
             {{ submitButtonText }}
         </button>
