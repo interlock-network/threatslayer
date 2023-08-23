@@ -1,6 +1,6 @@
 <template>
     <div class="login-page-submit-button-container">
-        <button class='forgot-password-button' @click="submitForgotPassword" :class="computedClass" :disabled="disabled"
+        <button class='secondary-hollow-button' @click="submitForgotPassword" :class="computedClass" :disabled="disabled"
             tabindex="99">
             {{ forgotPasswordButtonText }}
         </button>
@@ -102,14 +102,4 @@ export default {
 };
 </script>
 
-<style>
-.forgot-password-button {
-    background-color: #0F0818;
-    border: #BB00FD solid 1px;
-    border-radius: 12px;
-    color: #d0d4d9;
-    font-size: 1.25rem;
-    padding: 0.5rem 0.75rem;
-    width: 400px;
-}
-</style>
+<style></style>

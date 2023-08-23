@@ -222,6 +222,16 @@ input {
   width: 20px;
 }
 
+.secondary-hollow-button {
+  background-color: #0F0818;
+  border: #BB00FD solid 1px;
+  border-radius: 12px;
+  color: #d0d4d9;
+  font-size: 1.25rem;
+  padding: 0.5rem 0.75rem;
+  width: 400px;
+}
+
 .small-button {
   background-color: #060708;
   border: 1px solid #d0d4d9;
