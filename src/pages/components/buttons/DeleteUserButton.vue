@@ -10,17 +10,21 @@
             <TextComponent msg="Your account will be deleted forever." /><br />
             <TextComponent msg="You will lose any $ILOCK not transferred to a wallet." /><br />
             <!-- password input field -->
-            <input v-model.trim="password" id="delete-user-password-input" :type="passwordInputType"
-                placeholder="Enter password to permanently delete account" tabindex="6" />
-            <button @click="togglePasswordInputType" class="small-button" id="delete-user-toggle-button" tabindex="8">
-                {{ passwordInputType === 'password' ? 'Show' : 'Hide' }}
-            </button>
-            <!-- error message -->
-            <TextComponent v-for="errorMessage in errorArr" :msg="errorMessage" error />
+            <div style="position: relative;">
+                <input v-model.trim="password" id="delete-user-password-input" :type="passwordInputType"
+                    placeholder="Enter password to permanently delete account" tabindex="6" />
+                <button @click="togglePasswordInputType" class="small-button" id="delete-user-toggle-button" tabindex="8">
+                    {{ passwordInputType === 'password' ? 'Show' : 'Hide' }}
+                </button>
+            </div>
             <!-- delete user button -->
+            <br />
+            <br />
             <button @click="submitDeleteUser" id="delete-user-button" :class="computedClass" :disabled="disabled">
                 {{ deleteUserButtonText }}
             </button>
+            <!-- error message -->
+            <TextComponent v-for="errorMessage in errorArr" :msg="errorMessage" error />
             <!-- cancel button -->
             <button @click="fadeAccountPage(false); this.clickedOnce = false;" id="cancel-delete-user-button"
                 style="color: #963cf5;">Cancel</button>
@@ -185,15 +189,15 @@ export default {
 
 #delete-user-password-input {
     margin-top: 1rem;
+    position: absolute;
 }
 
 #delete-user-toggle-button {
     background-color: #0F0818;
     border: none;
     color: #963cf5;
-    /* margin-top: 0.3rem;
-    padding-top: 0.25rem;
+    margin-top: 1.45rem;
     position: absolute;
-    right: 28%; */
+    right: 4%;
 }
 </style>
