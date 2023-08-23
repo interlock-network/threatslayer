@@ -10,8 +10,11 @@
         <br />
         <!-- 5GrpknVvGGrGH3EFuURXeMrWHvbpj3VfER1oX5jFtuGbfzCE -->
         <TextComponent msg="Wallet Address" bold /> <br />
-        <div v-if="!address?.length">
-            <TextComponent msg="You must add a wallet address to receive $ILOCK token" subinstruction />
+        <!-- prompt to add wallet address if there is none -->
+        <div v-if="showAddressInput">
+            <!-- input field with prompt for new address -->
+            <TextComponent :msg="updateAddressMsg" subinstruction /><button id="cancel-change-address"
+                @click="toggleChangeAddress">Cancel</button>
             <input @input="validateAddress" v-model.trim="newAddress" :style="addressInputStyle" style="margin-top: 0.5rem;"
                 placeholder="Paste your Aleph Zero-compatible wallet address" tabindex="2" />
             <TextComponent v-if="newAddressErrorMessage.length" :msg="newAddressErrorMessage" error />
@@ -28,11 +31,14 @@
                     {{ passwordInputType === 'password' ? 'Show' : 'Hide' }}
                 </button>
                 <TextComponent :msg="passwordErrorMessage" error v-if="passwordErrorMessage.length" />
+                <!-- button to update address -->
             </div>
             <UpdateAddressButton :disabled="disableUpdateAddressButton"
                 v-bind="{ checkState, clickedOnce, newAddress, password, toggleClickedOnce, username }" />
         </div>
-        <TextComponent v-if="address?.length" :msg="address" mono /><br />
+        <TextComponent v-if="showAddress" :msg="address" mono /><br />
+        <button v-if="!changeAddressSelected" id="update-address-button" @click="toggleChangeAddress">Update
+            Address</button>
         <br />
         <br />
         <LineOfText v-if="!showClearButton" msg="No allowlisted sites to show" bold />
@@ -94,6 +100,7 @@ export default {
     data() {
         return {
             allowlist: null,
+            changeAddressSelected: false,
             clickedOnce: false,
             currentSortDir: 'chron', // defaults to chronological / API order
             deleteAccountClicked: false,
@@ -118,20 +125,14 @@ export default {
         disableUpdateAddressButton() {
             return !this.clickedOnce;
         },
-        sortHeader() {
-            let result;
-
-            if (!this.allowlist?.length || this.allowlist.length === 1) {
-                result = '';
-            } else {
-                result = this.currentSortDir === 'asc' ? ' ▲' :
-                    this.currentSortDir === 'desc' ? ' ▼' : ' (click here to sort)';
-            }
-
-            return result;
-        },
         showClearButton() {
             return this.allowlist?.length;
+        },
+        showAddress() {
+            return this.address?.length && !this.changeAddressSelected;
+        },
+        showAddressInput() {
+            return !this.address?.length || this.changeAddressSelected;
         },
         showUpdateAddressButton() {
             return this.newAddress.length && !this.newAddressErrorMessage.length;
@@ -150,6 +151,21 @@ export default {
             }
 
             return result;
+        },
+        sortHeader() {
+            let result;
+
+            if (!this.allowlist?.length || this.allowlist.length === 1) {
+                result = '';
+            } else {
+                result = this.currentSortDir === 'asc' ? ' ▲' :
+                    this.currentSortDir === 'desc' ? ' ▼' : ' (click here to sort)';
+            }
+
+            return result;
+        },
+        updateAddressMsg() {
+            return !this.address?.length ? "You must add a wallet address to receive $ILOCK token." : "Enter your new wallet address.";
         }
     },
     methods: {
@@ -195,6 +211,9 @@ export default {
             this.currentSortDir = this.currentSortDir === 'asc' ? 'desc' :
                 this.currentSortDir === 'desc' ? 'chron' : 'asc';
         },
+        toggleChangeAddress() {
+            this.changeAddressSelected = !this.changeAddressSelected;
+        },
         toggleClickedOnce() {
             this.clickedOnce = true;
         },
@@ -225,6 +244,15 @@ export default {
 </script>
 
 <style>
+#cancel-change-address {
+    background-color: #0F0818;
+    border: none;
+    color: red;
+    float: right;
+    font-size: 1rem;
+    padding-right: 50px;
+}
+
 #clear-allowlist {
     background-color: #0F0818;
     border: #BB00FD solid 1px;
@@ -232,6 +260,15 @@ export default {
     color: #d0d4d9;
     font-size: 1.25rem;
     padding: 0.5rem 0rem;
+    width: 400px;
+}
+
+#update-address-button {
+    background-color: #0F0818;
+    border: none;
+    color: #BB00FD;
+    font-size: 1rem;
+    padding: 0.5rem 0.75rem;
     width: 400px;
 }
 
