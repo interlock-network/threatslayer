@@ -13,14 +13,14 @@
         <!-- prompt to add wallet address if there is none -->
         <div v-if="showAddressInput">
             <!-- input field with prompt for new address -->
-            <TextComponent :msg="updateAddressMsg" subinstruction /><button id="cancel-change-address"
-                @click="toggleChangeAddress">Cancel</button>
+            <TextComponent :msg="updateAddressMsg" subinstruction /><button v-if="changeAddressSelected"
+                id="cancel-change-address" @click="toggleChangeAddress">Cancel</button>
             <input @input="validateAddress" v-model.trim="newAddress" :style="addressInputStyle" style="margin-top: 0.5rem;"
                 placeholder="Paste your Aleph Zero-compatible wallet address" tabindex="2" />
             <TextComponent v-if="newAddressErrorMessage.length" :msg="newAddressErrorMessage" error />
             <!-- password field with show/hide button -->
             <div v-if="clickedOnce">
-                <TextComponent msg="Enter your password to update your wallet address" subinstruction />
+                <TextComponent msg="Enter your password to update your wallet address." subinstruction />
             </div>
             <div v-if="clickedOnce">
                 <input id="login-password" class="input-field-text password-input" :type="passwordInputType"
@@ -37,7 +37,7 @@
                 v-bind="{ checkState, clickedOnce, newAddress, password, toggleClickedOnce, username }" />
         </div>
         <TextComponent v-if="showAddress" :msg="address" mono /><br />
-        <button v-if="!changeAddressSelected" id="update-address-button" @click="toggleChangeAddress">Update
+        <button v-if="showAddress" id="update-address-button" @click="toggleChangeAddress">Update
             Address</button>
         <br />
         <br />
