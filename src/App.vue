@@ -150,6 +150,10 @@ body {
   /* pointer-events: none; */
 }
 
+button {
+  cursor: default;
+}
+
 h1,
 h2,
 h3 {

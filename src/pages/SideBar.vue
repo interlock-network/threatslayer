@@ -167,6 +167,7 @@ export default {
 }
 
 .sidebar-item {
+    cursor: default;
     line-height: 2rem;
     margin-bottom: 0.5rem;
     pointer-events: initial;
