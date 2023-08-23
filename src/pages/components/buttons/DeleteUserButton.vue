@@ -8,10 +8,13 @@
         <div v-if="clickedOnce" style="font-size: 1rem;">
             <TextComponent msg="Are you sure?" id="delete-user-confirm-text" /><br />
             <TextComponent msg="Your account will be deleted forever." /><br />
-            <TextComponent msg="This action cannot be undone." />
+            <TextComponent msg="You will lose any $ILOCK not transferred to a wallet." /><br />
             <!-- password input field -->
-            <input v-model.trim="password" id="delete-user-password-input"
-                placeholder="Enter password to permanently delete account" />
+            <input v-model.trim="password" id="delete-user-password-input" :type="passwordInputType"
+                placeholder="Enter password to permanently delete account" tabindex="6" />
+            <button @click="togglePasswordInputType" class="small-button" id="delete-user-toggle-button" tabindex="8">
+                {{ passwordInputType === 'password' ? 'Show' : 'Hide' }}
+            </button>
             <!-- error message -->
             <TextComponent v-for="errorMessage in errorArr" :msg="errorMessage" error />
             <!-- delete user button -->
@@ -48,7 +51,8 @@ export default {
             confirm: false,
             errorArr: [],
             deleting: false,
-            password: ''
+            password: '',
+            passwordInputType: 'password',
         }
     },
     computed: {
@@ -132,12 +136,26 @@ export default {
                     fadeAccountPage(false);
                 }
             }
+        },
+        togglePasswordInputType() {
+            this.passwordInputType = this.passwordInputType === 'password' ? 'text' : 'password';
         }
     }
 };
 </script>
 
 <style>
+#cancel-delete-user-button {
+    font-size: 1.25rem;
+    background-color: #0F0818;
+    border: none;
+    color: red;
+    cursor: pointer;
+    font-size: 1.25rem;
+    padding-top: 1rem;
+    width: 400px;
+}
+
 #delete-user-button-container {
     background-color: #0F0818;
     border-radius: 12px;
@@ -169,14 +187,13 @@ export default {
     margin-top: 1rem;
 }
 
-#cancel-delete-user-button {
-    font-size: 1.25rem;
+#delete-user-toggle-button {
     background-color: #0F0818;
     border: none;
-    color: red;
-    cursor: pointer;
-    font-size: 1.25rem;
-    padding-top: 1rem;
-    width: 400px;
+    color: #963cf5;
+    /* margin-top: 0.3rem;
+    padding-top: 0.25rem;
+    position: absolute;
+    right: 28%; */
 }
 </style>
