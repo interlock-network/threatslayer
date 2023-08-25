@@ -18,7 +18,7 @@
                         <FooterLink msg="Privacy Policy"
                             url="https://github.com/interlock-network/knowledgebase-public/blob/main/what/privacy-policy.md" />
                         <br />
-                        <FooterLink msg="Do Not Sell My Personal Information." /><br />
+                        <FooterButton msg="Do Not Sell My Personal Information." :clickAction="openAlert" /><br />
                         <FooterLink msg="Terms of Service" />
                     </td>
                     <td>
@@ -31,6 +31,7 @@
 </template>
 
 <script>
+import FooterButton from "./components/buttons/FooterButton.vue";
 import FooterIcons from "./components/FooterIcons.vue";
 import FooterLink from "./components/FooterLink.vue";
 import LineOfText from "./components/LineOfText.vue";
@@ -38,9 +39,15 @@ import LineOfText from "./components/LineOfText.vue";
 export default {
     name: "PageFooter",
     components: {
+        FooterButton,
         FooterIcons,
         FooterLink,
         LineOfText
+    },
+    methods: {
+        openAlert() {
+            alert('To delete all of your user data, login to your account and click on your username in the sidebar to open your account information. Then click "Delete Account" at the bottom of the page.')
+        }
     }
 };
 </script>
