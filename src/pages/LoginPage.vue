@@ -7,8 +7,8 @@
     <br />
     <br />
     <!-- username field -->
-    <input class="input-field-text" id="login-username-or-email" v-model.trim="usernameOrEmail" placeholder="Username"
-        tabindex="2" :style="usernameInputStyle" />
+    <input class="input-field-text" id="login-username-or-email" v-model.trim="usernameOrEmail"
+        placeholder="Username or email" tabindex="2" :style="usernameInputStyle" />
     <TextComponent :msg="usernameErrorMessage" error v-if="usernameErrorMessage.length" />
     <br />
     <!-- password field with show/hide button -->
