@@ -93,7 +93,7 @@ export default {
             const { data: { address = '', email = '', key = '', username = '' } = {}, errors = [], response: { status = 200, statusText = '' } = {} } = response;
 
             if (status >= 400) {
-                console.log(`Forgot password error. Code: ${status}, status text: ${statusText}`);
+                console.log(`Login error. Code: ${status}, status text: ${statusText}`);
 
                 this.loggedIn = false;
                 this.loggingIn = false;
