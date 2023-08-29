@@ -1,5 +1,5 @@
 <template>
-    <div id="delete-user-button-container" :style="clickedOnce ? 'bottom: 40%' : 'bottom: 8rem;'">
+    <div id="delete-user-button-container" :style="clickedOnce ? 'bottom: 40%' : 'bottom: 10rem;'">
         <!-- initial delete user button -->
         <button v-if="!clickedOnce" @click="submitDeleteUser" id="delete-user-button" :class="computedClass"
             :disabled="disabled">
