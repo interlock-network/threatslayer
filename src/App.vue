@@ -10,7 +10,8 @@
         <AboutPage v-if="currentPage === 'about'" />
         <FAQPage v-if="currentPage === 'faq'" />
         <OptionsPage v-if="currentPage === 'options'" />
-        <AccountPage v-if="currentPage === 'account'" v-bind="{ address, checkState, email, selectPage, username }" />
+        <AccountPage v-if="currentPage === 'account'"
+          v-bind="{ address, apiKey, checkState, email, selectPage, username }" />
       </div>
     </div>
     <PageFooter />

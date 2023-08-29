@@ -34,7 +34,7 @@
                 <!-- button to update address -->
             </div>
             <UpdateAddressButton :disabled="disableUpdateAddressButton"
-                v-bind="{ checkState, clickedOnce, newAddress, password, toggleClickedOnce, username }" />
+                v-bind="{ checkState, clickedOnce, apiKey, newAddress, password, toggleClickedOnce, username }" />
         </div>
         <TextComponent v-if="showAddress" :msg="address" mono /><br />
         <button v-if="showAddress" id="update-address-button" @click="toggleChangeAddress">Update
@@ -92,6 +92,7 @@ export default {
     },
     props: {
         address: String,
+        apiKey: String,
         checkState: Function,
         email: String,
         selectPage: Function,

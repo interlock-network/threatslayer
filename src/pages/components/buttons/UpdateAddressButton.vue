@@ -18,6 +18,7 @@ import { baseUrl, setChromeStorage } from '../../../utilities.js';
 export default {
     name: "UpdateAddressButton",
     props: {
+        apiKey: String,
         checkState: Function,
         clickedOnce: Boolean,
         newAddress: String,
@@ -77,10 +78,10 @@ export default {
             } else {
                 this.errorArr = [];
 
-                const { newAddress, password, username } = this;
+                const { apiKey: key, newAddress, password, username } = this;
                 this.submitting = true;
 
-                const response = await axios.post(`${baseUrl}/address-update`, { address: newAddress, password, username })
+                const response = await axios.post(`${baseUrl}/user-bcaddr-reset`, { key, password, username, wallet_id: newAddress })
                     .then(res => res)
                     .catch(err => err);
 
@@ -102,7 +103,7 @@ export default {
                     this.submitted = true;
                     this.submitting = false;
 
-                    // set API key with user's unique key
+                    // set wallet address in state with user's new address
                     const setAddress = await setChromeStorage({ address: newAddress });
 
                     if (setAddress) {
