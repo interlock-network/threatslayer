@@ -204,16 +204,6 @@ input {
   pointer-events: initial;
 }
 
-.clear-button {
-  background-color: #0F0818;
-  border: #BB00FD solid 1px;
-  border-radius: 12px;
-  color: #d0d4d9;
-  font-size: 1.25rem;
-  padding: 0.5rem 0.75rem;
-  width: 400px;
-}
-
 .link-button-icon {
   height: 1rem;
 }
@@ -228,8 +218,8 @@ input {
 
 .secondary-hollow-button {
   background-color: #0F0818;
-  border: #BB00FD solid 1px;
-  border-radius: 12px;
+  border: #9000CB solid 1px;
+  border-radius: 1.25rem;
   color: #d0d4d9;
   font-size: 1.25rem;
   padding: 0.5rem 0.75rem;
@@ -244,9 +234,9 @@ input {
 }
 
 .submit-button {
-  background: linear-gradient(216.99deg, #BB00FD 22.5%, #51066B 112.78%);
+  background: linear-gradient(216.99deg, #B000F7 22.5%, #7400C5 112.78%);
   border: none;
-  border-radius: 12px;
+  border-radius: 1.25rem;
   color: #FFFFFF;
   cursor: pointer;
   float: left;

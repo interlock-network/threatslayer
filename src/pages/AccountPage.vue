@@ -255,7 +255,7 @@ export default {
 
 #clear-allowlist {
     background-color: #0F0818;
-    border: #BB00FD solid 1px;
+    border: #9000CB solid 1px;
     border-radius: 12px;
     color: #d0d4d9;
     font-size: 1.25rem;
@@ -266,7 +266,7 @@ export default {
 #update-address-button {
     background-color: #0F0818;
     border: none;
-    color: #BB00FD;
+    color: #9000CB;
     font-size: 1rem;
     padding: 0.5rem 0.75rem;
     width: 400px;

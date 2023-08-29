@@ -174,7 +174,7 @@ export default {
 }
 
 .selected-sidebar-item {
-    background: #BB00FD;
+    background: #9000CB;
     border-radius: 6px;
     margin-left: -0.5rem;
     padding-left: 0.5rem;
