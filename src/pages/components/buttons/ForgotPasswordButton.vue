@@ -71,7 +71,7 @@ export default {
             this.loggingIn = true;
 
             // TODO update with endpoint URL
-            const response = await axios.post(`${baseUrl}/forgot-password`, { email: this.email })
+            const response = await axios.post(`${baseUrl}/user-password-reset`, { email: this.email })
                 .then(res => res)
                 .catch(err => err);
 
