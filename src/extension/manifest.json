@@ -6,7 +6,6 @@
     "author": "Interlock",
     "version": "1.0.0",
     "icons": {
-        "48": "icon48.png",
         "128": "icon128.png"
     },
     "content_scripts": [
