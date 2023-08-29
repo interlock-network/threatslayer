@@ -8,12 +8,29 @@ body {
 }
 
 #dismiss-button {
-    background: linear-gradient(216.99deg, #BB00FD 22.5%, #51066B 112.78%);
-    border: none;
-    border-radius: 12px;
+    background-color: #0F0818;
+    border: #9000CB solid 1px;
+    border-radius: 1.25rem;
+    color: #d0d4d9;
     cursor: pointer;
+    font-size: 1rem;
     margin-top: 1rem;
     margin-bottom: 0.75rem;
+    padding-bottom: 1rem;
+    padding-top: 1rem;    
+    width: 10rem;
+}
+
+#safety-button {
+    background: linear-gradient(216.99deg, #9000CB 22.5%, #51066B 112.78%);
+    border: none;
+    border-radius: 12px;
+    color: #d0d4d9;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 0.75rem;
+    margin-right: 2rem;
     padding-bottom: 1rem;
     padding-top: 1rem;
     width: 10rem;
@@ -80,12 +97,6 @@ p {
     position: auto;
     text-align: center;
     z-index: 2147483647;
-}
-
-#dismiss-button-text {
-    color: white;
-    font-size: 0.75rem;
-    font-weight: bold;
 }
 
 #text-box {

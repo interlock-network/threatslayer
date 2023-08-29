@@ -13,7 +13,8 @@
     const bannerTitle = document.createElement('p');
     const bannerText = document.createElement('p');
     const warning = document.createElement('p');
-    const button = document.createElement('button');
+    const dismissButton = document.createElement('button');
+    const googleButton = document.createElement('button');
 
     // link elements to stylesheet
     bannerWrapper.id = 'warningbanner-wrapper';
@@ -24,7 +25,9 @@
     warning.id = 'warning';
     bannerTitle.class = 'warningbanner-text';
     bannerText.class = 'warningbanner-text';
-    button.id = 'dismiss-button';
+    dismissButton.id = 'dismiss-button';
+    googleButton.id = 'safety-button';
+
 
     // add background image
     backgroundImageURL = chrome.runtime.getURL('grid_background.png');
@@ -40,7 +43,8 @@
     bannerText.appendChild(document.createTextNode(chrome.i18n.getMessage("warning_text")));
 
     // "Trust This Site" button
-    button.innerHTML = '<span id="dismiss-button-text">Trust This Site</span>';
+    dismissButton.innerHTML = '<span id="dismiss-button-text">Trust This Site</span>';
+    googleButton.innerHTML = '<span id="safety-button-text">Take Me to Safety</span>';
 
     // build banner and underlying box
     banner.appendChild(image);
@@ -48,7 +52,8 @@
     textBox.appendChild(warning);
     textBox.appendChild(bannerTitle);
     textBox.appendChild(bannerText);
-    textBox.appendChild(button);
+    textBox.appendChild(googleButton);
+    textBox.appendChild(dismissButton);
     bannerWrapper.appendChild(banner);
     boxWrapper.appendChild(box);
 
@@ -56,8 +61,13 @@
     body.insertBefore(bannerWrapper, body.childNodes[0]);
     body.insertBefore(boxWrapper, body.childNodes[0]);
 
+    // on clicking 'Take Me to Safety', go to Google
+    googleButton.onclick = function () {
+        window.location.href = 'https://google.com/'
+    };
+
     // on click to close banner, remove banner and box
-    button.onclick = function () {
+    dismissButton.onclick = function () {
         chrome.storage.local.get(["allowlist"]).then((result) => {
             const allowlist = result.allowlist || [];
             const currentURL = document.URL;
