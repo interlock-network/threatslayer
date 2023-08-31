@@ -3,6 +3,10 @@
         "message": "Free enterprise-grade protection for your personal browser.",
         "description": "The description of the extension, displayed in the user's browser."
     },
+    "close": {
+        "message": "Close",
+        "description": "The text used on the close button."
+    },
     "description": {
         "message": "Free enterprise-grade security for your personal browser.",
         "description": "The description in the manifest."
@@ -16,12 +20,24 @@
         "description": "The title used for the popup when the extension icon is pressed."
     },
     "staking": {
-        "message": "Chance to Stake",
-        "description": "The text used in the staking text box."
+        "message": "Chance to Earn",
+        "description": "The text used on the staking text box."
+    },
+    "stake_this_url": {
+        "message": "Stake on this URL",
+        "description": "The text used in the staking button."
     },
     "staking_explanation": {
-        "message": "You can stake $$ILOCK you have deposited with Interlock on this URL if you believe it is safe. If you're right, you will receive a reward in $$ILOCK. If you're wrong, you will lose the $$ILOCK you have staked.",
+        "message": "You have a chance to earn $ILOCK! If you believe this URL is safe, you can stake $$ILOCK you have deposited with Interlock. If you're right, you will receive a reward in $$ILOCK. If you're wrong, you will lose the $$ILOCK you have staked.",
         "description": "The text used in the staking text box."
+    },
+    "take_to_safety": {
+        "message": "Take Me to Safety",
+        "description": "The text used in the take me to safety button."
+    },
+    "trust_this_url": {
+        "message": "Trust this URL",
+        "description": "The text used in the trust this URL button."
     },
     "urls_scanned": {
         "message": "URLs Scanned",
