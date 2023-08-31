@@ -21,7 +21,7 @@ export default {
 .link-button {
     background: #060708;
     border: 1px solid #9336e5;
-    color: #d0d4d9;
+    color: #FFFFFF;
     font-size: 0.1rem;
     height: 100%;
     margin: 0px;

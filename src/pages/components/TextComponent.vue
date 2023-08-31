@@ -80,7 +80,7 @@ export default {
 
 <style>
 .simple-text {
-    color: #D0D4D9;
+    color: #FFFFFF;
     margin-bottom: 0.5rem;
     word-wrap: break-word;
 }

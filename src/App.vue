@@ -146,7 +146,7 @@ a:focus {
 body {
   background: url("/src/assets/images/grid_background.png") repeat;
   background-color: #0F0818;
-  color: #d0d4d9;
+  color: #FFFFFF;
   font-size: 1.1rem;
   /* pointer-events: none; */
 }
@@ -221,7 +221,7 @@ input {
   background-color: #0F0818;
   border: #9000CB solid 1px;
   border-radius: 1.25rem;
-  color: #d0d4d9;
+  color: #FFFFFF;
   font-size: 1.25rem;
   padding: 0.5rem 0.75rem;
   width: 400px;
@@ -230,7 +230,7 @@ input {
 .small-button {
   background-color: #060708;
   border: 1px solid #d0d4d9;
-  color: #d0d4d9;
+  color: #FFFFFF;
   pointer-events: initial;
 }
 

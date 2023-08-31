@@ -111,7 +111,7 @@ export default {
 
 <style>
 .line-of-text {
-    color: #D0D4D9;
+    color: #FFFFFF;
     display: inline-flex;
     margin-bottom: 0.5rem;
     /* opacity: 85%; */

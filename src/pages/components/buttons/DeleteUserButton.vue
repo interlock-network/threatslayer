@@ -163,7 +163,7 @@ export default {
 #delete-user-button-container {
     background-color: #0F0818;
     border-radius: 12px;
-    color: #d0d4d9;
+    color: #FFFFFF;
     position: absolute;
     padding: 0.75rem 1rem;
     width: 400px;

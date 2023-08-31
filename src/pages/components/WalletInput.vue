@@ -14,7 +14,7 @@ export default {
 #wallet-input {
     border: 1px solid #d0d4d9;
     background: #060708;
-    color: #d0d4d9;
+    color: #FFFFFF;
     font-size: 1rem;
     cursor: pointer;
     min-width: 65px;

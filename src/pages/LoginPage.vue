@@ -142,7 +142,7 @@ input:focus {
 }
 
 .login-page-submit-button-container {
-    color: #d0d4d9;
+    color: #FFFFFF;
     margin-top: 2rem;
     width: 400px;
 }
