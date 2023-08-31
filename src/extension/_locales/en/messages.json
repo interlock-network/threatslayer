@@ -15,6 +15,14 @@
         "message": "ThreatSlayer Active.",
         "description": "The title used for the popup when the extension icon is pressed."
     },
+    "staking": {
+        "message": "Chance to Stake",
+        "description": "The text used in the staking text box."
+    },
+    "staking_explanation": {
+        "message": "You can stake $$ILOCK you have deposited with Interlock on this URL if you believe it is safe. If you're right, you will receive a reward in $$ILOCK. If you're wrong, you will lose the $$ILOCK you have staked.",
+        "description": "The text used in the staking text box."
+    },
     "urls_scanned": {
         "message": "URLs Scanned",
         "description": "The text used to show how many URLs are scanned on the dashboard."
