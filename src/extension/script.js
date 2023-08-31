@@ -19,7 +19,7 @@
 function handleAPIResponse(response) {
     let { href } = window.location;
     chrome.runtime.sendMessage({
-        action: "displayWarningBanner",
+        action: 'displayWarningBanner',
         url: href
     });
 
@@ -29,7 +29,7 @@ function handleAPIResponse(response) {
     //     console.log(`URL ${url} not classified as malicious.`);
     // } else if (response.malicious === true) {
     //     chrome.runtime.sendMessage({
-    //         action: "displayWarningBanner",
+    //         action: 'displayWarningBanner',
     //         url: url
     //     });
 }
@@ -48,9 +48,9 @@ function getFormattedUrl() {
  * and asynchronously provides a response.
  */
 chrome.runtime.sendMessage(
-    { contentScriptQuery: "queryURL", url: getFormattedUrl() },
+    { contentScriptQuery: 'queryURL', url: getFormattedUrl() },
     function (response) {
-        if (response !== undefined && response !== "") {
+        if (response !== undefined && response !== '') {
             handleAPIResponse(response);
         } else {
             handleAPIResponse(null);
