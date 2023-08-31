@@ -35,7 +35,7 @@
     allowButton.id = 'allow-button';
     allowButton.classList.add('first', 'secondary-button');
     googleButton.id = 'safety-button';
-    googleButton.classList.add('first', 'primary-button');
+    googleButton.classList.add('first', 'left-button', 'primary-button');
     staking.id = 'staking';
     staking.classList.add('second');
     stakingExplanation.id = 'staking-explanation';
@@ -44,7 +44,7 @@
     stakeButton.classList.add('second', 'primary-button');
     stakeButton.style.display = 'none';
     closeButton.id = 'close-button';
-    closeButton.classList.add('second', 'secondary-button');
+    closeButton.classList.add('second', 'secondary-button', 'left-button');
     closeButton.style.display = 'none';
 
     // add background image
@@ -61,14 +61,14 @@
     bannerText.appendChild(document.createTextNode(chrome.i18n.getMessage('warning_text')));
 
     // "Trust This Site" button
-    allowButton.innerHTML = '<span id="allow-button-text">Trust This Site</span>';
-    googleButton.innerHTML = '<span id="safety-button-text">Take Me to Safety</span>';
+    allowButton.appendChild(document.createTextNode(chrome.i18n.getMessage('trust_this_url')));
+    googleButton.appendChild(document.createTextNode(chrome.i18n.getMessage('take_to_safety')));
 
     // Staking box text and buttons
     staking.appendChild(document.createTextNode(chrome.i18n.getMessage('staking')));
     stakingExplanation.appendChild(document.createTextNode(chrome.i18n.getMessage('staking_explanation')));
-    stakeButton.innerHTML = '<span id="allow-button-text">Stake on This Site</span>';
-    closeButton.innerHTML = '<span id="safety-button-text">Close</span>';
+    stakeButton.appendChild(document.createTextNode(chrome.i18n.getMessage('stake_this_url')));
+    closeButton.appendChild(document.createTextNode(chrome.i18n.getMessage('close')));
 
     // build banner and underlying box
     banner.appendChild(image);
@@ -80,8 +80,8 @@
     textBox.appendChild(staking);
     textBox.appendChild(stakingExplanation);
     textBox.appendChild(allowButton);
-    textBox.appendChild(stakeButton);
     textBox.appendChild(closeButton);
+    textBox.appendChild(stakeButton);
 
     bannerWrapper.appendChild(banner);
     boxWrapper.appendChild(box);
