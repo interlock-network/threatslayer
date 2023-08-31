@@ -21,6 +21,7 @@ export default defineConfig({
             },
         },
     },
+    logLevel: 'warn',
     server: { port: 8080 },
     base: '/',
     resolve: {
