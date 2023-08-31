@@ -46,11 +46,11 @@ export function formatNumber(num) {
  * @param {number} num - a dashboard value for total number of URLs scanned.
  */
 export function getFontSizeForTotal(num) {
-    const oneToThreeDigits = "123px";
-    const fourDigits = "110px";
-    const fiveDigits = "90px";
-    const sixDigits = "75px";
-    const sevenDigits = "60px";
+    const oneToThreeDigits = '123px';
+    const fourDigits = '110px';
+    const fiveDigits = '90px';
+    const sixDigits = '75px';
+    const sevenDigits = '60px';
 
     let result;
 
@@ -74,8 +74,8 @@ export function getFontSizeForTotal(num) {
  * @param {number} num - a dashboard value for number of unique URLs scanned.
  */
 export function getFontSizeForSmallerNums(num) {
-    const defaultSize = "50px";
-    const sixDigits = "40px";
+    const defaultSize = '50px';
+    const sixDigits = '40px';
 
     let result;
 
@@ -96,8 +96,8 @@ export function getChromeStorage(key) {
     try {
         return chrome.storage.local
             .get([key])
-            .then(response => {
-                const result = response[key];
+            .then(async response => {
+                const result = await response[key];
                 console.log(`Chrome state retrieved for ${key}: ${result}`);
 
                 return result;
