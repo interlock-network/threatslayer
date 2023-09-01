@@ -1,14 +1,16 @@
 <template>
   <div id="app-container">
     <div id="top-container">
-      <SideBar v-bind="{ apiKey, checkState, currentPage, devMode, loggedIn, registered, selectPage, username }" />
+      <SideBar
+        v-bind="{ apiKey, checkState, currentPage, devMode, loggedIn, registered, selectPage, urlToStake, username }" />
       <div id="view-container">
         <EarnPage v-if="currentPage === 'earn'" :checkState="checkState" :selectPage="selectPage" />
         <WalletPage v-if="currentPage === 'wallet'" :selectPage="selectPage" />
         <LoginPage v-if="currentPage === 'login'" :checkState="checkState" :selectPage="selectPage" />
-        <SlayCount v-if="currentPage === 'slayCount'" />
+        <SlayCount v-if="currentPage === 'slayCount'" :apiKey="apiKey" :username="username" />
         <AboutPage v-if="currentPage === 'about'" />
         <FAQPage v-if="currentPage === 'faq'" />
+        <StakingPage v-if="currentPage === 'staking'" v-bind="{ apiKey, selectPage, urlToStake }" />
         <OptionsPage v-if="currentPage === 'options'" />
         <AccountPage v-if="currentPage === 'account'"
           v-bind="{ address, apiKey, checkState, email, selectPage, username }" />
@@ -27,6 +29,7 @@ import OptionsPage from "./pages/OptionsPage.vue";
 import PageFooter from "./pages/PageFooter.vue";
 import SideBar from "./pages/SideBar.vue";
 import SlayCount from "./pages/SlayCount.vue";
+import StakingPage from "./pages/StakingPage.vue";
 import WalletPage from "./pages/WalletPage.vue";
 
 import { getChromeStorage } from './utilities.js';
@@ -43,6 +46,7 @@ export default {
     AccountPage,
     SideBar,
     SlayCount,
+    StakingPage,
     WalletPage
   },
   data() {
@@ -54,6 +58,7 @@ export default {
       email: null,
       loggedIn: false,
       registered: false,
+      urlToStake: null,
       username: null
     };
   },
@@ -68,11 +73,13 @@ export default {
       const email = await getChromeStorage('email');
       const loggedIn = await getChromeStorage('loggedIn');
       const isRegistered = await getChromeStorage('registered');
+      const urlToStake = await getChromeStorage('urlToStake');
       const username = await getChromeStorage('username');
 
       this.devMode = devMode;
       this.loggedIn = loggedIn;
       this.registered = isRegistered;
+      this.urlToStake = urlToStake;
 
       if (isRegistered === false) {
         this.selectPage('earn');
@@ -84,7 +91,14 @@ export default {
         this.email = email;
         this.username = username;
 
-        this.selectPage('slayCount');
+        if (urlToStake) {
+          this.selectPage('staking');
+        } else {
+          this.selectPage('slayCount');
+        }
+      } else if (urlToStake) {
+        // TODO add message if users aren't logged in and have a URL to stake
+        this.selectPage('login');
       }
     },
     selectPage(page) {
@@ -145,6 +159,7 @@ a:focus {
 
 body {
   background: url("/src/assets/images/grid_background.png") repeat;
+  background-size: 80% 220%;
   background-color: #0F0818;
   color: #FFFFFF;
   font-size: 1.1rem;
