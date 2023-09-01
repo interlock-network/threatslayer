@@ -1,11 +1,11 @@
 /**
  * This is the main background script for ThreatSlayer.
  */
-const baseAPIUrl = `https://octahedron.interlock.network`;
-const betaBaseAPIUrl = `https://beta.octahedron.interlock.network`;
+const baseAPIUrl = 'http://159.89.252.13';
+const betaBaseAPIUrl = 'https://beta.octahedron.interlock.network';
 const defaultConfig = {
-    method: "POST",
-    headers: { "Content-Type": "application/json" }
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' }
 };
 
 /**
@@ -17,8 +17,8 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     let selectedBaseAPIUrl = baseAPIUrl;
     const url = request.url;
 
-    if (request.contentScriptQuery === "queryURL") {
-        chrome.storage.local.get(["totalURLsVisited"]).then((result) => {
+    if (request.contentScriptQuery === 'queryURL') {
+        chrome.storage.local.get('totalURLsVisited').then((result) => {
             let totalURLsVisited = result.totalURLsVisited || 0;
             totalURLsVisited++;
 
@@ -27,13 +27,13 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
                 .then(() => { console.log(`Total URLs set to: ${totalURLsVisited}`); });
         });
 
-        chrome.storage.sync.get("betaAISelected", async function (data) {
+        chrome.storage.sync.get('betaAISelected', async function (data) {
             if (data.betaAISelected && data.betaAISelected === true) {
-                console.log("Querying beta AI Threat Detection at", betaBaseAPIUrl);
+                console.log('Querying beta AI Threat Detection at', betaBaseAPIUrl);
                 selectedBaseAPIUrl = betaBaseAPIUrl;
             }
 
-            chrome.storage.local.get(['apiKey']).then((result) => {
+            chrome.storage.local.get('apiKey').then((result) => {
                 const key = result.apiKey || 'threatslayer-api-key';
 
                 fetch(`${selectedBaseAPIUrl}/malicious_p`, {
@@ -47,9 +47,10 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         });
 
         return true;
-    } else if (request.action === "displayWarningBanner") {
-        chrome.storage.local.get(["allowlist"]).then((result) => {
+    } else if (request.action === 'displayWarningBanner') {
+        chrome.storage.local.get('allowlist').then((result) => {
             const allowlist = result.allowlist || [];
+
             // bail condition
             if (allowlist?.includes(url)) {
                 console.log('URL allowlisted by user:', url);
@@ -58,7 +59,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 
             try {
                 chrome.storage.local
-                    .get(["totalMaliciousURLsVisited"])
+                    .get(['totalMaliciousURLsVisited'])
                     .then((result) => {
                         let totalMaliciousURLsVisited = result.totalMaliciousURLsVisited || 0;
                         totalMaliciousURLsVisited++;
@@ -78,20 +79,29 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
             // inject styling
             chrome.scripting.insertCSS({
                 target: { tabId: sender.tab.id },
-                files: ["banner.css"],
+                files: ['banner.css'],
             });
             // execute script
             try {
                 chrome.scripting
                     .executeScript({
                         target: { tabId: sender.tab.id },
-                        files: ["banner.js"],
+                        files: ['banner.js'],
                     })
                     .then((response) => sendResponse(response));
             } catch (err) { console.log('Error in sendingResponse():', err); }
 
             return true;
         });
+    } else if (request.action === 'stakeUrl') {
+        const urlToStake = request.url;
+
+        chrome.storage.local
+            .set({ urlToStake })
+            .then(() => {
+                console.log(`URL to stake set to: ${urlToStake}`);
+                chrome.tabs.create({ 'url': chrome.runtime.getURL('index.html'), 'active': true });
+            });
     }
 });
 
@@ -99,15 +109,15 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
  * This listener opens our survey in a new tab when users uninstall
  */
 chrome.runtime.setUninstallURL(
-    "https://docs.google.com/forms/d/e/1FAIpQLSeo1gW6Sg_ITlAXxbTXliQdab2qt1cLBzu45mXpz-XJ8O1KPg/viewform"
+    'https://docs.google.com/forms/d/e/1FAIpQLSeo1gW6Sg_ITlAXxbTXliQdab2qt1cLBzu45mXpz-XJ8O1KPg/viewform'
 );
 
 /**
  * This listener opens the release notes in a new tab when users update the extension
  */
 chrome.runtime.onInstalled.addListener(function (details) {
-    if (details.reason == "update") {
-        chrome.tabs.create({ url: "https://github.com/interlock-network/threatslayer/blob/master/docs/release_notes.md" });
+    if (details.reason == 'update') {
+        chrome.tabs.create({ url: 'https://github.com/interlock-network/threatslayer/blob/master/docs/release_notes.md' });
     }
 });
 
@@ -119,7 +129,7 @@ chrome.action.onClicked.addListener(() => {
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
         let activeTab = tabs[0];
 
-        chrome.tabs.sendMessage(activeTab.id, { "message": "clicked_browser_action" });
-        chrome.tabs.create({ 'url': chrome.runtime.getURL("index.html"), 'active': true });
+        chrome.tabs.sendMessage(activeTab.id, { 'message': 'clicked_browser_action' });
+        chrome.tabs.create({ 'url': chrome.runtime.getURL('index.html'), 'active': true });
     });
 });
