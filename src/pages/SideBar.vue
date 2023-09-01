@@ -16,6 +16,10 @@
                 <img class="sidebar-icon" src="/src/assets/images/login.png"><span class="sidebar-text">Login</span>
             </div>
         </div>
+        <div v-if="urlToStake" id="sidebar-staking" class="sidebar-item"
+            :class="currentPage === 'staking' ? 'selected-sidebar-item' : ''" @click="selectPage('staking')">
+            <img class="sidebar-icon" src="/src/assets/images/slay_count.png">Security Staking
+        </div>
         <div id="sidebar-slayCount" class="sidebar-item" :class="currentPage === 'slayCount' ? 'selected-sidebar-item' : ''"
             @click="selectPage('slayCount')">
             <img class="sidebar-icon" src="/src/assets/images/slay_count.png">Slay Count
@@ -35,7 +39,7 @@
         </div>
         <div id="sidebar-options" class="sidebar-item" :class="currentPage === 'options' ? 'selected-sidebar-item' : ''"
             @click="selectPage('options');">
-            <img class="sidebar-icon" src="/src/assets/images/options.png">Options
+            <img class="sidebar-icon" src="/src/assets/images/settings.png">Options
         </div>
         <div v-if="showLogoutButton" id="bottom-sidebar-items">
             <div id="sidebar-account" class="sidebar-item" :class="currentPage === 'account' ? 'selected-sidebar-item' : ''"
@@ -66,6 +70,7 @@ export default {
         loggedIn: Boolean,
         registered: Boolean,
         selectPage: Function,
+        urlToStake: String,
         username: String
     },
     components: {
