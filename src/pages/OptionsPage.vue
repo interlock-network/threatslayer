@@ -1,6 +1,6 @@
 <template>
     <PageBanner msg="Extension Options">
-        <img class="banner-icon" src="/src/assets/images/options.png">
+        <img class="banner-icon" src="/src/assets/images/settings.png">
     </PageBanner>
     <br />
     <TextComponent msg="Select from the following:" bold />
