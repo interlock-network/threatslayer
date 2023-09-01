@@ -8,7 +8,7 @@
                 <img class="button-img" src="/src/assets/images/download.png" alt="Download" />
             </button>
             <button id="copy-button" class="sharing-button" @click="copy" title="Copy Slay Count to clipboard">
-                <img class="button-img" src="/src/assets/images/copy_to_clipboard.png" alt="Copy" />
+                <img class="button-img" src="/src/assets/images/copy_icon.png" alt="Copy" />
             </button>
         </div>
         <!-- Total URLs big donut -->
@@ -97,6 +97,8 @@
 <script>
 import PageBanner from "./components/PageBanner.vue";
 
+import axios from "axios";
+import { baseUrl } from '../utilities.js';
 import { formatNumber, getFontSizeForTotal, getFontSizeForSmallerNums } from "../utilities";
 
 const output = { name: "SlayCount.png", width: 512, height: 512 };
@@ -106,21 +108,32 @@ export default {
     components: {
         PageBanner
     },
+    props: {
+        apiKey: String,
+        username: String
+    },
     data() {
         return {
             fontSizeForTotal: '123px',
             fontSizeForSmallerNums: '50px',
             fontSizeForMalicious: '50px',
-            formattedUniqueUrls: '0',
-            totalURLsVisited: '0',
+            rawTotalUrlsVisited: 0,
             totalMaliciousURLsVisited: '0',
         };
     },
     mounted() {
-        this.getExtensionState('totalMaliciousURLsVisited');
-        this.getExtensionState('totalURLsVisited');
+        this.getSlayCountStats()
     },
     computed: {
+        fontSizeForTotal() {
+            return getFontSizeForTotal(this.rawTotalUrlsVisited);
+        },
+        formattedUniqueUrls() {
+            const rawUniqueEstimate = Math.floor(this.rawTotalUrlsVisited / 8);
+            this.fontSizeForSmallerNums = getFontSizeForSmallerNums(rawUniqueEstimate);
+
+            return formatNumber(Math.max(rawUniqueEstimate, 1));
+        },
         maliciousVisitedStyle() {
             return { "font-size": this.fontSizeForSmallerNums };
         },
@@ -137,6 +150,9 @@ export default {
         },
         uniqueVisitedStyle() {
             return { "font-size": this.fontSizeForSmallerNums };
+        },
+        totalURLsVisited() {
+            return formatNumber(Math.max(this.rawTotalUrlsVisited, this.totalMaliciousURLsVisited, 1));
         },
         totalURLsVisitedStyle() {
             return { "font-size": this.totalVisitedFontSize };
@@ -204,6 +220,16 @@ export default {
                 a.remove();
             };
         },
+        async getSlayCountStats() {
+            this.getExtensionState('totalMaliciousURLsVisited');
+
+            if (this.apiKey?.length && this.username?.length) {
+                console.log('here');
+                this.getUserInfo();
+            } else {
+                this.getExtensionState('totalURLsVisited');
+            }
+        },
         async getExtensionState(key) {
             try {
                 chrome.storage.local
@@ -212,18 +238,24 @@ export default {
                         const numberResponse = Number(response[key]) || 0;
 
                         if (key === 'totalURLsVisited') {
-                            this.fontSizeForTotal = getFontSizeForTotal(numberResponse);
-
-                            const rawUniqueEstimate = Math.floor(numberResponse / 8);
-                            this.fontSizeForSmallerNums = getFontSizeForSmallerNums(rawUniqueEstimate);
-                            this.formattedUniqueUrls = formatNumber(Math.max(rawUniqueEstimate, 1));
+                            this.rawTotalUrlsVisited = numberResponse;
+                        } else {
+                            this[key] = formatNumber(numberResponse);
                         }
-
-                        this[key] = formatNumber(numberResponse);
                     });
             } catch (err) {
                 console.log('Error getting extension state:', err);
             }
+        },
+        async getUserInfo() {
+            const { apiKey, username } = this;
+            const response = await axios.post(`${baseUrl}/user-get`, { key: apiKey, username })
+                .then(res => res)
+                .catch(err => err);
+
+            const { lookups = 0, lookups_total: lookupsTotal = 0 } = response?.data;
+
+            this.rawTotalUrlsVisited = lookups + lookupsTotal;
         }
     }
 }
