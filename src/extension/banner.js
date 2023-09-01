@@ -101,6 +101,15 @@
         body.removeChild(boxWrapper);
     }
 
+    // on clicking the stake button, it opens TS+ on the staking page
+    stakeButton.onclick = function () {
+        chrome.runtime.sendMessage({
+            action: 'stakeUrl',
+            url: document.URL
+        });
+    }
+
+
     // on clicking the allow button, adds URL to local allowlist before sending it to GALACTUS
     allowButton.onclick = function () {
         // hide initial items on text box
