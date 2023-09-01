@@ -11,6 +11,10 @@ body {
     display: none;
 }
 
+.left-button {
+    margin-right: 2rem;
+}
+
 .secondary-button {
     background-color: #0F0818;
     border: #9000CB solid 1px;
@@ -34,7 +38,6 @@ body {
     font-size: 1rem;
     margin-top: 1rem;
     margin-bottom: 0.75rem;
-    margin-right: 2rem;
     padding-bottom: 1rem;
     padding-top: 1rem;
     width: 10rem;
