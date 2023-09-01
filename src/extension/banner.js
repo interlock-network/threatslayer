@@ -107,6 +107,11 @@
             action: 'stakeUrl',
             url: document.URL
         });
+
+        // then remove the warning banner
+        // TODO move this to a callback?
+        body.removeChild(bannerWrapper);
+        body.removeChild(boxWrapper);
     }
 
 
