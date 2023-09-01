@@ -4,6 +4,10 @@
     </PageBanner>
     <br />
     <div :style="computedStyle">
+        <TextComponent msg="$ILOCK Earned" bold /> <br />
+        <TextComponent :msg="tokensEarned + tokensEarnedTotal" mono /> <br />
+        <br />
+        <br />
         <TextComponent msg="Email" bold /> <br />
         <TextComponent :msg="email" mono /> <br />
         <br />
@@ -41,6 +45,10 @@
             Address</button>
         <br />
         <br />
+        <TextComponent msg="Users Referred" bold /> <br />
+        <TextComponent :msg="referred" mono /> <br />
+        <br />
+        <br />
         <LineOfText v-if="!showClearButton" msg="No allowlisted sites to show" bold />
         <div v-if="showClearButton" id="url-container">
             <LineOfText @click="sort" msg="Allowlisted Sites" bold>{{ sortHeader }}</LineOfText>
@@ -71,9 +79,10 @@ import PageBanner from "./components/PageBanner.vue";
 import TextComponent from "./components/TextComponent.vue";
 import UpdateAddressButton from "./components/buttons/UpdateAddressButton.vue";
 
+import axios from "axios";
+import { baseUrl, getChromeStorage, setChromeStorage } from '../utilities.js';
 import { decodeAddress, encodeAddress } from '@polkadot/keyring';
 import { debounce } from 'debounce';
-import { getChromeStorage, setChromeStorage } from '../utilities.js';
 import { hexToU8a, isHex } from '@polkadot/util';
 
 const errorStyle = {
@@ -110,11 +119,15 @@ export default {
             password: '',
             passwordErrorMessage: '',
             passwordInputType: 'password',
+            referred: 0,
             sortedAllowlist: [],
+            tokensEarned: 0,
+            tokensEarnedTotal: 0
         };
     },
     mounted() {
         this.getAllowlist();
+        this.getUserInfo();
     },
     computed: {
         addressInputStyle() {
@@ -176,6 +189,14 @@ export default {
             this.allowlist = [];
         },
         async clearUrl(urlToClear) {
+            // TODO add allowlist code here
+            // TODO update URL
+            const response = await axios.post(`${baseUrl}/site-forget`, { key: this.apiKey, url: urlToClear })
+                .then(res => res)
+                .catch(err => err);
+
+
+            console.log('response', response);
             const allowlist = await getChromeStorage('allowlist');
 
             if (!allowlist) {
@@ -194,6 +215,20 @@ export default {
             const allowlist = await getChromeStorage('allowlist');
 
             this.allowlist = allowlist;
+        },
+        async getUserInfo() {
+            const { apiKey, username } = this;
+
+            const response = await axios.post(`${baseUrl}/user-get`, { key: apiKey, username })
+                .then(res => res)
+                .catch(err => err);
+
+            const { data = {} } = response;
+            const { referred = 0, tokens_earned = 0, tokens_earned_total = 0 } = data;
+
+            this.referred = referred;
+            this.tokensEarned = tokens_earned;
+            this.tokensEarnedTotal = tokens_earned_total;
         },
         legitPolkadot(address) {
             try {
@@ -258,7 +293,7 @@ export default {
     background-color: #0F0818;
     border: #9000CB solid 1px;
     border-radius: 12px;
-    color: #d0d4d9;
+    color: #FFFFFF;
     font-size: 1.25rem;
     padding: 0.5rem 0rem;
     width: 400px;
