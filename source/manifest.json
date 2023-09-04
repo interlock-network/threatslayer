@@ -37,7 +37,7 @@
         }
     ],
     "background": {
-        "service_worker": "background.js",
+        "service_worker": "service/worker.js",
 	"type": "module"
     },
     "options_page": "options.html",

@@ -1,5 +1,5 @@
 /**
- * This is the main background script for ThreatSlayer.
+ * This is the ThreatSlayer service-worker module.
  */
 const APIKey = "threatslayer-api-key";
 const baseAPIUrl = `https://octahedron.interlock.network`;
