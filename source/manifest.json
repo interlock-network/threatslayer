@@ -5,8 +5,9 @@
     "default_locale": "en",
     "manifest_version": 3,
     "icons": {
-        "48": "icon48.png",
-        "128": "icon128.png"
+        "16": "static/images/icon16.png",
+        "48": "static/images/icon48.png",
+        "128": "static/images/icon128.png"
     },
     "author": "Interlock",
     "action": {
@@ -26,10 +27,7 @@
     "web_accessible_resources": [
         {
             "resources": [
-                "hand48.png",
-                "static/style.css",
-                "static/fonts/TTF",
-                "static/fonts/Webfont"
+                "static/*"
             ],
             "matches": [
                 "*://*/*"
@@ -40,7 +38,7 @@
         "service_worker": "service/worker.js",
 	"type": "module"
     },
-    "options_page": "options.html",
+    "options_page": "options/options.html",
     "permissions": [
         "scripting",
         "storage"

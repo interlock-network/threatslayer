@@ -15,5 +15,5 @@ betaAICheckbox.addEventListener("change", function(event) {
   });
 
   // Modify the "dark_mode_enabled" setting in the Chrome browser
-  chrome.settingsPrivate.setPref("dark_mode_enabled", betaAISelected);
+  // chrome.settingsPrivate.setPref("dark_mode_enabled", betaAISelected);
 });
