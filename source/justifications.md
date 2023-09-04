@@ -16,5 +16,8 @@ Justification: Same as above. banner script is a content script
 Message: mv background.js -> service/worker.js & update manifest
 Justification: manV3 do now have background scripts, rather, they have a single service worker
 
-":
+#### a7de1621bf7d9c9c4e171dfca4fbf2143103dc68
+Message: bundle all dashboard-related assets into popup directory per manV3 standard practice
+Justification: same as above, standard practice
+
 
