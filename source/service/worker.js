@@ -74,13 +74,13 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         // inject styling
         chrome.scripting.insertCSS({
             target: { tabId: sender.tab.id },
-            files: ["banner.css"],
+            files: ["../content/banner/banner.css"],
         });
         // execute script
         chrome.scripting
             .executeScript({
                 target: { tabId: sender.tab.id },
-                files: ["banner.js"],
+                files: ["../content/banner/banner.js"],
             })
             .then((response) => sendResponse(response))
             .catch((error) => console.log(error));

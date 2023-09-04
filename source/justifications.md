@@ -20,4 +20,8 @@ Justification: manV3 do now have background scripts, rather, they have a single 
 Message: bundle all dashboard-related assets into popup directory per manV3 standard practice
 Justification: same as above, standard practice
 
+#### 991ea77d84ff15581335fb9309cef09a722b7623
+Message: mv popup_style.css to popup dir and edit paths
+
+#### 
 
