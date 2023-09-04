@@ -10,7 +10,7 @@
     },
     "author": "Interlock",
     "action": {
-        "default_popup": "dashboard.html",
+        "default_popup": "popup/dashboard.html",
         "default_title": "__MSG_popup_title__"
     },
     "content_scripts": [
