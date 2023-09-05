@@ -4,13 +4,13 @@
       <SideBar
         v-bind="{ apiKey, checkState, currentPage, devMode, loggedIn, registered, selectPage, urlToStake, username }" />
       <div id="view-container">
-        <EarnPage v-if="currentPage === 'earn'" :checkState="checkState" :selectPage="selectPage" />
+        <StakingPage v-if="currentPage === 'staking'" v-bind="{ apiKey, loggedIn, registered, selectPage, urlToStake }" />
+        <EarnPage v-if="currentPage === 'earn'" v-bind="{ checkState, selectPage, urlToStake }" />
         <WalletPage v-if="currentPage === 'wallet'" :selectPage="selectPage" />
-        <LoginPage v-if="currentPage === 'login'" :checkState="checkState" :selectPage="selectPage" />
+        <LoginPage v-if="currentPage === 'login'" v-bind="{ checkState, selectPage, urlToStake }" />
         <SlayCount v-if="currentPage === 'slayCount'" :apiKey="apiKey" :username="username" />
         <AboutPage v-if="currentPage === 'about'" />
         <FAQPage v-if="currentPage === 'faq'" />
-        <StakingPage v-if="currentPage === 'staking'" v-bind="{ apiKey, selectPage, urlToStake }" />
         <OptionsPage v-if="currentPage === 'options'" />
         <AccountPage v-if="currentPage === 'account'"
           v-bind="{ address, apiKey, checkState, email, selectPage, username }" />
