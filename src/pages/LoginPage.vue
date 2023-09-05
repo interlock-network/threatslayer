@@ -2,6 +2,7 @@
     <PageBanner msg="Login to ThreatSlayer">
         <img class="banner-icon" src="/src/assets/images/login.png">
     </PageBanner>
+    <BeforeStakingWarning v-if="urlToStake" msg="You must login before you can stake on a URL." />
     <TextComponent msg="Don't have an account?" subinstruction /><button class="login-button"
         @click="unregister">Register</button>
     <br />
@@ -33,6 +34,7 @@
 import { debounce } from 'debounce';
 import { findEmailError, findNonAlphanumericChars, setChromeStorage } from "../utilities";
 
+import BeforeStakingWarning from "./components/BeforeStakingWarning.vue";
 import ForgotPasswordButton from "./components/buttons/ForgotPasswordButton.vue";
 import LoginButton from "./components/buttons/LoginButton.vue";
 import PageBanner from "./components/PageBanner.vue";
@@ -48,9 +50,11 @@ export default {
     name: 'EarnPage',
     props: {
         checkState: Function,
-        selectPage: Function
+        selectPage: Function,
+        urlToStake: String
     },
     components: {
+        BeforeStakingWarning,
         ForgotPasswordButton,
         LoginButton,
         PageBanner,

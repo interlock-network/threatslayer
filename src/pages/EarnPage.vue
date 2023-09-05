@@ -2,6 +2,7 @@
     <PageBanner msg="Sign up for ThreatSlayer">
         <img class="banner-icon" src="/src/assets/images/start_earning.png">
     </PageBanner>
+    <BeforeStakingWarning v-if="urlToStake" msg="You must register before you can stake on a URL." />
     <TextComponent msg="Already have an account?" subinstruction /><button class="login-button"
         @click="selectPage('login')">Login</button><br />
     <TextComponent msg="Don't have a wallet?" subinstruction /><button class="login-button"
@@ -57,6 +58,7 @@ import { debounce } from 'debounce';
 import { findEmailError, findNonAlphanumericChars } from "../utilities";
 import { hexToU8a, isHex } from '@polkadot/util';
 
+import BeforeStakingWarning from "./components/BeforeStakingWarning.vue";
 import CreateUserButton from "./components/buttons/CreateUserButton.vue";
 import InfoTip from "./components/InfoTip.vue";
 import LineOfText from "./components/LineOfText.vue";
@@ -74,8 +76,10 @@ export default {
     props: {
         checkState: Function,
         selectPage: Function,
+        urlToStake: String
     },
     components: {
+        BeforeStakingWarning,
         CreateUserButton,
         InfoTip,
         LineOfText,

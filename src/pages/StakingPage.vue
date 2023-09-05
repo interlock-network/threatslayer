@@ -2,6 +2,13 @@
     <PageBanner>
         <img class="banner-icon" src="/src/assets/images/account.png">Security Staking
     </PageBanner>
+    <BeforeStakingWarning v-if="!loggedIn" :msg="warningText">
+        <br />
+        <TextComponent msg="Already have an account?" subinstruction /><button class="login-button"
+            @click="selectPage('login')">Login</button><br />
+        <TextComponent msg="Don't have an account?" subinstruction /><button class="login-button"
+            @click="unregister">Register</button><br />
+    </BeforeStakingWarning>
     <br />
     <div>
         <TextComponent msg=" $ILOCK Available to Stake" bold /> <br />
@@ -35,6 +42,7 @@
     </div>
 </template>
 <script>
+import BeforeStakingWarning from "./components/BeforeStakingWarning.vue";
 import LineOfText from "./components/LineOfText.vue";
 import PageBanner from "./components/PageBanner.vue";
 import TextComponent from "./components/TextComponent.vue";
@@ -52,12 +60,15 @@ const errorStyle = {
 export default {
     name: 'StakingPage',
     components: {
+        BeforeStakingWarning,
         LineOfText,
         PageBanner,
         TextComponent,
     },
     props: {
         apiKey: String,
+        loggedIn: Boolean,
+        registered: Boolean,
         selectPage: Function,
         urlToStake: String
     },
@@ -98,6 +109,17 @@ export default {
             } else {
                 result = this.currentSortDir === 'asc' ? ' ▲' :
                     this.currentSortDir === 'desc' ? ' ▼' : ' (click here to sort)';
+            }
+
+            return result;
+        },
+        warningText() {
+            let result = '';
+
+            if (!this.registered && !this.loggedIn) {
+                result = 'You must register before you can stake on a URL.';
+            } else if (!this.loggedIn) {
+                result = 'You must login before you can stake on a URL.';
             }
 
             return result;
