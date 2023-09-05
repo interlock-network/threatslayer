@@ -49,30 +49,12 @@
         <TextComponent :msg="referred" mono /> <br />
         <br />
         <br />
-        <LineOfText v-if="!showClearButton" msg="No allowlisted sites to show" bold />
-        <div v-if="showClearButton" id="url-container">
-            <LineOfText @click="sort" msg="Allowlisted Sites" bold>{{ sortHeader }}</LineOfText>
-            <TextComponent msg="These are URLs you have marked as safe." subinstruction /><br />
-            <TextComponent msg="They will never be blocked by ThreatSlayer." subinstruction />
-            <table style="margin-left: -7px;">
-                <tr v-for="url in sortedAllowlist" style="margin-bottom: 1rem;">
-                    <td class="icon-column">
-                        <img @click="clearUrl(url)" class="sidebar-icon" style="padding-left: 1px; padding-bottom: 3px;"
-                            src="/src/assets/images/x-icon.png">
-                    </td>
-                    <td class="url-column">
-                        <TextComponent :msg="url" mono />
-                    </td>
-                </tr>
-            </table>
-            <br />
-        </div>
-        <!-- Note: Commented out until there's a better place for it -->
-        <!-- <button v-if="showClearButton" @click="clearAllUrls" id="clear-allowlist">Clear all allowlisted URLs</button> -->
+        <AllowlistTable :apiKey="apiKey" />
     </div>
     <DeleteUserButton v-bind="{ checkState, fadeAccountPage, selectPage, username }" />
 </template>
 <script>
+import AllowlistTable from "./components/AllowlistTable.vue";
 import DeleteUserButton from "./components/buttons/DeleteUserButton.vue";
 import LineOfText from "./components/LineOfText.vue";
 import PageBanner from "./components/PageBanner.vue";
@@ -80,7 +62,7 @@ import TextComponent from "./components/TextComponent.vue";
 import UpdateAddressButton from "./components/buttons/UpdateAddressButton.vue";
 
 import axios from "axios";
-import { baseUrl, getChromeStorage, setChromeStorage } from '../utilities.js';
+import { baseUrl } from '../utilities.js';
 import { decodeAddress, encodeAddress } from '@polkadot/keyring';
 import { debounce } from 'debounce';
 import { hexToU8a, isHex } from '@polkadot/util';
@@ -93,6 +75,7 @@ const errorStyle = {
 export default {
     name: 'AccountPage',
     components: {
+        AllowlistTable,
         DeleteUserButton,
         LineOfText,
         PageBanner,
@@ -112,7 +95,6 @@ export default {
             allowlist: null,
             changeAddressSelected: false,
             clickedOnce: false,
-            currentSortDir: 'chron', // defaults to chronological / API order
             deleteAccountClicked: false,
             newAddress: '',
             newAddressErrorMessage: '',
@@ -120,13 +102,11 @@ export default {
             passwordErrorMessage: '',
             passwordInputType: 'password',
             referred: 0,
-            sortedAllowlist: [],
             tokensEarned: 0,
             tokensEarnedTotal: 0
         };
     },
     mounted() {
-        this.getAllowlist();
         this.getUserInfo();
     },
     computed: {
@@ -139,82 +119,23 @@ export default {
         disableUpdateAddressButton() {
             return !this.clickedOnce;
         },
-        showClearButton() {
-            return this.allowlist?.length;
-        },
         showAddress() {
             return this.address?.length && !this.changeAddressSelected;
         },
         showAddressInput() {
             return !this.address?.length || this.changeAddressSelected;
         },
-        showUpdateAddressButton() {
-            return this.newAddress.length && !this.newAddressErrorMessage.length;
-        },
-        sortedAllowlist() {
-            if (!this.allowlist) return [];
-
-            let result = [];
-
-            if (this.currentSortDir === 'asc') {
-                result = [...this.allowlist].sort((a, b) => a > b ? -1 : 1);
-            } else if (this.currentSortDir === 'desc') {
-                result = [...this.allowlist].sort((a, b) => a > b ? 1 : -1);
-            } else {
-                result = this.allowlist;
-            }
-
-            return result;
-        },
-        sortHeader() {
-            let result;
-
-            if (!this.allowlist?.length || this.allowlist.length === 1) {
-                result = '';
-            } else {
-                result = this.currentSortDir === 'asc' ? ' ▲' :
-                    this.currentSortDir === 'desc' ? ' ▼' : ' (click here to sort)';
-            }
-
-            return result;
-        },
+        // TODO delete this?
+        // showUpdateAddressButton() {
+        //     return this.newAddress.length && !this.newAddressErrorMessage.length;
+        // },
         updateAddressMsg() {
             return !this.address?.length ? "You must add a wallet address to receive $ILOCK token." : "Enter your new wallet address.";
         }
     },
     methods: {
-        async clearAllUrls() {
-            setChromeStorage({ allowlist: null });
-
-            this.allowlist = [];
-        },
-        async clearUrl(urlToClear) {
-            // TODO add allowlist code here
-            // TODO update URL
-            const response = await axios.post(`${baseUrl}/site-forget`, { key: this.apiKey, url: urlToClear })
-                .then(res => res)
-                .catch(err => err);
-
-
-            console.log('response', response);
-            const allowlist = await getChromeStorage('allowlist');
-
-            if (!allowlist) {
-                return;
-            }
-
-            const updatedAllowlist = allowlist.filter(url => url !== urlToClear);
-            this.allowlist = updatedAllowlist
-
-            setChromeStorage({ allowlist: updatedAllowlist });
-        },
         fadeAccountPage(bool) {
             this.deleteAccountClicked = bool;
-        },
-        async getAllowlist() {
-            const allowlist = await getChromeStorage('allowlist');
-
-            this.allowlist = allowlist;
         },
         async getUserInfo() {
             const { apiKey, username } = this;
@@ -242,10 +163,6 @@ export default {
             } catch (_error) {
                 return false;
             }
-        },
-        sort() {
-            this.currentSortDir = this.currentSortDir === 'asc' ? 'desc' :
-                this.currentSortDir === 'desc' ? 'chron' : 'asc';
         },
         toggleChangeAddress() {
             this.changeAddressSelected = !this.changeAddressSelected;
@@ -287,16 +204,6 @@ export default {
     float: right;
     font-size: 1rem;
     padding-right: 50px;
-}
-
-#clear-allowlist {
-    background-color: #0F0818;
-    border: #9000CB solid 1px;
-    border-radius: 12px;
-    color: #FFFFFF;
-    font-size: 1.25rem;
-    padding: 0.5rem 0rem;
-    width: 400px;
 }
 
 #update-address-button {
