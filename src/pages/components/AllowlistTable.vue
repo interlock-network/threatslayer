@@ -2,10 +2,10 @@
     <div id="url-container">
         <LineOfText v-if="!allowlist.length" msg="No allowlisted sites to show" bold />
         <div v-if="allowlist.length">
-            <LineOfText @click="sort" msg="Allowlisted Sites" bold>{{ sortHeader }}</LineOfText>
-            <TextComponent msg="These are URLs you have marked as safe." subinstruction /><br />
-            <TextComponent msg="They will never be blocked by ThreatSlayer." subinstruction />
-            <table style="margin-left: -7px;">
+            <LineOfText @click="sort" :msg="tableHeader" bold>{{ sortHeader }}</LineOfText>
+            <TextComponent msg="You marked these safe. ThreatSlayer won't block them." subinstruction />
+            <br />
+            <table id="allowlist-table">
                 <tr v-for="url in sortedAllowlist" style="margin-bottom: 1rem;">
                     <td class="icon-column">
                         <button id="clear-url-button"><img @click="clearUrl(url)" class="sidebar-icon"
@@ -77,6 +77,9 @@ export default {
 
             return result;
         },
+        tableHeader() {
+            return `${this.allowlist.length} Allowlisted Sites`;
+        }
     },
     methods: {
         async clearAllUrls() {
@@ -118,6 +121,13 @@ export default {
 </script>
 
 <style>
+#allowlist-table {
+    display: block;
+    height: 8rem;
+    margin-left: -7px;
+    overflow-y: auto;
+}
+
 #clear-allowlist {
     background-color: #0F0818;
     border: #9000CB solid 1px;
