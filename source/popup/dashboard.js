@@ -1,14 +1,18 @@
+/**
+ * This is the ThreatSlayer dashboard..
+ */
+
 // convenience function to stringify large numbers to local formats with commas etc.
 const formatNumber = (num) => new Intl.NumberFormat().format(num);
 
 // takes an integer and returns a string to set font size
 const getFontSizeForTotal = (num) => {
+
     const oneToThreeDigits = "123px";
     const fourDigits = "110px";
     const fiveDigits = "90px";
     const sixDigits = "75px";
     const sevenDigits = "60px";
-
     let result;
 
     if (num >= 10 ** 6) {
@@ -28,9 +32,9 @@ const getFontSizeForTotal = (num) => {
 
 // takes an integer and returns a string to set font size
 const getFontSizeForUnique = (num) => {
+
     const defaultSize = "56px";
     const sixDigits = "40px";
-
     let result;
 
     if (num >= 10 ** 6) {
@@ -43,8 +47,10 @@ const getFontSizeForUnique = (num) => {
 };
 
 window.addEventListener("load", async function () {
+
     // get dashboard number for total URLs visited from local storage
     chrome.storage.local.get(["totalURLsVisited"]).then((result) => {
+
         const { totalURLsVisited = 1 } = result;
 
         // get HTML elements for total and unique URL counts
@@ -58,16 +64,13 @@ window.addEventListener("load", async function () {
 
         // set and format *total* URLs
         const formattedTotalURLsVisited = formatNumber(totalURLsVisited);
-
-        localURLsScannedCount.style.fontSize =
-            getFontSizeForTotal(totalURLsVisited);
+        localURLsScannedCount.style.fontSize = getFontSizeForTotal(totalURLsVisited);
         localURLsScannedCount.innerHTML = formattedTotalURLsVisited;
         slayCount.innerHTML = formattedTotalURLsVisited;
 
-        // set and format unique URLs
-        const uniqueURLsVisited = Math.ceil(totalURLsVisited * 0.177) || 1; // Ratio 0.177 based on Interlock data sources
+        // set and format unique URLs (Ratio 0.177 based on Interlock data sources)
+        const uniqueURLsVisited = Math.ceil(totalURLsVisited * 0.177) || 1;
         const formattedUniqueURLsVisited = formatNumber(uniqueURLsVisited);
-
         localUniqueURLsScannedCount.style.fontSize =
             getFontSizeForUnique(uniqueURLsVisited);
         localUniqueURLsScannedCount.innerHTML = `≈ ${formattedUniqueURLsVisited}`;
@@ -75,6 +78,7 @@ window.addEventListener("load", async function () {
 
     // get dashboard number for malicious URLs visited from local storage
     chrome.storage.local.get(["totalMaliciousURLsVisited"]).then((result) => {
+        
         const { totalMaliciousURLsVisited = 0 } = result;
 
         const formattedTotalMaliciousURLsVisited = formatNumber(
@@ -83,7 +87,6 @@ window.addEventListener("load", async function () {
         const localMaliciousURLsCount = document.getElementById(
             "local-malicious-urls-scanned-count"
         );
-
         localMaliciousURLsCount.innerHTML = formattedTotalMaliciousURLsVisited;
     });
 
@@ -96,21 +99,21 @@ window.addEventListener("load", async function () {
         chrome.i18n.getMessage("malicious_sites_detected");
 });
 
-// Set-up button for downloading the ThreatSlayer Slay Count
+// Setup button for downloading the ThreatSlayer Slay Count
 const output = { name: "SlayCount.png", width: 512, height: 512 };
 
 // Download png
 document.getElementById("download-button").onclick = () => {
-    const svgElem = document.querySelector("svg");
 
+    const svgElem = document.querySelector("svg");
     const uriData = `data:image/svg+xml;base64,${btoa(
         new XMLSerializer().serializeToString(svgElem)
     )}`;
-
     const img = new Image();
     img.src = uriData;
 
     img.onload = () => {
+
         const canvas = document.createElement("canvas");
         [canvas.width, canvas.height] = [output.width, output.height];
         const ctx = canvas.getContext("2d");
@@ -131,16 +134,16 @@ document.getElementById("download-button").onclick = () => {
 
 // Copy to buffer, then alert user it's copied to buffer
 document.getElementById("copy-button").onclick = () => {
-    const svgElem = document.querySelector("svg");
 
+    const svgElem = document.querySelector("svg");
     const uriData = `data:image/svg+xml;base64,${btoa(
         new XMLSerializer().serializeToString(svgElem)
     )}`;
-
     const img = new Image();
     img.src = uriData;
 
     img.onload = () => {
+
         const canvas = document.createElement("canvas");
         [canvas.width, canvas.height] = [output.width, output.height];
         const ctx = canvas.getContext("2d");

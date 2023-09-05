@@ -1,107 +1,79 @@
 /**
  * This is the ThreatSlayer service-worker module.
  */
-const APIKey = "threatslayer-api-key";
-const baseAPIUrl = `https://octahedron.interlock.network`;
-const betaBaseAPIUrl = `https://beta.octahedron.interlock.network`;
-const defaultConfig = {
+
+/**
+ * Declare constants.
+ */
+const SURVEY_URL = "https://docs.google.com/forms/d/e/1FAIpQLSeo1gW6Sg_ITlAXxbTXliQdab2qt1cLBzu45mXpz-XJ8O1KPg/viewform"
+const RELEASE_NOTES_URL = "https://github.com/interlock-network/threatslayer/blob/master/docs/release_notes.md"
+const API_KEY = "threatslayer-api-key";
+const BASE_API_URL = `https://octahedron.interlock.network`;
+const BETA_BASE_API_URL = `https://beta.octahedron.interlock.network`;
+const DEFAULT_CONFIG = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ key: APIKey }),
+    body: JSON.stringify({ key: API_KEY }),
 };
 
 /**
- * This listener is responsible for handling messages from content
- * scripts. It is invoked by script.js using
- * `chrome.runtime.sendMessage`.
+ * This listener handles messages from content scripts.
  */
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
-    let selectedBaseAPIUrl = baseAPIUrl;
+    let selectedBaseAPIUrl = BASE_API_URL;
 
+    // initial url scan request from content script
     if (request.contentScriptQuery === "queryURL") {
+
+        // first update local count of total urls visited by interlocker
         chrome.storage.local.get(["totalURLsVisited"]).then((result) => {
             let totalURLsVisited = result.totalURLsVisited || 0;
             totalURLsVisited++;
-
             chrome.storage.local
                 .set({ totalURLsVisited: totalURLsVisited })
                 .then(() => {
                     console.log(`Total URLs set to: ${totalURLsVisited}`);
-                });
+                })
+                .catch((error) => consol.log(`Error setting storage: ${error}`));
         });
 
+        // then adjust scan endpoint to reflect beta option predicate
         chrome.storage.sync.get("betaAISelected", function (data) {
             if (data.betaAISelected && data.betaAISelected === true) {
-                console.log(
-                    "Querying beta AI Threat Detection at",
-                    betaBaseAPIUrl
-                );
-                selectedBaseAPIUrl = betaBaseAPIUrl;
+                console.log("Querying beta AI Threat Detection at", BETA_BASE_API_URL);
+                selectedBaseAPIUrl = BETA_BASE_API_URL;
             }
 
-            fetch(`${selectedBaseAPIUrl}/malicious_p`, {
-                ...defaultConfig,
-                body: JSON.stringify({ key: APIKey, url: request.url }),
-            })
+            // make the post request to octahedron
+            fetch(`${selectedBaseAPIUrl}/malicious_p`,
+                {...DEFAULT_CONFIG, body: JSON.stringify({ key: API_KEY, url: request.url })})
                 .then((response) => response.json())
-                .then((response) => sendResponse(response))
-                .catch((error) =>
-                    console.log(`Error getting malicious URL: ${error}`)
-                );
+                .then((response) => sendResponse(response.malicious))
+                .catch((error) => console.log(`Error getting malicious URL: ${error}`));
         });
-
-        return true;
-    } else if (request === "displayWarningBanner") {
-        chrome.storage.local
-            .get(["totalMaliciousURLsVisited"])
-            .then((result) => {
-                let totalMaliciousURLsVisited =
-                    result.totalMaliciousURLsVisited || 0;
-                totalMaliciousURLsVisited++;
-
-                chrome.storage.local
-                    .set({
-                        totalMaliciousURLsVisited: totalMaliciousURLsVisited,
-                    })
-                    .then(() => {
-                        console.log(
-                            "Total malicious URLs set to:" +
-                                totalMaliciousURLsVisited
-                        );
-                    });
-            });
-
-        // inject styling
-        chrome.scripting.insertCSS({
-            target: { tabId: sender.tab.id },
-            files: ["../content/banner/banner.css"],
-        });
-        // execute script
-        chrome.scripting
-            .executeScript({
-                target: { tabId: sender.tab.id },
-                files: ["../content/banner/banner.js"],
-            })
-            .then((response) => sendResponse(response))
-            .catch((error) => console.log(error));
-
-        return true;
     }
+    
+    // we wish to treat sendResponse asynchronously, thus we return 'true'
+    return true;
 });
 
 /**
- * This listener opens our survey in a new tab when users uninstall
+ * This listener opens our survey in a new tab when users uninstall.
  */
 chrome.runtime.setUninstallURL(
-    "https://docs.google.com/forms/d/e/1FAIpQLSeo1gW6Sg_ITlAXxbTXliQdab2qt1cLBzu45mXpz-XJ8O1KPg/viewform"
+
+    SURVEY_URL
 );
 
 /**
- * This listener opens the release notes in a new tab when users update the extension
+ * This listener opens the release notes in a new tab when users update the extension.
  */
-chrome.runtime.onInstalled.addListener(function(details) {
-    if(details.reason == "update") {
-      chrome.tabs.create({ url: "https://github.com/interlock-network/threatslayer/blob/master/docs/release_notes.md" });
+chrome.runtime.onInstalled.addListener(function (details) {
+    
+    if (details.reason == "update") {
+        chrome.tabs.create({
+            url: RELEASE_NOTES_URL
+        });
     }
-  });
-  
+});
+
