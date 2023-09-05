@@ -8,8 +8,8 @@
             <table style="margin-left: -7px;">
                 <tr v-for="url in sortedAllowlist" style="margin-bottom: 1rem;">
                     <td class="icon-column">
-                        <img @click="clearUrl(url)" class="sidebar-icon" style="padding-left: 1px; padding-bottom: 3px;"
-                            src="/src/assets/images/x-icon.png">
+                        <button id="clear-url-button"><img @click="clearUrl(url)" class="sidebar-icon"
+                                src="/src/assets/images/x-icon.png"></button>
                     </td>
                     <td class="url-column">
                         <TextComponent :msg="url" mono />
@@ -128,6 +128,13 @@ export default {
     width: 400px;
 }
 
+#clear-url-button {
+    background: inherit;
+    border: none;
+    padding-bottom: 3px;
+    padding-left: 5px;
+}
+
 #url-container {
     min-height: 25vh;
     overflow-y: scroll;
@@ -148,5 +155,24 @@ export default {
     background: #d0d4d9;
     border-radius: 2px;
     -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+}
+
+.icon-column {
+    display: inline-block;
+    margin-left: -3px;
+    vertical-align: top;
+    width: 2rem;
+}
+
+.url-column {
+    max-width: 389px;
+    width: 389px;
+    word-wrap: break-word;
+}
+
+.x-button {
+    background-color: inherit;
+    border: none;
+    color: red;
 }
 </style>
