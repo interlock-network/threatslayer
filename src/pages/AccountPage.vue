@@ -236,23 +236,4 @@ export default {
     border-radius: 2px;
     -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
 }
-
-.icon-column {
-    margin-left: -3px;
-    padding-bottom: 1rem;
-    width: 1rem;
-}
-
-.url-column {
-    max-width: 389px;
-    padding-bottom: 1rem;
-    width: 389px;
-    word-wrap: break-word;
-}
-
-.x-button {
-    background-color: inherit;
-    border: none;
-    color: red;
-}
 </style>
