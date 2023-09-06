@@ -8,8 +8,7 @@
             <table id="allowlist-table">
                 <tr v-for="url in sortedAllowlist" style="margin-bottom: 1rem;">
                     <td class="icon-column">
-                        <button id="clear-url-button"><img @click="clearUrl(url)" class="sidebar-icon"
-                                src="/src/assets/images/x-icon.png"></button>
+                        <ClearAllowlistedURLButton v-bind="{ apiKey, callback: getAllowlist, url }" />
                     </td>
                     <td class="url-column">
                         <TextComponent :msg="url" mono />
@@ -24,15 +23,16 @@
 </template>
 
 <script>
+import ClearAllowlistedURLButton from "./buttons/ClearAllowlistedURLButton.vue";
 import LineOfText from "./LineOfText.vue";
 import TextComponent from "./TextComponent.vue";
 
-import axios from "axios";
-import { baseUrl, getChromeStorage, setChromeStorage } from '../../utilities.js';
+import { getChromeStorage, setChromeStorage } from '../../utilities.js';
 
 export default {
     name: "AllowlistTable",
     components: {
+        ClearAllowlistedURLButton,
         LineOfText,
         TextComponent
     },
@@ -86,26 +86,6 @@ export default {
             setChromeStorage({ allowlist: null });
 
             this.allowlist = [];
-        },
-        async clearUrl(urlToClear) {
-            // TODO add allowlist code here
-            // TODO update URL
-            const response = await axios.post(`${baseUrl}/site-forget`, { key: this.apiKey, url: urlToClear })
-                .then(res => res)
-                .catch(err => err);
-
-
-            console.log('response', response);
-            const allowlist = await getChromeStorage('allowlist');
-
-            if (!allowlist) {
-                return;
-            }
-
-            const updatedAllowlist = allowlist.filter(url => url !== urlToClear);
-            this.allowlist = updatedAllowlist
-
-            setChromeStorage({ allowlist: updatedAllowlist });
         },
         async getAllowlist() {
             const allowlist = await getChromeStorage('allowlist');
