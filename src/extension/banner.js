@@ -114,7 +114,6 @@
         body.removeChild(boxWrapper);
     }
 
-
     // on clicking the allow button, adds URL to local allowlist before sending it to GALACTUS
     allowButton.onclick = function () {
         // hide initial items on text box

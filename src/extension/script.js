@@ -18,6 +18,7 @@
 // function handleAPIResponse() {
 function handleAPIResponse(response) {
     let { href } = window.location;
+
     chrome.runtime.sendMessage({
         action: 'displayWarningBanner',
         url: href

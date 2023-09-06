@@ -44,11 +44,11 @@
         <button v-if="showAddress" id="update-address-button" @click="toggleChangeAddress">Update
             Address</button>
         <br />
-        <br />
+        <!-- Number of users referred -->
         <TextComponent msg="Users Referred" bold /> <br />
         <TextComponent :msg="referred" mono /> <br />
         <br />
-        <br />
+        <!-- Tabe of allowlisted URLs -->
         <AllowlistTable :apiKey="apiKey" />
     </div>
     <DeleteUserButton v-bind="{ checkState, fadeAccountPage, selectPage, username }" />
