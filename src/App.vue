@@ -4,7 +4,7 @@
       <SideBar
         v-bind="{ apiKey, checkState, currentPage, devMode, loggedIn, registered, selectPage, urlToStake, username }" />
       <div id="view-container">
-        <StakingPage v-if="currentPage === 'staking'" v-bind="{ apiKey, loggedIn, registered, selectPage, urlToStake }" />
+        <StakingPage v-if="currentPage === 'staking'" v-bind="{ apiKey, checkState, loggedIn, registered, selectPage }" />
         <EarnPage v-if="currentPage === 'earn'" v-bind="{ checkState, selectPage, urlToStake }" />
         <WalletPage v-if="currentPage === 'wallet'" :selectPage="selectPage" />
         <LoginPage v-if="currentPage === 'login'" v-bind="{ checkState, selectPage, urlToStake }" />
