@@ -10,12 +10,12 @@
     const banner = document.createElement('div');
     const textBox = document.createElement('div');
     const image = document.createElement('img');
-    const warning = document.createElement('h2');
+    const warningHeadline = document.createElement('h2');
     const bannerTitle = document.createElement('p');
     const bannerText = document.createElement('p');
     const allowButton = document.createElement('button');
     const googleButton = document.createElement('button');
-    const staking = document.createElement('h2');
+    const stakingHeadline = document.createElement('h2');
     const stakingExplanation = document.createElement('p');
     const stakeButton = document.createElement('button');
     const closeButton = document.createElement('button');
@@ -25,8 +25,8 @@
     box.id = 'box';
     banner.id = 'warningbanner';
     image.id = 'threatslayer_logo';
-    warning.id = 'warning';
-    warning.classList.add('first');
+    warningHeadline.id = 'headline';
+    warningHeadline.classList.add('first');
     bannerTitle.classList.add('warningbanner-text');
     bannerTitle.classList.add('first')
     bannerText.classList.add('warningbanner-text');
@@ -36,16 +36,16 @@
     allowButton.classList.add('first', 'secondary-button');
     googleButton.id = 'safety-button';
     googleButton.classList.add('first', 'left-button', 'primary-button');
-    staking.id = 'staking';
-    staking.classList.add('second');
+    stakingHeadline.id = 'headline';
+    stakingHeadline.classList.add('second');
     stakingExplanation.id = 'staking-explanation';
     stakingExplanation.classList.add('second');
     stakeButton.id = 'stake-button';
     stakeButton.classList.add('second', 'primary-button');
-    stakeButton.style.display = 'none';
+    // stakeButton.style.display = 'none';
     closeButton.id = 'close-button';
     closeButton.classList.add('second', 'secondary-button', 'left-button');
-    closeButton.style.display = 'none';
+    // closeButton.style.display = 'none';
 
     // add background image
     backgroundImageURL = chrome.runtime.getURL('grid_background.png');
@@ -56,7 +56,7 @@
     image.setAttribute('src', imageURL);
 
     // "Warning!" / "This website may be malicious." / "Close the tab unless you know this site is safe!"
-    warning.appendChild(document.createTextNode(chrome.i18n.getMessage('warning')));
+    warningHeadline.appendChild(document.createTextNode(chrome.i18n.getMessage('warning')));
     bannerTitle.appendChild(document.createTextNode(chrome.i18n.getMessage('warning_header')));
     bannerText.appendChild(document.createTextNode(chrome.i18n.getMessage('warning_text')));
 
@@ -65,7 +65,7 @@
     googleButton.appendChild(document.createTextNode(chrome.i18n.getMessage('take_to_safety')));
 
     // Staking box text and buttons
-    staking.appendChild(document.createTextNode(chrome.i18n.getMessage('staking')));
+    stakingHeadline.appendChild(document.createTextNode(chrome.i18n.getMessage('staking')));
     stakingExplanation.appendChild(document.createTextNode(chrome.i18n.getMessage('staking_explanation')));
     stakeButton.appendChild(document.createTextNode(chrome.i18n.getMessage('stake_this_url')));
     closeButton.appendChild(document.createTextNode(chrome.i18n.getMessage('close')));
@@ -73,11 +73,11 @@
     // build banner and underlying box
     banner.appendChild(image);
     banner.append(textBox);
-    textBox.appendChild(warning);
+    textBox.appendChild(warningHeadline);
     textBox.appendChild(bannerTitle);
     textBox.appendChild(bannerText);
     textBox.appendChild(googleButton);
-    textBox.appendChild(staking);
+    textBox.appendChild(stakingHeadline);
     textBox.appendChild(stakingExplanation);
     textBox.appendChild(allowButton);
     textBox.appendChild(closeButton);
@@ -117,20 +117,21 @@
     // on clicking the allow button, adds URL to local allowlist before sending it to GALACTUS
     allowButton.onclick = function () {
         // hide initial items on text box
-        const firstItems = document.getElementsByClassName('first');
+        const firstItemsLength = document.getElementsByClassName('first').length;
 
-        // counts down bc deleting items shortens the array
-        for (let i = firstItems.length - 1; i >= 0; i--) {
-            const item = firstItems[i];
-            item.parentNode.removeChild(item);
+        for (let i = 0; i < firstItemsLength; i++) {
+            const firstScreenItem = document.getElementsByClassName('first')[0];
+
+            firstScreenItem.parentNode.removeChild(firstScreenItem);
         }
 
-        // reveal staking items
-        const secondItems = document.getElementsByClassName('second');
-        console.log('secondItems', secondItems);
-        for (let i = 0; i < secondItems.length; i++) {
-            const item = secondItems[i];
-            item.style.display = 'inline-block'
+        // reveal staking items on second screen
+        const secondItemsLength = document.getElementsByClassName('second').length;
+
+        for (let i = 0; i < secondItemsLength; i++) {
+            const secondScreenItem = document.getElementsByClassName('second')[0];
+
+            secondScreenItem.classList.toggle("second");
         }
 
         chrome.storage.local.get('allowlist').then((result) => {
