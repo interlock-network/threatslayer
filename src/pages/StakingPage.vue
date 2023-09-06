@@ -16,10 +16,30 @@
         <br />
         <br />
         <TextComponent msg="URL to Stake" bold /> <br />
-        <TextComponent :msg="urlToStake" mono /> <br />
+        <div v-if="!url.length">
+            <TextComponent :msg="None" mono />
+        </div>
+        <div v-if="url">
+            <table>
+                <tr>
+                    <td>
+                        <ClearAllowlistedURLButton v-bind="{ apiKey, callback: clearUrlToStake, url }" />
+                    </td>
+                    <td>
+                        <TextComponent :msg="url" mono />
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <br />
+        <br />
+        <TextComponent msg="URL Staking Status" bold /> <br />
+        <TextComponent :msg="stakeStateMessage" mono /> <br />
         <br />
         <br />
         <TextComponent msg="Amount to Stake" bold /> <br />
+        <br />
+        <br />
         <!-- TODO change language to staked pages -->
         <LineOfText v-if="!showClearButton" msg="No allowlisted sites to show" bold />
         <div v-if="showClearButton" id="url-container">
@@ -27,7 +47,7 @@
             <TextComponent msg="These are URLs you have marked as safe." subinstruction /><br />
             <TextComponent msg="They will never be blocked by ThreatSlayer." subinstruction />
             <!-- <table style="margin-left: -7px;">
-                <tr v-for="url in sortedAllowlist" style="margin-bottom: 1rem;">
+                <tr v-for="url in stakedUrlList" style="margin-bottom: 1rem;">
                     <td class="icon-column">
                         <img @click="clearUrl(url)" class="sidebar-icon" style="padding-left: 1px; padding-bottom: 3px;"
                             src="/src/assets/images/x-icon.png">
@@ -43,14 +63,13 @@
 </template>
 <script>
 import BeforeStakingWarning from "./components/BeforeStakingWarning.vue";
+import ClearAllowlistedURLButton from "./components/buttons/ClearAllowlistedURLButton.vue";
 import LineOfText from "./components/LineOfText.vue";
 import PageBanner from "./components/PageBanner.vue";
 import TextComponent from "./components/TextComponent.vue";
 
 import axios from "axios";
 import { baseUrl, getChromeStorage, setChromeStorage } from '../utilities.js';
-import { decodeAddress, encodeAddress } from '@polkadot/keyring';
-import { hexToU8a, isHex } from '@polkadot/util';
 
 const errorStyle = {
     border: '3px solid red',
@@ -61,32 +80,37 @@ export default {
     name: 'StakingPage',
     components: {
         BeforeStakingWarning,
+        ClearAllowlistedURLButton,
         LineOfText,
         PageBanner,
         TextComponent,
     },
     props: {
         apiKey: String,
+        checkState: Function,
         loggedIn: Boolean,
         registered: Boolean,
         selectPage: Function,
-        urlToStake: String
     },
     data() {
         return {
             allowlist: null,
             currentSortDir: 'chron', // defaults to chronological / API order
-            sortedAllowlist: [],
+            stakedUrlList: [],
+            stakeState: null,
+            stakeStateMessage: '',
+            url: ''
         };
     },
     mounted() {
+        this.getStakingUrl();
         this.getSiteInfo();
     },
     computed: {
         showClearButton() {
             return this.allowlist?.length;
         },
-        sortedAllowlist() {
+        stakedUrlList() {
             if (!this.allowlist) return [];
 
             let result = [];
@@ -126,35 +150,43 @@ export default {
         }
     },
     methods: {
+        clearUrlToStake() {
+            console.log('here');
+            this.url = '';
+            this.stakeState = null;
+            this.stakeStateMessage = 'No URL selected for staking.';
+
+            this.checkState();
+        },
+        // TODO: revisit this
         async getAllowlist() {
             const allowlist = await getChromeStorage('allowlist');
 
             this.allowlist = allowlist;
         },
         async getSiteInfo() {
-            const { apiKey, urlToStake } = this;
+            const { apiKey, url } = this;
+            const stakingStatuses = {
+                neutral: 'You will be the first to stake this URL.',
+                pending: 'Someone else has tried staking this URL. If approved, your stake will be added to theirs. If rejected, you will not lose any $ILOCK.',
+                resolved: 'Nobody can stake on this URL at this time.'
+            };
 
-            const response = await axios.post(`${baseUrl}/site-get`, { key: apiKey, url: urlToStake })
+            const response = await axios.post(`${baseUrl}/site-get`, { key: apiKey, url })
                 .then(res => res)
                 .catch(err => err);
 
-            console.log('response', response);
             const { data = {} } = response;
-            console.log('data', data);
-            // const { referred = 0, tokens_earned = 0, tokens_earned_total = 0 } = data;
-        },
-        legitPolkadot(address) {
-            try {
-                encodeAddress(
-                    isHex(address)
-                        ? hexToU8a(address)
-                        : decodeAddress(address)
-                );
 
-                return true;
-            } catch (_error) {
-                return false;
-            }
+            const { stake_state } = data;
+
+            this.stakeState = stake_state;
+            this.stakeStateMessage = stakingStatuses[stake_state];
+        },
+        async getStakingUrl() {
+            const urlToStake = await getChromeStorage('urlToStake');
+
+            this.url = urlToStake;
         },
         sort() {
             this.currentSortDir = this.currentSortDir === 'asc' ? 'desc' :
