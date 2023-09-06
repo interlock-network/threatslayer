@@ -23,7 +23,7 @@
         <input class="password-input" :type="passwordInputType" v-model.trim="password" required
             placeholder="Enter a password of at least 12 characters" tabindex="8" :style="passwordInputStyle" />
         <button @click="togglePasswordInputType" class="small-button" id="show-toggle-button" tabindex="9">
-            {{ passwordInputType === 'password' ? 'Show' : 'Hide' }}
+            {{ passwordInputType === 'password' ? 'Show Password' : 'Hide Password' }}
         </button>
     </div>
     <TextComponent v-if="passwordErrorMessage.length" :msg="passwordErrorMessage" error />
@@ -260,16 +260,6 @@ input:focus {
     font-size: 1rem;
     margin-top: 1rem;
     margin-bottom: 0.5rem;
-}
-
-#show-toggle-button {
-    background-color: #0F0818;
-    border: none;
-    color: #963cf5;
-    margin-top: 0.3rem;
-    padding-top: 0.25rem;
-    position: absolute;
-    right: 28%;
 }
 
 .input-header {

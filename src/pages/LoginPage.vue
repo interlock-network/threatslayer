@@ -16,7 +16,7 @@
     <input id="login-password" class="input-field-text password-input" :type="passwordInputType" v-model.trim="password"
         placeholder="Password" tabindex="4" :style="passwordInputStyle" />
     <button @click="togglePasswordInputType" class="small-button" id="show-toggle-button" tabindex="5">
-        {{ passwordInputType === 'password' ? 'Show' : 'Hide' }}
+        {{ passwordInputType === 'password' ? 'Show Password' : 'Hide Password' }}
     </button>
     <TextComponent :msg="passwordErrorMessage" error v-if="passwordErrorMessage.length" />
     <br />

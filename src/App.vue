@@ -197,6 +197,14 @@ input {
   width: 100%;
 }
 
+#show-toggle-button {
+  background-color: #0F0818;
+  border: none;
+  color: #963cf5;
+  float: right;
+  margin-right: 50px;
+}
+
 #view-container {
   background-color: #0F0818;
   float: right;
