@@ -117,7 +117,7 @@ export default {
 @font-face {
   font-family: "THICCCBOI";
   src: local("THICCCBOI");
-  src: url('./extension/static/fonts/TTF/THICCCBOI-Regular.ttf') format('truetype');
+  src: url('../static/fonts/TTF/THICCCBOI-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -125,7 +125,7 @@ export default {
 @font-face {
   font-family: "THICCCBOI";
   src: local("THICCCBOI-ExtraBold");
-  src: url('./extension/static/fonts/TTF/THICCCBOI-ExtraBold.ttf') format('truetype');
+  src: url('../static/fonts/TTF/THICCCBOI-ExtraBold.ttf') format('truetype');
   font-weight: bold;
   font-style: normal;
 }
@@ -133,7 +133,7 @@ export default {
 /* @font-face {
   font-family: "THICCCBOI";
   src: local("THICCCBOI-ExtraBold");
-  src: url('./extension/static/fonts/TTF/THICCCBOI-ExtraBold.ttf') format('truetype');
+  src: url('../static/fonts/TTF/THICCCBOI-ExtraBold.ttf') format('truetype');
   font-weight: bold;
   font-style: normal;
 } */
