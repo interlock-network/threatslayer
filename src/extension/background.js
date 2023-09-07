@@ -3,6 +3,9 @@
  */
 const baseAPIUrl = 'http://159.89.252.13';
 const betaBaseAPIUrl = 'https://beta.octahedron.interlock.network';
+const surveyUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSeo1gW6Sg_ITlAXxbTXliQdab2qt1cLBzu45mXpz-XJ8O1KPg/viewform';
+const releaseNotes = 'https://github.com/interlock-network/threatslayer/blob/master/docs/release_notes.md';
+const defaultApiKey = 'threatslayer-api-key';
 const defaultConfig = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' }
@@ -34,7 +37,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
             }
 
             chrome.storage.local.get('apiKey').then((result) => {
-                const key = result.apiKey || 'threatslayer-api-key';
+                const key = result.apiKey || defaultApiKey;
 
                 fetch(`${selectedBaseAPIUrl}/malicious_p`, {
                     ...defaultConfig,
@@ -108,16 +111,14 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 /**
  * This listener opens our survey in a new tab when users uninstall
  */
-chrome.runtime.setUninstallURL(
-    'https://docs.google.com/forms/d/e/1FAIpQLSeo1gW6Sg_ITlAXxbTXliQdab2qt1cLBzu45mXpz-XJ8O1KPg/viewform'
-);
+chrome.runtime.setUninstallURL(surveyUrl);
 
 /**
  * This listener opens the release notes in a new tab when users update the extension
  */
 chrome.runtime.onInstalled.addListener(function (details) {
     if (details.reason == 'update') {
-        chrome.tabs.create({ url: 'https://github.com/interlock-network/threatslayer/blob/master/docs/release_notes.md' });
+        chrome.tabs.create({ url: releaseNotes });
     }
 });
 
