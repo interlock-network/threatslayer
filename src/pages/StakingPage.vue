@@ -69,7 +69,7 @@ import PageBanner from "./components/PageBanner.vue";
 import TextComponent from "./components/TextComponent.vue";
 
 import axios from "axios";
-import { baseUrl, getChromeStorage, setChromeStorage } from '../utilities.js';
+import { baseUrl, getChromeStorage } from '../utilities.js';
 
 const errorStyle = {
     border: '3px solid red',
@@ -151,7 +151,6 @@ export default {
     },
     methods: {
         clearUrlToStake() {
-            console.log('here');
             this.url = '';
             this.stakeState = null;
             this.stakeStateMessage = 'No URL selected for staking.';
