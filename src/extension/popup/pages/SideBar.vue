@@ -58,7 +58,7 @@
 <script>
 import LogoutButton from "./components/buttons/LogoutButton.vue";
 
-import { clearChromeStorage, setChromeStorage } from '../utilities.js';
+import { clearChromeStorage, setChromeStorage } from '/utilities.js';
 
 export default {
     name: 'SideBar',

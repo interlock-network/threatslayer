@@ -32,7 +32,7 @@ import SlayCount from "./pages/SlayCount.vue";
 import StakingPage from "./pages/StakingPage.vue";
 import WalletPage from "./pages/WalletPage.vue";
 
-import { getChromeStorage } from './utilities.js';
+import { getChromeStorage } from '/utilities.js';
 
 export default {
   name: 'App',

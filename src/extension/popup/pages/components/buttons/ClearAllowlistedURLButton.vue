@@ -4,7 +4,7 @@
 
 <script>
 import axios from "axios";
-import { baseUrl, getChromeStorage, setChromeStorage } from '../../../utilities.js';
+import { baseUrl, getChromeStorage, setChromeStorage } from '/utilities.js';
 
 export default {
     name: "ClearAllowlistedURLButton",

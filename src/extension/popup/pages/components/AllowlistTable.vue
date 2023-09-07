@@ -27,7 +27,7 @@ import ClearAllowlistedURLButton from "./buttons/ClearAllowlistedURLButton.vue";
 import LineOfText from "./LineOfText.vue";
 import TextComponent from "./TextComponent.vue";
 
-import { getChromeStorage, setChromeStorage } from '../../utilities.js';
+import { getChromeStorage, setChromeStorage } from '/utilities.js';
 
 export default {
     name: "AllowlistTable",

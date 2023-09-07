@@ -98,7 +98,7 @@
 import PageBanner from "./components/PageBanner.vue";
 
 import axios from "axios";
-import { baseUrl } from '../utilities.js';
+import { baseUrl } from '/utilities.js';
 import { formatNumber, getFontSizeForTotal, getFontSizeForSmallerNums } from "../utilities";
 
 const output = { name: "SlayCount.png", width: 512, height: 512 };

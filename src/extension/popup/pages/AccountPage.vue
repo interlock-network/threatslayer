@@ -62,7 +62,7 @@ import TextComponent from "./components/TextComponent.vue";
 import UpdateAddressButton from "./components/buttons/UpdateAddressButton.vue";
 
 import axios from "axios";
-import { baseUrl } from '../utilities.js';
+import { baseUrl } from '/utilities.js';
 import { decodeAddress, encodeAddress } from '@polkadot/keyring';
 import { debounce } from 'debounce';
 import { hexToU8a, isHex } from '@polkadot/util';

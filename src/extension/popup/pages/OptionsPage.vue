@@ -21,7 +21,7 @@
 import PageBanner from "./components/PageBanner.vue";
 import TextComponent from "./components/TextComponent.vue";
 
-import { getChromeStorage, setChromeStorage } from '../utilities.js';
+import { getChromeStorage, setChromeStorage } from '/utilities.js';
 
 export default {
     name: 'OptionsPage',
