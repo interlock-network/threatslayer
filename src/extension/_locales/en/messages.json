@@ -1,4 +1,20 @@
 {
+    "about_us": {
+        "message": "About Us",
+        "description": "Page title, also used in sidebar."
+    },
+    "affirm_not_us_citizen": {
+        "message": "Affirm you are not a US citizen or resident.",
+        "description": "Instruction for registering an account."
+    },
+    "agree_to_our": {
+        "message": "Agree to our ",
+        "description": "Instruction for registering an account."
+    },
+    "already_have_one": {
+        "message": "Already have an account?",
+        "description": "Instruction for logging in."
+    },
     "appDesc": {
         "message": "Free enterprise-grade protection for your personal browser.",
         "description": "The description of the extension, displayed in the user's browser."
@@ -7,37 +23,165 @@
         "message": "Close",
         "description": "The text used on the close button."
     },
+    "create_one": {
+        "message": "Create one",
+        "description": "Instruction for creating a wallet address."
+    },
+    "create_wallet": {
+        "message": "Create Wallet",
+        "description": "Page title, also used in sidebar."
+    },
+    "crypto_us_warning": {
+        "message": "Cryptocurrency is considered a security in the US so most US residents cannot purchase them.",
+        "description": "Warning for USians about cryptocurrency."
+    },
     "description": {
         "message": "Free enterprise-grade security for your personal browser.",
         "description": "The description in the manifest."
+    },
+    "dont_have_one": {
+        "message": "Don't have a wallet?",
+        "description": "Instruction for creating a wallet address."
+    },
+    "enter_a_password": {
+        "message": "Enter a password of at least 12 characters",
+        "description": "Instruction for registering an account."
+    },
+    "enter_password_again": {
+        "message": "Enter your password again",
+        "description": "Instruction for registering an account."
+    },
+    "enter_referrer_name": {
+        "message": "Optional: Enter referrer username",
+        "description": "Instruction for registering an account."
+    },
+    "enter_a_username": {
+        "message": "Enter a username",
+        "description": "Instruction for registering an account."
+    },
+    "enter_wallet_address": {
+        "message": "Optional: Paste your Aleph Zero-compatible wallet address",
+        "description": "Instruction for registering an account."
+    },
+    "enter_your_email": {
+        "message": "Enter your email",
+        "description": "Instruction for registering an account."
+    },
+    "error_invalid_email_generic": {
+        "message": "Invalid email address.",
+        "description": "Generic registering error message."
+    },
+    "error_password_too_long": {
+        "message": "Password cannot be more than 512 characters.",
+        "description": "Registering error message."
+    },
+    "error_password_too_short": {
+        "message": "Password must be at least 12 characters.",
+        "description": "Registering error message."
+    },
+    "error_passwords_dont_match": {
+        "message": "Your passwords do not match.",
+        "description": "Registering error message."
+    },
+    "error_registering_wallet_address": {
+        "message": "Not a valid wallet address.",
+        "description": "Registering error message."
+    },
+    "error_registering_generic": {
+        "message": "Error registering. Please try again later.",
+        "description": "Generic registering error message."
+    },
+    "error_username_too_long": {
+        "message": "Username too long: Max length is 16 characters.",
+        "description": "Registering error message."
+    },
+    "faq": {
+        "message": "FAQ",
+        "description": "Page title, also used in sidebar."
+    },
+    "login": {
+        "message": "Login",
+        "description": "Page title, also used in sidebar."
     },
     "malicious_sites_detected": {
         "message": "Malicious Sites Detected",
         "description": "The text used to show how many malicious URLs are scanned on the dashboard."
     },
+    "options": {
+        "message": "Options",
+        "description": "Page title, also used in sidebar."
+    },
+    "password_hide": {
+        "message": "Hide Password",
+        "description": "Instruction for toggling password visibility."
+    },
+    "password_show": {
+        "message": "Show Password",
+        "description": "Instruction for toggling password visibility."
+    },
     "popup_title": {
         "message": "ThreatSlayer Active.",
         "description": "The title used for the popup when the extension icon is pressed."
     },
+    "privacy": {
+        "message": "Privacy",
+        "description": "Page title, also used in sidebar."
+    },
+    "security_staking": {
+        "message": "Security Staking",
+        "description": "Page title, also used in sidebar."
+    },
+    "sign_up_for_threat_slayer": {
+        "message": "Sign up for ThreatSlayer",
+        "description": "Page title."
+    },
+    "slay_count": {
+        "message": "SlayCount",
+        "description": "Page title, also used in sidebar."
+    },
     "staking": {
         "message": "Chance to Earn",
         "description": "The text used on the staking text box."
+    },
+    "start_earning": {
+        "message": "Start Earning",
+        "description": "Page title, also used in sidebar."
     },
     "stake_this_url": {
         "message": "Stake on this URL",
         "description": "The text used in the staking button."
     },
     "staking_explanation": {
-        "message": "You have a chance to earn $ILOCK! If you believe this URL is safe, you can stake $$ILOCK you have deposited with Interlock. If you're right, you will receive a reward in $$ILOCK. If you're wrong, you will lose the $$ILOCK you have staked.",
-        "description": "The text used in the staking text box."
+        "message": "You have unlocked a chance to earn $$ILOCK token!",
+        "description": "The explanatory text used in the staking text box."
+    },
+    "submit": {
+        "message": "Submit",
+        "description": "Button text."
+    },
+    "success": {
+        "message": "Success!",
+        "description": "Button text."
     },
     "take_to_safety": {
         "message": "Take Me to Safety",
         "description": "The text used in the take me to safety button."
     },
+    "terms_of_service": {
+        "message": "Terms of Service",
+        "description": "Instruction for registering an account."
+    },
+    "test": {
+        "message": "Test",
+        "description": "Test message, for testing purposes only."
+    },
     "trust_this_url": {
         "message": "Trust this URL",
         "description": "The text used in the trust this URL button."
+    },
+    "try_again_later": {
+        "message": "Try again later",
+        "description": "Button text."
     },
     "urls_scanned": {
         "message": "URLs Scanned",
@@ -46,6 +190,10 @@
     "unique_urls_scanned": {
         "message": "Unique URLs Scanned",
         "description": "The text used to show how many unique URLs are scanned on the dashboard."
+    },
+    "waiting": {
+        "message": "Waiting...",
+        "description": "Button text."
     },
     "warning": {
         "message": "Warning!",
@@ -58,5 +206,9 @@
     "warning_text": {
         "message": "Close the tab unless you know this site is safe!",
         "description": "The text used in the warning banner."
+    },
+    "you_must_register_before_staking": {
+        "message": "You must register before you can stake on a URL.",
+        "description": "The text used in a warning box."
     }
 }
