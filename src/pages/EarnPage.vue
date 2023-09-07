@@ -2,7 +2,7 @@
     <PageBanner :msg="$i18n('sign_up_for_threat_slayer')">
         <img class="banner-icon" src="/src/assets/images/start_earning.png">
     </PageBanner>
-    <BeforeStakingWarning v-if="urlToStake" :msg="$i18n('you_must_register_before_staking')" />
+    <BeforeStakingWarning v-if="urlToStake" :msg="$i18n('warning_must_register_before_staking')" />
     <TextComponent :msg="$i18n('already_have_one')" subinstruction /><button class="login-button"
         @click="selectPage('login')">{{ $i18n('login') }}</button><br />
     <TextComponent :msg="$i18n('dont_have_one')" subinstruction /><button class="login-button"

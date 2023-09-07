@@ -2,7 +2,7 @@
     <PageBanner :msg="$i18n('login')">
         <img class="banner-icon" src="/src/assets/images/login.png">
     </PageBanner>
-    <BeforeStakingWarning v-if="urlToStake" :msg="$i18n('you_must_login_before_staking')" />
+    <BeforeStakingWarning v-if="urlToStake" :msg="$i18n('warning_must_login_before_staking')" />
     <TextComponent :msg="$i18n('dont_have_an_account')" subinstruction /><button class="login-button" @click="unregister">{{
         $i18n('register') }}</button>
     <br />

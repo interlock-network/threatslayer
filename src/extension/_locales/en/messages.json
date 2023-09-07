@@ -19,6 +19,10 @@
         "message": "Already have a wallet?",
         "description": "Instruction for registering."
     },
+    "amount_to_stake": {
+        "message": "Amount to Stake",
+        "description": "Info text on the Security Staking page."
+    },
     "appDesc": {
         "message": "Free enterprise-grade protection for your personal browser.",
         "description": "The description of the extension, displayed in the user's browser."
@@ -127,6 +131,10 @@
         "message": "Forgot password?",
         "description": "The text used on login page."
     },
+    "ilock_available_to_stake": {
+        "message": "$ILOCK Available to Stake",
+        "description": "Info text on the Security Staking page."
+    },
     "login": {
         "message": "Login",
         "description": "Page title, also used in sidebar."
@@ -138,6 +146,10 @@
     "must_create_wallet": {
         "message": "In order to use ThreatSlayer, you will need to create an Aleph Zero-compatible wallet.",
         "description": "Instruction for creating a wallet."
+    },
+    "no_url_selected": {
+        "message": "No URL selected for staking.",
+        "description": "Info text on the Security Staking page."
     },
     "options": {
         "message": "Options",
@@ -174,6 +186,18 @@
     "slay_count": {
         "message": "SlayCount",
         "description": "Page title, also used in sidebar."
+    },
+    "stake_state_neutral": {
+        "message": "You will be the first to stake this URL.",
+        "description": "Explanation of security staking state."
+    },
+    "stake_state_pending": {
+        "message": "Someone else has tried staking this URL. If approved, your stake will be added to theirs. If rejected, you will not lose any $ILOCK.",
+        "description": "Explanation of security staking state."
+    },
+    "stake_state_resolved": {
+        "message": "Nobody can stake on this URL at this time.",
+        "description": "Explanation of security staking state."
     },
     "staking": {
         "message": "Chance to Earn",
@@ -223,6 +247,14 @@
         "message": "URLs Scanned",
         "description": "The text used to show how many URLs are scanned on the dashboard."
     },
+    "url_to_stake": {
+        "message": "URL to Stake",
+        "description": "Info text on the Security Staking page."
+    },
+    "url_staking_status": {
+        "message": "URL Staking Status",
+        "description": "Info text on the Security Staking page."
+    },
     "username_or_password": {
         "message": "Username or email",
         "description": "Instruction on the login page."
@@ -243,16 +275,16 @@
         "message": "This website may be malicious.",
         "description": "The text used in the warning banner."
     },
-    "warning_text": {
-        "message": "Close the tab unless you know this site is safe!",
-        "description": "The text used in the warning banner."
-    },
-    "you_must_login_before_staking": {
+    "warning_must_login_before_staking": {
         "message": "You must login before you can stake on a URL.",
         "description": "The text used in a warning box."
     },
-    "you_must_register_before_staking": {
+    "warning_must_register_before_staking": {
         "message": "You must register before you can stake on a URL.",
         "description": "The text used in a warning box."
+    },
+    "warning_text": {
+        "message": "Close the tab unless you know this site is safe!",
+        "description": "The text used in the warning banner."
     }
 }
