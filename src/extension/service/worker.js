@@ -5,6 +5,7 @@
 /**
  * Declare constants.
  */
+const DASHBOARD_INDEX = "/popup/index.html"
 const SURVEY_URL = "https://docs.google.com/forms/d/e/1FAIpQLSeo1gW6Sg_ITlAXxbTXliQdab2qt1cLBzu45mXpz-XJ8O1KPg/viewform"
 const RELEASE_NOTES_URL = "https://github.com/interlock-network/threatslayer/blob/master/docs/release_notes.md"
 const API_KEY = "threatslayer-api-key";
@@ -76,7 +77,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
             .set({ urlToStake })
             .then(() => {
                 console.log(`URL to stake set to: ${urlToStake}`);
-                chrome.tabs.create({ 'url': chrome.runtime.getURL('index.html'), 'active': true });
+                chrome.tabs.create({ 'url': chrome.runtime.getURL(DASHBOARD_INDEX), 'active': true });
             });
     }
 });
