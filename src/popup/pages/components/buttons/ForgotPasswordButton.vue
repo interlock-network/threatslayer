@@ -14,7 +14,7 @@
 import TextComponent from "../TextComponent.vue";
 
 import axios from "axios";
-import { baseUrl, isEmail } from '/utilities.js';
+import { baseUrl, isEmail } from ../../../utilities.js';
 
 export default {
     name: "ForgotPasswordButton",

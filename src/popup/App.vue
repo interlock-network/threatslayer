@@ -32,7 +32,7 @@ import SlayCount from "./pages/SlayCount.vue";
 import StakingPage from "./pages/StakingPage.vue";
 import WalletPage from "./pages/WalletPage.vue";
 
-import { getChromeStorage } from '/utilities.js';
+import { getChromeStorage } from './utilities.js';
 
 export default {
   name: 'App',
@@ -117,7 +117,7 @@ export default {
 @font-face {
   font-family: "THICCCBOI";
   src: local("THICCCBOI");
-  src: url('../static/fonts/TTF/THICCCBOI-Regular.ttf') format('truetype');
+  src: url('./assets/fonts/TTF/THICCCBOI-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -125,7 +125,7 @@ export default {
 @font-face {
   font-family: "THICCCBOI";
   src: local("THICCCBOI-ExtraBold");
-  src: url('../static/fonts/TTF/THICCCBOI-ExtraBold.ttf') format('truetype');
+  src: url('./assets/fonts/TTF/THICCCBOI-ExtraBold.ttf') format('truetype');
   font-weight: bold;
   font-style: normal;
 }
@@ -133,7 +133,7 @@ export default {
 /* @font-face {
   font-family: "THICCCBOI";
   src: local("THICCCBOI-ExtraBold");
-  src: url('../static/fonts/TTF/THICCCBOI-ExtraBold.ttf') format('truetype');
+  src: url('./assets/fonts/TTF/THICCCBOI-ExtraBold.ttf') format('truetype');
   font-weight: bold;
   font-style: normal;
 } */
@@ -158,7 +158,7 @@ a:focus {
 }
 
 body {
-  background: url("/assets/images/grid_background.png") repeat;
+  background: url("./assets/images/grid_background.png") repeat;
   background-size: 80% 220%;
   background-color: #0F0818;
   color: #FFFFFF;
@@ -192,7 +192,7 @@ input {
 
 #app-container {
   background-color: #0F0818;
-  background: url("/assets/images/grid_background.png") repeat;
+  background: url("./assets/images/grid_background.png") repeat;
   height: 100%;
   width: 100%;
 }

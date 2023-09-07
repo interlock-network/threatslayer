@@ -1,19 +1,19 @@
 <template>
     <div id="footer-icons-row">
         <a href="https://discord.com/invite/8M5QfHqzfA" target="_blank">
-            <img class="footer-icon" src="/assets/images/discord.png">
+            <img class="footer-icon" src="../../assets/images/discord.png">
         </a>
         <a href="https://interlockweb3.medium.com/" target="_blank">
-            <img class="footer-icon" src="/assets/images/medium.png">
+            <img class="footer-icon" src="../../assets/images/medium.png">
         </a>
         <a href="https://www.linkedin.com/company/interlocknetwork" target="_blank">
-            <img class="footer-icon" src="/assets/images/linkedin.png">
+            <img class="footer-icon" src="../../assets/images/linkedin.png">
         </a>
         <a href="https://twitter.com/intent/follow?screen_name=interlockweb3" target="_blank">
-            <img class="footer-icon" src="/assets/images/twitter.png">
+            <img class="footer-icon" src="../../assets/images/twitter.png">
         </a>
         <a href="https://bit.ly/intlchat" target="_blank">
-            <img class="footer-icon" src="/assets/images/telegram.png">
+            <img class="footer-icon" src="../../assets/images/telegram.png">
         </a>
     </div>
 </template>

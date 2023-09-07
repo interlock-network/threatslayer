@@ -1,10 +1,10 @@
 <template>
-    <button id="clear-url-button"><img @click="clearUrl" class="sidebar-icon" src="/assets/images/x-icon.png"></button>
+    <button id="clear-url-button"><img @click="clearUrl" class="sidebar-icon" src="../../../assets/images/x-icon.png"></button>
 </template>
 
 <script>
 import axios from "axios";
-import { baseUrl, getChromeStorage, setChromeStorage } from '/utilities.js';
+import { baseUrl, getChromeStorage, setChromeStorage } from '../../../utilities.js';
 
 export default {
     name: "ClearAllowlistedURLButton",

@@ -13,7 +13,7 @@ const BASE_API_URL = `https://octahedron.interlock.network`;
 const BETA_BASE_API_URL = `https://beta.octahedron.interlock.network`;
 const DEFAULT_CONFIG = {
     method: "POST",
-    headers: { "Content-Type": "application/json", "mode": "cors" }, // no-cors??
+    headers: { "Content-Type": "application/json" }, // no-cors??
     body: JSON.stringify({ key: API_KEY }),
 };
 

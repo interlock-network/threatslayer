@@ -1,6 +1,6 @@
 <template>
     <PageBanner msg="Extension Options">
-        <img class="banner-icon" src="/assets/images/settings.png">
+        <img class="banner-icon" src="../assets/images/settings.png">
     </PageBanner>
     <br />
     <TextComponent msg="Select from the following:" bold />
@@ -21,7 +21,7 @@
 import PageBanner from "./components/PageBanner.vue";
 import TextComponent from "./components/TextComponent.vue";
 
-import { getChromeStorage, setChromeStorage } from '/utilities.js';
+import { getChromeStorage, setChromeStorage } from '../utilities.js';
 
 export default {
     name: 'OptionsPage',

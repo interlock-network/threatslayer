@@ -3,7 +3,7 @@
         <!-- initial delete user button -->
         <button v-if="!clickedOnce" @click="submitDeleteUser" id="delete-user-button" :class="computedClass"
             :disabled="disabled">
-            <img class="sidebar-icon" src="/assets/images/delete-user.png">Delete Account
+            <img class="sidebar-icon" src="../../../assets/images/delete-user.png">Delete Account
         </button>
         <div v-if="clickedOnce" style="font-size: 1rem;">
             <TextComponent msg="Are you sure?" id="delete-user-confirm-text" /><br />
@@ -36,7 +36,7 @@
 import TextComponent from "../TextComponent.vue";
 
 import axios from "axios";
-import { baseUrl, clearChromeStorage, setChromeStorage } from '/utilities.js';
+import { baseUrl, clearChromeStorage, setChromeStorage } from ../../../utilities.js';
 
 export default {
     name: "DeleteUserButton",

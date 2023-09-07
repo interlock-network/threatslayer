@@ -1,6 +1,6 @@
 <template>
     <PageBanner msg="Frequently Asked Questions">
-        <img class="banner-icon" src="/assets/images/faq.png">
+        <img class="banner-icon" src="../assets/images/faq.png">
     </PageBanner>
     <br />
     <div style="padding-right: 2rem;">

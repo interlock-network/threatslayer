@@ -7,7 +7,7 @@
                     <!-- this column wider to make more space between columns -->
                     <td style="width: 22%;">
                         <a href="https://www.interlock.network/" target="_blank">
-                            <img id="logo-white" src="/assets/images/logo_white.svg"></a><br />
+                            <img id="logo-white" src="../assets/images/logo_white.svg"></a><br />
                         <div id="left-hand-block">
                             <LineOfText msg="Interlock © 2023 All Rights Reserved" footer />
                             <FooterIcons />

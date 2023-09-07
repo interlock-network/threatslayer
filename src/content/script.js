@@ -4,7 +4,7 @@
  */
 
 // init
-const BANNER_CSS = "/banner.css"
+const BANNER_CSS = "/assets/style/banner.css"
 const SAFETY_ADDRESS = "https://google.com"
 const SITE_UNLOCK_ENDPOINT = 'http://159.89.252.13/site-unlock/'
 console.log("THREATSLAYER IS ACTIVE ON THIS PAGE.")
@@ -91,11 +91,11 @@ function loadBannerScript() {
     // closeButton.style.display = 'none';
 
     // add background image
-    backgroundImageURL = chrome.runtime.getURL('grid_background.png');
+    backgroundImageURL = chrome.runtime.getURL('/assets/images/grid_background.png');
     banner.style.background = `url(${backgroundImageURL}) repeat`;
 
     // generate logo URL
-    imageURL = chrome.runtime.getURL('threatslayer_logo.png');
+    imageURL = chrome.runtime.getURL('/assets/images/threatslayer_logo.png');
     image.setAttribute('src', imageURL);
 
     // "Warning!" / "This website may be malicious." / "Close the tab unless you know this site is safe!"
@@ -190,7 +190,7 @@ function loadBannerScript() {
                 chrome.storage.local.set({ allowlist });
             }
         });
-
+/*
         // send URL to GALACTUS
         chrome.storage.local.get('apiKey').then(async (result) => {
             const key = result.apiKey;
@@ -214,6 +214,7 @@ function loadBannerScript() {
                 console.log('Error sending allowlisted URL:', error);
             }
         });
+	*/
     };
 }
 

@@ -1,6 +1,6 @@
 <template>
     <PageBanner>
-        <img class="banner-icon" src="/assets/images/account.png">Security Staking
+        <img class="banner-icon" src="../assets/images/account.png">Security Staking
     </PageBanner>
     <BeforeStakingWarning v-if="!loggedIn" :msg="warningText">
         <br />
@@ -50,7 +50,7 @@
                 <tr v-for="url in stakedUrlList" style="margin-bottom: 1rem;">
                     <td class="icon-column">
                         <img @click="clearUrl(url)" class="sidebar-icon" style="padding-left: 1px; padding-bottom: 3px;"
-                            src="/assets/images/x-icon.png">
+                            src="../assets/images/x-icon.png">
                     </td>
                     <td class="url-column">
                         <TextComponent :msg="url" mono />
@@ -69,7 +69,7 @@ import PageBanner from "./components/PageBanner.vue";
 import TextComponent from "./components/TextComponent.vue";
 
 import axios from "axios";
-import { baseUrl, getChromeStorage, setChromeStorage } from '/utilities.js';
+import { baseUrl, getChromeStorage, setChromeStorage } from '../utilities.js';
 
 const errorStyle = {
     border: '3px solid red',

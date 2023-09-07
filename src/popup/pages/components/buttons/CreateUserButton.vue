@@ -11,7 +11,7 @@
 import TextComponent from "../TextComponent.vue";
 
 import axios from "axios";
-import { baseUrl, setChromeStorage } from '/utilities.js';
+import { baseUrl, setChromeStorage } from ../../../utilities.js';
 
 export default {
     name: "CreateUserButton",

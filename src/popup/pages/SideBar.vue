@@ -1,50 +1,50 @@
 <template>
     <div id="sidebar-nav">
-        <img id="threatslayer-logo" src="/assets/images/threatslayer_logo.png">
+        <img id="threatslayer-logo" src="../assets/images/threatslayer_logo.png">
         <div id="sidebar-earn" v-if="showRegisterPage" class="sidebar-item"
             :class="currentPage === 'earn' ? 'selected-sidebar-item' : ''" @click="selectPage('earn')">
-            <img class="sidebar-icon" src="/assets/images/start_earning.png"><span class=sidebar-text>Start
+            <img class="sidebar-icon" src="../assets/images/start_earning.png"><span class=sidebar-text>Start
                 Earning</span>
         </div>
         <div id="sidebar-wallet" v-if="showRegisterPage" class="sidebar-item"
             :class="currentPage === 'wallet' ? 'selected-sidebar-item' : ''" @click="selectPage('wallet')">
-            <img class="sidebar-icon" src="/assets/images/wallet.png"><span class=sidebar-text>Create Wallet</span>
+            <img class="sidebar-icon" src="../assets/images/wallet.png"><span class=sidebar-text>Create Wallet</span>
         </div>
         <div id="sidebar-login" v-if="showLoginPage" class="sidebar-item"
             :class="currentPage === 'login' ? 'selected-sidebar-item' : ''" @click="selectPage('login')">
             <div style="position: relative">
-                <img class="sidebar-icon" src="/assets/images/login.png"><span class="sidebar-text">Login</span>
+                <img class="sidebar-icon" src="../assets/images/login.png"><span class="sidebar-text">Login</span>
             </div>
         </div>
         <div v-if="urlToStake" id="sidebar-staking" class="sidebar-item"
             :class="currentPage === 'staking' ? 'selected-sidebar-item' : ''" @click="selectPage('staking')">
-            <img class="sidebar-icon" src="/assets/images/slay_count.png">Security Staking
+            <img class="sidebar-icon" src="../assets/images/slay_count.png">Security Staking
         </div>
         <div id="sidebar-slayCount" class="sidebar-item" :class="currentPage === 'slayCount' ? 'selected-sidebar-item' : ''"
             @click="selectPage('slayCount')">
-            <img class="sidebar-icon" src="/assets/images/slay_count.png">Slay Count
+            <img class="sidebar-icon" src="../assets/images/slay_count.png">Slay Count
         </div>
         <div id="sidebar-about" class="sidebar-item" :class="currentPage === 'about' ? 'selected-sidebar-item' : ''"
             @click="selectPage('about')">
-            <img class="sidebar-icon" src="/assets/images/about.png">About Us
+            <img class="sidebar-icon" src="../assets/images/about.png">About Us
         </div>
         <div id="sidebar-faq" class="sidebar-item" :class="currentPage === 'faq' ? 'selected-sidebar-item' : ''"
             @click="selectPage('faq')">
-            <img class="sidebar-icon" src="/assets/images/faq.png">FAQ
+            <img class="sidebar-icon" src="../assets/images/faq.png">FAQ
         </div>
         <div id="sidebar-privacy" class="sidebar-item" :class="currentPage === 'privacy' ? 'selected-sidebar-item' : ''"
             @click="selectPage('privacy')">
-            <img class="sidebar-icon" src="/assets/images/privacy.png">Privacy <img class="link-button-icon"
-                src="/assets/images/external_link.png">
+            <img class="sidebar-icon" src="../assets/images/privacy.png">Privacy <img class="link-button-icon"
+                src="../assets/images/external_link.png">
         </div>
         <div id="sidebar-options" class="sidebar-item" :class="currentPage === 'options' ? 'selected-sidebar-item' : ''"
             @click="selectPage('options');">
-            <img class="sidebar-icon" src="/assets/images/settings.png">Options
+            <img class="sidebar-icon" src="../assets/images/settings.png">Options
         </div>
         <div v-if="showLogoutButton" id="bottom-sidebar-items">
             <div id="sidebar-account" class="sidebar-item" :class="currentPage === 'account' ? 'selected-sidebar-item' : ''"
                 @click="selectPage('account');">
-                <img class="sidebar-icon" src="/assets/images/account.png">{{ username }}
+                <img class="sidebar-icon" src="../assets/images/account.png">{{ username }}
             </div>
             <LogoutButton v-bind="{ apiKey, checkState, selectPage, username }" />
         </div>
@@ -58,7 +58,7 @@
 <script>
 import LogoutButton from "./components/buttons/LogoutButton.vue";
 
-import { clearChromeStorage, setChromeStorage } from '/utilities.js';
+import { clearChromeStorage, setChromeStorage } from '../utilities.js';
 
 export default {
     name: 'SideBar',
