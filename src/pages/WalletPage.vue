@@ -1,6 +1,6 @@
 <template>
     <PageBanner msg="Create Wallet">
-        <img class="banner-icon" src="/src/assets/images/wallet.png">
+        <img class="banner-icon" src="/assets/images/wallet.png">
     </PageBanner>
     <TextComponent msg="Already have a wallet?" subinstruction /><button class="login-button"
         @click="selectPage('earn')">Register</button>

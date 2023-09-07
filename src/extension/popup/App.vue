@@ -158,7 +158,7 @@ a:focus {
 }
 
 body {
-  background: url("/src/assets/images/grid_background.png") repeat;
+  background: url("/assets/images/grid_background.png") repeat;
   background-size: 80% 220%;
   background-color: #0F0818;
   color: #FFFFFF;
@@ -192,7 +192,7 @@ input {
 
 #app-container {
   background-color: #0F0818;
-  background: url("/src/assets/images/grid_background.png") repeat;
+  background: url("/assets/images/grid_background.png") repeat;
   height: 100%;
   width: 100%;
 }

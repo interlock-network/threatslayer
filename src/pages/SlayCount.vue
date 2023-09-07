@@ -1,14 +1,14 @@
 <template>
     <PageBanner msg="Slay Count">
-        <img class="banner-icon" src="/src/assets/images/slay_count.png">
+        <img class="banner-icon" src="/assets/images/slay_count.png">
     </PageBanner>
     <div id="slaycount-container">
         <div id="button-container">
             <button id="download-button" class="sharing-button" @click="download" title="Download Slay Count">
-                <img class="button-img" src="/src/assets/images/download.png" alt="Download" />
+                <img class="button-img" src="/assets/images/download.png" alt="Download" />
             </button>
             <button id="copy-button" class="sharing-button" @click="copy" title="Copy Slay Count to clipboard">
-                <img class="button-img" src="/src/assets/images/copy_icon.png" alt="Copy" />
+                <img class="button-img" src="/assets/images/copy_icon.png" alt="Copy" />
             </button>
         </div>
         <!-- Total URLs big donut -->
@@ -285,7 +285,7 @@ export default {
 }
 
 #slaycount-circle {
-    background: url("/src/assets/images/slaycount_circle.svg");
+    background: url("/assets/images/slaycount_circle.svg");
 }
 
 #url-count {

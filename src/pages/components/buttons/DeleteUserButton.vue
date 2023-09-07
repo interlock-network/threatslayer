@@ -3,7 +3,7 @@
         <!-- initial delete user button -->
         <button v-if="!clickedOnce" @click="submitDeleteUser" id="delete-user-button" :class="computedClass"
             :disabled="disabled">
-            <img class="sidebar-icon" src="/src/assets/images/delete-user.png">Delete Account
+            <img class="sidebar-icon" src="/assets/images/delete-user.png">Delete Account
         </button>
         <div v-if="clickedOnce" style="font-size: 1rem;">
             <TextComponent msg="Are you sure?" id="delete-user-confirm-text" /><br />

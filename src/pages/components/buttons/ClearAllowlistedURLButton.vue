@@ -1,5 +1,5 @@
 <template>
-    <button id="clear-url-button"><img @click="clearUrl" class="sidebar-icon" src="/src/assets/images/x-icon.png"></button>
+    <button id="clear-url-button"><img @click="clearUrl" class="sidebar-icon" src="/assets/images/x-icon.png"></button>
 </template>
 
 <script>

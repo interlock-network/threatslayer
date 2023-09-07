@@ -1,6 +1,6 @@
 <template>
     <PageBanner>
-        <img class="banner-icon" src="/src/assets/images/account.png">Account Info for {{ username }}
+        <img class="banner-icon" src="/assets/images/account.png">Account Info for {{ username }}
     </PageBanner>
     <br />
     <div :style="computedStyle">

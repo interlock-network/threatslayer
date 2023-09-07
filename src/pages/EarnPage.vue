@@ -1,6 +1,6 @@
 <template>
     <PageBanner msg="Sign up for ThreatSlayer">
-        <img class="banner-icon" src="/src/assets/images/start_earning.png">
+        <img class="banner-icon" src="/assets/images/start_earning.png">
     </PageBanner>
     <BeforeStakingWarning v-if="urlToStake" msg="You must register before you can stake on a URL." />
     <TextComponent msg="Already have an account?" subinstruction /><button class="login-button"

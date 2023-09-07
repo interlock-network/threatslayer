@@ -1,6 +1,6 @@
 <template>
     <PageBanner msg="About ThreatSlayer">
-        <img class="banner-icon" src="/src/assets/images/about.png">
+        <img class="banner-icon" src="/assets/images/about.png">
     </PageBanner>
     <br />
     <TextComponent msg="Why Choose ThreatSlayer?" bold />

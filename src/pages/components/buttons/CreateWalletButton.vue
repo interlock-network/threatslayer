@@ -1,7 +1,7 @@
 <template>
     <button :id="id" class="link-button" @click="openTab()">
         <div>
-            Subwallet <img class="link-button-icon" src="/src/assets/images/external_link.png">
+            Subwallet <img class="link-button-icon" src="/assets/images/external_link.png">
         </div>
     </button>
 </template>

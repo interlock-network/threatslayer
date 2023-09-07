@@ -1,6 +1,6 @@
 <template>
     <div class="sidebar-item" @click="submitLogout" :class="computedClass" :disabled="loggingOut">
-        <img class="sidebar-icon" src="/src/assets/images/logout.png">{{ logoutButtonText }}
+        <img class="sidebar-icon" src="/assets/images/logout.png">{{ logoutButtonText }}
     </div>
     <TextComponent v-for="errorMessage in errorArr" :msg="errorMessage" error />
 </template>
