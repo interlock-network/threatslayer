@@ -23,6 +23,10 @@
         "message": "Free enterprise-grade protection for your personal browser.",
         "description": "The description of the extension, displayed in the user's browser."
     },
+    "change_password": {
+        "message": "Change Password",
+        "description": "The text used on change password button."
+    },
     "click_to_create_wallet": {
         "message": "Please click 'Create Wallet' to be redirected to a Chrome browser extension to create a SubWallet.",
         "description": "Page title, also used in sidebar."
@@ -46,6 +50,10 @@
     "description": {
         "message": "Free enterprise-grade security for your personal browser.",
         "description": "The description in the manifest."
+    },
+    "dont_have_an_account": {
+        "message": "Don't have an account?",
+        "description": "Instruction for creating an account."
     },
     "dont_have_one": {
         "message": "Don't have a wallet?",
@@ -75,9 +83,17 @@
         "message": "Enter your email",
         "description": "Instruction for registering an account."
     },
+    "enter_email_to_change_password": {
+        "message": "Enter your email to change your password",
+        "description": "Instruction for changing password."
+    },
     "error_invalid_email_generic": {
         "message": "Invalid email address.",
         "description": "Generic registering error message."
+    },
+    "error_login_generic": {
+        "message": "Error logging in. Please try again later.",
+        "description": "Generic login error message."
     },
     "error_password_too_long": {
         "message": "Password cannot be more than 512 characters.",
@@ -106,6 +122,10 @@
     "faq": {
         "message": "FAQ",
         "description": "Page title, also used in sidebar."
+    },
+    "forgot_password": {
+        "message": "Forgot password?",
+        "description": "The text used on login page."
     },
     "login": {
         "message": "Login",
@@ -203,6 +223,10 @@
         "message": "URLs Scanned",
         "description": "The text used to show how many URLs are scanned on the dashboard."
     },
+    "username_or_password": {
+        "message": "Username or email",
+        "description": "Instruction on the login page."
+    },
     "unique_urls_scanned": {
         "message": "Unique URLs Scanned",
         "description": "The text used to show how many unique URLs are scanned on the dashboard."
@@ -222,6 +246,10 @@
     "warning_text": {
         "message": "Close the tab unless you know this site is safe!",
         "description": "The text used in the warning banner."
+    },
+    "you_must_login_before_staking": {
+        "message": "You must login before you can stake on a URL.",
+        "description": "The text used in a warning box."
     },
     "you_must_register_before_staking": {
         "message": "You must register before you can stake on a URL.",

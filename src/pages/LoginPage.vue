@@ -1,33 +1,34 @@
 <template>
-    <PageBanner msg="Login to ThreatSlayer">
+    <PageBanner :msg="$i18n('login')">
         <img class="banner-icon" src="/src/assets/images/login.png">
     </PageBanner>
-    <BeforeStakingWarning v-if="urlToStake" msg="You must login before you can stake on a URL." />
-    <TextComponent msg="Don't have an account?" subinstruction /><button class="login-button"
-        @click="unregister">Register</button>
+    <BeforeStakingWarning v-if="urlToStake" :msg="$i18n('you_must_login_before_staking')" />
+    <TextComponent :msg="$i18n('dont_have_an_account')" subinstruction /><button class="login-button" @click="unregister">{{
+        $i18n('register') }}</button>
     <br />
     <br />
     <!-- username field -->
     <input class="input-field-text" id="login-username-or-email" v-model.trim="usernameOrEmail"
-        placeholder="Username or email" tabindex="2" :style="usernameInputStyle" />
-    <TextComponent :msg="usernameErrorMessage" error v-if="usernameErrorMessage.length" />
+        :placeholder="$i18n('username_or_password')" tabindex="2" :style="usernameInputStyle" />
+    <TextComponent :msg="$i18n(usernameErrorMessage)" error v-if="usernameErrorMessage.length" />
     <br />
     <!-- password field with show/hide button -->
     <input id="login-password" class="input-field-text password-input" :type="passwordInputType" v-model.trim="password"
         placeholder="Password" tabindex="4" :style="passwordInputStyle" />
     <button @click="togglePasswordInputType" class="small-button" id="show-toggle-button" tabindex="5">
-        {{ passwordInputType === 'password' ? 'Show Password' : 'Hide Password' }}
+        {{ passwordInputType === 'password' ? $i18n('password_show') : $i18n('password_hide') }}
     </button>
-    <TextComponent :msg="passwordErrorMessage" error v-if="passwordErrorMessage.length" />
+    <TextComponent :msg="$i18n(passwordErrorMessage)" error v-if="passwordErrorMessage.length" />
     <br />
     <LoginButton v-bind="{ checkState, password, selectPage, usernameOrEmail }" tabindex="6" />
     <!-- Forgot username / password flow -->
     <br />
     <br />
-    <TextComponent msg="Forgot password?" class="input-header" bold style="margin-top: 3rem; margin-bottom: 1rem;" />
+    <TextComponent :msg="$i18n('forgot_password')" class="input-header" bold
+        style="margin-top: 3rem; margin-bottom: 1rem;" />
     <input type="email" class="input-field-text" id="forgot-info-email" @input="validateEmail" v-model.trim="email" required
-        placeholder="Enter your email to change your password" tabindex="8" />
-    <TextComponent :msg="emailErrorMessage" error v-if="emailErrorMessage.length" />
+        :placeholder="$i18n('enter_email_to_change_password')" tabindex="8" />
+    <TextComponent :msg="$i18n(emailErrorMessage)" error v-if="emailErrorMessage.length" />
     <ForgotPasswordButton :email="email" style="margin-top: 0.75rem;" tabindex="10" />
 </template>
 <script>

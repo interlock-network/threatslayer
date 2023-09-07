@@ -2,7 +2,7 @@
     <div class="login-page-submit-button-container">
         <button class='secondary-hollow-button' @click="submitForgotPassword" :class="computedClass" :disabled="disabled"
             tabindex="99">
-            {{ forgotPasswordButtonText }}
+            {{ $i18n(forgotPasswordButtonText) }}
         </button>
         <br />
         <br />
@@ -53,13 +53,13 @@ export default {
             let result = '';
 
             if (loggedIn) {
-                result = 'Success!';
+                result = 'success';
             } else if (loggingIn) {
-                result = 'Waiting...';
+                result = 'waiting';
             } else if (errorArr.length) {
-                result = "Try again later";
+                result = "try_again_later";
             } else {
-                result = 'Change Password';
+                result = 'change_password';
             }
 
             return result;

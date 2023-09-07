@@ -2,11 +2,11 @@
     <div class="login-page-submit-button-container">
         <button class='submit-button' @click="submitLogin" :class="computedClass" :disabled="disabled"
             style="margin-bottom: 1rem; margin-top: 1rem;">
-            {{ loginButtonText }}
+            {{ $i18n(loginButtonText) }}
         </button>
         <br />
         <br />
-        <TextComponent v-for="errorMessage in errorArr" :msg="errorMessage" style="margin-bottom: -1rem;" error />
+        <TextComponent v-for="errorMessage in errorArr" :msg="$i18n(errorMessage)" style="margin-bottom: -1rem;" error />
     </div>
 </template>
 
@@ -55,13 +55,13 @@ export default {
             let result = '';
 
             if (this.loggedIn) {
-                result = 'Success!';
+                result = 'success';
             } else if (this.loggingIn) {
-                result = 'Waiting...';
+                result = 'waiting';
             } else if (this.errorArr.length) {
-                result = "Try again later";
+                result = "try_again_later";
             } else {
-                result = 'Login';
+                result = 'login';
             }
 
             return result;
@@ -128,7 +128,7 @@ export default {
                         this.checkState()
                     } else {
                         // TODO update error message to be an object
-                        this.errorArr.push('Error logging in. Please try again later.')
+                        this.errorArr.push('error_login_generic')
                     }
                 } else {
                     console.log('Login error:', errors)
