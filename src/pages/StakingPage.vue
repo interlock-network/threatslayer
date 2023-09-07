@@ -1,21 +1,21 @@
 <template>
     <PageBanner>
-        <img class="banner-icon" src="/src/assets/images/account.png">Security Staking
+        <img class="banner-icon" src="/src/assets/images/account.png">{{ $i18n('security_staking') }}
     </PageBanner>
-    <BeforeStakingWarning v-if="!loggedIn" :msg="warningText">
+    <BeforeStakingWarning v-if="!loggedIn" :msg="$i18n(warningText)">
         <br />
-        <TextComponent msg="Already have an account?" subinstruction /><button class="login-button"
-            @click="selectPage('login')">Login</button><br />
-        <TextComponent msg="Don't have an account?" subinstruction /><button class="login-button"
-            @click="unregister">Register</button><br />
+        <TextComponent :msg="$i18n('already_have_one')" subinstruction /><button class="login-button"
+            @click="selectPage('login')">{{ $i18n('login') }}</button><br />
+        <TextComponent :msg="$i18n('dont_have_one')" subinstruction /><button class="login-button"
+            @click="selectPage('wallet')">{{ $i18n('create_one') }}</button>
     </BeforeStakingWarning>
     <br />
     <div>
-        <TextComponent msg=" $ILOCK Available to Stake" bold /> <br />
+        <TextComponent :msg="$i18n('ilock_available_to_stake')" bold /> <br />
         <TextComponent msg="0" mono /> <br />
         <br />
         <br />
-        <TextComponent msg="URL to Stake" bold /> <br />
+        <TextComponent :msg="$i18n('url_to_stake')" bold /> <br />
         <div v-if="!url.length">
             <TextComponent :msg="None" mono />
         </div>
@@ -33,11 +33,11 @@
         </div>
         <br />
         <br />
-        <TextComponent msg="URL Staking Status" bold /> <br />
-        <TextComponent :msg="stakeStateMessage" mono /> <br />
+        <TextComponent :msg="$i18n('url_staking_status')" bold /> <br />
+        <TextComponent :msg="$i18n(stakeStateMessage)" mono /> <br />
         <br />
         <br />
-        <TextComponent msg="Amount to Stake" bold /> <br />
+        <TextComponent :msg="$i18n('amount_to_stake')" bold /> <br />
         <br />
         <br />
         <!-- TODO change language to staked pages -->
@@ -141,9 +141,9 @@ export default {
             let result = '';
 
             if (!this.registered && !this.loggedIn) {
-                result = 'You must register before you can stake on a URL.';
+                result = 'warning_must_register_before_staking';
             } else if (!this.loggedIn) {
-                result = 'You must login before you can stake on a URL.';
+                result = 'warning_must_login_before_staking';
             }
 
             return result;
@@ -153,7 +153,7 @@ export default {
         clearUrlToStake() {
             this.url = '';
             this.stakeState = null;
-            this.stakeStateMessage = 'No URL selected for staking.';
+            this.stakeStateMessage = 'no_url_selected';
 
             this.checkState();
         },
@@ -165,11 +165,6 @@ export default {
         },
         async getSiteInfo() {
             const { apiKey, url } = this;
-            const stakingStatuses = {
-                neutral: 'You will be the first to stake this URL.',
-                pending: 'Someone else has tried staking this URL. If approved, your stake will be added to theirs. If rejected, you will not lose any $ILOCK.',
-                resolved: 'Nobody can stake on this URL at this time.'
-            };
 
             const response = await axios.post(`${baseUrl}/site-get`, { key: apiKey, url })
                 .then(res => res)
@@ -180,7 +175,9 @@ export default {
             const { stake_state } = data;
 
             this.stakeState = stake_state;
-            this.stakeStateMessage = stakingStatuses[stake_state];
+
+            // Note: Translations for these are under 'stake_state_neutral', 'stake_state_pending', etc.
+            this.stakeStateMessage = `stake_state_${stake_state}`;
         },
         async getStakingUrl() {
             const urlToStake = await getChromeStorage('urlToStake');
