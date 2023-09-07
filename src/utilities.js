@@ -11,7 +11,7 @@ export function findEmailError(email) {
     if (!email?.length) {
         result = '';
     } else if (!emailRegex.test(email)) {
-        result = 'Invalid email address';
+        result = 'error_invalid_email_generic';
     } else {
         result = '';
     }

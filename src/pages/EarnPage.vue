@@ -1,52 +1,51 @@
 <template>
-    <PageBanner msg="Sign up for ThreatSlayer">
+    <PageBanner :msg="$i18n('sign_up_for_threat_slayer')">
         <img class="banner-icon" src="/src/assets/images/start_earning.png">
     </PageBanner>
-    <BeforeStakingWarning v-if="urlToStake" msg="You must register before you can stake on a URL." />
-    <TextComponent msg="Already have an account?" subinstruction /><button class="login-button"
-        @click="selectPage('login')">Login</button><br />
-    <TextComponent msg="Don't have a wallet?" subinstruction /><button class="login-button"
-        @click="selectPage('wallet')">Create
-        one</button>
+    <BeforeStakingWarning v-if="urlToStake" :msg="$i18n('you_must_register_before_staking')" />
+    <TextComponent :msg="$i18n('already_have_one')" subinstruction /><button class="login-button"
+        @click="selectPage('login')">{{ $i18n('login') }}</button><br />
+    <TextComponent :msg="$i18n('dont_have_one')" subinstruction /><button class="login-button"
+        @click="selectPage('wallet')">{{ $i18n('create_one') }}</button>
     <br />
     <br />
     <!-- username -->
     <input id="username-input" @input="validateUsername" v-model.trim="username" required tabindex="4"
-        placeholder="Enter a username" :style="usernameInputStyle" />
-    <TextComponent v-if="usernameErrorMessage.length" :msg="usernameErrorMessage" error />
+        :placeholder="$i18n('enter_a_username')" :style="usernameInputStyle" />
+    <TextComponent v-if="usernameErrorMessage.length" :msg="$i18n(usernameErrorMessage)" error />
     <!-- email -->
     <input type="email" @input="validateEmail" v-model.trim="email" required tabindex="6" :style="emailInputStyle"
-        placeholder="Enter your email" />
-    <TextComponent v-if="emailErrorMessage.length" :msg="emailErrorMessage" error />
+        :placeholder="$i18n('enter_your_email')" />
+    <TextComponent v-if="emailErrorMessage.length" :msg="$i18n(emailErrorMessage)" error />
     <!-- password with show/hide button -->
     <div>
         <input class="password-input" :type="passwordInputType" v-model.trim="password" required
-            placeholder="Enter a password of at least 12 characters" tabindex="8" :style="passwordInputStyle" />
+            :placeholder="$i18n('enter_a_password')" tabindex="8" :style="passwordInputStyle" />
         <button @click="togglePasswordInputType" class="small-button" id="show-toggle-button" tabindex="9">
-            {{ passwordInputType === 'password' ? 'Show Password' : 'Hide Password' }}
+            {{ passwordInputType === 'password' ? $i18n('password_show') : $i18n('password_hide') }}
         </button>
     </div>
-    <TextComponent v-if="passwordErrorMessage.length" :msg="passwordErrorMessage" error />
+    <TextComponent v-if="passwordErrorMessage.length" :msg="$i18n(passwordErrorMessage)" error />
     <!-- password confirmation field -->
     <input class="password-input" :type="passwordInputType" @input="validateReenteredPassword" :style="passwordInputStyle"
-        v-model.trim="reenteredPassword" placeholder="Enter your password again" tabindex="10" required />
-    <TextComponent v-if="reenteredPasswordErrorMessage.length" :msg="reenteredPasswordErrorMessage" error />
-    <!-- address (optional) -->
+        v-model.trim="reenteredPassword" :placeholder="$i18n('enter_password_again')" tabindex="10" required />
+    <TextComponent v-if="reenteredPasswordErrorMessage.length" :msg="$i18n(reenteredPasswordErrorMessage)" error />
+    <!-- wallet address (optional) -->
     <!-- 5GrpknVvGGrGH3EFuURXeMrWHvbpj3VfER1oX5jFtuGbfzCE -->
     <input id="address-input" @input="validateAddress" v-model.trim="address" :style="addressInputStyle"
-        placeholder="Optional: Paste your Aleph Zero-compatible wallet address" tabindex="11" />
-    <TextComponent v-if="addressErrorMessage.length" :msg="addressErrorMessage" error />
+        :placeholder="$i18n('enter_wallet_address')" tabindex="11" />
+    <TextComponent v-if="addressErrorMessage.length" :msg="$i18n(addressErrorMessage)" error />
     <!-- referrer (optional) -->
-    <input v-model.trim="referrer" tabindex="12" placeholder="Optional: Enter referrer username" />
+    <input v-model.trim="referrer" tabindex="12" :placeholder="$i18n('enter_referrer_name')" />
     <div class="checkbox-container" style="margin-top: 0.8rem;" @click="focusNextCheckbox">
         <input id="first-box" type="checkbox" v-model="termsOfService" tabindex="14">
-        <label for="first-box">Agree to our <a href="https://interlock.network" target="_blank">
-                Terms of Service</a></label>
+        <label for="first-box">{{ $i18n('agree_to_our') }}<a href="https://interlock.network" target="_blank">
+                {{ $i18n('terms_of_service') }} </a></label>
     </div>
     <div class="checkbox-container">
         <input id="second-box" type="checkbox" v-model="unitedStates" tabindex="16">
-        <label for="second-box" style="display: inline-flex;">Affirm you are not a US citizen or resident
-            <InfoTip msg="Cryptocurrency is considered a security in the US so most US residents cannot purchase them." />
+        <label for="second-box" style="display: inline-flex;">{{ $i18n('affirm_not_us_citizen') }}
+            <InfoTip :msg="$i18n('crypto_us_warning')" />
         </label>
     </div>
     <CreateUserButton style="margin-top: 1.1rem;" tabindex="26"
@@ -69,7 +68,7 @@ const errorStyle = {
     border: '3px solid red',
     color: 'red'
 };
-const maxPasswordLength = 16; // number of characters
+const maxUsernameLength = 16; // number of characters
 
 export default {
     name: 'EarnPage',
@@ -170,7 +169,7 @@ export default {
             } else if (!address || !address.length) {
                 this.addressErrorMessage = '';
             } else {
-                this.addressErrorMessage = 'Not a valid address';
+                this.addressErrorMessage = 'error_registering_wallet_address';
             }
         }, 250),
         validateEmail: debounce(function () {
@@ -187,9 +186,9 @@ export default {
             if (!password?.length) {
                 this.passwordErrorMessage = '';
             } else if (password.length < minLength) {
-                this.passwordErrorMessage = `Password must be at least ${minLength} characters`;
+                this.passwordErrorMessage = 'error_password_too_short';
             } else if (password.length > maxLength) {
-                this.passwordErrorMessage = `Password cannot be more than ${maxLength} characters`;
+                this.passwordErrorMessage = 'error_password_too_long';
             } else {
                 this.passwordErrorMessage = '';
             }
@@ -197,7 +196,7 @@ export default {
             if (!this.reenteredPassword.length) {
                 this.reenteredPasswordErrorMessage = '';
             } else if (password !== this.reenteredPassword) {
-                this.reenteredPasswordErrorMessage = 'Your passwords do not match';
+                this.reenteredPasswordErrorMessage = 'error_passwords_dont_match';
             } else {
                 this.reenteredPasswordErrorMessage = '';
             }
@@ -213,14 +212,14 @@ export default {
 
             const errorMessages = {
                 illegalChars: function (chars) { return `Username contains illegal characters: ${chars.join(', ')}` },
-                maxLength: `Username too long: Max length is ${maxPasswordLength} characters`
+                maxLength: 'error_username_too_long'
             };
 
             // TODO make an array of errors?
             const allowedCharsRegex = /^[a-zA-Z0-9_]+$/;
             const containsIllegalChars = !allowedCharsRegex.test(name);
 
-            if (name.length > maxPasswordLength) {
+            if (name.length > maxUsernameLength) {
                 this.usernameErrorMessage = errorMessages.maxLength;
             } else if (containsIllegalChars) {
                 const illegalChars = findNonAlphanumericChars(name);

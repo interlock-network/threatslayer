@@ -1,9 +1,9 @@
 <template>
     <div>
         <button @click="submitCreateUser" class="submit-button" :class="computedClass" :disabled="disabled">
-            {{ submitButtonText }}
+            {{ $i18n(submitButtonText) }}
         </button>
-        <TextComponent v-for="errorMessage in errorArr" :msg="errorMessage" error />
+        <TextComponent v-for="errorMessage in errorArr" :msg="$i18n(errorMessage)" error />
     </div>
 </template>
 
@@ -52,13 +52,13 @@ export default {
             let result = '';
 
             if (this.loggedIn) {
-                result = 'Success!';
+                result = 'success';
             } else if (this.loggingIn) {
-                result = 'Waiting...';
+                result = 'waiting';
             } else if (this.errorArr.length) {
-                result = "Try again later";
+                result = "try_again_later";
             } else {
-                result = 'Submit';
+                result = 'submit';
             }
 
             return result;
@@ -110,7 +110,7 @@ export default {
                     this.selectPage('faq');
                     this.checkState();
                 } else {
-                    this.errorArr.push('Error registering. Please try again later.');
+                    this.errorArr.push('error_registering_generic');
                 }
             } else {
                 console.log('Error submitting registration:', errors);
