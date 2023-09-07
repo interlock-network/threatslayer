@@ -128,7 +128,7 @@ export default {
         sortHeader() {
             let result;
 
-            if (!this.allowlist?.length || this.allowlist.length === 1) {
+            if (!this.allowlist?.length || this.allowlist?.length === 1) {
                 result = '';
             } else {
                 result = this.currentSortDir === 'asc' ? ' ▲' :

@@ -224,7 +224,6 @@ export default {
             this.getExtensionState('totalMaliciousURLsVisited');
 
             if (this.apiKey?.length && this.username?.length) {
-                console.log('here');
                 this.getUserInfo();
             } else {
                 this.getExtensionState('totalURLsVisited');

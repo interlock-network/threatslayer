@@ -1,7 +1,7 @@
 <template>
     <div id="url-container">
-        <LineOfText v-if="!allowlist.length" msg="No allowlisted sites to show" bold />
-        <div v-if="allowlist.length">
+        <LineOfText v-if="!allowlist?.length" msg="No allowlisted sites to show" bold />
+        <div v-if="allowlist?.length">
             <LineOfText @click="sort" :msg="tableHeader" bold>{{ sortHeader }}</LineOfText>
             <TextComponent msg="You marked these safe. ThreatSlayer won't block them." subinstruction />
             <br />
@@ -68,7 +68,7 @@ export default {
         sortHeader() {
             let result;
 
-            if (!this.allowlist?.length || this.allowlist.length === 1) {
+            if (!this.allowlist?.length || this.allowlist?.length === 1) {
                 result = '';
             } else {
                 result = this.currentSortDir === 'asc' ? ' ▲' :
@@ -78,7 +78,7 @@ export default {
             return result;
         },
         tableHeader() {
-            return `${this.allowlist.length} Allowlisted Sites`;
+            return `${this.allowlist?.length} Allowlisted Sites`;
         }
     },
     methods: {
