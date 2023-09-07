@@ -24,14 +24,17 @@
             <TextComponent v-if="newAddressErrorMessage.length" :msg="newAddressErrorMessage" error />
             <!-- password field with show/hide button -->
             <div v-if="clickedOnce">
+                <TextComponent v-if="showAddressChangeWarning" subinstruction
+                    msg="Warning: Changing your existing wallet address may delay access to previously deposited $ILOCK." />
+                <br />
+                <br />
                 <TextComponent msg="Enter your password to update your wallet address." subinstruction />
             </div>
             <div v-if="clickedOnce">
                 <input id="login-password" class="input-field-text password-input" :type="passwordInputType"
                     style="margin-top: 0.5rem;" v-model.trim="password" placeholder="Password" tabindex="4"
                     :style="passwordInputStyle" />
-                <button @click="togglePasswordInputType" class="small-button" id="show-toggle-button"
-                    style="padding-top: 0.75rem;" tabindex="5">
+                <button @click="togglePasswordInputType" class="small-button" id="show-toggle-button" tabindex="5">
                     {{ passwordInputType === 'password' ? 'Show' : 'Hide' }}
                 </button>
                 <TextComponent :msg="passwordErrorMessage" error v-if="passwordErrorMessage.length" />
@@ -124,6 +127,9 @@ export default {
         },
         showAddressInput() {
             return !this.address?.length || this.changeAddressSelected;
+        },
+        showAddressChangeWarning() {
+            return this.address?.length;
         },
         // TODO delete this?
         // showUpdateAddressButton() {
