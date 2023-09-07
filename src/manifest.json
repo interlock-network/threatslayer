@@ -1,0 +1,62 @@
+{
+    "manifest_version": 3,
+    "name": "ThreatSlayer: AI Threat Detection for Web3",
+    "description": "__MSG_appDesc__",
+    "default_locale": "en",
+    "author": "Interlock",
+    "version": "1.0.0",
+    "icons": {
+        "16": "icon16.png",
+        "48": "icon48.png",
+        "128": "icon128.png"
+    },
+    "action": {
+        "default_icon": {
+            "16": "icon16.png",
+            "48": "icon48.png",
+            "128": "icon128.png"
+        },
+        "default_popup": "popup/dashboard.html",
+        "default_title": "__MSG_popup_title__"
+    },
+    "background": {
+        "service_worker": "service/worker.js"
+    },
+    "content_scripts": [
+        {
+            "js": [
+                "content/script.js"
+            ],
+            "matches": [
+                "<all_urls>"
+            ]
+        }
+    ],
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "grid_background.png",
+                "hand48.png",
+                "threatslayer_logo.png",
+                "static/style.css",
+                "static/fonts/Webfont/THICCCBOI-Bold.woff2",
+                "static/fonts/Webfont/THICCCBOI-Regular.woff2",
+                "static/fonts/TTF/THICCCBOI-Bold.ttf",
+                "static/fonts/TTF/THICCCBOI-Regular.ttf",
+                "banner.css"
+            ],
+            "matches": [
+                "<all_urls>"
+            ]
+        }
+    ],
+    "permissions": [
+        "scripting",
+        "storage",
+        "downloads",
+        "tabs"
+    ],
+    "host_permissions": [
+        "<all_urls>"
+    ]
+}

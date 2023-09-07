@@ -1,0 +1,144 @@
+/* This CSS file is used during rendering of a warning to the user */
+body {
+    background-color: #0F0818;
+    color: #FFFFFF;
+    font-family: sans-serif;
+    font-size: 1.1rem;
+    font-weight: lighter;
+}
+
+.block {
+    display: block;
+}
+
+.second {
+    display: none;
+}
+
+.left-button {
+    margin-right: 2rem;
+}
+
+.secondary-button {
+    background-color: #0F0818;
+    border: #9000CB solid 1px;
+    border-radius: 1.5rem;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 0.75rem;
+    padding-bottom: 1rem;
+    padding-top: 1rem;    
+    width: 10rem;
+}
+
+.primary-button {
+    background: linear-gradient(216.99deg, #9000CB 22.5%, #51066B 112.78%);
+    border: none;
+    border-radius: 1.5rem;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 0.75rem;
+    padding-bottom: 1rem;
+    padding-top: 1rem;
+    width: 10rem;
+}
+
+p {
+    font-family: sans-serif;
+    font-size: 1rem;
+    margin-bottom: 0;
+}
+
+#warningbanner-wrapper {
+    background: transparent;
+    bottom: auto;
+    height: 100%;
+    position: fixed;
+    text-align: center;
+    width: 100%;
+    z-index: 2147483643;
+}
+
+#warningbanner {
+    border-radius:  0 0 15px 15px;
+    font-family: sans-serif;
+    height: 100vh;
+    top: 0;
+    width: 100%;
+    z-index: 2147483645;
+}
+
+#warningbanner-close {
+    cursor: pointer;
+    font: 18px/150% arial, sans-serif;
+    font-weight:  bold;
+    position: absolute;
+    right: 15px;
+    text-decoration: none;
+    top: 12px;
+    z-index: 2147483647;
+}
+
+#warningbanner-close:after {
+    content: 'I TRUST THIS SITE';
+}
+
+#box {
+    background-color: #0F0818;
+    bottom: auto;
+    font-family: sans-serif;
+    height: 100%;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    text-align: center;
+    top: 0;
+    width: 100%;
+    z-index: 2147483643;
+}
+
+#threatslayer_logo {
+    margin: 0;
+    padding: 0;
+    position: auto;
+    text-align: center;
+    z-index: 2147483647;
+}
+
+#text-box {
+    background-color: #0F0818;
+    border: #242424 solid 1px;
+    border-radius: 8px;
+    color: white;
+    font-family: sans-serif;
+    margin: 0 auto;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    position: auto;
+    text-align: left;
+    width: fit-content;
+    z-index: 2147483647;
+}
+
+#headline {
+    font-family: sans-serif;
+    font-weight: bold;
+    color: white;
+    padding-bottom: 1.75rem;
+    width: 100%;
+}
+
+.warningbanner-text {
+    color: white;
+    display: block;
+    font-family: sans-serif;
+    font-weight: bold;
+    z-index: 2147483647;
+}
