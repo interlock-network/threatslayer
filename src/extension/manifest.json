@@ -11,7 +11,7 @@
     "content_scripts": [
         {
             "js": [
-                "script.js"
+                "content/script.js"
             ],
             "matches": [
                 "*://*/*"
@@ -28,7 +28,8 @@
                 "static/fonts/Webfont/THICCCBOI-Bold.woff2",
                 "static/fonts/Webfont/THICCCBOI-Regular.woff2",
                 "static/fonts/TTF/THICCCBOI-Bold.ttf",
-                "static/fonts/TTF/THICCCBOI-Regular.ttf"
+                "static/fonts/TTF/THICCCBOI-Regular.ttf",
+		"banner.css"
             ],
             "matches": [
                 "*://*/*"
@@ -36,7 +37,7 @@
         }
     ],
     "background": {
-        "service_worker": "background.js"
+        "service_worker": "service/worker.js"
     },
     "action": {},
     "permissions": [
