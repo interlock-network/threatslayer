@@ -12,7 +12,7 @@ const BASE_API_URL = `https://octahedron.interlock.network`;
 const BETA_BASE_API_URL = `https://beta.octahedron.interlock.network`;
 const DEFAULT_CONFIG = {
     method: "POST",
-    headers: { "Content-Type": "application/json", "mode": "no-cors" }, // no-cors??
+    headers: { "Content-Type": "application/json", "mode": "cors" }, // no-cors??
     body: JSON.stringify({ key: API_KEY }),
 };
 
@@ -35,32 +35,32 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
                 .then(() => { console.log(`Total URLs set to: ${totalURLsVisited}`); });
         });
 
-    	// then adjust scan endpoint to reflect beta option predicate
+        // then adjust scan endpoint to reflect beta option predicate
         chrome.storage.sync.get('betaAISelected', async function (data) {
             if (data.betaAISelected && data.betaAISelected === true) {
                 console.log('Querying beta AI Threat Detection at', BETA_BASE_API_URL);
                 selectedBaseAPIUrl = BETA_BASE_API_URL;
             }
 
-	        // make the post request to octahedron
+            // make the post request to octahedron
             chrome.storage.local.get('apiKey').then((result) => {
                 const key = result.apiKey || API_KEY;
 
                 fetch(`${selectedBaseAPIUrl}/malicious_p`,
-				    {...DEFAULT_CONFIG, body: JSON.stringify({ key, url })})
+                    {...DEFAULT_CONFIG, body: JSON.stringify({ key, url })})
                     .then((response) => response.json())
                     .then((data) => {
-		                if (data.malicious == false) {
-            	            console.log(`URL ${url} classified as malicious.`);
-	    			        sendResponse("DANGER");
-	                    } else if (data.malicious == false) {
-        		            console.log(`URL ${url} is not classified as malicious.`);
-    		    		    sendResponse("SAFE");
-	        	        } else {
-		                    console.log(`API Unresponsive. Cannot verify safety of URL ${url} .`);
-		                }
-              	        return
-				    })
+                        if (data.malicious == false) {
+                            console.log(`URL ${url} classified as malicious.`);
+                            sendResponse("DANGER");
+                        } else if (data.malicious == false) {
+                            console.log(`URL ${url} is not classified as malicious.`);
+                            sendResponse("SAFE");
+                        } else {
+                            console.log(`API Unresponsive. Cannot verify safety of URL ${url} .`);
+                        }
+                          return
+                    })
                     .catch((error) => { console.log(`Error getting malicious URL: ${error}`) });
             });
         });
@@ -70,8 +70,8 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     } else if (request.action === 'stakeUrl') {
         const urlToStake = request.url;
 
-		// if interlocker intends to stake on webpage, handle that here
-		// ???? I see no message pass operation from content script ???? is this still relevant?
+        // if interlocker intends to stake on webpage, handle that here
+        // ???? I see no message pass operation from content script ???? is this still relevant?
         chrome.storage.local
             .set({ urlToStake })
             .then(() => {

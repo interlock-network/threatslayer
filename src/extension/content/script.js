@@ -6,7 +6,7 @@
 // init
 const BANNER_CSS = "/banner.css"
 const SAFETY_ADDRESS = "https://google.com"
-const SITE_UNLOCK_ENDPOINT = 'http://159.89.252.13/site-unlock'
+const SITE_UNLOCK_ENDPOINT = 'http://159.89.252.13/site-unlock/'
 console.log("THREATSLAYER IS ACTIVE ON THIS PAGE.")
 
 /**
@@ -159,6 +159,7 @@ function loadBannerScript() {
 
     // on clicking the allow button, adds URL to local allowlist before sending it to GALACTUS
     allowButton.onclick = function () {
+
         // hide initial items on text box
         const firstItemsLength = document.getElementsByClassName('first').length;
 
@@ -200,7 +201,7 @@ function loadBannerScript() {
             try {
                 const allowlistResult = await fetch(allowlistUrl, {
                     method: 'POST',
-                    mode: 'no-cors',
+                    mode: 'cors',
                     headers: {
                         'Content-Type': 'application/json'
                     },

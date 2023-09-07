@@ -6,7 +6,21 @@
     "author": "Interlock",
     "version": "1.0.0",
     "icons": {
+        "16": "icon16.png",
+        "48": "icon48.png",
         "128": "icon128.png"
+    },
+    "action": {
+        "default_icon": {
+            "16": "icon16.png",
+            "48": "icon48.png",
+            "128": "icon128.png"
+        },
+        "default_popup": "popup/dashboard.html",
+        "default_title": "__MSG_popup_title__"
+    },
+    "background": {
+        "service_worker": "service/worker.js"
     },
     "content_scripts": [
         {
@@ -14,7 +28,7 @@
                 "content/script.js"
             ],
             "matches": [
-                "*://*/*"
+                "<all_urls>"
             ]
         }
     ],
@@ -29,17 +43,13 @@
                 "static/fonts/Webfont/THICCCBOI-Regular.woff2",
                 "static/fonts/TTF/THICCCBOI-Bold.ttf",
                 "static/fonts/TTF/THICCCBOI-Regular.ttf",
-		"banner.css"
+                "banner.css"
             ],
             "matches": [
-                "*://*/*"
+                "<all_urls>"
             ]
         }
     ],
-    "background": {
-        "service_worker": "service/worker.js"
-    },
-    "action": {},
     "permissions": [
         "scripting",
         "storage",
