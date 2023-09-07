@@ -1,6 +1,6 @@
 <template>
     <button :id="id" class='submit-button' @click="openTab()">
-        Create Wallet
+        {{ $i18n('create_wallet') }}
     </button>
 </template>
 

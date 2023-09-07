@@ -15,9 +15,17 @@
         "message": "Already have an account?",
         "description": "Instruction for logging in."
     },
+    "already_have_a_wallet": {
+        "message": "Already have a wallet?",
+        "description": "Instruction for registering."
+    },
     "appDesc": {
         "message": "Free enterprise-grade protection for your personal browser.",
         "description": "The description of the extension, displayed in the user's browser."
+    },
+    "click_to_create_wallet": {
+        "message": "Please click 'Create Wallet' to be redirected to a Chrome browser extension to create a SubWallet.",
+        "description": "Page title, also used in sidebar."
     },
     "close": {
         "message": "Close",
@@ -47,16 +55,16 @@
         "message": "Enter a password of at least 12 characters",
         "description": "Instruction for registering an account."
     },
+    "enter_a_username": {
+        "message": "Enter a username",
+        "description": "Instruction for registering an account."
+    },
     "enter_password_again": {
         "message": "Enter your password again",
         "description": "Instruction for registering an account."
     },
     "enter_referrer_name": {
         "message": "Optional: Enter referrer username",
-        "description": "Instruction for registering an account."
-    },
-    "enter_a_username": {
-        "message": "Enter a username",
         "description": "Instruction for registering an account."
     },
     "enter_wallet_address": {
@@ -107,6 +115,10 @@
         "message": "Malicious Sites Detected",
         "description": "The text used to show how many malicious URLs are scanned on the dashboard."
     },
+    "must_create_wallet": {
+        "message": "In order to use ThreatSlayer, you will need to create an Aleph Zero-compatible wallet.",
+        "description": "Instruction for creating a wallet."
+    },
     "options": {
         "message": "Options",
         "description": "Page title, also used in sidebar."
@@ -126,6 +138,10 @@
     "privacy": {
         "message": "Privacy",
         "description": "Page title, also used in sidebar."
+    },
+    "register": {
+        "message": "Register",
+        "description": "Instruction for users."
     },
     "security_staking": {
         "message": "Security Staking",

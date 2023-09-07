@@ -1,17 +1,16 @@
 <template>
-    <PageBanner msg="Create Wallet">
+    <PageBanner :msg="$i18n('create_wallet')">
         <img class="banner-icon" src="/src/assets/images/wallet.png">
     </PageBanner>
-    <TextComponent msg="Already have a wallet?" subinstruction /><button class="login-button"
-        @click="selectPage('earn')">Register</button>
+    <TextComponent :msg="$i18n('already_have_a_wallet')" subinstruction />
+    <button class="login-button" @click="selectPage('earn')">{{ $i18n('register') }}</button>
     <br />
     <br />
     <div style="padding-right: 2rem;">
-        <TextComponent msg="In order to use ThreatSlayer, you will need to create an Aleph Zero-compatible wallet." />
+        <TextComponent :msg="$i18n('must_create_wallet')" />
         <br />
         <br />
-        <TextComponent
-            msg="Please click 'Create Wallet' to be redirected to a Chrome browser extension to create a SubWallet." />
+        <TextComponent :msg="$i18n('click_to_create_wallet')" />
     </div>
     <br />
     <br />
