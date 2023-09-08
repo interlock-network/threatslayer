@@ -232,7 +232,7 @@
         "description": "Answer to question on the FAQ page."
     },
     "ilock_available_to_stake": {
-        "message": "$ILOCK Available to Stake",
+        "message": "$$ILOCK Available to Stake",
         "description": "Info text on the Security Staking page."
     },
     "ilock_earned": {
