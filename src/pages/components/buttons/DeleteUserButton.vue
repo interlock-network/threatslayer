@@ -165,7 +165,6 @@ export default {
     border-radius: 12px;
     color: #FFFFFF;
     position: absolute;
-    padding: 0.75rem 1rem;
     width: 400px;
 }
 
@@ -182,7 +181,7 @@ export default {
     color: red;
     cursor: pointer;
     font-size: 1rem;
-    padding-bottom: 1rem;
+    margin-bottom: -1rem;
     padding-top: 1rem;
     width: 400px;
 }

@@ -4,13 +4,11 @@
     </PageBanner>
     <br />
     <div :style="computedStyle">
-        <TextComponent :msg="$i18n('ilock_earned')" bold /> <br />
+        <TextComponent class="left-label" :msg="$i18n('ilock_earned')" bold />
         <TextComponent :msg="tokensEarned + tokensEarnedTotal" mono /> <br />
         <br />
-        <br />
-        <TextComponent :msg="$i18n('email')" bold /> <br />
+        <TextComponent class="left-label" :msg="$i18n('email')" bold />
         <TextComponent :msg="email" mono /> <br />
-        <br />
         <br />
         <!-- 5GrpknVvGGrGH3EFuURXeMrWHvbpj3VfER1oX5jFtuGbfzCE -->
         <TextComponent :msg="$i18n('wallet_address')" bold /> <br />
@@ -48,7 +46,7 @@
             Address</button>
         <br />
         <!-- Number of users referred -->
-        <TextComponent :msg="$i18n('users_referred')" bold /> <br />
+        <TextComponent class="left-label" :msg="$i18n('users_referred')" bold />
         <TextComponent :msg="referred" mono /> <br />
         <br />
         <!-- Tabe of allowlisted URLs -->
@@ -241,5 +239,9 @@ export default {
     background: #d0d4d9;
     border-radius: 2px;
     -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+}
+
+.left-label {
+    margin-right: 1rem;
 }
 </style>
