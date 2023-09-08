@@ -3,8 +3,7 @@
         <img class="banner-icon" src="/src/assets/images/login.png">
     </PageBanner>
     <BeforeStakingWarning v-if="urlToStake" :msg="$i18n('warning_must_login_before_staking')" />
-    <TextComponent :msg="$i18n('dont_have_an_account')" subinstruction /><button class="login-button" @click="unregister">{{
-        $i18n('register') }}</button>
+    <RegisterLine :checkState="checkState" :selectPage="selectPage" />
     <br />
     <br />
     <!-- username field -->
@@ -39,6 +38,7 @@ import BeforeStakingWarning from "./components/BeforeStakingWarning.vue";
 import ForgotPasswordButton from "./components/buttons/ForgotPasswordButton.vue";
 import LoginButton from "./components/buttons/LoginButton.vue";
 import PageBanner from "./components/PageBanner.vue";
+import RegisterLine from './components/RegisterLine.vue';
 import TextComponent from "./components/TextComponent.vue";
 
 const errorStyle = {
@@ -59,6 +59,7 @@ export default {
         ForgotPasswordButton,
         LoginButton,
         PageBanner,
+        RegisterLine,
         TextComponent
     },
     data() {

@@ -3,8 +3,7 @@
         <img class="banner-icon" src="/src/assets/images/start_earning.png">
     </PageBanner>
     <BeforeStakingWarning v-if="urlToStake" :msg="$i18n('warning_must_register_before_staking')" />
-    <TextComponent :msg="$i18n('already_have_one')" subinstruction /><button class="login-button"
-        @click="selectPage('login')">{{ $i18n('login') }}</button><br />
+    <LoginLine :selectPage="selectPage" />
     <TextComponent :msg="$i18n('dont_have_one')" subinstruction /><button class="login-button"
         @click="selectPage('wallet')">{{ $i18n('create_one') }}</button>
     <br />
@@ -61,6 +60,7 @@ import BeforeStakingWarning from "./components/BeforeStakingWarning.vue";
 import CreateUserButton from "./components/buttons/CreateUserButton.vue";
 import InfoTip from "./components/InfoTip.vue";
 import LineOfText from "./components/LineOfText.vue";
+import LoginLine from './components/LoginLine.vue';
 import PageBanner from "./components/PageBanner.vue";
 import TextComponent from "./components/TextComponent.vue";
 
@@ -82,6 +82,7 @@ export default {
         CreateUserButton,
         InfoTip,
         LineOfText,
+        LoginLine,
         PageBanner,
         TextComponent
     },

@@ -4,10 +4,8 @@
     </PageBanner>
     <BeforeStakingWarning v-if="!loggedIn" :msg="$i18n(warningText)">
         <br />
-        <TextComponent :msg="$i18n('already_have_one')" subinstruction /><button class="login-button"
-            @click="selectPage('login')">{{ $i18n('login') }}</button><br />
-        <TextComponent :msg="$i18n('dont_have_one')" subinstruction /><button class="login-button"
-            @click="selectPage('wallet')">{{ $i18n('create_one') }}</button>
+        <RegisterLine :checkState="checkState" :selectPage="selectPage" /><br />
+        <LoginLine :selectPage="selectPage" />
     </BeforeStakingWarning>
     <br />
     <div>
@@ -65,7 +63,9 @@
 import BeforeStakingWarning from "./components/BeforeStakingWarning.vue";
 import ClearAllowlistedURLButton from "./components/buttons/ClearAllowlistedURLButton.vue";
 import LineOfText from "./components/LineOfText.vue";
+import LoginLine from './components/LoginLine.vue';
 import PageBanner from "./components/PageBanner.vue";
+import RegisterLine from './components/RegisterLine.vue';
 import TextComponent from "./components/TextComponent.vue";
 
 import axios from "axios";
@@ -82,7 +82,9 @@ export default {
         BeforeStakingWarning,
         ClearAllowlistedURLButton,
         LineOfText,
+        LoginLine,
         PageBanner,
+        RegisterLine,
         TextComponent,
     },
     props: {
