@@ -23,6 +23,10 @@
         "message": "Combine this with rewards for users that share anonymized security data, and you have a win-win solution for staying secure online while contributing to the wider internet safety ecosystem.",
         "description": "The fourth and last paragraph of text on the About Us page."
     },
+    "account_info_for": {
+        "message": "Account Info for",
+        "description": "Page header for Account page."
+    },
     "affirm_not_us_citizen": {
         "message": "Affirm you are not a US citizen or resident.",
         "description": "Instruction for registering an account."
@@ -47,6 +51,10 @@
         "message": "Free enterprise-grade protection for your personal browser.",
         "description": "The description of the extension, displayed in the user's browser."
     },
+    "cancel": {
+        "message": "Cancel",
+        "description": "Generic cancel option."
+    },
     "change_password": {
         "message": "Change Password",
         "description": "The text used on change password button."
@@ -58,6 +66,10 @@
     "close": {
         "message": "Close",
         "description": "The text used on the close button."
+    },
+    "confirm_are_you_sure": {
+        "message": "Are you sure?",
+        "description": "Confirmation for user actions."
     },
     "create_one": {
         "message": "Create one",
@@ -71,6 +83,18 @@
         "message": "Cryptocurrency is considered a security in the US so most US residents cannot purchase them.",
         "description": "Warning for USians about cryptocurrency."
     },
+    "delete_account": {
+        "message": "Delete Account",
+        "description": "Text for the Delete Account button."
+    },
+    "delete_account_permanent": {
+        "message": "Delete Account (Permanent)",
+        "description": "Text for the Delete Account button."
+    },
+    "deleting_account": {
+        "message": "Deleting Account",
+        "description": "Text for the Delete Account button."
+    },
     "description": {
         "message": "Free enterprise-grade security for your personal browser.",
         "description": "The description in the manifest."
@@ -82,6 +106,10 @@
     "dont_have_one": {
         "message": "Don't have a wallet?",
         "description": "Instruction for creating a wallet address."
+    },
+    "email": {
+        "message": "Email",
+        "description": "Section header for the Account page."
     },
     "enable_beta_option": {
         "message": "Enable beta AI Threat Detection (developers only)",
@@ -104,8 +132,16 @@
         "description": "Instruction for registering an account."
     },
     "enter_wallet_address": {
+        "message": "Paste your Aleph Zero-compatible wallet address",
+        "description": "Instruction for registering an account."
+    },
+    "enter_wallet_address_optional": {
         "message": "Optional: Paste your Aleph Zero-compatible wallet address",
         "description": "Instruction for registering an account."
+    },
+    "enter_new_wallet_address": {
+        "message": "Enter your new wallet address.",
+        "description": "Instruction for Account page."
     },
     "enter_your_email": {
         "message": "Enter your email",
@@ -114,6 +150,18 @@
     "enter_email_to_change_password": {
         "message": "Enter your email to change your password",
         "description": "Instruction for changing password."
+    },
+    "enter_password_to_delete_account": {
+        "message": "Enter password to permanently delete account",
+        "description": "Instruction for deleting account."
+    },
+    "enter_password_to_update_wallet_address": {
+        "message": "Enter your password to update your wallet address.",
+        "description": "Instruction for updating wallet address."
+    },
+    "error_deleting_account_generic": {
+        "message": "Error deleting account in. Please try again later.",
+        "description": "Generic login error message."
     },
     "error_invalid_email_generic": {
         "message": "Invalid email address.",
@@ -137,11 +185,15 @@
     },
     "error_registering_wallet_address": {
         "message": "Not a valid wallet address.",
-        "description": "Registering error message."
+        "description": "Error message for adding a wallet address."
     },
     "error_registering_generic": {
         "message": "Error registering. Please try again later.",
         "description": "Generic registering error message."
+    },
+    "error_updating_wallet_address_generic": {
+        "message": "Error updating wallet address. Please try again later.",
+        "description": "Generic updating wallet address error message."
     },
     "error_username_too_long": {
         "message": "Username too long: Max length is 16 characters.",
@@ -179,6 +231,10 @@
         "message": "$ILOCK Available to Stake",
         "description": "Info text on the Security Staking page."
     },
+    "ilock_earned": {
+        "message": "$$ILOCK Earned",
+        "description": "Section header for the Account page."
+    },
     "is_threat_slayer_open_source": {
         "message": "Is ThreatSlayer open source?",
         "description": "Question on the FAQ page."
@@ -206,6 +262,10 @@
     "options": {
         "message": "Options",
         "description": "Page title, also used in sidebar."
+    },
+    "password": {
+        "message": "Hide Password",
+        "description": "Instruction for toggling password visibility."
     },
     "password_hide": {
         "message": "Hide Password",
@@ -291,9 +351,13 @@
         "message": "Submit",
         "description": "Button text."
     },
+    "submit_new_wallet_address": {
+        "message": "Submit New Address",
+        "description": "Instruction for changing wallet address."
+    },
     "success": {
         "message": "Success!",
-        "description": "Button text."
+        "description": "Generic button text."
     },
     "take_to_safety": {
         "message": "Take Me to Safety",
@@ -317,7 +381,15 @@
     },
     "try_again_later": {
         "message": "Try again later",
-        "description": "Button text."
+        "description": "Generic button text."
+    },
+    "unique_urls_scanned": {
+        "message": "Unique URLs Scanned",
+        "description": "The text used to show how many unique URLs are scanned on the dashboard."
+    },
+    "update_wallet_address": {
+        "message": "Update Address",
+        "description": "Instruction for changing wallet address."
     },
     "urls_scanned": {
         "message": "URLs Scanned",
@@ -335,21 +407,41 @@
         "message": "Username or email",
         "description": "Instruction on the login page."
     },
-    "unique_urls_scanned": {
-        "message": "Unique URLs Scanned",
-        "description": "The text used to show how many unique URLs are scanned on the dashboard."
+    "users_referred": {
+        "message": "Users Referred",
+        "description": "Section header for the Account page."
     },
     "waiting": {
         "message": "Waiting...",
         "description": "Button text."
     },
+    "wallet_address": {
+        "message": "Wallet Address",
+        "description": "Section header for the Account page."
+    },
     "warning": {
         "message": "Warning!",
         "description": "The text used in the warning banner."
     },
+    "warning_account_will_be_deleted": {
+        "message": "Your account will be deleted forever.",
+        "description": "Warning text for deleting user account."
+    },
+    "warning_changing_wallet_address": {
+        "message": "Warning: Changing your existing wallet address may delay access to previously deposited $ILOCK.",
+        "description": "Warning text used for changing a wallet address."
+    },
     "warning_header": {
         "message": "This website may be malicious.",
         "description": "The text used in the warning banner."
+    },
+    "warning_ilock_will_be_lost": {
+        "message": "You will lose any $ILOCK not transferred to a wallet.",
+        "description": "Warning text for deleting user account."
+    },
+    "warning_must_add_wallet_address": {
+        "message": "You must add a wallet address to receive $ILOCK token.",
+        "description": "Warning text used on the Account page."
     },
     "warning_must_login_before_staking": {
         "message": "You must login before you can stake on a URL.",

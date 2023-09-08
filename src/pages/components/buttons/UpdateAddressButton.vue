@@ -2,10 +2,10 @@
     <div>
         <button @click="submitUpdateAddress" class="secondary-hollow-button" :class="computedClass" :disabled="disabled"
             style="margin-right: 10%;">
-            {{ submitButtonText }}
+            {{ $i18n(submitButtonText) }}
         </button>
         <br />
-        <TextComponent v-for="errorMessage in errorArr" :msg="errorMessage" error />
+        <TextComponent v-for="errorMessage in errorArr" :msg="$i18n(errorMessage)" error />
     </div>
 </template>
 
@@ -57,15 +57,15 @@ export default {
             let result = '';
 
             if (this.loggedIn) {
-                result = 'Success!';
+                result = 'success';
             } else if (this.loggingIn) {
-                result = 'Waiting...';
+                result = 'waiting';
             } else if (this.errorArr.length) {
-                result = 'Try again later';
+                result = 'try_again_later';
             } else if (this.clickedOnce) {
-                result = 'Submit New Address';
+                result = 'submit_new_wallet_address';
             } else {
-                result = 'Update Address';
+                result = 'update_wallet_address';
             }
 
             return result;
@@ -109,7 +109,7 @@ export default {
                     if (setAddress) {
                         this.checkState();
                     } else {
-                        this.errorArr.push('Error updating wallet address. Please try again later.');
+                        this.errorArr.push('error_updating_wallet_address_generic');
                     }
                 } else {
                     console.log('Error submitting wallet address:', errors);

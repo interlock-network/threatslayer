@@ -3,31 +3,31 @@
         <!-- initial delete user button -->
         <button v-if="!clickedOnce" @click="submitDeleteUser" id="delete-user-button" :class="computedClass"
             :disabled="disabled">
-            <img class="sidebar-icon" src="/src/assets/images/delete-user.png">Delete Account
+            <img class="sidebar-icon" src="/src/assets/images/delete-user.png">{{ $i18n('delete_account') }}
         </button>
         <div v-if="clickedOnce" style="font-size: 1rem;">
-            <TextComponent msg="Are you sure?" id="delete-user-confirm-text" /><br />
-            <TextComponent msg="Your account will be deleted forever." /><br />
-            <TextComponent msg="You will lose any $ILOCK not transferred to a wallet." /><br />
+            <TextComponent :msg="$i18n('confirm_are_you_sure')" id="delete-user-confirm-text" /><br />
+            <TextComponent :msg="$i18n('warning_account_will_be_deleted')" /><br />
+            <TextComponent :msg="$i18n('warning_ilock_will_be_lost')" /><br />
             <!-- password input field -->
             <div style="position: relative;">
                 <input v-model.trim="password" id="delete-user-password-input" :type="passwordInputType"
-                    placeholder="Enter password to permanently delete account" tabindex="6" />
+                    :placeholder="$i18n('enter_password_to_delete_account')" tabindex="6" />
                 <button @click="togglePasswordInputType" class="small-button" id="delete-user-toggle-button" tabindex="8">
-                    {{ passwordInputType === 'password' ? 'Show' : 'Hide' }}
+                    {{ passwordInputType === 'password' ? $i18n('password_show') : $i18n('password_hide') }}
                 </button>
             </div>
             <!-- delete user button -->
             <br />
             <br />
             <button @click="submitDeleteUser" id="delete-user-button" :class="computedClass" :disabled="disabled">
-                {{ deleteUserButtonText }}
+                {{ $i18n(deleteUserButtonText) }}
             </button>
             <!-- error message -->
             <TextComponent v-for="errorMessage in errorArr" :msg="errorMessage" error />
             <!-- cancel button -->
             <button @click="fadeAccountPage(false); this.clickedOnce = false;" id="cancel-delete-user-button"
-                style="color: #963cf5;">Cancel</button>
+                style="color: #963cf5;">{{ $i18n('cancel') }}</button>
         </div>
     </div>
 </template>
@@ -67,11 +67,11 @@ export default {
             let result = '';
 
             if (this.deleting) {
-                result = 'Deleting Account';
+                result = 'deleting_account';
             } else if (this.errorArr.length) {
-                result = "Try again later";
+                result = 'try_again_later';
             } else {
-                result = 'Delete Account (Permanent)';
+                result = 'delete_account_permanent';
             }
 
             return result;
@@ -116,7 +116,7 @@ export default {
 
                     // TODO improve this try/catch block
                     if (!deletedSynched) {
-                        this.errorArr.push('Error logging in. Please try again later.')
+                        this.errorArr.push('error_deleting_account_generic')
                     }
 
                     if (deletedSynched) {

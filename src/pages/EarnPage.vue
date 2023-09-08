@@ -33,7 +33,7 @@
     <!-- wallet address (optional) -->
     <!-- 5GrpknVvGGrGH3EFuURXeMrWHvbpj3VfER1oX5jFtuGbfzCE -->
     <input id="address-input" @input="validateAddress" v-model.trim="address" :style="addressInputStyle"
-        :placeholder="$i18n('enter_wallet_address')" tabindex="11" />
+        :placeholder="$i18n('enter_wallet_address_optional')" tabindex="11" />
     <TextComponent v-if="addressErrorMessage.length" :msg="$i18n(addressErrorMessage)" error />
     <!-- referrer (optional) -->
     <input v-model.trim="referrer" tabindex="12" :placeholder="$i18n('enter_referrer_name')" />

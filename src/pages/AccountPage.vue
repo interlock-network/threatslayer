@@ -1,41 +1,41 @@
 <template>
     <PageBanner>
-        <img class="banner-icon" src="/src/assets/images/account.png">Account Info for {{ username }}
+        <img class="banner-icon" src="/src/assets/images/account.png">{{ $i18n('account_info_for') }} {{ username }}
     </PageBanner>
     <br />
     <div :style="computedStyle">
-        <TextComponent msg="$ILOCK Earned" bold /> <br />
+        <TextComponent :msg="$i18n('ilock_earned')" bold /> <br />
         <TextComponent :msg="tokensEarned + tokensEarnedTotal" mono /> <br />
         <br />
         <br />
-        <TextComponent msg="Email" bold /> <br />
+        <TextComponent :msg="$i18n('email')" bold /> <br />
         <TextComponent :msg="email" mono /> <br />
         <br />
         <br />
         <!-- 5GrpknVvGGrGH3EFuURXeMrWHvbpj3VfER1oX5jFtuGbfzCE -->
-        <TextComponent msg="Wallet Address" bold /> <br />
+        <TextComponent :msg="$i18n('wallet_address')" bold /> <br />
         <!-- prompt to add wallet address if there is none -->
         <div v-if="showAddressInput">
             <!-- input field with prompt for new address -->
-            <TextComponent :msg="updateAddressMsg" subinstruction /><button v-if="changeAddressSelected"
-                id="cancel-change-address" @click="toggleChangeAddress">Cancel</button>
+            <TextComponent :msg="$i18n(updateAddressMsg)" subinstruction />
+            <button v-if="changeAddressSelected" id="cancel-change-address" @click="toggleChangeAddress">
+                {{ $i18n('cancel') }}
+            </button>
             <input @input="validateAddress" v-model.trim="newAddress" :style="addressInputStyle" style="margin-top: 0.5rem;"
-                placeholder="Paste your Aleph Zero-compatible wallet address" tabindex="2" />
+                :placeholder="$i18n('enter_wallet_address')" tabindex="2" />
             <TextComponent v-if="newAddressErrorMessage.length" :msg="newAddressErrorMessage" error />
             <!-- password field with show/hide button -->
             <div v-if="clickedOnce">
                 <TextComponent v-if="showAddressChangeWarning" subinstruction
-                    msg="Warning: Changing your existing wallet address may delay access to previously deposited $ILOCK." />
-                <br />
-                <br />
-                <TextComponent msg="Enter your password to update your wallet address." subinstruction />
+                    :msg="$i18n('warning_changing_wallet_address')" />
             </div>
             <div v-if="clickedOnce">
                 <input id="login-password" class="input-field-text password-input" :type="passwordInputType"
-                    style="margin-top: 0.5rem;" v-model.trim="password" placeholder="Password" tabindex="4"
+                    style="margin-top: 0.5rem;" v-model.trim="password"
+                    :placeholder="$i18n('enter_password_to_update_wallet_address')" tabindex="4"
                     :style="passwordInputStyle" />
                 <button @click="togglePasswordInputType" class="small-button" id="show-toggle-button" tabindex="5">
-                    {{ passwordInputType === 'password' ? 'Show' : 'Hide' }}
+                    {{ passwordInputType === 'password' ? $i18n('password_show') : $i18n('password_hide') }}
                 </button>
                 <TextComponent :msg="passwordErrorMessage" error v-if="passwordErrorMessage.length" />
                 <!-- button to update address -->
@@ -48,7 +48,7 @@
             Address</button>
         <br />
         <!-- Number of users referred -->
-        <TextComponent msg="Users Referred" bold /> <br />
+        <TextComponent :msg="$i18n('users_referred')" bold /> <br />
         <TextComponent :msg="referred" mono /> <br />
         <br />
         <!-- Tabe of allowlisted URLs -->
@@ -136,7 +136,7 @@ export default {
         //     return this.newAddress.length && !this.newAddressErrorMessage.length;
         // },
         updateAddressMsg() {
-            return !this.address?.length ? "You must add a wallet address to receive $ILOCK token." : "Enter your new wallet address.";
+            return !this.address?.length ? 'warning_must_add_wallet_address' : 'enter_new_wallet_address';
         }
     },
     methods: {
@@ -195,7 +195,7 @@ export default {
             } else if (!address || !address.length) {
                 this.newAddressErrorMessage = '';
             } else {
-                this.newAddressErrorMessage = 'Not a valid address';
+                this.newAddressErrorMessage = $i18n('error_registering_wallet_address');
             }
         }, 250)
     }
