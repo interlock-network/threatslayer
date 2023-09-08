@@ -2,7 +2,7 @@
     <PageBanner :msg="$i18n('sign_up_for_threat_slayer')">
         <img class="banner-icon" src="/src/assets/images/start_earning.png">
     </PageBanner>
-    <BeforeStakingWarning v-if="urlToStake" :msg="$i18n('warning_must_register_before_staking')" />
+    <WarningTextBox v-if="urlToStake" :msg="$i18n('warning_must_register_before_staking')" />
     <LoginLine :selectPage="selectPage" />
     <TextComponent :msg="$i18n('dont_have_one')" subinstruction /><button class="login-button"
         @click="selectPage('wallet')">{{ $i18n('create_one') }}</button>
@@ -56,7 +56,7 @@ import { debounce } from 'debounce';
 import { findEmailError, findNonAlphanumericChars } from "../utilities";
 import { hexToU8a, isHex } from '@polkadot/util';
 
-import BeforeStakingWarning from "./components/BeforeStakingWarning.vue";
+import WarningTextBox from "./components/WarningTextBox.vue";
 import CreateUserButton from "./components/buttons/CreateUserButton.vue";
 import InfoTip from "./components/InfoTip.vue";
 import LineOfText from "./components/LineOfText.vue";
@@ -78,7 +78,7 @@ export default {
         urlToStake: String
     },
     components: {
-        BeforeStakingWarning,
+        WarningTextBox,
         CreateUserButton,
         InfoTip,
         LineOfText,
