@@ -2,11 +2,11 @@
     <PageBanner>
         <img class="banner-icon" src="/src/assets/images/account.png">{{ $i18n('security_staking') }}
     </PageBanner>
-    <BeforeStakingWarning v-if="!loggedIn" :msg="$i18n(warningText)">
+    <WarningTextBox v-if="!loggedIn" :msg="$i18n(warningText)">
         <br />
         <RegisterLine :checkState="checkState" :selectPage="selectPage" /><br />
         <LoginLine :selectPage="selectPage" />
-    </BeforeStakingWarning>
+    </WarningTextBox>
     <br />
     <div>
         <TextComponent :msg="$i18n('ilock_available_to_stake')" bold /> <br />
@@ -60,15 +60,15 @@
     </div>
 </template>
 <script>
-import BeforeStakingWarning from "./components/BeforeStakingWarning.vue";
-import ClearAllowlistedURLButton from "./components/buttons/ClearAllowlistedURLButton.vue";
-import LineOfText from "./components/LineOfText.vue";
+import WarningTextBox from './components/WarningTextBox.vue';
+import ClearAllowlistedURLButton from './components/buttons/ClearAllowlistedURLButton.vue';
+import LineOfText from './components/LineOfText.vue';
 import LoginLine from './components/LoginLine.vue';
-import PageBanner from "./components/PageBanner.vue";
+import PageBanner from './components/PageBanner.vue';
 import RegisterLine from './components/RegisterLine.vue';
-import TextComponent from "./components/TextComponent.vue";
+import TextComponent from './components/TextComponent.vue';
 
-import axios from "axios";
+import axios from 'axios';
 import { baseUrl, getChromeStorage } from '../utilities.js';
 
 const errorStyle = {
@@ -79,7 +79,7 @@ const errorStyle = {
 export default {
     name: 'StakingPage',
     components: {
-        BeforeStakingWarning,
+        WarningTextBox,
         ClearAllowlistedURLButton,
         LineOfText,
         LoginLine,
