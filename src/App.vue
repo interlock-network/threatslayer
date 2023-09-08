@@ -14,6 +14,7 @@
         <OptionsPage v-if="currentPage === 'options'" />
         <AccountPage v-if="currentPage === 'account'"
           v-bind="{ address, apiKey, checkState, email, selectPage, username }" />
+        <NoAccountPage v-if="currentPage === 'noAccount'" v-bind="{ checkState, selectPage }" />
       </div>
     </div>
     <PageFooter />
@@ -25,6 +26,7 @@ import AccountPage from "./pages/AccountPage.vue";
 import EarnPage from "./pages/EarnPage.vue";
 import FAQPage from "./pages/FAQPage.vue";
 import LoginPage from "./pages/LoginPage.vue";
+import NoAccountPage from "./pages/NoAccountPage.vue";
 import OptionsPage from "./pages/OptionsPage.vue";
 import PageFooter from "./pages/PageFooter.vue";
 import SideBar from "./pages/SideBar.vue";
@@ -41,6 +43,7 @@ export default {
     EarnPage,
     FAQPage,
     LoginPage,
+    NoAccountPage,
     OptionsPage,
     PageFooter,
     AccountPage,
@@ -282,5 +285,15 @@ input {
   color: #FFFFFF;
   opacity: 0.3;
   pointer-events: none;
+}
+
+.warning-container {
+  border: yellow solid 1px;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+  width: 380px;
 }
 </style>

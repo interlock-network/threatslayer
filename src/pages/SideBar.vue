@@ -50,6 +50,12 @@
             </div>
             <LogoutButton v-bind="{ apiKey, checkState, selectPage, username }" />
         </div>
+        <div v-if="!showLogoutButton" id="bottom-sidebar-items">
+            <div id="sidebar-account" class="sidebar-item"
+                :class="currentPage === 'noAccount' ? 'selected-sidebar-item' : ''" @click="selectPage('noAccount');">
+                <img class="sidebar-icon" src="/src/assets/images/account.png">{{ $i18n('account_info') }}
+            </div>
+        </div>
         <!-- TODO delete these four buttons -->
         <button v-if="devMode" class="" @click="_toggleRegistered" style="pointer-events: initial;">Toggle Register</button>
         <button v-if="devMode" class="" @click="_toggleLoggedIn" style="pointer-events: initial;">Toggle Login</button>
