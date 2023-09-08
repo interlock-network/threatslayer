@@ -1,27 +1,25 @@
 <template>
-    <PageBanner msg="Slay Count">
+    <PageBanner :msg="$i18n('slay_count')">
         <img class="banner-icon" src="/src/assets/images/slay_count.png">
     </PageBanner>
     <div id="slaycount-container">
         <div id="button-container">
-            <button id="download-button" class="sharing-button" @click="download" title="Download Slay Count">
+            <button id="download-button" class="sharing-button" @click="download" :title="$i18n('slay_count_download')">
                 <img class="button-img" src="/src/assets/images/download.png" alt="Download" />
             </button>
-            <button id="copy-button" class="sharing-button" @click="copy" title="Copy Slay Count to clipboard">
+            <button id="copy-button" class="sharing-button" @click="copy" :title="$i18n('slay_count_copy')">
                 <img class="button-img" src="/src/assets/images/copy_icon.png" alt="Copy" />
             </button>
         </div>
         <!-- Total URLs big donut -->
         <div id="local-urls-scanned-count" :style="totalURLsVisitedStyle">
-            <div id="slaycount-circle">
-                {{ totalURLsVisited }}
-            </div>
+            <div id="slaycount-circle">{{ totalURLsVisited }}</div>
         </div>
-        <div id="urls-scanned-sub-text">URLs Scanned</div>
+        <div id="urls-scanned-sub-text">{{ $i18n('urls_scanned') }}</div>
         <!-- Unique URLs small left number -->
         <div style="float: left" class="statistic">
             <span class="statistic-header" id="unique-urls-scanned-text">
-                Unique URLs Scanned
+                {{ $i18n('unique_urls_scanned') }}
             </span>
             <span id="local-unique-urls-scanned-count" class="statistic-value" :style="uniqueVisitedStyle">
                 {{ formattedUniqueUrls }}
@@ -30,7 +28,7 @@
         <!-- Malicious URLs small right number -->
         <div style="float: right; margin-right: 2.5rem;" class="statistic">
             <span class="statistic-header" id="malicious-sites-detected-text">
-                Malicious Sites Detected
+                {{ $i18n('malicious_sites_detected') }}
             </span>
             <span id="local-malicious-urls-scanned-count" class="statistic-value" :style="maliciousVisitedStyle">
                 {{ totalMaliciousURLsVisited }}
@@ -76,12 +74,12 @@
                 d="M182.5 356.5C280.807 356.5 360.5 276.807 360.5 178.5C360.5 80.1933 280.807 0.5 182.5 0.5C84.1933 0.5 4.5 80.1933 4.5 178.5C4.5 276.807 84.1933 356.5 182.5 356.5ZM326.731 178.5C326.731 258.156 262.156 322.731 182.5 322.731C102.844 322.731 38.2692 258.156 38.2692 178.5C38.2692 98.8436 102.844 34.2692 182.5 34.2692C262.156 34.2692 326.731 98.8436 326.731 178.5Z"
                 stroke="black" />
         </g>
-        <text id="credit" x="38" y="64" font-size="14px" font-family="THICCCBOI" font-weight="bold" fill="white">Powered by
-            Interlock
+        <text id="credit" x="38" y="64" font-size="14px" font-family="THICCCBOI" font-weight="bold" fill="white">
+            {{ $i18n('powered_by_interlock') }}
         </text>
         <text id="threatslayer" x="32" y="42" font-size="36px" font-family="THICCCBOI" font-weight="bold"
             fill="url(#rainbow)">
-            ThreatSlayer
+            {{ $i18n('threat_slayer') }}
         </text>
         <text id="slay-count" x="50%" y="55%" class="count" font-family="THICCCBOI" font-weight="bold"
             :font-size="totalVisitedFontSize" text-anchor="middle" dominant-baseline="middle" stroke="white" fill="white"
@@ -90,7 +88,7 @@
         </text>
         <text x="48%" y="72%" font-style="italic" font-size="64px" font-family="THICCCBOI" font-weight="bold"
             text-anchor="middle" stroke="black" fill="red" stroke-width="1px" dominant-baseline="middle">
-            SLAY COUNT
+            {{ $i18n('SLAY_COUNT') }}
         </text>
     </svg>
 </template>

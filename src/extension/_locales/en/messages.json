@@ -167,6 +167,10 @@
         "message": "ThreatSlayer Active.",
         "description": "The title used for the popup when the extension icon is pressed."
     },
+    "powered_by_interlock": {
+        "message": "Powered by Interlock",
+        "description": "Info text on the SlayCount page."
+    },
     "privacy": {
         "message": "Privacy",
         "description": "Page title, also used in sidebar."
@@ -186,6 +190,14 @@
     "slay_count": {
         "message": "SlayCount",
         "description": "Page title, also used in sidebar."
+    },
+    "slay_count_copy": {
+        "message": "Copy SlayCount to clipboard",
+        "description": "Info for SlayCount page."
+    },
+    "slay_count_download": {
+        "message": "Download SlayCount",
+        "description": "Info for SlayCount page."
     },
     "stake_state_neutral": {
         "message": "You will be the first to stake this URL.",
@@ -215,6 +227,10 @@
         "message": "You have unlocked a chance to earn $$ILOCK token!",
         "description": "The explanatory text used in the staking text box."
     },
+    "SLAY_COUNT": {
+        "message": "SLAY COUNT",
+        "description": "Text for SlayCount exported image."
+    },
     "submit": {
         "message": "Submit",
         "description": "Button text."
@@ -234,6 +250,10 @@
     "test": {
         "message": "Test",
         "description": "Test message, for testing purposes only."
+    },
+    "threat_slayer": {
+        "message": "ThreatSlayer",
+        "description": "Name of the app."
     },
     "trust_this_url": {
         "message": "Trust this URL",
