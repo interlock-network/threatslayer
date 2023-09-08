@@ -1,7 +1,50 @@
 /**
+ * This is the main content script used by ThreatSlayer. It is
+ * executed every time the user visits a page.
+ */
+
+// init
+const BANNER_CSS = "/assets/style/banner.css"
+const SAFETY_ADDRESS = "https://google.com"
+const SITE_UNLOCK_ENDPOINT = 'http://159.89.252.13/site-unlock/'
+console.log("THREATSLAYER IS ACTIVE ON THIS PAGE.")
+
+/**
+ * Due to security concerns in content scripts, Chrome requires us to
+ * execute cross-origin XHR using a service worker. Therefore, we send
+ * a message to our service worker, which then performs the request,
+ * and asynchronously provides a response.
+ *
+ * (message only returns if url is calssified malicious)
+ */
+chrome.runtime.sendMessage({message: "scanURL", url: removeParams(window.location.href)}, (response) => {
+    if (response == "DANGER") {
+        console.log("THREATSLAYER ALERT: THIS A SUSPICIOUS OR KNOWN MALICIOUS WEBSITE.")
+        loadBannerCSS();
+        loadBannerScript();
+    } else {
+        console.log("WEBSITE DEEMED SAFE OR UNKNOWN")
+    }
+});
+
+/**
+ * This function injects the warning banner styling if malicious_p returns 'true'
+ */
+function loadBannerCSS() {
+    var head  = document.getElementsByTagName('head')[0];
+    var link  = document.createElement('link');
+    link.id   = "malicious_p_banner";
+    link.rel  = 'stylesheet';
+    link.type = 'text/css';
+    link.href = chrome.runtime.getURL(BANNER_CSS)
+    link.media = 'all';
+    head.appendChild(link);
+}
+
+/**
  * This script is injected into website if url is found to be malicious.
  */
-(function () {
+function loadBannerScript() {
     // create elements
     const body = document.body;
     const bannerWrapper = document.createElement('div');
@@ -48,11 +91,11 @@
     // closeButton.style.display = 'none';
 
     // add background image
-    backgroundImageURL = chrome.runtime.getURL('grid_background.png');
+    backgroundImageURL = chrome.runtime.getURL('/assets/images/grid_background.png');
     banner.style.background = `url(${backgroundImageURL}) repeat`;
 
     // generate logo URL
-    imageURL = chrome.runtime.getURL('threatslayer_logo.png');
+    imageURL = chrome.runtime.getURL('/assets/images/threatslayer_logo.png');
     image.setAttribute('src', imageURL);
 
     // "Warning!" / "This website may be malicious." / "Close the tab unless you know this site is safe!"
@@ -92,7 +135,7 @@
 
     // on clicking 'Take Me to Safety', go to Google
     googleButton.onclick = function () {
-        window.location.href = 'https://google.com/'
+        window.location.href = SAFETY_ADDRESS
     };
 
     // on click the close button, remove banner and box
@@ -104,7 +147,7 @@
     // on clicking the stake button, it opens TS+ on the staking page
     stakeButton.onclick = function () {
         chrome.runtime.sendMessage({
-            action: 'stakeUrl',
+            action: 'stakeURL',
             url: document.URL
         });
 
@@ -116,6 +159,7 @@
 
     // on clicking the allow button, adds URL to local allowlist before sending it to GALACTUS
     allowButton.onclick = function () {
+
         // hide initial items on text box
         const firstItemsLength = document.getElementsByClassName('first').length;
 
@@ -146,13 +190,13 @@
                 chrome.storage.local.set({ allowlist });
             }
         });
-
+/*
         // send URL to GALACTUS
         chrome.storage.local.get('apiKey').then(async (result) => {
             const key = result.apiKey;
             const url = document.URL;
             const body = { key, url };
-            const allowlistUrl = 'http://159.89.252.13/site-unlock'
+            const allowlistUrl = SITE_UNLOCK_ENDPOINT;
 
             try {
                 const allowlistResult = await fetch(allowlistUrl, {
@@ -170,7 +214,23 @@
                 console.log('Error sending allowlisted URL:', error);
             }
         });
-
-
+	*/
     };
-})();
+}
+
+/**
+ * This helper function removes parameters from URLs sent to pipeline,
+ * in order to protect sensitive user info.
+ * From https://stackoverflow.com/questions/12023430/regex-url-path-from-url
+ * @param {} url - the complete URL string, including protocol and any params
+ */
+function removeParams(url) {
+    console.log(url)
+    const parser = document.createElement('a');
+    parser.href = url;
+    const {hostname, protocol, pathname} = parser;
+
+    const result = `${protocol}//${hostname}${pathname}`;
+
+    return result
+}
