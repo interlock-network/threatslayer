@@ -2,7 +2,7 @@
     <PageBanner :msg="$i18n('login')">
         <img class="banner-icon" src="/src/assets/images/login.png">
     </PageBanner>
-    <BeforeStakingWarning v-if="urlToStake" :msg="$i18n('warning_must_login_before_staking')" />
+    <WarningTextBox v-if="urlToStake" :msg="$i18n('warning_must_login_before_staking')" />
     <RegisterLine :checkState="checkState" :selectPage="selectPage" />
     <br />
     <br />
@@ -34,7 +34,7 @@
 import { debounce } from 'debounce';
 import { findEmailError, findNonAlphanumericChars, setChromeStorage } from "../utilities";
 
-import BeforeStakingWarning from "./components/BeforeStakingWarning.vue";
+import WarningTextBox from "./components/WarningTextBox.vue";
 import ForgotPasswordButton from "./components/buttons/ForgotPasswordButton.vue";
 import LoginButton from "./components/buttons/LoginButton.vue";
 import PageBanner from "./components/PageBanner.vue";
@@ -55,7 +55,7 @@ export default {
         urlToStake: String
     },
     components: {
-        BeforeStakingWarning,
+        WarningTextBox,
         ForgotPasswordButton,
         LoginButton,
         PageBanner,
