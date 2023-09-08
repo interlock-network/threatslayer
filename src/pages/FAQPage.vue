@@ -1,10 +1,10 @@
 <template>
-    <PageBanner msg="Frequently Asked Questions">
+    <PageBanner :msg="$i18n('frequently_asked_questions')">
         <img class="banner-icon" src="/src/assets/images/faq.png">
     </PageBanner>
     <br />
     <div style="padding-right: 2rem;">
-        <TextComponent msg="How does ThreatSlayer protect me?" bold /><br />
+        <TextComponent :msg="$i18n('how_does_threat_slayer_protect_me')" bold /><br />
         <div>
             <LineOfText>
                 <span>ThreatSlayer uses <a href="https://www.interlock.network/" target="_blank">Interlock's</a>
@@ -13,21 +13,19 @@
         </div>
         <br />
         <br />
-        <TextComponent msg="How does ThreatSlayer reward me with $ILOCK?" bold /><br />
+        <TextComponent :msg="$i18n('how_does_threat_slayer_reward_me')" bold /><br />
         <br />
-        <TextComponent
-            msg="ThreatSlayer users have a chance to get rewarded for every URL they visit. The more sites you browse, the more chances you have to get $ILOCK." />
-        <br />
-        <br />
-        <br />
-        <TextComponent msg="What data does ThreatSlayer Collect?" bold /><br />
-        <br />
-        <TextComponent
-            msg="We scan your browser's URLs with our threat-detecting AI. We associate URLs with your account so we can reward you with $ILOCK. That's it!" />
+        <TextComponent :msg="$i18n('how_does_threat_slayer_reward_me_answer')" />
         <br />
         <br />
         <br />
-        <TextComponent msg="Is ThreatSlayer open source?" bold /><br />
+        <TextComponent :msg="$i18n('what_does_threat_slayer_collect')" bold /><br />
+        <br />
+        <TextComponent :msg="$i18n('what_does_threat_slayer_collect_answer')" />
+        <br />
+        <br />
+        <br />
+        <TextComponent :msg="$i18n('is_threat_slayer_open_source')" bold /><br />
         <div>
             <LineOfText>
                 <span>Absolutely. You can look at our <a href="https://github.com/interlock-network/threatslayer"
@@ -38,6 +36,7 @@
     <br />
     <br />
 </template>
+
 <script>
 import LineOfText from "./components/LineOfText.vue";
 import PageBanner from "./components/PageBanner.vue";
@@ -53,9 +52,4 @@ export default {
 }
 </script>
 
-<style>
-.socials-icon {
-    padding-left: 1rem;
-    padding-right: 1rem;
-}
-</style>
+<style></style>

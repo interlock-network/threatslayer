@@ -1,14 +1,12 @@
 <template>
-    <PageBanner msg="Extension Options">
+    <PageBanner :msg="$i18n('extension_options')">
         <img class="banner-icon" src="/src/assets/images/settings.png">
     </PageBanner>
     <br />
-    <TextComponent msg="Select from the following:" bold />
+    <TextComponent :msg="$i18n('select_from_the_following')" bold />
     <div class="options-container">
         <input type="checkbox" id="beta-ai-checkbox" @click="betaClassifier($event)" tabindex="2" />
-        <label for="beta-ai-checkboxbox">
-            Enable beta AI Threat Detection (developers only)
-        </label>
+        <label for="beta-ai-checkboxbox">{{ $i18n('enable_beta_option') }}</label>
     </div>
     <div class="options-container">
         <input type="checkbox" id="dev-mode-checkbox" @click="devMode($event)" tabindex="4" />

@@ -1,7 +1,27 @@
 {
+    "about_threat_slayer": {
+        "message": "About ThreatSlayer",
+        "description": "Page title."
+    },
     "about_us": {
         "message": "About Us",
         "description": "Page title, also used in sidebar."
+    },
+    "about_us_paragraph_1": {
+        "message": "In a world where cyber threats are becoming increasingly sophisticated and common, it's crucial to have a solution that not only reacts swiftly but also proactively prevents threats.",
+        "description": "The first paragraph of text on the About Us page."
+    },
+    "about_us_paragraph_2": {
+        "message": "ThreatSlayer is not just another cybersecurity product, it's a comprehensive security companion that operates in real-time to detect and neutralize threats before they can do any harm.",
+        "description": "The second paragraph of text on the About Us page."
+    },
+    "about_us_paragraph_3": {
+        "message": "Easy to install and armed with the ability to protect you from threats in both web2 and web3 space, ThreatSlayer is the future of browser security. It runs in the background, protecting you from malicious assets or dangerous pages without interrupting your workflow.",
+        "description": "The third paragraph of text on the About Us page."
+    },
+    "about_us_paragraph_4": {
+        "message": "Combine this with rewards for users that share anonymized security data, and you have a win-win solution for staying secure online while contributing to the wider internet safety ecosystem.",
+        "description": "The fourth and last paragraph of text on the About Us page."
     },
     "affirm_not_us_citizen": {
         "message": "Affirm you are not a US citizen or resident.",
@@ -63,6 +83,10 @@
         "message": "Don't have a wallet?",
         "description": "Instruction for creating a wallet address."
     },
+    "enable_beta_option": {
+        "message": "Enable beta AI Threat Detection (developers only)",
+        "description": "Options page option."
+    },
     "enter_a_password": {
         "message": "Enter a password of at least 12 characters",
         "description": "Instruction for registering an account."
@@ -123,6 +147,10 @@
         "message": "Username too long: Max length is 16 characters.",
         "description": "Registering error message."
     },
+    "extension_options": {
+        "message": "Extension Options",
+        "description": "Page title."
+    },
     "faq": {
         "message": "FAQ",
         "description": "Page title, also used in sidebar."
@@ -131,9 +159,33 @@
         "message": "Forgot password?",
         "description": "The text used on login page."
     },
+    "frequently_asked_questions": {
+        "message": "Frequently Asked Questions",
+        "description": "Page title."
+    },
+    "how_does_threat_slayer_protect_me": {
+        "message": "How does ThreatSlayer protect me?",
+        "description": "Question on the FAQ page."
+    },
+    "how_does_threat_slayer_reward_me": {
+        "message": "How does ThreatSlayer reward me with $ILOCK?",
+        "description": "Question on the FAQ page."
+    },
+    "how_does_threat_slayer_reward_me_answer": {
+        "message": "ThreatSlayer users have a chance to get rewarded for every URL they visit. The more sites you browse, the more chances you have to get $ILOCK.",
+        "description": "Answer to question on the FAQ page."
+    },
     "ilock_available_to_stake": {
         "message": "$ILOCK Available to Stake",
         "description": "Info text on the Security Staking page."
+    },
+    "is_threat_slayer_open_source": {
+        "message": "Is ThreatSlayer open source?",
+        "description": "Question on the FAQ page."
+    },
+    "is_threat_slayer_open_source_answer": {
+        "message": "We scan your browser's URLs with our threat-detecting AI. We associate URLs with your account so we can reward you with $ILOCK. That's it!",
+        "description": "Answer to question on the FAQ page."
     },
     "login": {
         "message": "Login",
@@ -182,6 +234,10 @@
     "security_staking": {
         "message": "Security Staking",
         "description": "Page title, also used in sidebar."
+    },
+    "select_from_the_following": {
+        "message": "Select from the following:",
+        "description": "Header for the options on the Options page."
     },
     "sign_up_for_threat_slayer": {
         "message": "Sign up for ThreatSlayer",
@@ -306,5 +362,17 @@
     "warning_text": {
         "message": "Close the tab unless you know this site is safe!",
         "description": "The text used in the warning banner."
+    },
+    "what_does_threat_slayer_collect": {
+        "message": "What data does ThreatSlayer Collect?",
+        "description": "Question on the FAQ page."
+    },
+    "what_does_threat_slayer_collect_answer": {
+        "message": "We scan your browser's URLs with our threat-detecting AI. We associate URLs with your account so we can reward you with $ILOCK. That's it!",
+        "description": "Answer to question on the FAQ page."
+    },
+    "why_choose_threat_slayer": {
+        "message": "Why Choose ThreatSlayer?",
+        "description": "The text used on the About Us page."
     }
 }
