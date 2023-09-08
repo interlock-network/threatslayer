@@ -4,6 +4,8 @@ node_modules/
 /dist
 /public
 .DS_Store
+dist.crx
+dist.pem
 
 # Log files
 npm-debug.log*

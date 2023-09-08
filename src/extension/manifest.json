@@ -6,12 +6,17 @@
     "author": "Interlock",
     "version": "1.0.0",
     "icons": {
-        "128": "icon128.png"
+        "128": "assets/icons/icon128.png"
+    },
+    "action": {
+        "default_icon": {
+            "128": "assets/icons/icon128.png"
+        }
     },
     "content_scripts": [
         {
             "js": [
-                "script.js"
+                "content/script.js"
             ],
             "matches": [
                 "*://*/*"
@@ -22,13 +27,7 @@
         {
             "resources": [
                 "grid_background.png",
-                "hand48.png",
-                "threatslayer_logo.png",
-                "static/style.css",
-                "static/fonts/Webfont/THICCCBOI-Bold.woff2",
-                "static/fonts/Webfont/THICCCBOI-Regular.woff2",
-                "static/fonts/TTF/THICCCBOI-Bold.ttf",
-                "static/fonts/TTF/THICCCBOI-Regular.ttf"
+                "threatslayer_logo.png"
             ],
             "matches": [
                 "*://*/*"
@@ -36,9 +35,9 @@
         }
     ],
     "background": {
-        "service_worker": "background.js"
+        "service_worker": "service/worker.js",
+        "type": "module"
     },
-    "action": {},
     "permissions": [
         "scripting",
         "storage",
