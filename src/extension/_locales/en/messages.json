@@ -23,6 +23,10 @@
         "message": "Combine this with rewards for users that share anonymized security data, and you have a win-win solution for staying secure online while contributing to the wider internet safety ecosystem.",
         "description": "The fourth and last paragraph of text on the About Us page."
     },
+    "account_info": {
+        "message": "Account Info",
+        "description": "Page header for not-logged-in Account page."
+    },
     "account_info_for": {
         "message": "Account Info for",
         "description": "Page header for Account page."
@@ -220,11 +224,11 @@
         "description": "Question on the FAQ page."
     },
     "how_does_threat_slayer_reward_me": {
-        "message": "How does ThreatSlayer reward me with $ILOCK?",
+        "message": "How does ThreatSlayer reward me with $$ILOCK?",
         "description": "Question on the FAQ page."
     },
     "how_does_threat_slayer_reward_me_answer": {
-        "message": "ThreatSlayer users have a chance to get rewarded for every URL they visit. The more sites you browse, the more chances you have to get $ILOCK.",
+        "message": "ThreatSlayer users have a chance to get rewarded for every URL they visit. The more sites you browse, the more chances you have to get $$ILOCK.",
         "description": "Answer to question on the FAQ page."
     },
     "ilock_available_to_stake": {
@@ -240,7 +244,7 @@
         "description": "Question on the FAQ page."
     },
     "is_threat_slayer_open_source_answer": {
-        "message": "We scan your browser's URLs with our threat-detecting AI. We associate URLs with your account so we can reward you with $ILOCK. That's it!",
+        "message": "We scan your browser's URLs with our threat-detecting AI. We associate URLs with your account so we can reward you with $$ILOCK. That's it!",
         "description": "Answer to question on the FAQ page."
     },
     "login": {
@@ -320,7 +324,7 @@
         "description": "Explanation of security staking state."
     },
     "stake_state_pending": {
-        "message": "Someone else has tried staking this URL. If approved, your stake will be added to theirs. If rejected, you will not lose any $ILOCK.",
+        "message": "Someone else has tried staking this URL. If approved, your stake will be added to theirs. If rejected, you will not lose any $$ILOCK.",
         "description": "Explanation of security staking state."
     },
     "stake_state_resolved": {
@@ -428,7 +432,7 @@
         "description": "Warning text for deleting user account."
     },
     "warning_changing_wallet_address": {
-        "message": "Warning: Changing your existing wallet address may delay access to previously deposited $ILOCK.",
+        "message": "Warning: Changing your existing wallet address may delay access to previously deposited $$ILOCK.",
         "description": "Warning text used for changing a wallet address."
     },
     "warning_header": {
@@ -436,15 +440,19 @@
         "description": "The text used in the warning banner."
     },
     "warning_ilock_will_be_lost": {
-        "message": "You will lose any $ILOCK not transferred to a wallet.",
+        "message": "You will lose any $$ILOCK not transferred to a wallet.",
         "description": "Warning text for deleting user account."
     },
     "warning_must_add_wallet_address": {
-        "message": "You must add a wallet address to receive $ILOCK token.",
+        "message": "You must add a wallet address to receive $$ILOCK token.",
         "description": "Warning text used on the Account page."
     },
     "warning_must_login_before_staking": {
         "message": "You must login before you can stake on a URL.",
+        "description": "The text used in a warning box."
+    },
+    "warning_must_login_to_earn_etc": {
+        "message": "Warning: You must register or login to earn $$ILOCK and use all of ThreatSlayer's features.",
         "description": "The text used in a warning box."
     },
     "warning_must_register_before_staking": {
@@ -460,7 +468,7 @@
         "description": "Question on the FAQ page."
     },
     "what_does_threat_slayer_collect_answer": {
-        "message": "We scan your browser's URLs with our threat-detecting AI. We associate URLs with your account so we can reward you with $ILOCK. That's it!",
+        "message": "We scan your browser's URLs with our threat-detecting AI. We associate URLs with your account so we can reward you with $$ILOCK. That's it!",
         "description": "Answer to question on the FAQ page."
     },
     "why_choose_threat_slayer": {
