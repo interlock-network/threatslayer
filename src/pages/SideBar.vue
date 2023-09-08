@@ -83,10 +83,10 @@ export default {
     },
     computed: {
         showRegisterPage() {
-            return this.registered === false;
+            return this.registered === false && this.loggedIn === false;
         },
         showLoginPage() {
-            return this.loggedIn === false || this.registered === false;
+            return this.loggedIn === false;
         },
         showLogoutButton() {
             return this.loggedIn;
@@ -155,7 +155,7 @@ export default {
     height: 250px;
     margin-left: -3rem;
     margin-bottom: -3rem;
-    margin-top: -2rem;
+    margin-top: -3rem;
     width: 250px;
 }
 
