@@ -21,27 +21,26 @@
                 "content/script.js"
             ],
             "matches": [
-                "*://*/*"
+                "<all_urls>"
             ]
         }
     ],
     "web_accessible_resources": [
         {
             "resources": [
-	            "assets/*"
+                "assets/*"
             ],
             "matches": [
-                "*://*/*"
+                "<all_urls>"
             ]
         }
     ],
     "background": {
         "service_worker": "service/worker.js",
-		"type": "module"
+        "type": "module"
     },
     "permissions": [
         "storage",
-        "downloads",
         "tabs"
     ],
     "host_permissions": [

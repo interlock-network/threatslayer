@@ -5,7 +5,7 @@
 /**
  * Declare constants.
  */
-const DASHBOARD_INDEX = "/popup/index.html"
+const DASHBOARD_INDEX = "/index.html"
 const SURVEY_URL = "https://docs.google.com/forms/d/e/1FAIpQLSeo1gW6Sg_ITlAXxbTXliQdab2qt1cLBzu45mXpz-XJ8O1KPg/viewform"
 const RELEASE_NOTES_URL = "https://github.com/interlock-network/threatslayer/blob/master/docs/release_notes.md"
 const API_KEY = "threatslayer-api-key";
@@ -26,7 +26,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     const url = request.url;
 
     // first update local count of total urls visited by interlocker
-    if (request.message === 'scanURL') {
+    if (request.message === 'scanUrl') {
 
         chrome.storage.local.get('totalURLsVisited').then((result) => {
             let totalURLsVisited = result.totalURLsVisited || 0;
@@ -53,7 +53,8 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
                     .then((response) => response.json())
                     .then((data) => {
 
-                        if (data.malicious == true) {
+                        if (data.malicious == false) { 
+                        //if (data.malicious == true) { 
                             console.log(`URL ${url} classified as malicious.`);
                             chrome.storage.local.get('allowlist').then((result) => {
 
@@ -99,10 +100,10 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         return true;
 
     } else if (request.action === 'stakeUrl') {
+
         const urlToStake = request.url;
 
         // if interlocker intends to stake on webpage, handle that here
-        // ???? I see no message pass operation from content script ???? is this still relevant?
         chrome.storage.local.set({ urlToStake })
             .then(() => {
                 console.log(`URL to stake set to: ${urlToStake}`);
