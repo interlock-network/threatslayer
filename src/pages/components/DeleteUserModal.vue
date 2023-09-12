@@ -1,11 +1,10 @@
 <template>
-    <div id="delete-user-button-container" :style="active ? 'bottom: 40%' : 'bottom: 10rem;'">
-        <!-- initial delete user button -->
-        <button v-if="!active" @click="submitDeleteUser" id="delete-user-button" :class="computedClass"
-            :disabled="disabled">
-            <img class="sidebar-icon" src="/src/assets/images/delete-user.png">{{ $i18n('delete_account') }}
-        </button>
-        <div v-if="active" style="font-size: 1rem;">
+    <!-- initial delete user button -->
+    <button v-if="!active" @click="openDeleteUserModal" id="delete-user-button" :class="computedClass">
+        <img v-if="!active" class="sidebar-icon" src="/src/assets/images/delete-user.png">{{ $i18n('delete_account') }}
+    </button>
+    <div v-if="active" id="modal-overlay">
+        <div id="modal-container" :style="active ? 'bottom: 40%' : 'display: none'">
             <TextComponent :msg="$i18n('confirm_are_you_sure')" id="delete-user-confirm-text" /><br />
             <TextComponent :msg="$i18n('warning_account_will_be_deleted')" /><br />
             <TextComponent :msg="$i18n('warning_ilock_will_be_lost')" /><br />
@@ -26,8 +25,9 @@
             <!-- error message -->
             <TextComponent v-for="errorMessage in errorArr" :msg="errorMessage" error />
             <!-- cancel button -->
-            <button @click="fadeAccountPage(false); this.active = false;" id="cancel-delete-user-button"
-                style="color: #963cf5;">{{ $i18n('cancel') }}</button>
+            <button @click="cancelAction" id="cancel-delete-user-button" style="color: #963cf5 ">
+                {{ $i18n('cancel') }}
+            </button>
         </div>
     </div>
 </template>
@@ -83,6 +83,14 @@ export default {
         }
     },
     methods: {
+        cancelAction() {
+            this.fadeAccountPage(false);
+            this.active = false;
+        },
+        openDeleteUserModal() {
+            this.fadeAccountPage(true);
+            this.active = true;
+        },
         async submitDeleteUser() {
             const { password, username } = this;
             this.errorArr = [];
@@ -153,7 +161,7 @@ export default {
     font-size: 1.25rem;
     background-color: #0F0818;
     border: none;
-    color: red;
+    color: #963cf5;
     cursor: pointer;
     font-size: 1.25rem;
     padding-top: 1rem;

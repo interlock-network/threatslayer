@@ -23,7 +23,7 @@
         <!-- Tabe of allowlisted URLs -->
         <AllowlistTable :apiKey="apiKey" />
     </div>
-    <DeleteUserModal v-bind="{ checkState, fadeAccountPage, selectPage, username }" :style="computedStyle" />
+    <DeleteUserModal v-bind="{ checkState, fadeAccountPage, selectPage, username }" />
 </template>
 <script>
 import AllowlistTable from "./components/AllowlistTable.vue";

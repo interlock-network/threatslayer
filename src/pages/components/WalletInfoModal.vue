@@ -127,7 +127,6 @@ export default {
     border: none;
     color: red;
     font-size: 1.25rem;
-    height: 600px;
     padding-top: 1rem;
     width: 400px;
 }
