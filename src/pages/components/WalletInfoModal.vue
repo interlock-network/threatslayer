@@ -1,16 +1,17 @@
 <template>
+    <!-- initial View Wallet Info button -->
     <button v-if="!active" @click="openWalletInfoModal" id="view-wallet-info-button" :class="computedClass">
         {{ $i18n('view_wallet_info') }}
     </button>
     <div v-if="active" id="modal-overlay">
-        <div id="wallet-info-modal-container" :style="active ? 'bottom: 40%' : 'display: none'">
+        <div id="modal-container" :style="active ? 'bottom: 40%' : 'display: none'">
             <!-- initial view wallet button -->
             <TextComponent :msg="$i18n('wallet_address')" bold /> <br />
             <!-- prompt to add wallet address if there is none -->
             <div v-if="showAddressInput">
                 <!-- input field with prompt for new address -->
                 <TextComponent :msg="$i18n(updateAddressMsg)" subinstruction />
-                <button v-if="changeAddressSelected" id="cancel-change-address" @click="toggleChangeAddress">
+                <button v-if="changeAddressSelected" id="cancel-change-address" @click="selectChangeAddress(false)">
                     {{ $i18n('cancel') }}
                 </button>
                 <input @input="validateAddress" v-model.trim="newAddress" :style="addressInputStyle"
@@ -26,11 +27,12 @@
                     v-bind="{ apiKey, checkState, active, newAddress, password, toggleClickedOnce, username }" />
             </div>
             <TextComponent v-if="showAddress" :msg="address" mono /><br />
-            <button v-if="!showAddressInput" @click="toggleChangeAddress" id="update-address-button" class="modal-button">
+            <button v-if="!showAddressInput" @click="selectChangeAddress(true)" id="update-address-button"
+                class="modal-button">
                 {{ $i18n('update_wallet_address') }}
             </button><br />
             <br />
-            <button @click="doneButton" id="done-button" class="modal-button">
+            <button @click="doneAction" id="done-button" class="modal-button">
                 {{ $i18n('done') }}
             </button>
         </div>
@@ -99,19 +101,17 @@ export default {
         }
     },
     methods: {
-        doneButton() {
+        doneAction() {
             this.fadeAccountPage(false);
             this.active = false;
-            this.toggleChangeAddress();
+            this.selectChangeAddress(false);
         },
         openWalletInfoModal() {
-            if (!this.active) {
-                this.fadeAccountPage(true);
-                this.active = true;
-            }
+            this.fadeAccountPage(true);
+            this.active = true;
         },
-        toggleChangeAddress() {
-            this.changeAddressSelected = !this.changeAddressSelected;
+        selectChangeAddress(bool) {
+            this.changeAddressSelected = bool;
         },
         toggleClickedOnce() {
             this.active = !this.active;
@@ -132,7 +132,7 @@ export default {
     width: 400px;
 }
 
-#wallet-info-modal-container {
+#modal-container {
     background-color: #0F0818;
     border-radius: 12px;
     color: #FFFFFF;
