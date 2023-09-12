@@ -30,7 +30,7 @@
                 {{ $i18n('update_wallet_address') }}
             </button><br />
             <br />
-            <button @click="fadeAccountPage(false); this.active = false;" id="done-button" class="modal-button">
+            <button @click="doneButton" id="done-button" class="modal-button">
                 {{ $i18n('done') }}
             </button>
         </div>
@@ -99,6 +99,11 @@ export default {
         }
     },
     methods: {
+        doneButton() {
+            this.fadeAccountPage(false);
+            this.active = false;
+            this.toggleChangeAddress();
+        },
         openWalletInfoModal() {
             if (!this.active) {
                 this.fadeAccountPage(true);
@@ -106,7 +111,6 @@ export default {
             }
         },
         toggleChangeAddress() {
-            console.log('toggleChangeAddress');
             this.changeAddressSelected = !this.changeAddressSelected;
         },
         toggleClickedOnce() {
