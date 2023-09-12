@@ -22,8 +22,9 @@ export default {
                 const response = await axios.post(`${baseUrl}/site-forget`, { key: apiKey, url })
                     .then(res => res)
                     .catch(err => err);
+
+                console.log('response', response);
             }
-            console.log('response', response);
 
             // if cleared URL is the same url as the one to stake, clear it
             const urlToStake = await getChromeStorage('urlToStake');
@@ -31,15 +32,6 @@ export default {
             if (urlToStake === url) {
                 setChromeStorage({ urlToStake: null });
             }
-
-            const allowlist = await getChromeStorage('allowlist');
-
-            if (!allowlist) {
-                return;
-            }
-
-            const updatedAllowlist = allowlist.filter(allowlistedUrl => allowlistedUrl !== url);
-            setChromeStorage({ allowlist: updatedAllowlist });
 
             this.callback();
         },
