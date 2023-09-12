@@ -10,40 +10,11 @@
         <TextComponent class="left-label" :msg="$i18n('email')" bold />
         <TextComponent :msg="email" mono /> <br />
         <br />
-        <!-- 5GrpknVvGGrGH3EFuURXeMrWHvbpj3VfER1oX5jFtuGbfzCE -->
-        <TextComponent :msg="$i18n('wallet_address')" bold /> <br />
-        <!-- prompt to add wallet address if there is none -->
-        <div v-if="showAddressInput">
-            <!-- input field with prompt for new address -->
-            <TextComponent :msg="$i18n(updateAddressMsg)" subinstruction />
-            <button v-if="changeAddressSelected" id="cancel-change-address" @click="toggleChangeAddress">
-                {{ $i18n('cancel') }}
-            </button>
-            <input @input="validateAddress" v-model.trim="newAddress" :style="addressInputStyle" style="margin-top: 0.5rem;"
-                :placeholder="$i18n('enter_wallet_address')" tabindex="2" />
-            <TextComponent v-if="newAddressErrorMessage.length" :msg="newAddressErrorMessage" error />
-            <!-- password field with show/hide button -->
-            <div v-if="clickedOnce">
-                <TextComponent v-if="showAddressChangeWarning" subinstruction
-                    :msg="$i18n('warning_changing_wallet_address')" />
-            </div>
-            <div v-if="clickedOnce">
-                <input id="login-password" class="input-field-text password-input" :type="passwordInputType"
-                    style="margin-top: 0.5rem;" v-model.trim="password"
-                    :placeholder="$i18n('enter_password_to_update_wallet_address')" tabindex="4"
-                    :style="passwordInputStyle" />
-                <button @click="togglePasswordInputType" class="small-button" id="show-toggle-button" tabindex="5">
-                    {{ passwordInputType === 'password' ? $i18n('password_show') : $i18n('password_hide') }}
-                </button>
-                <TextComponent :msg="passwordErrorMessage" error v-if="passwordErrorMessage.length" />
-                <!-- button to update address -->
-            </div>
-            <UpdateAddressButton :disabled="disableUpdateAddressButton"
-                v-bind="{ checkState, clickedOnce, apiKey, newAddress, password, toggleClickedOnce, username }" />
-        </div>
-        <TextComponent v-if="showAddress" :msg="address" mono /><br />
-        <button v-if="showAddress" id="update-address-button" @click="toggleChangeAddress">Update
-            Address</button>
+    </div>
+    <!-- 5GrpknVvGGrGH3EFuURXeMrWHvbpj3VfER1oX5jFtuGbfzCE -->
+    <!-- view wallet information modal -->
+    <WalletInfoModal v-bind="{ address, apiKey, checkState, fadeAccountPage, selectPage, username }" style="opacity:1" />
+    <div :style="computedStyle">
         <br />
         <!-- Number of users referred -->
         <TextComponent class="left-label" :msg="$i18n('users_referred')" bold />
@@ -52,15 +23,15 @@
         <!-- Tabe of allowlisted URLs -->
         <AllowlistTable :apiKey="apiKey" />
     </div>
-    <DeleteUserButton v-bind="{ checkState, fadeAccountPage, selectPage, username }" />
+    <DeleteUserModal v-bind="{ checkState, fadeAccountPage, selectPage, username }" />
 </template>
 <script>
 import AllowlistTable from "./components/AllowlistTable.vue";
-import DeleteUserButton from "./components/buttons/DeleteUserButton.vue";
+import DeleteUserModal from "./components/DeleteUserModal.vue";
 import LineOfText from "./components/LineOfText.vue";
 import PageBanner from "./components/PageBanner.vue";
 import TextComponent from "./components/TextComponent.vue";
-import UpdateAddressButton from "./components/buttons/UpdateAddressButton.vue";
+import WalletInfoModal from "./components/WalletInfoModal.vue";
 
 import axios from "axios";
 import { baseUrl } from '../utilities.js';
@@ -77,11 +48,11 @@ export default {
     name: 'AccountPage',
     components: {
         AllowlistTable,
-        DeleteUserButton,
+        DeleteUserModal,
         LineOfText,
         PageBanner,
         TextComponent,
-        UpdateAddressButton
+        WalletInfoModal
     },
     props: {
         address: String,
@@ -94,11 +65,7 @@ export default {
     data() {
         return {
             allowlist: null,
-            changeAddressSelected: false,
-            clickedOnce: false,
-            deleteAccountClicked: false,
-            newAddress: '',
-            newAddressErrorMessage: '',
+            fadePage: false,
             password: '',
             passwordErrorMessage: '',
             passwordInputType: 'password',
@@ -115,31 +82,12 @@ export default {
             return this.newAddressErrorMessage?.length ? errorStyle : {};
         },
         computedStyle() {
-            return this.deleteAccountClicked ? { opacity: '10%' } : {};
-        },
-        disableUpdateAddressButton() {
-            return !this.clickedOnce;
-        },
-        showAddress() {
-            return this.address?.length && !this.changeAddressSelected;
-        },
-        showAddressInput() {
-            return !this.address?.length || this.changeAddressSelected;
-        },
-        showAddressChangeWarning() {
-            return this.address?.length;
-        },
-        // TODO delete this?
-        // showUpdateAddressButton() {
-        //     return this.newAddress.length && !this.newAddressErrorMessage.length;
-        // },
-        updateAddressMsg() {
-            return !this.address?.length ? 'warning_must_add_wallet_address' : 'enter_new_wallet_address';
+            return this.fadePage ? { 'opacity': '5%', 'pointer-events': 'none' } : {};
         }
     },
     methods: {
         fadeAccountPage(bool) {
-            this.deleteAccountClicked = bool;
+            this.fadePage = bool;
         },
         async getUserInfo() {
             const { apiKey, username } = this;
@@ -167,12 +115,6 @@ export default {
             } catch (_error) {
                 return false;
             }
-        },
-        toggleChangeAddress() {
-            this.changeAddressSelected = !this.changeAddressSelected;
-        },
-        toggleClickedOnce() {
-            this.clickedOnce = true;
         },
         togglePasswordInputType() {
             this.passwordInputType = this.passwordInputType === 'password' ? 'text' : 'password';
@@ -208,15 +150,6 @@ export default {
     float: right;
     font-size: 1rem;
     padding-right: 50px;
-}
-
-#update-address-button {
-    background-color: #0F0818;
-    border: none;
-    color: #9000CB;
-    font-size: 1rem;
-    padding: 0.5rem 0.75rem;
-    width: 400px;
 }
 
 #url-container {
