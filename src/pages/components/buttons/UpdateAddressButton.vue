@@ -1,7 +1,7 @@
 <template>
     <div>
         <button @click="submitUpdateAddress" class="secondary-hollow-button" :class="computedClass" :disabled="disabled"
-            style="margin-right: 10%;">
+            style="margin-right: 10%; margin-top: 2rem;">
             {{ $i18n(submitButtonText) }}
         </button>
         <br />
