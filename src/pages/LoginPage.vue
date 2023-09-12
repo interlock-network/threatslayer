@@ -93,16 +93,6 @@ export default {
         togglePasswordInputType() {
             this.passwordInputType = this.passwordInputType === 'password' ? 'text' : 'password';
         },
-        async unregister() {
-            const unregistered = await setChromeStorage({ 'registered': false });
-
-            if (unregistered) {
-                // this forces a check to make the "Start Earning" tab appear in the sidebar
-                await this.checkState();
-            };
-
-            this.selectPage('earn');
-        },
         validateEmail() {
             this.emailErrorMessage = findEmailError(this.email);
         },
