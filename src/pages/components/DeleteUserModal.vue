@@ -1,11 +1,11 @@
 <template>
-    <div id="delete-user-button-container" :style="clickedOnce ? 'bottom: 40%' : 'bottom: 10rem;'">
+    <div id="delete-user-button-container" :style="active ? 'bottom: 40%' : 'bottom: 10rem;'">
         <!-- initial delete user button -->
-        <button v-if="!clickedOnce" @click="submitDeleteUser" id="delete-user-button" :class="computedClass"
+        <button v-if="!active" @click="submitDeleteUser" id="delete-user-button" :class="computedClass"
             :disabled="disabled">
             <img class="sidebar-icon" src="/src/assets/images/delete-user.png">{{ $i18n('delete_account') }}
         </button>
-        <div v-if="clickedOnce" style="font-size: 1rem;">
+        <div v-if="active" style="font-size: 1rem;">
             <TextComponent :msg="$i18n('confirm_are_you_sure')" id="delete-user-confirm-text" /><br />
             <TextComponent :msg="$i18n('warning_account_will_be_deleted')" /><br />
             <TextComponent :msg="$i18n('warning_ilock_will_be_lost')" /><br />
@@ -26,20 +26,20 @@
             <!-- error message -->
             <TextComponent v-for="errorMessage in errorArr" :msg="errorMessage" error />
             <!-- cancel button -->
-            <button @click="fadeAccountPage(false); this.clickedOnce = false;" id="cancel-delete-user-button"
+            <button @click="fadeAccountPage(false); this.active = false;" id="cancel-delete-user-button"
                 style="color: #963cf5;">{{ $i18n('cancel') }}</button>
         </div>
     </div>
 </template>
 
 <script>
-import TextComponent from "../TextComponent.vue";
+import TextComponent from "./TextComponent.vue";
 
 import axios from "axios";
-import { baseUrl, clearChromeStorage, setChromeStorage } from '../../../utilities.js';
+import { baseUrl, clearChromeStorage, setChromeStorage } from '../../utilities.js';
 
 export default {
-    name: "DeleteUserButton",
+    name: "DeleteUserModal",
     props: {
         checkState: Function,
         fadeAccountPage: Function,
@@ -51,7 +51,7 @@ export default {
     },
     data() {
         return {
-            clickedOnce: false,
+            active: false,
             confirm: false,
             errorArr: [],
             deleting: false,
@@ -61,7 +61,7 @@ export default {
     },
     computed: {
         computedClass() {
-            return this.errorArr.length || this.clickedOnce ? 'submit-button-error' : '';
+            return this.errorArr.length || this.active ? 'submit-button-error' : '';
         },
         deleteUserButtonText() {
             let result = '';
@@ -77,9 +77,9 @@ export default {
             return result;
         },
         disabled() {
-            const { clickedOnce, deleting, password } = this;
+            const { active, deleting, password } = this;
 
-            return (clickedOnce && !password.length) || deleting;
+            return (active && !password.length) || deleting;
         }
     },
     methods: {
@@ -88,9 +88,9 @@ export default {
             this.errorArr = [];
 
             // user must confirm they are deleting their account
-            if (!this.clickedOnce) {
+            if (!this.active) {
                 this.fadeAccountPage(true);
-                this.clickedOnce = true;
+                this.active = true;
             } else if (password.length) {
                 this.deleting = true;
 
@@ -120,7 +120,7 @@ export default {
                     }
 
                     if (deletedSynched) {
-                        this.clickedOnce = false;
+                        this.active = false;
                         this.deleting = false;
 
                         // navigate to user page after logging out
