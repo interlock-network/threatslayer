@@ -213,13 +213,4 @@ export default {
     padding: 0.5rem 0rem;
     width: 400px;
 }
-
-#update-address-button {
-    background-color: #0F0818;
-    border: none;
-    color: #9000CB;
-    font-size: 1rem;
-    padding: 0.5rem 0.75rem;
-    width: 400px;
-}
 </style>
