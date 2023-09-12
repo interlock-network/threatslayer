@@ -194,23 +194,4 @@ export default {
 }
 </script>
 
-<style>
-#cancel-change-address {
-    background-color: #0F0818;
-    border: none;
-    color: red;
-    float: right;
-    font-size: 1rem;
-    padding-right: 50px;
-}
-
-#clear-allowlist {
-    background-color: #0F0818;
-    border: #9000CB solid 1px;
-    border-radius: 12px;
-    color: #FFFFFF;
-    font-size: 1.25rem;
-    padding: 0.5rem 0rem;
-    width: 400px;
-}
-</style>
+<style></style>

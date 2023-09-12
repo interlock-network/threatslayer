@@ -46,15 +46,6 @@ export default {
 </script>
 
 <style>
-#cancel-change-address {
-    background-color: #0F0818;
-    border: none;
-    color: red;
-    float: right;
-    font-size: 1rem;
-    padding-right: 50px;
-}
-
 #url-container {
     min-height: 25vh;
     overflow-y: scroll;
