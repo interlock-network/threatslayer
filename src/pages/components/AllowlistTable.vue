@@ -8,7 +8,7 @@
             <table id="allowlist-table">
                 <tr v-for="url in sortedAllowlist" style="margin-bottom: 1rem;">
                     <td class="icon-column">
-                        <ClearAllowlistedURLButton v-bind="{ apiKey, callback: getAllowlist, url }" />
+                        <ClearAllowlistedURLButton v-bind="{ apiKey, callback: updateAllowlist, url }" />
                     </td>
                     <td class="url-column">
                         <TextComponent :msg="url" mono />
@@ -47,7 +47,7 @@ export default {
         }
     },
     mounted() {
-        this.getAllowlist();
+        this.populateAllowlist();
     },
     computed: {
         sortedAllowlist() {
@@ -87,9 +87,16 @@ export default {
 
             this.allowlist = [];
         },
-        async getAllowlist() {
+        async populateAllowlist() {
             const allowlist = await getChromeStorage('allowlist');
 
+            this.allowlist = allowlist;
+        },
+        async updateAllowlist() {
+            const allowlist = await getChromeStorage('allowlist');
+            const updatedAllowlist = allowlist.filter(allowlistedUrl => allowlistedUrl !== url);
+
+            setChromeStorage({ allowlist: updatedAllowlist });
             this.allowlist = allowlist;
         },
         sort() {
