@@ -61,10 +61,10 @@ export default {
             } else if (this.mono) {
                 result = {
                     ...result,
-                    display: "block",
+                    'display': 'block',
                     'font-family': 'monospace',
                     'font-size': '0.9rem',
-                    width: '375px'
+                    'width': '375px'
                 }
             }
 
@@ -76,31 +76,38 @@ export default {
 
             switch (true) {
                 case bold:
-                    styleObj = { "font-weight": "bold" };
+                    styleObj = { 'font-weight': 'bold' };
                     break;
                 case error:
-                    styleObj = { color: "red" };
+                    styleObj = { 'color': 'red' };
                     break;
                 case footer:
                     styleObj = {
-                        color: "gray",
-                        display: "inline",
-                        "font-size": "0.75rem"
+                        'color': 'gray',
+                        'display': 'inline',
+                        'font-size': '0.75rem'
+                    };
+                    break;
+                case bigmono:
+                    styleObj = {
+                        'display': 'block',
+                        'font-family': 'monospace',
+                        'font-size': '1.1rem'
                     };
                     break;
                 case mono:
                     styleObj = {
-                        display: "block",
+                        'display': 'block',
                         'font-family': 'monospace',
                         'font-size': '0.9rem',
-                        width: '375px'
+                        'width': '375px'
                     };
                     break;
                 case subinstruction:
                     styleObj = { 'font-size': '1rem' };
                     break;
                 default:
-                    styleObj = { width: "100%" };
+                    styleObj = { 'width': '100%' };
             }
 
             return styleObj;
