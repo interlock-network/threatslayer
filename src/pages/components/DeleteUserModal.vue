@@ -1,10 +1,10 @@
 <template>
     <!-- initial delete user button -->
-    <button v-if="!active" @click="openDeleteUserModal" id="delete-user-button" :class="computedClass">
+    <button v-if="!pageFaded" @click="openDeleteUserModal" id="delete-user-button" :class="computedClass">
         <img v-if="!active" class="sidebar-icon" src="/src/assets/images/delete-user.png">{{ $i18n('delete_account') }}
     </button>
     <div v-if="active" id="modal-overlay">
-        <div id="modal-container" :style="active ? 'bottom: 40%' : 'display: none'">
+        <div id="delete-user-modal-container" :style="active ? 'bottom: 40%' : 'display: none'">
             <TextComponent :msg="$i18n('confirm_are_you_sure')" id="delete-user-confirm-text" /><br />
             <TextComponent :msg="$i18n('warning_account_will_be_deleted')" /><br />
             <TextComponent :msg="$i18n('warning_ilock_will_be_lost')" /><br />
@@ -19,7 +19,7 @@
             <!-- delete user button -->
             <br />
             <br />
-            <button @click="submitDeleteUser" id="delete-user-button" :class="computedClass" :disabled="disabled">
+            <button @click="submitDeleteUser" id="modal-delete-user-button" :class="computedClass" :disabled="disabled">
                 {{ $i18n(deleteUserButtonText) }}
             </button>
             <!-- error message -->
@@ -43,6 +43,7 @@ export default {
     props: {
         checkState: Function,
         fadeAccountPage: Function,
+        pageFaded: Boolean,
         selectPage: Function,
         username: String
     },
@@ -168,10 +169,11 @@ export default {
     width: 400px;
 }
 
-#delete-user-button-container {
+#delete-user-modal-container {
     background-color: #0F0818;
     border-radius: 12px;
     color: #FFFFFF;
+    padding: 50px;
     position: absolute;
     width: 400px;
 }
@@ -189,9 +191,9 @@ export default {
     color: red;
     cursor: pointer;
     font-size: 1rem;
-    margin-bottom: -1rem;
-    padding-top: 1rem;
     width: 400px;
+    position: absolute;
+    bottom: 22%;
 }
 
 #delete-user-password-input {
@@ -206,5 +208,16 @@ export default {
     margin-top: 1.45rem;
     position: absolute;
     right: 4%;
+}
+
+#modal-delete-user-button {
+    background-color: #0F0818;
+    border: none;
+    color: red;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-bottom: -1rem;
+    padding-top: 1rem;
+    width: 400px;
 }
 </style>

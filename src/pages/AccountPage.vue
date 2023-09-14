@@ -5,25 +5,24 @@
     <br />
     <div :style="computedStyle">
         <TextComponent class="left-label" :msg="$i18n('ilock_earned')" bold />
-        <TextComponent :msg="tokensEarned + tokensEarnedTotal" mono /> <br />
+        <TextComponent :msg="tokensEarned + tokensEarnedTotal" bigmono /> <br />
         <br />
         <TextComponent class="left-label" :msg="$i18n('email')" bold />
-        <TextComponent :msg="email" mono /> <br />
+        <TextComponent :msg="email" bigmono /> <br />
         <br />
     </div>
-    <!-- 5GrpknVvGGrGH3EFuURXeMrWHvbpj3VfER1oX5jFtuGbfzCE -->
     <!-- view wallet information modal -->
-    <WalletInfoModal v-bind="{ address, apiKey, checkState, fadeAccountPage, selectPage, username }" style="opacity:1" />
+    <WalletInfoModal v-bind="{ address, apiKey, checkState, fadeAccountPage, selectPage, username }" style="opacity: 1" />
     <div :style="computedStyle">
         <br />
         <!-- Number of users referred -->
         <TextComponent class="left-label" :msg="$i18n('users_referred')" bold />
-        <TextComponent :msg="referred" mono /> <br />
+        <TextComponent :msg="referred" bigmono /> <br />
         <br />
         <!-- Tabe of allowlisted URLs -->
         <AllowlistTable :apiKey="apiKey" />
     </div>
-    <DeleteUserModal v-bind="{ checkState, fadeAccountPage, selectPage, username }" />
+    <DeleteUserModal v-bind="{ checkState, fadeAccountPage, pageFaded, selectPage, username }" />
 </template>
 <script>
 import AllowlistTable from "./components/AllowlistTable.vue";
@@ -65,7 +64,7 @@ export default {
     data() {
         return {
             allowlist: null,
-            fadePage: false,
+            pageFaded: false,
             password: '',
             passwordErrorMessage: '',
             passwordInputType: 'password',
@@ -75,21 +74,21 @@ export default {
         };
     },
     mounted() {
-        this.getUserInfo();
+        this.getStatsFromApi();
     },
     computed: {
         addressInputStyle() {
             return this.newAddressErrorMessage?.length ? errorStyle : {};
         },
         computedStyle() {
-            return this.fadePage ? { 'opacity': '5%', 'pointer-events': 'none' } : {};
+            return this.pageFaded ? { 'opacity': '5%', 'pointer-events': 'none' } : {};
         }
     },
     methods: {
         fadeAccountPage(bool) {
-            this.fadePage = bool;
+            this.pageFaded = bool;
         },
-        async getUserInfo() {
+        async getStatsFromApi() {
             const { apiKey, username } = this;
 
             const response = await axios.post(`${baseUrl}/user-get`, { key: apiKey, username })
