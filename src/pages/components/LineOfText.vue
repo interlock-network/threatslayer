@@ -9,6 +9,10 @@
 export default {
     name: "LineOfText",
     props: {
+        bigmono: {
+            type: Boolean,
+            default: false,
+        },
         bold: {
             type: Boolean,
             default: false,
@@ -72,7 +76,7 @@ export default {
         },
         style() {
             let styleObj;
-            const { bold, error, footer, mono, subinstruction } = this;
+            const { bigmono, bold, error, footer, mono, subinstruction } = this;
 
             switch (true) {
                 case bold:
