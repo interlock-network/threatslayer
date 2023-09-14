@@ -4,12 +4,13 @@
     </PageBanner>
     <WarningTextBox v-if="!loggedIn" :msg="$i18n(warningText)">
         <br />
+        <br />
         <RegisterLine :checkState="checkState" :selectPage="selectPage" /><br />
         <LoginLine :selectPage="selectPage" />
     </WarningTextBox>
     <br />
     <div>
-        <TextComponent :msg="$i18n('ilock_available_to_stake')" bold /> <br />
+        <TextComponent class="left-label" :msg="$i18n('ilock_available_to_stake')" bold />
         <TextComponent msg="0" bigmono /> <br />
         <br />
         <br />
@@ -31,11 +32,11 @@
         </div>
         <br />
         <br />
-        <TextComponent :msg="$i18n('url_staking_status')" bold /> <br />
+        <TextComponent class="left-label" :msg="$i18n('url_staking_status')" bold />
         <TextComponent :msg="$i18n(stakeStateMessage)" bigmono /> <br />
         <br />
         <br />
-        <TextComponent :msg="$i18n('amount_to_stake')" bold /> <br />
+        <WarningTextBox v-if="loggedIn" :msg="$i18n('warning_staking_not_available')" />
     </div>
 </template>
 <script>
@@ -137,12 +138,6 @@ export default {
             this.stakeStateMessage = 'no_url_selected';
 
             this.checkState();
-        },
-        // TODO: revisit this
-        async getAllowlist() {
-            const allowlist = await getChromeStorage('allowlist');
-
-            this.allowlist = allowlist;
         },
         async getSiteInfo() {
             const { apiKey, url } = this;
