@@ -123,7 +123,6 @@ export default {
 
                     const deletedSynched = keyClearedFromState && loggedOut && usernameClearedFromState;
 
-                    // TODO improve this try/catch block
                     if (!deletedSynched) {
                         this.errorArr.push('error_deleting_account_generic')
                     }
@@ -136,11 +135,8 @@ export default {
                         this.selectPage('earn');
                         this.checkState();
                         await setChromeStorage({ registered: false });
-                    } else {
-                        // TODO add error handling?
                     }
                 } else {
-                    // TODO show errors
                     console.log('Delete User error:', response.errors)
 
                     this.errorArr = [response.errors];

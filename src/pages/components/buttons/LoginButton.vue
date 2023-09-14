@@ -101,7 +101,7 @@ export default {
 
                 return;
             }
-            // TODO test this
+
             if (!errors.length) {
                 this.loggedIn = true;
                 this.loggingIn = false;
@@ -117,7 +117,6 @@ export default {
                     this.checkState()
                     const loggedInSynched = setChromeStorage({ loggedIn: true });
 
-                    // TODO improve this try/catch block
                     if (loggedInSynched) {
                         this.loggedIn = true;
                         this.loggingIn = false;
@@ -127,7 +126,6 @@ export default {
                         this.selectPage('slayCount');
                         this.checkState()
                     } else {
-                        // TODO update error message to be an object
                         this.errorArr.push('error_login_generic')
                     }
                 } else {
