@@ -171,6 +171,7 @@ body {
 
 button {
   cursor: default;
+  pointer-events: initial;
 }
 
 h1,
