@@ -100,7 +100,6 @@ export default {
           this.selectPage('slayCount');
         }
       } else if (urlToStake) {
-        // TODO add message if users aren't logged in and have a URL to stake
         this.selectPage('login');
       }
     },
@@ -244,6 +243,10 @@ input {
   width: 20px;
 }
 
+.left-label {
+  margin-right: 1rem;
+}
+
 .secondary-hollow-button {
   background-color: #0F0818;
   border: #9000CB solid 1px;
@@ -286,15 +289,5 @@ input {
   color: #FFFFFF;
   opacity: 0.3;
   pointer-events: none;
-}
-
-.warning-container {
-  border: yellow solid 1px;
-  border-radius: 0.5rem;
-  font-size: 1rem;
-  padding: 0.5rem;
-  margin-bottom: 1rem;
-  margin-top: 1rem;
-  width: 380px;
 }
 </style>
