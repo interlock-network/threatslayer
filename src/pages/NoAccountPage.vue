@@ -10,7 +10,7 @@
     </WarningTextBox>
     <br />
     <div>
-        <TextComponent :msg="$i18n('ilock_earned')" bold />
+        <TextComponent class="left-label" :msg="$i18n('ilock_earned')" bold />
         <TextComponent msg="0" bigmono /> <br />
         <br />
         <br />

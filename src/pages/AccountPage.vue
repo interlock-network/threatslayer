@@ -171,8 +171,4 @@ export default {
     border-radius: 2px;
     -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, .5);
 }
-
-.left-label {
-    margin-right: 1rem;
-}
 </style>
