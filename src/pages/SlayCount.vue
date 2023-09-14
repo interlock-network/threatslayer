@@ -97,7 +97,7 @@ import PageBanner from "./components/PageBanner.vue";
 
 import axios from "axios";
 import { baseUrl } from '../utilities.js';
-import { formatNumber, getFontSizeForTotal, getFontSizeForSmallerNums } from "../utilities";
+import { formatNumber, getFontSizeForTotal, getFontSizeForSmallerNums, setChromeStorage } from "../utilities";
 
 const output = { name: "SlayCount.png", width: 512, height: 512 };
 
@@ -219,15 +219,16 @@ export default {
             };
         },
         async getSlayCountStats() {
-            this.getExtensionState('totalMaliciousURLsVisited');
+            // this value is only stored locally
+            this.useExtensionState('totalMaliciousURLsVisited');
 
             if (this.apiKey?.length && this.username?.length) {
-                this.getUserInfo();
+                this.getStatsFromApi();
             } else {
-                this.getExtensionState('totalURLsVisited');
+                this.useExtensionState('totalURLsVisited');
             }
         },
-        async getExtensionState(key) {
+        async useExtensionState(key) {
             try {
                 chrome.storage.local
                     .get(key, response => {
@@ -244,15 +245,17 @@ export default {
                 console.log('Error getting extension state:', err);
             }
         },
-        async getUserInfo() {
+        async getStatsFromApi() {
             const { apiKey, username } = this;
             const response = await axios.post(`${baseUrl}/user-get`, { key: apiKey, username })
                 .then(res => res)
                 .catch(err => err);
 
-            const { lookups = 0, lookups_total: lookupsTotal = 0 } = response?.data;
+            const { lookups = 0, lookups_total = 0 } = response?.data;
+            const totalURLsVisited = lookups + lookups_total;
 
-            this.rawTotalUrlsVisited = lookups + lookupsTotal;
+            this.rawTotalUrlsVisited = totalURLsVisited;
+            setChromeStorage({ totalURLsVisited });
         }
     }
 }
