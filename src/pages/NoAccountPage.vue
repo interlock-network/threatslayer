@@ -10,8 +10,8 @@
     </WarningTextBox>
     <br />
     <div>
-        <TextComponent :msg="$i18n('ilock_earned')" bold /> <br />
-        <TextComponent msg="0" mono /> <br />
+        <TextComponent :msg="$i18n('ilock_earned')" bold />
+        <TextComponent msg="0" bigmono /> <br />
         <br />
         <br />
         <!-- Tabe of allowlisted URLs -->
