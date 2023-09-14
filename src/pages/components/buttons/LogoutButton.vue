@@ -2,12 +2,9 @@
     <div class="sidebar-item" @click="submitLogout" :class="computedClass" :disabled="loggingOut">
         <img class="sidebar-icon" src="/src/assets/images/logout.png">{{ logoutButtonText }}
     </div>
-    <TextComponent v-for="errorMessage in errorArr" :msg="errorMessage" error />
 </template>
 
 <script>
-import TextComponent from "../TextComponent.vue";
-
 import axios from "axios";
 import { baseUrl, clearChromeStorage, setChromeStorage } from '../../../utilities.js';
 
@@ -18,9 +15,6 @@ export default {
         apiKey: String,
         selectPage: Function,
         username: String
-    },
-    components: {
-        TextComponent
     },
     data() {
         return {
@@ -38,8 +32,6 @@ export default {
 
             if (this.loggingOut) {
                 result = 'Logging Out';
-            } else if (this.errorArr.length) {
-                result = "Try again later";
             } else if (this.clickedOnce) {
                 result = "Are you sure?";
             } else {
@@ -68,40 +60,30 @@ export default {
 
                 if (status >= 400) {
                     console.log(`Logout user error. Code: ${status}, status text: ${statusText}`);
-
-                    this.loggingOut = false;
-                    this.errorArr.push(`Error: ${statusText}`);
-                } else if (!errors.length) {
-                    this.loggingOut = false;
-
-                    const addressClearedFromState = await clearChromeStorage('address');
-                    const emailClearedFromState = await clearChromeStorage('email');
-                    const keyClearedFromState = await clearChromeStorage('apiKey');
-                    const loggedOut = await setChromeStorage({ loggedIn: false });
-                    const usernameClearedFromState = await clearChromeStorage('username');
-
-                    const loggedOutSynched = addressClearedFromState && emailClearedFromState && keyClearedFromState && loggedOut && usernameClearedFromState;
-
-                    if (!loggedOutSynched) {
-                        this.errorArr.push('Error logging in. Please try again later.')
-                    }
-
-                    if (loggedOutSynched) {
-                        this.clickedOnce = false;
-                        this.loggingOut = false;
-
-                        // navigate to user page after logging out
-                        this.selectPage('login');
-                        this.checkState();
-                    } else {
-                        // TODO add error handling?
-                    }
-                } else {
+                } else if (errors.length) {
                     console.log('Logout error:', response.errors)
-
-                    this.errorArr = [response.errors];
-                    this.loggingOut = false;
                 }
+
+                // regardless of whether there are errors, users should be able to logout of the extension
+                // this prevents users from being unable to logout, e.g. because they logged in from a different
+                // installation on another browser and their API key changed
+                this.loggingOut = false;
+
+                const addressClearedFromState = await clearChromeStorage('address');
+                const emailClearedFromState = await clearChromeStorage('email');
+                const keyClearedFromState = await clearChromeStorage('apiKey');
+                const usernameClearedFromState = await clearChromeStorage('username');
+                const loggedOut = await setChromeStorage({ loggedIn: false });
+
+                const loggedOutSynched = addressClearedFromState && emailClearedFromState && keyClearedFromState && loggedOut && usernameClearedFromState;
+
+                if (!loggedOutSynched) {
+                    this.errorArr.push('Error logging in. Please try again later.')
+                }
+
+                // navigate to user page after logging out
+                this.selectPage('login');
+                this.checkState();
             }
         }
     }
