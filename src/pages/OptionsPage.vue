@@ -8,12 +8,6 @@
         <input type="checkbox" id="beta-ai-checkbox" @click="betaClassifier($event)" tabindex="2" />
         <label for="beta-ai-checkboxbox">{{ $i18n('enable_beta_option') }}</label>
     </div>
-    <div class="options-container">
-        <input type="checkbox" id="dev-mode-checkbox" @click="devMode($event)" tabindex="4" />
-        <label for="dev-mode-checkbox">
-            Dev mode (Interlock engineers only)
-        </label>
-    </div>
 </template>
 <script>
 import PageBanner from "./components/PageBanner.vue";

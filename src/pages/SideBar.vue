@@ -56,11 +56,6 @@
                 <img class="sidebar-icon" src="/src/assets/images/account.png">{{ $i18n('account_info') }}
             </div>
         </div>
-        <!-- TODO delete these four buttons -->
-        <button v-if="devMode" class="" @click="_toggleRegistered" style="pointer-events: initial;">Toggle Register</button>
-        <button v-if="devMode" class="" @click="_toggleLoggedIn" style="pointer-events: initial;">Toggle Login</button>
-        <button v-if="devMode" class="" @click="_clearLogin" style="pointer-events: initial;">Clear Login</button>
-        <button v-if="devMode" class="" @click="checkState" style="pointer-events: initial;">Check State</button>
     </div>
 </template>
 <script>
@@ -96,51 +91,6 @@ export default {
         },
         showLogoutButton() {
             return this.loggedIn;
-        }
-    },
-    methods: {
-        // TODO delete this
-        async _clearLogin() {
-            await clearChromeStorage('address');
-            await clearChromeStorage('apiKey');
-            await clearChromeStorage('email');
-            await clearChromeStorage('username');
-            await setChromeStorage({ loggedIn: false });
-            await setChromeStorage({ allowlist: null });
-
-            this.checkState();
-        },
-        // TODO delete this
-        async _toggleLoggedIn() {
-            const loggedIn = !this.loggedIn;
-            const address = this.loggedIn ? null : '5GrpknVvGGrGH3EFuURXeMrWHvbpj3VfER1oX5jFtuGbfzCE';
-            const email = this.loggedIn ? null : 'alice@example.com';
-            const apiKey = this.loggedIn ? null : 'threatslayer-api-key';
-            const username = this.loggedIn ? null : 'alice';
-
-            const addressSet = await setChromeStorage({ address });
-            const emailSet = await setChromeStorage({ email });
-            const keySet = await setChromeStorage({ apiKey });
-            const loggedInSet = await setChromeStorage({ loggedIn });
-            const usernameSet = await setChromeStorage({ username });
-
-            if (emailSet && keySet && loggedInSet && usernameSet && addressSet) this.checkState();
-        },
-        // TODO delete this
-        async _toggleRegistered() {
-            const nextRegistered = !this.registered;
-
-            await setChromeStorage({ registered: nextRegistered });
-            await setChromeStorage({ loggedIn: nextRegistered });
-
-            if (nextRegistered) {
-                await clearChromeStorage('address');
-                await clearChromeStorage('apiKey');
-                await clearChromeStorage('email');
-                await clearChromeStorage('username');
-            }
-
-            this.checkState();
         }
     }
 }
