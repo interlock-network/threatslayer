@@ -10,12 +10,12 @@
     <br />
     <div>
         <TextComponent :msg="$i18n('ilock_available_to_stake')" bold /> <br />
-        <TextComponent msg="0" mono /> <br />
+        <TextComponent msg="0" bigmono /> <br />
         <br />
         <br />
         <TextComponent :msg="$i18n('url_to_stake')" bold /> <br />
         <div v-if="!url.length">
-            <TextComponent :msg="None" mono />
+            <TextComponent :msg="None" bigmono />
         </div>
         <div v-if="url">
             <table>
@@ -24,7 +24,7 @@
                         <ClearAllowlistedURLButton v-bind="{ apiKey, callback: clearUrlToStake, url }" />
                     </td>
                     <td>
-                        <TextComponent :msg="url" mono />
+                        <TextComponent :msg="url" bigmono />
                     </td>
                 </tr>
             </table>
@@ -32,31 +32,10 @@
         <br />
         <br />
         <TextComponent :msg="$i18n('url_staking_status')" bold /> <br />
-        <TextComponent :msg="$i18n(stakeStateMessage)" mono /> <br />
+        <TextComponent :msg="$i18n(stakeStateMessage)" bigmono /> <br />
         <br />
         <br />
         <TextComponent :msg="$i18n('amount_to_stake')" bold /> <br />
-        <br />
-        <br />
-        <!-- TODO change language to staked pages -->
-        <LineOfText v-if="!showClearButton" msg="No allowlisted sites to show" bold />
-        <div v-if="showClearButton" id="url-container">
-            <LineOfText @click="sort" msg="Allowlisted Sites" bold>{{ sortHeader }}</LineOfText>
-            <TextComponent msg="These are URLs you have marked as safe." subinstruction /><br />
-            <TextComponent msg="They will never be blocked by ThreatSlayer." subinstruction />
-            <!-- <table style="margin-left: -7px;">
-                <tr v-for="url in stakedUrlList" style="margin-bottom: 1rem;">
-                    <td class="icon-column">
-                        <img @click="clearUrl(url)" class="sidebar-icon" style="padding-left: 1px; padding-bottom: 3px;"
-                            src="/src/assets/images/x-icon.png">
-                    </td>
-                    <td class="url-column">
-                        <TextComponent :msg="url" mono />
-                    </td>
-                </tr>
-            </table> -->
-            <br />
-        </div>
     </div>
 </template>
 <script>
@@ -152,7 +131,7 @@ export default {
         }
     },
     methods: {
-        clearUrlToStake() {
+        clearUrlToStake(_url) {
             this.url = '';
             this.stakeState = null;
             this.stakeStateMessage = 'no_url_selected';
