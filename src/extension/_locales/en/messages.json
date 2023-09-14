@@ -111,6 +111,10 @@
         "message": "Don't have a wallet?",
         "description": "Instruction for creating a wallet address."
     },
+    "done": {
+        "message": "Done",
+        "description": "Generic button text."
+    },
     "email": {
         "message": "Email",
         "description": "Section header for the Account page."
@@ -156,7 +160,7 @@
         "description": "Instruction for changing password."
     },
     "enter_password_to_delete_account": {
-        "message": "Enter password to permanently delete account",
+        "message": "Enter password to delete account",
         "description": "Instruction for deleting account."
     },
     "enter_password_to_update_wallet_address": {
@@ -278,10 +282,6 @@
     "password_show": {
         "message": "Show Password",
         "description": "Instruction for toggling password visibility."
-    },
-    "popup_title": {
-        "message": "ThreatSlayer Active.",
-        "description": "The title used for the popup when the extension icon is pressed."
     },
     "powered_by_interlock": {
         "message": "Powered by Interlock",
@@ -414,6 +414,10 @@
     "users_referred": {
         "message": "Users Referred",
         "description": "Section header for the Account page."
+    },
+    "view_wallet_info": {
+        "message": "View Wallet Info",
+        "description": "Button text for viewing wallet information."
     },
     "waiting": {
         "message": "Waiting...",
