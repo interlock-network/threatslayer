@@ -92,7 +92,7 @@ export default {
 
             this.allowlist = allowlist;
         },
-        async updateAllowlist() {
+        async updateAllowlist(url) {
             const allowlist = await getChromeStorage('allowlist');
             const updatedAllowlist = allowlist.filter(allowlistedUrl => allowlistedUrl !== url);
 
@@ -110,8 +110,9 @@ export default {
 <style>
 #allowlist-table {
     display: block;
-    height: 8rem;
+    height: 14rem;
     margin-left: -7px;
+    margin-top: 1rem;
     overflow-y: auto;
 }
 

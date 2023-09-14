@@ -33,7 +33,7 @@ export default {
                 setChromeStorage({ urlToStake: null });
             }
 
-            this.callback();
+            this.callback(url);
         },
     }
 };
