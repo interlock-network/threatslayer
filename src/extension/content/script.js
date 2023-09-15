@@ -14,25 +14,19 @@
  * @param {} response - the response from the API, an object with an attribute of `malicious`
  */
 
-// TODO clean up commented cruft here
-// function handleAPIResponse() {
 function handleAPIResponse(response) {
     let { href } = window.location;
 
-    chrome.runtime.sendMessage({
-        action: 'displayWarningBanner',
-        url: href
-    });
-
-    // if (response === null) {
-    //     console.log(`API Unresponsive. Cannot verify safety of URL ${url} .`);
-    // } else if (response.malicious === false) {
-    //     console.log(`URL ${url} not classified as malicious.`);
-    // } else if (response.malicious === true) {
-    //     chrome.runtime.sendMessage({
-    //         action: 'displayWarningBanner',
-    //         url: url
-    //     });
+    if (response === null) {
+        console.log(`API Unresponsive. Cannot verify safety of URL ${url} .`);
+    } else if (response.malicious === false) {
+        console.log(`URL ${url} not classified as malicious.`);
+    } else if (response.malicious === true) {
+        chrome.runtime.sendMessage({
+            action: 'displayWarningBanner',
+            url: href
+        });
+    }
 }
 
 /**
