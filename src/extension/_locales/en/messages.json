@@ -463,9 +463,21 @@
         "message": "You must register before you can stake on a URL.",
         "description": "The text used in a warning box."
     },
+    "warning_staking_not_available": {
+        "message": "Security staking not available until October.",
+        "description": "The text used in a warning box."
+    },
     "warning_text": {
         "message": "Close the tab unless you know this site is safe!",
         "description": "The text used in the warning banner."
+    },
+    "warning_username_contains_illegal_characters": {
+        "message": "Username contains illegal characters: !, #, $, etc.",
+        "description": "The text used in a warning box."
+    },
+    "warning_username_too_long": {
+        "message": "Username too long: Max length is 16 characters.",
+        "description": "The text used in a warning box."
     },
     "what_does_threat_slayer_collect": {
         "message": "What data does ThreatSlayer Collect?",
