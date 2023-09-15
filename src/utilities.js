@@ -1,5 +1,14 @@
 export const baseUrl = 'http://159.89.252.13';
 
+export const usernameErrorMessages = {
+    illegalChars: function (_chars) {
+        // TODO uncomment when we upgrade translation
+        // const chars = chars.join(', ');
+        return 'warning_username_contains_illegal_characters';
+    },
+    maxLength: 'warning_username_too_long'
+};
+
 /**
  * This convenience function perforns basic email validation
  * @param {string} email - an email string

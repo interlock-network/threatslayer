@@ -7,7 +7,7 @@
     <br />
     <br />
     <!-- username field -->
-    <input class="input-field-text" id="login-username-or-email" v-model.trim="usernameOrEmail"
+    <input class="input-field-text" @input="validateUsername" id="login-username-or-email" v-model.trim="usernameOrEmail"
         :placeholder="$i18n('username_or_password')" tabindex="2" :style="usernameInputStyle" />
     <TextComponent :msg="$i18n(usernameErrorMessage)" error v-if="usernameErrorMessage.length" />
     <br />
@@ -32,14 +32,14 @@
 </template>
 <script>
 import { debounce } from 'debounce';
-import { findEmailError, findNonAlphanumericChars, setChromeStorage } from "../utilities";
+import { findEmailError, findNonAlphanumericChars, usernameErrorMessages } from "../utilities";
 
-import WarningTextBox from "./components/WarningTextBox.vue";
 import ForgotPasswordButton from "./components/buttons/ForgotPasswordButton.vue";
 import LoginButton from "./components/buttons/LoginButton.vue";
 import PageBanner from "./components/PageBanner.vue";
 import RegisterLine from './components/RegisterLine.vue';
 import TextComponent from "./components/TextComponent.vue";
+import WarningTextBox from "./components/WarningTextBox.vue";
 
 const errorStyle = {
     border: "3px solid red",
@@ -105,20 +105,15 @@ export default {
                 return true;
             }
 
-            const errorMessages = {
-                illegalChars: function (chars) { return `Username contains illegal characters: ${chars.join(', ')}` },
-                maxLength: `Username too long: Max length is ${maxPasswordLength} characters`
-            };
-
-            const allowedCharsRegex = /^[a-zA-Z0-9_]+$/;
+            const allowedCharsRegex = /^[@.a-zA-Z0-9_]+$/;
             const containsIllegalChars = !allowedCharsRegex.test(name);
 
             if (name.length > maxPasswordLength) {
-                this.usernameErrorMessage = errorMessages.maxLength;
+                this.usernameErrorMessage = usernameErrorMessages.maxLength;
             } else if (containsIllegalChars) {
                 const illegalChars = findNonAlphanumericChars(name);
 
-                this.usernameErrorMessage = errorMessages.illegalChars(illegalChars);
+                this.usernameErrorMessage = usernameErrorMessages.illegalChars(illegalChars);
             } else {
                 this.clearUsernameErrors();
             }

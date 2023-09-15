@@ -51,9 +51,9 @@
         v-bind="{ address, checkState, selectPage, email, password, referrer, termsOfService, unitedStates, username }" />
 </template>
 <script>
-import { decodeAddress, encodeAddress } from '@polkadot/keyring';
 import { debounce } from 'debounce';
-import { findEmailError, findNonAlphanumericChars } from "../utilities";
+import { decodeAddress, encodeAddress } from '@polkadot/keyring';
+import { findEmailError, findNonAlphanumericChars, usernameErrorMessages } from "../utilities";
 import { hexToU8a, isHex } from '@polkadot/util';
 
 import WarningTextBox from "./components/WarningTextBox.vue";
@@ -211,21 +211,16 @@ export default {
                 return true;
             }
 
-            const errorMessages = {
-                illegalChars: function (chars) { return `Username contains illegal characters: ${chars.join(', ')}` },
-                maxLength: 'error_username_too_long'
-            };
-
             // TODO make an array of errors?
             const allowedCharsRegex = /^[a-zA-Z0-9_]+$/;
             const containsIllegalChars = !allowedCharsRegex.test(name);
 
             if (name.length > maxUsernameLength) {
-                this.usernameErrorMessage = errorMessages.maxLength;
+                this.usernameErrorMessage = usernameErrorMessages.maxLength;
             } else if (containsIllegalChars) {
                 const illegalChars = findNonAlphanumericChars(name);
 
-                this.usernameErrorMessage = errorMessages.illegalChars(illegalChars);
+                this.usernameErrorMessage = usernameErrorMessages.illegalChars(illegalChars);
             } else {
                 this.clearUsernameErrors();
             }
