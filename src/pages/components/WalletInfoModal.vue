@@ -5,18 +5,25 @@
     </button>
     <div v-if="active" id="modal-overlay">
         <div id="modal-container" :style="active ? 'bottom: 40%' : 'display: none'">
-            <!-- initial view wallet button -->
-            <TextComponent :msg="$i18n('wallet_address')" bold /> <br />
+            <!-- List of existing wallet addresses -->
+            <WalletList v-bind="{ azeroAddress, changeAddressSelected, pdotAddress }" />
+            <br />
             <!-- prompt to add wallet address if there is none -->
             <div v-if="showAddressInput">
-                <!-- input field with prompt for new address -->
+                <!-- input field with prompt for new Aleph Zero address -->
                 <TextComponent :msg="$i18n(updateAddressMsg)" subinstruction />
                 <button v-if="changeAddressSelected" id="cancel-change-address" @click="selectChangeAddress(false)">
                     {{ $i18n('cancel') }}
                 </button>
-                <input @input="validateAddress" v-model.trim="newAddress" :style="addressInputStyle"
-                    style="margin-top: 0.5rem;" :placeholder="$i18n('enter_wallet_address')" tabindex="2" />
-                <TextComponent v-if="newAddressErrorMessage.length" :msg="newAddressErrorMessage" error />
+                <input @input="validateAddress($event, 'newAzeroAddressErrorMessage')" v-model.trim="newAzeroAddress"
+                    :style="addressInputStyle" style="margin-top: 0.5rem;" :placeholder="$i18n('enter_wallet_address')"
+                    tabindex="2" />
+                <TextComponent v-if="newAzeroAddressErrorMessage.length" :msg="newAzeroAddressErrorMessage" error />
+                <!-- TODO update translation here -->
+                <input @input="validateAddress($event, 'newPdotAddressErrorMessage')" v-model.trim="newPdotAddress"
+                    :style="addressInputStyle" style="margin-top: 0.5rem;"
+                    placeholder="Or paste your Moonbeam-compatible wallet here" tabindex="4" />
+                <TextComponent v-if="newPdotAddressErrorMessage.length" :msg="newPdotAddressErrorMessage" error />
                 <!-- password field with show/hide button -->
                 <div v-if="active">
                     <TextComponent v-if="showAddressChangeWarning" subinstruction
@@ -24,9 +31,8 @@
                 </div>
                 <!-- button to update address -->
                 <UpdateAddressButton
-                    v-bind="{ apiKey, checkState, active, newAddress, password, toggleClickedOnce, username }" />
+                    v-bind="{ apiKey, checkState, active, newAzeroAddress, newPdotAddress, password, toggleClickedOnce, username }" />
             </div>
-            <TextComponent v-if="showAddress" :msg="address" mono /><br />
             <button v-if="!showAddressInput" @click="selectChangeAddress(true)" id="update-address-button"
                 class="modal-button">
                 {{ $i18n('update_wallet_address') }}
@@ -42,20 +48,25 @@
 <script>
 import TextComponent from "./TextComponent.vue";
 import UpdateAddressButton from "./buttons/UpdateAddressButton.vue";
+import WalletList from "./WalletList.vue";
+
+import { debounce } from 'debounce';
 
 export default {
     name: "WalletInfoModal",
     props: {
-        address: String,
         apiKey: String,
+        azeroAddress: String,
         checkState: Function,
         fadeAccountPage: Function,
+        pdotAddress: String,
         selectPage: Function,
         username: String
     },
     components: {
         TextComponent,
-        UpdateAddressButton
+        UpdateAddressButton,
+        WalletList
     },
     data() {
         return {
@@ -64,8 +75,10 @@ export default {
             confirm: false,
             deleting: false,
             errorArr: [],
-            newAddress: '',
-            newAddressErrorMessage: '',
+            newAzeroAddress: '',
+            newAzeroAddressErrorMessage: '',
+            newPdotAddress: '',
+            newPdotAddressErrorMessage: '',
             password: '',
             passwordInputType: 'password',
         }
@@ -87,14 +100,14 @@ export default {
 
             return result;
         },
-        showAddress() {
-            return this.address?.length && !this.changeAddressSelected;
+        showAddress(address) {
+            return address?.length && !this.changeAddressSelected;
         },
         showAddressInput() {
-            return !this.address?.length || this.changeAddressSelected;
+            return (!this.azeroAddress?.length && !this.pdotAddress?.length) || this.changeAddressSelected;
         },
         showAddressChangeWarning() {
-            return this.address?.length;
+            return this.azeroAddress?.length;
         },
         updateAddressMsg() {
             return !this.address?.length ? 'warning_must_add_wallet_address' : 'enter_new_wallet_address';
@@ -106,6 +119,19 @@ export default {
             this.active = false;
             this.selectChangeAddress(false);
         },
+        legitPolkadot(address) {
+            try {
+                encodeAddress(
+                    isHex(address)
+                        ? hexToU8a(address)
+                        : decodeAddress(address)
+                );
+
+                return true;
+            } catch (_error) {
+                return false;
+            }
+        },
         openWalletInfoModal() {
             this.fadeAccountPage(true);
             this.active = true;
@@ -116,6 +142,28 @@ export default {
         toggleClickedOnce() {
             this.active = !this.active;
         },
+        validateAddress: debounce(function (event, keyName) {
+            const address = event?.target?.value;
+            this[keyName] = '';
+
+            if (!address || !address.length) {
+                this[keyName] = '';
+            }
+
+            const addressIsValid = this.legitPolkadot(address);
+
+            // happy case
+            if (addressIsValid) {
+                this[keyName] = '';
+            } else if (!address || !address.length) {
+                this[keyName] = '';
+            } else {
+                this[keyName] = $i18n('error_registering_wallet_address');
+            }
+        }, 250),
+        togglePasswordInputType() {
+            this.passwordInputType = this.passwordInputType === 'password' ? 'text' : 'password';
+        }
     }
 };
 </script>
