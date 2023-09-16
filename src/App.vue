@@ -13,7 +13,7 @@
         <FAQPage v-if="currentPage === 'faq'" />
         <OptionsPage v-if="currentPage === 'options'" />
         <AccountPage v-if="currentPage === 'account'"
-          v-bind="{ address, apiKey, checkState, email, selectPage, username }" />
+          v-bind="{ azeroAddress, apiKey, checkState, email, pdotAddress, selectPage, username }" />
         <NoAccountPage v-if="currentPage === 'noAccount'" v-bind="{ checkState, selectPage }" />
       </div>
     </div>
@@ -54,12 +54,13 @@ export default {
   },
   data() {
     return {
-      address: null,
       apiKey: null,
+      azeroAddress: null,
       currentPage: 'account',
       devMode: false,
       email: null,
       loggedIn: false,
+      pdotAddress: null,
       registered: false,
       urlToStake: null,
       username: null
@@ -70,12 +71,13 @@ export default {
   },
   methods: {
     async checkState() {
-      const address = await getChromeStorage('address'); // optional, may be missing
       const apiKey = await getChromeStorage('apiKey');
+      const azeroAddress = await getChromeStorage('azeroAddress'); // optional, may be missing
       const devMode = await getChromeStorage('devMode');
       const email = await getChromeStorage('email');
-      const loggedIn = await getChromeStorage('loggedIn');
       const isRegistered = await getChromeStorage('registered');
+      const loggedIn = await getChromeStorage('loggedIn');
+      const pdotAddress = await getChromeStorage('pdotAddress'); // optional, may be missing
       const urlToStake = await getChromeStorage('urlToStake');
       const username = await getChromeStorage('username');
 
@@ -89,9 +91,10 @@ export default {
       } else if (loggedIn === false) {
         this.selectPage('login');
       } else if (apiKey && email && username) {
-        this.address = address;
         this.apiKey = apiKey;
+        this.azeroAddress = azeroAddress;
         this.email = email;
+        this.pdotAddress = pdotAddress;
         this.username = username;
 
         if (urlToStake) {
@@ -220,6 +223,13 @@ input {
 #top-container {
   margin: auto;
   width: 765px;
+}
+
+
+#url-container {
+  min-height: 25vh;
+  overflow-y: scroll;
+  margin-bottom: 4rem;
 }
 
 .login-button {
