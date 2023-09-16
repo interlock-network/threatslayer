@@ -1,14 +1,15 @@
 <template>
     <!-- TODO update translation here -->
-    <div v-if="azeroAddress?.length && changeAddressSelected">
+    <div v-if="azeroAddress?.length && !changeAddressSelected">
         <TextComponent msg="Aleph Zero-compatible Wallet Address" bold /> <br />
         <TextComponent :msg="azeroAddress" mono /><br />
+        <br />
     </div>
-    <br />
     <!-- TODO update translation here -->
-    <div v-if="pdotAddress?.length && changeAddressSelected">
-        <TextComponent msg="Moonbeam-compatible Wallet Address" bold /> <br />
-        <TextComponent v-if="pdotAddress?.length && changeAddressSelected" :msg="pdotAddress" mono /><br />
+    <div v-if="pdotAddress?.length && !changeAddressSelected">
+        <TextComponent msg="Moonbeam Wallet Address" bold /> <br />
+        <TextComponent :msg="pdotAddress" mono /><br />
+        <br />
     </div>
 </template>
 
