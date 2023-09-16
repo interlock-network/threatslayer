@@ -29,13 +29,16 @@
     <input class="password-input" :type="passwordInputType" @input="validateReenteredPassword" :style="passwordInputStyle"
         v-model.trim="reenteredPassword" :placeholder="$i18n('enter_password_again')" tabindex="10" required />
     <TextComponent v-if="reenteredPasswordErrorMessage.length" :msg="$i18n(reenteredPasswordErrorMessage)" error />
-    <!-- wallet address (optional) -->
-    <!-- 5GrpknVvGGrGH3EFuURXeMrWHvbpj3VfER1oX5jFtuGbfzCE -->
-    <input id="address-input" @input="validateAddress" v-model.trim="address" :style="addressInputStyle"
-        :placeholder="$i18n('enter_wallet_address_optional')" tabindex="11" />
-    <TextComponent v-if="addressErrorMessage.length" :msg="$i18n(addressErrorMessage)" error />
+    <!-- AZero wallet address (optional) -->
+    <input id="address-input" @input="validateAddress($event, 'azeroAddressErrorMessage')" v-model.trim="azeroWalletId"
+        :style="addressInputStyleAzero" :placeholder="$i18n('enter_wallet_address_optional')" tabindex="11" />
+    <TextComponent v-if="azeroAddressErrorMessage.length" :msg="$i18n(azeroAddressErrorMessage)" error />
+    <!-- Polkadot wallet address (optional) -->
+    <input id="address-input" @input="validateAddress($event, 'pdotAddressErrorMessage')" v-model.trim="pdotWalletId"
+        :style="addressInputStylePdot" placeholder="Optional: Paste your Moonbeam wallet here" tabindex="12" />
+    <TextComponent v-if="pdotAddressErrorMessage.length" :msg="$i18n(pdotAddressErrorMessage)" error />
     <!-- referrer (optional) -->
-    <input v-model.trim="referrer" tabindex="12" :placeholder="$i18n('enter_referrer_name')" />
+    <input v-model.trim="referrer" tabindex="13" :placeholder="$i18n('enter_referrer_name')" />
     <div class="checkbox-container" style="margin-top: 0.8rem;" @click="focusNextCheckbox">
         <input id="first-box" type="checkbox" v-model="termsOfService" tabindex="14">
         <label for="first-box">{{ $i18n('agree_to_our') }}<a href="https://interlock.network" target="_blank">
@@ -48,7 +51,7 @@
         </label>
     </div>
     <CreateUserButton style="margin-top: 1.1rem;" tabindex="26"
-        v-bind="{ address, checkState, selectPage, email, password, referrer, termsOfService, unitedStates, username }" />
+        v-bind="{ azeroWalletId, checkState, selectPage, email, password, pdotWalletId, referrer, termsOfService, unitedStates, username }" />
 </template>
 <script>
 import { debounce } from 'debounce';
@@ -88,8 +91,8 @@ export default {
     },
     data() {
         return {
-            address: '',
-            addressErrorMessage: '',
+            azeroWalletId: '',
+            azeroAddressErrorMessage: '',
             connectAccountSelected: true,
             createAccountSelected: false,
             email: '',
@@ -97,6 +100,8 @@ export default {
             password: '',
             passwordErrorMessage: '',
             passwordInputType: 'password',
+            pdotWalletId: '',
+            pdotAddressErrorMessage: '',
             reenteredPassword: '',
             reenteredPasswordErrorMessage: '',
             referrer: '',
@@ -112,8 +117,11 @@ export default {
         firstInput.focus();
     },
     computed: {
-        addressInputStyle() {
-            return this.addressErrorMessage?.length ? errorStyle : {};
+        addressInputStyleAzero() {
+            return this.azeroAddressErrorMessage?.length ? errorStyle : {};
+        },
+        addressInputStylePdot() {
+            return this.pdotAddressErrorMessage?.length ? errorStyle : {};
         },
         emailInputStyle() {
             return this.emailErrorMessage?.length ? errorStyle : {};
@@ -154,23 +162,23 @@ export default {
         togglePasswordInputType() {
             this.passwordInputType = this.passwordInputType === 'password' ? 'text' : 'password';
         },
-        validateAddress: debounce(function (event) {
+        validateAddress: debounce(function (event, keyName) {
             const address = event?.target?.value;
-            this.addressErrorMessage = '';
+            this[keyName] = '';
 
             if (!address || !address.length) {
-                this.addressErrorMessage = '';
+                this[keyName] = '';
             }
 
             const addressIsValid = this.legitPolkadot(address);
 
             // happy case
             if (addressIsValid) {
-                this.addressErrorMessage = '';
+                this[keyName] = '';
             } else if (!address || !address.length) {
-                this.addressErrorMessage = '';
+                this[keyName] = '';
             } else {
-                this.addressErrorMessage = 'error_registering_wallet_address';
+                this[keyName] = 'error_registering_wallet_address';
             }
         }, 250),
         validateEmail: debounce(function () {
