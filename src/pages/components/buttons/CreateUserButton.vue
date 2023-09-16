@@ -16,10 +16,11 @@ import { baseUrl, setChromeStorage } from '../../../utilities.js';
 export default {
     name: "CreateUserButton",
     props: {
-        address: String,
+        azeroWalletId: String,
         checkState: Function,
         email: String,
         password: String,
+        pdotWalletId: String,
         referrer: String,
         selectPage: Function,
         termsOfService: Boolean,
@@ -73,11 +74,11 @@ export default {
         async submitCreateUser() {
             this.errorArr = [];
 
-            const { address = '', email, password, referrer, termsOfService: terms_of_service, unitedStates: united_states, username } = this;
+            const { azeroWalletId: azero_wallet_id = '', email, password, pdotWalletId: pdot_wallet_id = '', referrer, termsOfService: terms_of_service, unitedStates: united_states, username } = this;
             const key = 'threatslayer-api-key';
             this.submitting = true;
 
-            const response = await axios.post(`${baseUrl}/user-create`, { address, email, key, password, referrer, terms_of_service, united_states, username })
+            const response = await axios.post(`${baseUrl}/user-create`, { azero_wallet_id, email, key, password, pdot_wallet_id, referrer, terms_of_service, united_states, username })
                 .then(res => res)
                 .catch(err => err);
 
@@ -98,15 +99,16 @@ export default {
                 this.submitted = true;
                 this.submitting = false;
 
-                // set API key with user's unique key
+                // set user's values in Chrome extension state unique key
                 const loggedInSynched = await setChromeStorage({ loggedIn: true });
                 const registeredSynched = await setChromeStorage({ registered: true });
-                const setAddress = await setChromeStorage({ address });
+                const setAzeroAddress = await setChromeStorage({ azeroAddress: azero_wallet_id });
+                const setPdotAddress = await setChromeStorage({ pdotAddress: pdot_wallet_id });
                 const setApiKey = await setChromeStorage({ apiKey: response.data.key });
                 const setEmail = await setChromeStorage({ email });
                 const setUsername = await setChromeStorage({ username });
 
-                if (loggedInSynched & registeredSynched && setAddress && setApiKey && setEmail && setUsername) {
+                if (loggedInSynched & registeredSynched && setAzeroAddress && setApiKey && setEmail && setPdotAddress && setUsername) {
                     this.selectPage('faq');
                     this.checkState();
                 } else {
