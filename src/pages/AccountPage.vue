@@ -12,7 +12,8 @@
         <br />
     </div>
     <!-- view wallet information modal -->
-    <WalletInfoModal v-bind="{ address, apiKey, checkState, fadeAccountPage, selectPage, username }" style="opacity: 1" />
+    <WalletInfoModal v-bind="{ azeroAddress, apiKey, checkState, fadeAccountPage, pdotAddress, selectPage, username }"
+        style="opacity: 1" />
     <div :style="computedStyle">
         <br />
         <!-- Number of users referred -->
@@ -34,14 +35,6 @@ import WalletInfoModal from "./components/WalletInfoModal.vue";
 
 import axios from "axios";
 import { baseUrl } from '../utilities.js';
-import { decodeAddress, encodeAddress } from '@polkadot/keyring';
-import { debounce } from 'debounce';
-import { hexToU8a, isHex } from '@polkadot/util';
-
-const errorStyle = {
-    border: '3px solid red',
-    color: 'red'
-};
 
 export default {
     name: 'AccountPage',
@@ -54,10 +47,11 @@ export default {
         WalletInfoModal
     },
     props: {
-        address: String,
+        azeroAddress: String,
         apiKey: String,
         checkState: Function,
         email: String,
+        pdotAddress: String,
         selectPage: Function,
         username: String
     },
@@ -77,9 +71,6 @@ export default {
         this.getStatsFromApi();
     },
     computed: {
-        addressInputStyle() {
-            return this.newAddressErrorMessage?.length ? errorStyle : {};
-        },
         computedStyle() {
             return this.pageFaded ? { 'opacity': '5%', 'pointer-events': 'none' } : {};
         }
@@ -101,42 +92,7 @@ export default {
             this.referred = referred;
             this.tokensEarned = tokens_earned;
             this.tokensEarnedTotal = tokens_earned_total;
-        },
-        legitPolkadot(address) {
-            try {
-                encodeAddress(
-                    isHex(address)
-                        ? hexToU8a(address)
-                        : decodeAddress(address)
-                );
-
-                return true;
-            } catch (_error) {
-                return false;
-            }
-        },
-        togglePasswordInputType() {
-            this.passwordInputType = this.passwordInputType === 'password' ? 'text' : 'password';
-        },
-        validateAddress: debounce(function (event) {
-            const address = event?.target?.value;
-            this.newAddressErrorMessage = '';
-
-            if (!address || !address.length) {
-                this.newAddressErrorMessage = '';
-            }
-
-            const addressIsValid = this.legitPolkadot(address);
-
-            // happy case
-            if (addressIsValid) {
-                this.newAddressErrorMessage = '';
-            } else if (!address || !address.length) {
-                this.newAddressErrorMessage = '';
-            } else {
-                this.newAddressErrorMessage = $i18n('error_registering_wallet_address');
-            }
-        }, 250)
+        }
     }
 }
 </script>
@@ -148,12 +104,6 @@ export default {
     color: red;
     float: right;
     font-size: 1rem;
-}
-
-#url-container {
-    min-height: 25vh;
-    overflow-y: scroll;
-    margin-bottom: 4rem;
 }
 
 #url-container::-webkit-scrollbar {
