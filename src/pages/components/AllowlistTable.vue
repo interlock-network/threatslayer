@@ -133,12 +133,6 @@ export default {
     padding-left: 5px;
 }
 
-#url-container {
-    min-height: 25vh;
-    overflow-y: scroll;
-    margin-bottom: 4rem;
-}
-
 #url-container::-webkit-scrollbar {
     -webkit-appearance: none;
     width: 4px;
