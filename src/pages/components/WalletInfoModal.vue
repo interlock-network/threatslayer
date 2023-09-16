@@ -5,41 +5,43 @@
     </button>
     <div v-if="active" id="modal-overlay">
         <div id="modal-container" :style="active ? 'bottom: 40%' : 'display: none'">
-            <!-- List of existing wallet addresses -->
+            <!-- List of existing wallet addresses, if any -->
             <WalletList v-bind="{ azeroAddress, changeAddressSelected, pdotAddress }" />
-            <br />
             <!-- prompt to add wallet address if there is none -->
             <div v-if="showAddressInput">
                 <!-- input field with prompt for new Aleph Zero address -->
                 <TextComponent :msg="$i18n(updateAddressMsg)" subinstruction />
-                <button v-if="changeAddressSelected" id="cancel-change-address" @click="selectChangeAddress(false)">
-                    {{ $i18n('cancel') }}
-                </button>
                 <input @input="validateAddress($event, 'newAzeroAddressErrorMessage')" v-model.trim="newAzeroAddress"
                     :style="addressInputStyle" style="margin-top: 0.5rem;" :placeholder="$i18n('enter_wallet_address')"
                     tabindex="2" />
-                <TextComponent v-if="newAzeroAddressErrorMessage.length" :msg="newAzeroAddressErrorMessage" error />
+                <TextComponent v-if="newAzeroAddressErrorMessage.length" :msg="$i18n(newAzeroAddressErrorMessage)" error />
                 <!-- TODO update translation here -->
                 <input @input="validateAddress($event, 'newPdotAddressErrorMessage')" v-model.trim="newPdotAddress"
                     :style="addressInputStyle" style="margin-top: 0.5rem;"
-                    placeholder="Or paste your Moonbeam-compatible wallet here" tabindex="4" />
-                <TextComponent v-if="newPdotAddressErrorMessage.length" :msg="newPdotAddressErrorMessage" error />
+                    placeholder="Or paste your Moonbeam wallet address here" tabindex="4" />
+                <TextComponent v-if="newPdotAddressErrorMessage.length" :msg="$i18n(newPdotAddressErrorMessage)" error />
                 <!-- password field with show/hide button -->
+                <input id="login-password" class="input-field-text password-input" :type="passwordInputType"
+                    v-model.trim="password" placeholder="Password" tabindex="6" :style="passwordInputStyle" />
+                <button @click="togglePasswordInputType" class="small-button" id="show-toggle-button" tabindex="8">
+                    {{ passwordInputType === 'password' ? $i18n('password_show') : $i18n('password_hide') }}
+                </button>
                 <div v-if="active">
-                    <TextComponent v-if="showAddressChangeWarning" subinstruction
-                        :msg="$i18n('warning_changing_wallet_address')" />
+                    <br />
+                    <WarningTextBox v-if="showAddressChangeWarning" :msg="$i18n('warning_changing_wallet_address')" />
                 </div>
                 <!-- button to update address -->
                 <UpdateAddressButton
                     v-bind="{ apiKey, checkState, active, newAzeroAddress, newPdotAddress, password, toggleClickedOnce, username }" />
             </div>
-            <button v-if="!showAddressInput" @click="selectChangeAddress(true)" id="update-address-button"
-                class="modal-button">
-                {{ $i18n('update_wallet_address') }}
-            </button><br />
-            <br />
+            <div v-if="!showAddressInput">
+                <button @click="selectChangeAddress(true)" id="update-address-button" class="modal-button">
+                    {{ $i18n('update_wallet_address') }}
+                </button><br />
+                <br />
+            </div>
             <button @click="doneAction" id="done-button" class="modal-button">
-                {{ $i18n('done') }}
+                {{ $i18n(cancelDoneButtonText) }}
             </button>
         </div>
     </div>
@@ -49,8 +51,11 @@
 import TextComponent from "./TextComponent.vue";
 import UpdateAddressButton from "./buttons/UpdateAddressButton.vue";
 import WalletList from "./WalletList.vue";
+import WarningTextBox from "./WarningTextBox.vue";
 
 import { debounce } from 'debounce';
+import { decodeAddress, encodeAddress } from '@polkadot/keyring';
+import { hexToU8a, isHex } from '@polkadot/util';
 
 export default {
     name: "WalletInfoModal",
@@ -66,7 +71,8 @@ export default {
     components: {
         TextComponent,
         UpdateAddressButton,
-        WalletList
+        WalletList,
+        WarningTextBox
     },
     data() {
         return {
@@ -84,6 +90,9 @@ export default {
         }
     },
     computed: {
+        cancelDoneButtonText() {
+            return this.changeAddressSelected ? 'cancel' : 'done';
+        },
         computedClass() {
             return this.errorArr.length || this.active ? 'submit-button-error' : '';
         },
@@ -142,23 +151,23 @@ export default {
         toggleClickedOnce() {
             this.active = !this.active;
         },
-        validateAddress: debounce(function (event, keyName) {
+        validateAddress: debounce(function (event, errorKeyName) {
             const address = event?.target?.value;
-            this[keyName] = '';
+            this[errorKeyName] = '';
 
             if (!address || !address.length) {
-                this[keyName] = '';
+                this[errorKeyName] = '';
             }
 
             const addressIsValid = this.legitPolkadot(address);
 
             // happy case
             if (addressIsValid) {
-                this[keyName] = '';
+                this[errorKeyName] = '';
             } else if (!address || !address.length) {
-                this[keyName] = '';
+                this[errorKeyName] = '';
             } else {
-                this[keyName] = $i18n('error_registering_wallet_address');
+                this[errorKeyName] = 'error_registering_wallet_address';
             }
         }, 250),
         togglePasswordInputType() {
@@ -230,6 +239,17 @@ export default {
     display: flex;
     justify-content: center;
     background-color: #000000da;
+}
+
+#update-address-button {
+    background-color: #0F0818;
+    border: none;
+    color: #9000CB;
+    font-size: 1rem;
+    height: 2rem;
+    margin-bottom: 2rem;
+    padding: 0.5rem 0.75rem;
+    width: 400px;
 }
 
 #view-wallet-info-button {
