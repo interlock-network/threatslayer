@@ -69,13 +69,15 @@ export default {
                 // installation on another browser and their API key changed
                 this.loggingOut = false;
 
-                const addressClearedFromState = await clearChromeStorage('address');
+                const azeroAddressClearedFromState = await clearChromeStorage('azeroAddress');
                 const emailClearedFromState = await clearChromeStorage('email');
                 const keyClearedFromState = await clearChromeStorage('apiKey');
+                const pdotAddressClearedFromState = await clearChromeStorage('pdotAddress');
                 const usernameClearedFromState = await clearChromeStorage('username');
+                // this happens last
                 const loggedOut = await setChromeStorage({ loggedIn: false });
 
-                const loggedOutSynched = addressClearedFromState && emailClearedFromState && keyClearedFromState && loggedOut && usernameClearedFromState;
+                const loggedOutSynched = azeroAddressClearedFromState && emailClearedFromState && keyClearedFromState && loggedOut && pdotAddressClearedFromState && usernameClearedFromState;
 
                 if (!loggedOutSynched) {
                     this.errorArr.push('Error logging in. Please try again later.')
