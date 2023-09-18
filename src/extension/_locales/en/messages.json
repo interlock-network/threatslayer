@@ -409,7 +409,7 @@
     },
     "username_or_password": {
         "message": "Username or email",
-        "description": "Instruction on the login page."
+        "description": "TODO fix this key"
     },
     "users_referred": {
         "message": "Users Referred",
@@ -434,6 +434,14 @@
     "warning_account_will_be_deleted": {
         "message": "Your account will be deleted forever.",
         "description": "Warning text for deleting user account."
+    },
+    "warning_address_not_azero": {
+        "message": "This is not an Aleph Zero address.",
+        "description": "Warning text for user wallet type."
+    },
+    "warning_address_not_moonbeam": {
+        "message": "This is not a Moonbeam address.",
+        "description": "Warning text for user wallet type."
     },
     "warning_changing_wallet_address": {
         "message": "Warning: Changing your existing wallet address may delay access to previously deposited $$ILOCK.",
