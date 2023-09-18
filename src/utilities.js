@@ -178,3 +178,33 @@ export function clearChromeStorage(key) {
         return false;
     }
 }
+
+/**
+ * This convenience function validates whether a wallet address string is Aleph Zero
+ * @param {string} address - a wallet address string
+ */
+export function validateAzero(address = '') {
+    let result = true;
+    const azeroRegex = /^5.*/;
+
+    if (address.length && !azeroRegex.test(address)) {
+        result = false;
+    }
+
+    return result;
+}
+
+/**
+ * This convenience function validates whether a wallet address string is Moonbeam
+ * @param {string} address - a wallet address string
+ */
+export function validateMoonbeam(address = '') {
+    let result = true;
+    const moonbeamRegex = /^Vd.*/;
+
+    if (address.length && !moonbeamRegex.test(address)) {
+        result = false;
+    }
+
+    return result;
+}
