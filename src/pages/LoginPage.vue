@@ -7,8 +7,9 @@
     <br />
     <br />
     <!-- username field -->
+    <!-- TODO add translation for placeholder text -->
     <input class="input-field-text" @input="validateUsername" id="login-username-or-email" v-model.trim="usernameOrEmail"
-        :placeholder="$i18n('username_or_password')" tabindex="2" :style="usernameInputStyle" />
+        placeholder="Enter your username" tabindex="2" :style="usernameInputStyle" />
     <TextComponent :msg="$i18n(usernameErrorMessage)" error v-if="usernameErrorMessage.length" />
     <br />
     <!-- password field with show/hide button -->
