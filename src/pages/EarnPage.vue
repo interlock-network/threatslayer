@@ -30,12 +30,14 @@
         v-model.trim="reenteredPassword" :placeholder="$i18n('enter_password_again')" tabindex="10" required />
     <TextComponent v-if="reenteredPasswordErrorMessage.length" :msg="$i18n(reenteredPasswordErrorMessage)" error />
     <!-- AZero wallet address (optional) -->
-    <input id="address-input" @input="validateAddress($event, 'azeroAddressErrorMessage')" v-model.trim="azeroWalletId"
-        :style="addressInputStyleAzero" :placeholder="$i18n('enter_wallet_address_optional')" tabindex="11" />
+    <input id="address-input" @input="validateAddress($event, 'azero', 'azeroAddressErrorMessage')"
+        v-model.trim="azeroWalletId" :style="addressInputStyleAzero" :placeholder="$i18n('enter_wallet_address_optional')"
+        tabindex="11" />
     <TextComponent v-if="azeroAddressErrorMessage.length" :msg="$i18n(azeroAddressErrorMessage)" error />
     <!-- Polkadot wallet address (optional) -->
-    <input id="address-input" @input="validateAddress($event, 'pdotAddressErrorMessage')" v-model.trim="pdotWalletId"
-        :style="addressInputStylePdot" placeholder="Optional: Paste your Moonbeam wallet here" tabindex="12" />
+    <input id="address-input" @input="validateAddress($event, 'pdot', 'pdotAddressErrorMessage')"
+        v-model.trim="pdotWalletId" :style="addressInputStylePdot" placeholder="Optional: Paste your Moonbeam wallet here"
+        tabindex="12" />
     <TextComponent v-if="pdotAddressErrorMessage.length" :msg="$i18n(pdotAddressErrorMessage)" error />
     <!-- referrer (optional) -->
     <input v-model.trim="referrer" tabindex="13" :placeholder="$i18n('enter_referrer_name')" />
@@ -56,7 +58,7 @@
 <script>
 import { debounce } from 'debounce';
 import { decodeAddress, encodeAddress } from '@polkadot/keyring';
-import { findEmailError, findNonAlphanumericChars, usernameErrorMessages } from "../utilities";
+import { findEmailError, findNonAlphanumericChars, usernameErrorMessages, validateAzero, validateMoonbeam } from "../utilities";
 import { hexToU8a, isHex } from '@polkadot/util';
 
 import WarningTextBox from "./components/WarningTextBox.vue";
@@ -162,23 +164,28 @@ export default {
         togglePasswordInputType() {
             this.passwordInputType = this.passwordInputType === 'password' ? 'text' : 'password';
         },
-        validateAddress: debounce(function (event, keyName) {
+        validateAddress: debounce(function (event, addressType, errorKeyName) {
             const address = event?.target?.value;
-            this[keyName] = '';
+            this[errorKeyName] = '';
 
             if (!address || !address.length) {
-                this[keyName] = '';
+                this[errorKeyName] = '';
             }
 
             const addressIsValid = this.legitPolkadot(address);
 
+            if (addressType === 'azero' && !validateAzero(address)) {
+                this[errorKeyName] = 'warning_address_not_azero';
+            } else if (addressType === 'pdot' && !validateMoonbeam(address)) {
+                this[errorKeyName] = 'warning_address_not_moonbeam';
+            }
             // happy case
-            if (addressIsValid) {
-                this[keyName] = '';
+            else if (addressIsValid) {
+                this[errorKeyName] = '';
             } else if (!address || !address.length) {
-                this[keyName] = '';
+                this[errorKeyName] = '';
             } else {
-                this[keyName] = 'error_registering_wallet_address';
+                this[errorKeyName] = 'error_registering_wallet_address';
             }
         }, 250),
         validateEmail: debounce(function () {
