@@ -74,51 +74,56 @@ export default {
         async submitCreateUser() {
             this.errorArr = [];
 
-            const { azeroWalletId: azero_wallet_id = '', email, password, pdotWalletId: pdot_wallet_id = '', referrer, termsOfService: terms_of_service, unitedStates: united_states, username } = this;
+            const { azeroWalletId: azero_wallet_id = '', email, password, pdotWalletId: pdot_wallet_id = '',
+                referrer, termsOfService: terms_of_service, unitedStates: united_states, username } = this;
             const key = 'threatslayer-api-key';
             this.submitting = true;
 
-            const response = await axios.post(`${baseUrl}/user-create`, { azero_wallet_id, email, key, password, pdot_wallet_id, referrer, terms_of_service, united_states, username })
-                .then(res => res)
-                .catch(err => err);
+            // needed bc this endpoint returns a 201 (create) rather than 200
+            const instance = axios.create({
+                validateStatus: (status) => status === 200 || status === 201
+            });
 
-            const { errors = [], response: { status = 200, statusText = '' } = {} } = response;
+            instance.post(`${baseUrl}/user-create`,
+                { azero_wallet_id, email, key, password, pdot_wallet_id, referrer, terms_of_service, united_states, username })
+                .then(async response => {
+                    this.submitted = true;
+                    this.submitting = false;
 
-            if (status >= 400) {
-                console.log(`Create user error. Code: ${status}, status text: ${statusText}`);
+                    // set user's values in Chrome extension state unique key
+                    const loggedInSynched = await setChromeStorage({ loggedIn: true });
+                    const registeredSynched = await setChromeStorage({ registered: true });
+                    const setAzeroAddress = await setChromeStorage({ azeroAddress: azero_wallet_id });
+                    const setPdotAddress = await setChromeStorage({ pdotAddress: pdot_wallet_id });
+                    const setApiKey = await setChromeStorage({ apiKey: response.data.key });
+                    const setEmail = await setChromeStorage({ email });
+                    const setUsername = await setChromeStorage({ username });
 
-                this.submitted = false;
-                this.submitting = false;
+                    if (loggedInSynched & registeredSynched && setAzeroAddress && setApiKey && setEmail && setPdotAddress && setUsername) {
+                        this.selectPage('faq');
+                        this.checkState();
+                    } else {
+                        this.errorArr.push('error_registering_generic');
+                    }
+                })
+                .catch(error => {
+                    this.submitted = false;
+                    this.submitting = false;
 
-                if (errors.length) {
-                    this.errorArr = [...errors];
-                } else {
-                    this.errorArr.push(`Error: ${statusText}`);
-                }
-            } else if (!errors?.length) {
-                this.submitted = true;
-                this.submitting = false;
+                    const { errors = [], response: { status, statusText = '' } = {} } = error;
 
-                // set user's values in Chrome extension state unique key
-                const loggedInSynched = await setChromeStorage({ loggedIn: true });
-                const registeredSynched = await setChromeStorage({ registered: true });
-                const setAzeroAddress = await setChromeStorage({ azeroAddress: azero_wallet_id });
-                const setPdotAddress = await setChromeStorage({ pdotAddress: pdot_wallet_id });
-                const setApiKey = await setChromeStorage({ apiKey: response.data.key });
-                const setEmail = await setChromeStorage({ email });
-                const setUsername = await setChromeStorage({ username });
+                    console.log(`Create user error. Code: ${status}, status text: ${statusText}`);
 
-                if (loggedInSynched & registeredSynched && setAzeroAddress && setApiKey && setEmail && setPdotAddress && setUsername) {
-                    this.selectPage('faq');
-                    this.checkState();
-                } else {
-                    this.errorArr.push('error_registering_generic');
-                }
-            } else {
-                console.log('Error submitting registration:', errors);
+                    if (errors.length) {
+                        this.errorArr = [...errors];
+                    } else {
+                        this.errorArr.push(`Error: ${statusText}`);
+                    }
 
-                this.errorArr = [...errors, ...this.errorArr];
-            }
+                    console.log(`Error creating user, status: ${status}, error ${errors}`);
+
+                    this.errorArr = [...errors, ...this.errorArr];
+                });
         }
     }
 };
