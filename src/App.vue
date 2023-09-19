@@ -1,8 +1,7 @@
 <template>
   <div id="app-container">
     <div id="top-container">
-      <SideBar
-        v-bind="{ apiKey, checkState, currentPage, devMode, loggedIn, registered, selectPage, urlToStake, username }" />
+      <SideBar v-bind="{ apiKey, checkState, currentPage, loggedIn, registered, selectPage, urlToStake, username }" />
       <div id="view-container">
         <StakingPage v-if="currentPage === 'staking'" v-bind="{ apiKey, checkState, loggedIn, registered, selectPage }" />
         <EarnPage v-if="currentPage === 'earn'" v-bind="{ checkState, selectPage, urlToStake }" />
@@ -57,7 +56,6 @@ export default {
       apiKey: null,
       azeroAddress: null,
       currentPage: 'account',
-      devMode: false,
       email: null,
       loggedIn: false,
       pdotAddress: null,
@@ -73,7 +71,6 @@ export default {
     async checkState() {
       const apiKey = await getChromeStorage('apiKey');
       const azeroAddress = await getChromeStorage('azeroAddress'); // optional, may be missing
-      const devMode = await getChromeStorage('devMode');
       const email = await getChromeStorage('email');
       const isRegistered = await getChromeStorage('registered');
       const loggedIn = await getChromeStorage('loggedIn');
@@ -81,7 +78,6 @@ export default {
       const urlToStake = await getChromeStorage('urlToStake');
       const username = await getChromeStorage('username');
 
-      this.devMode = devMode;
       this.loggedIn = loggedIn;
       this.registered = isRegistered;
       this.urlToStake = urlToStake;

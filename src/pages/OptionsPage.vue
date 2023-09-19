@@ -23,17 +23,12 @@ export default {
     },
     async mounted() {
         const betaAICheckbox = document.getElementById('beta-ai-checkbox');
-        const devModeCheckbox = document.getElementById('dev-mode-checkbox');
 
         betaAICheckbox.focus();
 
         // Load the user's preference for beta AI Threat Detection from storage
         const betaAISelected = await getChromeStorage("betaAISelected");
         betaAICheckbox.checked = betaAISelected;
-
-        // same for devmode
-        const devMode = await getChromeStorage("devMode");
-        devModeCheckbox.checked = devMode;
     },
     methods: {
         betaClassifier(event) {
@@ -41,12 +36,6 @@ export default {
 
             // Store the user's preference for beta AI Threat Detection in storage
             setChromeStorage({ betaAISelected });
-        },
-        devMode(event) {
-            const devMode = event.target.checked;
-
-            // Store the user's preference for beta AI Threat Detection in storage
-            setChromeStorage({ devMode })
         }
     }
 }
