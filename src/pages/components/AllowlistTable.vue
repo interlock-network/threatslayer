@@ -15,8 +15,6 @@
                     </td>
                 </tr>
             </table>
-            <!-- Note: Commented out until there's a better place for it -->
-            <!-- <button @click="clearAllUrls" id="clear-allowlist">Clear all allowlisted URLs</button> -->
             <br />
         </div>
     </div>

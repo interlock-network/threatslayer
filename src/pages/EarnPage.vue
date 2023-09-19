@@ -31,8 +31,8 @@
     <TextComponent v-if="reenteredPasswordErrorMessage.length" :msg="$i18n(reenteredPasswordErrorMessage)" error />
     <!-- AZero wallet address (optional) -->
     <input id="address-input" @input="validateAddress($event, 'azero', 'azeroAddressErrorMessage')"
-        v-model.trim="azeroWalletId" :style="addressInputStyleAzero" :placeholder="$i18n('enter_wallet_address_optional')"
-        tabindex="11" />
+        v-model.trim="azeroWalletId" :style="addressInputStyleAzero"
+        :placeholder="$i18n('enter_azero_wallet_address_optional')" tabindex="11" />
     <TextComponent v-if="azeroAddressErrorMessage.length" :msg="$i18n(azeroAddressErrorMessage)" error />
     <!-- Polkadot wallet address (optional) -->
     <input id="address-input" @input="validateAddress($event, 'pdot', 'pdotAddressErrorMessage')"

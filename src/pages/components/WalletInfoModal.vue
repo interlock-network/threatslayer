@@ -12,13 +12,12 @@
                 <!-- input field with prompt for new Aleph Zero address -->
                 <TextComponent :msg="$i18n(updateAddressMsg)" subinstruction />
                 <input @input="validateAddress($event, 'newAzeroAddressErrorMessage')" v-model.trim="newAzeroAddress"
-                    :style="addressInputStyle" style="margin-top: 0.5rem;" :placeholder="$i18n('enter_wallet_address')"
-                    tabindex="2" />
-                <TextComponent v-if="newAzeroAddressErrorMessage.length" :msg="$i18n(newAzeroAddressErrorMessage)" error />
-                <!-- TODO update translation here -->
-                <input @input="validateAddress($event, 'newPdotAddressErrorMessage')" v-model.trim="newPdotAddress"
                     :style="addressInputStyle" style="margin-top: 0.5rem;"
-                    placeholder="Or paste your Moonbeam wallet address here" tabindex="4" />
+                    :placeholder="$i18n('enter_azero_wallet_address')" tabindex="2" />
+                <TextComponent v-if="newAzeroAddressErrorMessage.length" :msg="$i18n(newAzeroAddressErrorMessage)" error />
+                <input @input="validateAddress($event, 'newPdotAddressErrorMessage')" v-model.trim="newPdotAddress"
+                    :style="addressInputStyle" style="margin-top: 0.5rem;" :placeholder="$i18n('enter_pdot_wallet_address')"
+                    tabindex="4" />
                 <TextComponent v-if="newPdotAddressErrorMessage.length" :msg="$i18n(newPdotAddressErrorMessage)" error />
                 <!-- password field with show/hide button -->
                 <input id="login-password" class="input-field-text password-input" :type="passwordInputType"

@@ -7,7 +7,7 @@
     <br />
     <br />
     <div style="padding-right: 2rem;">
-        <TextComponent :msg="$i18n('must_create_wallet')" />
+        <TextComponent :msg="$i18n('must_create_azero_wallet')" />
         <br />
         <br />
         <TextComponent :msg="$i18n('click_to_create_wallet')" />

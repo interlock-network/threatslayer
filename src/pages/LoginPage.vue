@@ -7,9 +7,8 @@
     <br />
     <br />
     <!-- username field -->
-    <!-- TODO add translation for placeholder text -->
     <input class="input-field-text" @input="validateUsername" id="login-username-or-email" v-model.trim="usernameOrEmail"
-        placeholder="Enter your username" tabindex="2" :style="usernameInputStyle" />
+        :placeholder="$i18n('enter_your_username')" tabindex="2" :style="usernameInputStyle" />
     <TextComponent :msg="$i18n(usernameErrorMessage)" error v-if="usernameErrorMessage.length" />
     <br />
     <!-- password field with show/hide button -->
@@ -65,6 +64,7 @@ export default {
     },
     data() {
         return {
+            email: '',
             emailErrorMessage: '',
             forgotUsernamePassword: false,
             password: '',
@@ -103,6 +103,7 @@ export default {
             // bail out if no username yet, or else it will show an error and be annoying
             if (!name || !name.length) {
                 this.clearUsernameErrors();
+
                 return true;
             }
 
