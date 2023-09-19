@@ -241,10 +241,6 @@ input {
   pointer-events: initial;
 }
 
-.link-button-icon {
-  height: 1rem;
-}
-
 .banner-icon {
   height: 20px;
   padding-right: 0.5rem;
