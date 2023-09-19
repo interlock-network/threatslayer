@@ -103,47 +103,38 @@ export default {
             } else if (password.length) {
                 this.deleting = true;
 
-                const response = await axios.post(`${baseUrl}/user-delete`, { confirm: true, password, username })
-                    .then(res => res)
-                    .catch(err => err);
-
-                const { errors = [], response: { status = 200, statusText = '' } = {} } = response;
-
-                if (status >= 400) {
-                    console.log(`Delete user error. Code: ${status}, status text: ${statusText}`);
-
-                    this.deleting = false;
-                    this.errorArr.push(`Error: ${statusText}`);
-                } else if (!errors.length) {
-                    this.deleting = false;
-
-                    const keyClearedFromState = await clearChromeStorage('apiKey');
-                    const loggedOut = await setChromeStorage({ loggedIn: false });
-                    const usernameClearedFromState = await clearChromeStorage('username');
-
-                    const deletedSynched = keyClearedFromState && loggedOut && usernameClearedFromState;
-
-                    if (!deletedSynched) {
-                        this.errorArr.push('error_deleting_account_generic')
-                    }
-
-                    if (deletedSynched) {
-                        this.active = false;
+                axios.post(`${baseUrl}/user-delete`, { confirm: true, password, username })
+                    .then(async _response => {
                         this.deleting = false;
 
-                        // navigate to user page after logging out
-                        this.selectPage('earn');
-                        this.checkState();
-                        await setChromeStorage({ registered: false });
-                    }
-                } else {
-                    console.log('Delete User error:', response.errors)
+                        const keyClearedFromState = await clearChromeStorage('apiKey');
+                        const loggedOut = await setChromeStorage({ loggedIn: false });
+                        const usernameClearedFromState = await clearChromeStorage('username');
 
-                    this.errorArr = [response.errors];
-                    this.deleting = false;
+                        const deletedSynched = keyClearedFromState && loggedOut && usernameClearedFromState;
 
-                    fadeAccountPage(false);
-                }
+                        if (!deletedSynched) {
+                            this.errorArr.push('error_deleting_account_generic')
+                        }
+
+                        if (deletedSynched) {
+                            this.active = false;
+                            this.deleting = false;
+
+                            // navigate to user page after logging out
+                            this.selectPage('earn');
+                            this.checkState();
+                            setChromeStorage({ registered: false });
+                        }
+                    })
+                    .catch(error => {
+                        const { errors = [], status } = error;
+                        console.log(`Delete user error. Status ${status}, error: ${errors}`);
+
+                        this.deleting = false;
+                        this.errorArr = [errors];
+                        fadeAccountPage(false);
+                    });
             }
         },
         togglePasswordInputType() {

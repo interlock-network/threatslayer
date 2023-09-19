@@ -142,18 +142,17 @@ export default {
         async getSiteInfo() {
             const { apiKey, url } = this;
 
-            const response = await axios.post(`${baseUrl}/site-get`, { key: apiKey, url })
-                .then(res => res)
-                .catch(err => err);
+            axios.post(`${baseUrl}/site-get`, { key: apiKey, url })
+                .then(reponse => {
+                    const { stake_state } = reponse?.data;
 
-            const { data = {} } = response;
-
-            const { stake_state } = data;
-
-            this.stakeState = stake_state;
-
-            // Note: Translations for these are under 'stake_state_neutral', 'stake_state_pending', etc.
-            this.stakeStateMessage = `stake_state_${stake_state}`;
+                    // Note: Translations for these are under 'stake_state_neutral', 'stake_state_pending', etc.
+                    this.stakeStateMessage = `stake_state_${stake_state}`;
+                    this.stakeState = stake_state;
+                })
+                .catch(error => {
+                    console.log(`Error getting site information for URL ${url}: ${error.errors}`);
+                });
         },
         async getStakingUrl() {
             const urlToStake = await getChromeStorage('urlToStake');

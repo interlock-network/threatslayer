@@ -27,6 +27,7 @@ export default {
     data() {
         return {
             errorArr: [],
+            isError: false,
             loggedIn: false,
             loggingIn: false
         }
@@ -35,7 +36,7 @@ export default {
         computedClass() {
             let className = '';
 
-            if (this.errorArr.length) {
+            if (this.isError) {
                 className = 'submit-button-error';
             } else {
                 className = 'login-active';
@@ -44,7 +45,7 @@ export default {
             return className;
         },
         disabled() {
-            const { email, loggedIn, loggingIn, password } = this;
+            const { email } = this;
 
             return !email?.length || !isEmail(email);
         },
@@ -70,33 +71,25 @@ export default {
             this.errorArr = [];
             this.loggingIn = true;
 
-            // TODO update with endpoint URL
-            const response = await axios.post(`${baseUrl}/user-password-reset`, { email: this.email })
-                .then(res => res)
-                .catch(err => err);
+            axios.post(`${baseUrl}/user-password-forgot`, { email: this.email })
+                .then(_response => {
+                    console.log('Password forget request submitted.');
 
-            const { errors = [], response: { status = 200, statusText = '' } = {} } = response;
-            console.log('response', response);
-            console.log('status', status);
+                    this.loggedIn = true;
+                    this.loggingIn = false;
+                })
+                .catch(error => {
+                    this.isError = true;
+                    const { errors = [], response: { status } = {} } = error;
+                    console.log(`Forgot password error. Code: ${status}: ${errors}`)
 
-            if (status >= 400) {
-                console.log(`Forgot password error. Code: ${status}, status text: ${statusText}`)
+                    this.loggedIn = false;
+                    this.loggingIn = false;
 
-                this.loggedIn = false;
-                this.loggingIn = false;
-                this.errorArr.push(`Error: ${statusText}`);
-            } else if (status === 200) {
-                console.log('Password forget request submitted.');
-
-                this.loggedIn = true;
-                this.loggingIn = false;
-            } else {
-                console.log(`Forgot password error: ${errors}`);
-
-                this.loggedIn = false;
-                this.loggingIn = false;
-                this.errorArr.push(errors);
-            }
+                    if (errors.length) {
+                        this.errorArr.push(errors);
+                    }
+                });
         }
     }
 };

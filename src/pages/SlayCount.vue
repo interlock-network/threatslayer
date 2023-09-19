@@ -247,15 +247,21 @@ export default {
         },
         async getStatsFromApi() {
             const { apiKey, username } = this;
-            const response = await axios.post(`${baseUrl}/user-get`, { key: apiKey, username })
-                .then(res => res)
-                .catch(err => err);
 
-            const { lookups = 0, lookups_total = 0 } = response?.data;
-            const totalURLsVisited = lookups + lookups_total;
+            axios.post(`${baseUrl}/user-get`, { key: apiKey, username })
+                .then(response => {
+                    const { lookups = 0, lookups_total = 0 } = response?.data;
+                    const totalURLsVisited = lookups + lookups_total;
 
-            this.rawTotalUrlsVisited = totalURLsVisited;
-            setChromeStorage({ totalURLsVisited });
+                    this.rawTotalUrlsVisited = totalURLsVisited;
+                    setChromeStorage({ totalURLsVisited });
+                })
+                .catch(error => {
+                    const { errors = [] } = error;
+
+                    console.log('Error getting user stats from API:', errors);
+                });
+
         }
     }
 }
