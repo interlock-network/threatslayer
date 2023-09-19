@@ -31,6 +31,14 @@
         "message": "Account Info for",
         "description": "Page header for Account page."
     },
+    "address_aleph": {
+        "message": "Aleph Zero-compatible Wallet Address",
+        "description": "Header on a page listing wallet addresses."
+    },
+    "address_pdot": {
+        "message": "Moonbeam Wallet Address",
+        "description": "Header on a page listing wallet addresses."
+    },
     "affirm_not_us_citizen": {
         "message": "Affirm you are not a US citizen or resident.",
         "description": "Instruction for registering an account."
@@ -131,6 +139,10 @@
         "message": "Enter a username",
         "description": "Instruction for registering an account."
     },
+    "enter_your_username": {
+        "message": "Enter your username",
+        "description": "Instruction for logging into an account."
+    },
     "enter_password_again": {
         "message": "Enter your password again",
         "description": "Instruction for registering an account."
@@ -139,11 +151,15 @@
         "message": "Optional: Enter referrer username",
         "description": "Instruction for registering an account."
     },
-    "enter_wallet_address": {
+    "enter_azero_wallet_address": {
         "message": "Paste your Aleph Zero-compatible wallet address",
         "description": "Instruction for registering an account."
     },
-    "enter_wallet_address_optional": {
+    "enter_pdot_wallet_address": {
+        "message": "Or paste your Moonbeam wallet address here",
+        "description": "Instruction for registering an account."
+    },
+    "enter_azero_wallet_address_optional": {
         "message": "Optional: Paste your Aleph Zero-compatible wallet address",
         "description": "Instruction for registering an account."
     },
@@ -259,7 +275,7 @@
         "message": "Malicious Sites Detected",
         "description": "The text used to show how many malicious URLs are scanned on the dashboard."
     },
-    "must_create_wallet": {
+    "must_create_azero_wallet": {
         "message": "In order to use ThreatSlayer, you will need to create an Aleph Zero-compatible wallet.",
         "description": "Instruction for creating a wallet."
     },
@@ -407,9 +423,9 @@
         "message": "URL Staking Status",
         "description": "Info text on the Security Staking page."
     },
-    "username_or_password": {
+    "username_or_email": {
         "message": "Username or email",
-        "description": "TODO fix this key"
+        "description": "Instructions to fill in a field."
     },
     "users_referred": {
         "message": "Users Referred",
