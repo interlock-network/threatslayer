@@ -3,7 +3,7 @@
         <button @click="submitCreateUser" class="submit-button" :class="computedClass" :disabled="disabled">
             {{ $i18n(submitButtonText) }}
         </button>
-        <TextComponent v-for="errorMessage in errorArr" :msg="$i18n(errorMessage)" error />
+        <TextComponent v-for="errorMessage in errorArr" :msg="errorMessage" error />
     </div>
 </template>
 
@@ -102,27 +102,17 @@ export default {
                     if (loggedInSynched & registeredSynched && setAzeroAddress && setApiKey && setEmail && setPdotAddress && setUsername) {
                         this.selectPage('faq');
                         this.checkState();
-                    } else {
-                        this.errorArr.push('error_registering_generic');
                     }
                 })
                 .catch(error => {
                     this.submitted = false;
                     this.submitting = false;
 
-                    const { errors = [], response: { status, statusText = '' } = {} } = error;
-
-                    console.log(`Create user error. Code: ${status}, status text: ${statusText}`);
-
-                    if (errors.length) {
-                        this.errorArr = [...errors];
-                    } else {
-                        this.errorArr.push(`Error: ${statusText}`);
-                    }
+                    const { errors = [], status } = error.response.data;
 
                     console.log(`Error creating user, status: ${status}, error ${errors}`);
 
-                    this.errorArr = [...errors, ...this.errorArr];
+                    this.errorArr = [...errors];
                 });
         }
     }

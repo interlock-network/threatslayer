@@ -80,14 +80,15 @@ export default {
                 })
                 .catch(error => {
                     this.isError = true;
-                    const { errors = [], response: { status } = {} } = error;
+                    const { errors = [], status } = error.response.data;
+
                     console.log(`Forgot password error. Code: ${status}: ${errors}`)
 
                     this.loggedIn = false;
                     this.loggingIn = false;
 
                     if (errors.length) {
-                        this.errorArr.push(errors);
+                        this.errorArr = [...errors];
                     }
                 });
         }

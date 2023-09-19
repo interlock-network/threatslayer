@@ -257,8 +257,7 @@ export default {
                     setChromeStorage({ totalURLsVisited });
                 })
                 .catch(error => {
-                    const { errors = [] } = error;
-
+                    const { errors = [] } = error.response.data;
                     console.log('Error getting user stats from API:', errors);
                 });
 
