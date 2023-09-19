@@ -5,7 +5,11 @@
     <br />
     <div :style="computedStyle">
         <TextComponent class="left-label" :msg="$i18n('ilock_earned')" bold />
-        <TextComponent :msg="tokensEarned + tokensEarnedTotal" bigmono /> <br />
+        <TextComponent v-if="ilockEarned > 0" :msg="ilockEarned" bigmono />
+        <div v-if="ilockEarned === 0">
+            <TextComponent msg="Keep browsing with ThreatSlayer to earn $ILOCK!" />
+        </div>
+        <br />
         <br />
         <TextComponent class="left-label" :msg="$i18n('email')" bold />
         <TextComponent :msg="email" bigmono /> <br />
@@ -25,6 +29,7 @@
     </div>
     <DeleteUserModal v-bind="{ checkState, fadeAccountPage, pageFaded, selectPage, username }" />
 </template>
+
 <script>
 import AllowlistTable from "./components/AllowlistTable.vue";
 import DeleteUserModal from "./components/DeleteUserModal.vue";
@@ -73,6 +78,11 @@ export default {
     computed: {
         computedStyle() {
             return this.pageFaded ? { 'opacity': '5%', 'pointer-events': 'none' } : {};
+        },
+        ilockEarned() {
+            const tokenTotal = this.tokensEarned + this.tokensEarnedTotal;
+
+            return tokenTotal;
         }
     },
     methods: {
@@ -82,16 +92,19 @@ export default {
         async getStatsFromApi() {
             const { apiKey, username } = this;
 
-            const response = await axios.post(`${baseUrl}/user-get`, { key: apiKey, username })
-                .then(res => res)
-                .catch(err => err);
+            axios.post(`${baseUrl}/user-get`, { key: apiKey, username })
+                .then(response => {
+                    const { referred = 0, tokens_earned = 0, tokens_earned_total = 0 } = response?.data;
 
-            const { data = {} } = response;
-            const { referred = 0, tokens_earned = 0, tokens_earned_total = 0 } = data;
+                    this.referred = referred;
+                    this.tokensEarned = tokens_earned;
+                    this.tokensEarnedTotal = tokens_earned_total;
+                })
+                .catch(error => {
+                    const { errors = [] } = error;
 
-            this.referred = referred;
-            this.tokensEarned = tokens_earned;
-            this.tokensEarnedTotal = tokens_earned_total;
+                    console.log('Error getting user stats from API:', errors);
+                });
         }
     }
 }
