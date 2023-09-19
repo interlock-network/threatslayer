@@ -1,11 +1,11 @@
 <template>
     <div>
         <button @click="submitUpdateAddress" class="secondary-hollow-button" :class="computedClass" :disabled="disabled"
-            style="margin-right: 10%; margin-top: 2rem;">
+            style="margin-right: 10%;">
             {{ $i18n(submitButtonText) }}
         </button>
         <br />
-        <TextComponent v-for="errorMessage in errorArr" :msg="$i18n(errorMessage)" error />
+        <TextComponent v-for="errorMessage in errorArr" :msg="errorMessage" error />
     </div>
 </template>
 
@@ -21,7 +21,14 @@ export default {
         apiKey: String,
         checkState: Function,
         clickedOnce: Boolean,
-        newAddress: String,
+        newAzeroAddress: {
+            type: String,
+            default: ''
+        },
+        newPdotAddress: {
+            type: String,
+            default: ''
+        },
         password: String,
         toggleClickedOnce: Function,
         username: String,
@@ -49,9 +56,9 @@ export default {
             return className;
         },
         disabled() {
-            const { newAddress, submitting, submitted } = this;
+            const { newAzeroAddress, newPdotAddress, submitting, submitted } = this;
 
-            return (!newAddress.length || submitting || submitted);
+            return ((!newAzeroAddress.length && !newPdotAddress.length) || submitting || submitted);
         },
         submitButtonText() {
             let result = '';
@@ -69,60 +76,48 @@ export default {
     },
     methods: {
         async submitUpdateAddress() {
-            console.log('here in submitUpdateAddress');
             this.errorArr = [];
-
-            const { apiKey: key, newAddress, password, username } = this;
             this.submitting = true;
 
-            const response = await axios.post(`${baseUrl}/user-bcaddr-reset`, { key, password, username, wallet_id: newAddress })
-                .then(res => res)
-                .catch(err => err);
+            const { apiKey: key, newAzeroAddress, newPdotAddress, password, username } = this;
 
-            console.log('response', response);
-            const { errors = [], response: { status = 200, statusText = '' } = {} } = response;
+            axios.post(`${baseUrl}/user-bcaddr-reset`,
+                { azero_wallet_id: newAzeroAddress, key, password, pdot_wallet_id: newPdotAddress, username })
+                .then(async _response => {
+                    this.submitted = true;
+                    this.submitting = false;
 
-            if (status >= 400) {
-                console.log(`Create user error. Code: ${status}, status text: ${statusText}`);
+                    let setAzeroAddress = false;
+                    let setPdotAddress = false;
 
-                this.submitted = false;
-                this.submitting = false;
+                    // set wallet address in state with user's new address
+                    if (newAzeroAddress?.length) {
+                        setAzeroAddress = await setChromeStorage({ azeroAddress: newAzeroAddress });
+                    }
+                    if (newPdotAddress?.length) {
+                        setPdotAddress = await setChromeStorage({ pdotAddress: newPdotAddress });
+                    }
 
-                if (errors.length) {
-                    this.errorArr = [...errors];
-                } else {
-                    this.errorArr.push(`Error: ${statusText}`);
-                }
-            } else if (!errors?.length) {
-                this.submitted = true;
-                this.submitting = false;
+                    if (setAzeroAddress || setPdotAddress) {
+                        this.checkState();
+                    } else {
+                        this.errorArr.push('error_updating_wallet_address_generic');
+                    }
+                })
+                .catch(error => {
+                    const { errors = [], status } = error.response.data;
+                    console.log(`Create user error. Code: ${status}, status text: ${errors}`);
 
-                // set wallet address in state with user's new address
-                const setAddress = await setChromeStorage({ address: newAddress });
+                    this.submitted = false;
+                    this.submitting = false;
 
-                if (setAddress) {
-                    this.checkState();
-                } else {
-                    this.errorArr.push('error_updating_wallet_address_generic');
-                }
-            } else {
-                console.log('Error submitting wallet address:', errors);
-
-                this.errorArr = [...errors, ...this.errorArr];
-            }
+                    if (errors.length) {
+                        this.errorArr = [...errors];
+                    }
+                });
         }
     }
 };
 </script>
 
-<style>
-#update-address-button {
-    background-color: #0F0818;
-    border: none;
-    color: #9000CB;
-    font-size: 1rem;
-    height: 2rem;
-    padding: 0.5rem 0.75rem;
-    width: 400px;
-}
-</style>
+<style></style>

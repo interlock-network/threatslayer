@@ -6,7 +6,7 @@
         </button>
         <br />
         <br />
-        <TextComponent v-for="errorMessage in errorArr" :msg="$i18n(errorMessage)" style="margin-bottom: -1rem;" error />
+        <TextComponent v-for="errorMessage in errorArr" :msg="errorMessage" style="margin-bottom: -1rem;" error />
     </div>
 </template>
 
@@ -69,10 +69,10 @@ export default {
     },
     methods: {
         async submitLogin() {
+            this.loggingIn = true;
+            this.errorArr = [];
             const { password, usernameOrEmail } = this;
             const requestBody = { password };
-            this.errorArr = [];
-            this.loggingIn = true;
 
             if (!usernameOrEmail?.length) {
                 return;
@@ -86,56 +86,45 @@ export default {
                 requestBody.username = usernameOrEmail;
             }
 
-            const response = await axios.post(`${baseUrl}/user-login`, requestBody)
-                .then(res => res)
-                .catch(err => err);
+            axios.post(`${baseUrl}/user-login`, requestBody)
+                .then(async response => {
+                    const { azeroAddress = '', email = '', key = '', pdotAddress = '', username = '' } = response?.data;
 
-            const { data: { address = '', email = '', key = '', username = '' } = {}, errors = [], response: { status = 200, statusText = '' } = {} } = response;
+                    this.loggedIn = true;
+                    this.loggingIn = false;
 
-            if (status >= 400) {
-                console.log(`Login error. Code: ${status}, status text: ${statusText}`);
+                    // set API key with user's unique key and other values
+                    const azeroWalletSet = await setChromeStorage({ azeroAddress });
+                    const emailSet = await setChromeStorage({ email });
+                    const keySet = await setChromeStorage({ apiKey: key });
+                    const pdotWalletSet = await setChromeStorage({ pdotAddress });
+                    const setUsername = await setChromeStorage({ username });
 
-                this.loggedIn = false;
-                this.loggingIn = false;
-                this.errorArr.push(`Error: ${statusText}`);
+                    if (azeroWalletSet && emailSet && keySet && pdotWalletSet && setUsername) {
+                        this.checkState();
+                        const loggedInSynched = await setChromeStorage({ loggedIn: true });
 
-                return;
-            }
+                        if (loggedInSynched) {
+                            this.loggedIn = true;
+                            this.loggingIn = false;
 
-            if (!errors.length) {
-                this.loggedIn = true;
-                this.loggingIn = false;
-
-                // set API key with user's unique key and other values
-                // TODO uncomment this once it's implemented
-                // setChromeStorage({ address }, 'Chrome state for wallet address set after successful login.', 'Error setting Chrome state wallet address after successful login:');
-                const emailSet = await setChromeStorage({ email });
-                const keySet = await setChromeStorage({ apiKey: key });
-                const setUsername = await setChromeStorage({ username });
-
-                if (emailSet && keySet && setUsername) {
-                    this.checkState()
-                    const loggedInSynched = setChromeStorage({ loggedIn: true });
-
-                    if (loggedInSynched) {
-                        this.loggedIn = true;
-                        this.loggingIn = false;
-
-                        await setChromeStorage({ registered: true });
-                        // navigate to user page after logging in
-                        this.selectPage('slayCount');
-                        this.checkState()
-                    } else {
-                        this.errorArr.push('error_login_generic')
+                            await setChromeStorage({ registered: true });
+                            // navigate to user page after logging in
+                            this.selectPage('slayCount');
+                            this.checkState();
+                        } else {
+                            this.errorArr.push('error_login_generic')
+                        }
                     }
-                } else {
-                    console.log('Login error:', errors)
+                })
+                .catch(error => {
+                    const { error_message: errors = [], status } = error.response.data;
+                    console.log(`Login error. Status: ${status}, ${errors}`);
 
-                    this.errorArr = errors;
                     this.loggedIn = false;
                     this.loggingIn = false;
-                }
-            }
+                    this.errorArr = [...errors];
+                });
         }
     }
 };
