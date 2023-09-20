@@ -14,7 +14,7 @@
 import TextComponent from "../TextComponent.vue";
 
 import axios from "axios";
-import { baseUrl, isEmail, setChromeStorage } from '../../../utilities.js';
+import { baseUrl, formatErrorMessage, isEmail, setChromeStorage } from '../../../utilities.js';
 
 export default {
     name: "LoginButton",
@@ -101,19 +101,14 @@ export default {
                     const setUsername = await setChromeStorage({ username });
 
                     if (azeroWalletSet && emailSet && keySet && pdotWalletSet && setUsername) {
-                        this.checkState();
+                        const registeredSynched = await setChromeStorage({ registered: true });
                         const loggedInSynched = await setChromeStorage({ loggedIn: true });
 
-                        if (loggedInSynched) {
+                        if (registeredSynched && loggedInSynched) {
                             this.loggedIn = true;
                             this.loggingIn = false;
 
-                            await setChromeStorage({ registered: true });
-                            // navigate to user page after logging in
-                            this.selectPage('slayCount');
                             this.checkState();
-                        } else {
-                            this.errorArr.push('error_login_generic')
                         }
                     }
                 })
@@ -121,9 +116,11 @@ export default {
                     const { error_message: errors = [], status } = error.response.data;
                     console.log(`Login error. Status: ${status}, ${errors}`);
 
+                    const formattedErrors = errors.map(err => formatErrorMessage(err));
+
                     this.loggedIn = false;
                     this.loggingIn = false;
-                    this.errorArr = [...errors];
+                    this.errorArr = [...formattedErrors];
                 });
         }
     }
