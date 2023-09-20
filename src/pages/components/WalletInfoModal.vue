@@ -11,17 +11,18 @@
             <div v-if="showAddressInput">
                 <!-- input field with prompt for new Aleph Zero address -->
                 <TextComponent :msg="$i18n(updateAddressMsg)" subinstruction />
-                <input @input="validateAddress($event, 'newAzeroAddressErrorMessage')" v-model.trim="newAzeroAddress"
+                <input @input="validateAddress($event, 'azero', 'newAzeroErrorMessage')" v-model.trim="newAzeroAddress"
                     :style="addressInputStyle" style="margin-top: 0.5rem;"
                     :placeholder="$i18n('enter_azero_wallet_address')" tabindex="2" />
-                <TextComponent v-if="newAzeroAddressErrorMessage.length" :msg="$i18n(newAzeroAddressErrorMessage)" error />
-                <input @input="validateAddress($event, 'newPdotAddressErrorMessage')" v-model.trim="newPdotAddress"
-                    :style="addressInputStyle" style="margin-top: 0.5rem;" :placeholder="$i18n('enter_pdot_wallet_address')"
-                    tabindex="4" />
-                <TextComponent v-if="newPdotAddressErrorMessage.length" :msg="$i18n(newPdotAddressErrorMessage)" error />
+                <ErrorMessage v-if="newAzeroErrorMessage.length" :msg="$i18n(newAzeroErrorMessage)" singleError />
+                <!-- input field with prompt for new Moonbeam address -->
+                <input @input="validateAddress($event, 'pdot', 'newPdotErrorMessage')" v-model.trim="newPdotAddress"
+                    :style="addressInputStyle" style="margin-top: -0.2rem;"
+                    :placeholder="$i18n('enter_pdot_wallet_address')" tabindex="4" />
+                <ErrorMessage v-if="newPdotErrorMessage.length" :msg="$i18n(newPdotErrorMessage)" singleError last />
                 <!-- password field with show/hide button -->
                 <input id="login-password" class="input-field-text password-input" :type="passwordInputType"
-                    v-model.trim="password" placeholder="Password" tabindex="6" :style="passwordInputStyle" />
+                    v-model.trim="password" placeholder="Password" tabindex="6" style="margin-top: 1.5rem" />
                 <button @click="togglePasswordInputType" class="small-button" id="show-password-toggle-button"
                     style="margin-right: 0;" tabindex="8">
                     {{ passwordInputType === 'password' ? $i18n('password_show') : $i18n('password_hide') }}
@@ -48,6 +49,7 @@
 </template>
 
 <script>
+import ErrorMessage from "./ErrorMessage.vue";
 import TextComponent from "./TextComponent.vue";
 import UpdateAddressButton from "./buttons/UpdateAddressButton.vue";
 import WalletList from "./WalletList.vue";
@@ -56,6 +58,7 @@ import WarningTextBox from "./WarningTextBox.vue";
 import { debounce } from 'debounce';
 import { decodeAddress, encodeAddress } from '@polkadot/keyring';
 import { hexToU8a, isHex } from '@polkadot/util';
+import { validateAzero, validateMoonbeam } from "../../utilities";
 
 export default {
     name: "WalletInfoModal",
@@ -69,6 +72,7 @@ export default {
         username: String
     },
     components: {
+        ErrorMessage,
         TextComponent,
         UpdateAddressButton,
         WalletList,
@@ -82,9 +86,9 @@ export default {
             deleting: false,
             errorArr: [],
             newAzeroAddress: '',
-            newAzeroAddressErrorMessage: '',
+            newAzeroErrorMessage: '',
             newPdotAddress: '',
-            newPdotAddressErrorMessage: '',
+            newPdotErrorMessage: '',
             password: '',
             passwordInputType: 'password',
         }
@@ -151,7 +155,7 @@ export default {
         toggleClickedOnce() {
             this.active = !this.active;
         },
-        validateAddress: debounce(function (event, errorKeyName) {
+        validateAddress: debounce(function (event, addressType, errorKeyName) {
             const address = event?.target?.value;
             this[errorKeyName] = '';
 
@@ -161,8 +165,13 @@ export default {
 
             const addressIsValid = this.legitPolkadot(address);
 
+            if (addressType === 'azero' && !validateAzero(address)) {
+                this[errorKeyName] = 'warning_address_not_azero';
+            } else if (addressType === 'pdot' && !validateMoonbeam(address)) {
+                this[errorKeyName] = 'warning_address_not_moonbeam';
+            }
             // happy case
-            if (addressIsValid) {
+            else if (addressIsValid) {
                 this[errorKeyName] = '';
             } else if (!address || !address.length) {
                 this[errorKeyName] = '';
