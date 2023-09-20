@@ -21,11 +21,11 @@
     <div :style="computedStyle">
         <br />
         <!-- Number of users referred -->
-        <TextComponent class="left-label" :msg="$i18n('users_referred')" bold />
+        <TextComponent v-if="!pageFaded" class="left-label" :msg="$i18n('users_referred')" bold />
         <TextComponent :msg="referred" bigmono /> <br />
         <br />
         <!-- Tabe of allowlisted URLs -->
-        <AllowlistTable :apiKey="apiKey" />
+        <AllowlistTable v-if="!pageFaded" :apiKey="apiKey" />
     </div>
     <DeleteUserModal v-bind="{ checkState, fadeAccountPage, pageFaded, selectPage, username }" />
 </template>
