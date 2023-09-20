@@ -14,7 +14,7 @@
     <!-- password field with show/hide button -->
     <input id="login-password" class="input-field-text password-input" :type="passwordInputType" v-model.trim="password"
         placeholder="Password" tabindex="4" :style="passwordInputStyle" />
-    <button @click="togglePasswordInputType" class="small-button" id="show-toggle-button" tabindex="5">
+    <button @click="togglePasswordInputType" class="small-button" id="show-password-toggle-button" tabindex="5">
         {{ passwordInputType === 'password' ? $i18n('password_show') : $i18n('password_hide') }}
     </button>
     <TextComponent :msg="$i18n(passwordErrorMessage)" error v-if="passwordErrorMessage.length" />
