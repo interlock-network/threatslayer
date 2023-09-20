@@ -81,10 +81,10 @@ export default {
     },
     computed: {
         showRegisterPage() {
-            return this.registered === false && this.loggedIn === false;
+            return !this.registered && !this.loggedIn;
         },
         showLoginPage() {
-            return this.loggedIn === false;
+            return !this.loggedIn;
         },
         showLogoutButton() {
             return this.loggedIn;
