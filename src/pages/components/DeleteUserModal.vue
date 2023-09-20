@@ -111,14 +111,16 @@ export default {
                         const loggedOut = await setChromeStorage({ loggedIn: false });
                         const usernameClearedFromState = await clearChromeStorage('username');
 
+                        const deletedSynched = keyClearedFromState && loggedOut && usernameClearedFromState;
+
                         if (deletedSynched) {
                             this.active = false;
                             this.deleting = false;
+                            const unregistered = await setChromeStorage({ registered: false });
 
-                            // navigate to user page after logging out
-                            this.selectPage('earn');
-                            this.checkState();
-                            setChromeStorage({ registered: false });
+                            if (unregistered) {
+                                this.checkState();
+                            }
                         }
                     })
                     .catch(error => {
@@ -129,7 +131,7 @@ export default {
 
                         this.deleting = false;
                         this.errorArr = [...formattedErrors];
-                        fadeAccountPage(false);
+                        this.fadeAccountPage(false);
                     });
             }
         },
