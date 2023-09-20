@@ -69,7 +69,8 @@ export default {
   },
   methods: {
     async checkState() {
-      const apiKey = await getChromeStorage('apiKey');
+      // these values will all be undefined on first installation
+      const apiKey = await getChromeStorage('apiKey') || 'threatslayer-api-key';
       const azeroAddress = await getChromeStorage('azeroAddress'); // optional, may be missing
       const email = await getChromeStorage('email');
       const isRegistered = await getChromeStorage('registered');
@@ -82,9 +83,9 @@ export default {
       this.registered = isRegistered;
       this.urlToStake = urlToStake;
 
-      if (isRegistered === false) {
+      if (!isRegistered) {
         this.selectPage('earn');
-      } else if (loggedIn === false) {
+      } else if (!loggedIn) {
         this.selectPage('login');
       } else if (apiKey && email && username) {
         this.apiKey = apiKey;
@@ -199,12 +200,13 @@ input {
   width: 100%;
 }
 
-#show-toggle-button {
+#show-password-toggle-button {
   background-color: #0F0818;
   border: none;
   color: #963cf5;
   float: right;
   margin-right: 50px;
+  margin-top: -0.6rem;
 }
 
 #view-container {
