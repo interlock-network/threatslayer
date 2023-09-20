@@ -5,15 +5,15 @@
             {{ $i18n(submitButtonText) }}
         </button>
         <br />
-        <TextComponent v-for="errorMessage in errorArr" :msg="errorMessage" error />
+        <ErrorMessage v-for="errorMessage in errorArr" :msg="errorMessage" stackedError />
     </div>
 </template>
 
 <script>
-import TextComponent from "../TextComponent.vue";
+import ErrorMessage from "../ErrorMessage.vue";
 
 import axios from "axios";
-import { baseUrl, formatErrorMessage, setChromeStorage } from '../../../utilities.js';
+import { baseUrl, formatErrorMessages, setChromeStorage } from '../../../utilities.js';
 
 export default {
     name: "UpdateAddressButton",
@@ -34,7 +34,7 @@ export default {
         username: String,
     },
     components: {
-        TextComponent
+        ErrorMessage
     },
     data() {
         return {
@@ -105,16 +105,15 @@ export default {
                     }
                 })
                 .catch(error => {
-                    const { errors = [], status } = error.response.data;
-                    console.log(`Create user error. Code: ${status}, status text: ${errors}`);
+                    const { data: { error_message: errors = [] }, status } = error.response;
+
+                    console.log(`Create user error. Status: ${status}. Error: ${errors}`);
 
                     this.submitted = false;
                     this.submitting = false;
 
                     if (errors.length) {
-                        const formattedErrors = errors.map(err => formatErrorMessage(err));
-
-                        this.errorArr = [...formattedErrors];
+                        this.errorArr = formatErrorMessages(errors);
                     }
                 });
         }

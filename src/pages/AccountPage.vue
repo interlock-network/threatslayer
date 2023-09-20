@@ -101,9 +101,9 @@ export default {
                     this.tokensEarnedTotal = tokens_earned_total;
                 })
                 .catch(error => {
-                    const { errors = [] } = error.response.data;
+                    const { data: { error_message: errors = [] }, status } = error.response;
 
-                    console.log('Error getting user stats from API:', errors);
+                    console.log(`Error getting user stats from API. Status: ${status}. Error: ${errors}`);
                 });
         }
     }

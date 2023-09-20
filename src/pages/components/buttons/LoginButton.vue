@@ -14,7 +14,7 @@
 import TextComponent from "../TextComponent.vue";
 
 import axios from "axios";
-import { baseUrl, formatErrorMessage, isEmail, setChromeStorage } from '../../../utilities.js';
+import { baseUrl, formatErrorMessages, isEmail, setChromeStorage } from '../../../utilities.js';
 
 export default {
     name: "LoginButton",
@@ -113,14 +113,13 @@ export default {
                     }
                 })
                 .catch(error => {
-                    const { error_message: errors = [], status } = error.response.data;
-                    console.log(`Login error. Status: ${status}, ${errors}`);
+                    const { data: { error_message: errors = [] }, status } = error.response;
 
-                    const formattedErrors = errors.map(err => formatErrorMessage(err));
+                    console.log(`Login error. Status: ${status}. Error: ${errors}`);
 
                     this.loggedIn = false;
                     this.loggingIn = false;
-                    this.errorArr = [...formattedErrors];
+                    this.errorArr = formatErrorMessages(errors);
                 });
         }
     }

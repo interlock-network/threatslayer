@@ -36,7 +36,7 @@
 import TextComponent from "./TextComponent.vue";
 
 import axios from "axios";
-import { baseUrl, clearChromeStorage, formatErrorMessage, setChromeStorage } from '../../utilities.js';
+import { baseUrl, clearChromeStorage, formatErrorMessages, setChromeStorage } from '../../utilities.js';
 
 export default {
     name: "DeleteUserModal",
@@ -124,13 +124,12 @@ export default {
                         }
                     })
                     .catch(error => {
-                        const { errors = [], status } = error.response.data;
-                        console.log(`Delete user error. Status ${status}, error: ${errors}`);
+                        const { data: { error_message: errors = [] }, status } = error.response;
 
-                        const formattedErrors = errors.map(err => formatErrorMessage(err));
+                        console.log(`Delete user error. Status: ${status}. Error: ${errors}`);
 
                         this.deleting = false;
-                        this.errorArr = [...formattedErrors];
+                        this.errorArr = formatErrorMessages(errors);
                         this.fadeAccountPage(false);
                     });
             }

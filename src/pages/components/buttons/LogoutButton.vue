@@ -75,9 +75,9 @@ export default {
                         }
                     })
                     .catch(error => {
-                        const { errors = [], status } = error.response.data;
+                        const { data: { error_message: errors = [] }, status } = error.response;
 
-                        console.log(`Logout error. Status: ${status}, ${errors}`);
+                        console.log(`Logout error. Status: ${status}. Error: ${errors}`);
                     })
                     .finally(() => {
                         // navigate to user page after logging out, successfully or not
