@@ -11,7 +11,7 @@
 import TextComponent from "../TextComponent.vue";
 
 import axios from "axios";
-import { baseUrl, setChromeStorage } from '../../../utilities.js';
+import { baseUrl, formatErrorMessage, setChromeStorage } from '../../../utilities.js';
 
 export default {
     name: "CreateUserButton",
@@ -110,9 +110,11 @@ export default {
 
                     const { errors = [], status } = error.response.data;
 
+                    const formattedErrors = errors.map(err => formatErrorMessage(err));
+
                     console.log(`Error creating user, status: ${status}, error ${errors}`);
 
-                    this.errorArr = [...errors];
+                    this.errorArr = [...formattedErrors];
                 });
         }
     }

@@ -36,7 +36,7 @@
 import TextComponent from "./TextComponent.vue";
 
 import axios from "axios";
-import { baseUrl, clearChromeStorage, setChromeStorage } from '../../utilities.js';
+import { baseUrl, clearChromeStorage, formatErrorMessage, setChromeStorage } from '../../utilities.js';
 
 export default {
     name: "DeleteUserModal",
@@ -111,12 +111,6 @@ export default {
                         const loggedOut = await setChromeStorage({ loggedIn: false });
                         const usernameClearedFromState = await clearChromeStorage('username');
 
-                        const deletedSynched = keyClearedFromState && loggedOut && usernameClearedFromState;
-
-                        if (!deletedSynched) {
-                            this.errorArr.push('error_deleting_account_generic')
-                        }
-
                         if (deletedSynched) {
                             this.active = false;
                             this.deleting = false;
@@ -131,8 +125,10 @@ export default {
                         const { errors = [], status } = error.response.data;
                         console.log(`Delete user error. Status ${status}, error: ${errors}`);
 
+                        const formattedErrors = errors.map(err => formatErrorMessage(err));
+
                         this.deleting = false;
-                        this.errorArr = [errors];
+                        this.errorArr = [...formattedErrors];
                         fadeAccountPage(false);
                     });
             }

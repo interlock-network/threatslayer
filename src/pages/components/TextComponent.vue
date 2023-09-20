@@ -46,16 +46,17 @@ export default {
                     break;
                 case error:
                     result = {
-                        color: "red",
-                        display: 'block',
+                        'color': "red",
+                        'display': 'block',
                         'font-size': '1rem',
-                        'margin-top': '-0.5rem'
+                        'margin-top': '1rem',
+                        'margin-bottom': '1rem'
                     };
                     break;
                 case footer:
                     result = {
-                        color: "gray",
-                        display: "inline",
+                        'color': "gray",
+                        'display': "inline",
                         "font-size": "0.75rem"
                     };
                     break;
@@ -69,7 +70,7 @@ export default {
                     result = { 'font-size': '1rem' };
                     break;
                 default:
-                    result = { width: "100%" };
+                    result = { 'width': "100%" };
             }
 
             return result;

@@ -14,7 +14,7 @@
 import TextComponent from "../TextComponent.vue";
 
 import axios from "axios";
-import { baseUrl, isEmail } from '../../../utilities.js';
+import { baseUrl, formatErrorMessage, isEmail } from '../../../utilities.js';
 
 export default {
     name: "ForgotPasswordButton",
@@ -88,7 +88,9 @@ export default {
                     this.loggingIn = false;
 
                     if (errors.length) {
-                        this.errorArr = [...errors];
+                        const formattedErrors = errors.map(err => formatErrorMessage(err));
+
+                        this.errorArr = [...formattedErrors];
                     }
                 });
         }
