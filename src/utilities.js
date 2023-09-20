@@ -43,11 +43,19 @@ export function findNonAlphanumericChars(str) {
 }
 
 /**
- * This convenience function to format API endpoint error messages.
+ * This convenience function formats individual API endpoint error messages.
  * @param {errorStr} str - Error message string
  */
 export function formatErrorMessage(errorStr) {
     return `Error: ${errorStr}`;
+}
+
+/**
+ * This convenience function formats an array of API endpoint error messages.
+ * @param {errorArr} str - Array of strings
+ */
+export function formatErrorMessages(errorArr) {
+    return errorArr.map(v => v).map(err => formatErrorMessage(err));
 }
 
 /**
