@@ -9,18 +9,18 @@
     <br />
     <br />
     <!-- username -->
-    <input id="username-input" @input="validateUsername" v-model.trim="username" required tabindex="4"
+    <input id="username-input" @input="validateUsername" v-model.trim="username" required tabindex="2"
         :placeholder="$i18n('enter_a_username')" :style="usernameInputStyle" />
     <TextComponent v-if="usernameErrorMessage.length" :msg="$i18n(usernameErrorMessage)" error />
     <!-- email -->
-    <input type="email" @input="validateEmail" v-model.trim="email" required tabindex="6" :style="emailInputStyle"
+    <input type="email" @input="validateEmail" v-model.trim="email" required tabindex="4" :style="emailInputStyle"
         :placeholder="$i18n('enter_your_email')" />
     <TextComponent v-if="emailErrorMessage.length" :msg="$i18n(emailErrorMessage)" error />
     <!-- password with show/hide button -->
     <div>
         <input class="password-input" :type="passwordInputType" v-model.trim="password" required
-            :placeholder="$i18n('enter_a_password')" tabindex="8" :style="passwordInputStyle" />
-        <button @click="togglePasswordInputType" class="small-button" id="show-toggle-button" tabindex="9">
+            :placeholder="$i18n('enter_a_password')" tabindex="6" :style="passwordInputStyle" />
+        <button @click="togglePasswordInputType" class="small-button" id="show-password-toggle-button" tabindex="8">
             {{ passwordInputType === 'password' ? $i18n('password_show') : $i18n('password_hide') }}
         </button>
     </div>
@@ -32,27 +32,28 @@
     <!-- AZero wallet address (optional) -->
     <input id="address-input" @input="validateAddress($event, 'azero', 'azeroAddressErrorMessage')"
         v-model.trim="azeroWalletId" :style="addressInputStyleAzero"
-        :placeholder="$i18n('enter_azero_wallet_address_optional')" tabindex="11" />
+        :placeholder="$i18n('enter_azero_wallet_address_optional')" tabindex="12" />
     <TextComponent v-if="azeroAddressErrorMessage.length" :msg="$i18n(azeroAddressErrorMessage)" error />
     <!-- Polkadot wallet address (optional) -->
+    <!-- TODO add this to translation file -->
     <input id="address-input" @input="validateAddress($event, 'pdot', 'pdotAddressErrorMessage')"
         v-model.trim="pdotWalletId" :style="addressInputStylePdot" placeholder="Optional: Paste your Moonbeam wallet here"
-        tabindex="12" />
+        tabindex="14" />
     <TextComponent v-if="pdotAddressErrorMessage.length" :msg="$i18n(pdotAddressErrorMessage)" error />
     <!-- referrer (optional) -->
-    <input v-model.trim="referrer" tabindex="13" :placeholder="$i18n('enter_referrer_name')" />
+    <input v-model.trim="referrer" tabindex="16" :placeholder="$i18n('enter_referrer_name')" />
     <div class="checkbox-container" style="margin-top: 0.8rem;" @click="focusNextCheckbox">
-        <input id="first-box" type="checkbox" v-model="termsOfService" tabindex="14">
+        <input id="first-box" type="checkbox" v-model="termsOfService" tabindex="18">
         <label for="first-box">{{ $i18n('agree_to_our') }}<a href="https://interlock.network" target="_blank">
                 {{ $i18n('terms_of_service') }} </a></label>
     </div>
     <div class="checkbox-container">
-        <input id="second-box" type="checkbox" v-model="unitedStates" tabindex="16">
+        <input id="second-box" type="checkbox" v-model="unitedStates" tabindex="20">
         <label for="second-box" style="display: inline-flex;">{{ $i18n('affirm_not_us_citizen') }}
             <InfoTip :msg="$i18n('crypto_us_warning')" />
         </label>
     </div>
-    <CreateUserButton style="margin-top: 1.1rem;" tabindex="26"
+    <CreateUserButton style="margin-top: 1.1rem;" tabindex="22"
         v-bind="{ azeroWalletId, checkState, selectPage, email, password, pdotWalletId, referrer, termsOfService, unitedStates, username }" />
 </template>
 <script>
@@ -114,7 +115,7 @@ export default {
         };
     },
     async mounted() {
-        const firstInput = document.getElementById('address-input');
+        const firstInput = document.getElementById('username-input');
 
         firstInput.focus();
     },
