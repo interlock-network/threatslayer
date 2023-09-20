@@ -43,6 +43,14 @@ export function findNonAlphanumericChars(str) {
 }
 
 /**
+ * This convenience function to format API endpoint error messages.
+ * @param {errorStr} str - Error message string
+ */
+export function formatErrorMessage(errorStr) {
+    return `Error: ${errorStr}`;
+}
+
+/**
  * This convenience function to stringify large numbers to local formats with commas etc.
  * @param {number} num - Unix time in seconds
  */
