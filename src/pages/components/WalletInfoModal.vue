@@ -11,13 +11,13 @@
             <div v-if="showAddressInput">
                 <!-- input field with prompt for new Aleph Zero address -->
                 <TextComponent :msg="$i18n(updateAddressMsg)" subinstruction />
-                <input @input="validateAddress($event, 'azero', 'newAzeroErrorMessage')" v-model.trim="newAzeroAddress"
-                    :style="addressInputStyle" style="margin-top: 0.5rem;"
+                <input id="azero-input" @input="validateAddress($event, 'azero', 'newAzeroErrorMessage')"
+                    v-model.trim="newAzeroAddress" :style="addressInputStyle" style="margin-top: 0.5rem;"
                     :placeholder="$i18n('enter_azero_wallet_address')" tabindex="2" />
                 <ErrorMessage v-if="newAzeroErrorMessage.length" :msg="$i18n(newAzeroErrorMessage)" single />
                 <!-- input field with prompt for new Moonbeam address -->
-                <input @input="validateAddress($event, 'pdot', 'newPdotErrorMessage')" v-model.trim="newPdotAddress"
-                    :style="addressInputStyle" style="margin-top: -0.2rem;"
+                <input id="pdot-input" @input="validateAddress($event, 'pdot', 'newPdotErrorMessage')"
+                    v-model.trim="newPdotAddress" :style="addressInputStyle" style="margin-top: -0.2rem;"
                     :placeholder="$i18n('enter_pdot_wallet_address')" tabindex="4" />
                 <ErrorMessage v-if="newPdotErrorMessage.length" :msg="$i18n(newPdotErrorMessage)" single last />
                 <!-- password field with show/hide button -->
@@ -32,16 +32,16 @@
                     <WarningTextBox v-if="showAddressChangeWarning" :msg="$i18n('warning_changing_wallet_address')" />
                 </div>
                 <!-- button to update address -->
-                <UpdateAddressButton
+                <UpdateAddressButton tabindex="10"
                     v-bind="{ apiKey, checkState, active, newAzeroAddress, newPdotAddress, password, toggleClickedOnce, username }" />
             </div>
             <div v-if="!showAddressInput">
-                <button @click="selectChangeAddress(true)" id="update-address-button" class="modal-button">
+                <button @click="selectChangeAddress(true)" id="update-address-button" class="modal-button" tabindex="12">
                     {{ $i18n('update_wallet_address') }}
                 </button><br />
                 <br />
             </div>
-            <button @click="doneAction" id="done-button" class="modal-button">
+            <button @click="doneAction" id="done-button" class="modal-button" tabindex="14">
                 {{ $i18n(cancelDoneButtonText) }}
             </button>
         </div>
@@ -131,8 +131,13 @@ export default {
     },
     methods: {
         doneAction() {
-            this.fadeAccountPage(false);
+            this.newAzeroAddress = '';
+            this.newAzeroErrorMessage = '';
+            this.password = '';
+            this.newPdotAddress = '';
+            this.newPdotErrorMessage = '';
             this.active = false;
+            this.fadeAccountPage(false);
             this.selectChangeAddress(false);
         },
         legitPolkadot(address) {
