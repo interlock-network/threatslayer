@@ -21,6 +21,7 @@ export default {
     name: "LoginButton",
     props: {
         checkState: Function,
+        disabled: Boolean,
         password: String,
         selectPage: Function,
         usernameOrEmail: String,
@@ -49,9 +50,9 @@ export default {
             return className;
         },
         disabled() {
-            const { loggedIn, loggingIn, password, usernameOrEmail } = this;
+            const { disabled, loggedIn, loggingIn, password, usernameOrEmail } = this;
 
-            return !password || !usernameOrEmail || loggedIn || loggingIn;
+            return disabled || !password || !usernameOrEmail || loggedIn || loggingIn;
         },
         loginButtonText() {
             let result = '';
