@@ -3,11 +3,12 @@
         <button @click="submitCreateUser" class="submit-button" :class="computedClass" :disabled="disabled">
             {{ $i18n(submitButtonText) }}
         </button>
-        <TextComponent v-for="errorMessage in errorArr" :msg="errorMessage" error />
+        <ErrorMessage v-for="errorMessage in errorArr" :msg="errorMessage" style="padding-top: 3rem;" single />
     </div>
 </template>
 
 <script>
+import ErrorMessage from "../ErrorMessage.vue";
 import TextComponent from "../TextComponent.vue";
 
 import axios from "axios";
@@ -28,6 +29,7 @@ export default {
         username: String,
     },
     components: {
+        ErrorMessage,
         TextComponent
     },
     data() {
