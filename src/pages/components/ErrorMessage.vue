@@ -16,11 +16,11 @@ export default {
             type: Boolean,
             default: false,
         },
-        singleError: {
+        single: {
             type: Boolean,
             default: false,
         },
-        stackedError: {
+        stacked: {
             type: Boolean,
             default: false,
         },
@@ -30,7 +30,7 @@ export default {
     },
     computed: {
         computedClass() {
-            return this.singleError ? 'single-error' : this.stackedError ? 'stacked-error' : '';
+            return this.single ? 'single-error' : this.stacked ? 'stacked-error' : '';
         },
         computedStyle() {
             return this.last ? 'margin-bottom: 0;' : '';
@@ -45,7 +45,7 @@ export default {
     display: block;
     font-size: 1rem;
     margin-top: -0.3rem;
-    margin-bottom: 1rem;
+    /* margin-bottom: 1rem; */
 }
 
 .stacked-error {
