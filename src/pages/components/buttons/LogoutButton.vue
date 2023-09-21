@@ -6,7 +6,7 @@
 
 <script>
 import axios from "axios";
-import { baseUrl, clearChromeStorage, setChromeStorage } from '../../../utilities.js';
+import { baseUrl, clearChromeStorage, extractFromError, setChromeStorage } from '../../../utilities.js';
 
 export default {
     name: "LogoutButton",
@@ -75,7 +75,7 @@ export default {
                         }
                     })
                     .catch(error => {
-                        const { data: { error_message: errors = [] }, status } = error.response;
+                        const { errors, status } = extractFromError(error);
 
                         console.log(`Logout error. Status: ${status}. Error: ${errors}`);
                     })

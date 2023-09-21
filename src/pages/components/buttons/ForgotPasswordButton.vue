@@ -14,7 +14,7 @@
 import TextComponent from "../TextComponent.vue";
 
 import axios from "axios";
-import { baseUrl, formatErrorMessages, isEmail } from '../../../utilities.js';
+import { baseUrl, extractFromError, formatErrorMessages, isEmail } from '../../../utilities.js';
 
 export default {
     name: "ForgotPasswordButton",
@@ -80,7 +80,7 @@ export default {
                 })
                 .catch(error => {
                     this.isError = true;
-                    const { data: { error_message: errors = [] }, status } = error.response;
+                    const { errors, status } = extractFromError(error);
 
                     console.log(`Forgot password error. Status: ${status}. Error: ${errors}`);
 

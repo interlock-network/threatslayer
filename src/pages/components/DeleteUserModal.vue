@@ -36,7 +36,7 @@
 import TextComponent from "./TextComponent.vue";
 
 import axios from "axios";
-import { baseUrl, clearChromeStorage, formatErrorMessages, setChromeStorage } from '../../utilities.js';
+import { baseUrl, clearChromeStorage, extractFromError, formatErrorMessages, setChromeStorage } from '../../utilities.js';
 
 export default {
     name: "DeleteUserModal",
@@ -124,7 +124,7 @@ export default {
                         }
                     })
                     .catch(error => {
-                        const { data: { error_message: errors = [] }, status } = error.response;
+                        const { errors, status } = extractFromError(error);
 
                         console.log(`Delete user error. Status: ${status}. Error: ${errors}`);
 

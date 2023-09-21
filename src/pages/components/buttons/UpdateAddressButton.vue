@@ -5,7 +5,7 @@
             {{ $i18n(submitButtonText) }}
         </button>
         <br />
-        <ErrorMessage v-for="errorMessage in errorArr" :msg="errorMessage" stackedError />
+        <ErrorMessage v-for="errorMessage in errorArr" :msg="errorMessage" stacked />
     </div>
 </template>
 
@@ -13,7 +13,7 @@
 import ErrorMessage from "../ErrorMessage.vue";
 
 import axios from "axios";
-import { baseUrl, formatErrorMessages, setChromeStorage } from '../../../utilities.js';
+import { baseUrl, extractFromError, formatErrorMessages, setChromeStorage } from '../../../utilities.js';
 
 export default {
     name: "UpdateAddressButton",
@@ -105,7 +105,7 @@ export default {
                     }
                 })
                 .catch(error => {
-                    const { data: { error_message: errors = [] }, status } = error.response;
+                    const { errors, status } = extractFromError(error);
 
                     console.log(`Create user error. Status: ${status}. Error: ${errors}`);
 

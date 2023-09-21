@@ -97,7 +97,7 @@ import PageBanner from "./components/PageBanner.vue";
 
 import axios from "axios";
 import { baseUrl } from '../utilities.js';
-import { formatNumber, getFontSizeForTotal, getFontSizeForSmallerNums, setChromeStorage } from "../utilities";
+import { extractFromError, formatNumber, getFontSizeForTotal, getFontSizeForSmallerNums, setChromeStorage } from "../utilities";
 
 const output = { name: "SlayCount.png", width: 512, height: 512 };
 
@@ -257,7 +257,7 @@ export default {
                     setChromeStorage({ totalURLsVisited });
                 })
                 .catch(error => {
-                    const { data: { error_message: errors = [] }, status } = error.response;
+                    const { errors, status } = extractFromError(error);
 
                     console.log(`Error getting user stats from API. Status: ${status}. Error: ${errors}`);
                 });

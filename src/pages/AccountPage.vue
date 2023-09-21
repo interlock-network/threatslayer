@@ -39,7 +39,7 @@ import TextComponent from "./components/TextComponent.vue";
 import WalletInfoModal from "./components/WalletInfoModal.vue";
 
 import axios from "axios";
-import { baseUrl } from '../utilities.js';
+import { baseUrl, extractFromError } from '../utilities.js';
 
 export default {
     name: 'AccountPage',
@@ -101,7 +101,7 @@ export default {
                     this.tokensEarnedTotal = tokens_earned_total;
                 })
                 .catch(error => {
-                    const { data: { error_message: errors = [] }, status } = error.response;
+                    const { errors, status } = extractFromError(error);
 
                     console.log(`Error getting user stats from API. Status: ${status}. Error: ${errors}`);
                 });
