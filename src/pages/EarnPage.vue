@@ -11,11 +11,11 @@
     <!-- username -->
     <input id="username-input" @input="validateUsername" v-model.trim="username" required tabindex="2"
         :placeholder="$i18n('enter_a_username')" :style="usernameInputStyle" />
-    <TextComponent v-if="usernameErrorMessage.length" :msg="$i18n(usernameErrorMessage)" error />
+    <ErrorMessage v-if="usernameErrorMessage.length" :msg="$i18n(usernameErrorMessage)" single />
     <!-- email -->
     <input type="email" @input="validateEmail" v-model.trim="email" required tabindex="4" :style="emailInputStyle"
         :placeholder="$i18n('enter_your_email')" />
-    <TextComponent v-if="emailErrorMessage.length" :msg="$i18n(emailErrorMessage)" error />
+    <ErrorMessage v-if="emailErrorMessage.length" :msg="$i18n(emailErrorMessage)" single />
     <!-- password with show/hide button -->
     <div>
         <input class="password-input" :type="passwordInputType" v-model.trim="password" required
@@ -24,22 +24,22 @@
             {{ passwordInputType === 'password' ? $i18n('password_show') : $i18n('password_hide') }}
         </button>
     </div>
-    <TextComponent v-if="passwordErrorMessage.length" :msg="$i18n(passwordErrorMessage)" error />
+    <ErrorMessage v-if="passwordErrorMessage.length" :msg="$i18n(passwordErrorMessage)" single />
     <!-- password confirmation field -->
     <input class="password-input" :type="passwordInputType" @input="validateReenteredPassword" :style="passwordInputStyle"
         v-model.trim="reenteredPassword" :placeholder="$i18n('enter_password_again')" tabindex="10" required />
-    <TextComponent v-if="reenteredPasswordErrorMessage.length" :msg="$i18n(reenteredPasswordErrorMessage)" error />
+    <ErrorMessage v-if="reenteredPasswordErrorMessage.length" :msg="$i18n(reenteredPasswordErrorMessage)" single />
     <!-- AZero wallet address (optional) -->
     <input id="address-input" @input="validateAddress($event, 'azero', 'azeroAddressErrorMessage')"
         v-model.trim="azeroWalletId" :style="addressInputStyleAzero"
         :placeholder="$i18n('enter_azero_wallet_address_optional')" tabindex="12" />
-    <TextComponent v-if="azeroAddressErrorMessage.length" :msg="$i18n(azeroAddressErrorMessage)" error />
+    <ErrorMessage v-if="azeroAddressErrorMessage.length" :msg="$i18n(azeroAddressErrorMessage)" single />
     <!-- Polkadot wallet address (optional) -->
     <!-- TODO add this to translation file -->
     <input id="address-input" @input="validateAddress($event, 'pdot', 'pdotAddressErrorMessage')"
         v-model.trim="pdotWalletId" :style="addressInputStylePdot" placeholder="Optional: Paste your Moonbeam wallet here"
         tabindex="14" />
-    <TextComponent v-if="pdotAddressErrorMessage.length" :msg="$i18n(pdotAddressErrorMessage)" error />
+    <ErrorMessage v-if="pdotAddressErrorMessage.length" :msg="$i18n(pdotAddressErrorMessage)" single />
     <!-- referrer (optional) -->
     <input v-model.trim="referrer" tabindex="16" :placeholder="$i18n('enter_referrer_name')" />
     <div class="checkbox-container" style="margin-top: 0.8rem;" @click="focusNextCheckbox">
@@ -62,13 +62,14 @@ import { decodeAddress, encodeAddress } from '@polkadot/keyring';
 import { findEmailError, findNonAlphanumericChars, usernameErrorMessages, validateAzero, validateMoonbeam } from "../utilities";
 import { hexToU8a, isHex } from '@polkadot/util';
 
-import WarningTextBox from "./components/WarningTextBox.vue";
 import CreateUserButton from "./components/buttons/CreateUserButton.vue";
+import ErrorMessage from "./components/ErrorMessage.vue";
 import InfoTip from "./components/InfoTip.vue";
 import LineOfText from "./components/LineOfText.vue";
 import LoginLine from './components/LoginLine.vue';
 import PageBanner from "./components/PageBanner.vue";
 import TextComponent from "./components/TextComponent.vue";
+import WarningTextBox from "./components/WarningTextBox.vue";
 
 const errorStyle = {
     border: '3px solid red',
@@ -84,13 +85,15 @@ export default {
         urlToStake: String
     },
     components: {
-        WarningTextBox,
         CreateUserButton,
+        ErrorMessage,
         InfoTip,
         LineOfText,
         LoginLine,
         PageBanner,
-        TextComponent
+        TextComponent,
+        WarningTextBox,
+
     },
     data() {
         return {
@@ -221,7 +224,6 @@ export default {
         validateUsername: debounce(function (event) {
             const name = event?.target?.value;
 
-            // bail out if no username yet, or else it will show an error and be annoying
             if (!name || !name.length) {
                 this.clearUsernameErrors();
                 return true;
