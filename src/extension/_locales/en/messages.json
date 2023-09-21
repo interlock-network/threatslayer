@@ -31,6 +31,10 @@
         "message": "Account Info for",
         "description": "Page header for Account page."
     },
+    "add_blockchain_address": {
+        "message": "Add Blockchain Address",
+        "description": "Header text on Account page."
+    },
     "address_aleph": {
         "message": "Aleph Zero-compatible Wallet Address",
         "description": "Header on a page listing wallet addresses."
