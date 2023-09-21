@@ -6,15 +6,16 @@
         </button>
         <br />
         <br />
-        <TextComponent v-for="errorMessage in errorArr" :msg="errorMessage" style="margin-bottom: -1rem;" error />
+        <ErrorMessage v-for="errorMessage in errorArr" :msg="errorMessage" single />
     </div>
 </template>
 
 <script>
+import ErrorMessage from "../ErrorMessage.vue";
 import TextComponent from "../TextComponent.vue";
 
 import axios from "axios";
-import { baseUrl, formatErrorMessages, isEmail, setChromeStorage } from '../../../utilities.js';
+import { baseUrl, extractFromError, formatErrorMessages, isEmail, setChromeStorage } from '../../../utilities.js';
 
 export default {
     name: "LoginButton",
@@ -25,6 +26,7 @@ export default {
         usernameOrEmail: String,
     },
     components: {
+        ErrorMessage,
         TextComponent
     },
     data() {
@@ -113,7 +115,7 @@ export default {
                     }
                 })
                 .catch(error => {
-                    const { data: { error_message: errors = [] }, status } = error.response;
+                    const { errors, status } = extractFromError(error);
 
                     console.log(`Login error. Status: ${status}. Error: ${errors}`);
 
