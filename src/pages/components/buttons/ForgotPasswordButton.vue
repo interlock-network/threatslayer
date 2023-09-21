@@ -6,22 +6,25 @@
         </button>
         <br />
         <br />
-        <TextComponent v-for="errorMessage in errorArr" :msg="errorMessage" error />
+        <ErrorMessage v-for="errorMessage in errorArr" :msg="errorMessage" single />
     </div>
 </template>
 
 <script>
+import ErrorMessage from "../ErrorMessage.vue";
 import TextComponent from "../TextComponent.vue";
 
 import axios from "axios";
-import { baseUrl, extractFromError, formatErrorMessages, isEmail } from '../../../utilities.js';
+import { baseUrl, extractFromError, formatErrorMessages } from '../../../utilities.js';
 
 export default {
     name: "ForgotPasswordButton",
     props: {
+        disabled: Boolean,
         email: String,
     },
     components: {
+        ErrorMessage,
         TextComponent
     },
     data() {
@@ -43,11 +46,6 @@ export default {
             }
 
             return className;
-        },
-        disabled() {
-            const { email } = this;
-
-            return !email?.length || !isEmail(email);
         },
         forgotPasswordButtonText() {
             const { errorArr, loggedIn, loggingIn } = this;
@@ -73,8 +71,6 @@ export default {
 
             axios.post(`${baseUrl}/user-password-forgot`, { email: this.email })
                 .then(_response => {
-                    console.log('Password forget request submitted.');
-
                     this.loggedIn = true;
                     this.loggingIn = false;
                 })
