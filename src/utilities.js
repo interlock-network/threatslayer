@@ -1,13 +1,42 @@
 export const baseUrl = 'http://159.89.252.13';
 
-export const usernameErrorMessages = {
-    illegalChars: function (_chars) {
-        // TODO uncomment when we upgrade translation
-        // const chars = chars.join(', ');
-        return 'warning_username_contains_illegal_characters';
-    },
-    maxLength: 'warning_username_too_long'
-};
+/**
+ * This function gets a single value from Chrome local storage
+ * @param {string} key - The key for a value to set to null in Chrome local storage
+ */
+export function clearChromeStorage(key) {
+    try {
+        return chrome.storage.local
+            .set({ [key]: null })
+            .then(() => {
+                console.log(`Chrome state cleared for ${key}`);
+
+                return true;
+            });
+    } catch (err) {
+        console.log(`Error clearing Chrome state for ${key}. Error: ${err}`);
+
+        return false;
+    }
+}
+
+/**
+ * This convenience function formats an array of API endpoint error messages.
+ * @param {object} errorObj - the error object returned by Axios
+ * @param {object} errorObj.response - the response from the GALACTUS endpoint
+ * @param {number} errorObj.response.status - server status code
+ * @param {object} errorObj.response.data - an object containing data specific to the error
+ * @param {Array.<string>} errorObj.response.data.error_message - an array of error messages
+ */
+export function extractFromError(errorObj) {
+    const { data: { error_message = [] } = {}, status } = errorObj.response;
+
+    const result = {};
+    result.errors = error_message;
+    result.status = status;
+
+    return result;
+}
 
 /**
  * This convenience function perforns basic email validation
@@ -175,25 +204,15 @@ export function setChromeStorage(storageObj) {
     }
 }
 
-/**
- * This function gets a single value from Chrome local storage
- * @param {string} key - The key for a value to set to null in Chrome local storage
- */
-export function clearChromeStorage(key) {
-    try {
-        return chrome.storage.local
-            .set({ [key]: null })
-            .then(() => {
-                console.log(`Chrome state cleared for ${key}`);
-
-                return true;
-            });
-    } catch (err) {
-        console.log(`Error clearing Chrome state for ${key}. Error: ${err}`);
-
-        return false;
-    }
-}
+// TODO add documentation here
+export const usernameErrorMessages = {
+    illegalChars: function (_chars) {
+        // TODO uncomment when we upgrade translation
+        // const chars = chars.join(', ');
+        return 'warning_username_contains_illegal_characters';
+    },
+    maxLength: 'warning_username_too_long'
+};
 
 /**
  * This convenience function validates whether a wallet address string is Aleph Zero
