@@ -42,13 +42,12 @@ export function extractFromError(errorObj) {
  * This convenience function perforns basic email validation
  * @param {string} email - an email string
  */
-export function findEmailError(email) {
+export function findEmailError(email = '') {
     let result = '';
-    const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/;
 
-    if (!email?.length) {
+    if (!email.length) {
         result = '';
-    } else if (!emailRegex.test(email)) {
+    } else if (!isEmail(email)) {
         result = 'error_invalid_email_generic';
     } else {
         result = '';
@@ -211,6 +210,8 @@ export const usernameErrorMessages = {
         // const chars = chars.join(', ');
         return 'warning_username_contains_illegal_characters';
     },
+    // TODO determine min characters
+    minLength: 'warning_username_too_short',
     maxLength: 'warning_username_too_long'
 };
 
