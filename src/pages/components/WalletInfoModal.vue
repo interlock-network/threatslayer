@@ -1,7 +1,7 @@
 <template>
     <!-- initial View Wallet Info button -->
     <button v-if="!active" @click="openWalletInfoModal" id="view-wallet-info-button" :class="computedClass">
-        {{ $i18n('view_wallet_info') }}
+        {{ $i18n(headerText) }}
     </button>
     <div v-if="active" id="modal-overlay">
         <div id="modal-container" :style="active ? 'bottom: 40%' : 'display: none'">
@@ -14,12 +14,12 @@
                 <input @input="validateAddress($event, 'azero', 'newAzeroErrorMessage')" v-model.trim="newAzeroAddress"
                     :style="addressInputStyle" style="margin-top: 0.5rem;"
                     :placeholder="$i18n('enter_azero_wallet_address')" tabindex="2" />
-                <ErrorMessage v-if="newAzeroErrorMessage.length" :msg="$i18n(newAzeroErrorMessage)" singleError />
+                <ErrorMessage v-if="newAzeroErrorMessage.length" :msg="$i18n(newAzeroErrorMessage)" single />
                 <!-- input field with prompt for new Moonbeam address -->
                 <input @input="validateAddress($event, 'pdot', 'newPdotErrorMessage')" v-model.trim="newPdotAddress"
                     :style="addressInputStyle" style="margin-top: -0.2rem;"
                     :placeholder="$i18n('enter_pdot_wallet_address')" tabindex="4" />
-                <ErrorMessage v-if="newPdotErrorMessage.length" :msg="$i18n(newPdotErrorMessage)" singleError last />
+                <ErrorMessage v-if="newPdotErrorMessage.length" :msg="$i18n(newPdotErrorMessage)" single last />
                 <!-- password field with show/hide button -->
                 <input id="login-password" class="input-field-text password-input" :type="passwordInputType"
                     v-model.trim="password" placeholder="Password" tabindex="6" style="margin-top: 1.5rem" />
@@ -112,6 +112,9 @@ export default {
             }
 
             return result;
+        },
+        headerText() {
+            return !this.azeroAddress?.length && !this.pdotAddress?.length ? 'add_blockchain_address' : 'view_wallet_info';
         },
         showAddress(address) {
             return address?.length && !this.changeAddressSelected;
