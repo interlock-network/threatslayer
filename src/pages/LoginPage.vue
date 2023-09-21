@@ -9,17 +9,17 @@
     <!-- username field -->
     <input class="input-field-text" @input="validateUsername" id="login-username-or-email" v-model.trim="usernameOrEmail"
         :placeholder="$i18n('enter_your_username')" tabindex="2" :style="usernameInputStyle" />
-    <TextComponent :msg="$i18n(usernameErrorMessage)" error v-if="usernameErrorMessage.length" />
+    <ErrorMessage :msg="$i18n(usernameErrorMessage)" single v-if="usernameErrorMessage.length" />
     <br />
     <!-- password field with show/hide button -->
     <input id="login-password" class="input-field-text password-input" :type="passwordInputType" v-model.trim="password"
-        placeholder="Password" tabindex="4" :style="passwordInputStyle" />
+        :placeholder="$i18n('password')" tabindex="4" :style="passwordInputStyle" />
     <button @click="togglePasswordInputType" class="small-button" id="show-password-toggle-button" tabindex="5">
         {{ passwordInputType === 'password' ? $i18n('password_show') : $i18n('password_hide') }}
     </button>
-    <TextComponent :msg="$i18n(passwordErrorMessage)" error v-if="passwordErrorMessage.length" />
+    <ErrorMessage :msg="$i18n(passwordErrorMessage)" single v-if="passwordErrorMessage.length" />
     <br />
-    <LoginButton v-bind="{ checkState, password, selectPage, usernameOrEmail }" tabindex="6" />
+    <LoginButton :disabled="loginDisabled" v-bind="{ checkState, password, selectPage, usernameOrEmail }" tabindex="6" />
     <!-- Forgot username / password flow -->
     <br />
     <br />
@@ -27,13 +27,14 @@
         style="margin-top: 3rem; margin-bottom: 1rem;" />
     <input type="email" class="input-field-text" id="forgot-info-email" @input="validateEmail" v-model.trim="email" required
         :placeholder="$i18n('enter_email_to_change_password')" tabindex="8" />
-    <TextComponent :msg="$i18n(emailErrorMessage)" error v-if="emailErrorMessage.length" />
-    <ForgotPasswordButton :email="email" style="margin-top: 0.75rem;" tabindex="10" />
+    <ErrorMessage :msg="$i18n(emailErrorMessage)" single v-if="emailErrorMessage.length" />
+    <ForgotPasswordButton :disabled="forgotPasswordDisabled" :email="email" style="margin-top: 0.75rem;" tabindex="10" />
 </template>
 <script>
 import { debounce } from 'debounce';
 import { findEmailError, findNonAlphanumericChars, usernameErrorMessages } from "../utilities";
 
+import ErrorMessage from "./components/ErrorMessage.vue";
 import ForgotPasswordButton from "./components/buttons/ForgotPasswordButton.vue";
 import LoginButton from "./components/buttons/LoginButton.vue";
 import PageBanner from "./components/PageBanner.vue";
@@ -55,12 +56,13 @@ export default {
         urlToStake: String
     },
     components: {
-        WarningTextBox,
+        ErrorMessage,
         ForgotPasswordButton,
         LoginButton,
         PageBanner,
         RegisterLine,
-        TextComponent
+        TextComponent,
+        WarningTextBox
     },
     data() {
         return {
@@ -80,6 +82,14 @@ export default {
         usernameInput.focus();
     },
     computed: {
+        forgotPasswordDisabled() {
+            const { emailErrorMessage } = this;
+
+            return emailErrorMessage.length > 0;
+        },
+        loginDisabled() {
+            return this.usernameErrorMessage.length > 0;
+        },
         passwordInputStyle() {
             return this.passwordErrorMessage.length ? errorStyle : {};
         },
@@ -94,6 +104,7 @@ export default {
         togglePasswordInputType() {
             this.passwordInputType = this.passwordInputType === 'password' ? 'text' : 'password';
         },
+        // TODO add validate password
         validateEmail() {
             this.emailErrorMessage = findEmailError(this.email);
         },
