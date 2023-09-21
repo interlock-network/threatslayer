@@ -10,10 +10,6 @@ export default {
             type: Boolean,
             default: false,
         },
-        error: {
-            type: Boolean,
-            default: false,
-        },
         footer: {
             type: Boolean,
             default: false,
@@ -38,20 +34,11 @@ export default {
     computed: {
         style() {
             let result = {};
-            const { bold, error, footer, mono, subinstruction } = this;
+            const { bold, footer, mono, subinstruction } = this;
 
             switch (true) {
                 case bold:
                     result = { "font-weight": "bold" };
-                    break;
-                case error:
-                    result = {
-                        'color': "red",
-                        'display': 'block',
-                        'font-size': '1rem',
-                        'margin-top': '1rem',
-                        'margin-bottom': '1rem'
-                    };
                     break;
                 case footer:
                     result = {
@@ -74,8 +61,8 @@ export default {
             }
 
             return result;
-        },
-    },
+        }
+    }
 };
 </script>
 
