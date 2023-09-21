@@ -22,8 +22,7 @@
             <button @click="submitDeleteUser" id="modal-delete-user-button" :class="computedClass" :disabled="disabled">
                 {{ $i18n(deleteUserButtonText) }}
             </button>
-            <!-- error message -->
-            <TextComponent v-for="errorMessage in errorArr" :msg="errorMessage" error />
+            <ErrorMessage v-for="errorMessage in errorArr" :msg="errorMessage" single style="margin-top: 1rem;" />
             <!-- cancel button -->
             <button @click="cancelAction" id="cancel-delete-user-button" style="color: #963cf5 ">
                 {{ $i18n('cancel') }}
@@ -33,6 +32,7 @@
 </template>
 
 <script>
+import ErrorMessage from "./ErrorMessage.vue";
 import TextComponent from "./TextComponent.vue";
 
 import axios from "axios";
@@ -48,6 +48,7 @@ export default {
         username: String
     },
     components: {
+        ErrorMessage,
         TextComponent
     },
     data() {
@@ -85,6 +86,8 @@ export default {
     },
     methods: {
         cancelAction() {
+            this.password = '';
+            this.errorArr = [];
             this.fadeAccountPage(false);
             this.active = false;
         },
