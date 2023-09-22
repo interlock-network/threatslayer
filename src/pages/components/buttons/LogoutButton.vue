@@ -1,6 +1,10 @@
 <template>
-    <div class="sidebar-item" @click="submitLogout" :class="computedClass" :disabled="loggingOut">
-        <img class="sidebar-icon" src="/src/assets/images/logout.png">{{ logoutButtonText }}
+    <div class="sidebar-item" :disabled="loggingOut">
+        <img class="sidebar-icon" src="/src/assets/images/logout.png">
+        <span @click="submitLogout">{{ logoutButtonText }}
+        </span><br />
+        <span disabled="!clickedOnce" id="sidebar-cancel" :style="computedStyle" @click="cancelLogout">{{ $i18n('cancel')
+        }}</span>
     </div>
 </template>
 
@@ -24,12 +28,13 @@ export default {
         }
     },
     computed: {
-        computedClass() {
-            return this.errorArr.length || this.clickedOnce ? 'submit-button-error' : '';
+        computedStyle() {
+            return this.clickedOnce ? 'color: red;' : 'color: #211037;';
         },
         logoutButtonText() {
             let result = '';
 
+            // TODO add these to translations
             if (this.loggingOut) {
                 result = 'Logging Out';
             } else if (this.clickedOnce) {
@@ -42,6 +47,9 @@ export default {
         }
     },
     methods: {
+        cancelLogout() {
+            this.clickedOnce = false;
+        },
         submitLogout() {
             // user must confirm before they are logged out
             if (!this.clickedOnce) {
@@ -89,4 +97,19 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+#sidebar-cancel {
+    cursor: default;
+    line-height: 2rem;
+    margin-left: 1.65rem;
+    pointer-events: initial;
+}
+
+.cancel-icon {
+    height: 20px;
+    padding-left: 0.75rem;
+    position: relative;
+    top: 5px;
+    width: 20px;
+}
+</style>
