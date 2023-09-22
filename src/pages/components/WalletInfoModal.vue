@@ -33,7 +33,7 @@
                 </div>
                 <!-- button to update address -->
                 <UpdateAddressButton tabindex="10"
-                    v-bind="{ apiKey, checkState, active, newAzeroAddress, newPdotAddress, password, toggleClickedOnce, username }" />
+                    v-bind="{ apiKey, active, checkState, hasError, newAzeroAddress, newPdotAddress, password, toggleClickedOnce, username }" />
             </div>
             <div v-if="!showAddressInput">
                 <button @click="selectChangeAddress(true)" id="update-address-button" class="modal-button" tabindex="12">
@@ -120,10 +120,15 @@ export default {
             return address?.length && !this.changeAddressSelected;
         },
         showAddressInput() {
-            return (!this.azeroAddress?.length && !this.pdotAddress?.length) || this.changeAddressSelected;
+            const { azeroAddress, changeAddressSelected, pdotAddress } = this;
+
+            return (!azeroAddress?.length && !pdotAddress?.length) || changeAddressSelected;
         },
         showAddressChangeWarning() {
             return this.azeroAddress?.length;
+        },
+        hasError() {
+            return !!this.newAzeroErrorMessage.length || !!this.newPdotErrorMessage;
         },
         updateAddressMsg() {
             return !this.address?.length ? 'warning_must_add_wallet_address' : 'enter_new_wallet_address';
