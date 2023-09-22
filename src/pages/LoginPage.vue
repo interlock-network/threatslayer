@@ -23,12 +23,15 @@
     <!-- Forgot username / password flow -->
     <br />
     <br />
-    <TextComponent :msg="$i18n('forgot_password')" class="input-header" bold
-        style="margin-top: 3rem; margin-bottom: 1rem;" />
-    <input type="email" class="input-field-text" id="forgot-info-email" @input="validateEmail" v-model.trim="email" required
-        :placeholder="$i18n('enter_email_to_change_password')" tabindex="8" />
-    <ErrorMessage :msg="$i18n(emailErrorMessage)" single v-if="emailErrorMessage.length" />
-    <ForgotPasswordButton :disabled="forgotPasswordDisabled" :email="email" style="margin-top: 0.75rem;" tabindex="10" />
+    <div id="forgot-password-container">
+        <TextComponent :msg="$i18n('forgot_password')" class="input-header" bold
+            style="margin-top: 3rem; margin-bottom: 1rem;" />
+        <input type="email" class="input-field-text" id="forgot-info-email" @input="validateEmail" v-model.trim="email"
+            required :placeholder="$i18n('enter_email_to_change_password')" tabindex="8" />
+        <ErrorMessage :msg="$i18n(emailErrorMessage)" single v-if="emailErrorMessage.length" />
+        <ForgotPasswordButton :disabled="forgotPasswordDisabled" :email="email" style="margin-top: 0.75rem;"
+            tabindex="10" />
+    </div>
 </template>
 <script>
 import { debounce } from 'debounce';
@@ -83,12 +86,10 @@ export default {
     },
     computed: {
         forgotPasswordDisabled() {
-            const { emailErrorMessage } = this;
-
-            return emailErrorMessage.length > 0;
+            return !!this.emailErrorMessage.length;
         },
         loginDisabled() {
-            return this.usernameErrorMessage.length > 0;
+            return !!this.usernameErrorMessage.length;
         },
         passwordInputStyle() {
             return this.passwordErrorMessage.length ? errorStyle : {};
@@ -139,6 +140,11 @@ export default {
 input:focus {
     border: 3px solid #3b8de8;
     outline: none;
+}
+
+#forgot-password-container {
+    bottom: 30vh;
+    position: absolute;
 }
 
 .password-input {
