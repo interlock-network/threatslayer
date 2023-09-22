@@ -1,6 +1,6 @@
 <template>
     <!-- initial delete user button -->
-    <button v-if="!pageFaded" @click="openDeleteUserModal" id="delete-user-button" :class="computedClass">
+    <button v-if="!pageFaded" @click="openDeleteUserModal" id="delete-user-button">
         <img v-if="!active" class="sidebar-icon" src="/src/assets/images/delete-user.png">{{ $i18n('delete_account') }}
     </button>
     <div v-if="active" id="modal-overlay">
@@ -16,12 +16,8 @@
                     {{ passwordInputType === 'password' ? $i18n('password_show') : $i18n('password_hide') }}
                 </button>
             </div>
-            <!-- delete user button -->
-            <br />
-            <br />
-            <button @click="submitDeleteUser" id="modal-delete-user-button" :class="computedClass" :disabled="disabled">
-                {{ $i18n(deleteUserButtonText) }}
-            </button>
+            <DeleteUserButton v-if="active"
+                v-bind="{ active, checkState, fadeAccountPage, password, setActive, username }" />
             <ErrorMessage v-for="errorMessage in errorArr" :msg="errorMessage" single style="margin-top: 1rem;" />
             <!-- cancel button -->
             <button @click="cancelAction" id="cancel-delete-user-button" style="color: #963cf5 ">
@@ -32,11 +28,9 @@
 </template>
 
 <script>
+import DeleteUserButton from "./buttons/DeleteUserButton.vue";
 import ErrorMessage from "./ErrorMessage.vue";
 import TextComponent from "./TextComponent.vue";
-
-import axios from "axios";
-import { baseUrl, clearChromeStorage, extractFromError, formatErrorMessages, setChromeStorage } from '../../utilities.js';
 
 export default {
     name: "DeleteUserModal",
@@ -48,6 +42,7 @@ export default {
         username: String
     },
     components: {
+        DeleteUserButton,
         ErrorMessage,
         TextComponent
     },
@@ -62,14 +57,12 @@ export default {
         }
     },
     computed: {
-        computedClass() {
-            return this.errorArr.length || this.active ? 'submit-button-error' : '';
-        },
         deleteUserButtonText() {
             let result = '';
 
             if (this.deleting) {
                 result = 'deleting_account';
+                // TODO update text depending on error status
             } else if (this.errorArr.length) {
                 result = 'try_again_later';
             } else {
@@ -77,11 +70,6 @@ export default {
             }
 
             return result;
-        },
-        disabled() {
-            const { active, deleting, password } = this;
-
-            return (active && !password.length) || deleting;
         }
     },
     methods: {
@@ -89,53 +77,14 @@ export default {
             this.password = '';
             this.errorArr = [];
             this.fadeAccountPage(false);
-            this.active = false;
+            this.setActive(false);
         },
         openDeleteUserModal() {
             this.fadeAccountPage(true);
-            this.active = true;
+            this.setActive(true);
         },
-        async submitDeleteUser() {
-            const { password, username } = this;
-            this.errorArr = [];
-
-            // user must confirm they are deleting their account
-            if (!this.active) {
-                this.fadeAccountPage(true);
-                this.active = true;
-            } else if (password.length) {
-                this.deleting = true;
-
-                axios.post(`${baseUrl}/user-delete`, { confirm: true, password, username })
-                    .then(async _response => {
-                        this.deleting = false;
-
-                        const keyClearedFromState = await clearChromeStorage('apiKey');
-                        const loggedOut = await setChromeStorage({ loggedIn: false });
-                        const usernameClearedFromState = await clearChromeStorage('username');
-
-                        const deletedSynched = keyClearedFromState && loggedOut && usernameClearedFromState;
-
-                        if (deletedSynched) {
-                            this.active = false;
-                            this.deleting = false;
-                            const unregistered = await setChromeStorage({ registered: false });
-
-                            if (unregistered) {
-                                this.checkState();
-                            }
-                        }
-                    })
-                    .catch(error => {
-                        const { errors, status } = extractFromError(error);
-
-                        console.log(`Delete user error. Status: ${status}. Error: ${errors}`);
-
-                        this.deleting = false;
-                        this.errorArr = formatErrorMessages(errors);
-                        this.fadeAccountPage(false);
-                    });
-            }
+        setActive(bool) {
+            this.active = bool;
         },
         togglePasswordInputType() {
             this.passwordInputType = this.passwordInputType === 'password' ? 'text' : 'password';
@@ -195,16 +144,5 @@ export default {
     margin-top: 1.45rem;
     position: absolute;
     right: 4%;
-}
-
-#modal-delete-user-button {
-    background-color: #0F0818;
-    border: none;
-    color: red;
-    cursor: pointer;
-    font-size: 1rem;
-    margin-bottom: -1rem;
-    padding-top: 1rem;
-    width: 400px;
 }
 </style>
