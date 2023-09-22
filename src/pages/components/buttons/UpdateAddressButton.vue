@@ -21,6 +21,7 @@ export default {
         apiKey: String,
         checkState: Function,
         clickedOnce: Boolean,
+        hasError: Boolean,
         newAzeroAddress: {
             type: String,
             default: ''
@@ -30,7 +31,6 @@ export default {
             default: ''
         },
         password: String,
-        toggleClickedOnce: Function,
         username: String,
     },
     components: {
@@ -56,9 +56,9 @@ export default {
             return className;
         },
         disabled() {
-            const { newAzeroAddress, newPdotAddress, submitting, submitted } = this;
+            const { hasError, newAzeroAddress, newPdotAddress, submitting, submitted } = this;
 
-            return ((!newAzeroAddress.length && !newPdotAddress.length) || submitting || submitted);
+            return (hasError || (!newAzeroAddress.length && !newPdotAddress.length) || submitting || submitted);
         },
         submitButtonText() {
             let result = '';
