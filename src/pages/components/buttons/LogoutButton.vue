@@ -42,7 +42,7 @@ export default {
         }
     },
     methods: {
-        async submitLogout() {
+        submitLogout() {
             // user must confirm before they are logged out
             if (!this.clickedOnce) {
                 this.clickedOnce = true;
@@ -53,7 +53,13 @@ export default {
                 this.loggingOut = true;
 
                 axios.post(`${baseUrl}/user-logout`, { key: apiKey, username })
-                    .then(async _response => {
+                    .then(response => { response })
+                    .catch(error => {
+                        const { errors, status } = extractFromError(error);
+
+                        console.log(`Logout error. Status: ${status}. Error: ${errors}`);
+                    })
+                    .finally(async () => {
                         // regardless of whether there are errors, users should be able to logout of the extension
                         // this prevents users from being unable to logout, e.g. because they logged in from a different
                         // installation on another browser and their API key changed
@@ -73,13 +79,6 @@ export default {
                         if (!loggedOutSynched) {
                             this.errorArr.push('Error logging in. Please try again later.')
                         }
-                    })
-                    .catch(error => {
-                        const { errors, status } = extractFromError(error);
-
-                        console.log(`Logout error. Status: ${status}. Error: ${errors}`);
-                    })
-                    .finally(() => {
                         // navigate to user page after logging out, successfully or not
                         this.selectPage('login');
                         this.checkState();
