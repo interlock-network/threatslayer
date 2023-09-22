@@ -33,7 +33,7 @@
                 </div>
                 <!-- button to update address -->
                 <UpdateAddressButton tabindex="10"
-                    v-bind="{ apiKey, active, checkState, hasError, newAzeroAddress, newPdotAddress, password, toggleClickedOnce, username }" />
+                    v-bind="{ apiKey, checkState, hasError, newAzeroAddress, newPdotAddress, password, username }" />
             </div>
             <div v-if="!showAddressInput">
                 <button @click="selectChangeAddress(true)" id="update-address-button" class="modal-button" tabindex="12">
@@ -164,9 +164,6 @@ export default {
         },
         selectChangeAddress(bool) {
             this.changeAddressSelected = bool;
-        },
-        toggleClickedOnce() {
-            this.active = !this.active;
         },
         validateAddress: debounce(function (event, addressType, errorKeyName) {
             const address = event?.target?.value;
