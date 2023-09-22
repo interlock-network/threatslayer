@@ -101,7 +101,7 @@ export default {
     color: #963cf5;
     cursor: pointer;
     font-size: 1.25rem;
-    padding-top: 1rem;
+    padding-top: 0.9rem;
     width: 400px;
 }
 
