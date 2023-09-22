@@ -100,6 +100,33 @@ export function formatNumber(num) {
 }
 
 /**
+ * This convenience function returns button text for API submit buttons.
+ * @param {Object} configObject - Configuration object for this function
+ * @param {Array<string>} configObject.errorArr - Array of error strings; may be empty
+ * @param {string} configObject.initial - Default i18n button label string (before clicked)
+ * @param {boolean} configObject.submitted - Whether the request has been submitted
+ * @param {boolean} configObject.submitting - Whether the request is submitting now
+ * @param {number} configObject.status - Server status code, 1xx to 5xx
+ */
+export function genericSubmitButtonLabels({ errorArr, initial, submitted, submitting, status }) {
+    let result = '';
+
+    if (submitted) {
+        result = 'success';
+    } else if (submitting) {
+        result = 'waiting';
+    } else if (status >= 500) {
+        result = "try_again_later";
+    } else if (errorArr.length) {
+        result = "error";
+    } else {
+        result = initial;
+    }
+
+    return result;
+}
+
+/**
  * This convenience function takes an integer and returns a string to set font size
  * @param {number} num - a dashboard value for total number of URLs scanned.
  */
