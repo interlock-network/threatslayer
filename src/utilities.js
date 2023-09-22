@@ -83,7 +83,12 @@ export function formatErrorMessage(errorStr) {
  * @param {errorArr} str - Array of strings
  */
 export function formatErrorMessages(errorArr) {
-    return errorArr.map(v => v).map(err => formatErrorMessage(err));
+    let result = ['Error'];
+
+    if (errorArr.length) {
+        result = errorArr.map(v => v).map(err => formatErrorMessage(err));
+    }
+    return result;
 }
 
 /**
