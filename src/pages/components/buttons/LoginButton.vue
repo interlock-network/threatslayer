@@ -15,7 +15,7 @@ import ErrorMessage from "../ErrorMessage.vue";
 import TextComponent from "../TextComponent.vue";
 
 import axios from "axios";
-import { baseUrl, extractFromError, formatErrorMessages, isEmail, setChromeStorage } from '../../../utilities.js';
+import { baseUrl, extractFromError, formatErrorMessages, genericSubmitButtonLabels, isEmail, setChromeStorage } from '../../../utilities.js';
 
 export default {
     name: "LoginButton",
@@ -34,7 +34,8 @@ export default {
         return {
             errorArr: [],
             loggedIn: false,
-            loggingIn: false
+            loggingIn: false,
+            status: 200
         }
     },
     computed: {
@@ -55,19 +56,9 @@ export default {
             return disabled || !password || !usernameOrEmail || loggedIn || loggingIn;
         },
         loginButtonText() {
-            let result = '';
+            const { errorArr, loggedIn: submitted, loggingIn: submitting, status } = this;
 
-            if (this.loggedIn) {
-                result = 'success';
-            } else if (this.loggingIn) {
-                result = 'waiting';
-            } else if (this.errorArr.length) {
-                result = "try_again_later";
-            } else {
-                result = 'login';
-            }
-
-            return result;
+            return genericSubmitButtonLabels({ errorArr, initial: 'login', submitted, submitting, status });
         }
     },
     methods: {
@@ -91,8 +82,9 @@ export default {
 
             axios.post(`${baseUrl}/user-login`, requestBody)
                 .then(async response => {
-                    const { azeroAddress = '', email = '', key = '', pdotAddress = '', username = '' } = response?.data;
+                    const { status, data: { azeroAddress = '', email = '', key = '', pdotAddress = '', username = '' } } = response;
 
+                    this.status = status;
                     this.loggedIn = true;
                     this.loggingIn = false;
 
@@ -122,6 +114,7 @@ export default {
 
                     this.loggedIn = false;
                     this.loggingIn = false;
+                    this.status = status;
                     this.errorArr = formatErrorMessages(errors);
                 });
         }

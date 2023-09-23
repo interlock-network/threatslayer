@@ -12,7 +12,7 @@ import ErrorMessage from "../ErrorMessage.vue";
 import TextComponent from "../TextComponent.vue";
 
 import axios from "axios";
-import { baseUrl, extractFromError, formatErrorMessages, setChromeStorage } from '../../../utilities.js';
+import { baseUrl, extractFromError, formatErrorMessages, genericSubmitButtonLabels, setChromeStorage } from '../../../utilities.js';
 
 export default {
     name: "CreateUserButton",
@@ -36,7 +36,8 @@ export default {
         return {
             errorArr: [],
             submitted: false,
-            submitting: false
+            submitting: false,
+            status: 200
         }
     },
     computed: {
@@ -52,19 +53,9 @@ export default {
             return className;
         },
         submitButtonText() {
-            let result = '';
+            const { errorArr, loggedIn: submitted, loggingIn: submitting, status } = this;
 
-            if (this.loggedIn) {
-                result = 'success';
-            } else if (this.loggingIn) {
-                result = 'waiting';
-            } else if (this.errorArr.length) {
-                result = "try_again_later";
-            } else {
-                result = 'submit';
-            }
-
-            return result;
+            return genericSubmitButtonLabels({ errorArr, initial: 'login', submitted, submitting, status });
         },
         disabled() {
             const { email, password, submitting, submitted, termsOfService: terms_of_service, unitedStates: united_states, username } = this;
@@ -89,6 +80,9 @@ export default {
             instance.post(`${baseUrl}/user-create`,
                 { azero_wallet_id, email, key, password, pdot_wallet_id, referrer, terms_of_service, united_states, username })
                 .then(async response => {
+                    const { status, data: { key } } = response;
+
+                    this.status = status;
                     this.submitted = true;
                     this.submitting = false;
 
@@ -97,25 +91,24 @@ export default {
                     const registeredSynched = await setChromeStorage({ registered: true });
                     const setAzeroAddress = await setChromeStorage({ azeroAddress: azero_wallet_id });
                     const setPdotAddress = await setChromeStorage({ pdotAddress: pdot_wallet_id });
-                    const setApiKey = await setChromeStorage({ apiKey: response.data.key });
+                    const setApiKey = await setChromeStorage({ apiKey: key });
                     const setEmail = await setChromeStorage({ email });
                     const setUsername = await setChromeStorage({ username });
 
                     if (loggedInSynched & registeredSynched && setAzeroAddress && setApiKey && setEmail && setPdotAddress && setUsername) {
-                        this.selectPage('faq');
                         this.checkState();
                     }
                 })
                 .catch(error => {
-                    this.submitted = false;
-                    this.submitting = false;
-
                     const { errors, status } = extractFromError(error);
 
                     console.log(`Create user error. Status: ${status}. Error: ${errors}`);
 
+                    this.submitted = false;
+                    this.submitting = false;
+                    this.status = status;
                     this.errorArr = formatErrorMessages(errors);
-                });
+                })
         }
     }
 };
