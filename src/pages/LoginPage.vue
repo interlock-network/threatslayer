@@ -12,8 +12,8 @@
     <ErrorMessage :msg="$i18n(usernameErrorMessage)" single v-if="usernameErrorMessage.length" />
     <br />
     <!-- password field with show/hide button -->
-    <input id="login-password" class="input-field-text password-input" :type="passwordInputType" v-model.trim="password"
-        :placeholder="$i18n('password')" tabindex="4" :style="passwordInputStyle" />
+    <input id="login-password" class="input-field-text password-input" @input="validatePassword" :type="passwordInputType"
+        v-model.trim="password" :placeholder="$i18n('password')" tabindex="4" :style="passwordInputStyle" />
     <button @click="togglePasswordInputType" class="small-button" id="show-password-toggle-button" tabindex="5">
         {{ passwordInputType === 'password' ? $i18n('password_show') : $i18n('password_hide') }}
     </button>
@@ -35,7 +35,7 @@
 </template>
 <script>
 import { debounce } from 'debounce';
-import { findEmailError, findNonAlphanumericChars, usernameErrorMessages } from "../utilities";
+import { findEmailError, validatePassword, validateUsername } from "../utilities";
 
 import ErrorMessage from "./components/ErrorMessage.vue";
 import ForgotPasswordButton from "./components/buttons/ForgotPasswordButton.vue";
@@ -49,14 +49,13 @@ const errorStyle = {
     border: "3px solid red",
     color: 'red',
 };
-const maxPasswordLength = 16; // number of characters
 
 export default {
     name: 'EarnPage',
     props: {
-        checkState: Function,
-        selectPage: Function,
-        urlToStake: String
+        checkState: { type: Function, required: true },
+        selectPage: { type: Function, required: true },
+        urlToStake: { type: String, default: '' }
     },
     components: {
         ErrorMessage,
@@ -99,38 +98,21 @@ export default {
         },
     },
     methods: {
-        clearUsernameErrors() {
-            this.usernameErrorMessage = '';
-        },
         togglePasswordInputType() {
             this.passwordInputType = this.passwordInputType === 'password' ? 'text' : 'password';
         },
-        // TODO add validate password
         validateEmail() {
             this.emailErrorMessage = findEmailError(this.email);
         },
+        validatePassword: debounce(function (event) {
+            const password = event?.target?.value;
+
+            this.passwordErrorMessage = validatePassword(password);
+        }, 250),
         validateUsername: debounce(function (event) {
-            const name = event?.target?.value;
+            const username = event?.target?.value;
 
-            // bail out if no username yet, or else it will show an error and be annoying
-            if (!name || !name.length) {
-                this.clearUsernameErrors();
-
-                return true;
-            }
-
-            const allowedCharsRegex = /^[@.a-zA-Z0-9_]+$/;
-            const containsIllegalChars = !allowedCharsRegex.test(name);
-
-            if (name.length > maxPasswordLength) {
-                this.usernameErrorMessage = usernameErrorMessages.maxLength;
-            } else if (containsIllegalChars) {
-                const illegalChars = findNonAlphanumericChars(name);
-
-                this.usernameErrorMessage = usernameErrorMessages.illegalChars(illegalChars);
-            } else {
-                this.clearUsernameErrors();
-            }
+            this.usernameErrorMessage = validateUsername(username);
         }, 250)
     }
 }
@@ -153,7 +135,6 @@ input:focus {
 
 .login-page-submit-button-container {
     color: #FFFFFF;
-    margin-top: 2rem;
     width: 400px;
 }
 
