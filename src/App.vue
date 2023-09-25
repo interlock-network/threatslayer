@@ -205,8 +205,8 @@ input {
   border: none;
   color: #963cf5;
   float: right;
-  margin-right: 50px;
-  margin-top: -0.6rem;
+  margin-right: 4.25rem;
+  margin-top: -2.25rem;
 }
 
 #view-container {
