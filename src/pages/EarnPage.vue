@@ -16,18 +16,19 @@
     <input type="email" @input="validateEmail" v-model.trim="email" required tabindex="4" :style="emailInputStyle"
         :placeholder="$i18n('enter_your_email')" />
     <ErrorMessage v-if="emailErrorMessage.length" :msg="$i18n(emailErrorMessage)" single />
-    <!-- password with show/hide button -->
+    <!-- first password, with show/hide button -->
     <div>
-        <input class="password-input" :type="passwordInputType" v-model.trim="password" required
+        <input class="password-input" :type="passwordInputType" @input="validatePassword" v-model.trim="password" required
             :placeholder="$i18n('enter_a_password')" tabindex="6" :style="passwordInputStyle" />
         <button @click="togglePasswordInputType" class="small-button" id="show-password-toggle-button" tabindex="8">
             {{ passwordInputType === 'password' ? $i18n('password_show') : $i18n('password_hide') }}
         </button>
     </div>
     <ErrorMessage v-if="passwordErrorMessage.length" :msg="$i18n(passwordErrorMessage)" single />
-    <!-- password confirmation field -->
-    <input class="password-input" :type="passwordInputType" @input="validateReenteredPassword" :style="passwordInputStyle"
-        v-model.trim="reenteredPassword" :placeholder="$i18n('enter_password_again')" tabindex="10" required />
+    <!-- password confirmation -->
+    <input class="password-input" :type="passwordInputType" @input="validateReenteredPassword"
+        :style="reenteredPasswordInputStyle" v-model.trim="reenteredPassword" :placeholder="$i18n('enter_password_again')"
+        tabindex="10" required />
     <ErrorMessage v-if="reenteredPasswordErrorMessage.length" :msg="$i18n(reenteredPasswordErrorMessage)" single />
     <!-- AZero wallet address (optional) -->
     <input id="address-input" @input="validateAddress($event, 'azero', 'azeroAddressErrorMessage')"
@@ -59,7 +60,7 @@
 <script>
 import { debounce } from 'debounce';
 import { decodeAddress, encodeAddress } from '@polkadot/keyring';
-import { findEmailError, findNonAlphanumericChars, usernameErrorMessages, validateAzero, validateMoonbeam } from "../utilities";
+import { findEmailError, validateAzero, validateMoonbeam, validatePassword, validateUsername } from "../utilities";
 import { hexToU8a, isHex } from '@polkadot/util';
 
 import CreateUserButton from "./components/buttons/CreateUserButton.vue";
@@ -75,14 +76,13 @@ const errorStyle = {
     border: '3px solid red',
     color: 'red'
 };
-const maxUsernameLength = 16; // number of characters
 
 export default {
     name: 'EarnPage',
     props: {
-        checkState: Function,
-        selectPage: Function,
-        urlToStake: String
+        checkState: { type: Function, required: true },
+        selectPage: { type: Function, required: true },
+        urlToStake: { type: String, default: '' }
     },
     components: {
         CreateUserButton,
@@ -135,14 +135,14 @@ export default {
         passwordInputStyle() {
             return this.passwordErrorMessage?.length ? errorStyle : {};
         },
+        reenteredPasswordInputStyle() {
+            return this.reenteredPasswordErrorMessage?.length ? errorStyle : {};
+        },
         usernameInputStyle() {
             return this.usernameErrorMessage?.length ? errorStyle : {};
         },
     },
     methods: {
-        clearUsernameErrors() {
-            this.usernameErrorMessage = '';
-        },
         focusNextCheckbox() {
             const firstCheckBox = document.getElementById('first-box');
 
@@ -195,53 +195,30 @@ export default {
         validateEmail: debounce(function () {
             this.emailErrorMessage = findEmailError(this.email);
         }, 250),
+        validatePassword: debounce(function () {
+            console.log('this.password', this.password);
+            console.log('validatePassword(this.password)', validatePassword(this.password));
+            this.passwordErrorMessage = validatePassword(this.password);
+        }, 250),
         validateReenteredPassword: debounce(function () {
-            // number of characters
-            const minLength = 12;
-            const maxLength = 512;
+            const { password, reenteredPassword } = this;
 
-            // validate initial password first
-            const password = this.password;
+            // // validate initial password first
+            // this.passwordErrorMessage = validatePassword(password);
 
-            if (!password?.length) {
-                this.passwordErrorMessage = '';
-            } else if (password.length < minLength) {
-                this.passwordErrorMessage = 'error_password_too_short';
-            } else if (password.length > maxLength) {
-                this.passwordErrorMessage = 'error_password_too_long';
-            } else {
-                this.passwordErrorMessage = '';
-            }
-
-            if (!this.reenteredPassword.length) {
+            // validate reentered password next
+            if (!reenteredPassword.length) {
                 this.reenteredPasswordErrorMessage = '';
-            } else if (password !== this.reenteredPassword) {
+            } else if (password !== reenteredPassword) {
                 this.reenteredPasswordErrorMessage = 'error_passwords_dont_match';
             } else {
                 this.reenteredPasswordErrorMessage = '';
             }
         }, 250),
         validateUsername: debounce(function (event) {
-            const name = event?.target?.value;
+            const username = event?.target?.value;
 
-            if (!name || !name.length) {
-                this.clearUsernameErrors();
-                return true;
-            }
-
-            // TODO make an array of errors?
-            const allowedCharsRegex = /^[a-zA-Z0-9_]+$/;
-            const containsIllegalChars = !allowedCharsRegex.test(name);
-
-            if (name.length > maxUsernameLength) {
-                this.usernameErrorMessage = usernameErrorMessages.maxLength;
-            } else if (containsIllegalChars) {
-                const illegalChars = findNonAlphanumericChars(name);
-
-                this.usernameErrorMessage = usernameErrorMessages.illegalChars(illegalChars);
-            } else {
-                this.clearUsernameErrors();
-            }
+            this.usernameErrorMessage = validateUsername(username);
         }, 250)
     }
 }
