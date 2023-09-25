@@ -17,16 +17,16 @@ import { baseUrl, extractFromError, formatErrorMessages, genericSubmitButtonLabe
 export default {
     name: "CreateUserButton",
     props: {
-        azeroWalletId: String,
-        checkState: Function,
-        email: String,
-        password: String,
-        pdotWalletId: String,
-        referrer: String,
-        selectPage: Function,
-        termsOfService: Boolean,
-        unitedStates: Boolean,
-        username: String,
+        azeroWalletId: { type: String, default: '' },
+        checkState: { type: Function, required: true },
+        email: { type: String, default: '' },
+        password: { type: String, default: '' },
+        pdotWalletId: { type: String, default: '' },
+        referrer: { type: String, default: '' },
+        selectPage: { type: Function, required: true },
+        termsOfService: { type: Boolean, default: false },
+        unitedStates: { type: Boolean, default: false },
+        username: { type: String, default: '' }
     },
     components: {
         ErrorMessage,

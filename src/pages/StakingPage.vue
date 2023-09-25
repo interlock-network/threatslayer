@@ -68,11 +68,11 @@ export default {
         TextComponent,
     },
     props: {
-        apiKey: String,
-        checkState: Function,
-        loggedIn: Boolean,
-        registered: Boolean,
-        selectPage: Function,
+        apiKey: { type: String, default: '' },
+        checkState: { type: Function, required: true },
+        loggedIn: { type: Boolean, required: true },
+        registered: { type: Boolean, required: true },
+        selectPage: { type: Function, required: true },
     },
     data() {
         return {

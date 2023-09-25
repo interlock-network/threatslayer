@@ -9,7 +9,7 @@ import TextComponent from "./TextComponent.vue";
 export default {
     name: "LoginLine",
     props: {
-        selectPage: Function,
+        selectPage: { type: Function, required: true },
     },
     components: {
         TextComponent

@@ -15,10 +15,10 @@ import { baseUrl, clearChromeStorage, extractFromError, setChromeStorage } from 
 export default {
     name: "LogoutButton",
     props: {
-        checkState: Function,
-        apiKey: String,
-        selectPage: Function,
-        username: String
+        checkState: { type: Function, required: true },
+        apiKey: { type: String, default: '' },
+        selectPage: { type: Function, required: true },
+        username: { type: String, default: '' }
     },
     data() {
         return {

@@ -8,7 +8,7 @@
 export default {
     name: "PageBanner",
     props: {
-        msg: String
+        msg: { type: String, default: '' }
     }
 };
 </script>

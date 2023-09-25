@@ -1,7 +1,7 @@
 <template>
     <div class="login-page-submit-button-container">
         <button class='submit-button' @click="submitLogin" :class="computedClass" :disabled="disabled"
-            style="margin-bottom: 1rem; margin-top: 1rem;">
+            style="margin-bottom: 1rem;">
             {{ $i18n(loginButtonText) }}
         </button>
         <br />
@@ -20,11 +20,11 @@ import { baseUrl, extractFromError, formatErrorMessages, genericSubmitButtonLabe
 export default {
     name: "LoginButton",
     props: {
-        checkState: Function,
+        checkState: { type: Function, required: true },
         disabled: Boolean,
-        password: String,
-        selectPage: Function,
-        usernameOrEmail: String,
+        password: { type: String, default: '' },
+        selectPage: { type: Function, required: true },
+        usernameOrEmail: { type: String, default: '' }
     },
     components: {
         ErrorMessage,
@@ -112,10 +112,10 @@ export default {
 
                     console.log(`Login error. Status: ${status}. Error: ${errors}`);
 
+                    this.errorArr = formatErrorMessages(errors);
                     this.loggedIn = false;
                     this.loggingIn = false;
                     this.status = status;
-                    this.errorArr = formatErrorMessages(errors);
                 });
         }
     }

@@ -39,8 +39,8 @@ export default {
         WarningTextBox
     },
     props: {
-        checkState: Function,
-        selectPage: Function,
+        checkState: { type: Function, required: true },
+        selectPage: { type: Function, required: true },
     }
 }
 </script>

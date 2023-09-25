@@ -35,7 +35,7 @@ export default {
         TextComponent
     },
     props: {
-        apiKey: String
+        apiKey: { type: String, default: '' }
     },
     data() {
         return {

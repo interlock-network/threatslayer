@@ -64,14 +64,14 @@ import LogoutButton from "./components/buttons/LogoutButton.vue";
 export default {
     name: 'SideBar',
     props: {
-        apiKey: String,
-        checkState: Function,
-        currentPage: String,
-        loggedIn: Boolean,
-        registered: Boolean,
-        selectPage: Function,
-        urlToStake: String,
-        username: String
+        apiKey: { type: String, default: '' },
+        checkState: { type: Function, required: true },
+        currentPage: { type: String, default: '' },
+        loggedIn: { type: Boolean, required: true },
+        registered: { type: Boolean, required: true },
+        selectPage: { type: Function, required: true },
+        urlToStake: { type: String, default: '' },
+        username: { type: String, default: '' }
     },
     components: {
         LogoutButton

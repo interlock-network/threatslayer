@@ -11,7 +11,7 @@ import TextComponent from "./TextComponent.vue";
 export default {
     name: "WarningTextBox",
     props: {
-        msg: String
+        msg: { type: String, default: '' }
     },
     components: {
         TextComponent

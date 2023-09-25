@@ -35,10 +35,10 @@ import TextComponent from "./TextComponent.vue";
 export default {
     name: "DeleteUserModal",
     props: {
-        checkState: Function,
+        checkState: { type: Function, required: true },
         fadeAccountPage: Function,
         pageFaded: Boolean,
-        selectPage: Function,
+        selectPage: { type: Function, required: true },
         username: String
     },
     components: {

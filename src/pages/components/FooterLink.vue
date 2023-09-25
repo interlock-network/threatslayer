@@ -12,7 +12,7 @@ export default {
             type: Boolean,
             default: false,
         },
-        msg: String,
+        msg: { type: String, default: '' },
         url: {
             type: String,
             default: 'https://interlock.network',

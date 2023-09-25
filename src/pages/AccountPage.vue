@@ -52,13 +52,13 @@ export default {
         WalletInfoModal
     },
     props: {
-        azeroAddress: String,
-        apiKey: String,
-        checkState: Function,
-        email: String,
-        pdotAddress: String,
-        selectPage: Function,
-        username: String
+        azeroAddress: { type: String, default: '' },
+        apiKey: { type: String, default: '' },
+        checkState: { type: Function, required: true },
+        email: { type: String, default: '' },
+        pdotAddress: { type: String, default: '' },
+        selectPage: { type: Function, required: true },
+        username: { type: String, default: '' }
     },
     data() {
         return {

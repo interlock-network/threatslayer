@@ -107,8 +107,8 @@ export default {
         PageBanner
     },
     props: {
-        apiKey: String,
-        username: String
+        apiKey: { type: String, default: '' },
+        username: { type: String, default: '' }
     },
     data() {
         return {
@@ -261,7 +261,6 @@ export default {
 
                     console.log(`Error getting user stats from API. Status: ${status}. Error: ${errors}`);
                 });
-
         }
     }
 }

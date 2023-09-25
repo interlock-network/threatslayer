@@ -12,8 +12,8 @@ export default {
             type: Boolean,
             default: false,
         },
-        msg: String,
-        clickAction: Function
+        msg: { type: String, default: '' },
+        clickAction: { type: Function, required: true }
     },
 };
 </script>

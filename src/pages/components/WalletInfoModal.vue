@@ -63,13 +63,13 @@ import { validateAzero, validateMoonbeam } from "../../utilities";
 export default {
     name: "WalletInfoModal",
     props: {
-        apiKey: String,
-        azeroAddress: String,
-        checkState: Function,
-        fadeAccountPage: Function,
-        pdotAddress: String,
-        selectPage: Function,
-        username: String
+        apiKey: { type: String, default: '' },
+        azeroAddress: { type: String, default: '' },
+        checkState: { type: Function, required: true },
+        fadeAccountPage: { type: Function, required: true },
+        pdotAddress: { type: String, default: '' },
+        selectPage: { type: Function, required: true },
+        username: { type: String, default: '' }
     },
     components: {
         ErrorMessage,

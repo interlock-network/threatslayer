@@ -29,7 +29,7 @@ export default {
         WalletButton
     },
     props: {
-        selectPage: Function,
+        selectPage: { type: Function, required: true },
     }
 }
 </script>

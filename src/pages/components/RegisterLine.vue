@@ -12,8 +12,8 @@ import TextComponent from "./TextComponent.vue";
 export default {
     name: "RegisterLine",
     props: {
-        checkState: Function,
-        selectPage: Function
+        checkState: { type: Function, required: true },
+        selectPage: { type: Function, required: true }
     },
     components: {
         TextComponent

@@ -8,7 +8,7 @@
 export default {
     name: "InfoTip",
     props: {
-        msg: String,
+        msg: { type: String, default: '' },
     },
 };
 </script>

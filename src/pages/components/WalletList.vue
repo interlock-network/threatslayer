@@ -17,9 +17,9 @@ import TextComponent from "./TextComponent.vue";
 export default {
     name: "WalletList",
     props: {
-        azeroAddress: String,
-        changeAddressSelected: Boolean,
-        pdotAddress: String,
+        azeroAddress: { type: String, default: '' },
+        changeAddressSelected: { type: Boolean, required: true },
+        pdotAddress: { type: String, default: '' },
     },
     components: {
         TextComponent,
