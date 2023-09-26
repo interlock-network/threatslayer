@@ -6,29 +6,23 @@
     <RegisterLine :checkState="checkState" :selectPage="selectPage" />
     <br />
     <br />
-    <!-- username field -->
-    <input class="input-field-text" @input="validateUsername" id="login-username-or-email" v-model.trim="usernameOrEmail"
-        :placeholder="$i18n('enter_your_username')" tabindex="2" :class="usernameInputClass" />
-    <ErrorMessage :msg="$i18n(usernameErrorMessage)" single v-if="usernameErrorMessage.length" />
+    <UsernameInput @currentUsername="getUsername" @usernameHasError="getUsernameHasError" />
     <SinglePasswordInput @currentPassword="getPassword" @passwordHasError="getPasswordHasError" />
     <LoginButton v-bind="{ checkState, loginDisabled, password, selectPage, usernameOrEmail }" tabindex="6" />
+    <br />
+    <br />
     <!-- Forgot username / password flow -->
-    <br />
-    <br />
     <div id="forgot-password-container">
         <TextComponent :msg="$i18n('forgot_password')" class="input-header" bold
             style="margin-top: 3rem; margin-bottom: 1rem;" />
-        <input type="email" class="input-field-text" id="forgot-info-email" @input="validateEmail" v-model.trim="email"
-            required :placeholder="$i18n('enter_email_to_change_password')" tabindex="8" />
-        <ErrorMessage :msg="$i18n(emailErrorMessage)" single v-if="emailErrorMessage.length" />
+        <EmailInput placeholder="enter_email_to_change_password" @currentEmail="getEmail"
+            @emailHasError="getEmailHasError" />
         <ForgotPasswordButton :forgotPasswordDisabled="forgotPasswordDisabled" :email="email" style="margin-top: 0.75rem;"
             tabindex="10" />
     </div>
 </template>
 <script>
-import { debounce } from 'debounce';
-import { findEmailError, validateUsername } from "../utilities";
-
+import EmailInput from "./components/inputs/EmailInput.vue";
 import ErrorMessage from "./components/ErrorMessage.vue";
 import ForgotPasswordButton from "./components/buttons/ForgotPasswordButton.vue";
 import LoginButton from "./components/buttons/LoginButton.vue";
@@ -36,6 +30,7 @@ import PageBanner from "./components/PageBanner.vue";
 import RegisterLine from './components/RegisterLine.vue';
 import SinglePasswordInput from "./components/inputs/SinglePasswordInput.vue";
 import TextComponent from "./components/TextComponent.vue";
+import UsernameInput from "./components/inputs/UsernameInput.vue";
 import WarningTextBox from "./components/WarningTextBox.vue";
 
 export default {
@@ -46,6 +41,7 @@ export default {
         urlToStake: { type: String, default: '' }
     },
     components: {
+        EmailInput,
         ErrorMessage,
         ForgotPasswordButton,
         LoginButton,
@@ -53,50 +49,57 @@ export default {
         RegisterLine,
         SinglePasswordInput,
         TextComponent,
+        UsernameInput,
         WarningTextBox
     },
     data() {
         return {
             email: '',
-            emailErrorMessage: '',
-            forgotUsernamePassword: false,
+            emailHasError: '',
             password: '',
             passwordHasError: false,
             usernameOrEmail: '',
-            usernameErrorMessage: ''
+            usernameHasError: ''
         };
     },
     mounted() {
-        const usernameInput = document.getElementById('login-username-or-email')
+        // TODO fix this
+        // const usernameInput = document.getElementById('login-username-or-email')
 
-        usernameInput.focus();
+        // usernameInput.focus();
     },
     computed: {
         forgotPasswordDisabled() {
-            return !this.email || !!this.emailErrorMessage.length;
+            return !this.email || this.emailHasError;
         },
         loginDisabled() {
-            return !this.usernameOrEmail.length || !!this.usernameErrorMessage.length || !this.password || this.passwordHasError;
+            const { password, passwordHasError, usernameOrEmail, usernameHasError } = this;
+
+            return !password || passwordHasError || !usernameOrEmail.length || usernameHasError;
         },
         usernameInputClass() {
             return this.usernameErrorMessage?.length ? 'generic-error' : '';
         }
     },
     methods: {
+        getEmail(email) {
+            this.email = email;
+        },
+        getEmailHasError(errorBool) {
+            this.emailHasError = errorBool;
+        },
         getPassword(password) {
             this.password = password;
         },
         getPasswordHasError(errorBool) {
             this.passwordHasError = errorBool;
         },
-        validateEmail() {
-            this.emailErrorMessage = findEmailError(this.email);
+        getUsername(username) {
+            this.username = username;
         },
-        validateUsername: debounce(function (event) {
-            const username = event?.target?.value;
-
-            this.usernameErrorMessage = validateUsername(username);
-        }, 250)
+        getUsernameHasError(errorBool) {
+            this.usernameHasError = errorBool;
+        }
     }
 }
 </script>
