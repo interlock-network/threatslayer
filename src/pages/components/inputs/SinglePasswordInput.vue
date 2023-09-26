@@ -4,7 +4,7 @@
     <button @click="togglePasswordInputType" class="small-button" id="show-password-toggle-button" tabindex="4">
         {{ passwordInputType === 'password' ? $i18n('password_show') : $i18n('password_hide') }}
     </button>
-    <ErrorMessage :msg="$i18n(passwordErrorMessage)" single v-if="passwordErrorMessage.length" />
+    <ErrorMessage :msg="$i18n(errorMessage)" single v-if="errorMessage.length" />
 </template>
 <script>
 import { debounce } from 'debounce';
@@ -20,25 +20,28 @@ export default {
     data() {
         return {
             password: '',
-            passwordErrorMessage: '',
+            errorMessage: '',
             passwordInputType: 'password',
         };
     },
     computed: {
         passwordInputClass() {
-            return this.passwordErrorMessage.length ? 'generic-error' : '';
+            return this.errorMessage.length ? 'generic-error' : '';
         }
     },
     methods: {
         togglePasswordInputType() {
-            this.passwordInputType = this.passwordInputType === 'password' ? 'text' : 'password';
+            const inputType = this.passwordInputType === 'password' ? 'text' : 'password';
+
+            this.passwordInputType = inputType;
+            this.$emit('inputType', inputType);
         },
-        validatePassword: debounce(function (event) {
-            const password = event?.target?.value;
+        validatePassword: debounce(function () {
+            const password = this.password;
             const errorMessage = validatePassword(password);
             const hasError = !!errorMessage.length;
 
-            this.passwordErrorMessage = errorMessage;
+            this.errorMessage = errorMessage;
             this.$emit('currentPassword', password)
             this.$emit('passwordHasError', hasError);
         }, 250)
