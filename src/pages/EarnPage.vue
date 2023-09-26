@@ -4,27 +4,12 @@
     </PageBanner>
     <WarningTextBox v-if="urlToStake" :msg="$i18n('warning_must_register_before_staking')" />
     <LoginLine :selectPage="selectPage" />
-    <TextComponent :msg="$i18n('dont_have_one')" subinstruction /><button class="login-button"
-        @click="selectPage('wallet')">{{ $i18n('create_one') }}</button>
+    <CreateWalletLine :selectPage="selectPage" />
     <br />
     <br />
-    <!-- username -->
-    <input id="username-input" @input="validateUsername" v-model.trim="username" required tabindex="2"
-        :placeholder="$i18n('enter_a_username')" :class="usernameInputClass" />
-    <ErrorMessage v-if="usernameErrorMessage.length" :msg="$i18n(usernameErrorMessage)" single />
-    <!-- email -->
-    <input type="email" @input="validateEmail" v-model.trim="email" required tabindex="4" :class="emailInputClass"
-        :placeholder="$i18n('enter_your_email')" />
-    <ErrorMessage v-if="emailErrorMessage.length" :msg="$i18n(emailErrorMessage)" single />
-    <!-- first password, with show/hide button -->
-    <div>
-        <input class="password-input" :type="passwordInputType" @input="validatePassword" v-model.trim="password" required
-            :placeholder="$i18n('enter_a_password')" tabindex="6" :class="passwordInputClass" />
-        <button @click="togglePasswordInputType" class="small-button" id="show-password-toggle-button" tabindex="8">
-            {{ passwordInputType === 'password' ? $i18n('password_show') : $i18n('password_hide') }}
-        </button>
-    </div>
-    <ErrorMessage v-if="passwordErrorMessage.length" :msg="$i18n(passwordErrorMessage)" single />
+    <UsernameInput @currentUsername="getUsername" @usernameHasError="getUsernameHasError" />
+    <EmailInput @currentEmail="getEmail" @emailHasError="getEmailHasError" />
+    <SinglePasswordInput @currentPassword="getPassword" @passwordHasError="getPasswordHasError" @inputType="getInputType" />
     <!-- password confirmation -->
     <input class="password-input" :type="passwordInputType" @input="validateReenteredPassword"
         :class="reenteredPasswordInputClass" v-model.trim="reenteredPassword" :placeholder="$i18n('enter_password_again')"
@@ -55,21 +40,25 @@
         </label>
     </div>
     <CreateUserButton style="margin-top: 1.1rem;" tabindex="22"
-        v-bind="{ azeroWalletId, checkState, selectPage, email, password, pdotWalletId, referrer, termsOfService, unitedStates, username }" />
+        v-bind="{ azeroWalletId, checkState, createUserDisabled, selectPage, email, password, pdotWalletId, referrer, termsOfService, unitedStates, username }" />
 </template>
 <script>
 import { debounce } from 'debounce';
 import { decodeAddress, encodeAddress } from '@polkadot/keyring';
-import { findEmailError, validateAzero, validateMoonbeam, validatePassword, validateUsername } from "../utilities";
+import { validateAzero, validateMoonbeam } from "../utilities";
 import { hexToU8a, isHex } from '@polkadot/util';
 
 import CreateUserButton from "./components/buttons/CreateUserButton.vue";
+import CreateWalletLine from './components/CreateWalletLine.vue';
+import EmailInput from "./components/inputs/EmailInput.vue";
 import ErrorMessage from "./components/ErrorMessage.vue";
 import InfoTip from "./components/InfoTip.vue";
 import LineOfText from "./components/LineOfText.vue";
 import LoginLine from './components/LoginLine.vue';
 import PageBanner from "./components/PageBanner.vue";
+import SinglePasswordInput from "./components/inputs/SinglePasswordInput.vue";
 import TextComponent from "./components/TextComponent.vue";
+import UsernameInput from "./components/inputs/UsernameInput.vue";
 import WarningTextBox from "./components/WarningTextBox.vue";
 
 export default {
@@ -81,14 +70,17 @@ export default {
     },
     components: {
         CreateUserButton,
+        CreateWalletLine,
+        EmailInput,
         ErrorMessage,
         InfoTip,
         LineOfText,
         LoginLine,
         PageBanner,
+        SinglePasswordInput,
         TextComponent,
+        UsernameInput,
         WarningTextBox,
-
     },
     data() {
         return {
@@ -97,9 +89,9 @@ export default {
             connectAccountSelected: true,
             createAccountSelected: false,
             email: '',
-            emailErrorMessage: '',
+            emailHasError: false,
             password: '',
-            passwordErrorMessage: '',
+            passwordHasError: false,
             passwordInputType: 'password',
             pdotWalletId: '',
             pdotAddressErrorMessage: '',
@@ -109,7 +101,7 @@ export default {
             termsOfService: false,
             unitedStates: false,
             username: '',
-            usernameErrorMessage: ''
+            usernameHasError: ''
         };
     },
     async mounted() {
@@ -124,18 +116,18 @@ export default {
         addressInputClassPdot() {
             return this.pdotAddressErrorMessage?.length ? 'generic-error' : '';
         },
-        emailInputClass() {
-            return this.emailErrorMessage?.length ? 'generic-error' : '';
-        },
-        passwordInputClass() {
-            return this.passwordErrorMessage?.length ? 'generic-error' : '';
+        createUserDisabled() {
+            const { email, emailHasError, password, passwordHasError, termsOfService, unitedStates, username, usernameHasError } = this;
+
+            const missingFields = !email.length || !password.length || !username.length;
+            const boxesUnchecked = !termsOfService || !unitedStates;
+            const hasErrors = emailHasError || passwordHasError || usernameHasError;
+
+            return missingFields || boxesUnchecked || hasErrors;
         },
         reenteredPasswordInputClass() {
             return this.reenteredPasswordErrorMessage?.length ? 'generic-error' : '';
-        },
-        usernameInputClass() {
-            return this.usernameErrorMessage?.length ? 'generic-error' : '';
-        },
+        }
     },
     methods: {
         focusNextCheckbox() {
@@ -146,6 +138,27 @@ export default {
 
                 secondCheckBox.focus();
             }
+        },
+        getEmail(email) {
+            this.email = email;
+        },
+        getEmailHasError(errorBool) {
+            this.emailHasError = errorBool;
+        },
+        getPassword(password) {
+            this.password = password;
+        },
+        getPasswordHasError(errorBool) {
+            this.passwordHasError = errorBool;
+        },
+        getInputType(inputType) {
+            this.passwordInputType = inputType;
+        },
+        getUsername(username) {
+            this.username = username;
+        },
+        getUsernameHasError(errorBool) {
+            this.usernameHasError = errorBool;
         },
         legitPolkadot(address) {
             try {
@@ -159,9 +172,6 @@ export default {
             } catch (_error) {
                 return false;
             }
-        },
-        togglePasswordInputType() {
-            this.passwordInputType = this.passwordInputType === 'password' ? 'text' : 'password';
         },
         validateAddress: debounce(function (event, addressType, errorKeyName) {
             const address = event?.target?.value;
@@ -187,19 +197,8 @@ export default {
                 this[errorKeyName] = 'error_registering_wallet_address';
             }
         }, 250),
-        validateEmail: debounce(function () {
-            this.emailErrorMessage = findEmailError(this.email);
-        }, 250),
-        validatePassword: debounce(function () {
-            console.log('this.password', this.password);
-            console.log('validatePassword(this.password)', validatePassword(this.password));
-            this.passwordErrorMessage = validatePassword(this.password);
-        }, 250),
         validateReenteredPassword: debounce(function () {
             const { password, reenteredPassword } = this;
-
-            // // validate initial password first
-            // this.passwordErrorMessage = validatePassword(password);
 
             // validate reentered password next
             if (!reenteredPassword.length) {
@@ -209,11 +208,6 @@ export default {
             } else {
                 this.reenteredPasswordErrorMessage = '';
             }
-        }, 250),
-        validateUsername: debounce(function (event) {
-            const username = event?.target?.value;
-
-            this.usernameErrorMessage = validateUsername(username);
         }, 250)
     }
 }
