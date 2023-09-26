@@ -51,11 +51,6 @@ import TextComponent from './components/TextComponent.vue';
 import axios from 'axios';
 import { baseUrl, getChromeStorage } from '../utilities.js';
 
-const errorStyle = {
-    border: '3px solid red',
-    color: 'red'
-};
-
 export default {
     name: 'StakingPage',
     components: {

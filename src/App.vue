@@ -247,6 +247,11 @@ input {
   width: 20px;
 }
 
+.generic-error {
+  border: "3px solid red";
+  color: 'red';
+}
+
 .left-label {
   margin-right: 1rem;
 }
