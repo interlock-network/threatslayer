@@ -20,13 +20,7 @@
                     v-model.trim="newPdotAddress" :style="addressInputStyle" style="margin-top: -0.2rem;"
                     :placeholder="$i18n('enter_pdot_wallet_address')" tabindex="4" />
                 <ErrorMessage v-if="newPdotErrorMessage.length" :msg="$i18n(newPdotErrorMessage)" single last />
-                <!-- password field with show/hide button -->
-                <input id="login-password" class="input-field-text password-input" :type="passwordInputType"
-                    v-model.trim="password" placeholder="Password" tabindex="6" style="margin-top: 1.5rem" />
-                <button @click="togglePasswordInputType" class="small-button" id="show-password-toggle-button"
-                    style="margin-right: 0;" tabindex="8">
-                    {{ passwordInputType === 'password' ? $i18n('password_show') : $i18n('password_hide') }}
-                </button>
+                <SinglePasswordInput @currentPassword="getPassword" @passwordHasError="getPasswordHasError" />
                 <div v-if="active">
                     <br />
                     <WarningTextBox v-if="showAddressChangeWarning" :msg="$i18n('warning_changing_wallet_address')" />
@@ -50,6 +44,7 @@
 
 <script>
 import ErrorMessage from "./ErrorMessage.vue";
+import SinglePasswordInput from "./inputs/SinglePasswordInput.vue";
 import TextComponent from "./TextComponent.vue";
 import UpdateAddressButton from "./buttons/UpdateAddressButton.vue";
 import WalletList from "./WalletList.vue";
@@ -73,6 +68,7 @@ export default {
     },
     components: {
         ErrorMessage,
+        SinglePasswordInput,
         TextComponent,
         UpdateAddressButton,
         WalletList,
@@ -90,7 +86,7 @@ export default {
             newPdotAddress: '',
             newPdotErrorMessage: '',
             password: '',
-            passwordInputType: 'password',
+            passwordHasError: false
         }
     },
     computed: {
@@ -128,7 +124,7 @@ export default {
             return this.azeroAddress?.length;
         },
         hasError() {
-            return !!this.newAzeroErrorMessage.length || !!this.newPdotErrorMessage;
+            return this.passwordHasError || !!this.newAzeroErrorMessage.length || !!this.newPdotErrorMessage;
         },
         updateAddressMsg() {
             return !this.address?.length ? 'warning_must_add_wallet_address' : 'enter_new_wallet_address';
@@ -144,6 +140,12 @@ export default {
             this.active = false;
             this.fadeAccountPage(false);
             this.selectChangeAddress(false);
+        },
+        getPassword(password) {
+            this.password = password;
+        },
+        getPasswordHasError(errorBool) {
+            this.passwordHasError = errorBool;
         },
         legitPolkadot(address) {
             try {
@@ -188,10 +190,7 @@ export default {
             } else {
                 this[errorKeyName] = 'error_registering_wallet_address';
             }
-        }, 250),
-        togglePasswordInputType() {
-            this.passwordInputType = this.passwordInputType === 'password' ? 'text' : 'password';
-        }
+        }, 250)
     }
 };
 </script>
