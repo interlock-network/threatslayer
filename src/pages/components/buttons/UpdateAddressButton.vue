@@ -13,15 +13,14 @@
 import ErrorMessage from "../ErrorMessage.vue";
 
 import axios from "axios";
-import { baseUrl, extractFromError, formatErrorMessages, setChromeStorage } from '../../../utilities.js';
+import { baseUrl, extractFromError, formatErrorMessages, genericSubmitButtonLabels, setChromeStorage } from '../../../utilities.js';
 
 export default {
     name: "UpdateAddressButton",
     props: {
-        apiKey: String,
-        checkState: Function,
-        clickedOnce: Boolean,
-        hasError: Boolean,
+        apiKey: { type: String, required: true },
+        checkState: { type: Function, required: true },
+        hasError: { type: Boolean, required: true },
         newAzeroAddress: {
             type: String,
             default: ''
@@ -30,8 +29,8 @@ export default {
             type: String,
             default: ''
         },
-        password: String,
-        username: String,
+        password: { type: String, default: '' },
+        username: { type: String, default: '' }
     },
     components: {
         ErrorMessage
@@ -39,6 +38,7 @@ export default {
     data() {
         return {
             errorArr: [],
+            status: 200,
             submitted: false,
             submitting: false
         }
@@ -47,6 +47,7 @@ export default {
         computedClass() {
             let className = '';
 
+            // TODO fix this?
             if (this.errorArr.length) {
                 className = 'submit-button-error';
             } else {
@@ -61,17 +62,12 @@ export default {
             return (hasError || (!newAzeroAddress.length && !newPdotAddress.length) || submitting || submitted);
         },
         submitButtonText() {
-            let result = '';
+            const { errorArr, submitted, submitting, status } = this;
 
-            if (this.errorArr.length) {
-                result = 'try_again_later';
-            } else if (this.clickedOnce) {
-                result = 'submit_new_wallet_address';
-            } else {
-                result = 'update_wallet_address';
-            }
-
-            return result;
+            // TODO test this
+            return genericSubmitButtonLabels(
+                { errorArr, initial: 'update_wallet_address', submitted, submitting, status }
+            );
         }
     },
     methods: {
@@ -83,10 +79,12 @@ export default {
 
             axios.post(`${baseUrl}/user-bcaddr-reset`,
                 { azero_wallet_id: newAzeroAddress, key, password, pdot_wallet_id: newPdotAddress, username })
-                .then(async _response => {
+                .then(async response => {
+                    const { status } = response.data;
+
+                    this.status = status;
                     this.submitted = true;
                     this.submitting = false;
-
                     let setAzeroAddress = false;
                     let setPdotAddress = false;
 
@@ -109,12 +107,10 @@ export default {
 
                     console.log(`Create user error. Status: ${status}. Error: ${errors}`);
 
+                    this.errorArr = formatErrorMessages(errors);
+                    this.status = status;
                     this.submitted = false;
                     this.submitting = false;
-
-                    if (errors.length) {
-                        this.errorArr = formatErrorMessages(errors);
-                    }
                 });
         }
     }
