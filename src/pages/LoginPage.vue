@@ -11,7 +11,7 @@
         :placeholder="$i18n('enter_your_username')" tabindex="2" :class="usernameInputClass" />
     <ErrorMessage :msg="$i18n(usernameErrorMessage)" single v-if="usernameErrorMessage.length" />
     <SinglePasswordInput @currentPassword="getPassword" @passwordHasError="getPasswordHasError" />
-    <LoginButton :disabled="loginDisabled" v-bind="{ checkState, password, selectPage, usernameOrEmail }" tabindex="6" />
+    <LoginButton v-bind="{ checkState, loginDisabled, password, selectPage, usernameOrEmail }" tabindex="6" />
     <!-- Forgot username / password flow -->
     <br />
     <br />
@@ -21,7 +21,7 @@
         <input type="email" class="input-field-text" id="forgot-info-email" @input="validateEmail" v-model.trim="email"
             required :placeholder="$i18n('enter_email_to_change_password')" tabindex="8" />
         <ErrorMessage :msg="$i18n(emailErrorMessage)" single v-if="emailErrorMessage.length" />
-        <ForgotPasswordButton :disabled="forgotPasswordDisabled" :email="email" style="margin-top: 0.75rem;"
+        <ForgotPasswordButton :forgotPasswordDisabled="forgotPasswordDisabled" :email="email" style="margin-top: 0.75rem;"
             tabindex="10" />
     </div>
 </template>
@@ -73,10 +73,10 @@ export default {
     },
     computed: {
         forgotPasswordDisabled() {
-            return !!this.emailErrorMessage.length;
+            return !this.email || !!this.emailErrorMessage.length;
         },
         loginDisabled() {
-            return !!this.usernameErrorMessage.length || this.passwordHasError;
+            return !this.usernameOrEmail.length || !!this.usernameErrorMessage.length || !this.password || this.passwordHasError;
         },
         usernameInputClass() {
             return this.usernameErrorMessage?.length ? 'generic-error' : '';
