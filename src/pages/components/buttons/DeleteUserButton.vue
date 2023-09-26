@@ -7,19 +7,19 @@
 
 <script>
 import axios from "axios";
-import { baseUrl, clearChromeStorage, extractFromError, formatErrorMessages, setChromeStorage } from '../../../utilities.js';
+import { baseUrl, clearChromeStorage, extractFromError, formatErrorMessages, genericSubmitButtonLabels, setChromeStorage } from '../../../utilities.js';
 
 import ErrorMessage from "../ErrorMessage.vue";
 
 export default {
     name: "DeleteUserButton",
     props: {
-        active: Boolean,
-        checkState: Function,
-        fadeAccountPage: Function,
-        password: String,
-        setActive: Function,
-        username: String
+        active: { type: Boolean, required: true },
+        checkState: { type: Function, required: true },
+        fadeAccountPage: { type: Function, required: true },
+        password: { type: String, default: '' },
+        setActive: { type: Function, required: true },
+        username: { type: String, default: '' }
     },
     components: {
         ErrorMessage
@@ -27,23 +27,19 @@ export default {
     data() {
         return {
             confirm: false,
+            deleted: false,
             deleting: false,
-            errorArr: []
+            errorArr: [],
+            status: 200
         }
     },
     computed: {
         deleteUserButtonText() {
-            let result = '';
+            const { errorArr, deleted: submitted, deleting: submitting, status } = this;
 
-            if (this.deleting) {
-                result = 'deleting_account';
-            } else if (this.errorArr.length) {
-                result = 'try_again_later';
-            } else {
-                result = 'delete_account_permanent';
-            }
-
-            return result;
+            return genericSubmitButtonLabels(
+                { errorArr, initial: 'delete_account_permanent', inProgress: 'deleting_account', submitted, submitting, status }
+            );
         },
         disabled() {
             const { deleting, password } = this;
@@ -60,8 +56,12 @@ export default {
                 this.deleting = true;
 
                 axios.post(`${baseUrl}/user-delete`, { confirm: true, password, username })
-                    .then(async _response => {
+                    .then(async response => {
+                        const { status } = response.data;
+
+                        this.deleted = true;
                         this.deleting = false;
+                        this.status = status;
 
                         const keyClearedFromState = await clearChromeStorage('apiKey');
                         const loggedOut = await setChromeStorage({ loggedIn: false });
@@ -81,12 +81,13 @@ export default {
                         }
                     })
                     .catch(error => {
-                        this.deleting = false;
                         const { errors, status } = extractFromError(error);
 
                         console.log(`Delete user error. Status: ${status}. Error: ${errors}`);
 
+                        this.deleting = false;
                         this.errorArr = formatErrorMessages(errors);
+                        this.status = status;
                         this.fadeAccountPage(false);
                     });
             }
