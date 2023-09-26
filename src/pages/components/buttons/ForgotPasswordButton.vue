@@ -1,7 +1,7 @@
 <template>
     <div class="login-page-submit-button-container">
-        <button class='secondary-hollow-button' @click="submitForgotPassword" :class="computedClass" :disabled="disabled"
-            tabindex="99">
+        <button class='secondary-hollow-button' @click="submitForgotPassword" :class="computedClass"
+            :disabled="forgotPasswordDisabled" tabindex="99">
             {{ $i18n(forgotPasswordButtonText) }}
         </button>
         <br />
@@ -15,13 +15,13 @@ import ErrorMessage from "../ErrorMessage.vue";
 import TextComponent from "../TextComponent.vue";
 
 import axios from "axios";
-import { baseUrl, extractFromError, formatErrorMessages } from '../../../utilities.js';
+import { baseUrl, extractFromError, formatErrorMessages, genericSubmitButtonLabels } from '../../../utilities.js';
 
 export default {
     name: "ForgotPasswordButton",
     props: {
-        disabled: Boolean,
-        email: String,
+        forgotPasswordDisabled: { type: Boolean, required: true },
+        email: { type: String, default: '' }
     },
     components: {
         ErrorMessage,
@@ -30,16 +30,16 @@ export default {
     data() {
         return {
             errorArr: [],
-            isError: false,
-            loggedIn: false,
-            loggingIn: false
+            submitted: false,
+            submitting: false,
+            status: 200
         }
     },
     computed: {
         computedClass() {
             let className = '';
 
-            if (this.isError) {
+            if (this.errorArr.length) {
                 className = 'submit-button-error';
             } else {
                 className = 'login-active';
@@ -48,44 +48,36 @@ export default {
             return className;
         },
         forgotPasswordButtonText() {
-            const { errorArr, loggedIn, loggingIn } = this;
-            let result = '';
+            const { errorArr, submitted, submitting, status } = this;
 
-            if (loggedIn) {
-                result = 'success';
-            } else if (loggingIn) {
-                result = 'waiting';
-            } else if (errorArr.length) {
-                result = "try_again_later";
-            } else {
-                result = 'change_password';
-            }
-
-            return result;
+            // TODO test this
+            return genericSubmitButtonLabels(
+                { errorArr, initial: 'change_password', submitted, submitting, status }
+            );
         }
     },
     methods: {
         async submitForgotPassword() {
             this.errorArr = [];
-            this.loggingIn = true;
+            this.submitting = true;
 
             axios.post(`${baseUrl}/user-password-forgot`, { email: this.email })
-                .then(_response => {
-                    this.loggedIn = true;
-                    this.loggingIn = false;
+                .then(response => {
+                    const { status } = response.data;
+
+                    this.status = status;
+                    this.submitted = true;
+                    this.submitting = false;
                 })
                 .catch(error => {
-                    this.isError = true;
                     const { errors, status } = extractFromError(error);
 
                     console.log(`Forgot password error. Status: ${status}. Error: ${errors}`);
 
-                    this.loggedIn = false;
-                    this.loggingIn = false;
-
-                    if (errors.length) {
-                        this.errorArr = formatErrorMessages(errors);
-                    }
+                    this.errorArr = formatErrorMessages(errors);
+                    this.status = status;
+                    this.submitted = false;
+                    this.submitting = false;
                 });
         }
     }
