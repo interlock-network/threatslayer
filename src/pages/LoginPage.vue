@@ -8,17 +8,9 @@
     <br />
     <!-- username field -->
     <input class="input-field-text" @input="validateUsername" id="login-username-or-email" v-model.trim="usernameOrEmail"
-        :placeholder="$i18n('enter_your_username')" tabindex="2" :style="usernameInputStyle" />
+        :placeholder="$i18n('enter_your_username')" tabindex="2" :class="usernameInputClass" />
     <ErrorMessage :msg="$i18n(usernameErrorMessage)" single v-if="usernameErrorMessage.length" />
-    <br />
-    <!-- password field with show/hide button -->
-    <input id="login-password" class="input-field-text password-input" @input="validatePassword" :type="passwordInputType"
-        v-model.trim="password" :placeholder="$i18n('password')" tabindex="4" :style="passwordInputStyle" />
-    <button @click="togglePasswordInputType" class="small-button" id="show-password-toggle-button" tabindex="5">
-        {{ passwordInputType === 'password' ? $i18n('password_show') : $i18n('password_hide') }}
-    </button>
-    <ErrorMessage :msg="$i18n(passwordErrorMessage)" single v-if="passwordErrorMessage.length" />
-    <br />
+    <SinglePasswordInput @currentPassword="getPassword" @passwordHasError="getPasswordHasError" />
     <LoginButton :disabled="loginDisabled" v-bind="{ checkState, password, selectPage, usernameOrEmail }" tabindex="6" />
     <!-- Forgot username / password flow -->
     <br />
@@ -35,23 +27,19 @@
 </template>
 <script>
 import { debounce } from 'debounce';
-import { findEmailError, validatePassword, validateUsername } from "../utilities";
+import { findEmailError, validateUsername } from "../utilities";
 
 import ErrorMessage from "./components/ErrorMessage.vue";
 import ForgotPasswordButton from "./components/buttons/ForgotPasswordButton.vue";
 import LoginButton from "./components/buttons/LoginButton.vue";
 import PageBanner from "./components/PageBanner.vue";
 import RegisterLine from './components/RegisterLine.vue';
+import SinglePasswordInput from "./components/inputs/SinglePasswordInput.vue";
 import TextComponent from "./components/TextComponent.vue";
 import WarningTextBox from "./components/WarningTextBox.vue";
 
-const errorStyle = {
-    border: "3px solid red",
-    color: 'red',
-};
-
 export default {
-    name: 'EarnPage',
+    name: 'LoginPage',
     props: {
         checkState: { type: Function, required: true },
         selectPage: { type: Function, required: true },
@@ -63,6 +51,7 @@ export default {
         LoginButton,
         PageBanner,
         RegisterLine,
+        SinglePasswordInput,
         TextComponent,
         WarningTextBox
     },
@@ -72,10 +61,9 @@ export default {
             emailErrorMessage: '',
             forgotUsernamePassword: false,
             password: '',
-            passwordErrorMessage: '',
-            passwordInputType: 'password',
+            passwordHasError: false,
             usernameOrEmail: '',
-            usernameErrorMessage: '',
+            usernameErrorMessage: ''
         };
     },
     mounted() {
@@ -88,27 +76,22 @@ export default {
             return !!this.emailErrorMessage.length;
         },
         loginDisabled() {
-            return !!this.usernameErrorMessage.length;
+            return !!this.usernameErrorMessage.length || this.passwordHasError;
         },
-        passwordInputStyle() {
-            return this.passwordErrorMessage.length ? errorStyle : {};
-        },
-        usernameInputStyle() {
-            return this.usernameErrorMessage?.length ? errorStyle : {};
-        },
+        usernameInputClass() {
+            return this.usernameErrorMessage?.length ? 'generic-error' : '';
+        }
     },
     methods: {
-        togglePasswordInputType() {
-            this.passwordInputType = this.passwordInputType === 'password' ? 'text' : 'password';
+        getPassword(password) {
+            this.password = password;
+        },
+        getPasswordHasError(errorBool) {
+            this.passwordHasError = errorBool;
         },
         validateEmail() {
             this.emailErrorMessage = findEmailError(this.email);
         },
-        validatePassword: debounce(function (event) {
-            const password = event?.target?.value;
-
-            this.passwordErrorMessage = validatePassword(password);
-        }, 250),
         validateUsername: debounce(function (event) {
             const username = event?.target?.value;
 
