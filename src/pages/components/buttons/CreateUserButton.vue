@@ -19,6 +19,7 @@ export default {
     props: {
         azeroWalletId: { type: String, default: '' },
         checkState: { type: Function, required: true },
+        createUserDisabled: { type: Boolean, default: false },
         email: { type: String, default: '' },
         password: { type: String, default: '' },
         pdotWalletId: { type: String, default: '' },
@@ -55,12 +56,12 @@ export default {
         submitButtonText() {
             const { errorArr, loggedIn: submitted, loggingIn: submitting, status } = this;
 
-            return genericSubmitButtonLabels({ errorArr, initial: 'login', submitted, submitting, status });
+            return genericSubmitButtonLabels({ errorArr, initial: 'register', submitted, submitting, status });
         },
         disabled() {
-            const { email, password, submitting, submitted, termsOfService: terms_of_service, unitedStates: united_states, username } = this;
+            const { createUserDisabled, submitting, submitted } = this;
 
-            return (!email?.length || !password?.length || submitting || submitted || !terms_of_service || !united_states || !username?.length);
+            return createUserDisabled || submitting || submitted;
         }
     },
     methods: {
