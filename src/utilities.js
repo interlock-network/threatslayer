@@ -45,7 +45,7 @@ export function extractFromError(errorObj = {}) {
  * @param {string} email - an email string
  * @returns {string} A translation key string to show email error message, if applicable
  */
-export function findEmailError(email = '') {
+export function validateEmail(email = '') {
     let result = '';
 
     if (!email.length) {
