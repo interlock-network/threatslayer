@@ -10,16 +10,16 @@
     <br />
     <!-- username -->
     <input id="username-input" @input="validateUsername" v-model.trim="username" required tabindex="2"
-        :placeholder="$i18n('enter_a_username')" :style="usernameInputStyle" />
+        :placeholder="$i18n('enter_a_username')" :class="usernameInputClass" />
     <ErrorMessage v-if="usernameErrorMessage.length" :msg="$i18n(usernameErrorMessage)" single />
     <!-- email -->
-    <input type="email" @input="validateEmail" v-model.trim="email" required tabindex="4" :style="emailInputStyle"
+    <input type="email" @input="validateEmail" v-model.trim="email" required tabindex="4" :class="emailInputClass"
         :placeholder="$i18n('enter_your_email')" />
     <ErrorMessage v-if="emailErrorMessage.length" :msg="$i18n(emailErrorMessage)" single />
     <!-- first password, with show/hide button -->
     <div>
         <input class="password-input" :type="passwordInputType" @input="validatePassword" v-model.trim="password" required
-            :placeholder="$i18n('enter_a_password')" tabindex="6" :style="passwordInputStyle" />
+            :placeholder="$i18n('enter_a_password')" tabindex="6" :class="passwordInputClass" />
         <button @click="togglePasswordInputType" class="small-button" id="show-password-toggle-button" tabindex="8">
             {{ passwordInputType === 'password' ? $i18n('password_show') : $i18n('password_hide') }}
         </button>
@@ -27,18 +27,18 @@
     <ErrorMessage v-if="passwordErrorMessage.length" :msg="$i18n(passwordErrorMessage)" single />
     <!-- password confirmation -->
     <input class="password-input" :type="passwordInputType" @input="validateReenteredPassword"
-        :style="reenteredPasswordInputStyle" v-model.trim="reenteredPassword" :placeholder="$i18n('enter_password_again')"
+        :class="reenteredPasswordInputClass" v-model.trim="reenteredPassword" :placeholder="$i18n('enter_password_again')"
         tabindex="10" required />
     <ErrorMessage v-if="reenteredPasswordErrorMessage.length" :msg="$i18n(reenteredPasswordErrorMessage)" single />
     <!-- AZero wallet address (optional) -->
     <input id="address-input" @input="validateAddress($event, 'azero', 'azeroAddressErrorMessage')"
-        v-model.trim="azeroWalletId" :style="addressInputStyleAzero"
+        v-model.trim="azeroWalletId" :class="addressInputClassAzero"
         :placeholder="$i18n('enter_azero_wallet_address_optional')" tabindex="12" />
     <ErrorMessage v-if="azeroAddressErrorMessage.length" :msg="$i18n(azeroAddressErrorMessage)" single />
     <!-- Polkadot wallet address (optional) -->
     <!-- TODO add this to translation file -->
     <input id="address-input" @input="validateAddress($event, 'pdot', 'pdotAddressErrorMessage')"
-        v-model.trim="pdotWalletId" :style="addressInputStylePdot" placeholder="Optional: Paste your Moonbeam wallet here"
+        v-model.trim="pdotWalletId" :class="addressInputClassPdot" placeholder="Optional: Paste your Moonbeam wallet here"
         tabindex="14" />
     <ErrorMessage v-if="pdotAddressErrorMessage.length" :msg="$i18n(pdotAddressErrorMessage)" single />
     <!-- referrer (optional) -->
@@ -71,11 +71,6 @@ import LoginLine from './components/LoginLine.vue';
 import PageBanner from "./components/PageBanner.vue";
 import TextComponent from "./components/TextComponent.vue";
 import WarningTextBox from "./components/WarningTextBox.vue";
-
-const errorStyle = {
-    border: '3px solid red',
-    color: 'red'
-};
 
 export default {
     name: 'EarnPage',
@@ -123,23 +118,23 @@ export default {
         firstInput.focus();
     },
     computed: {
-        addressInputStyleAzero() {
-            return this.azeroAddressErrorMessage?.length ? errorStyle : {};
+        addressInputClassAzero() {
+            return this.azeroAddressErrorMessage?.length ? 'generic-error' : '';
         },
-        addressInputStylePdot() {
-            return this.pdotAddressErrorMessage?.length ? errorStyle : {};
+        addressInputClassPdot() {
+            return this.pdotAddressErrorMessage?.length ? 'generic-error' : '';
         },
-        emailInputStyle() {
-            return this.emailErrorMessage?.length ? errorStyle : {};
+        emailInputClass() {
+            return this.emailErrorMessage?.length ? 'generic-error' : '';
         },
-        passwordInputStyle() {
-            return this.passwordErrorMessage?.length ? errorStyle : {};
+        passwordInputClass() {
+            return this.passwordErrorMessage?.length ? 'generic-error' : '';
         },
-        reenteredPasswordInputStyle() {
-            return this.reenteredPasswordErrorMessage?.length ? errorStyle : {};
+        reenteredPasswordInputClass() {
+            return this.reenteredPasswordErrorMessage?.length ? 'generic-error' : '';
         },
-        usernameInputStyle() {
-            return this.usernameErrorMessage?.length ? errorStyle : {};
+        usernameInputClass() {
+            return this.usernameErrorMessage?.length ? 'generic-error' : '';
         },
     },
     methods: {
