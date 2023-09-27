@@ -29,7 +29,7 @@
         <div>
             <LineOfText>
                 <span>Absolutely. You can look at our <a href="https://github.com/interlock-network/threatslayer"
-                        target="_blank">source code on GitbHub</a> and see exactly what it does.</span>
+                        target="_blank">source code on GitHub</a> and see exactly what it does.</span>
             </LineOfText>
         </div>
     </div>
