@@ -1,6 +1,8 @@
 <template>
-    <TextComponent :msg="$i18n('dont_have_one')" subinstruction /><button class="login-button"
-        @click="selectPage('wallet')">{{ $i18n('create_one') }}</button>
+    <TextComponent :msg="$i18n('dont_have_one')" subinstruction />
+    <button class="login-button" @click="selectPage('wallet')" :tabindex="tabindex">
+        {{ $i18n('create_one') }}
+    </button>
 </template>
 
 <script>
@@ -10,6 +12,7 @@ export default {
     name: "CreateWalletLine",
     props: {
         selectPage: { type: Function, required: true },
+        tabindex: { type: Number, default: 24 }
     },
     components: {
         TextComponent

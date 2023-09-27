@@ -1,5 +1,6 @@
 <template>
-    <TextComponent :msg="$i18n('dont_have_an_account')" subinstruction /><button class="login-button" @click="unregister">
+    <TextComponent :msg="$i18n('dont_have_an_account')" subinstruction />
+    <button class="login-button" @click="unregister" :tabindex="tabindex">
         {{ $i18n('register') }}
     </button>
 </template>
@@ -13,7 +14,8 @@ export default {
     name: "RegisterLine",
     props: {
         checkState: { type: Function, required: true },
-        selectPage: { type: Function, required: true }
+        selectPage: { type: Function, required: true },
+        tabindex: { type: Number, default: 10 }
     },
     components: {
         TextComponent
