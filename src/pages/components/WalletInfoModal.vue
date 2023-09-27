@@ -3,7 +3,8 @@
     <button v-if="!active" @click="openWalletInfoModal" id="view-wallet-info-button" :class="computedClass">
         {{ $i18n(headerText) }}
     </button>
-    <div v-if="active" id="modal-overlay">
+    <!-- wallet info modal contents -->
+    <div v-if="active" id="modal-overlay" @keydown.esc="doneAction">
         <div id="modal-container" :style="active ? 'bottom: 40%' : 'display: none'">
             <!-- List of existing wallet addresses, if any -->
             <WalletList v-bind="{ azeroAddress, changeAddressSelected, pdotAddress }" />
@@ -89,6 +90,14 @@ export default {
             newPdotErrorMessage: '',
             password: '',
             passwordHasError: false
+        }
+    },
+    mounted() {
+        // focus this element to encourage users to add their wallet address
+        if (!this.azeroAddress?.length && !this.pdotAddress?.length) {
+            const firstInput = document.getElementById('view-wallet-info-button');
+
+            firstInput.focus();
         }
     },
     computed: {
@@ -269,12 +278,14 @@ export default {
     height: 2rem;
     margin-bottom: 2rem;
     padding: 0.5rem 0.75rem;
+    pointer-events: initial;
     width: 400px;
 }
 
 #view-wallet-info-button {
     background-color: #0F0818;
     border: none;
+    cursor: pointer;
     color: #963cf5;
     font-size: 1.1rem;
     font-weight: bold;
@@ -284,5 +295,6 @@ export default {
 .modal-button {
     position: absolute;
     display: inline-block;
+    cursor: pointer;
 }
 </style>
