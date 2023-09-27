@@ -8,15 +8,9 @@
 export default {
     name: "FooterLink",
     props: {
-        divider: {
-            type: Boolean,
-            default: false,
-        },
+        divider: { type: Boolean, default: false },
         msg: { type: String, default: '' },
-        url: {
-            type: String,
-            default: 'https://interlock.network',
-        },
+        url: { type: String, default: 'https://interlock.network' }
     },
 };
 </script>

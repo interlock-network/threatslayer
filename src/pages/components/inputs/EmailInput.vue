@@ -15,10 +15,7 @@ export default {
         ErrorMessage
     },
     props: {
-        placeholder: {
-            type: String,
-            default: 'enter_your_email'
-        }
+        placeholder: { type: String, default: 'enter_your_email' }
     },
     data() {
         return {

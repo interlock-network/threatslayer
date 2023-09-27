@@ -64,9 +64,6 @@ export default {
         return {
             allowlist: null,
             pageFaded: false,
-            password: '',
-            passwordErrorMessage: '',
-            passwordInputType: 'password',
             referred: 0,
             tokensEarned: 0,
             tokensEarnedTotal: 0

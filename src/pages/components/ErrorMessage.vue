@@ -8,22 +8,10 @@ import TextComponent from "./TextComponent.vue";
 export default {
     name: "ErrorMessage",
     props: {
-        msg: {
-            required: true,
-            type: String,
-        },
-        last: {
-            type: Boolean,
-            default: false,
-        },
-        single: {
-            type: Boolean,
-            default: false,
-        },
-        stacked: {
-            type: Boolean,
-            default: false,
-        },
+        msg: { type: String, required: true },
+        last: { type: Boolean, default: false },
+        single: { type: Boolean, default: false },
+        stacked: { type: Boolean, default: false },
     },
     components: {
         TextComponent

@@ -6,30 +6,12 @@
 export default {
     name: "TextComponent",
     props: {
-        bold: {
-            type: Boolean,
-            default: false,
-        },
-        footer: {
-            type: Boolean,
-            default: false,
-        },
-        instruction: {
-            type: Boolean,
-            default: false,
-        },
-        mono: {
-            type: Boolean,
-            default: false,
-        },
-        msg: {
-            required: true,
-            type: String,
-        },
-        subinstruction: {
-            type: Boolean,
-            default: false,
-        },
+        bold: { type: Boolean, default: false },
+        footer: { type: Boolean, default: false },
+        instruction: { type: Boolean, default: false },
+        mono: { type: Boolean, default: false },
+        msg: { type: String, required: true },
+        subinstruction: { type: Boolean, default: false }
     },
     computed: {
         style() {

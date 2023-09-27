@@ -21,14 +21,8 @@ export default {
         apiKey: { type: String, required: true },
         checkState: { type: Function, required: true },
         hasError: { type: Boolean, required: true },
-        newAzeroAddress: {
-            type: String,
-            default: ''
-        },
-        newPdotAddress: {
-            type: String,
-            default: ''
-        },
+        newAzeroAddress: { type: String, default: '' },
+        newPdotAddress: { type: String, default: '' },
         password: { type: String, default: '' },
         username: { type: String, default: '' }
     },
