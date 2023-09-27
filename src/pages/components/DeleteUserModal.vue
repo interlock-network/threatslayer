@@ -3,21 +3,18 @@
     <button v-if="!pageFaded" @click="openDeleteUserModal" id="delete-user-button">
         <img v-if="!active" class="sidebar-icon" src="/src/assets/images/delete-user.png">{{ $i18n('delete_account') }}
     </button>
+    <!-- delete user modal contents -->
     <div v-if="active" id="modal-overlay">
         <div id="delete-user-modal-container" :style="active ? 'bottom: 40%' : 'display: none'">
             <TextComponent :msg="$i18n('confirm_are_you_sure')" id="delete-user-confirm-text" /><br />
             <TextComponent :msg="$i18n('warning_account_will_be_deleted')" /><br />
             <TextComponent :msg="$i18n('warning_ilock_will_be_lost')" /><br />
-            <!-- password input field -->
-            <div style="position: relative;">
-                <input v-model.trim="password" id="delete-user-password-input" :type="passwordInputType"
-                    :placeholder="$i18n('enter_password_to_delete_account')" tabindex="6" />
-                <button @click="togglePasswordInputType" class="small-button" id="delete-user-toggle-button" tabindex="8">
-                    {{ passwordInputType === 'password' ? $i18n('password_show') : $i18n('password_hide') }}
-                </button>
+            <div id="delete-user-password-input">
+                <SinglePasswordInput placeholder="enter_password_to_delete_account" @currentPassword="getPassword"
+                    @passwordHasError="getPasswordHasError" />
             </div>
             <DeleteUserButton v-if="active"
-                v-bind="{ active, checkState, fadeAccountPage, password, setActive, username }" />
+                v-bind="{ active, checkState, disableDeleteButton, fadeAccountPage, password, setActive, username }" />
             <ErrorMessage v-for="errorMessage in errorArr" :msg="errorMessage" single style="margin-top: 1rem;" />
             <!-- cancel button -->
             <button @click="cancelAction" id="cancel-delete-user-button" style="color: #963cf5 ">
@@ -30,20 +27,22 @@
 <script>
 import DeleteUserButton from "./buttons/DeleteUserButton.vue";
 import ErrorMessage from "./ErrorMessage.vue";
+import SinglePasswordInput from "./inputs/SinglePasswordInput.vue";
 import TextComponent from "./TextComponent.vue";
 
 export default {
     name: "DeleteUserModal",
     props: {
         checkState: { type: Function, required: true },
-        fadeAccountPage: Function,
-        pageFaded: Boolean,
+        fadeAccountPage: { type: Function, required: true },
+        pageFaded: { type: Boolean, default: false },
         selectPage: { type: Function, required: true },
-        username: String
+        username: { type: String, default: '' }
     },
     components: {
         DeleteUserButton,
         ErrorMessage,
+        SinglePasswordInput,
         TextComponent
     },
     data() {
@@ -53,7 +52,7 @@ export default {
             errorArr: [],
             deleting: false,
             password: '',
-            passwordInputType: 'password',
+            passwordHasError: false
         }
     },
     computed: {
@@ -70,6 +69,9 @@ export default {
             }
 
             return result;
+        },
+        disableDeleteButton() {
+            return this.passwordHasError;
         }
     },
     methods: {
@@ -79,15 +81,18 @@ export default {
             this.fadeAccountPage(false);
             this.setActive(false);
         },
+        getPassword(password) {
+            this.password = password;
+        },
+        getPasswordHasError(errorBool) {
+            this.passwordHasError = errorBool;
+        },
         openDeleteUserModal() {
             this.fadeAccountPage(true);
             this.setActive(true);
         },
         setActive(bool) {
             this.active = bool;
-        },
-        togglePasswordInputType() {
-            this.passwordInputType = this.passwordInputType === 'password' ? 'text' : 'password';
         }
     }
 };
@@ -133,8 +138,8 @@ export default {
 }
 
 #delete-user-password-input {
-    margin-top: 1rem;
-    position: absolute;
+    margin-top: 2rem;
+    position: relative;
 }
 
 #delete-user-toggle-button {
