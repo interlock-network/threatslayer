@@ -19,7 +19,10 @@
     <PageFooter />
   </div>
 </template>
+
 <script>
+import { getChromeStorage } from './utilities.js';
+
 import AboutPage from "./pages/AboutPage.vue";
 import AccountPage from "./pages/AccountPage.vue";
 import EarnPage from "./pages/EarnPage.vue";
@@ -32,8 +35,6 @@ import SideBar from "./pages/SideBar.vue";
 import SlayCount from "./pages/SlayCount.vue";
 import StakingPage from "./pages/StakingPage.vue";
 import WalletPage from "./pages/WalletPage.vue";
-
-import { getChromeStorage } from './utilities.js';
 
 export default {
   name: 'App',
@@ -200,15 +201,6 @@ input {
   width: 100%;
 }
 
-#show-password-toggle-button {
-  background-color: #0F0818;
-  border: none;
-  color: #963cf5;
-  float: right;
-  margin-right: 4.25rem;
-  margin-top: -2.25rem;
-}
-
 #view-container {
   background-color: #0F0818;
   float: right;
@@ -263,14 +255,9 @@ input {
   color: #FFFFFF;
   font-size: 1.25rem;
   padding: 0.5rem 0.75rem;
-  width: 400px;
-}
-
-.small-button {
-  background-color: #060708;
-  border: 1px solid #d0d4d9;
-  color: #FFFFFF;
   pointer-events: initial;
+  cursor: pointer;
+  width: 400px;
 }
 
 .submit-button {

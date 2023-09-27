@@ -131,6 +131,7 @@ export default {
     line-height: 2rem;
     margin-bottom: 0.5rem;
     pointer-events: initial;
+    cursor: pointer;
 }
 
 .selected-sidebar-item {
