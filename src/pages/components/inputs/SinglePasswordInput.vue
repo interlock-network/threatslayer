@@ -1,6 +1,6 @@
 <template>
     <input id="login-password" class="input-field-text password-input" @input="validatePassword" :type="passwordInputType"
-        v-model.trim="password" :placeholder="$i18n('password')" tabindex="2" :class="passwordInputClass" />
+        v-model.trim="password" :placeholder="$i18n(placeholder)" tabindex="2" :class="passwordInputClass" />
     <button @click="togglePasswordInputType" class="small-button" id="show-password-toggle-button" tabindex="4">
         {{ passwordInputType === 'password' ? $i18n('password_show') : $i18n('password_hide') }}
     </button>
@@ -17,11 +17,15 @@ export default {
     components: {
         ErrorMessage
     },
+    props: {
+        placeholder: { type: String, default: 'password' }
+    },
     data() {
         return {
             password: '',
             errorMessage: '',
             passwordInputType: 'password',
+
         };
     },
     computed: {
