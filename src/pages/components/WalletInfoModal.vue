@@ -20,13 +20,15 @@
                     v-model.trim="newPdotAddress" :style="addressInputStyle" style="margin-top: -0.2rem;"
                     :placeholder="$i18n('enter_pdot_wallet_address')" tabindex="4" />
                 <ErrorMessage v-if="newPdotErrorMessage.length" :msg="$i18n(newPdotErrorMessage)" single last />
-                <SinglePasswordInput @currentPassword="getPassword" @passwordHasError="getPasswordHasError" />
+                <div style="position: absolute;">
+                    <SinglePasswordInput @currentPassword="getPassword" @passwordHasError="getPasswordHasError" />
+                </div>
                 <div v-if="active">
                     <br />
                     <WarningTextBox v-if="showAddressChangeWarning" :msg="$i18n('warning_changing_wallet_address')" />
                 </div>
                 <!-- button to update address -->
-                <UpdateAddressButton tabindex="10"
+                <UpdateAddressButton tabindex="10" style="margin-top: 4rem;"
                     v-bind="{ apiKey, checkState, hasError, newAzeroAddress, newPdotAddress, password, username }" />
             </div>
             <div v-if="!showAddressInput">
