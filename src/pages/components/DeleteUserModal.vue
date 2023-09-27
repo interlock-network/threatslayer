@@ -4,7 +4,7 @@
         <img v-if="!active" class="sidebar-icon" src="/src/assets/images/delete-user.png">{{ $i18n('delete_account') }}
     </button>
     <!-- delete user modal contents -->
-    <div v-if="active" id="modal-overlay">
+    <div v-if="active" id="modal-overlay" @keydown.esc="cancelAction">
         <div id="delete-user-modal-container" :style="active ? 'bottom: 40%' : 'display: none'">
             <TextComponent :msg="$i18n('confirm_are_you_sure')" id="delete-user-confirm-text" /><br />
             <TextComponent :msg="$i18n('warning_account_will_be_deleted')" /><br />
