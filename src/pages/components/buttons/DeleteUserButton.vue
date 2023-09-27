@@ -104,7 +104,7 @@ export default {
     cursor: pointer;
     font-size: 1rem;
     margin-bottom: -1rem;
-    padding-top: 4.5rem;
+    padding-top: 5.5rem;
     width: 400px;
 }
 </style>
