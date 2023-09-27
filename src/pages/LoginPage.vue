@@ -8,7 +8,7 @@
     <br />
     <UsernameInput @currentUsername="getUsername" @usernameHasError="getUsernameHasError" />
     <SinglePasswordInput @currentPassword="getPassword" @passwordHasError="getPasswordHasError" />
-    <LoginButton v-bind="{ checkState, loginDisabled, password, selectPage, usernameOrEmail }" tabindex="6" />
+    <LoginButton v-bind="{ checkState, loginDisabled, password, selectPage, username }" tabindex="6" />
     <br />
     <br />
     <!-- Forgot username / password flow -->
@@ -58,7 +58,7 @@ export default {
             emailHasError: '',
             password: '',
             passwordHasError: false,
-            usernameOrEmail: '',
+            username: '',
             usernameHasError: ''
         };
     },
@@ -73,9 +73,9 @@ export default {
             return !this.email || this.emailHasError;
         },
         loginDisabled() {
-            const { password, passwordHasError, usernameOrEmail, usernameHasError } = this;
+            const { password, passwordHasError, username, usernameHasError } = this;
 
-            return !password || passwordHasError || !usernameOrEmail.length || usernameHasError;
+            return !password || passwordHasError || !username.length || usernameHasError;
         },
         usernameInputClass() {
             return this.usernameErrorMessage?.length ? 'generic-error' : '';
