@@ -3,50 +3,52 @@
         <img class="banner-icon" src="/src/assets/images/start_earning.png">
     </PageBanner>
     <WarningTextBox v-if="urlToStake" :msg="$i18n('warning_must_register_before_staking')" />
-    <LoginLine :selectPage="selectPage" />
-    <CreateWalletLine :selectPage="selectPage" />
+    <LoginLine :selectPage="selectPage" tabindex="22" />
+    <CreateWalletLine :selectPage="selectPage" tabindex="24" />
     <br />
     <br />
-    <UsernameInput @currentUsername="getUsername" @usernameHasError="getUsernameHasError" />
-    <EmailInput @currentEmail="getEmail" @emailHasError="getEmailHasError" />
-    <SinglePasswordInput @currentPassword="getPassword" @passwordHasError="getPasswordHasError" @inputType="getInputType" />
+    <UsernameInput @currentUsername="getUsername" @usernameHasError="getUsernameHasError" tabindex="2" />
+    <EmailInput @currentEmail="getEmail" @emailHasError="getEmailHasError" tabindex="4" />
+    <SinglePasswordInput @currentPassword="getPassword" @passwordHasError="getPasswordHasError" @inputType="getInputType"
+        tabindex="6" />
     <!-- password confirmation -->
     <input class="password-input" :type="passwordInputType" @input="validateReenteredPassword"
         :class="reenteredPasswordInputClass" v-model.trim="reenteredPassword" :placeholder="$i18n('enter_password_again')"
-        tabindex="10" required />
+        tabindex="8" required />
     <ErrorMessage v-if="reenteredPasswordErrorMessage.length" :msg="$i18n(reenteredPasswordErrorMessage)" single />
     <!-- AZero wallet address (optional) -->
     <input id="address-input" @input="validateAddress($event, 'azero', 'azeroAddressErrorMessage')"
         v-model.trim="azeroWalletId" :class="addressInputClassAzero"
-        :placeholder="$i18n('enter_azero_wallet_address_optional')" tabindex="12" />
+        :placeholder="$i18n('enter_azero_wallet_address_optional')" tabindex="10" />
     <ErrorMessage v-if="azeroAddressErrorMessage.length" :msg="$i18n(azeroAddressErrorMessage)" single />
     <!-- Polkadot wallet address (optional) -->
     <!-- TODO add this to translation file -->
     <input id="address-input" @input="validateAddress($event, 'pdot', 'pdotAddressErrorMessage')"
         v-model.trim="pdotWalletId" :class="addressInputClassPdot" placeholder="Optional: Paste your Moonbeam wallet here"
-        tabindex="14" />
+        tabindex="12" />
     <ErrorMessage v-if="pdotAddressErrorMessage.length" :msg="$i18n(pdotAddressErrorMessage)" single />
     <!-- referrer (optional) -->
-    <input v-model.trim="referrer" tabindex="16" :placeholder="$i18n('enter_referrer_name')" />
+    <input v-model.trim="referrer" tabindex="14" :placeholder="$i18n('enter_referrer_name')" />
     <div class="checkbox-container" style="margin-top: 0.8rem;" @click="focusNextCheckbox">
-        <input id="first-box" type="checkbox" v-model="termsOfService" tabindex="18">
+        <input id="first-box" type="checkbox" v-model="termsOfService" tabindex="16">
         <label for="first-box">{{ $i18n('agree_to_our') }}<a href="https://interlock.network" target="_blank">
                 {{ $i18n('terms_of_service') }} </a></label>
     </div>
     <div class="checkbox-container">
-        <input id="second-box" type="checkbox" v-model="unitedStates" tabindex="20">
+        <input id="second-box" type="checkbox" v-model="unitedStates" tabindex="18">
         <label for="second-box" style="display: inline-flex;">{{ $i18n('affirm_not_us_citizen') }}
             <InfoTip :msg="$i18n('crypto_us_warning')" />
         </label>
     </div>
-    <CreateUserButton style="margin-top: 1.1rem;" tabindex="22"
+    <CreateUserButton style="margin-top: 1.1rem;" tabindex="20"
         v-bind="{ azeroWalletId, checkState, createUserDisabled, selectPage, email, password, pdotWalletId, referrer, termsOfService, unitedStates, username }" />
 </template>
+
 <script>
 import { debounce } from 'debounce';
 import { decodeAddress, encodeAddress } from '@polkadot/keyring';
-import { validateAzero, validateMoonbeam } from "../utilities";
 import { hexToU8a, isHex } from '@polkadot/util';
+import { validateAzero, validateMoonbeam } from "../utilities";
 
 import CreateUserButton from "./components/buttons/CreateUserButton.vue";
 import CreateWalletLine from './components/CreateWalletLine.vue';

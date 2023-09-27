@@ -3,11 +3,11 @@
         <img class="banner-icon" src="/src/assets/images/login.png">
     </PageBanner>
     <WarningTextBox v-if="urlToStake" :msg="$i18n('warning_must_login_before_staking')" />
-    <RegisterLine :checkState="checkState" :selectPage="selectPage" />
+    <RegisterLine :checkState="checkState" :selectPage="selectPage" tabindex="12" />
     <br />
     <br />
-    <UsernameInput @currentUsername="getUsername" @usernameHasError="getUsernameHasError" />
-    <SinglePasswordInput @currentPassword="getPassword" @passwordHasError="getPasswordHasError" />
+    <UsernameInput @currentUsername="getUsername" @usernameHasError="getUsernameHasError" tabindex="2" />
+    <SinglePasswordInput @currentPassword="getPassword" @passwordHasError="getPasswordHasError" tabindex="4" />
     <LoginButton v-bind="{ checkState, loginDisabled, password, selectPage, username }" tabindex="6" />
     <br />
     <br />
@@ -15,7 +15,7 @@
     <div id="forgot-password-container">
         <TextComponent :msg="$i18n('forgot_password')" class="input-header" bold
             style="margin-top: 3rem; margin-bottom: 1rem;" />
-        <EmailInput placeholder="enter_email_to_change_password" @currentEmail="getEmail"
+        <EmailInput placeholder="enter_email_to_change_password" @currentEmail="getEmail" tabindex="8"
             @emailHasError="getEmailHasError" />
         <ForgotPasswordButton :forgotPasswordDisabled="forgotPasswordDisabled" :email="email" style="margin-top: 0.75rem;"
             tabindex="10" />
@@ -113,10 +113,6 @@ input:focus {
 #forgot-password-container {
     bottom: 30vh;
     position: absolute;
-}
-
-.password-input {
-    float: left;
 }
 
 .login-page-submit-button-container {
