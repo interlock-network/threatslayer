@@ -1,7 +1,7 @@
 <template>
-    <input id="username-input" @input="validateUsername" v-model.trim="username" required tabindex="2"
+    <input id="username-input" @input="validateUsername" v-model.trim="username" required :tabindex="tabindex"
         :placeholder="$i18n('enter_a_username')" :class="usernameInputClass" />
-    <ErrorMessage v-if="usernameErrorMessage.length" :msg="$i18n(usernameErrorMessage)" single />
+    <ErrorMessage v-if="errorMessage.length" :msg="$i18n(errorMessage)" single />
 </template>
 <script>
 import { debounce } from 'debounce';
@@ -14,15 +14,18 @@ export default {
     components: {
         ErrorMessage
     },
+    props: {
+        tabindex: { type: Number, default: 2 }
+    },
     data() {
         return {
             username: '',
-            usernameErrorMessage: ''
+            errorMessage: ''
         };
     },
     computed: {
         usernameInputClass() {
-            return this.usernameErrorMessage?.length ? 'generic-error' : '';
+            return this.errorMessage?.length ? 'generic-error' : '';
         },
     },
     methods: {
@@ -31,8 +34,7 @@ export default {
             const errorMessage = validateUsername(username);
             const hasError = !!errorMessage.length;
 
-            this.usernameErrorMessage = errorMessage;
-            this.passwordErrorMessage = errorMessage;
+            this.errorMessage = errorMessage;
             this.$emit('currentUsername', username)
             this.$emit('usernameHasError', hasError);
 

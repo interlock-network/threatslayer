@@ -1,5 +1,5 @@
 <template>
-    <input type="email" @input="validateEmail" v-model.trim="email" required tabindex="4" :class="inputClass"
+    <input type="email" @input="validateEmail" v-model.trim="email" required :tabindex="tabindex" :class="inputClass"
         :placeholder="$i18n(placeholder)" />
     <ErrorMessage v-if="errorMessage.length" :msg="$i18n(errorMessage)" single />
 </template>
@@ -15,7 +15,8 @@ export default {
         ErrorMessage
     },
     props: {
-        placeholder: { type: String, default: 'enter_your_email' }
+        placeholder: { type: String, default: 'enter_your_email' },
+        tabindex: { type: Number, default: 4 }
     },
     data() {
         return {

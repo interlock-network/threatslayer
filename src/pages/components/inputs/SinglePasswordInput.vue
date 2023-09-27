@@ -1,7 +1,7 @@
 <template>
-    <input id="login-password" class="input-field-text password-input" @input="validatePassword" :type="passwordInputType"
-        v-model.trim="password" :placeholder="$i18n(placeholder)" tabindex="2" :class="passwordInputClass" />
-    <button @click="togglePasswordInputType" class="small-button" id="show-password-toggle-button" tabindex="4">
+    <input id="login-password" class="password-input" @input="validatePassword" :type="passwordInputType"
+        v-model.trim="password" :placeholder="$i18n(placeholder)" :tabindex="tabindex" :class="passwordInputClass" />
+    <button @click="togglePasswordInputType" id="show-password-toggle-button" :tabindex="showButtonIndex">
         {{ passwordInputType === 'password' ? $i18n('password_show') : $i18n('password_hide') }}
     </button>
     <ErrorMessage :msg="$i18n(errorMessage)" single v-if="errorMessage.length" />
@@ -18,7 +18,8 @@ export default {
         ErrorMessage
     },
     props: {
-        placeholder: { type: String, default: 'password' }
+        placeholder: { type: String, default: 'password' },
+        tabindex: { type: Number, default: 4 }
     },
     data() {
         return {
@@ -31,6 +32,9 @@ export default {
     computed: {
         passwordInputClass() {
             return this.errorMessage.length ? 'generic-error' : '';
+        },
+        showButtonIndex() {
+            return Number.parseInt(this.tabindex) + 1;
         }
     },
     methods: {
@@ -52,4 +56,19 @@ export default {
     }
 }
 </script>
-<style></style>
+<style>
+#show-password-toggle-button {
+    background-color: #0F0818;
+    border: none;
+    color: #963cf5;
+    float: right;
+    margin-right: 4.25rem;
+    margin-top: -2.25rem;
+    pointer-events: initial;
+    cursor: pointer;
+}
+
+.password-input {
+    float: left;
+}
+</style>
