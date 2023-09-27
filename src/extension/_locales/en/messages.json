@@ -187,6 +187,10 @@
         "message": "Enter your password to update your wallet address.",
         "description": "Instruction for updating wallet address."
     },
+    "error": {
+        "message": "Error",
+        "description": "Generic error message."
+    },
     "error_deleting_account_generic": {
         "message": "Error deleting account in. Please try again later.",
         "description": "Generic login error message."
@@ -292,8 +296,8 @@
         "description": "Page title, also used in sidebar."
     },
     "password": {
-        "message": "Hide Password",
-        "description": "Instruction for toggling password visibility."
+        "message": "Password",
+        "description": "Generic input field placeholder text."
     },
     "password_hide": {
         "message": "Hide Password",
@@ -504,8 +508,12 @@
         "description": "The text used in a warning box."
     },
     "warning_username_too_long": {
-        "message": "Username too long: Max length is 16 characters.",
+        "message": "Username too long: Maximum length is 16 characters.",
         "description": "The text used in a warning box."
+    },
+    "warning_username_too_short": {
+        "message": "Username too short: Minimum length is 5 characters.",
+        "description": "//TODO determine min characters."
     },
     "what_does_threat_slayer_collect": {
         "message": "What data does ThreatSlayer Collect?",
