@@ -15,7 +15,7 @@ import ErrorMessage from "../ErrorMessage.vue";
 import TextComponent from "../TextComponent.vue";
 
 import axios from "axios";
-import { baseUrl, extractFromError, formatErrorMessages, genericSubmitButtonLabels, isEmail, setChromeStorage } from '../../../utilities.js';
+import { baseUrl, extractFromError, formatErrorMessages, genericSubmitButtonLabels, setChromeStorage } from '../../../utilities.js';
 
 export default {
     name: "LoginButton",
@@ -24,7 +24,7 @@ export default {
         loginDisabled: { type: Boolean, required: true },
         password: { type: String, default: '' },
         selectPage: { type: Function, required: true },
-        usernameOrEmail: { type: String, default: '' }
+        username: { type: String, default: '' }
     },
     components: {
         ErrorMessage,
@@ -63,20 +63,8 @@ export default {
         async submitLogin() {
             this.loggingIn = true;
             this.errorArr = [];
-            const { password, usernameOrEmail } = this;
-            const requestBody = { password };
-
-            if (!usernameOrEmail?.length) {
-                return;
-            }
-
-            if (isEmail(usernameOrEmail)) {
-                requestBody.email = usernameOrEmail;
-                requestBody.username = '';
-            } else {
-                requestBody.email = '';
-                requestBody.username = usernameOrEmail;
-            }
+            const { email = '', password, username } = this;
+            const requestBody = { email, password, username };
 
             axios.post(`${baseUrl}/user-login`, requestBody)
                 .then(async response => {
