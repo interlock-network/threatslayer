@@ -38,7 +38,6 @@ export default {
             this.errorMessage = errorMessage;
             this.$emit('currentEmail', email)
             this.$emit('emailHasError', hasError);
-
         }, 250)
     }
 }

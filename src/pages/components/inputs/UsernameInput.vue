@@ -29,8 +29,8 @@ export default {
         },
     },
     methods: {
-        validateUsername: debounce(function (event) {
-            const username = event?.target?.value;
+        validateUsername: debounce(function () {
+            const username = this.username;
             const errorMessage = validateUsername(username);
             const hasError = !!errorMessage.length;
 
