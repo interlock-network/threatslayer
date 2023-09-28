@@ -31,11 +31,27 @@ export function clearChromeStorage(key) {
  * @returns {{errors: Array.<string>, status: number}} An object with the errors array and server status code
  */
 export function extractFromError(errorObj = {}) {
-    const { response: { data: { error_message = [] } = {}, status } = {} } = errorObj;
+    const { response: { data: { error_message: errors = [] } = {}, status } = {} } = errorObj;
+    const result = { errors, status };
 
-    const result = {};
-    result.errors = error_message;
-    result.status = status;
+    return result;
+}
+
+/**
+ * This convenience function formats an array of API endpoint error messages.
+ * @param {Object} response - the response from the GALACTUS endpoint
+ * @param {Number} response.status - server status code
+ * @param {Object} response.data - an object containing data specific to the user
+ * @param {string} response.data.azero_wallet_id - an Aleph Zero-compatible wallet address
+ * @param {string} response.data.email - an email address
+ * @param {string} response.data.key - the user's unique API key
+ * @param {string} response.data.pdot_wallet_id - an Polkadot-compatible wallet address
+ * @param {string} response.data.username - the user's username
+ * @returns {{azeroAddress: string, email: string, key: string, pdotAddress: string, status: Number, username: string}} An object with relevant values extracted
+ */
+export function extractFromLogin(response) {
+    const { status, data: { azero_wallet_id: azeroAddress, email, key, pdot_wallet_id: pdotAddress, username } = {} } = response;
+    const result = { azeroAddress, email, key, pdotAddress, status, username };
 
     return result;
 }
