@@ -15,7 +15,7 @@ import ErrorMessage from "../ErrorMessage.vue";
 import TextComponent from "../TextComponent.vue";
 
 import axios from "axios";
-import { baseUrl, extractFromError, formatErrorMessages, genericSubmitButtonLabels, setChromeStorage } from '../../../utilities.js';
+import { baseUrl, extractFromError, extractFromLogin, formatErrorMessages, genericSubmitButtonLabels, setChromeStorage } from '../../../utilities.js';
 
 export default {
     name: "LoginButton",
@@ -68,7 +68,7 @@ export default {
 
             axios.post(`${baseUrl}/user-login`, requestBody)
                 .then(async response => {
-                    const { status, data: { azeroAddress = '', email = '', key = '', pdotAddress = '', username = '' } } = response;
+                    const { status, azeroAddress, email, key, pdotAddress, username } = extractFromLogin(response);
 
                     this.status = status;
                     this.loggedIn = true;
