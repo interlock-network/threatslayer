@@ -38,7 +38,7 @@
         </label>
     </div>
     <CreateUserButton style="margin-top: 1.1rem;" tabindex="20"
-        v-bind="{ azeroWalletAddress, checkState, createUserDisabled, selectPage, email, password, pdotWalletId, referrer, termsOfService, unitedStates, username }" />
+        v-bind="{ azeroAddress, checkState, createUserDisabled, selectPage, email, password, pdotWalletId, referrer, termsOfService, unitedStates, username }" />
 </template>
 
 <script>
@@ -85,9 +85,8 @@ export default {
     },
     data() {
         return {
-            azeroWalletAddress: '',
+            azeroAddress: '',
             azeroAddressHasError: '',
-            azeroAddressErrorMessage: '',
             connectAccountSelected: true,
             createAccountSelected: false,
             email: '',
@@ -112,9 +111,6 @@ export default {
         firstInput.focus();
     },
     computed: {
-        addressInputClassAzero() {
-            return this.azeroAddressErrorMessage?.length ? 'generic-error' : '';
-        },
         addressInputClassPdot() {
             return this.pdotAddressErrorMessage?.length ? 'generic-error' : '';
         },
@@ -142,7 +138,7 @@ export default {
             }
         },
         getAzeroAddress(walletAddress) {
-            this.azeroWalletAddress = walletAddress;
+            this.azeroAddress = walletAddress;
         },
         getAzeroAddressHasError(errorBool) {
             this.azeroAddressHasError = errorBool;
