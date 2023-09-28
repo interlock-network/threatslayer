@@ -71,7 +71,7 @@ export default {
             return result;
         },
         disableDeleteButton() {
-            return this.passwordHasError;
+            return !this.password.length || this.passwordHasError;
         }
     },
     methods: {

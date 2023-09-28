@@ -16,6 +16,7 @@ export default {
     props: {
         active: { type: Boolean, required: true },
         checkState: { type: Function, required: true },
+        disableDeleteButton: { type: Boolean, required: true },
         fadeAccountPage: { type: Function, required: true },
         password: { type: String, default: '' },
         setActive: { type: Function, required: true },
@@ -42,9 +43,7 @@ export default {
             );
         },
         disabled() {
-            const { deleting, password } = this;
-
-            return !password.length || deleting;
+            return this.deleting || this.disableDeleteButton;
         }
     },
     methods: {
