@@ -16,11 +16,8 @@
         :class="reenteredPasswordInputClass" v-model.trim="reenteredPassword" :placeholder="$i18n('enter_password_again')"
         tabindex="8" required />
     <ErrorMessage v-if="reenteredPasswordErrorMessage.length" :msg="$i18n(reenteredPasswordErrorMessage)" single />
-    <!-- AZero wallet address (optional) -->
-    <input id="address-input" @input="validateAddress($event, 'azero', 'azeroAddressErrorMessage')"
-        v-model.trim="azeroWalletId" :class="addressInputClassAzero"
-        :placeholder="$i18n('enter_azero_wallet_address_optional')" tabindex="10" />
-    <ErrorMessage v-if="azeroAddressErrorMessage.length" :msg="$i18n(azeroAddressErrorMessage)" single />
+    <AzeroAddressInput @currentAzeroAddress="getAzeroAddress" @azeroAddressHasError="getAzeroAddressHasError"
+        tabindex="10" />
     <!-- Polkadot wallet address (optional) -->
     <!-- TODO add this to translation file -->
     <input id="address-input" @input="validateAddress($event, 'pdot', 'pdotAddressErrorMessage')"
@@ -41,7 +38,7 @@
         </label>
     </div>
     <CreateUserButton style="margin-top: 1.1rem;" tabindex="20"
-        v-bind="{ azeroWalletId, checkState, createUserDisabled, selectPage, email, password, pdotWalletId, referrer, termsOfService, unitedStates, username }" />
+        v-bind="{ azeroWalletAddress, checkState, createUserDisabled, selectPage, email, password, pdotWalletId, referrer, termsOfService, unitedStates, username }" />
 </template>
 
 <script>
@@ -50,6 +47,7 @@ import { decodeAddress, encodeAddress } from '@polkadot/keyring';
 import { hexToU8a, isHex } from '@polkadot/util';
 import { validateAzero, validateMoonbeam } from "../utilities";
 
+import AzeroAddressInput from "./components/inputs/AzeroAddressInput.vue";
 import CreateUserButton from "./components/buttons/CreateUserButton.vue";
 import CreateWalletLine from './components/CreateWalletLine.vue';
 import EmailInput from "./components/inputs/EmailInput.vue";
@@ -71,6 +69,7 @@ export default {
         urlToStake: { type: String, default: '' }
     },
     components: {
+        AzeroAddressInput,
         CreateUserButton,
         CreateWalletLine,
         EmailInput,
@@ -86,7 +85,8 @@ export default {
     },
     data() {
         return {
-            azeroWalletId: '',
+            azeroWalletAddress: '',
+            azeroAddressHasError: '',
             azeroAddressErrorMessage: '',
             connectAccountSelected: true,
             createAccountSelected: false,
@@ -119,11 +119,11 @@ export default {
             return this.pdotAddressErrorMessage?.length ? 'generic-error' : '';
         },
         createUserDisabled() {
-            const { email, emailHasError, password, passwordHasError, termsOfService, unitedStates, username, usernameHasError } = this;
+            const { azeroAddressHasError, email, emailHasError, password, passwordHasError, termsOfService, unitedStates, username, usernameHasError } = this;
 
             const missingFields = !email.length || !password.length || !username.length;
             const boxesUnchecked = !termsOfService || !unitedStates;
-            const hasErrors = emailHasError || passwordHasError || usernameHasError;
+            const hasErrors = azeroAddressHasError || emailHasError || passwordHasError || usernameHasError;
 
             return missingFields || boxesUnchecked || hasErrors;
         },
@@ -140,6 +140,12 @@ export default {
 
                 secondCheckBox.focus();
             }
+        },
+        getAzeroAddress(walletAddress) {
+            this.azeroWalletAddress = walletAddress;
+        },
+        getAzeroAddressHasError(errorBool) {
+            this.azeroAddressHasError = errorBool;
         },
         getEmail(email) {
             this.email = email;
