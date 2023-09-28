@@ -12,10 +12,8 @@
             <div v-if="showAddressInput">
                 <!-- input field with prompt for new Aleph Zero address -->
                 <TextComponent :msg="$i18n(updateAddressMsg)" subinstruction />
-                <input id="azero-input" @input="validateAddress($event, 'azero', 'newAzeroErrorMessage')"
-                    v-model.trim="newAzeroAddress" :style="addressInputStyle" style="margin-top: 0.5rem;"
-                    :placeholder="$i18n('enter_azero_wallet_address')" tabindex="2" />
-                <ErrorMessage v-if="newAzeroErrorMessage.length" :msg="$i18n(newAzeroErrorMessage)" single />
+                <AzeroAddressInput @currentAzeroAddress="getAzeroAddress" @azeroAddressHasError="getAzeroAddressHasError"
+                    tabindex="2" />
                 <!-- input field with prompt for new Moonbeam address -->
                 <input id="pdot-input" @input="validateAddress($event, 'pdot', 'newPdotErrorMessage')"
                     v-model.trim="newPdotAddress" :style="addressInputStyle" style="margin-top: -0.2rem;"
@@ -28,7 +26,6 @@
                     <br />
                     <WarningTextBox v-if="showAddressChangeWarning" :msg="$i18n('warning_changing_wallet_address')" />
                 </div>
-                <!-- button to update address -->
                 <UpdateAddressButton tabindex="10" style="margin-top: 4rem;"
                     v-bind="{ apiKey, checkState, hasError, newAzeroAddress, newPdotAddress, password, username }" />
             </div>
@@ -46,17 +43,18 @@
 </template>
 
 <script>
+import { debounce } from 'debounce';
+import { decodeAddress, encodeAddress } from '@polkadot/keyring';
+import { hexToU8a, isHex } from '@polkadot/util';
+import { validateAzero, validateMoonbeam } from "../../utilities";
+
+import AzeroAddressInput from "./inputs/AzeroAddressInput.vue";
 import ErrorMessage from "./ErrorMessage.vue";
 import SinglePasswordInput from "./inputs/SinglePasswordInput.vue";
 import TextComponent from "./TextComponent.vue";
 import UpdateAddressButton from "./buttons/UpdateAddressButton.vue";
 import WalletList from "./WalletList.vue";
 import WarningTextBox from "./WarningTextBox.vue";
-
-import { debounce } from 'debounce';
-import { decodeAddress, encodeAddress } from '@polkadot/keyring';
-import { hexToU8a, isHex } from '@polkadot/util';
-import { validateAzero, validateMoonbeam } from "../../utilities";
 
 export default {
     name: "WalletInfoModal",
@@ -70,6 +68,7 @@ export default {
         username: { type: String, default: '' }
     },
     components: {
+        AzeroAddressInput,
         ErrorMessage,
         SinglePasswordInput,
         TextComponent,
@@ -85,7 +84,7 @@ export default {
             deleting: false,
             errorArr: [],
             newAzeroAddress: '',
-            newAzeroErrorMessage: '',
+            newAzeroAddressHasError: '',
             newPdotAddress: '',
             newPdotErrorMessage: '',
             password: '',
@@ -120,22 +119,22 @@ export default {
 
             return result;
         },
+        hasError() {
+            return this.newAzeroAddressHasError || !!this.newPdotErrorMessage || this.passwordHasError;
+        },
         headerText() {
             return !this.azeroAddress?.length && !this.pdotAddress?.length ? 'add_blockchain_address' : 'view_wallet_info';
         },
         showAddress(address) {
             return address?.length && !this.changeAddressSelected;
         },
+        showAddressChangeWarning() {
+            return this.azeroAddress?.length;
+        },
         showAddressInput() {
             const { azeroAddress, changeAddressSelected, pdotAddress } = this;
 
             return (!azeroAddress?.length && !pdotAddress?.length) || changeAddressSelected;
-        },
-        showAddressChangeWarning() {
-            return this.azeroAddress?.length;
-        },
-        hasError() {
-            return this.passwordHasError || !!this.newAzeroErrorMessage.length || !!this.newPdotErrorMessage;
         },
         updateAddressMsg() {
             return !this.address?.length ? 'warning_must_add_wallet_address' : 'enter_new_wallet_address';
@@ -144,13 +143,19 @@ export default {
     methods: {
         doneAction() {
             this.newAzeroAddress = '';
-            this.newAzeroErrorMessage = '';
+            this.newAzeroAddressHasError = '';
             this.password = '';
             this.newPdotAddress = '';
             this.newPdotErrorMessage = '';
             this.active = false;
             this.fadeAccountPage(false);
             this.selectChangeAddress(false);
+        },
+        getAzeroAddress(walletAddress) {
+            this.newAzeroAddress = walletAddress;
+        },
+        getAzeroAddressHasError(errorBool) {
+            this.newAzeroAddressHasError = errorBool;
         },
         getPassword(password) {
             this.password = password;
@@ -180,27 +185,25 @@ export default {
         },
         validateAddress: debounce(function (event, addressType, errorKeyName) {
             const address = event?.target?.value;
-            this[errorKeyName] = '';
+            let result = ''
 
             if (!address || !address.length) {
-                this[errorKeyName] = '';
-            }
-
-            const addressIsValid = this.legitPolkadot(address);
-
-            if (addressType === 'azero' && !validateAzero(address)) {
-                this[errorKeyName] = 'warning_address_not_azero';
-            } else if (addressType === 'pdot' && !validateMoonbeam(address)) {
-                this[errorKeyName] = 'warning_address_not_moonbeam';
-            }
-            // happy case
-            else if (addressIsValid) {
-                this[errorKeyName] = '';
-            } else if (!address || !address.length) {
-                this[errorKeyName] = '';
+                result = '';
             } else {
-                this[errorKeyName] = 'error_registering_wallet_address';
+                const addressIsValid = this.legitPolkadot(address);
+
+                if (addressType === 'pdot' && !validateMoonbeam(address)) {
+                    result = 'warning_address_not_moonbeam';
+                }
+                // happy case
+                else if (addressIsValid) {
+                    result = '';
+                } else {
+                    result = 'error_registering_wallet_address';
+                }
             }
+
+            this[errorKeyName] = result;
         }, 250)
     }
 };
