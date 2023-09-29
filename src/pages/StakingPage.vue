@@ -39,7 +39,11 @@
         <WarningTextBox v-if="loggedIn" :msg="$i18n('warning_staking_not_available')" />
     </div>
 </template>
+
 <script>
+import axios from 'axios';
+import { baseUrl, getChromeStorage } from '../utilities.js';
+
 import WarningTextBox from './components/WarningTextBox.vue';
 import ClearAllowlistedURLButton from './components/buttons/ClearAllowlistedURLButton.vue';
 import LineOfText from './components/LineOfText.vue';
@@ -47,9 +51,6 @@ import LoginLine from './components/LoginLine.vue';
 import PageBanner from './components/PageBanner.vue';
 import RegisterLine from './components/RegisterLine.vue';
 import TextComponent from './components/TextComponent.vue';
-
-import axios from 'axios';
-import { baseUrl, getChromeStorage } from '../utilities.js';
 
 export default {
     name: 'StakingPage',
@@ -60,14 +61,14 @@ export default {
         LoginLine,
         PageBanner,
         RegisterLine,
-        TextComponent,
+        TextComponent
     },
     props: {
         apiKey: { type: String, default: '' },
         checkState: { type: Function, required: true },
         loggedIn: { type: Boolean, required: true },
         registered: { type: Boolean, required: true },
-        selectPage: { type: Function, required: true },
+        selectPage: { type: Function, required: true }
     },
     data() {
         return {
@@ -88,9 +89,11 @@ export default {
             return this.allowlist?.length;
         },
         stakedUrlList() {
-            if (!this.allowlist) return [];
-
             let result = [];
+
+            if (!this.allowlist) {
+                return result;
+            };
 
             if (this.currentSortDir === 'asc') {
                 result = [...this.allowlist].sort((a, b) => a > b ? -1 : 1);
@@ -103,7 +106,7 @@ export default {
             return result;
         },
         sortHeader() {
-            let result;
+            let result = '';
 
             if (!this.allowlist?.length || this.allowlist?.length === 1) {
                 result = '';
@@ -128,9 +131,9 @@ export default {
     },
     methods: {
         clearUrlToStake(_url) {
-            this.url = '';
             this.stakeState = null;
             this.stakeStateMessage = 'no_url_selected';
+            this.url = '';
 
             this.checkState();
         },

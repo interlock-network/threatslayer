@@ -18,6 +18,7 @@
         <AllowlistTable apiKey="" />
     </div>
 </template>
+
 <script>
 import AllowlistTable from './components/AllowlistTable.vue';
 import LineOfText from './components/LineOfText.vue';
@@ -40,7 +41,7 @@ export default {
     },
     props: {
         checkState: { type: Function, required: true },
-        selectPage: { type: Function, required: true },
+        selectPage: { type: Function, required: true }
     }
 }
 </script>

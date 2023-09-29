@@ -21,6 +21,7 @@
             tabindex="10" />
     </div>
 </template>
+
 <script>
 import EmailInput from "./components/inputs/EmailInput.vue";
 import ErrorMessage from "./components/ErrorMessage.vue";

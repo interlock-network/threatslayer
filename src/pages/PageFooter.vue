@@ -57,7 +57,6 @@ export default {
     background-color: #0F0818;
     bottom: 0;
     box-shadow: 0px 6px 46px 0px rgba(187, 0, 253, 0.30);
-    /* left: 2rem; */
     height: 17%;
     position: absolute;
     width: 100%;
@@ -75,9 +74,7 @@ export default {
 
 #page-footer {
     color: gray;
-    /* display: flex; */
     font-size: 0.75rem;
-    /* padding-left: 2rem; */
     padding-top: 0.6rem;
     position: absolute;
     top: 1rem;

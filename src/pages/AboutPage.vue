@@ -19,6 +19,7 @@
         <TextComponent :msg="$i18n('about_us_paragraph_4')" />
     </div>
 </template>
+
 <script>
 import PageBanner from "./components/PageBanner.vue";
 import TextComponent from "./components/TextComponent.vue";

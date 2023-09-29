@@ -92,12 +92,13 @@
         </text>
     </svg>
 </template>
-<script>
-import PageBanner from "./components/PageBanner.vue";
 
+<script>
 import axios from "axios";
 import { baseUrl } from '../utilities.js';
 import { extractFromError, formatNumber, getFontSizeForTotal, getFontSizeForSmallerNums, setChromeStorage } from "../utilities";
+
+import PageBanner from "./components/PageBanner.vue";
 
 const output = { name: "SlayCount.png", width: 512, height: 512 };
 
@@ -117,7 +118,7 @@ export default {
             fontSizeForMalicious: '50px',
             rawTotalUrlsVisited: 0,
             totalMaliciousURLsVisited: '0',
-        };
+        }
     },
     mounted() {
         this.getSlayCountStats()

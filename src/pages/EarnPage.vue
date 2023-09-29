@@ -19,7 +19,7 @@
     <AzeroAddressInput @currentAzeroAddress="getAzeroAddress" @azeroAddressHasError="getAzeroAddressHasError"
         tabindex="10" />
     <!-- Polkadot wallet address (optional) -->
-    <!-- TODO add this to translation file -->
+    <!-- TODO add this to translation file? -->
     <input id="address-input" @input="validateAddress($event, 'pdot', 'pdotAddressErrorMessage')"
         v-model.trim="pdotWalletId" :class="addressInputClassPdot" placeholder="Optional: Paste your Moonbeam wallet here"
         tabindex="12" />
@@ -81,7 +81,7 @@ export default {
         SinglePasswordInput,
         TextComponent,
         UsernameInput,
-        WarningTextBox,
+        WarningTextBox
     },
     data() {
         return {

@@ -16,6 +16,7 @@
     <br />
     <WalletButton tabindex="2" />
 </template>
+
 <script>
 import PageBanner from "./components/PageBanner.vue";
 import TextComponent from "./components/TextComponent.vue";
@@ -29,7 +30,7 @@ export default {
         WalletButton
     },
     props: {
-        selectPage: { type: Function, required: true },
+        selectPage: { type: Function, required: true }
     }
 }
 </script>

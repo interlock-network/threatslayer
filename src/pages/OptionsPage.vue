@@ -9,11 +9,12 @@
         <label for="beta-ai-checkboxbox">{{ $i18n('enable_beta_option') }}</label>
     </div>
 </template>
+
 <script>
+import { getChromeStorage, setChromeStorage } from '../utilities.js';
+
 import PageBanner from "./components/PageBanner.vue";
 import TextComponent from "./components/TextComponent.vue";
-
-import { getChromeStorage, setChromeStorage } from '../utilities.js';
 
 export default {
     name: 'OptionsPage',
