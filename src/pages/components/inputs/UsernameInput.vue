@@ -3,6 +3,7 @@
         :placeholder="$i18n('enter_a_username')" :class="usernameInputClass" />
     <ErrorMessage v-if="errorMessage.length" :msg="$i18n(errorMessage)" single />
 </template>
+
 <script>
 import { debounce } from 'debounce';
 import { validateUsername } from "../../../utilities";
@@ -32,7 +33,7 @@ export default {
     computed: {
         usernameInputClass() {
             return this.errorMessage?.length ? 'generic-error' : '';
-        },
+        }
     },
     methods: {
         validateUsername: debounce(function () {
@@ -41,11 +42,12 @@ export default {
             const hasError = !!errorMessage.length;
 
             this.errorMessage = errorMessage;
-            this.$emit('currentUsername', username)
+            this.$emit('currentUsername', username);
             this.$emit('usernameHasError', hasError);
 
         }, 250)
     }
 }
 </script>
+
 <style></style>

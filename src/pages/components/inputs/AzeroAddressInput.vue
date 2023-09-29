@@ -24,12 +24,12 @@ export default {
         return {
             walletAddress: '',
             errorMessage: ''
-        };
+        }
     },
     computed: {
         inputClass() {
             return this.errorMessage?.length ? 'generic-error' : '';
-        },
+        }
     },
     methods: {
         validateAzero(address = '') {
@@ -65,7 +65,7 @@ export default {
             const hasError = !!result.length;
 
             this.errorMessage = result;
-            this.$emit('currentAzeroAddress', walletAddress)
+            this.$emit('currentAzeroAddress', walletAddress);
             this.$emit('azeroAddressHasError', hasError);
         }, 250),
         validPolkadot(address) {

@@ -36,7 +36,7 @@ export default {
             const hasError = !!errorMessage.length;
 
             this.errorMessage = errorMessage;
-            this.$emit('currentEmail', email)
+            this.$emit('currentEmail', email);
             this.$emit('emailHasError', hasError);
         }, 250)
     }

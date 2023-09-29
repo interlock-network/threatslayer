@@ -6,6 +6,7 @@
     </button>
     <ErrorMessage :msg="$i18n(errorMessage)" single v-if="errorMessage.length" />
 </template>
+
 <script>
 import { debounce } from 'debounce';
 import { validatePassword } from "../../../utilities";
@@ -25,8 +26,7 @@ export default {
         return {
             password: '',
             errorMessage: '',
-            passwordInputType: 'password',
-
+            passwordInputType: 'password'
         };
     },
     computed: {
@@ -56,6 +56,7 @@ export default {
     }
 }
 </script>
+
 <style>
 #show-password-toggle-button {
     background-color: #0F0818;
