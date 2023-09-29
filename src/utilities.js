@@ -57,25 +57,6 @@ export function extractFromLogin(response) {
 }
 
 /**
- * This convenience function perforns basic email validation
- * @param {string} email - an email string
- * @returns {string} A translation key string to show email error message, if applicable
- */
-export function validateEmail(email = '') {
-    let result = '';
-
-    if (!email.length) {
-        result = '';
-    } else if (!isEmail(email)) {
-        result = 'error_invalid_email_generic';
-    } else {
-        result = '';
-    }
-
-    return result;
-}
-
-/**
  * This convenience function finds characters not A-Z, a-z and 0-9
  * @param {string} str - a username string
  * @returns {Array} Characters in string that are not A-Z, a-z and 0-9
@@ -126,27 +107,29 @@ export function formatNumber(num) {
  * This convenience function returns button text for API submit buttons.
  * @param {Object} configObject - Configuration object for this function
  * @param {Array<string>} configObject.errorArr - Array of error strings; may be empty
- * @param {string} configObject.initial - Default i18n button label string (before clicked)
+ * @param {string} configObject.initialMsg - Default i18n button label string (before clicked)
  * @param {boolean} configObject.submitted - Whether the request has been submitted
+ * @param {string} configObject.submittedMsg - Submitted request i18n button label string (success)
  * @param {boolean} configObject.submitting - Whether the request is submitting now
+ * @param {string} configObject.submittingMsg - Submitting request i18n button label string (waiting)
  * @param {Number} configObject.status - Server status code, 1xx to 5xx
  * @returns {string} A translation key string to show on the submit button
  */
-export function genericSubmitButtonLabels(
-    { errorArr, initial, inProgress = 'waiting', submitted, submitting, status }
+export function submitButtonLabels(
+    { errorArr, errorMsg = 'error', initialMsg, submitted, submittedMsg = 'success', submitting, submittingMsg = 'waiting', status }
 ) {
     let result = '';
 
     if (submitted) {
-        result = 'success';
+        result = submittedMsg;
     } else if (submitting) {
-        result = inProgress;
+        result = submittingMsg;
     } else if (status >= 500) {
         result = "try_again_later";
     } else if (errorArr.length) {
-        result = "error";
+        result = errorMsg;
     } else {
-        result = initial;
+        result = initialMsg;
     }
 
     return result;
@@ -158,13 +141,12 @@ export function genericSubmitButtonLabels(
  * @returns {string} Pixel size in string for use in CSS
  */
 export function getFontSizeForTotal(num) {
+    let result = '';
     const oneToThreeDigits = '123px';
     const fourDigits = '110px';
     const fiveDigits = '90px';
     const sixDigits = '75px';
     const sevenDigits = '60px';
-
-    let result;
 
     if (num >= 10 ** 6) {
         result = sevenDigits;
@@ -187,10 +169,9 @@ export function getFontSizeForTotal(num) {
  * @returns {string} Pixel size in string for use in CSS
  */
 export function getFontSizeForSmallerNums(num) {
+    let result = '';
     const defaultSize = '50px';
     const sixDigits = '40px';
-
-    let result;
 
     if (num >= 10 ** 6) {
         result = sixDigits;
@@ -255,6 +236,7 @@ export function setChromeStorage(storageObj) {
             .then(() => {
                 const key = Object.keys(storageObj);
                 const value = storageObj[key];
+
                 console.log(`Chrome state set for ${key}: ${value}`);
 
                 return true;
@@ -277,6 +259,25 @@ export function validateAzero(address = '') {
 
     if (address.length && !azeroRegex.test(address)) {
         result = false;
+    }
+
+    return result;
+}
+
+/**
+ * This convenience function perforns basic email validation
+ * @param {string} email - an email string
+ * @returns {string} A translation key string to show email error message, if applicable
+ */
+export function validateEmail(email = '') {
+    let result = '';
+
+    if (!email.length) {
+        result = '';
+    } else if (!isEmail(email)) {
+        result = 'error_invalid_email_generic';
+    } else {
+        result = '';
     }
 
     return result;

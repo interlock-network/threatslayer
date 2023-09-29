@@ -63,7 +63,7 @@ export default {
       registered: false,
       urlToStake: null,
       username: null
-    };
+    }
   },
   mounted() {
     this.checkState();
@@ -166,7 +166,6 @@ body {
   background-color: #0F0818;
   color: #FFFFFF;
   font-size: 1.1rem;
-  /* pointer-events: none; */
 }
 
 button {
