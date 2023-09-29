@@ -6,8 +6,8 @@
 export default {
     name: "StepHeader",
     props: {
-        msg: { type: String, default: '' },
-    },
+        msg: { type: String, default: '' }
+    }
 };
 </script>
 

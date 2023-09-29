@@ -49,9 +49,11 @@ export default {
     },
     computed: {
         sortedAllowlist() {
-            if (!this.allowlist) return [];
-
             let result = [];
+
+            if (!this.allowlist) {
+                return result;
+            }
 
             if (this.currentSortDir === 'asc') {
                 result = [...this.allowlist].sort((a, b) => a > b ? -1 : 1);

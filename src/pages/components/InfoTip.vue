@@ -8,8 +8,8 @@
 export default {
     name: "InfoTip",
     props: {
-        msg: { type: String, default: '' },
-    },
+        msg: { type: String, default: '' }
+    }
 };
 </script>
 
@@ -67,7 +67,6 @@ export default {
 }
 
 /* CSS animation */
-
 @-webkit-keyframes fadeIn {
     0% {
         opacity: 0;

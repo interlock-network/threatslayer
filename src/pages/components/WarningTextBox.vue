@@ -15,7 +15,7 @@ export default {
     },
     components: {
         TextComponent
-    },
+    }
 };
 </script>
 

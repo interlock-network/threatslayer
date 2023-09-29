@@ -7,7 +7,7 @@
 
 <script>
 import axios from "axios";
-import { baseUrl, clearChromeStorage, extractFromError, formatErrorMessages, genericSubmitButtonLabels, setChromeStorage } from '../../../utilities.js';
+import { baseUrl, clearChromeStorage, extractFromError, formatErrorMessages, submitButtonLabels, setChromeStorage } from '../../../utilities.js';
 
 import ErrorMessage from "../ErrorMessage.vue";
 
@@ -37,9 +37,11 @@ export default {
     computed: {
         deleteUserButtonText() {
             const { errorArr, deleted: submitted, deleting: submitting, status } = this;
+            const initialMsg = 'delete_account_permanent';
+            const submittingMsg = 'deleting_account';
 
-            return genericSubmitButtonLabels(
-                { errorArr, initial: 'delete_account_permanent', inProgress: 'deleting_account', submitted, submitting, status }
+            return submitButtonLabels(
+                { errorArr, initialMsg, submittingMsg, submitted, submitting, status }
             );
         },
         disabled() {

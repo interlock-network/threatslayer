@@ -12,7 +12,7 @@ import ErrorMessage from "../ErrorMessage.vue";
 import TextComponent from "../TextComponent.vue";
 
 import axios from "axios";
-import { baseUrl, extractFromError, formatErrorMessages, genericSubmitButtonLabels, setChromeStorage } from '../../../utilities.js';
+import { baseUrl, extractFromError, formatErrorMessages, submitButtonLabels, setChromeStorage } from '../../../utilities.js';
 
 export default {
     name: "CreateUserButton",
@@ -56,7 +56,7 @@ export default {
         submitButtonText() {
             const { errorArr, loggedIn: submitted, loggingIn: submitting, status } = this;
 
-            return genericSubmitButtonLabels({ errorArr, initial: 'register', submitted, submitting, status });
+            return submitButtonLabels({ errorArr, initialMsg: 'register', submitted, submitting, status });
         },
         disabled() {
             const { createUserDisabled, submitting, submitted } = this;

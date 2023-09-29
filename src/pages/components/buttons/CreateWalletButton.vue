@@ -1,7 +1,7 @@
 <template>
     <button :id="id" class="link-button" @click="openTab()">
         <div>
-            Subwallet <img class="link-button-icon" src="/src/assets/images/external_link.png">
+            SubWallet <img class="link-button-icon" src="/src/assets/images/external_link.png">
         </div>
     </button>
 </template>
@@ -11,9 +11,9 @@ export default {
     name: "WalletButton",
     methods: {
         openTab() {
-            window.open('https://chrome.google.com/webstore/detail/subwallet-polkadot-wallet/onhogfjeacnfoofkfgppdlbmlmnplgbn')
-        },
-    },
+            window.open('https://chrome.google.com/webstore/detail/subwallet-polkadot-wallet/onhogfjeacnfoofkfgppdlbmlmnplgbn');
+        }
+    }
 };
 </script>
 

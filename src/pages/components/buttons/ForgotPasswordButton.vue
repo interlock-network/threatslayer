@@ -15,7 +15,7 @@ import ErrorMessage from "../ErrorMessage.vue";
 import TextComponent from "../TextComponent.vue";
 
 import axios from "axios";
-import { baseUrl, extractFromError, formatErrorMessages, genericSubmitButtonLabels } from '../../../utilities.js';
+import { baseUrl, extractFromError, formatErrorMessages, submitButtonLabels } from '../../../utilities.js';
 
 export default {
     name: "ForgotPasswordButton",
@@ -50,10 +50,7 @@ export default {
         forgotPasswordButtonText() {
             const { errorArr, submitted, submitting, status } = this;
 
-            // TODO test this
-            return genericSubmitButtonLabels(
-                { errorArr, initial: 'change_password', submitted, submitting, status }
-            );
+            return submitButtonLabels({ errorArr, initialMsg: 'change_password', submitted, submitting, status });
         }
     },
     methods: {

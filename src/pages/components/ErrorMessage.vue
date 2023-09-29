@@ -11,7 +11,7 @@ export default {
         msg: { type: String, required: true },
         last: { type: Boolean, default: false },
         single: { type: Boolean, default: false },
-        stacked: { type: Boolean, default: false },
+        stacked: { type: Boolean, default: false }
     },
     components: {
         TextComponent

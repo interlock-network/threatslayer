@@ -91,8 +91,8 @@ export default {
             }
 
             return styleObj;
-        },
-    },
+        }
+    }
 };
 </script>
 
@@ -101,6 +101,5 @@ export default {
     color: #FFFFFF;
     display: inline-flex;
     margin-bottom: 0.5rem;
-    /* opacity: 85%; */
 }
 </style>

@@ -46,7 +46,7 @@
 import { debounce } from 'debounce';
 import { decodeAddress, encodeAddress } from '@polkadot/keyring';
 import { hexToU8a, isHex } from '@polkadot/util';
-import { validateAzero, validateMoonbeam } from "../../utilities";
+import { validateMoonbeam } from "../../utilities";
 
 import AzeroAddressInput from "./inputs/AzeroAddressInput.vue";
 import ErrorMessage from "./ErrorMessage.vue";

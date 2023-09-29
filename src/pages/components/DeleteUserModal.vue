@@ -50,26 +50,14 @@ export default {
             active: false,
             confirm: false,
             errorArr: [],
+            deleted: false,
             deleting: false,
             password: '',
-            passwordHasError: false
+            passwordHasError: false,
+            status: 200
         }
     },
     computed: {
-        deleteUserButtonText() {
-            let result = '';
-
-            if (this.deleting) {
-                result = 'deleting_account';
-                // TODO update text depending on error status
-            } else if (this.errorArr.length) {
-                result = 'try_again_later';
-            } else {
-                result = 'delete_account_permanent';
-            }
-
-            return result;
-        },
         disableDeleteButton() {
             return !this.password.length || this.passwordHasError;
         }

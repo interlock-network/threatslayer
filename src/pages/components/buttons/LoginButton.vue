@@ -15,7 +15,7 @@ import ErrorMessage from "../ErrorMessage.vue";
 import TextComponent from "../TextComponent.vue";
 
 import axios from "axios";
-import { baseUrl, extractFromError, extractFromLogin, formatErrorMessages, genericSubmitButtonLabels, setChromeStorage } from '../../../utilities.js';
+import { baseUrl, extractFromError, extractFromLogin, formatErrorMessages, submitButtonLabels, setChromeStorage } from '../../../utilities.js';
 
 export default {
     name: "LoginButton",
@@ -56,7 +56,7 @@ export default {
         loginButtonText() {
             const { errorArr, loggedIn: submitted, loggingIn: submitting, status } = this;
 
-            return genericSubmitButtonLabels({ errorArr, initial: 'login', submitted, submitting, status });
+            return submitButtonLabels({ errorArr, initialMsg: 'login', submitted, submitting, status });
         }
     },
     methods: {

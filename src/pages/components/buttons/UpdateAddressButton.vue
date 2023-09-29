@@ -13,7 +13,7 @@
 import ErrorMessage from "../ErrorMessage.vue";
 
 import axios from "axios";
-import { baseUrl, extractFromError, formatErrorMessages, genericSubmitButtonLabels, setChromeStorage } from '../../../utilities.js';
+import { baseUrl, extractFromError, formatErrorMessages, submitButtonLabels, setChromeStorage } from '../../../utilities.js';
 
 export default {
     name: "UpdateAddressButton",
@@ -41,7 +41,6 @@ export default {
         computedClass() {
             let className = '';
 
-            // TODO fix this?
             if (this.errorArr.length) {
                 className = 'submit-button-error';
             } else {
@@ -58,9 +57,8 @@ export default {
         submitButtonText() {
             const { errorArr, submitted, submitting, status } = this;
 
-            // TODO test this
-            return genericSubmitButtonLabels(
-                { errorArr, initial: 'update_wallet_address', submitted, submitting, status }
+            return submitButtonLabels(
+                { errorArr, initialMsg: 'update_wallet_address', submitted, submitting, status }
             );
         }
     },
@@ -75,12 +73,12 @@ export default {
                 { azero_wallet_id: newAzeroAddress, key, password, pdot_wallet_id: newPdotAddress, username })
                 .then(async response => {
                     const { status } = response.data;
+                    let setAzeroAddress = false;
+                    let setPdotAddress = false;
 
                     this.status = status;
                     this.submitted = true;
                     this.submitting = false;
-                    let setAzeroAddress = false;
-                    let setPdotAddress = false;
 
                     // set wallet address in state with user's new address
                     if (newAzeroAddress?.length) {

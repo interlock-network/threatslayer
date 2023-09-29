@@ -19,10 +19,10 @@ export default {
     props: {
         azeroAddress: { type: String, default: '' },
         changeAddressSelected: { type: Boolean, required: true },
-        pdotAddress: { type: String, default: '' },
+        pdotAddress: { type: String, default: '' }
     },
     components: {
-        TextComponent,
+        TextComponent
     }
 };
 </script>
