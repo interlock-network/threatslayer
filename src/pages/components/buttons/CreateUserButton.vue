@@ -17,7 +17,7 @@ import { baseUrl, extractFromError, formatErrorMessages, genericSubmitButtonLabe
 export default {
     name: "CreateUserButton",
     props: {
-        azeroWalletAddress: { type: String, default: '' },
+        azeroAddress: { type: String, default: '' },
         checkState: { type: Function, required: true },
         createUserDisabled: { type: Boolean, default: false },
         email: { type: String, default: '' },
@@ -68,7 +68,7 @@ export default {
         async submitCreateUser() {
             this.errorArr = [];
 
-            const { azeroWalletAddress: azero_wallet_id = '', email, password, pdotWalletId: pdot_wallet_id = '',
+            const { azeroAddress: azero_wallet_id = '', email, password, pdotWalletId: pdot_wallet_id = '',
                 referrer, termsOfService: terms_of_service, unitedStates: united_states, username } = this;
             const key = 'threatslayer-api-key';
             this.submitting = true;
