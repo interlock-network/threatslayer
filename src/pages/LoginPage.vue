@@ -6,9 +6,9 @@
     <RegisterLine :checkState="checkState" :selectPage="selectPage" tabindex="12" />
     <br />
     <br />
-    <UsernameInput @currentUsername="getUsername" @usernameHasError="getUsernameHasError" tabindex="2" />
+    <UsernameInput @currentUsername="getUsername" @usernameHasError="getUsernameHasError" tabindex="2" focus />
     <SinglePasswordInput @currentPassword="getPassword" @passwordHasError="getPasswordHasError" tabindex="4" />
-    <LoginButton v-bind="{ checkState, loginDisabled, password, selectPage, username }" tabindex="6" />
+    <LoginButton v-bind="{ checkState, loginDisabled, password, selectPage, username }" />
     <br />
     <br />
     <!-- Forgot username / password flow -->
@@ -61,12 +61,6 @@ export default {
             username: '',
             usernameHasError: ''
         };
-    },
-    mounted() {
-        // TODO fix this
-        // const usernameInput = document.getElementById('login-username-or-email')
-
-        // usernameInput.focus();
     },
     computed: {
         forgotPasswordDisabled() {
