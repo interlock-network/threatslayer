@@ -279,6 +279,18 @@
         "message": "Login",
         "description": "Page title, also used in sidebar."
     },
+    "logged_out": {
+        "message": "Logged Out",
+        "description": "Button text."
+    },
+    "logging_out": {
+        "message": "Logging Out",
+        "description": "Button text."
+    },
+    "logout": {
+        "message": "Logout",
+        "description": "Button text."
+    },
     "malicious_sites_detected": {
         "message": "Malicious Sites Detected",
         "description": "The text used to show how many malicious URLs are scanned on the dashboard."
@@ -505,15 +517,15 @@
     },
     "warning_username_contains_illegal_characters": {
         "message": "Username contains illegal characters: !, #, $, etc.",
-        "description": "The text used in a warning box."
+        "description": "Text used in warning box for username input."
     },
     "warning_username_too_long": {
         "message": "Username too long: Maximum length is 16 characters.",
-        "description": "The text used in a warning box."
+        "description": "Text used in warning box for username input."
     },
     "warning_username_too_short": {
         "message": "Username too short: Minimum length is 5 characters.",
-        "description": "//TODO determine min characters."
+        "description": "Text used in warning box for username input."
     },
     "what_does_threat_slayer_collect": {
         "message": "What data does ThreatSlayer Collect?",
