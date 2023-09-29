@@ -1,16 +1,16 @@
 <template>
     <div class="sidebar-item" :disabled="loggingOut">
         <img class="sidebar-icon" src="/src/assets/images/logout.png">
-        <span @click="submitLogout">{{ logoutButtonText }}
+        <span :disabled="disabled" @click="submitLogout">{{ $i18n(logoutButtonText) }}
         </span><br />
-        <span disabled="!clickedOnce" id="sidebar-cancel" :style="computedStyle" @click="cancelLogout">{{ $i18n('cancel')
+        <span :disabled="!clickedOnce" id="sidebar-cancel" :style="computedStyle" @click="cancelLogout">{{ $i18n('cancel')
         }}</span>
     </div>
 </template>
 
 <script>
 import axios from "axios";
-import { baseUrl, clearChromeStorage, extractFromError, setChromeStorage } from '../../../utilities.js';
+import { baseUrl, clearChromeStorage, extractFromError, submitButtonLabels, setChromeStorage } from '../../../utilities.js';
 
 export default {
     name: "LogoutButton",
@@ -24,26 +24,34 @@ export default {
         return {
             clickedOnce: false,
             errorArr: [],
-            loggingOut: false
+            loggedOut: false,
+            loggingOut: false,
+            status: 200
         }
     },
     computed: {
         computedStyle() {
             return this.clickedOnce ? 'color: red;' : 'color: #211037;';
         },
+        disabled() {
+            const { loggedOut, loggingOut } = this;
+
+            return loggedOut || loggingOut;
+        },
         logoutButtonText() {
-            let result = '';
+            const { clickedOnce, errorArr, loggedOut: submitted, loggingOut: submitting, status } = this;
 
-            // TODO add these to translations
-            if (this.loggingOut) {
-                result = 'Logging Out';
-            } else if (this.clickedOnce) {
-                result = "Are you sure?";
+            if (clickedOnce && !(submitted || submitting)) {
+                return 'confirm_are_you_sure';
             } else {
-                result = 'Logout';
-            }
+                const initialMsg = 'logout';
+                const submittedMsg = 'logged_out';
+                const submittingMsg = 'logging_out';
 
-            return result;
+                return submitButtonLabels(
+                    { errorArr, initialMsg, submitting, submittingMsg, submitted, submittedMsg, submitting, status }
+                );
+            }
         }
     },
     methods: {
@@ -61,9 +69,15 @@ export default {
                 this.loggingOut = true;
 
                 axios.post(`${baseUrl}/user-logout`, { key: apiKey, username })
-                    .then(response => { response })
+                    .then(response => {
+                        const { status } = response.data;
+
+                        this.status = status;
+                    })
                     .catch(error => {
                         const { errors, status } = extractFromError(error);
+
+                        this.status = status;
 
                         console.log(`Logout error. Status: ${status}. Error: ${errors}`);
                     })
@@ -72,6 +86,7 @@ export default {
                         // this prevents users from being unable to logout, e.g. because they logged in from a different
                         // installation on another browser and their API key changed
                         this.loggingOut = false;
+                        this.loggedOut = true;
 
                         const azeroAddressClearedFromState = await clearChromeStorage('azeroAddress');
                         const emailClearedFromState = await clearChromeStorage('email');
