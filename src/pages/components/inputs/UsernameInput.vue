@@ -15,6 +15,7 @@ export default {
         ErrorMessage
     },
     props: {
+        focus: { type: Boolean, default: false },
         tabindex: { type: Number, default: 2 }
     },
     data() {
@@ -22,6 +23,11 @@ export default {
             username: '',
             errorMessage: ''
         };
+    },
+    mounted() {
+        if (this.focus) {
+            document.getElementById('username-input').focus();
+        }
     },
     computed: {
         usernameInputClass() {
