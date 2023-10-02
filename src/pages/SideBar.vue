@@ -127,11 +127,18 @@ export default {
 }
 
 .sidebar-item {
-    cursor: default;
     line-height: 2rem;
     margin-bottom: 0.5rem;
     pointer-events: initial;
     cursor: pointer;
+}
+
+.sidebar-item:hover {
+    background-color: #4A0064;
+    border-radius: 6px;
+    margin-left: -0.5rem;
+    padding-left: 0.5rem;
+    width: 80%;
 }
 
 .selected-sidebar-item {

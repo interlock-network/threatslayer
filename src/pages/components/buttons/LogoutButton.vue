@@ -3,11 +3,13 @@
         <img class="sidebar-icon" src="/src/assets/images/logout.png">
         <span :disabled="disabled" @click="submitLogout">{{ $i18n(logoutButtonText) }}
         </span><br />
-        <span :disabled="!clickedOnce" id="sidebar-cancel" :style="computedStyle" @click="cancelLogout">{{ $i18n('cancel')
-        }}</span>
+    </div>
+    <div>
+        <div :disabled="!clickedOnce" id="sidebar-cancel" :class="computedClass" @click="cancelLogout">
+            {{ $i18n('cancel') }}
+        </div>
     </div>
 </template>
-
 <script>
 import axios from "axios";
 import { baseUrl, clearChromeStorage, extractFromError, submitButtonLabels, setChromeStorage } from '../../../utilities.js';
@@ -30,8 +32,8 @@ export default {
         }
     },
     computed: {
-        computedStyle() {
-            return this.clickedOnce ? 'color: red;' : 'color: #211037;';
+        computedClass() {
+            return !this.clickedOnce ? 'hidden-sidebar-cancel' : 'visible-sidebar-cancel';
         },
         disabled() {
             const { loggedOut, loggingOut } = this;
@@ -114,10 +116,26 @@ export default {
 
 <style>
 #sidebar-cancel {
-    cursor: default;
+    cursor: pointer;
     line-height: 2rem;
-    margin-left: 1.65rem;
+    padding-left: 1.65rem;
     pointer-events: initial;
+    margin-bottom: 0.5rem;
+}
+
+.hidden-sidebar-cancel {
+    color: #211037;
+}
+
+.visible-sidebar-cancel {
+    color: red;
+}
+
+.visible-sidebar-cancel:hover {
+    background-color: #4A0064;
+    border-radius: 6px;
+    line-height: 2rem;
+    width: 68%;
 }
 
 .cancel-icon {
