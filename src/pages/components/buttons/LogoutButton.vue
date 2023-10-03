@@ -129,13 +129,17 @@ export default {
 
 .visible-sidebar-cancel {
     color: red;
+    border-radius: 6px;
+    line-height: 2rem;
+    width: 68%;
 }
 
 .visible-sidebar-cancel:hover {
     background-color: #4A0064;
-    border-radius: 6px;
-    line-height: 2rem;
-    width: 68%;
+}
+
+.visible-sidebar-cancel:active {
+    background-color: #261142;
 }
 
 .cancel-icon {

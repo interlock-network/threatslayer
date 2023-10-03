@@ -141,6 +141,14 @@ export default {
     width: 80%;
 }
 
+.sidebar-item:active {
+    background-color: #261142;
+    border-radius: 6px;
+    margin-left: -0.5rem;
+    padding-left: 0.5rem;
+    width: 80%;
+}
+
 .selected-sidebar-item {
     background: #9000CB;
     border-radius: 6px;
