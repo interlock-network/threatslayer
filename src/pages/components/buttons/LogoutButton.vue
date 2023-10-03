@@ -1,7 +1,7 @@
 <template>
-    <div class="sidebar-item" :disabled="loggingOut">
+    <div class="sidebar-item" :disabled="disabled" @click="submitLogout">
         <img class="sidebar-icon" src="/src/assets/images/logout.png">
-        <span :disabled="disabled" @click="submitLogout">{{ $i18n(logoutButtonText) }}
+        <span>{{ $i18n(logoutButtonText) }}
         </span><br />
     </div>
     <div>
