@@ -6,7 +6,7 @@
     <button class="login-button" @click="selectPage('earn')">{{ $i18n('register') }}</button>
     <br />
     <br />
-    <div style="padding-right: 2rem;">
+    <div class="generic-text-container">
         <TextComponent :msg="$i18n('must_create_azero_wallet')" />
         <br />
         <br />

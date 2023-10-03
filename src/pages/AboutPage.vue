@@ -6,7 +6,7 @@
     <TextComponent :msg="$i18n('why_choose_threat_slayer')" bold />
     <br />
     <br />
-    <div style="padding-right: 2rem;">
+    <div class="generic-text-container">
         <TextComponent :msg="$i18n('about_us_paragraph_1')" />
         <br />
         <br />

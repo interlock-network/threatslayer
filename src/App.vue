@@ -173,12 +173,6 @@ button {
   pointer-events: initial;
 }
 
-h1,
-h2,
-h3 {
-  font-family: "THICCCBOI";
-}
-
 input {
   box-sizing: border-box;
   background: #0F0818;
@@ -236,6 +230,10 @@ input {
   position: relative;
   top: 3px;
   width: 20px;
+}
+
+.generic-text-container {
+  padding-right: 2rem;
 }
 
 .generic-error {
