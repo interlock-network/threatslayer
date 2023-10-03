@@ -10,8 +10,8 @@
             <WalletList v-bind="{ azeroAddress, changeAddressSelected, pdotAddress }" />
             <!-- prompt to add wallet address if there is none -->
             <div v-if="showAddressInput">
-                <!-- input field with prompt for new Aleph Zero address -->
-                <TextComponent :msg="$i18n(updateAddressMsg)" subinstruction />
+                <TextComponent :msg="$i18n(updateAddressMsg)" subinstruction /><br />
+                <br />
                 <AzeroAddressInput @currentAzeroAddress="getAzeroAddress" @azeroAddressHasError="getAzeroAddressHasError"
                     tabindex="2" />
                 <!-- input field with prompt for new Moonbeam address -->
@@ -26,7 +26,7 @@
                     <br />
                     <WarningTextBox v-if="showAddressChangeWarning" :msg="$i18n('warning_changing_wallet_address')" />
                 </div>
-                <UpdateAddressButton tabindex="10" style="margin-top: 4rem;"
+                <UpdateAddressButton tabindex="10" style="margin-top: 3rem; margin-bottom: 1rem;"
                     v-bind="{ apiKey, checkState, hasError, newAzeroAddress, newPdotAddress, password, username }" />
             </div>
             <div v-if="!showAddressInput">
@@ -210,16 +210,6 @@ export default {
 </script>
 
 <style>
-#cancel-delete-user-button {
-    font-size: 1.25rem;
-    background-color: #0F0818;
-    border: none;
-    color: red;
-    font-size: 1.25rem;
-    padding-top: 1rem;
-    width: 400px;
-}
-
 #modal-container {
     background-color: #0F0818;
     border-radius: 12px;
@@ -241,11 +231,20 @@ export default {
 #done-button {
     background-color: #0F0818;
     border: none;
+    border-radius: 6px;
     color: red;
     font-size: 1rem;
-    height: 2rem;
-    padding-top: 1rem;
+    line-height: 2rem;
+    /* padding-top: 1rem; */
     width: 400px;
+}
+
+#done-button:hover {
+    background-color: #4A0064;
+}
+
+#done-button:active {
+    background-color: #261142;
 }
 
 #delete-user-password-input {
@@ -288,11 +287,23 @@ export default {
 #view-wallet-info-button {
     background-color: #0F0818;
     border: none;
+    border-radius: 6px;
     cursor: pointer;
     color: #963cf5;
     font-size: 1.1rem;
     font-weight: bold;
-    padding: 0;
+    margin-bottom: -0.5rem;
+    margin-left: -1rem;
+    margin-top: -0.5rem;
+    padding: 1rem;
+}
+
+#view-wallet-info-button:hover {
+    background-color: #4A0064;
+}
+
+#view-wallet-info-button:active {
+    background-color: #0F0818;
 }
 
 .modal-button {
