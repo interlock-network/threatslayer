@@ -1,7 +1,7 @@
 export const baseUrl = 'http://159.89.252.13';
 
 /**
- * This function gets a single value from Chrome local storage
+ * This function clears a single value from Chrome local storage.
  * @param {string} key - The key for a value to set to null in Chrome local storage
  * @returns {boolean} Whether the value for key was cleared from Chrome local storage
  */
@@ -49,7 +49,7 @@ export function extractFromError(errorObj = {}) {
  * @param {string} response.data.username - the user's username
  * @returns {{azeroAddress: string, email: string, key: string, pdotAddress: string, status: Number, username: string}} An object with relevant values extracted
  */
-export function extractFromLogin(response) {
+export function extractLoginValues(response) {
     const { status, data: { azero_wallet_id: azeroAddress, email, key, pdot_wallet_id: pdotAddress, username } = {} } = response;
     const result = { azeroAddress, email, key, pdotAddress, status, username };
 
@@ -64,7 +64,7 @@ export function extractFromLogin(response) {
 export function findNonAlphanumericChars(str) {
     const regex = /[^A-Za-z0-9]/g;
     const matchesArr = str.match(regex).map(char =>
-        char === ' ' ? 'whitespace' :
+        char === ' ' ? 'space' :
             char === ',' ? 'comma' : char
     );
 
@@ -72,25 +72,17 @@ export function findNonAlphanumericChars(str) {
 }
 
 /**
- * This convenience function formats individual API endpoint error messages.
- * @param {string} errorStr - Error message string
- * @returns {string} The original error string prepended with "Error: "
- */
-export function formatErrorMessage(errorStr) {
-    return `Error: ${errorStr}`;
-}
-
-/**
  * This convenience function formats an array of API endpoint error messages.
  * @param {string[]} errorArr - Array of strings
- * @returns {string[]} A formatted array of error strings
+ * @returns {string[]} An array of error strings populated with at least a default message
  */
 export function formatErrorMessages(errorArr) {
     let result = ['Error'];
 
     if (errorArr.length) {
-        result = errorArr.map(v => v).map(err => formatErrorMessage(err));
+        result = errorArr.map(v => v);
     }
+
     return result;
 }
 
@@ -204,6 +196,7 @@ export function getChromeStorage(key) {
     }
 }
 
+// TODO fix this
 /**
  * This convenience function perforns basic email validation
  * @param {string} usernameOrPassword - an email string
