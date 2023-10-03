@@ -22,6 +22,12 @@ export default {
         },
         computedStyle() {
             return this.last ? 'margin-bottom: 0;' : '';
+        },
+        errorMessage() {
+            const { msg = '' } = this;
+            const firstWord = msg.toLowerCase().slice(0, 5);
+
+            return firstWord === 'error' ? msg : `Error: ${msg}`;
         }
     }
 };
