@@ -267,6 +267,10 @@
         "message": "$$ILOCK Earned",
         "description": "Section header for the Account page."
     },
+    "ilock_keep_browsing_to_earn": {
+        "message": "Keep browsing with ThreatSlayer to earn $$ILOCK!",
+        "description": "Message to user about earning token."
+    },
     "is_threat_slayer_open_source": {
         "message": "Is ThreatSlayer open source?",
         "description": "Question on the FAQ page."
