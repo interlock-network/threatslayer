@@ -91,11 +91,20 @@ export default {
     font-size: 1.25rem;
     background-color: #0F0818;
     border: none;
+    border-radius: 6px;
     color: #963cf5;
     cursor: pointer;
+    line-height: 2rem;
     font-size: 1.25rem;
-    padding-top: 0.9rem;
     width: 400px;
+}
+
+#cancel-delete-user-button:hover {
+    background-color: #4A0064;
+}
+
+#cancel-delete-user-button:active {
+    background-color: #261142;
 }
 
 #delete-user-modal-container {
@@ -117,12 +126,22 @@ export default {
 #delete-user-button {
     background-color: #0F0818;
     border: none;
+    border-radius: 6px;
     color: red;
     cursor: pointer;
     font-size: 1rem;
+    line-height: 2rem;
     width: 400px;
     position: absolute;
     bottom: 22%;
+}
+
+#delete-user-button:hover {
+    background-color: #4A0064;
+}
+
+#delete-user-button:active {
+    background-color: #261142;
 }
 
 #delete-user-password-input {

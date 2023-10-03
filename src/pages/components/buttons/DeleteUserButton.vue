@@ -1,7 +1,9 @@
 <template>
-    <button @click="submitDeleteUser" id="modal-delete-user-button" :disabled="disabled">
-        {{ $i18n(deleteUserButtonText) }}
-    </button>
+    <div id="modal-delete-user-button-container">
+        <button @click="submitDeleteUser" id="modal-delete-user-button" :disabled="disabled">
+            {{ $i18n(deleteUserButtonText) }}
+        </button>
+    </div>
     <ErrorMessage v-for="errorMessage in errorArr" :msg="errorMessage" style="margin-top: 1rem;" single />
 </template>
 
@@ -37,6 +39,7 @@ export default {
     computed: {
         deleteUserButtonText() {
             const { errorArr, deleted: submitted, deleting: submitting, status } = this;
+
             const initialMsg = 'delete_account_permanent';
             const submittingMsg = 'deleting_account';
 
@@ -98,14 +101,27 @@ export default {
 </script>
 
 <style>
+#modal-delete-user-button-container {
+    padding-bottom: 1rem;
+    padding-top: 4.5rem;
+}
+
 #modal-delete-user-button {
     background-color: #0F0818;
     border: none;
+    border-radius: 6px;
     color: red;
     cursor: pointer;
     font-size: 1rem;
-    margin-bottom: -1rem;
-    padding-top: 5.5rem;
+    line-height: 2rem;
     width: 400px;
+}
+
+#modal-delete-user-button:hover {
+    background-color: #4A0064;
+}
+
+#modal-delete-user-button:active {
+    background-color: #261142;
 }
 </style>
