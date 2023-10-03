@@ -1,3 +1,5 @@
+<!-- Make smart to handle multiple lines of magic :-D -->
+
 <template>
     <span class="simple-text" :style="style">{{ msg }}</span>
 </template>

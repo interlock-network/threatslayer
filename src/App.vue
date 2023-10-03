@@ -165,13 +165,16 @@ body {
   background-size: 80% 220%;
   background-color: #0F0818;
   color: #FFFFFF;
-  font-size: 1.1rem;
+  font-size: 1.1rem; // why?
 }
 
 button {
   cursor: default;
   pointer-events: initial;
 }
+
+// Why stop at h3? Also, why even do this? there is a * above for font
+family for all elements.
 
 h1,
 h2,

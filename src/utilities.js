@@ -1,7 +1,9 @@
+// Defined in two places? What is the difference between baseAPIUrl
+// and baseUrl? Why is baseUrl defined in this file?
 export const baseUrl = 'http://159.89.252.13';
 
 /**
- * This function gets a single value from Chrome local storage
+ * This function clears a single value from Chrome local storage
  * @param {string} key - The key for a value to set to null in Chrome local storage
  * @returns {boolean} Whether the value for key was cleared from Chrome local storage
  */
@@ -31,12 +33,15 @@ export function clearChromeStorage(key) {
  * @returns {{errors: Array.<string>, status: number}} An object with the errors array and server status code
  */
 export function extractFromError(errorObj = {}) {
+    // Is this a special type of destructuring ordering? Is the assignee at the end?
     const { response: { data: { error_message: errors = [] } = {}, status } = {} } = errorObj;
     const result = { errors, status };
 
     return result;
 }
 
+
+// Funciton should probably be renamed something more logical? extractErrorsFromLoginResponse?
 /**
  * This convenience function formats an array of API endpoint error messages.
  * @param {Object} response - the response from the GALACTUS endpoint
@@ -50,6 +55,7 @@ export function extractFromError(errorObj = {}) {
  * @returns {{azeroAddress: string, email: string, key: string, pdotAddress: string, status: Number, username: string}} An object with relevant values extracted
  */
 export function extractFromLogin(response) {
+    // Is this a special type of destructuring ordering? Is the assignee at the end?
     const { status, data: { azero_wallet_id: azeroAddress, email, key, pdot_wallet_id: pdotAddress, username } = {} } = response;
     const result = { azeroAddress, email, key, pdotAddress, status, username };
 
@@ -64,6 +70,10 @@ export function extractFromLogin(response) {
 export function findNonAlphanumericChars(str) {
     const regex = /[^A-Za-z0-9]/g;
     const matchesArr = str.match(regex).map(char =>
+        // Not actually whitespace, doesn't handle tab, newline,
+        // etc. Not necessary to fix, but probably best to document
+        // this caveat. One way to fix this would be to find a list of
+        // all whitespace characters that exist.
         char === ' ' ? 'whitespace' :
             char === ',' ? 'comma' : char
     );
@@ -76,6 +86,13 @@ export function findNonAlphanumericChars(str) {
  * @param {string} errorStr - Error message string
  * @returns {string} The original error string prepended with "Error: "
  */
+// I don't think it is a good idea to prepend text for several
+// reasons. One, it doesn't handle multiple languages, two, it is a
+// presentation layer issue. I.E. probably wherever errors are
+// rendered to the user the interface should be responsible for
+// indicating that this is an error string. Three, it means should we
+// wish to extract the error again from the string, we will have to do
+// some parsing/manual manipulation based on magic numbers/strings.
 export function formatErrorMessage(errorStr) {
     return `Error: ${errorStr}`;
 }
@@ -85,6 +102,8 @@ export function formatErrorMessage(errorStr) {
  * @param {string[]} errorArr - Array of strings
  * @returns {string[]} A formatted array of error strings
  */
+// Why fail gracefully here? Do we not want to propagate the error up
+// the stack? Why not return "undefined" when there is no error?
 export function formatErrorMessages(errorArr) {
     let result = ['Error'];
 
@@ -99,6 +118,7 @@ export function formatErrorMessages(errorArr) {
  * @param {Number} num - Unix time in seconds
  * @returns {string} A number localized based on the user's browser language setting 
  */
+// I don't think wrapping a library function this way makes sense.
 export function formatNumber(num) {
     return new Intl.NumberFormat().format(num);
 }
@@ -140,6 +160,9 @@ export function submitButtonLabels(
  * @param {Number} num - a dashboard value for total number of URLs scanned.
  * @returns {string} Pixel size in string for use in CSS
  */
+// Using a CSS container body would be a simpler, and more reliable
+// approach. It will consider the users resolution, scaling factor,
+// etc. OR is this used for the SVG generation?
 export function getFontSizeForTotal(num) {
     let result = '';
     const oneToThreeDigits = '123px';
@@ -168,6 +191,7 @@ export function getFontSizeForTotal(num) {
  * @param {Number} num - a dashboard value for number of unique URLs scanned.
  * @returns {string} Pixel size in string for use in CSS
  */
+// Same comment as function above.
 export function getFontSizeForSmallerNums(num) {
     let result = '';
     const defaultSize = '50px';
@@ -187,6 +211,7 @@ export function getFontSizeForSmallerNums(num) {
  * @param {string} key - The key for a value in Chrome local storage
  * @returns {Promise} A promise object with the value for the key passed to the function
  */
+// probably move this up to be logically close to the other chrome storage functions.
 export function getChromeStorage(key) {
     try {
         return chrome.storage.local
@@ -209,6 +234,7 @@ export function getChromeStorage(key) {
  * @param {string} usernameOrPassword - an email string
  * @returns {boolean} Whether the string is a valid email address
  */
+// Use input type email, this is not so easy to use regex for.
 export function isEmail(usernameOrPassword) {
     let result = true;
     const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/;
@@ -229,6 +255,8 @@ export function isEmail(usernameOrPassword) {
  * @param {Boolean} storageObj.registered - A key/value pair to set in Chrome local storage
  * @returns {boolean} Whether the value for key was set in Chrome local storage
  */
+// Same as above chrome function, rather than interspersing them
+// throughout the file, put them in one place.
 export function setChromeStorage(storageObj) {
     try {
         return chrome.storage.local
@@ -253,15 +281,17 @@ export function setChromeStorage(storageObj) {
  * @param {string} address - a wallet address string
  * @returns {boolean} A boolean for whether a wallet address matches Aleph Zero's address type
  */
+// why result on separate line?
 export function validateAzero(address = '') {
     let result = true;
     const azeroRegex = /^5.*/;
 
     if (address.length && !azeroRegex.test(address)) {
-        result = false;
+        return false;
+    } else {
+        return true
     }
 
-    return result;
 }
 
 /**
@@ -309,6 +339,8 @@ export function validatePassword(password = '') {
 
     // number of characters
     const minLength = 12;
+    // Why 512? Is this constrained by database number of bytes? If
+    // so, consider other encodings.
     const maxLength = 512;
 
     if (!password.length) {

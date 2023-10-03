@@ -3,9 +3,11 @@
         <img class="banner-icon" src="/src/assets/images/faq.png">
     </PageBanner>
     <br />
+    <!-- Why inline tomato style? -->
     <div style="padding-right: 2rem;">
         <TextComponent :msg="$i18n('how_does_threat_slayer_protect_me')" bold /><br />
         <div>
+          <!-- No translation? -->
             <LineOfText>
                 <span>ThreatSlayer uses <a href="https://www.interlock.network/" target="_blank">Interlock's</a>
                     threat-detecting AI to instantly block malicious sites and prevent them from stealing your data.</span>
@@ -27,7 +29,8 @@
         <br />
         <TextComponent :msg="$i18n('is_threat_slayer_open_source')" bold /><br />
         <div>
-            <LineOfText>
+          <LineOfText>
+            <!-- Translation -->
                 <span>Absolutely. You can look at our <a href="https://github.com/interlock-network/threatslayer"
                         target="_blank">source code on GitHub</a> and see exactly what it does.</span>
             </LineOfText>

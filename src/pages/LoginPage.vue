@@ -13,6 +13,7 @@
     <br />
     <!-- Forgot username / password flow -->
     <div id="forgot-password-container">
+      <!-- NO MORE INLINE STYLES PLOX -->
         <TextComponent :msg="$i18n('forgot_password')" class="input-header" bold
             style="margin-top: 3rem; margin-bottom: 1rem;" />
         <EmailInput placeholder="enter_email_to_change_password" @currentEmail="getEmail" tabindex="8"

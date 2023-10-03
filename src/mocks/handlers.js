@@ -2,11 +2,11 @@ import { rest } from 'msw'
 import { usernames } from './usernames.js';
 
 export default [
-    // NOTE: this will be done via Chrome storage, not an URL endpoint
+    // NOTE: this will be done via Chrome storage, not a URL endpoint
     rest.get('/totalURLsVisited', (_req, res, ctx) => {
         return res(ctx.json(1337));
     }),
-    // NOTE: this will be done via Chrome storage, not an URL endpoint
+    // NOTE: this will be done via Chrome storage, not a URL endpoint
     rest.get('/totalMaliciousURLsVisited', (_req, res, ctx) => {
         return res(ctx.json(69));
     }),

@@ -6,7 +6,9 @@
     <TextComponent :msg="$i18n('why_choose_threat_slayer')" bold />
     <br />
     <br />
+    <!-- No use inline style! -->
     <div style="padding-right: 2rem;">
+      <!-- Can text component be more sophisticated to handle arbitrary number of paragraphs encoded in an array? -->
         <TextComponent :msg="$i18n('about_us_paragraph_1')" />
         <br />
         <br />
