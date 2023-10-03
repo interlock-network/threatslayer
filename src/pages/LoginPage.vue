@@ -13,8 +13,7 @@
     <br />
     <!-- Forgot username / password flow -->
     <div id="forgot-password-container">
-        <TextComponent :msg="$i18n('forgot_password')" class="input-header" bold
-            style="margin-top: 3rem; margin-bottom: 1rem;" />
+        <TextComponent :msg="$i18n('forgot_password')" id="forgot-password-header" bold />
         <EmailInput placeholder="enter_email_to_change_password" @currentEmail="getEmail" tabindex="8"
             @emailHasError="getEmailHasError" />
         <ForgotPasswordButton :forgotPasswordDisabled="forgotPasswordDisabled" :email="email" style="margin-top: 0.75rem;"
@@ -108,6 +107,12 @@ input:focus {
 #forgot-password-container {
     bottom: 30vh;
     position: absolute;
+}
+
+#forgot-password-header {
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    display: block;
 }
 
 .login-page-submit-button-container {

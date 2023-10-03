@@ -245,11 +245,6 @@ input:focus {
     margin-bottom: 0.5rem;
 }
 
-.input-header {
-    display: block;
-    margin-bottom: 0.5rem;
-}
-
 .checkbox-container {
     display: block;
     font-size: 0.9rem;

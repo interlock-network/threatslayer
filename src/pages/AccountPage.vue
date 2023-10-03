@@ -7,7 +7,7 @@
         <TextComponent class="left-label" :msg="$i18n('ilock_earned')" bold />
         <TextComponent v-if="ilockEarned > 0" :msg="ilockEarned" bigmono />
         <div v-if="ilockEarned === 0">
-            <TextComponent msg="Keep browsing with ThreatSlayer to earn $ILOCK!" />
+            <TextComponent :msg="$i18n('ilock_keep_browsing_to_earn')" />
         </div>
         <br />
         <br />
