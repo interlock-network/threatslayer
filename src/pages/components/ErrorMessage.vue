@@ -1,5 +1,5 @@
 <template>
-    <TextComponent :msg="msg" :class="computedClass" :style="computedStyle" />
+    <TextComponent :msg="errorMessage" :class="computedClass" :style="computedStyle" />
 </template>
 
 <script>
@@ -10,6 +10,7 @@ export default {
     props: {
         msg: { type: String, required: true },
         last: { type: Boolean, default: false },
+        secondMsg: { type: String, required: false },
         single: { type: Boolean, default: false },
         stacked: { type: Boolean, default: false }
     },
@@ -28,6 +29,9 @@ export default {
             const firstWord = msg.toLowerCase().slice(0, 5);
 
             return firstWord === 'error' ? msg : `Error: ${msg}`;
+        },
+        errorMessage() {
+            return this.secondMsg ? this.msg + this.secondMsg : this.msg;
         }
     }
 };
@@ -39,7 +43,6 @@ export default {
     display: block;
     font-size: 1rem;
     margin-top: -0.3rem;
-    /* margin-bottom: 1rem; */
 }
 
 .stacked-error {
