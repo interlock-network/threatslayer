@@ -520,7 +520,7 @@
         "description": "The text used in the warning banner."
     },
     "warning_username_contains_illegal_characters": {
-        "message": "Username contains illegal characters: !, #, $, etc.",
+        "message": "Username contains illegal characters: ",
         "description": "Text used in warning box for username input."
     },
     "warning_username_too_long": {
