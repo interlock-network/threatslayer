@@ -59,16 +59,27 @@ export function extractLoginValues(response) {
 /**
  * This convenience function finds characters not A-Z, a-z and 0-9
  * @param {string} str - a username string
- * @returns {Array} Characters in string that are not A-Z, a-z and 0-9
+ * @returns {string} Characters in string that are not A-Z, a-z and 0-9
  */
-export function findNonAlphanumericChars(str) {
-    const regex = /[^A-Za-z0-9]/g;
-    const matchesArr = str.match(regex).map(char =>
-        char === ' ' ? 'space' :
-            char === ',' ? 'comma' : char
-    );
+export function findNonAlphanumericChars(str = '') {
+    let result = [];
 
-    return [...new Set(matchesArr)]; // to remove duplicate chars
+    if (str?.length) {
+        const regex = /[^A-Za-z0-9]/g;
+        const matchesArr = str.match(regex);
+
+        if (matchesArr?.length) {
+            const illegalChars = matchesArr.map(char =>
+                char === ' ' ? 'space' :
+                    char === ',' ? 'comma' : char
+            );
+
+            // to remove duplicate chars and stringify
+            result = [...new Set(illegalChars)].join(', ');
+        }
+    }
+
+    return result;
 }
 
 /**
@@ -196,7 +207,6 @@ export function getChromeStorage(key) {
     }
 }
 
-// TODO fix this
 /**
  * This convenience function perforns basic email validation
  * @param {string} usernameOrPassword - an email string
@@ -204,7 +214,8 @@ export function getChromeStorage(key) {
  */
 export function isEmail(usernameOrPassword) {
     let result = true;
-    const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/;
+    // from https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/email
+    const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
 
     if (!emailRegex.test(usernameOrPassword)) {
         result = false;
@@ -323,12 +334,6 @@ export function validatePassword(password = '') {
 export function validateUsername(username = '') {
     let result = '';
 
-    const illegalCharsMessage = (_chars) => {
-        // TODO uncomment when we upgrade translation
-        // const chars = chars.join(', ');
-        return 'warning_username_contains_illegal_characters';
-    }
-
     // number of characters
     const maxLength = 16;
     const minLength = 5;
@@ -343,9 +348,7 @@ export function validateUsername(username = '') {
     } else if (username.length > maxLength) {
         result = 'warning_username_too_long';
     } else if (containsIllegalChars) {
-        const illegalChars = findNonAlphanumericChars(username);
-
-        result = illegalCharsMessage(illegalChars);
+        result = 'warning_username_contains_illegal_characters';
     }
 
     return result;
