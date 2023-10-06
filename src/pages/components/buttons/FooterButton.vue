@@ -25,7 +25,6 @@ export default {
 }
 
 #footer-link {
-    /* cursor: pointer; */
     pointer-events: initial;
     text-decoration: none;
 }

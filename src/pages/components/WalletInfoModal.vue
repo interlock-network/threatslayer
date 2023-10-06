@@ -235,7 +235,6 @@ export default {
     color: red;
     font-size: 1rem;
     line-height: 2rem;
-    /* padding-top: 1rem; */
     width: 400px;
 }
 
