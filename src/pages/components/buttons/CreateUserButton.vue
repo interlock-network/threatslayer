@@ -12,17 +12,16 @@ import ErrorMessage from "../ErrorMessage.vue";
 import TextComponent from "../TextComponent.vue";
 
 import axios from "axios";
-import { baseUrl, extractFromError, formatErrorMessages, submitButtonLabels, setChromeStorage } from '../../../utilities.js';
+import { baseUrl, extractFromError, formatErrorMessages, getChromeStorage, submitButtonLabels, setChromeStorage } from '../../../utilities.js';
 
 export default {
     name: "CreateUserButton",
     props: {
-        azeroAddress: { type: String, default: '' },
+        address: { type: String, default: '' },
         checkState: { type: Function, required: true },
         createUserDisabled: { type: Boolean, default: false },
         email: { type: String, default: '' },
         password: { type: String, default: '' },
-        pdotWalletId: { type: String, default: '' },
         referrer: { type: String, default: '' },
         selectPage: { type: Function, required: true },
         termsOfService: { type: Boolean, default: false },
@@ -68,8 +67,8 @@ export default {
         async submitCreateUser() {
             this.errorArr = [];
 
-            const { azeroAddress: azero_wallet_id = '', email, password, pdotWalletId: pdot_wallet_id = '',
-                referrer, termsOfService: terms_of_service, unitedStates: united_states, username } = this;
+            const allowlist = await getChromeStorage('allowlist') || [];
+            const { address, email, password, referrer, termsOfService: terms_of_service, unitedStates: united_states, username } = this;
             const key = 'threatslayer-api-key';
             this.submitting = true;
 
@@ -79,7 +78,7 @@ export default {
             });
 
             instance.post(`${baseUrl}/user-create`,
-                { azero_wallet_id, email, key, password, pdot_wallet_id, referrer, terms_of_service, united_states, username })
+                { address, allowlist, email, key, password, referrer, terms_of_service, united_states, username })
                 .then(async response => {
                     const { status, data: { key } } = response;
 
@@ -90,13 +89,12 @@ export default {
                     // set user's values in Chrome extension state unique key
                     const loggedInSynched = await setChromeStorage({ loggedIn: true });
                     const registeredSynched = await setChromeStorage({ registered: true });
-                    const setAzeroAddress = await setChromeStorage({ azeroAddress: azero_wallet_id });
-                    const setPdotAddress = await setChromeStorage({ pdotAddress: pdot_wallet_id });
                     const setApiKey = await setChromeStorage({ apiKey: key });
+                    const setAzeroAddress = await setChromeStorage({ azeroAddress: address });
                     const setEmail = await setChromeStorage({ email });
                     const setUsername = await setChromeStorage({ username });
 
-                    if (loggedInSynched & registeredSynched && setAzeroAddress && setApiKey && setEmail && setPdotAddress && setUsername) {
+                    if (loggedInSynched & registeredSynched && setApiKey && setAzeroAddress && setEmail && setUsername) {
                         this.checkState();
                     }
                 })
