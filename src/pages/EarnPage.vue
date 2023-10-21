@@ -18,12 +18,6 @@
     <ErrorMessage v-if="reenteredPasswordErrorMessage.length" :msg="$i18n(reenteredPasswordErrorMessage)" single />
     <AzeroAddressInput @currentAzeroAddress="getAzeroAddress" @azeroAddressHasError="getAzeroAddressHasError"
         tabindex="10" />
-    <!-- Polkadot wallet address (optional) -->
-    <!-- TODO add this to translation file? -->
-    <input id="address-input" @input="validateAddress($event, 'pdot', 'pdotAddressErrorMessage')"
-        v-model.trim="pdotWalletId" :class="addressInputClassPdot" placeholder="Optional: Paste your Moonbeam wallet here"
-        tabindex="12" />
-    <ErrorMessage v-if="pdotAddressErrorMessage.length" :msg="$i18n(pdotAddressErrorMessage)" single />
     <!-- referrer (optional) -->
     <input v-model.trim="referrer" tabindex="14" :placeholder="$i18n('enter_referrer_name')" />
     <div class="checkbox-container" style="margin-top: 0.8rem;" @click="focusNextCheckbox">
@@ -38,7 +32,7 @@
         </label>
     </div>
     <CreateUserButton style="margin-top: 1.1rem;" tabindex="20"
-        v-bind="{ azeroAddress, checkState, createUserDisabled, selectPage, email, password, pdotWalletId, referrer, termsOfService, unitedStates, username }" />
+        v-bind="{ address, checkState, createUserDisabled, selectPage, email, password, referrer, termsOfService, unitedStates, username }" />
 </template>
 
 <script>
@@ -85,7 +79,7 @@ export default {
     },
     data() {
         return {
-            azeroAddress: '',
+            address: '',
             azeroAddressHasError: '',
             connectAccountSelected: true,
             createAccountSelected: false,
@@ -94,8 +88,6 @@ export default {
             password: '',
             passwordHasError: false,
             passwordInputType: 'password',
-            pdotWalletId: '',
-            pdotAddressErrorMessage: '',
             reenteredPassword: '',
             reenteredPasswordErrorMessage: '',
             referrer: '',
@@ -111,9 +103,6 @@ export default {
         firstInput.focus();
     },
     computed: {
-        addressInputClassPdot() {
-            return this.pdotAddressErrorMessage?.length ? 'generic-error' : '';
-        },
         createUserDisabled() {
             const { azeroAddressHasError, email, emailHasError, password, passwordHasError, termsOfService, unitedStates, username, usernameHasError } = this;
 
@@ -138,7 +127,7 @@ export default {
             }
         },
         getAzeroAddress(walletAddress) {
-            this.azeroAddress = walletAddress;
+            this.address = walletAddress;
         },
         getAzeroAddressHasError(errorBool) {
             this.azeroAddressHasError = errorBool;
@@ -177,6 +166,7 @@ export default {
                 return false;
             }
         },
+        // refactor pdot out
         validateAddress: debounce(function (event, addressType, errorKeyName) {
             const address = event?.target?.value;
             this[errorKeyName] = '';
