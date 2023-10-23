@@ -1,6 +1,6 @@
 <template>
     <div class="login-page-submit-button-container">
-        <button class='secondary-hollow-button' @click="submitForgotPassword" :class="computedClass"
+        <button class="secondary-hollow-button" @click="submitForgotPassword" :class="computedClass"
             :disabled="forgotPasswordDisabled" tabindex="99">
             {{ $i18n(forgotPasswordButtonText) }}
         </button>
@@ -11,10 +11,10 @@
 </template>
 
 <script>
-import ErrorMessage from "../ErrorMessage.vue";
-import TextComponent from "../TextComponent.vue";
+import ErrorMessage from '../ErrorMessage.vue';
+import TextComponent from '../TextComponent.vue';
 
-import axios from "axios";
+import axios from 'axios';
 import { baseUrl, extractFromError, formatErrorMessages, submitButtonLabels } from '../../../utilities.js';
 
 export default {
@@ -37,15 +37,15 @@ export default {
     },
     computed: {
         computedClass() {
-            let className = '';
+            let result = '';
 
             if (this.errorArr.length) {
-                className = 'submit-button-error';
+                result = 'submit-button-error';
             } else {
-                className = 'login-active';
+                result = 'login-active';
             }
 
-            return className;
+            return result;
         },
         forgotPasswordButtonText() {
             const { errorArr, submitted, submitting, status } = this;
@@ -58,15 +58,15 @@ export default {
             this.errorArr = [];
             this.submitting = true;
 
-            axios.post(`${baseUrl}/user-password-forgot`, { email: this.email })
-                .then(response => {
+            axios.post(`${baseUrl}/user-password-reset`, { email: this.email })
+                .then((response) => {
                     const { status } = response.data;
 
                     this.status = status;
                     this.submitted = true;
                     this.submitting = false;
                 })
-                .catch(error => {
+                .catch((error) => {
                     const { errors, status } = extractFromError(error);
 
                     console.log(`Forgot password error. Status: ${status}. Error: ${errors}`);
