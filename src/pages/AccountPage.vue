@@ -25,7 +25,7 @@
         <TextComponent :msg="referred" bigmono /> <br />
         <br />
         <!-- Tabe of allowlisted URLs -->
-        <AllowlistTable v-if="!pageFaded" :apiKey="apiKey" />
+        <AllowlistTable v-if="!pageFaded && allowlistSet" :apiKey="apiKey" />
     </div>
     <DeleteUserModal v-bind="{ checkState, fadeAccountPage, pageFaded, selectPage, username }" />
 </template>
@@ -62,7 +62,7 @@ export default {
     },
     data() {
         return {
-            allowlist: null,
+            allowlistSet: false,
             pageFaded: false,
             referred: 0,
             tokensEarned: 0,
@@ -89,13 +89,19 @@ export default {
         async getStatsFromApi() {
             const { apiKey, username } = this;
 
-            axios.post(`${baseUrl}/user-get`, { key: apiKey, username })
-                .then(response => {
+            axios.post(`${baseUrl}/user-get`, { allowlist, key: apiKey, username })
+                .then(async response => {
                     const { referred = 0, tokens_earned = 0, tokens_earned_total = 0 } = response?.data;
 
-                    this.referred = referred;
-                    this.tokensEarned = tokens_earned;
-                    this.tokensEarnedTotal = tokens_earned_total;
+                    const allowlistSet = await setChromeStorage({ allowlist }) || [];
+
+                    this.allowlistSet = allowlistSet;
+
+                    if (allowlistSet) {
+                        this.referred = referred;
+                        this.tokensEarned = tokens_earned;
+                        this.tokensEarnedTotal = tokens_earned_total;
+                    }
                 })
                 .catch(error => {
                     const { errors, status } = extractFromError(error);
