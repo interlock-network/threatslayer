@@ -44,13 +44,13 @@
 import axios from 'axios';
 import { baseUrl, getChromeStorage } from '../utilities.js';
 
-import WarningTextBox from './components/WarningTextBox.vue';
 import ClearAllowlistedURLButton from './components/buttons/ClearAllowlistedURLButton.vue';
 import LineOfText from './components/LineOfText.vue';
 import LoginLine from './components/LoginLine.vue';
 import PageBanner from './components/PageBanner.vue';
 import RegisterLine from './components/RegisterLine.vue';
 import TextComponent from './components/TextComponent.vue';
+import WarningTextBox from './components/WarningTextBox.vue';
 
 export default {
     name: 'StakingPage',
@@ -105,18 +105,6 @@ export default {
 
             return result;
         },
-        sortHeader() {
-            let result = '';
-
-            if (!this.allowlist?.length || this.allowlist?.length === 1) {
-                result = '';
-            } else {
-                result = this.currentSortDir === 'asc' ? ' ▲' :
-                    this.currentSortDir === 'desc' ? ' ▼' : ' (click here to sort)';
-            }
-
-            return result;
-        },
         warningText() {
             let result = '';
 
@@ -156,10 +144,6 @@ export default {
             const urlToStake = await getChromeStorage('urlToStake');
 
             this.url = urlToStake;
-        },
-        sort() {
-            this.currentSortDir = this.currentSortDir === 'asc' ? 'desc' :
-                this.currentSortDir === 'desc' ? 'chron' : 'asc';
         }
     }
 }
