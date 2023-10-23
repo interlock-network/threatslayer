@@ -9,7 +9,6 @@
 
 <script>
 import { debounce } from 'debounce';
-import { validatePassword } from "../../../utilities";
 
 import ErrorMessage from "../ErrorMessage.vue";
 
@@ -38,6 +37,23 @@ export default {
         }
     },
     methods: {
+        findPasswordError(password = '') {
+            let result = '';
+
+            // number of characters
+            const minLength = 12;
+            const maxLength = 512;
+
+            if (!password.length) {
+                result = ''; // no change, empty string === valid
+            } else if (password.length < minLength) {
+                result = 'error_password_too_short';
+            } else if (password.length > maxLength) {
+                result = 'error_password_too_long';
+            }
+
+            return result;
+        },
         togglePasswordInputType() {
             const inputType = this.passwordInputType === 'password' ? 'text' : 'password';
 
@@ -46,7 +62,7 @@ export default {
         },
         validatePassword: debounce(function () {
             const password = this.password;
-            const errorMessage = validatePassword(password);
+            const errorMessage = this.findPasswordError(password);
             const hasError = !!errorMessage.length;
 
             this.errorMessage = errorMessage;

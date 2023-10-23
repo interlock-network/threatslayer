@@ -15,7 +15,7 @@ import ErrorMessage from "../ErrorMessage.vue";
 import TextComponent from "../TextComponent.vue";
 
 import axios from "axios";
-import { baseUrl, extractFromError, extractLoginValues, formatErrorMessages, submitButtonLabels, setChromeStorage } from '../../../utilities.js';
+import { baseUrl, extractFromError, formatErrorMessages, submitButtonLabels, setChromeStorage } from '../../../utilities.js';
 
 export default {
     name: "LoginButton",
@@ -60,6 +60,12 @@ export default {
         }
     },
     methods: {
+        extractLoginValues(response) {
+            const { status, data: { allowlist = [], azero_wallet_id: azeroAddress, email, key, pdot_wallet_id: pdotAddress, username } = {} } = response;
+            const result = { allowlist, azeroAddress, email, key, pdotAddress, status, username };
+
+            return result;
+        },
         async submitLogin() {
             this.loggingIn = true;
             this.errorArr = [];
@@ -68,20 +74,21 @@ export default {
 
             axios.post(`${baseUrl}/user-login`, requestBody)
                 .then(async response => {
-                    const { status, azeroAddress, email, key, pdotAddress, username } = extractLoginValues(response);
+                    const { allowlist, azeroAddress, email, key, pdotAddress, status } = this.extractLoginValues(response);
 
                     this.status = status;
                     this.loggedIn = true;
                     this.loggingIn = false;
 
                     // set API key with user's unique key and other values
+                    const allowlistSet = await setChromeStorage({ allowlist });
                     const azeroWalletSet = await setChromeStorage({ azeroAddress });
                     const emailSet = await setChromeStorage({ email });
                     const keySet = await setChromeStorage({ apiKey: key });
                     const pdotWalletSet = await setChromeStorage({ pdotAddress });
                     const setUsername = await setChromeStorage({ username });
 
-                    if (azeroWalletSet && emailSet && keySet && pdotWalletSet && setUsername) {
+                    if (allowlistSet && azeroWalletSet && emailSet && keySet && pdotWalletSet && setUsername) {
                         const registeredSynched = await setChromeStorage({ registered: true });
                         const loggedInSynched = await setChromeStorage({ loggedIn: true });
 
