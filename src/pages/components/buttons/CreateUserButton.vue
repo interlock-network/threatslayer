@@ -68,7 +68,7 @@ export default {
             this.errorArr = [];
 
             const allowlist = await getChromeStorage('allowlist') || [];
-            const { address, email, password, referrer, termsOfService: terms_of_service, unitedStates: united_states, username } = this;
+            const { address, email, password, referrer, termsOfService: terms_of_service, unitedStates: confirmed_not_united_states, username } = this;
             const key = 'threatslayer-api-key';
             this.submitting = true;
 
@@ -78,7 +78,7 @@ export default {
             });
 
             instance.post(`${baseUrl}/user-create`,
-                { address, allowlist, email, key, password, referrer, terms_of_service, united_states, username })
+                { address, allowlist, email, key, password, referrer, terms_of_service, confirmed_not_united_states, username })
                 .then(async response => {
                     const { status, data: { key } } = response;
 
