@@ -96,7 +96,7 @@
 <script>
 import axios from "axios";
 import { baseUrl } from '../utilities.js';
-import { extractFromError, formatNumber, getFontSizeForTotal, getFontSizeForSmallerNums, setChromeStorage } from "../utilities";
+import { extractFromError, setChromeStorage } from "../utilities";
 
 import PageBanner from "./components/PageBanner.vue";
 
@@ -125,13 +125,13 @@ export default {
     },
     computed: {
         fontSizeForTotal() {
-            return getFontSizeForTotal(this.rawTotalUrlsVisited);
+            return this.getFontSizeForTotal(this.rawTotalUrlsVisited);
         },
         formattedUniqueUrls() {
             const rawUniqueEstimate = Math.floor(this.rawTotalUrlsVisited / 8);
-            this.fontSizeForSmallerNums = getFontSizeForSmallerNums(rawUniqueEstimate);
+            this.fontSizeForSmallerNums = this.getFontSizeForSmallerNums(rawUniqueEstimate);
 
-            return formatNumber(Math.max(rawUniqueEstimate, 1));
+            return this.formatNumber(Math.max(rawUniqueEstimate, 1));
         },
         maliciousVisitedStyle() {
             return { "font-size": this.fontSizeForSmallerNums };
@@ -151,7 +151,7 @@ export default {
             return { "font-size": this.fontSizeForSmallerNums };
         },
         totalURLsVisited() {
-            return formatNumber(Math.max(this.rawTotalUrlsVisited, this.totalMaliciousURLsVisited, 1));
+            return this.formatNumber(Math.max(this.rawTotalUrlsVisited, this.totalMaliciousURLsVisited, 1));
         },
         totalURLsVisitedStyle() {
             return { "font-size": this.totalVisitedFontSize };
@@ -219,6 +219,44 @@ export default {
                 a.remove();
             };
         },
+        formatNumber(num) {
+            return new Intl.NumberFormat().format(num);
+        },
+        getFontSizeForSmallerNums(num) {
+            let result = '';
+            const defaultSize = '50px';
+            const sixDigits = '40px';
+
+            if (num >= 10 ** 6) {
+                result = sixDigits;
+            } else {
+                result = defaultSize;
+            }
+
+            return result;
+        },
+        getFontSizeForTotal(num) {
+            let result = '';
+            const oneToThreeDigits = '123px';
+            const fourDigits = '110px';
+            const fiveDigits = '90px';
+            const sixDigits = '75px';
+            const sevenDigits = '60px';
+
+            if (num >= 10 ** 6) {
+                result = sevenDigits;
+            } else if (num >= 10 ** 5) {
+                result = sixDigits;
+            } else if (num >= 10 ** 4) {
+                result = fiveDigits;
+            } else if (num >= 10 ** 3) {
+                result = fourDigits;
+            } else {
+                result = oneToThreeDigits;
+            }
+
+            return result;
+        },
         async getSlayCountStats() {
             // this value is only stored locally
             this.useExtensionState('totalMaliciousURLsVisited');
@@ -239,7 +277,7 @@ export default {
                         if (key === 'totalURLsVisited') {
                             this.rawTotalUrlsVisited = numberResponse;
                         } else {
-                            this[key] = formatNumber(numberResponse);
+                            this[key] = this.formatNumber(numberResponse);
                         }
                     });
             } catch (err) {
