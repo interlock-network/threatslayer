@@ -14,11 +14,6 @@
                 <br />
                 <AzeroAddressInput @currentAzeroAddress="getAzeroAddress" @azeroAddressHasError="getAzeroAddressHasError"
                     tabindex="2" />
-                <!-- input field with prompt for new Moonbeam address -->
-                <input id="pdot-input" @input="validateAddress($event, 'pdot', 'newPdotErrorMessage')"
-                    v-model.trim="newPdotAddress" :style="addressInputStyle" style="margin-top: -0.2rem;"
-                    :placeholder="$i18n('enter_pdot_wallet_address')" tabindex="4" />
-                <ErrorMessage v-if="newPdotErrorMessage.length" :msg="$i18n(newPdotErrorMessage)" single last />
                 <div style="position: absolute;">
                     <SinglePasswordInput @currentPassword="getPassword" @passwordHasError="getPasswordHasError" />
                 </div>
@@ -46,7 +41,6 @@
 import { debounce } from 'debounce';
 import { decodeAddress, encodeAddress } from '@polkadot/keyring';
 import { hexToU8a, isHex } from '@polkadot/util';
-import { validateMoonbeam } from "../../utilities";
 
 import AzeroAddressInput from "./inputs/AzeroAddressInput.vue";
 import ErrorMessage from "./ErrorMessage.vue";
@@ -185,18 +179,15 @@ export default {
         },
         validateAddress: debounce(function (event, addressType, errorKeyName) {
             const address = event?.target?.value;
-            let result = ''
+            let result = '';
 
             if (!address || !address.length) {
                 result = '';
             } else {
                 const addressIsValid = this.legitPolkadot(address);
 
-                if (addressType === 'pdot' && !validateMoonbeam(address)) {
-                    result = 'warning_address_not_moonbeam';
-                }
                 // happy case
-                else if (addressIsValid) {
+                if (addressIsValid) {
                     result = '';
                 } else {
                     result = 'error_registering_wallet_address';
