@@ -39,7 +39,6 @@
 import { debounce } from 'debounce';
 import { decodeAddress, encodeAddress } from '@polkadot/keyring';
 import { hexToU8a, isHex } from '@polkadot/util';
-import { validateAzero, validateMoonbeam } from "../utilities";
 
 import AzeroAddressInput from "./components/inputs/AzeroAddressInput.vue";
 import CreateUserButton from "./components/buttons/CreateUserButton.vue";
@@ -166,31 +165,6 @@ export default {
                 return false;
             }
         },
-        // refactor pdot out
-        validateAddress: debounce(function (event, addressType, errorKeyName) {
-            const address = event?.target?.value;
-            this[errorKeyName] = '';
-
-            if (!address || !address.length) {
-                this[errorKeyName] = '';
-            }
-
-            const addressIsValid = this.legitPolkadot(address);
-
-            if (addressType === 'azero' && !validateAzero(address)) {
-                this[errorKeyName] = 'warning_address_not_azero';
-            } else if (addressType === 'pdot' && !validateMoonbeam(address)) {
-                this[errorKeyName] = 'warning_address_not_moonbeam';
-            }
-            // happy case
-            else if (addressIsValid) {
-                this[errorKeyName] = '';
-            } else if (!address || !address.length) {
-                this[errorKeyName] = '';
-            } else {
-                this[errorKeyName] = 'error_registering_wallet_address';
-            }
-        }, 250),
         validateReenteredPassword: debounce(function () {
             const { password, reenteredPassword } = this;
 
