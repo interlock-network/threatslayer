@@ -511,8 +511,12 @@
         "message": "You must register before you can stake on a URL.",
         "description": "The text used in a warning box."
     },
+    "warning_possible_malicious_url_detected": {
+        "message": "Possible malicious URLs detected:",
+        "description": "The text used in a warning box."
+    },
     "warning_staking_not_available": {
-        "message": "Security staking not available until October.",
+        "message": "Security staking will be available soon!",
         "description": "The text used in a warning box."
     },
     "warning_text": {
