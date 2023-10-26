@@ -1,5 +1,7 @@
 <template>
   <div id="app-container">
+    <MaliciousWarningBanner v-if="maliciousUrlObjects?.length" :checkState="checkState"
+      :maliciousUrlObjects="maliciousUrlObjects" />
     <div id="top-container">
       <SideBar v-bind="{ apiKey, checkState, currentPage, loggedIn, registered, selectPage, urlToStake, username }" />
       <div id="view-container">
@@ -10,7 +12,7 @@
         <SlayCount v-if="currentPage === 'slayCount'" :apiKey="apiKey" :username="username" />
         <AboutPage v-if="currentPage === 'about'" />
         <FAQPage v-if="currentPage === 'faq'" />
-        <OptionsPage v-if="currentPage === 'options'" />
+        <!-- <OptionsPage v-if="currentPage === 'options'" /> -->
         <AccountPage v-if="currentPage === 'account'"
           v-bind="{ azeroAddress, apiKey, checkState, email, pdotAddress, selectPage, username }" />
         <NoAccountPage v-if="currentPage === 'noAccount'" v-bind="{ checkState, selectPage }" />
@@ -28,8 +30,9 @@ import AccountPage from "./pages/AccountPage.vue";
 import EarnPage from "./pages/EarnPage.vue";
 import FAQPage from "./pages/FAQPage.vue";
 import LoginPage from "./pages/LoginPage.vue";
+import MaliciousWarningBanner from "./pages/MaliciousWarningBanner.vue";
 import NoAccountPage from "./pages/NoAccountPage.vue";
-import OptionsPage from "./pages/OptionsPage.vue";
+// import OptionsPage from "./pages/OptionsPage.vue";
 import PageFooter from "./pages/PageFooter.vue";
 import SideBar from "./pages/SideBar.vue";
 import SlayCount from "./pages/SlayCount.vue";
@@ -43,8 +46,9 @@ export default {
     EarnPage,
     FAQPage,
     LoginPage,
+    MaliciousWarningBanner,
     NoAccountPage,
-    OptionsPage,
+    // OptionsPage,
     PageFooter,
     AccountPage,
     SideBar,
@@ -59,6 +63,7 @@ export default {
       currentPage: 'account',
       email: null,
       loggedIn: false,
+      maliciousUrlObjects: null,
       pdotAddress: null,
       registered: false,
       urlToStake: null,
@@ -76,11 +81,13 @@ export default {
       const email = await getChromeStorage('email');
       const isRegistered = await getChromeStorage('registered');
       const loggedIn = await getChromeStorage('loggedIn');
+      const maliciousUrlObjects = await getChromeStorage('maliciousUrlObjects');
       const pdotAddress = await getChromeStorage('pdotAddress'); // optional, may be missing
       const urlToStake = await getChromeStorage('urlToStake');
       const username = await getChromeStorage('username');
 
       this.loggedIn = loggedIn;
+      this.maliciousUrlObjects = maliciousUrlObjects;
       this.registered = isRegistered;
       this.urlToStake = urlToStake;
 
@@ -207,7 +214,6 @@ input {
   margin: auto;
   width: 765px;
 }
-
 
 #url-container {
   min-height: 25vh;
