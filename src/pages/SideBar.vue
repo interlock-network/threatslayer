@@ -39,10 +39,10 @@
             <img class="sidebar-icon" src="/src/assets/images/privacy.png">{{ $i18n('privacy') }}<img
                 class="link-button-icon" src="/src/assets/images/external_link.png">
         </div>
-        <div id="sidebar-options" class="sidebar-item" :class="currentPage === 'options' ? 'selected-sidebar-item' : ''"
+        <!-- <div id="sidebar-options" class="sidebar-item" :class="currentPage === 'options' ? 'selected-sidebar-item' : ''"
             @click="selectPage('options');">
             <img class="sidebar-icon" src="/src/assets/images/settings.png">{{ $i18n('options') }}
-        </div>
+        </div> -->
         <div v-if="showLogoutButton" id="bottom-sidebar-items">
             <div id="sidebar-account" class="sidebar-item" :class="currentPage === 'account' ? 'selected-sidebar-item' : ''"
                 @click="selectPage('account');">
