@@ -69,7 +69,6 @@ export default {
 
             const allowlist = await getChromeStorage('allowlist') || [];
             const { address, email, password, referrer, termsOfService: terms_of_service, unitedStates: confirmed_not_united_states, username } = this;
-            const key = 'threatslayer-api-key';
             this.submitting = true;
 
             // needed bc this endpoint returns a 201 (create) rather than 200
@@ -78,7 +77,7 @@ export default {
             });
 
             instance.post(`${baseUrl}/user-create`,
-                { address, allowlist, email, key, password, referrer, terms_of_service, confirmed_not_united_states, username })
+                { address, allowlist, email, password, referrer, terms_of_service, confirmed_not_united_states, username })
                 .then(async response => {
                     const { status, data: { key } } = response;
 
