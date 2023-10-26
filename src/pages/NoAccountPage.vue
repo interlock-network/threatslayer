@@ -14,7 +14,6 @@
         <TextComponent msg="0" bigmono /> <br />
         <br />
         <br />
-        <!-- Tabe of allowlisted URLs -->
         <AllowlistTable apiKey="" />
     </div>
 </template>
