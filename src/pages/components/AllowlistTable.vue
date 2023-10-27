@@ -25,7 +25,8 @@ import ClearAllowlistedURLButton from "./buttons/ClearAllowlistedURLButton.vue";
 import LineOfText from "./LineOfText.vue";
 import TextComponent from "./TextComponent.vue";
 
-import { getChromeStorage, setChromeStorage } from '../../utilities.js';
+import axios from "axios";
+import { baseUrl, extractFromError, getChromeStorage, setChromeStorage } from '../../utilities.js';
 
 export default {
     name: "AllowlistTable",
@@ -92,16 +93,29 @@ export default {
 
             this.allowlist = allowlist;
         },
+        sort() {
+            this.currentSortDir = this.currentSortDir === 'asc' ? 'desc' :
+                this.currentSortDir === 'desc' ? 'chron' : 'asc';
+        },
         async updateAllowlist(url) {
             const allowlist = await getChromeStorage('allowlist');
             const updatedAllowlist = allowlist.filter(allowlistedUrl => allowlistedUrl !== url);
 
             setChromeStorage({ allowlist: updatedAllowlist });
             this.allowlist = allowlist;
-        },
-        sort() {
-            this.currentSortDir = this.currentSortDir === 'asc' ? 'desc' :
-                this.currentSortDir === 'desc' ? 'chron' : 'asc';
+
+            // TODO test this
+            if (this.apiKey.length) {
+                axios.post(`${baseUrl}/site-unallowlist`, { key: apiKey, url })
+                    .then(_response => {
+                        console.log(`URL ${url} successfully removed from allowlist.`);
+                    })
+                    .catch(error => {
+                        const { errors, status } = extractFromError(error);
+
+                        console.log(`Error removing URL ${url} from allowlist. Status: ${status}. Error: ${errors}`);
+                    });
+            }
         }
     }
 }
