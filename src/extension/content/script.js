@@ -15,18 +15,25 @@
  */
 
 function handleAPIResponse(response) {
-    let { href } = window.location;
+    let { href: url } = window.location;
 
-    if (response === null) {
-        console.log(`API Unresponsive. Cannot verify safety of URL ${url} .`);
-    } else if (response.malicious === false) {
-        console.log(`URL ${url} not classified as malicious.`);
-    } else if (response.malicious === true) {
-        chrome.runtime.sendMessage({
-            action: 'displayWarningBanner',
-            url: href
-        });
-    }
+    // TODO delete this 
+    chrome.runtime.sendMessage({
+        action: 'displayWarningBanner',
+        url
+    });
+
+    // TODO uncomment this 
+    // if (response === null) {
+    //     console.log(`API Unresponsive. Cannot verify safety of URL ${url} .`);
+    // } else if (response.malicious === false) {
+    //     console.log(`URL ${url} not classified as malicious.`);
+    // } else if (response.malicious === true) {
+    //     chrome.runtime.sendMessage({
+    //         action: 'displayWarningBanner',
+    //         url
+    //     });
+    // }
 }
 
 /**
@@ -43,7 +50,7 @@ function getFormattedUrl() {
  * and asynchronously provides a response.
  */
 chrome.runtime.sendMessage(
-    { contentScriptQuery: 'queryURL', url: getFormattedUrl() },
+    { action: 'queryURL', url: getFormattedUrl() },
     function (response) {
         if (response !== undefined && response !== '') {
             handleAPIResponse(response);
@@ -51,4 +58,3 @@ chrome.runtime.sendMessage(
             handleAPIResponse(null);
         }
     });
-
