@@ -11,7 +11,7 @@
     <br />
     <div>
         <TextComponent class="left-label" :msg="$i18n('ilock_available_to_stake')" bold />
-        <TextComponent msg="0" bigmono /> <br />
+        <TextComponent msg="TBD" bigmono /> <br />
         <br />
         <br />
         <TextComponent :msg="$i18n('url_to_stake')" bold /> <br />
@@ -32,10 +32,11 @@
         </div>
         <br />
         <br />
-        <TextComponent class="left-label" :msg="$i18n('url_staking_status')" bold />
+        <!-- TODO uncomment when security staking is available -->
+        <!-- <TextComponent class="left-label" :msg="$i18n('url_staking_status')" bold />
         <TextComponent :msg="$i18n(stakeStateMessage)" bigmono /> <br />
         <br />
-        <br />
+        <br /> -->
         <WarningTextBox v-if="loggedIn" :msg="$i18n('warning_staking_not_available')" />
     </div>
 </template>
@@ -82,7 +83,8 @@ export default {
     },
     mounted() {
         this.getStakingUrl();
-        this.getSiteInfo();
+        // TODO uncomment when staking is available
+        // this.getSiteInfo();
     },
     computed: {
         showClearButton() {
