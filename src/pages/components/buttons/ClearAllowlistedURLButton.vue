@@ -8,6 +8,7 @@ import { getChromeStorage, setChromeStorage } from '../../../utilities.js';
 export default {
     name: "ClearAllowlistedURLButton",
     props: {
+        apiKey: { type: String, default: '' },
         callback: { type: Function, required: true },
         url: { type: String, default: '' }
     },
