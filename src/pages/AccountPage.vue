@@ -21,6 +21,7 @@
     <div :style="computedStyle">
         <br />
         <!-- Number of users referred -->
+        <!-- TODO update for array -->
         <TextComponent v-if="!pageFaded" class="left-label" :msg="$i18n('users_referred')" bold />
         <TextComponent :msg="referred" bigmono /> <br />
         <br />
@@ -89,9 +90,10 @@ export default {
         async getStatsFromApi() {
             const { apiKey, username } = this;
 
-            axios.post(`${baseUrl}/user-get`, { allowlist, key: apiKey, username })
+            axios.post(`${baseUrl}/user-get`, { key: apiKey, username })
                 .then(async response => {
-                    const { referred = 0, tokens_earned = 0, tokens_earned_total = 0 } = response?.data;
+                    const { address = '', allowlist = [], email, malicious_urls = 0, next_token_drop = 0, referred = [], referrer = '', slay_count = 0,
+                        token_earned_balance = 0, tokens_earned_total = 0, unique_urls = 0, unlocked_urls_confirmed = 0, user_since = 0 } = response?.data;
 
                     const allowlistSet = await setChromeStorage({ allowlist }) || [];
 
