@@ -1,10 +1,8 @@
 /**
  * This is the main background script for ThreatSlayer.
  */
-// TODO delete this
-const baseAPIUrl = 'https://octahedron.interlock.network';
-// TODO uncomment this
-// const baseAPIUrl = 'https://galactus.interlock.network';
+const allowlistAPIUrl = 'https://galactus.interlock.network/allowlist-add'
+const baseAPIUrl = 'https://galactus.interlock.network';
 // const betaBaseAPIUrl = 'https://beta.octahedron.interlock.network';
 const surveyUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSeo1gW6Sg_ITlAXxbTXliQdab2qt1cLBzu45mXpz-XJ8O1KPg/viewform';
 const releaseNotes = 'https://github.com/interlock-network/threatslayer/blob/master/docs/release_notes.md';
@@ -20,14 +18,35 @@ const defaultConfig = {
  * @param {Object} request - the error object returned by Axios
  * @param {string} request.action - one of: clearMaliciousUrlObject, displayWarningBanner, queryURL, stakeUrl
  * @param {string} request.url - stringified URL with protocol, i.e. 'https://www.yahoo.com/'
+ * @param {Object} sender - the error object returned by Axios
+ * @param {Object} sender.tab - one of: clearMaliciousUrlObject, displayWarningBanner, queryURL, stakeUrl
+ * @param {Number} sender.tab.id - stringified URL with protocol, i.e. 'https://www.yahoo.com/'
  */
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     const { action, url } = request;
     const { tab: { id: tabId } } = sender;
     let selectedBaseAPIUrl = baseAPIUrl;
 
-    if (action === 'clearMaliciousUrlObject') {
-        // clear '!!' and red background from ThreatSlayer logo
+    if (action === 'allowlistUrl') {
+        chrome.storage.local.get('apiKey')
+            .then((result) => {
+                const key = result.apiKey;
+
+                // bail if user has no personal API key i.e. is logged out
+                if (key?.length || key === defaultApiKey) {
+                    try {
+                        fetch(allowlistAPIUrl, {
+                            ...defaultConfig,
+                            body: JSON.stringify({ key, url })
+                        });
+                        console.log(`URL ${url} added to allowlist`);
+                    } catch (error) {
+                        console.log(`Error sending allowlisted URL ${url} to server: ${error}`);
+                    }
+                }
+            });
+    } else if (action === 'clearMaliciousUrlObject') {
+        // clears '!!' and red background from ThreatSlayer logo
         chrome.action.setBadgeBackgroundColor({ tabId, color: '' })
         chrome.action.setBadgeText({ tabId, text: '' });
 

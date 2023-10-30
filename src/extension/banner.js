@@ -304,28 +304,7 @@ const threatSlayerLogoStyles = {
 
                 chrome.storage.local.set({ allowlist: newAllowlist });
 
-                console.log(`Adding ${url} to allowlist`);
-            }
-        });
-
-        // send URL to GALACTUS
-        chrome.storage.local.get('apiKey').then(async (result) => {
-            const key = result.apiKey;
-            const url = document.URL;
-            const body = { key, url };
-            const allowlistUrl = 'https://galactus.interlock.network/site-allowlist'
-
-            try {
-                fetch(allowlistUrl, {
-                    method: 'POST',
-                    mode: 'cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(body)
-                });
-
-                console.log(`URL ${url} added to allowlist`);
-            } catch (error) {
-                console.log('Error sending allowlisted URL:', error);
+                chrome.runtime.sendMessage({ action: 'allowlistUrl', url });
             }
         });
     };
