@@ -1,9 +1,9 @@
 <template>
     <div id="url-container">
-        <LineOfText v-if="!allowlist?.length" msg="No allowlisted sites to show" bold />
+        <LineOfText v-if="!allowlist?.length" :msg="$i18n('no_allowlisted_sites')" bold />
         <div v-if="allowlist?.length">
             <LineOfText @click="sort" :msg="tableHeader" bold>{{ sortHeader }}</LineOfText>
-            <TextComponent msg="You marked these safe. ThreatSlayer won't block them." subinstruction />
+            <TextComponent :msg="$i18n('allowlist_explanation')" subinstruction />
             <br />
             <table id="allowlist-table">
                 <tr v-for="url in sortedAllowlist" style="margin-bottom: 1rem;">
@@ -36,7 +36,7 @@ export default {
         TextComponent
     },
     props: {
-        apiKey: { type: String, default: '' }
+        apiKey: { type: String, required: true }
     },
     data() {
         return {
@@ -104,9 +104,8 @@ export default {
             setChromeStorage({ allowlist: updatedAllowlist });
             this.allowlist = allowlist;
 
-            // TODO test this
             if (this.apiKey.length) {
-                axios.post(`${baseUrl}/site-unallowlist`, { key: apiKey, url })
+                axios.post(`${baseUrl}/allowlist-remove`, { key: this.apiKey, url })
                     .then(_response => {
                         console.log(`URL ${url} successfully removed from allowlist.`);
                     })
