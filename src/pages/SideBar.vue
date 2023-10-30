@@ -39,6 +39,7 @@
             <img class="sidebar-icon" src="/src/assets/images/privacy.png">{{ $i18n('privacy') }}<img
                 class="link-button-icon" src="/src/assets/images/external_link.png">
         </div>
+        <!-- uncomment when we have actionable options -->
         <!-- <div id="sidebar-options" class="sidebar-item" :class="currentPage === 'options' ? 'selected-sidebar-item' : ''"
             @click="selectPage('options');">
             <img class="sidebar-icon" src="/src/assets/images/settings.png">{{ $i18n('options') }}

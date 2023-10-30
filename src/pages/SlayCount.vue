@@ -281,7 +281,7 @@ export default {
                         }
                     });
             } catch (err) {
-                console.log('Error getting extension state:', err);
+                console.log(`Error getting extension state: ${err}`);
             }
         },
         async getStatsFromApi() {
