@@ -22,7 +22,8 @@
     <input v-model.trim="referrer" tabindex="14" :placeholder="$i18n('enter_referrer_name')" />
     <div class="checkbox-container" style="margin-top: 0.8rem;" @click="focusNextCheckbox">
         <input id="first-box" type="checkbox" v-model="termsOfService" tabindex="16">
-        <label for="first-box">{{ $i18n('agree_to_our') }}<a href="https://interlock.network" target="_blank">
+        <label for="first-box">{{ $i18n('agree_to_our') }}
+            <a href="https://www.interlock.network/terms-of-service" target="_blank">
                 {{ $i18n('terms_of_service') }} </a></label>
     </div>
     <div class="checkbox-container">
