@@ -1,0 +1,558 @@
+{
+    "about_threat_slayer": {
+        "message": "Về ThreatSlayer",
+        "description": "Page title."
+    },
+    "about_us": {
+        "message": "Về Chúng Tôi",
+        "description": "Page title, also used in sidebar."
+    },
+    "about_us_paragraph_1": {
+        "message": "Trong thế giới nơi mà mối đe dọa mạng ngày càng tinh vi và phổ biến, việc có một giải pháp không chỉ phản ứng nhanh chóng mà còn ngăn chặn mối đe dọa một cách chủ động là rất quan trọng.",
+        "description": "The first paragraph of text on the About Us page."
+    },
+    "about_us_paragraph_2": {
+        "message": "ThreatSlayer không chỉ là một sản phẩm an ninh mạng khác, đây là một đối tác bảo mật toàn diện hoạt động theo thời gian thực để phát hiện và vô hiệu hóa các mối đe dọa trước khi chúng có thể gây hại.",
+        "description": "The second paragraph of text on the About Us page."
+    },
+    "about_us_paragraph_3": {
+        "message": "Dễ dàng cài đặt và được trang bị khả năng bảo vệ bạn khỏi các mối đe dọa trong cả không gian web2 và web3, ThreatSlayer là tương lai của bảo mật trình duyệt. Nó chạy ở chế độ nền, bảo vệ bạn khỏi các tài sản độc hại hoặc các trang web nguy hiểm mà không làm gián đoạn công việc của bạn.",
+        "description": "The third paragraph of text on the About Us page."
+    },
+    "about_us_paragraph_4": {
+        "message": "Kết hợp điều này với việc thưởng cho người dùng chia sẻ dữ liệu bảo mật ẩn danh, và bạn có một giải pháp đôi bên cùng có lợi để ở an toàn trực tuyến trong khi đóng góp vào hệ sinh thái an toàn internet rộng lớn hơn.",
+        "description": "The fourth and last paragraph of text on the About Us page."
+    },
+    "account_info": {
+        "message": "Thông Tin Tài Khoản",
+        "description": "Page header for not-logged-in Account page."
+    },
+    "account_info_for": {
+        "message": "Thông Tin Tài Khoản cho",
+        "description": "Page header for Account page."
+    },
+    "add_blockchain_address": {
+        "message": "Thêm Địa Chỉ Blockchain",
+        "description": "Header text on Account page."
+    },
+    "address_aleph": {
+        "message": "Địa Chỉ Ví Tương Thích với Aleph Zero",
+        "description": "Header on a page listing wallet addresses."
+    },
+    "address_pdot": {
+        "message": "Địa Chỉ Ví Moonbeam",
+        "description": "Header on a page listing wallet addresses."
+    },
+    "affirm_not_us_citizen": {
+        "message": "Xác nhận rằng bạn không phải là công dân hoặc cư dân của Hoa Kỳ.",
+        "description": "Instruction for registering an account."
+    },
+    "agree_to_our": {
+        "message": "Đồng ý với ",
+        "description": "Instruction for registering an account."
+    },
+    "allowlist_explanation": {
+        "message": "Bạn đã đánh dấu chúng là an toàn. ThreatSlayer sẽ không chặn chúng.",
+        "description": "Explanation on the allowlist table."
+    },
+    "already_have_one": {
+        "message": "Đã có tài khoản?",
+        "description": "Instruction for logging in."
+    },
+    "already_have_a_wallet": {
+        "message": "Đã có ví?",
+        "description": "Instruction for registering."
+    },
+    "amount_to_stake": {
+        "message": "Số Tiền Để Cược",
+        "description": "Info text on the Security Staking page."
+    },
+    "appDesc": {
+        "message": "Bảo vệ miễn phí cấp doanh nghiệp cho trình duyệt cá nhân của bạn.",
+        "description": "The description of the extension, displayed in the user's browser."
+    },
+    "cancel": {
+        "message": "Hủy Bỏ",
+        "description": "Generic cancel option."
+    },
+    "change_password": {
+        "message": "Đổi Mật Khẩu",
+        "description": "The text used on change password button."
+    },
+    "click_to_create_wallet": {
+        "message": "Vui lòng nhấp 'Tạo Ví' để được chuyển hướng đến tiện ích mở rộng trình duyệt Chrome để tạo SubWallet.",
+        "description": "Page title, also used in sidebar."
+    },
+    "close": {
+        "message": "Đóng",
+        "description": "The text used on the close button."
+    },
+    "confirm_are_you_sure": {
+        "message": "Bạn có chắc chắn không?",
+        "description": "Confirmation for user actions."
+    },
+    "create_one": {
+        "message": "Tạo một",
+        "description": "Instruction for creating a wallet address."
+    },
+    "create_wallet": {
+        "message": "Tạo Ví",
+        "description": "Page title, also used in sidebar."
+    },
+    "crypto_us_warning": {
+        "message": "Tiền điện tử được coi là tài sản tại Hoa Kỳ nên hầu hết cư dân Hoa Kỳ không thể mua chúng.",
+        "description": "Warning for USians about cryptocurrency."
+    },
+    "delete_account": {
+        "message": "Xóa Tài Khoản",
+        "description": "Text for the Delete Account button."
+    },
+    "delete_account_permanent": {
+        "message": "Xóa Tài Khoản (Vĩnh Viễn)",
+        "description": "Text for the Delete Account button."
+    },
+    "deleting_account": {
+        "message": "Đang Xóa Tài Khoản",
+        "description": "Text for the Delete Account button."
+    },
+    "description": {
+        "message": "Bảo mật miễn phí cấp doanh nghiệp cho trình duyệt cá nhân của bạn.",
+        "description": "The description in the manifest."
+    },
+    "dont_have_an_account": {
+        "message": "Không có tài khoản?",
+        "description": "Instruction for creating an account."
+    },
+    "dont_have_one": {
+        "message": "Không có ví?",
+        "description": "Instruction for creating a wallet address."
+    },
+    "done": {
+        "message": "Hoàn Tất",
+        "description": "Generic button text."
+    },
+    "email": {
+        "message": "Email",
+        "description": "Section header for the Account page."
+    },
+    "enable_beta_option": {
+        "message": "Kích hoạt Tính Năng Phát Hiện Mối Đe Dọa AI Beta (chỉ dành cho nhà phát triển)",
+        "description": "Options page option."
+    },
+    "enter_a_password": {
+        "message": "Nhập mật khẩu có ít nhất 12 ký tự",
+        "description": "Instruction for registering an account."
+    },
+    "enter_a_username": {
+        "message": "Nhập tên đăng nhập",
+        "description": "Instruction for registering an account."
+    },
+    "enter_your_username": {
+        "message": "Nhập tên đăng nhập của bạn",
+        "description": "Instruction for logging into an account."
+    },
+    "enter_password_again": {
+        "message": "Nhập lại mật khẩu của bạn",
+        "description": "Instruction for registering an account."
+    },
+    "enter_referrer_name": {
+        "message": "Tùy chọn: Nhập tên đăng nhập của người giới thiệu",
+        "description": "Instruction for registering an account."
+    },
+    "enter_azero_wallet_address": {
+        "message": "Dán địa chỉ ví tương thích với Aleph Zero của bạn",
+        "description": "Instruction for registering an account."
+    },
+    "enter_pdot_wallet_address": {
+        "message": "Hoặc dán địa chỉ ví Moonbeam của bạn vào đây",
+        "description": "Instruction for registering an account."
+    },
+    "enter_azero_wallet_address_optional": {
+        "message": "Tùy chọn: Dán địa chỉ ví tương thích với Aleph Zero của bạn",
+        "description": "Instruction for registering an account."
+    },
+    "enter_new_wallet_address": {
+        "message": "Nhập địa chỉ ví mới của bạn.",
+        "description": "Instruction for Account page."
+    },
+    "enter_your_email": {
+        "message": "Nhập email của bạn",
+        "description": "Instruction for registering an account."
+    },
+    "enter_email_to_change_password": {
+        "message": "Nhập email của bạn để thay đổi mật khẩu",
+        "description": "Instruction for changing password."
+    },
+    "enter_password_to_delete_account": {
+        "message": "Nhập mật khẩu để xóa tài khoản",
+        "description": "Instruction for deleting account."
+    },
+    "enter_password_to_update_wallet_address": {
+        "message": "Nhập mật khẩu của bạn để cập nhật địa chỉ ví.",
+        "description": "Instruction for updating wallet address."
+    },
+    "error": {
+        "message": "Lỗi",
+        "description": "Generic error message."
+    },
+    "error_deleting_account_generic": {
+        "message": "Có lỗi khi xóa tài khoản. Vui lòng thử lại sau.",
+        "description": "Generic login error message."
+    },
+    "error_invalid_email_generic": {
+        "message": "Địa chỉ email không hợp lệ.",
+        "description": "Generic registering error message."
+    },
+    "error_login_generic": {
+        "message": "Lỗi đăng nhập. Vui lòng thử lại sau.",
+        "description": "Generic login error message."
+    },
+    "error_password_too_long": {
+        "message": "Mật khẩu không được vượt quá 512 ký tự.",
+        "description": "Registering error message."
+    },
+    "error_password_too_short": {
+        "message": "Mật khẩu phải có ít nhất 12 ký tự.",
+        "description": "Registering error message."
+    },
+    "error_passwords_dont_match": {
+        "message": "Mật khẩu của bạn không khớp.",
+        "description": "Registering error message."
+    },
+    "error_registering_wallet_address": {
+        "message": "Địa chỉ ví không hợp lệ.",
+        "description": "Error message for adding a wallet address."
+    },
+    "error_registering_generic": {
+        "message": "Lỗi đăng ký. Vui lòng thử lại sau.",
+        "description": "Generic registering error message."
+    },
+    "error_updating_wallet_address_generic": {
+        "message": "Lỗi cập nhật địa chỉ ví. Vui lòng thử lại sau.",
+        "description": "Generic updating wallet address error message."
+    },
+    "error_username_too_long": {
+        "message": "Tên đăng nhập quá dài: Độ dài tối đa là 16 ký tự.",
+        "description": "Registering error message."
+    },
+    "extension_options": {
+        "message": "Tùy Chọn Tiện Ích Mở Rộng",
+        "description": "Page title."
+    },
+    "faq": {
+        "message": "Câu Hỏi Thường Gặp",
+        "description": "Page title, also used in sidebar."
+    },
+    "forgot_password": {
+        "message": "Quên mật khẩu?",
+        "description": "The text used on login page."
+    },
+    "frequently_asked_questions": {
+        "message": "Câu Hỏi Thường Gặp",
+        "description": "Page title."
+    },
+    "how_does_threat_slayer_protect_me": {
+        "message": "ThreatSlayer bảo vệ tôi như thế nào?",
+        "description": "Question on the FAQ page."
+    },
+    "how_does_threat_slayer_reward_me": {
+        "message": "ThreatSlayer thưởng cho tôi $$ILOCK như thế nào?",
+        "description": "Question on the FAQ page."
+    },
+    "how_does_threat_slayer_reward_me_answer": {
+        "message": "Người dùng ThreatSlayer có cơ hội được thưởng cho mỗi URL họ truy cập. Càng lướt web nhiều, bạn càng có nhiều cơ hội để nhận được $$ILOCK.",
+        "description": "Câu trả lời cho câu hỏi trên trang FAQ."
+    },
+    "ilock_available_to_stake": {
+        "message": "$$ILOCK Có Thể Đặt Cược",
+        "description": "Thông tin trên trang Security Staking."
+    },
+    "ilock_earned": {
+        "message": "$$ILOCK Đã Kiếm Được",
+        "description": "Tiêu đề mục cho trang Tài Khoản."
+    },
+    "ilock_keep_browsing_to_earn": {
+        "message": "Tiếp tục lướt web với ThreatSlayer để kiếm $$ILOCK!",
+        "description": "Thông điệp cho người dùng về việc kiếm token."
+    },
+    "is_threat_slayer_open_source": {
+        "message": "ThreatSlayer có phải là mã nguồn mở không?",
+        "description": "Câu hỏi trên trang FAQ."
+    },
+    "is_threat_slayer_open_source_answer": {
+        "message": "Chúng tôi quét URL của trình duyệt với AI phát hiện mối đe dọa của chúng tôi. Chúng tôi liên kết URL với tài khoản của bạn để chúng tôi có thể thưởng cho bạn $$ILOCK. Đó là tất cả!",
+        "description": "Câu trả lời cho câu hỏi trên trang FAQ."
+    },
+    "login": {
+        "message": "Đăng Nhập",
+        "description": "Tiêu đề trang, cũng được sử dụng trong thanh bên."
+    },
+    "logged_out": {
+        "message": "Đã Đăng Xuất",
+        "description": "Văn bản nút."
+    },
+    "logging_out": {
+        "message": "Đang Đăng Xuất",
+        "description": "Văn bản nút."
+    },
+    "logout": {
+        "message": "Đăng Xuất",
+        "description": "Văn bản nút."
+    },
+    "malicious_sites_detected": {
+        "message": "Các Trang Web Độc Hại Đã Được Phát Hiện",
+        "description": "Văn bản được sử dụng để hiển thị số lượng URL độc hại được quét trên bảng điều khiển."
+    },
+    "must_create_azero_wallet": {
+        "message": "Để sử dụng ThreatSlayer, bạn cần tạo một ví tương thích với Aleph Zero.",
+        "description": "Hướng dẫn tạo ví."
+    },
+    "no_allowlisted_sites": {
+        "message": "Không có trang web nào được cho phép để hiển thị.",
+        "description": "Thông tin trên bảng danh sách trắng."
+    },
+    "no_url_selected": {
+        "message": "Không có URL nào được chọn để đặt cược.",
+        "description": "Thông tin trên trang Security Staking."
+    },
+    "options": {
+        "message": "Tùy Chọn",
+        "description": "Tiêu đề trang, cũng được sử dụng trong thanh bên."
+    },
+    "password": {
+        "message": "Mật Khẩu",
+        "description": "Văn bản giữ chỗ cho trường nhập."
+    },
+    "password_hide": {
+        "message": "Ẩn Mật Khẩu",
+        "description": "Hướng dẫn để chuyển đổi hiển thị mật khẩu."
+    },
+    "password_show": {
+        "message": "Hiển Thị Mật Khẩu",
+        "description": "Hướng dẫn để chuyển đổi hiển thị mật khẩu."
+    },
+    "powered_by_interlock": {
+        "message": "Được Cung Cấp Bởi Interlock",
+        "description": "Thông tin trên trang SlayCount."
+    },
+    "privacy": {
+        "message": "Quyền Riêng Tư",
+        "description": "Tiêu đề trang, cũng được sử dụng trong thanh bên."
+    },
+    "register": {
+        "message": "Đăng Ký",
+        "description": "Hướng dẫn cho người dùng."
+    },
+    "security_staking": {
+        "message": "Security Staking",
+        "description": "Tiêu đề trang, cũng được sử dụng trong thanh bên."
+    },
+    "select_from_the_following": {
+        "message": "Chọn từ các tùy chọn sau:",
+        "description": "Tiêu đề cho các tùy chọn trên trang Tùy Chọn."
+    },
+    "sign_up_for_threat_slayer": {
+        "message": "Đăng Ký Sử Dụng ThreatSlayer",
+        "description": "Tiêu đề trang."
+    },
+    "slay_count": {
+        "message": "SlayCount",
+        "description": "Tiêu đề trang, cũng được sử dụng trong thanh bên."
+    },
+    "slay_count_copy": {
+        "message": "Sao chép SlayCount vào bộ nhớ tạm",
+        "description": "Thông tin trên trang SlayCount."
+    },
+    "slay_count_download": {
+        "message": "Tải xuống SlayCount",
+        "description": "Thông tin trên trang SlayCount."
+    },
+    "stake_state_neutral": {
+        "message": "Bạn sẽ là người đầu tiên đặt cược vào URL này.",
+        "description": "Giải thích về trạng thái đặt cược bảo mật."
+    },
+    "stake_state_pending": {
+        "message": "Một người khác đã thử đặt cược vào URL này. Nếu được chấp nhận, số tiền cược của bạn sẽ được cộng dồn với họ. Nếu bị từ chối, bạn sẽ không mất $$ILOCK.",
+        "description": "Giải thích về trạng thái đặt cược bảo mật."
+    },
+    "stake_state_resolved": {
+        "message": "Không ai có thể đặt cược vào URL này vào lúc này.",
+        "description": "Giải thích về trạng thái đặt cược bảo mật."
+    },
+    "staking": {
+        "message": "Cơ Hội Kiếm Được",
+        "description": "Văn bản được sử dụng trong hộp văn bản đặt cược."
+    },
+    "start_earning": {
+        "message": "Bắt Đầu Kiếm Được",
+        "description": "Tiêu đề trang, cũng được sử dụng trong thanh bên."
+    },
+    "stake_this_url": {
+        "message": "Đặt Cược vào URL này",
+        "description": "Văn bản được sử dụng trong nút đặt cược."
+    },
+    "staking_explanation": {
+        "message": "Bạn đã mở khóa cơ hội kiếm token $$ILOCK!",
+        "description": "Văn bản giải thích được sử dụng trong hộp văn bản đặt cược."
+    },
+    "SLAY_COUNT": {
+        "message": "SLAY COUNT",
+        "description": "Văn bản cho hình ảnh SlayCount được xuất."
+    },
+    "submit": {
+        "message": "Gửi",
+        "description": "Văn bản nút."
+    },
+    "submit_new_wallet_address": {
+        "message": "Gửi Địa Chỉ Mới",
+        "description": "Hướng dẫn để thay đổi địa chỉ ví."
+    },
+    "success": {
+        "message": "Thành Công!",
+        "description": "Văn bản nút chung."
+    },
+    "take_to_safety": {
+        "message": "Đưa Tôi đến Nơi An Toàn",
+        "description": "Văn bản được sử dụng trong nút đưa tôi đến nơi an toàn."
+    },
+    "terms_of_service": {
+        "message": "Điều Khoản Dịch Vụ",
+        "description": "Hướng dẫn để đăng ký tài khoản."
+    },
+    "test": {
+        "message": "Kiểm Tra",
+        "description": "Văn bản kiểm tra, chỉ dùng để mục đích kiểm tra."
+    },
+    "threat_slayer": {
+        "message": "ThreatSlayer",
+        "description": "Tên của ứng dụng."
+    },
+    "trust_this_url": {
+        "message": "Tin Tưởng URL này",
+        "description": "Văn bản được sử dụng trong nút tin tưởng URL này."
+    },
+    "try_again_later": {
+        "message": "Thử Lại Sau",
+        "description": "Văn bản nút chung."
+    },
+    "unique_urls_scanned": {
+        "message": "URL Duy Nhất Đã Quét",
+        "description": "Văn bản được sử dụng để hiển thị số lượng URL duy nhất được quét trên bảng điều khiển."
+    },
+    "update_wallet_address": {
+        "message": "Cập Nhật Địa Chỉ",
+        "description": "Hướng dẫn để thay đổi địa chỉ ví."
+    },
+    "urls_scanned": {
+        "message": "URL Đã Quét",
+        "description": "Văn bản được sử dụng để hiển thị số lượng URL được quét trên bảng điều khiển."
+    },
+    "url_to_stake": {
+        "message": "URL để Đặt Cược",
+        "description": "Văn bản thông tin trên trang Security Staking."
+    },
+    "url_staking_status": {
+        "message": "Trạng Thái Đặt Cược URL",
+        "description": "Văn bản thông tin trên trang Security Staking."
+    },
+    "username_or_email": {
+        "message": "Tên đăng nhập hoặc email",
+        "description": "Hướng dẫn điền vào trường."
+    },
+    "users_referred": {
+        "message": "Người Dùng Được Giới Thiệu",
+        "description": "Tiêu đề mục cho trang Tài Khoản."
+    },
+    "view_wallet_info": {
+        "message": "Xem Thông Tin Ví",
+        "description": "Văn bản nút để xem thông tin ví."
+    },
+    "waiting": {
+        "message": "Đang Chờ...",
+        "description": "Văn bản nút."
+    },
+    "wallet_address": {
+        "message": "Địa Chỉ Ví",
+        "description": "Tiêu đề mục cho trang Tài Khoản."
+    },
+    "warning": {
+        "message": "Cảnh Báo!",
+        "description": "Văn bản được sử dụng trong bảng cảnh báo."
+    },
+    "warning_account_will_be_deleted": {
+        "message": "Tài khoản của bạn sẽ bị xóa vĩnh viễn.",
+        "description": "Văn bản cảnh báo khi xóa tài khoản người dùng."
+    },
+    "warning_address_not_azero": {
+        "message": "Đây không phải là địa chỉ Aleph Zero.",
+        "description": "Văn bản cảnh báo cho loại ví người dùng."
+    },
+    "warning_address_not_moonbeam": {
+        "message": "Đây không phải là địa chỉ Moonbeam.",
+        "description": "Văn bản cảnh báo cho loại ví người dùng."
+    },
+    "warning_changing_wallet_address": {
+        "message": "Cảnh báo: Việc thay đổi địa chỉ ví hiện tại của bạn có thể làm trễ quá trình truy cập vào $$ILOCK đã gửi trước đó.",
+        "description": "Văn bản cảnh báo được sử dụng khi thay đổi địa chỉ ví."
+    },
+    "warning_header": {
+        "message": "Trang web này có thể có hại.",
+        "description": "Văn bản được sử dụng trong bảng cảnh báo."
+    },
+    "warning_ilock_will_be_lost": {
+        "message": "Bạn sẽ mất tất cả số $$ILOCK chưa được chuyển vào ví.",
+        "description": "Văn bản cảnh báo khi xóa tài khoản người dùng."
+    },
+    "warning_must_add_wallet_address": {
+        "message": "Bạn phải thêm địa chỉ ví để nhận token $$ILOCK.",
+        "description": "Văn bản cảnh báo được sử dụng trên trang Tài Khoản."
+    },
+    "warning_must_login_before_staking": {
+        "message": "Bạn phải đăng nhập trước khi bạn có thể đặt cược vào một URL.",
+        "description": "Văn bản được sử dụng trong hộp cảnh báo."
+    },
+    "warning_must_login_to_earn_etc": {
+        "message": "Cảnh báo: Bạn phải đăng ký hoặc đăng nhập để kiếm $$ILOCK và sử dụng tất cả các tính năng của ThreatSlayer.",
+        "description": "Văn bản được sử dụng trong hộp cảnh báo."
+    },
+    "warning_must_register_before_staking": {
+        "message": "Bạn phải đăng ký trước khi bạn có thể đặt cược vào một URL.",
+        "description": "Văn bản được sử dụng trong hộp cảnh báo."
+    },
+    "warning_possible_malicious_url_detected": {
+        "message": "Phát hiện URL có khả năng gây hại:",
+        "description": "Văn bản được sử dụng trong hộp cảnh báo."
+    },
+    "warning_staking_not_available": {
+        "message": "Đặt cược bảo mật sẽ sớm được mở!",
+        "description": "Văn bản được sử dụng trong hộp cảnh báo."
+    },
+    "warning_text": {
+        "message": "Đóng tab nếu bạn không chắc rằng trang web này an toàn!",
+        "description": "Văn bản được sử dụng trong bảng thông báo cảnh báo."
+    },
+    "warning_username_contains_illegal_characters": {
+        "message": "Tên đăng nhập chứa ký tự không hợp lệ: ",
+        "description": "Văn bản được sử dụng trong hộp cảnh báo cho việc nhập tên đăng nhập."
+    },
+    "warning_username_too_long": {
+        "message": "Tên đăng nhập quá dài: Độ dài tối đa là 16 ký tự.",
+        "description": "Văn bản được sử dụng trong hộp cảnh báo cho việc nhập tên đăng nhập."
+    },
+    "warning_username_too_short": {
+        "message": "Tên đăng nhập quá ngắn: Độ dài tối thiểu là 5 ký tự.",
+        "description": "Văn bản được sử dụng trong hộp cảnh báo cho việc nhập tên đăng nhập."
+    },
+    "what_does_threat_slayer_collect": {
+        "message": "ThreatSlayer thu thập dữ liệu gì?",
+        "description": "Câu hỏi trên trang FAQ."
+    },
+    "what_does_threat_slayer_collect_answer": {
+        "message": "Chúng tôi quét các URL trên trình duyệt của bạn với AI phát hiện mối đe dọa của chúng tôi. Chúng tôi liên kết các URL với tài khoản của bạn để có thể thưởng cho bạn $$ILOCK. Đó là tất cả!",
+        "description": "Câu trả lời cho câu hỏi trên trang FAQ."
+    },
+    "why_choose_threat_slayer": {
+        "message": "Tại sao chọn ThreatSlayer?",
+        "description": "Văn bản được sử dụng trên trang Về Chúng Tôi."
+    }
+}
