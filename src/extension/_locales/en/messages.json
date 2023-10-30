@@ -51,6 +51,10 @@
         "message": "Agree to our ",
         "description": "Instruction for registering an account."
     },
+    "allowlist_explanation": {
+        "message": "You marked these safe. ThreatSlayer won't block them. ",
+        "description": "Explanation on the allowlist table."
+    },
     "already_have_one": {
         "message": "Already have an account?",
         "description": "Instruction for logging in."
@@ -302,6 +306,10 @@
     "must_create_azero_wallet": {
         "message": "In order to use ThreatSlayer, you will need to create an Aleph Zero-compatible wallet.",
         "description": "Instruction for creating a wallet."
+    },
+    "no_allowlisted_sites": {
+        "message": "No allowlisted sites to show.",
+        "description": "Info text on the allowlist table."
     },
     "no_url_selected": {
         "message": "No URL selected for staking.",
