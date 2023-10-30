@@ -22,11 +22,13 @@
         <br />
         <!-- Number of users referred -->
         <!-- TODO update for array -->
-        <TextComponent v-if="!pageFaded" class="left-label" :msg="$i18n('users_referred')" bold />
-        <TextComponent :msg="referred" bigmono /> <br />
+        <div v-if="!pageFaded && referred !== -1">
+            <TextComponent class="left-label" :msg="$i18n('users_referred')" bold />
+            <TextComponent :msg="referred" bigmono /> <br />
+        </div>
         <br />
         <!-- Tabe of allowlisted URLs -->
-        <AllowlistTable v-if="!pageFaded && allowlistSet" :apiKey="apiKey" />
+        <AllowlistTable v-if="!pageFaded" :apiKey="apiKey" />
     </div>
     <DeleteUserModal v-bind="{ checkState, fadeAccountPage, pageFaded, selectPage, username }" />
 </template>
@@ -95,15 +97,9 @@ export default {
                     const { address = '', allowlist = [], email, malicious_urls = 0, next_token_drop = 0, referred = [], referrer = '', slay_count = 0,
                         token_earned_balance = 0, tokens_earned_total = 0, unique_urls = 0, unlocked_urls_confirmed = 0, user_since = 0 } = response?.data;
 
-                    const allowlistSet = await setChromeStorage({ allowlist }) || [];
-
-                    this.allowlistSet = allowlistSet;
-
-                    if (allowlistSet) {
-                        this.referred = referred;
-                        this.tokensEarned = tokens_earned;
-                        this.tokensEarnedTotal = tokens_earned_total;
-                    }
+                    this.referred = referred;
+                    this.tokensEarned = tokens_earned;
+                    this.tokensEarnedTotal = tokens_earned_total;
                 })
                 .catch(error => {
                     const { errors, status } = extractFromError(error);
