@@ -17,23 +17,16 @@
 function handleAPIResponse(response) {
     let { href: url } = window.location;
 
-    // TODO delete this 
-    chrome.runtime.sendMessage({
-        action: 'displayWarningBanner',
-        url
-    });
-
-    // TODO uncomment this 
-    // if (response === null) {
-    //     console.log(`API Unresponsive. Cannot verify safety of URL ${url} .`);
-    // } else if (response.malicious === false) {
-    //     console.log(`URL ${url} not classified as malicious.`);
-    // } else if (response.malicious === true) {
-    //     chrome.runtime.sendMessage({
-    //         action: 'displayWarningBanner',
-    //         url
-    //     });
-    // }
+    if (response === null) {
+        console.log(`API Unresponsive. Cannot verify safety of URL ${url} .`);
+    } else if (response.malicious === false) {
+        console.log(`URL ${url} not classified as malicious.`);
+    } else if (response.malicious === true) {
+        chrome.runtime.sendMessage({
+            action: 'displayWarningBanner',
+            url
+        });
+    }
 }
 
 /**
