@@ -1,0 +1,558 @@
+{
+    "about_threat_slayer": {
+        "message": "Tentang ThreatSlayer",
+        "description": "Page title."
+    },
+    "about_us": {
+        "message": "Tentang Kami",
+        "description": "Page title, also used in sidebar."
+    },
+    "about_us_paragraph_1": {
+        "message": "Di dunia dimana ancaman siber semakin canggih dan umum, sangat penting untuk memiliki solusi yang tidak hanya bereaksi dengan cepat tetapi juga proaktif mencegah ancaman.",
+        "description": "The first paragraph of text on the About Us page."
+    },
+    "about_us_paragraph_2": {
+        "message": "ThreatSlayer bukan hanya produk keamanan siber lainnya, ini adalah teman keamanan yang komprehensif yang beroperasi secara real-time untuk mendeteksi dan menetralkan ancaman sebelum mereka dapat menimbulkan kerusakan.",
+        "description": "The second paragraph of text on the About Us page."
+    },
+    "about_us_paragraph_3": {
+        "message": "Mudah diinstal dan dilengkapi dengan kemampuan untuk melindungi Anda dari ancaman di ruang web2 dan web3, ThreatSlayer adalah masa depan keamanan browser. Ini berjalan di latar belakang, melindungi Anda dari aset berbahaya atau halaman berbahaya tanpa mengganggu alur kerja Anda.",
+        "description": "The third paragraph of text on the About Us page."
+    },
+    "about_us_paragraph_4": {
+        "message": "Gabungkan ini dengan hadiah untuk pengguna yang membagikan data keamanan anonim, dan Anda memiliki solusi win-win untuk tetap aman secara online sambil berkontribusi pada ekosistem keamanan internet yang lebih luas.",
+        "description": "The fourth and last paragraph of text on the About Us page."
+    },
+    "account_info": {
+        "message": "Info Akun",
+        "description": "Page header for not-logged-in Account page."
+    },
+    "account_info_for": {
+        "message": "Info Akun untuk",
+        "description": "Page header for Account page."
+    },
+    "add_blockchain_address": {
+        "message": "Tambahkan Alamat Blockchain",
+        "description": "Header text on Account page."
+    },
+    "address_aleph": {
+        "message": "Alamat Wallet yang Kompatibel dengan Aleph Zero",
+        "description": "Header on a page listing wallet addresses."
+    },
+    "address_pdot": {
+        "message": "Alamat Wallet Moonbeam",
+        "description": "Header on a page listing wallet addresses."
+    },
+    "affirm_not_us_citizen": {
+        "message": "Pastikan Anda bukan warga negara atau penduduk AS.",
+        "description": "Instruction for registering an account."
+    },
+    "agree_to_our": {
+        "message": "Setuju dengan",
+        "description": "Instruction for registering an account."
+    },
+    "allowlist_explanation": {
+        "message": "Anda telah menandai ini aman. ThreatSlayer tidak akan memblokirnya.",
+        "description": "Explanation on the allowlist table."
+    },
+    "already_have_one": {
+        "message": "Sudah punya akun?",
+        "description": "Instruction for logging in."
+    },
+    "already_have_a_wallet": {
+        "message": "Sudah punya dompet?",
+        "description": "Instruction for registering."
+    },
+    "amount_to_stake": {
+        "message": "Jumlah untuk Stake",
+        "description": "Info text on the Security Staking page."
+    },
+    "appDesc": {
+        "message": "Perlindungan gratis tingkat perusahaan untuk browser pribadi Anda.",
+        "description": "The description of the extension, displayed in the user's browser."
+    },
+    "cancel": {
+        "message": "Batal",
+        "description": "Generic cancel option."
+    },
+    "change_password": {
+        "message": "Ubah Kata Sandi",
+        "description": "The text used on change password button."
+    },
+    "click_to_create_wallet": {
+        "message": "Silakan klik 'Buat Dompet' untuk diarahkan ke ekstensi browser Chrome untuk membuat SubWallet.",
+        "description": "Page title, also used in sidebar."
+    },
+    "close": {
+        "message": "Tutup",
+        "description": "The text used on the close button."
+    },
+    "confirm_are_you_sure": {
+        "message": "Anda yakin?",
+        "description": "Confirmation for user actions."
+    },
+    "create_one": {
+        "message": "Buat satu",
+        "description": "Instruction for creating a wallet address."
+    },
+    "create_wallet": {
+        "message": "Buat Dompet",
+        "description": "Page title, also used in sidebar."
+    },
+    "crypto_us_warning": {
+        "message": "Mata uang kripto dianggap sebagai sekuritas di AS sehingga sebagian besar penduduk AS tidak dapat membelinya.",
+        "description": "Warning for USians about cryptocurrency."
+    },
+    "delete_account": {
+        "message": "Hapus Akun",
+        "description": "Text for the Delete Account button."
+    },
+    "delete_account_permanent": {
+        "message": "Hapus Akun (Permanen)",
+        "description": "Text for the Delete Account button."
+    },
+    "deleting_account": {
+        "message": "Menghapus Akun",
+        "description": "Text for the Delete Account button."
+    },
+    "description": {
+        "message": "Keamanan gratis tingkat perusahaan untuk browser pribadi Anda.",
+        "description": "The description in the manifest."
+    },
+    "dont_have_an_account": {
+        "message": "Belum punya akun?",
+        "description": "Instruction for creating an account."
+    },
+    "dont_have_one": {
+        "message": "Belum punya dompet?",
+        "description": "Instruction for creating a wallet address."
+    },
+    "done": {
+        "message": "Selesai",
+        "description": "Generic button text."
+    },
+    "email": {
+        "message": "Email",
+        "description": "Section header for the Account page."
+    },
+    "enable_beta_option": {
+        "message": "Aktifkan Deteksi Ancaman AI beta (hanya untuk pengembang)",
+        "description": "Options page option."
+    },
+    "enter_a_password": {
+        "message": "Masukkan kata sandi setidaknya 12 karakter",
+        "description": "Instruction for registering an account."
+    },
+    "enter_a_username": {
+        "message": "Masukkan nama pengguna",
+        "description": "Instruction for registering an account."
+    },
+    "enter_your_username": {
+        "message": "Masukkan nama pengguna Anda",
+        "description": "Instruction for logging into an account."
+    },
+    "enter_password_again": {
+        "message": "Masukkan kata sandi Anda lagi",
+        "description": "Instruction for registering an account."
+    },
+    "enter_referrer_name": {
+        "message": "Opsional: Masukkan nama pengguna yang mereferensikan",
+        "description": "Instruction for registering an account."
+    },
+    "enter_azero_wallet_address": {
+        "message": "Tempelkan alamat dompet yang kompatibel dengan Aleph Zero Anda",
+        "description": "Instruction for registering an account."
+    },
+    "enter_pdot_wallet_address": {
+        "message": "Atau tempelkan alamat dompet Moonbeam Anda di sini",
+        "description": "Instruction for registering an account."
+    },
+    "enter_azero_wallet_address_optional": {
+        "message": "Opsional: Tempelkan alamat dompet yang kompatibel dengan Aleph Zero Anda",
+        "description": "Instruction for registering an account."
+    },
+    "enter_new_wallet_address": {
+        "message": "Masukkan alamat dompet baru Anda.",
+        "description": "Instruction for Account page."
+    },
+    "enter_your_email": {
+        "message": "Masukkan email Anda",
+        "description": "Instruction for registering an account."
+    },
+    "enter_email_to_change_password": {
+        "message": "Masukkan email Anda untuk mengubah kata sandi Anda",
+        "description": "Instruction for changing password."
+    },
+    "enter_password_to_delete_account": {
+        "message": "Masukkan kata sandi untuk menghapus akun",
+        "description": "Instruction for deleting account."
+    },
+    "enter_password_to_update_wallet_address": {
+        "message": "Masukkan kata sandi Anda untuk memperbarui alamat dompet Anda.",
+        "description": "Instruction for updating wallet address."
+    },
+    "error": {
+        "message": "Kesalahan",
+        "description": "Generic error message."
+    },
+    "error_deleting_account_generic": {
+        "message": "Kesalahan menghapus akun. Silakan coba lagi nanti.",
+        "description": "Generic login error message."
+    },
+    "error_invalid_email_generic": {
+        "message": "Alamat email tidak valid.",
+        "description": "Generic registering error message."
+    },
+    "error_login_generic": {
+        "message": "Kesalahan saat login. Silakan coba lagi nanti.",
+        "description": "Generic login error message."
+    },
+    "error_password_too_long": {
+        "message": "Kata sandi tidak boleh lebih dari 512 karakter.",
+        "description": "Registering error message."
+    },
+    "error_password_too_short": {
+        "message": "Kata sandi harus setidaknya 12 karakter.",
+        "description": "Registering error message."
+    },
+    "error_passwords_dont_match": {
+        "message": "Kata sandi Anda tidak cocok.",
+        "description": "Registering error message."
+    },
+    "error_registering_wallet_address": {
+        "message": "Bukan alamat dompet yang valid.",
+        "description": "Error message for adding a wallet address."
+    },
+    "error_registering_generic": {
+        "message": "Kesalahan saat mendaftar. Silakan coba lagi nanti.",
+        "description": "Generic registering error message."
+    },
+    "error_updating_wallet_address_generic": {
+        "message": "Kesalahan memperbarui alamat dompet. Silakan coba lagi nanti.",
+        "description": "Generic updating wallet address error message."
+    },
+    "error_username_too_long": {
+        "message": "Nama pengguna terlalu panjang: Panjang maksimal adalah 16 karakter.",
+        "description": "Registering error message."
+    },
+    "extension_options": {
+        "message": "Opsi Ekstensi",
+        "description": "Page title."
+    },
+    "faq": {
+        "message": "FAQ",
+        "description": "Page title, also used in sidebar."
+    },
+    "forgot_password": {
+        "message": "Lupa kata sandi?",
+        "description": "The text used on login page."
+    },
+    "frequently_asked_questions": {
+        "message": "Pertanyaan yang Sering Diajukan",
+        "description": "Page title."
+    },
+    "how_does_threat_slayer_protect_me": {
+        "message": "Bagaimana ThreatSlayer melindungi saya?",
+        "description": "Question on the FAQ page."
+    },
+    "how_does_threat_slayer_reward_me": {
+        "message": "Bagaimana ThreatSlayer memberi saya hadiah dengan $$ILOCK?",
+        "description": "Question on the FAQ page."
+    },
+    "how_does_threat_slayer_reward_me_answer": {
+        "message": "Pengguna ThreatSlayer memiliki kesempatan untuk mendapatkan hadiah untuk setiap URL yang mereka kunjungi. Semakin banyak situs yang Anda jelajahi, semakin banyak kesempatan Anda untuk mendapatkan $$ILOCK.",
+        "description": "Answer to question on the FAQ page."
+    },
+    "ilock_available_to_stake": {
+        "message": "$$ILOCK Tersedia untuk Stake",
+        "description": "Info text on the Security Staking page."
+    },
+    "ilock_earned": {
+        "message": "$$ILOCK yang Diperoleh",
+        "description": "Section header for the Account page."
+    },
+    "ilock_keep_browsing_to_earn": {
+        "message": "Teruslah menjelajahi dengan ThreatSlayer untuk mendapatkan $$ILOCK!",
+        "description": "Message to user about earning token."
+    },
+    "is_threat_slayer_open_source": {
+        "message": "Apakah ThreatSlayer bersifat open source?",
+        "description": "Question on the FAQ page."
+    },
+    "is_threat_slayer_open_source_answer": {
+        "message": "Kami memindai URL browser Anda dengan AI kami yang mendeteksi ancaman. Kami menghubungkan URL dengan akun Anda sehingga kami dapat memberi Anda hadiah $$ILOCK. Itu saja!",
+        "description": "Answer to question on the FAQ page."
+    },
+    "login": {
+        "message": "Masuk",
+        "description": "Page title, also used in sidebar."
+    },
+    "logged_out": {
+        "message": "Telah Keluar",
+        "description": "Button text."
+    },
+    "logging_out": {
+        "message": "Sedang Keluar",
+        "description": "Button text."
+    },
+    "logout": {
+        "message": "Keluar",
+        "description": "Button text."
+    },
+    "malicious_sites_detected": {
+        "message": "Situs Berbahaya Terdeteksi",
+        "description": "The text used to show how many malicious URLs are scanned on the dashboard."
+    },
+    "must_create_azero_wallet": {
+        "message": "Untuk menggunakan ThreatSlayer, Anda perlu membuat dompet yang kompatibel dengan Aleph Zero.",
+        "description": "Instruction for creating a wallet."
+    },
+    "no_allowlisted_sites": {
+        "message": "Tidak ada situs yang diizinkan untuk ditampilkan.",
+        "description": "Info text on the allowlist table."
+    },
+    "no_url_selected": {
+        "message": "Tidak ada URL yang dipilih untuk staking.",
+        "description": "Info text on the Security Staking page."
+    },
+    "options": {
+        "message": "Opsi",
+        "description": "Page title, also used in sidebar."
+    },
+    "password": {
+        "message": "Kata Sandi",
+        "description": "Generic input field placeholder text."
+    },
+    "password_hide": {
+        "message": "Sembunyikan Kata Sandi",
+        "description": "Instruction for toggling password visibility."
+    },
+    "password_show": {
+        "message": "Tampilkan Kata Sandi",
+        "description": "Instruction for toggling password visibility."
+    },
+    "powered_by_interlock": {
+        "message": "Ditenagai oleh Interlock",
+        "description": "Info text on the SlayCount page."
+    },
+    "privacy": {
+        "message": "Privasi",
+        "description": "Page title, also used in sidebar."
+    },
+    "register": {
+        "message": "Daftar",
+        "description": "Instruction for users."
+    },
+    "security_staking": {
+        "message": "Staking Keamanan",
+        "description": "Page title, also used in sidebar."
+    },
+    "select_from_the_following": {
+        "message": "Pilih dari yang berikut:",
+        "description": "Header for the options on the Options page."
+    },
+    "sign_up_for_threat_slayer": {
+        "message": "Daftar untuk ThreatSlayer",
+        "description": "Page title."
+    },
+    "slay_count": {
+        "message": "Jumlah Slay",
+        "description": "Page title, also used in sidebar."
+    },
+    "slay_count_copy": {
+        "message": "Salin Jumlah Slay ke papan klip",
+        "description": "Info for SlayCount page."
+    },
+    "slay_count_download": {
+        "message": "Unduh Jumlah Slay",
+        "description": "Info for SlayCount page."
+    },
+    "stake_state_neutral": {
+        "message": "Anda akan menjadi yang pertama untuk melakukan staking pada URL ini.",
+        "description": "Explanation of security staking state."
+    },
+    "stake_state_pending": {
+        "message": "Seseorang telah mencoba melakukan staking pada URL ini. Jika disetujui, staking Anda akan ditambahkan ke milik mereka. Jika ditolak, Anda tidak akan kehilangan $$ILOCK.",
+        "description": "Explanation of security staking state."
+    },
+    "stake_state_resolved": {
+        "message": "Tidak ada yang bisa melakukan staking pada URL ini pada saat ini.",
+        "description": "Explanation of security staking state."
+    },
+    "staking": {
+        "message": "Kesempatan untuk Mendapatkan",
+        "description": "The text used on the staking text box."
+    },
+    "start_earning": {
+        "message": "Mulai Menghasilkan",
+        "description": "Page title, also used in sidebar."
+    },
+    "stake_this_url": {
+        "message": "Lakukan Staking pada URL ini",
+        "description": "The text used in the staking button."
+    },
+    "staking_explanation": {
+        "message": "Anda telah membuka kesempatan untuk mendapatkan token $$ILOCK!",
+        "description": "The explanatory text used in the staking text box."
+    },
+    "SLAY_COUNT": {
+        "message": "JUMLAH SLAY",
+        "description": "Text for SlayCount exported image."
+    },
+    "submit": {
+        "message": "Kirim",
+        "description": "Button text."
+    },
+    "submit_new_wallet_address": {
+        "message": "Kirim Alamat Baru",
+        "description": "Instruction for changing wallet address."
+    },
+    "success": {
+        "message": "Berhasil!",
+        "description": "Generic button text."
+    },
+    "take_to_safety": {
+        "message": "Bawa Saya ke Tempat Aman",
+        "description": "The text used in the take me to safety button."
+    },
+    "terms_of_service": {
+        "message": "Syarat dan Ketentuan",
+        "description": "Instruction for registering an account."
+    },
+    "test": {
+        "message": "Tes",
+        "description": "Test message, for testing purposes only."
+    },
+    "threat_slayer": {
+        "message": "ThreatSlayer",
+        "description": "Name of the app."
+    },
+    "trust_this_url": {
+        "message": "Percayai URL ini",
+        "description": "The text used in the trust this URL button."
+    },
+    "try_again_later": {
+        "message": "Coba Lagi Nanti",
+        "description": "Generic button text."
+    },
+    "unique_urls_scanned": {
+        "message": "URL Unik yang Dipindai",
+        "description": "The text used to show how many unique URLs are scanned on the dashboard."
+    },
+    "update_wallet_address": {
+        "message": "Perbarui Alamat Dompet",
+        "description": "Instruction for changing wallet address."
+    },
+    "urls_scanned": {
+        "message": "URL yang Dipindai",
+        "description": "The text used to show how many URLs are scanned on the dashboard."
+    },
+    "url_to_stake": {
+        "message": "URL untuk Staking",
+        "description": "Info text on the Security Staking page."
+    },
+    "url_staking_status": {
+        "message": "Status Staking URL",
+        "description": "Info text on the Security Staking page."
+    },
+    "username_or_email": {
+        "message": "Nama Pengguna atau Email",
+        "description": "Instructions to fill in a field."
+    },
+    "users_referred": {
+        "message": "Pengguna yang Dirujuk",
+        "description": "Section header for the Account page."
+    },
+    "view_wallet_info": {
+        "message": "Lihat Informasi Dompet",
+        "description": "Button text for viewing wallet information."
+    },
+    "waiting": {
+        "message": "Menunggu...",
+        "description": "Button text."
+    },
+    "wallet_address": {
+        "message": "Alamat Dompet",
+        "description": "Section header for the Account page."
+    },
+    "warning": {
+        "message": "Peringatan!",
+        "description": "The text used in the warning banner."
+    },
+    "warning_account_will_be_deleted": {
+        "message": "Akun Anda akan dihapus selamanya.",
+        "description": "Warning text for deleting user account."
+    },
+    "warning_address_not_azero": {
+        "message": "Ini bukan alamat Aleph Zero.",
+        "description": "Warning text for user wallet type."
+    },
+    "warning_address_not_moonbeam": {
+        "message": "Ini bukan alamat Moonbeam.",
+        "description": "Warning text for user wallet type."
+    },
+    "warning_changing_wallet_address": {
+        "message": "Peringatan: Mengubah alamat dompet yang ada dapat menunda akses ke $$ILOCK yang telah disetorkan sebelumnya.",
+        "description": "Warning text used for changing a wallet address."
+    },
+    "warning_header": {
+        "message": "Situs web ini mungkin berbahaya.",
+        "description": "The text used in the warning banner."
+    },
+    "warning_ilock_will_be_lost": {
+        "message": "Anda akan kehilangan $$ILOCK yang tidak ditransfer ke dompet.",
+        "description": "Warning text for deleting user account."
+    },
+    "warning_must_add_wallet_address": {
+        "message": "Anda harus menambahkan alamat dompet untuk menerima token $$ILOCK.",
+        "description": "Warning text used on the Account page."
+    },
+    "warning_must_login_before_staking": {
+        "message": "Anda harus masuk sebelum dapat melakukan staking pada URL.",
+        "description": "The text used in a warning box."
+    },
+    "warning_must_login_to_earn_etc": {
+        "message": "Peringatan: Anda harus mendaftar atau masuk untuk mendapatkan $$ILOCK dan menggunakan semua fitur ThreatSlayer.",
+        "description": "The text used in a warning box."
+    },
+    "warning_must_register_before_staking": {
+        "message": "Anda harus mendaftar sebelum dapat melakukan staking pada URL.",
+        "description": "The text used in a warning box."
+    },
+    "warning_possible_malicious_url_detected": {
+        "message": "URL yang mungkin berbahaya terdeteksi:",
+        "description": "The text used in a warning box."
+    },
+    "warning_staking_not_available": {
+        "message": "Staking keamanan akan segera tersedia!",
+        "description": "The text used in a warning box."
+    },
+    "warning_text": {
+        "message": "Tutup tab ini kecuali Anda tahu situs ini aman!",
+        "description": "The text used in the warning banner."
+    },
+    "warning_username_contains_illegal_characters": {
+        "message": "Nama pengguna mengandung karakter ilegal: ",
+        "description": "Text used in warning box for username input."
+    },
+    "warning_username_too_long": {
+        "message": "Nama pengguna terlalu panjang: Panjang maksimum adalah 16 karakter.",
+        "description": "Text used in warning box for username input."
+    },
+    "warning_username_too_short": {
+        "message": "Nama pengguna terlalu pendek: Panjang minimum adalah 5 karakter.",
+        "description": "Text used in warning box for username input."
+    },
+    "what_does_threat_slayer_collect": {
+        "message": "Data Apa yang Dikumpulkan oleh ThreatSlayer?",
+        "description": "Question on the FAQ page."
+    },
+    "what_does_threat_slayer_collect_answer": {
+        "message": "Kami memindai URL browser Anda dengan AI pendeteksi ancaman kami. Kami menghubungkan URL dengan akun Anda sehingga kami dapat memberi Anda $$ILOCK. Itu saja!",
+        "description": "Answer to question on the FAQ page."
+    },
+    "why_choose_threat_slayer": {
+        "message": "Mengapa Memilih ThreatSlayer?",
+        "description": "The text used on the About Us page."
+    }
+}
