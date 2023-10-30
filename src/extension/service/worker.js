@@ -6,7 +6,6 @@ const baseAPIUrl = 'https://galactus.interlock.network';
 // const betaBaseAPIUrl = 'https://beta.octahedron.interlock.network';
 const surveyUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSeo1gW6Sg_ITlAXxbTXliQdab2qt1cLBzu45mXpz-XJ8O1KPg/viewform';
 const releaseNotes = 'https://github.com/interlock-network/threatslayer/blob/master/docs/release_notes.md';
-const defaultApiKey = 'threatslayer-api-key';
 const defaultConfig = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' }
@@ -16,11 +15,11 @@ const defaultConfig = {
  * This listener is responsible for handling messages from content
  * scripts. It is invoked by script.js using `chrome.runtime.sendMessage`.
  * @param {Object} request - the error object returned by Axios
- * @param {string} request.action - one of: clearMaliciousUrlObject, displayWarningBanner, queryURL, stakeUrl
+ * @param {string} request.action - one of: allowlistUrl, clearMaliciousUrlObject, displayWarningBanner, queryURL, stakeUrl
  * @param {string} request.url - stringified URL with protocol, i.e. 'https://www.yahoo.com/'
  * @param {Object} sender - the error object returned by Axios
- * @param {Object} sender.tab - one of: clearMaliciousUrlObject, displayWarningBanner, queryURL, stakeUrl
- * @param {Number} sender.tab.id - stringified URL with protocol, i.e. 'https://www.yahoo.com/'
+ * @param {Object} sender.tab - an object including the tab's numeric ID
+ * @param {Number} sender.tab.id - unique ID number for a tab
  */
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     const { action, url } = request;
@@ -28,41 +27,38 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     let selectedBaseAPIUrl = baseAPIUrl;
 
     if (action === 'allowlistUrl') {
-        chrome.storage.local.get('apiKey')
-            .then((result) => {
-                const key = result.apiKey;
+        chrome.storage.local.get('apiKey').then((result) => {
+            const key = result.apiKey;
 
-                // bail if user has no personal API key i.e. is logged out
-                if (key?.length || key === defaultApiKey) {
-                    try {
-                        fetch(allowlistAPIUrl, {
-                            ...defaultConfig,
-                            body: JSON.stringify({ key, url })
-                        });
-                        console.log(`URL ${url} added to allowlist`);
-                    } catch (error) {
-                        console.log(`Error sending allowlisted URL ${url} to server: ${error}`);
-                    }
+            // bail if user has no personal API key i.e. is logged out
+            if (key?.length) {
+                try {
+                    fetch(allowlistAPIUrl, {
+                        ...defaultConfig,
+                        body: JSON.stringify({ key, url })
+                    });
+                    console.log(`URL ${url} added to allowlist`);
+                } catch (error) {
+                    console.log(`Error sending allowlisted URL ${url} to server: ${error}`);
                 }
-            });
+            }
+        });
     } else if (action === 'clearMaliciousUrlObject') {
         // clears '!!' and red background from ThreatSlayer logo
         chrome.action.setBadgeBackgroundColor({ tabId, color: '' })
         chrome.action.setBadgeText({ tabId, text: '' });
 
-        chrome.storage.local
-            .get('maliciousUrlObjects')
-            .then((result) => {
-                const { maliciousUrlObjects = [] } = result;
-                const maliciousUrlRemoved = maliciousUrlObjects.filter(maliciousUrlObject => maliciousUrlObject.tabId === tabId)[0].url;
-                const newMaliciousUrlObjects = maliciousUrlObjects.filter(maliciousUrlObject => maliciousUrlObject.tabId !== tabId);
+        chrome.storage.local.get('maliciousUrlObjects').then((result) => {
+            const { maliciousUrlObjects = [] } = result;
+            const maliciousUrlRemoved = maliciousUrlObjects.filter(maliciousUrlObject => maliciousUrlObject.tabId === tabId)[0].url;
+            const newMaliciousUrlObjects = maliciousUrlObjects.filter(maliciousUrlObject => maliciousUrlObject.tabId !== tabId);
 
-                chrome.storage.local
-                    .set({ maliciousUrlObjects: newMaliciousUrlObjects })
-                    .then(() => {
-                        console.log(`Removed ${maliciousUrlRemoved} from malicious URL queue.`);
-                    });
-            });
+            chrome.storage.local
+                .set({ maliciousUrlObjects: newMaliciousUrlObjects })
+                .then(() => {
+                    console.log(`Removed ${maliciousUrlRemoved} from malicious URL queue.`);
+                });
+        });
     } else if (action === 'displayWarningBanner') {
         chrome.storage.local.get('allowlist').then((result) => {
             const allowlist = result.allowlist || [];
@@ -77,37 +73,33 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
             chrome.action.setBadgeBackgroundColor({ tabId, color: '#FF0000' });
             chrome.action.setBadgeText({ tabId, text: '!!' });
 
-            chrome.storage.local
-                .get('maliciousUrlObjects')
-                .then((result) => {
-                    const { maliciousUrlObjects = [] } = result;
+            chrome.storage.local.get('maliciousUrlObjects').then((result) => {
+                const { maliciousUrlObjects = [] } = result;
 
-                    const addMaliciousUrl = !maliciousUrlObjects.length
-                        || !maliciousUrlObjects.map(urlObject => urlObject.url).includes(url);
+                const addMaliciousUrl = !maliciousUrlObjects.length
+                    || !maliciousUrlObjects.map(urlObject => urlObject.url).includes(url);
 
-                    if (addMaliciousUrl) {
-                        const newMaliciousUrlObjects = [...maliciousUrlObjects, { tabId, url }];
-
-                        chrome.storage.local
-                            .set({ maliciousUrlObjects: newMaliciousUrlObjects })
-                            .then(() => {
-                                console.log(`Added ${url} to malicious URL queue.`);
-                            });
-                    }
-                });
-
-            chrome.storage.local
-                .get('totalMaliciousURLsVisited')
-                .then((result) => {
-                    let totalMaliciousURLsVisited = result.totalMaliciousURLsVisited || 0;
-                    const newTotalMaliciousURLsVisited = totalMaliciousURLsVisited + 1;
+                if (addMaliciousUrl) {
+                    const newMaliciousUrlObjects = [...maliciousUrlObjects, { tabId, url }];
 
                     chrome.storage.local
-                        .set({ totalMaliciousURLsVisited: newTotalMaliciousURLsVisited })
+                        .set({ maliciousUrlObjects: newMaliciousUrlObjects })
                         .then(() => {
-                            console.log(`Total malicious URLs set to: ${totalMaliciousURLsVisited}`);
+                            console.log(`Added ${url} to malicious URL queue.`);
                         });
-                });
+                }
+            });
+
+            chrome.storage.local.get('totalMaliciousURLsVisited').then((result) => {
+                const totalMaliciousURLsVisited = result.totalMaliciousURLsVisited || 0;
+                const newTotalMaliciousURLsVisited = totalMaliciousURLsVisited + 1;
+
+                chrome.storage.local
+                    .set({ totalMaliciousURLsVisited: newTotalMaliciousURLsVisited })
+                    .then(() => {
+                        console.log(`Total malicious URLs set to: ${totalMaliciousURLsVisited}`);
+                    });
+            });
 
             // execute script
             try {
@@ -117,12 +109,12 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
                         files: ['banner.js']
                     })
                     .then((response) => sendResponse(response));
-            } catch (err) { console.log('Error in sendingResponse():', err); }
+            } catch (err) { console.log(`Error in sendingResponse(): ${err}`); }
         });
     }
     else if (action === 'queryURL') {
         chrome.storage.local.get('totalURLsVisited').then((result) => {
-            let totalURLsVisited = result.totalURLsVisited || 0;
+            const totalURLsVisited = result.totalURLsVisited || 0;
             const newTotalURLsVisited = totalURLsVisited + 1;
 
             chrome.storage.local
@@ -133,39 +125,37 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         // uncomment when beta AI classifier is available to users again
         // chrome.storage.sync.get('betaAISelected', async function (data) {
         //     if (data.betaAISelected && data.betaAISelected === true) {
-        //         console.log('Querying beta AI Threat Detection at', betaBaseAPIUrl);
+        //         console.log(`Querying beta AI Threat Detection at: ${betaBaseAPIUrl}`);
         //         selectedBaseAPIUrl = betaBaseAPIUrl;
         //     }
 
-        chrome.storage.local.get('apiKey')
-            .then((result) => {
-                const key = result.apiKey || defaultApiKey;
+        chrome.storage.local.get('apiKey').then((result) => {
+            const body = { url };
+            const key = result.apiKey;
 
-                fetch(`${selectedBaseAPIUrl}/malicious_p`, {
-                    ...defaultConfig,
-                    body: JSON.stringify({ key, url })
+            if (key?.length) {
+                body.key = key;
+            }
+
+            fetch(`${selectedBaseAPIUrl}/malicious-p`, {
+                ...defaultConfig,
+                body: JSON.stringify(body)
+            })
+                .then((response) => response.json())
+                .then((response) => {
+                    sendResponse(response)
                 })
-                    .then((response) => response.json())
-                    .then((response) => {
-                        // TODO delete this
-                        sendResponse({ malicious: true });
-                        // either {malicious: true} or {malicious: false}
-                        // TODO uncomment this
-                        // sendResponse(response)
-                    })
-                    .catch((error) => { console.log(`Error getting malicious URL: ${error}`) });
-            });
+                .catch((error) => { console.log(`Error getting malicious URL: ${error}`) });
+        });
         // });
     } else if (action === 'stakeUrl') {
         const urlToStake = request.url;
 
-        chrome.storage.local
-            .set({ urlToStake })
-            .then(() => {
-                console.log(`URL to stake set to: ${urlToStake}`);
+        chrome.storage.local.set({ urlToStake }).then(() => {
+            console.log(`URL to stake set to: ${urlToStake}`);
 
-                chrome.tabs.create({ 'url': chrome.runtime.getURL('index.html'), 'active': true });
-            });
+            chrome.tabs.create({ 'url': chrome.runtime.getURL('index.html'), 'active': true });
+        });
     }
 });
 
@@ -189,7 +179,7 @@ chrome.runtime.onInstalled.addListener(function (details) {
 chrome.action.onClicked.addListener(() => {
     // Send a message to the active tab
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-        let activeTab = tabs[0];
+        const activeTab = tabs[0];
 
         chrome.tabs.sendMessage(activeTab.id, { 'message': 'clicked_browser_action' });
         chrome.tabs.create({ 'url': chrome.runtime.getURL('index.html'), 'active': true });
