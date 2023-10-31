@@ -1,0 +1,558 @@
+{
+    "about_threat_slayer": {
+        "message": "ThreatSlayerについて",
+        "description": "Page title."
+    },
+    "about_us": {
+        "message": "私たちについて",
+        "description": "Page title, also used in sidebar."
+    },
+    "about_us_paragraph_1": {
+        "message": "サイバー脅威がますます洗練され、一般的になる世界では、迅速に反応するだけでなく、積極的に脅威を防ぐソリューションを持っていることが不可欠です。",
+        "description": "The first paragraph of text on the About Us page."
+    },
+    "about_us_paragraph_2": {
+        "message": "ThreatSlayerは単なる別のサイバーセキュリティ製品ではありません。それはリアルタイムで動作し、脅威を検出し、害を与える前に中和する包括的なセキュリティコンパニオンです。",
+        "description": "The second paragraph of text on the About Us page."
+    },
+    "about_us_paragraph_3": {
+        "message": "インストールが簡単で、web2およびweb3の両方のスペースであなたを脅威から守る能力を備えているThreatSlayerは、ブラウザのセキュリティの未来です。それはバックグラウンドで動作し、あなたのワークフローを妨げることなく、悪意のあるアセットや危険なページからあなたを守ります。",
+        "description": "The third paragraph of text on the About Us page."
+    },
+    "about_us_paragraph_4": {
+        "message": "これを匿名のセキュリティデータを共有するユーザーに対する報酬と組み合わせると、オンラインで安全を保ちながら広範なインターネットセキュリティエコシステムに貢献するウィンウィンのソリューションが得られます。",
+        "description": "The fourth and last paragraph of text on the About Us page."
+    },
+    "account_info": {
+        "message": "アカウント情報",
+        "description": "Page header for not-logged-in Account page."
+    },
+    "account_info_for": {
+        "message": "のアカウント情報",
+        "description": "Page header for Account page."
+    },
+    "add_blockchain_address": {
+        "message": "ブロックチェーンアドレスを追加",
+        "description": "Header text on Account page."
+    },
+    "address_aleph": {
+        "message": "Aleph Zero対応ウォレットアドレス",
+        "description": "Header on a page listing wallet addresses."
+    },
+    "address_pdot": {
+        "message": "Moonbeamウォレットアドレス",
+        "description": "Header on a page listing wallet addresses."
+    },
+    "affirm_not_us_citizen": {
+        "message": "あなたがアメリカ市民または居住者でないことを確認してください。",
+        "description": "Instruction for registering an account."
+    },
+    "agree_to_our": {
+        "message": "私たちの規約に同意する ",
+        "description": "Instruction for registering an account."
+    },
+    "allowlist_explanation": {
+        "message": "これらは安全とマークされています。ThreatSlayerはこれらをブロックしません。",
+        "description": "Explanation on the allowlist table."
+    },
+    "already_have_one": {
+        "message": "すでにアカウントをお持ちですか？",
+        "description": "Instruction for logging in."
+    },
+    "already_have_a_wallet": {
+        "message": "すでにウォレットをお持ちですか？",
+        "description": "Instruction for registering."
+    },
+    "amount_to_stake": {
+        "message": "ステークする金額",
+        "description": "Info text on the Security Staking page."
+    },
+    "appDesc": {
+        "message": "個人のブラウザ用の無料エンタープライズグレードの保護。",
+        "description": "The description of the extension, displayed in the user's browser."
+    },
+    "cancel": {
+        "message": "キャンセル",
+        "description": "Generic cancel option."
+    },
+    "change_password": {
+        "message": "パスワードを変更",
+        "description": "The text used on change password button."
+    },
+    "click_to_create_wallet": {
+        "message": "'ウォレットを作成'をクリックして、SubWalletを作成するためのChromeブラウザ拡張機能にリダイレクトされてください。",
+        "description": "Page title, also used in sidebar."
+    },
+    "close": {
+        "message": "閉じる",
+        "description": "The text used on the close button."
+    },
+    "confirm_are_you_sure": {
+        "message": "本当によろしいですか？",
+        "description": "Confirmation for user actions."
+    },
+    "create_one": {
+        "message": "作成する",
+        "description": "Instruction for creating a wallet address."
+    },
+    "create_wallet": {
+        "message": "ウォレットを作成",
+        "description": "Page title, also used in sidebar."
+    },
+    "crypto_us_warning": {
+        "message": "アメリカでは暗号通貨はセキュリティと見なされるため、ほとんどのアメリカ居住者はそれらを購入することができません。",
+        "description": "Warning for USians about cryptocurrency."
+    },
+    "delete_account": {
+        "message": "アカウントを削除",
+        "description": "Text for the Delete Account button."
+    },
+    "delete_account_permanent": {
+        "message": "アカウント削除（永久）",
+        "description": "アカウント削除ボタンのテキスト。"
+    },
+    "deleting_account": {
+        "message": "アカウントを削除しています",
+        "description": "アカウント削除ボタンのテキスト。"
+    },
+    "description": {
+        "message": "あなたの個人的なブラウザのための無料のエンタープライズグレードのセキュリティ。",
+        "description": "マニフェスト内の説明。"
+    },
+    "dont_have_an_account": {
+        "message": "アカウントをお持ちでないですか？",
+        "description": "アカウント作成の指示。"
+    },
+    "dont_have_one": {
+        "message": "ウォレットをお持ちでないですか？",
+        "description": "ウォレットアドレスの作成指示。"
+    },
+    "done": {
+        "message": "完了",
+        "description": "一般的なボタンテキスト。"
+    },
+    "email": {
+        "message": "メール",
+        "description": "アカウントページのセクションヘッダー。"
+    },
+    "enable_beta_option": {
+        "message": "ベータ版AI脅威検出を有効にする（開発者のみ）",
+        "description": "オプションページのオプション。"
+    },
+    "enter_a_password": {
+        "message": "12文字以上のパスワードを入力してください",
+        "description": "アカウント登録の指示。"
+    },
+    "enter_a_username": {
+        "message": "ユーザー名を入力してください",
+        "description": "アカウント登録の指示。"
+    },
+    "enter_your_username": {
+        "message": "ユーザー名を入力してください",
+        "description": "アカウントへのログインの指示。"
+    },
+    "enter_password_again": {
+        "message": "パスワードをもう一度入力してください",
+        "description": "アカウント登録の指示。"
+    },
+    "enter_referrer_name": {
+        "message": "任意：紹介者のユーザー名を入力してください",
+        "description": "アカウント登録の指示。"
+    },
+    "enter_azero_wallet_address": {
+        "message": "Aleph Zero互換ウォレットアドレスを貼り付けてください",
+        "description": "アカウント登録の指示。"
+    },
+    "enter_pdot_wallet_address": {
+        "message": "または、Moonbeamウォレットアドレスをここに貼り付けてください",
+        "description": "アカウント登録の指示。"
+    },
+    "enter_azero_wallet_address_optional": {
+        "message": "任意：Aleph Zero互換ウォレットアドレスを貼り付けてください",
+        "description": "アカウント登録の指示。"
+    },
+    "enter_new_wallet_address": {
+        "message": "新しいウォレットアドレスを入力してください。",
+        "description": "アカウントページの指示。"
+    },
+    "enter_your_email": {
+        "message": "メールアドレスを入力してください",
+        "description": "アカウント登録の指示。"
+    },
+    "enter_email_to_change_password": {
+        "message": "パスワードを変更するためにメールアドレスを入力してください",
+        "description": "パスワード変更の指示。"
+    },
+    "enter_password_to_delete_account": {
+        "message": "アカウントを削除するためのパスワードを入力してください",
+        "description": "アカウント削除の指示。"
+    },
+    "enter_password_to_update_wallet_address": {
+        "message": "ウォレットアドレスを更新するためのパスワードを入力してください。",
+        "description": "ウォレットアドレス更新の指示。"
+    },
+    "error": {
+        "message": "エラー",
+        "description": "一般的なエラーメッセージ。"
+    },
+    "error_deleting_account_generic": {
+        "message": "アカウントの削除中にエラーが発生しました。後でもう一度試してください。",
+        "description": "一般的なログインエラーメッセージ。"
+    },
+    "error_invalid_email_generic": {
+        "message": "無効なメールアドレスです。",
+        "description": "一般的な登録エラーメッセージ。"
+    },
+    "error_login_generic": {
+        "message": "ログインエラー。後でもう一度試してください。",
+        "description": "一般的なログインエラーメッセージ。"
+    },
+    "error_password_too_long": {
+        "message": "パスワードは512文字を超えることはできません。",
+        "description": "登録エラーメッセージ。"
+    },
+    "error_password_too_short": {
+        "message": "パスワードは最低12文字必要です。",
+        "description": "登録エラーメッセージ。"
+    },
+    "error_passwords_dont_match": {
+        "message": "パスワードが一致しません。",
+        "description": "登録エラーメッセージ。"
+    },
+    "error_registering_wallet_address": {
+        "message": "無効なウォレットアドレスです。",
+        "description": "ウォレットアドレス追加時のエラーメッセージ。"
+    },
+    "error_registering_generic": {
+        "message": "登録エラー。後でもう一度試してください。",
+        "description": "一般的な登録エラーメッセージ。"
+    },
+    "error_updating_wallet_address_generic": {
+        "message": "ウォレットアドレスの更新中にエラーが発生しました。後でもう一度試してください。",
+        "description": "ウォレットアドレス更新の一般的なエラーメッセージ。"
+    },
+    "error_username_too_long": {
+        "message": "ユーザー名が長すぎます：最大長は16文字です。",
+        "description": "登録エラーメッセージ。"
+    },
+    "extension_options": {
+        "message": "拡張機能のオプション",
+        "description": "ページのタイトル。"
+    },
+    "faq": {
+        "message": "よくある質問",
+        "description": "ページのタイトル。サイドバーで使用されます。"
+    },
+    "forgot_password": {
+        "message": "パスワードをお忘れですか？",
+        "description": "ログインページで使用されるテキスト。"
+    },
+    "frequently_asked_questions": {
+        "message": "よくある質問",
+        "description": "ページのタイトル。"
+    },
+    "how_does_threat_slayer_protect_me": {
+        "message": "ThreatSlayerはどのように私を保護しますか？",
+        "description": "FAQページの質問。"
+    },
+    "how_does_threat_slayer_reward_me": {
+        "message": "ThreatSlayerはどのようにして$$ILOCKで私に報酬を提供しますか？",
+        "description": "FAQページの質問。"
+    },
+    "how_does_threat_slayer_reward_me_answer": {
+        "message": "ThreatSlayerのユーザーは、訪れたURLごとに報酬を得るチャンスがあります。サイトをブラウズするほど、$$ILOCKを獲得するチャンスが増えます。",
+        "description": "FAQページの質問に対する回答。"
+    },
+    "ilock_available_to_stake": {
+        "message": "$$ILOCKのステーキング可能",
+        "description": "セキュリティステーキングページの情報テキスト。"
+    },
+    "ilock_earned": {
+        "message": "獲得した$$ILOCK",
+        "description": "アカウントページのセクションヘッダー。"
+    },
+    "ilock_keep_browsing_to_earn": {
+        "message": "ThreatSlayerでブラウジングを続けて$$ILOCKを稼ぎましょう！",
+        "description": "トークン獲得に関するユーザーメッセージ。"
+    },
+    "is_threat_slayer_open_source": {
+        "message": "ThreatSlayerはオープンソースですか？",
+        "description": "FAQページの質問。"
+    },
+    "is_threat_slayer_open_source_answer": {
+        "message": "私たちは、脅威を検出するAIでブラウザのURLをスキャンします。アカウントとURLを関連付けて、$$ILOCKで報酬を提供できるようにします。それだけです！",
+        "description": "FAQページの質問に対する回答。"
+    },
+    "login": {
+        "message": "ログイン",
+        "description": "ページのタイトル。サイドバーで使用されます。"
+    },
+    "logged_out": {
+        "message": "ログアウトしました",
+        "description": "ボタンのテキスト。"
+    },
+    "logging_out": {
+        "message": "ログアウト中",
+        "description": "ボタンのテキスト。"
+    },
+    "logout": {
+        "message": "ログアウト",
+        "description": "ボタンのテキスト。"
+    },
+    "malicious_sites_detected": {
+        "message": "検出された悪意のあるサイト",
+        "description": "ダッシュボードでスキャンされた悪意のあるURLの数を示すテキスト。"
+    },
+    "must_create_azero_wallet": {
+        "message": "ThreatSlayerを利用するためには、Aleph Zero対応のウォレットを作成する必要があります。",
+        "description": "ウォレット作成の説明。"
+    },
+    "no_allowlisted_sites": {
+        "message": "表示する許可リストに追加されたサイトはありません。",
+        "description": "許可リストのテーブルに関する情報テキスト。"
+    },
+    "no_url_selected": {
+        "message": "ステーキング用に選択されたURLはありません。",
+        "description": "セキュリティステーキングページの情報テキスト。"
+    },
+    "options": {
+        "message": "オプション",
+        "description": "ページのタイトル。サイドバーでも使用されます。"
+    },
+    "password": {
+        "message": "パスワード",
+        "description": "一般的な入力フィールドのプレースホルダーテキスト。"
+    },
+    "password_hide": {
+        "message": "パスワードを隠す",
+        "description": "パスワードの可視性を切り替えるための指示。"
+    },
+    "password_show": {
+        "message": "パスワードを表示",
+        "description": "パスワードの可視性を切り替えるための指示。"
+    },
+    "powered_by_interlock": {
+        "message": "Powered by Interlock",
+        "description": "SlayCountページの情報テキスト。"
+    },
+    "privacy": {
+        "message": "プライバシー",
+        "description": "ページのタイトル。サイドバーでも使用されます。"
+    },
+    "register": {
+        "message": "登録",
+        "description": "ユーザーへの指示。"
+    },
+    "security_staking": {
+        "message": "セキュリティステーキング",
+        "description": "ページのタイトル。サイドバーでも使用されます。"
+    },
+    "select_from_the_following": {
+        "message": "以下から選択してください：",
+        "description": "オプションページのオプションに関するヘッダー。"
+    },
+    "sign_up_for_threat_slayer": {
+        "message": "ThreatSlayerに登録する",
+        "description": "ページのタイトル。"
+    },
+    "slay_count": {
+        "message": "SlayCount",
+        "description": "ページのタイトル。サイドバーでも使用されます。"
+    },
+    "slay_count_copy": {
+        "message": "SlayCountをクリップボードにコピー",
+        "description": "SlayCountページの情報。"
+    },
+    "slay_count_download": {
+        "message": "SlayCountをダウンロード",
+        "description": "SlayCountページの情報。"
+    },
+    "stake_state_neutral": {
+        "message": "このURLに対してステーキングを行うのはあなたが初めてです。",
+        "description": "セキュリティステーキング状態の説明。"
+    },
+    "stake_state_pending": {
+        "message": "他の誰かがこのURLに対してステーキングを試みています。承認されれば、あなたのステーキは彼らのものに追加されます。拒否されれば、$$ILOCKを失うことはありません。",
+        "description": "セキュリティステーキング状態の説明。"
+    },
+    "stake_state_resolved": {
+        "message": "現在、このURLに対して誰もステーキングできません。",
+        "description": "セキュリティステーキング状態の説明。"
+    },
+    "staking": {
+        "message": "獲得チャンス",
+        "description": "ステーキングテキストボックスで使用されるテキスト。"
+    },
+    "start_earning": {
+        "message": "獲得を始める",
+        "description": "ページのタイトル。サイドバーでも使用されます。"
+    },
+    "stake_this_url": {
+        "message": "このURLにステーキング",
+        "description": "ステーキングボタンで使用されるテキスト。"
+    },
+    "staking_explanation": {
+        "message": "$$ILOCKトークンを獲得するチャンスを解除しました！",
+        "description": "ステーキングテキストボックスで使用される説明テキスト。"
+    },
+    "SLAY_COUNT": {
+        "message": "SLAY COUNT",
+        "description": "SlayCountエクスポート画像のテキスト。"
+    },
+    "submit": {
+        "message": "送信",
+        "description": "ボタンのテキスト。"
+    },
+    "submit_new_wallet_address": {
+        "message": "新しいアドレスを送信",
+        "description": "ウォレットアドレスを変更するための指示。"
+    },
+    "success": {
+        "message": "成功！",
+        "description": "一般的なボタンのテキスト。"
+    },
+    "take_to_safety": {
+        "message": "安全な場所へ連れて行って",
+        "description": "「安全な場所へ連れて行って」ボタンに使用されるテキスト。"
+    },
+    "terms_of_service": {
+        "message": "利用規約",
+        "description": "アカウントを登録する際の指示。"
+    },
+    "test": {
+        "message": "テスト",
+        "description": "テストの目的のみで使用されるテストメッセージ。"
+    },
+    "threat_slayer": {
+        "message": "ThreatSlayer",
+        "description": "アプリの名前。"
+    },
+    "trust_this_url": {
+        "message": "このURLを信頼する",
+        "description": "「このURLを信頼する」ボタンに使用されるテキスト。"
+    },
+    "try_again_later": {
+        "message": "後でもう一度試してください",
+        "description": "一般的なボタンテキスト。"
+    },
+    "unique_urls_scanned": {
+        "message": "スキャンされたユニークなURL",
+        "description": "ダッシュボード上でスキャンされたユニークなURLの数を表示する際に使用されるテキスト。"
+    },
+    "update_wallet_address": {
+        "message": "アドレスを更新する",
+        "description": "ウォレットアドレスを変更するための指示。"
+    },
+    "urls_scanned": {
+        "message": "スキャンされたURL",
+        "description": "ダッシュボード上でスキャンされたURLの数を表示する際に使用されるテキスト。"
+    },
+    "url_to_stake": {
+        "message": "ステークするURL",
+        "description": "セキュリティステーキングページ上の情報テキスト。"
+    },
+    "url_staking_status": {
+        "message": "URLステーキングの状態",
+        "description": "セキュリティステーキングページ上の情報テキスト。"
+    },
+    "username_or_email": {
+        "message": "ユーザーネームまたはメールアドレス",
+        "description": "フィールドに入力するための指示。"
+    },
+    "users_referred": {
+        "message": "紹介されたユーザー",
+        "description": "アカウントページのセクションヘッダー。"
+    },
+    "view_wallet_info": {
+        "message": "ウォレット情報を表示",
+        "description": "ウォレット情報を表示するためのボタンテキスト。"
+    },
+    "waiting": {
+        "message": "待機中...",
+        "description": "ボタンテキスト。"
+    },
+    "wallet_address": {
+        "message": "ウォレットアドレス",
+        "description": "アカウントページのセクションヘッダー。"
+    },
+    "warning": {
+        "message": "警告！",
+        "description": "警告バナーに使用されるテキスト。"
+    },
+    "warning_account_will_be_deleted": {
+        "message": "アカウントは完全に削除されます。",
+        "description": "ユーザーアカウントを削除する際の警告テキスト。"
+    },
+    "warning_address_not_azero": {
+        "message": "これはAleph Zeroアドレスではありません。",
+        "description": "ユーザーのウォレットタイプに関する警告テキスト。"
+    },
+    "warning_address_not_moonbeam": {
+        "message": "これはMoonbeamアドレスではありません。",
+        "description": "ユーザーのウォレットタイプに関する警告テキスト。"
+    },
+    "warning_changing_wallet_address": {
+        "message": "警告: 既存のウォレットアドレスを変更すると、以前に預け入れた$$ILOCKへのアクセスが遅延する可能性があります。",
+        "description": "ウォレットアドレスを変更する際に使用される警告テキスト。"
+    },
+    "warning_header": {
+        "message": "このウェブサイトは悪意のあるものかもしれません。",
+        "description": "警告バナーに使用されるテキスト。"
+    },
+    "warning_ilock_will_be_lost": {
+        "message": "ウォレットに転送されていない$$ILOCKは失われます。",
+        "description": "ユーザーアカウントを削除する際の警告テキスト。"
+    },
+    "warning_must_add_wallet_address": {
+        "message": "$$ILOCKトークンを受け取るためには、ウォレットアドレスを追加する必要があります。",
+        "description": "アカウントページで使用される警告テキスト。"
+    },
+    "warning_must_login_before_staking": {
+        "message": "URLにステークする前にログインしてください。",
+        "description": "The text used in a warning box."
+    },
+    "warning_must_login_to_earn_etc": {
+        "message": "警告: $$ILOCKを獲得し、ThreatSlayerのすべての機能を利用するには登録またはログインする必要があります。",
+        "description": "The text used in a warning box."
+    },
+    "warning_must_register_before_staking": {
+        "message": "URLにステークする前に登録してください。",
+        "description": "The text used in a warning box."
+    },
+    "warning_possible_malicious_url_detected": {
+        "message": "悪意のあるURLが検出されました:",
+        "description": "The text used in a warning box."
+    },
+    "warning_staking_not_available": {
+        "message": "セキュリティステーキングは近日中に利用可能となります！",
+        "description": "The text used in a warning box."
+    },
+    "warning_text": {
+        "message": "このサイトが安全であることを知らない限り、タブを閉じてください！",
+        "description": "The text used in the warning banner."
+    },
+    "warning_username_contains_illegal_characters": {
+        "message": "ユーザー名に不正な文字が含まれています: ",
+        "description": "Text used in warning box for username input."
+    },
+    "warning_username_too_long": {
+        "message": "ユーザー名が長すぎます: 最大16文字までです。",
+        "description": "Text used in warning box for username input."
+    },
+    "warning_username_too_short": {
+        "message": "ユーザー名が短すぎます: 最低5文字必要です。",
+        "description": "Text used in warning box for username input."
+    },
+    "what_does_threat_slayer_collect": {
+        "message": "ThreatSlayerは何を収集しますか？",
+        "description": "Question on the FAQ page."
+    },
+    "what_does_threat_slayer_collect_answer": {
+        "message": "私たちは、脅威を検出するAIでブラウザのURLをスキャンします。URLをアカウントと関連付けて、$$ILOCKを報酬として提供できるようにします。それだけです！",
+        "description": "Answer to question on the FAQ page."
+    },
+    "why_choose_threat_slayer": {
+        "message": "なぜThreatSlayerを選ぶのか？",
+        "description": "The text used on the About Us page."
+    }
+}
