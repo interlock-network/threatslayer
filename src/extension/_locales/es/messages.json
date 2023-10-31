@@ -1,0 +1,558 @@
+{
+    "about_threat_slayer": {
+        "message": "Acerca de ThreatSlayer",
+        "description": "Page title."
+    },
+    "about_us": {
+        "message": "Acerca de Nosotros",
+        "description": "Page title, also used in sidebar."
+    },
+    "about_us_paragraph_1": {
+        "message": "En un mundo donde las amenazas cibernéticas son cada vez más sofisticadas y comunes, es crucial tener una solución que no solo reaccione rápidamente, sino que también prevenga proactivamente las amenazas.",
+        "description": "The first paragraph of text on the About Us page."
+    },
+    "about_us_paragraph_2": {
+        "message": "ThreatSlayer no es solo otro producto de ciberseguridad, es un compañero de seguridad integral que opera en tiempo real para detectar y neutralizar amenazas antes de que puedan causar daño.",
+        "description": "The second paragraph of text on the About Us page."
+    },
+    "about_us_paragraph_3": {
+        "message": "Fácil de instalar y equipado con la capacidad de protegerte de amenazas tanto en el espacio web2 como en el web3, ThreatSlayer es el futuro de la seguridad del navegador. Funciona en segundo plano, protegiéndote de activos maliciosos o páginas peligrosas sin interrumpir tu flujo de trabajo.",
+        "description": "The third paragraph of text on the About Us page."
+    },
+    "about_us_paragraph_4": {
+        "message": "Combina esto con recompensas para los usuarios que comparten datos de seguridad anonimizados, y tendrás una solución en la que todos ganan para mantenerse seguro en línea mientras contribuyes al ecosistema de seguridad de Internet más amplio.",
+        "description": "The fourth and last paragraph of text on the About Us page."
+    },
+    "account_info": {
+        "message": "Información de la Cuenta",
+        "description": "Page header for not-logged-in Account page."
+    },
+    "account_info_for": {
+        "message": "Información de la Cuenta para",
+        "description": "Page header for Account page."
+    },
+    "add_blockchain_address": {
+        "message": "Añadir Dirección de Blockchain",
+        "description": "Header text on Account page."
+    },
+    "address_aleph": {
+        "message": "Dirección de Cartera Compatible con Aleph Zero",
+        "description": "Header on a page listing wallet addresses."
+    },
+    "address_pdot": {
+        "message": "Dirección de Cartera de Moonbeam",
+        "description": "Header on a page listing wallet addresses."
+    },
+    "affirm_not_us_citizen": {
+        "message": "Afirmar que no eres ciudadano ni residente de los Estados Unidos.",
+        "description": "Instruction for registering an account."
+    },
+    "agree_to_our": {
+        "message": "Aceptar nuestros ",
+        "description": "Instruction for registering an account."
+    },
+    "allowlist_explanation": {
+        "message": "Los has marcado como seguros. ThreatSlayer no los bloqueará.",
+        "description": "Explanation on the allowlist table."
+    },
+    "already_have_one": {
+        "message": "¿Ya tienes una cuenta?",
+        "description": "Instruction for logging in."
+    },
+    "already_have_a_wallet": {
+        "message": "¿Ya tienes una billetera?",
+        "description": "Instruction for registering."
+    },
+    "amount_to_stake": {
+        "message": "Cantidad para Apostar",
+        "description": "Info text on the Security Staking page."
+    },
+    "appDesc": {
+        "message": "Protección gratuita de nivel empresarial para tu navegador personal.",
+        "description": "The description of the extension, displayed in the user's browser."
+    },
+    "cancel": {
+        "message": "Cancelar",
+        "description": "Generic cancel option."
+    },
+    "change_password": {
+        "message": "Cambiar Contraseña",
+        "description": "The text used on change password button."
+    },
+    "click_to_create_wallet": {
+        "message": "Por favor haz clic en 'Crear Billetera' para ser redirigido a una extensión de navegador Chrome para crear una SubWallet.",
+        "description": "Page title, also used in sidebar."
+    },
+    "close": {
+        "message": "Cerrar",
+        "description": "The text used on the close button."
+    },
+    "confirm_are_you_sure": {
+        "message": "¿Estás seguro?",
+        "description": "Confirmation for user actions."
+    },
+    "create_one": {
+        "message": "Crear una",
+        "description": "Instruction for creating a wallet address."
+    },
+    "create_wallet": {
+        "message": "Crear Billetera",
+        "description": "Page title, also used in sidebar."
+    },
+    "crypto_us_warning": {
+        "message": "La criptomoneda se considera un valor en los Estados Unidos, por lo que la mayoría de los residentes estadounidenses no pueden comprarlas.",
+        "description": "Warning for USians about cryptocurrency."
+    },
+    "delete_account": {
+        "message": "Eliminar Cuenta",
+        "description": "Text for the Delete Account button."
+    },
+    "delete_account_permanent": {
+        "message": "Eliminar Cuenta (Permanente)",
+        "description": "Text for the Delete Account button."
+    },
+    "deleting_account": {
+        "message": "Eliminando Cuenta",
+        "description": "Text for the Delete Account button."
+    },
+    "description": {
+        "message": "Seguridad de nivel empresarial gratuita para tu navegador personal.",
+        "description": "The description in the manifest."
+    },
+    "dont_have_an_account": {
+        "message": "¿No tienes una cuenta?",
+        "description": "Instruction for creating an account."
+    },
+    "dont_have_one": {
+        "message": "¿No tienes una billetera?",
+        "description": "Instruction for creating a wallet address."
+    },
+    "done": {
+        "message": "Hecho",
+        "description": "Generic button text."
+    },
+    "email": {
+        "message": "Correo electrónico",
+        "description": "Section header for the Account page."
+    },
+    "enable_beta_option": {
+        "message": "Habilitar la detección de amenazas AI en versión beta (solo para desarrolladores)",
+        "description": "Options page option."
+    },
+    "enter_a_password": {
+        "message": "Ingresa una contraseña de al menos 12 caracteres",
+        "description": "Instruction for registering an account."
+    },
+    "enter_a_username": {
+        "message": "Ingresa un nombre de usuario",
+        "description": "Instruction for registering an account."
+    },
+    "enter_your_username": {
+        "message": "Ingresa tu nombre de usuario",
+        "description": "Instruction for logging into an account."
+    },
+    "enter_password_again": {
+        "message": "Ingresa tu contraseña nuevamente",
+        "description": "Instruction for registering an account."
+    },
+    "enter_referrer_name": {
+        "message": "Opcional: Ingresa el nombre de usuario del referidor",
+        "description": "Instruction for registering an account."
+    },
+    "enter_azero_wallet_address": {
+        "message": "Pega tu dirección de billetera compatible con Aleph Zero",
+        "description": "Instruction for registering an account."
+    },
+    "enter_pdot_wallet_address": {
+        "message": "O pega tu dirección de billetera Moonbeam aquí",
+        "description": "Instruction for registering an account."
+    },
+    "enter_azero_wallet_address_optional": {
+        "message": "Opcional: Pega tu dirección de billetera compatible con Aleph Zero",
+        "description": "Instruction for registering an account."
+    },
+    "enter_new_wallet_address": {
+        "message": "Ingresa tu nueva dirección de billetera.",
+        "description": "Instruction for Account page."
+    },
+    "enter_your_email": {
+        "message": "Ingresa tu correo electrónico",
+        "description": "Instruction for registering an account."
+    },
+    "enter_email_to_change_password": {
+        "message": "Ingresa tu correo electrónico para cambiar tu contraseña",
+        "description": "Instruction for changing password."
+    },
+    "enter_password_to_delete_account": {
+        "message": "Ingresa la contraseña para eliminar la cuenta",
+        "description": "Instruction for deleting account."
+    },
+    "enter_password_to_update_wallet_address": {
+        "message": "Ingresa tu contraseña para actualizar tu dirección de billetera.",
+        "description": "Instruction for updating wallet address."
+    },
+    "error": {
+        "message": "Error",
+        "description": "Generic error message."
+    },
+    "error_deleting_account_generic": {
+        "message": "Error al eliminar la cuenta. Por favor, inténtalo de nuevo más tarde.",
+        "description": "Generic login error message."
+    },
+    "error_invalid_email_generic": {
+        "message": "Dirección de correo electrónico no válida.",
+        "description": "Generic registering error message."
+    },
+    "error_login_generic": {
+        "message": "Error al iniciar sesión. Por favor, inténtalo de nuevo más tarde.",
+        "description": "Generic login error message."
+    },
+    "error_password_too_long": {
+        "message": "La contraseña no puede tener más de 512 caracteres.",
+        "description": "Registering error message."
+    },
+    "error_password_too_short": {
+        "message": "La contraseña debe tener al menos 12 caracteres.",
+        "description": "Registering error message."
+    },
+    "error_passwords_dont_match": {
+        "message": "Tus contraseñas no coinciden.",
+        "description": "Registering error message."
+    },
+    "error_registering_wallet_address": {
+        "message": "No es una dirección de billetera válida.",
+        "description": "Error message for adding a wallet address."
+    },
+    "error_registering_generic": {
+        "message": "Error al registrarse. Por favor, inténtalo de nuevo más tarde.",
+        "description": "Generic registering error message."
+    },
+    "error_updating_wallet_address_generic": {
+        "message": "Error al actualizar la dirección de la billetera. Por favor, inténtalo de nuevo más tarde.",
+        "description": "Generic updating wallet address error message."
+    },
+    "error_username_too_long": {
+        "message": "Nombre de usuario demasiado largo: La longitud máxima es de 16 caracteres.",
+        "description": "Registering error message."
+    },
+    "extension_options": {
+        "message": "Opciones de Extensión",
+        "description": "Page title."
+    },
+    "faq": {
+        "message": "Preguntas Frecuentes",
+        "description": "Page title, also used in sidebar."
+    },
+    "forgot_password": {
+        "message": "¿Olvidaste tu contraseña?",
+        "description": "The text used on login page."
+    },
+    "frequently_asked_questions": {
+        "message": "Preguntas Frecuentes",
+        "description": "Page title."
+    },
+    "how_does_threat_slayer_protect_me": {
+        "message": "¿Cómo me protege ThreatSlayer?",
+        "description": "Question on the FAQ page."
+    },
+    "how_does_threat_slayer_reward_me": {
+        "message": "¿Cómo me recompensa ThreatSlayer con $$ILOCK?",
+        "description": "Question on the FAQ page."
+    },
+    "how_does_threat_slayer_reward_me_answer": {
+        "message": "Los usuarios de ThreatSlayer tienen la oportunidad de ser recompensados por cada URL que visitan. Cuantos más sitios navegues, más oportunidades tendrás de obtener $$ILOCK.",
+        "description": "Answer to question on the FAQ page."
+    },
+    "ilock_available_to_stake": {
+        "message": "$$ILOCK Disponible para Apostar",
+        "description": "Info text on the Security Staking page."
+    },
+    "ilock_earned": {
+        "message": "$$ILOCK Ganado",
+        "description": "Section header for the Account page."
+    },
+    "ilock_keep_browsing_to_earn": {
+        "message": "¡Sigue navegando con ThreatSlayer para ganar $$ILOCK!",
+        "description": "Message to user about earning token."
+    },
+    "is_threat_slayer_open_source": {
+        "message": "¿Es ThreatSlayer de código abierto?",
+        "description": "Question on the FAQ page."
+    },
+    "is_threat_slayer_open_source_answer": {
+        "message": "Escaneamos las URL de tu navegador con nuestro AI de detección de amenazas. Asociamos las URL con tu cuenta para poder recompensarte con $$ILOCK. ¡Eso es todo!",
+        "description": "Answer to question on the FAQ page."
+    },
+    "login": {
+        "message": "Iniciar Sesión",
+        "description": "Page title, also used in sidebar."
+    },
+    "logged_out": {
+        "message": "Sesión Cerrada",
+        "description": "Button text."
+    },
+    "logging_out": {
+        "message": "Cerrando Sesión",
+        "description": "Button text."
+    },
+    "logout": {
+        "message": "Cerrar Sesión",
+        "description": "Button text."
+    },
+    "malicious_sites_detected": {
+        "message": "Sitios Maliciosos Detectados",
+        "description": "The text used to show how many malicious URLs are scanned on the dashboard."
+    },
+    "must_create_azero_wallet": {
+        "message": "Para usar ThreatSlayer, necesitarás crear una billetera compatible con Aleph Zero.",
+        "description": "Instruction for creating a wallet."
+    },
+    "no_allowlisted_sites": {
+        "message": "No hay sitios en la lista de permitidos para mostrar.",
+        "description": "Info text on the allowlist table."
+    },
+    "no_url_selected": {
+        "message": "No se ha seleccionado ninguna URL para apostar.",
+        "description": "Info text on the Security Staking page."
+    },
+    "options": {
+        "message": "Opciones",
+        "description": "Page title, also used in sidebar."
+    },
+    "password": {
+        "message": "Contraseña",
+        "description": "Generic input field placeholder text."
+    },
+    "password_hide": {
+        "message": "Ocultar Contraseña",
+        "description": "Instruction for toggling password visibility."
+    },
+    "password_show": {
+        "message": "Mostrar Contraseña",
+        "description": "Instruction for toggling password visibility."
+    },
+    "powered_by_interlock": {
+        "message": "Potenciado por Interlock",
+        "description": "Info text on the SlayCount page."
+    },
+    "privacy": {
+        "message": "Privacidad",
+        "description": "Page title, also used in sidebar."
+    },
+    "register": {
+        "message": "Registrarse",
+        "description": "Instruction for users."
+    },
+    "security_staking": {
+        "message": "Security Staking",
+        "description": "Page title, also used in sidebar."
+    },
+    "select_from_the_following": {
+        "message": "Selecciona de los siguientes:",
+        "description": "Header for the options on the Options page."
+    },
+    "sign_up_for_threat_slayer": {
+        "message": "Regístrate en ThreatSlayer",
+        "description": "Page title."
+    },
+    "slay_count": {
+        "message": "SlayCount",
+        "description": "Page title, also used in sidebar."
+    },
+    "slay_count_copy": {
+        "message": "Copiar SlayCount al portapapeles",
+        "description": "Info for SlayCount page."
+    },
+    "slay_count_download": {
+        "message": "Descargar SlayCount",
+        "description": "Info for SlayCount page."
+    },
+    "stake_state_neutral": {
+        "message": "Serás el primero en apostar esta URL.",
+        "description": "Explanation of security staking state."
+    },
+    "stake_state_pending": {
+        "message": "Alguien más ha intentado apostar esta URL. Si se aprueba, tu apuesta se sumará a la de ellos. Si se rechaza, no perderás ningún $$ILOCK.",
+        "description": "Explanation of security staking state."
+    },
+    "stake_state_resolved": {
+        "message": "Nadie puede apostar en esta URL en este momento.",
+        "description": "Explanation of security staking state."
+    },
+    "staking": {
+        "message": "Oportunidad de Ganar",
+        "description": "The text used on the staking text box."
+    },
+    "start_earning": {
+        "message": "Comienza a Ganar",
+        "description": "Page title, also used in sidebar."
+    },
+    "stake_this_url": {
+        "message": "Apostar en esta URL",
+        "description": "The text used in the staking button."
+    },
+    "staking_explanation": {
+        "message": "¡Has desbloqueado la oportunidad de ganar el token $$ILOCK!",
+        "description": "The explanatory text used in the staking text box."
+    },
+    "SLAY_COUNT": {
+        "message": "SLAY COUNT",
+        "description": "Text for SlayCount exported image."
+    },
+    "submit": {
+        "message": "Enviar",
+        "description": "Button text."
+    },
+    "submit_new_wallet_address": {
+        "message": "Enviar Nueva Dirección",
+        "description": "Instruction for changing wallet address."
+    },
+    "success": {
+        "message": "¡Éxito!",
+        "description": "Generic button text."
+    },
+    "take_to_safety": {
+        "message": "Llévame a un Lugar Seguro",
+        "description": "The text used in the take me to safety button."
+    },
+    "terms_of_service": {
+        "message": "Términos de Servicio",
+        "description": "Instruction for registering an account."
+    },
+    "test": {
+        "message": "Prueba",
+        "description": "Test message, for testing purposes only."
+    },
+    "threat_slayer": {
+        "message": "ThreatSlayer",
+        "description": "Name of the app."
+    },
+    "trust_this_url": {
+        "message": "Confiar en esta URL",
+        "description": "The text used in the trust this URL button."
+    },
+    "try_again_later": {
+        "message": "Intenta nuevamente más tarde",
+        "description": "Generic button text."
+    },
+    "unique_urls_scanned": {
+        "message": "URLs Únicas Escaneadas",
+        "description": "The text used to show how many unique URLs are scanned on the dashboard."
+    },
+    "update_wallet_address": {
+        "message": "Actualizar Dirección",
+        "description": "Instruction for changing wallet address."
+    },
+    "urls_scanned": {
+        "message": "URLs Escaneadas",
+        "description": "The text used to show how many URLs are scanned on the dashboard."
+    },
+    "url_to_stake": {
+        "message": "URL para Apostar",
+        "description": "Info text on the Security Staking page."
+    },
+    "url_staking_status": {
+        "message": "Estado de Staking de URL",
+        "description": "Info text on the Security Staking page."
+    },
+    "username_or_email": {
+        "message": "Nombre de usuario o correo electrónico",
+        "description": "Instructions to fill in a field."
+    },
+    "users_referred": {
+        "message": "Usuarios Referidos",
+        "description": "Section header for the Account page."
+    },
+    "view_wallet_info": {
+        "message": "Ver Información de la Cartera",
+        "description": "Button text for viewing wallet information."
+    },
+    "waiting": {
+        "message": "Esperando...",
+        "description": "Button text."
+    },
+    "wallet_address": {
+        "message": "Dirección de la Cartera",
+        "description": "Section header for the Account page."
+    },
+    "warning": {
+        "message": "¡Advertencia!",
+        "description": "The text used in the warning banner."
+    },
+    "warning_account_will_be_deleted": {
+        "message": "Tu cuenta será eliminada para siempre.",
+        "description": "Warning text for deleting user account."
+    },
+    "warning_address_not_azero": {
+        "message": "Esta no es una dirección de Aleph Zero.",
+        "description": "Warning text for user wallet type."
+    },
+    "warning_address_not_moonbeam": {
+        "message": "Esta no es una dirección de Moonbeam.",
+        "description": "Warning text for user wallet type."
+    },
+    "warning_changing_wallet_address": {
+        "message": "Advertencia: Cambiar tu dirección de cartera existente puede retrasar el acceso a $$ILOCK previamente depositados.",
+        "description": "Warning text used for changing a wallet address."
+    },
+    "warning_header": {
+        "message": "Este sitio web puede ser malicioso.",
+        "description": "The text used in the warning banner."
+    },
+    "warning_ilock_will_be_lost": {
+        "message": "Perderás cualquier $$ILOCK que no haya sido transferido a una cartera.",
+        "description": "Warning text for deleting user account."
+    },
+    "warning_must_add_wallet_address": {
+        "message": "Debes agregar una dirección de cartera para recibir el token $$ILOCK.",
+        "description": "Warning text used on the Account page."
+    },
+    "warning_must_login_before_staking": {
+        "message": "Debes iniciar sesión antes de poder apostar en una URL.",
+        "description": "The text used in a warning box."
+    },
+    "warning_must_login_to_earn_etc": {
+        "message": "Advertencia: Debes registrarte o iniciar sesión para ganar $$ILOCK y usar todas las funciones de ThreatSlayer.",
+        "description": "The text used in a warning box."
+    },
+    "warning_must_register_before_staking": {
+        "message": "Debes registrarte antes de poder apostar en una URL.",
+        "description": "The text used in a warning box."
+    },
+    "warning_possible_malicious_url_detected": {
+        "message": "Posibles URLs maliciosas detectadas:",
+        "description": "The text used in a warning box."
+    },
+    "warning_staking_not_available": {
+        "message": "¡El staking de seguridad estará disponible pronto!",
+        "description": "The text used in a warning box."
+    },
+    "warning_text": {
+        "message": "¡Cierra la pestaña a menos que sepas que este sitio es seguro!",
+        "description": "The text used in the warning banner."
+    },
+    "warning_username_contains_illegal_characters": {
+        "message": "El nombre de usuario contiene caracteres ilegales: ",
+        "description": "Text used in warning box for username input."
+    },
+    "warning_username_too_long": {
+        "message": "Nombre de usuario demasiado largo: La longitud máxima es de 16 caracteres.",
+        "description": "Text used in warning box for username input."
+    },
+    "warning_username_too_short": {
+        "message": "Nombre de usuario demasiado corto: La longitud mínima es de 5 caracteres.",
+        "description": "Text used in warning box for username input."
+    },
+    "what_does_threat_slayer_collect": {
+        "message": "¿Qué datos recopila ThreatSlayer?",
+        "description": "Question on the FAQ page."
+    },
+    "what_does_threat_slayer_collect_answer": {
+        "message": "Escaneamos las URLs de tu navegador con nuestra IA de detección de amenazas. Asociamos URLs con tu cuenta para poder recompensarte con $$ILOCK. ¡Eso es todo!",
+        "description": "Answer to question on the FAQ page."
+    },
+    "why_choose_threat_slayer": {
+        "message": "¿Por qué elegir ThreatSlayer?",
+        "description": "The text used on the About Us page."
+    }
+}
