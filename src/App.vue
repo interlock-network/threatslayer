@@ -113,7 +113,7 @@ export default {
     },
     selectPage(page) {
       if (page === 'privacy') {
-        window.open('https://github.com/interlock-network/knowledgebase-public/blob/main/what/privacy-policy.md');
+        window.open('https://www.interlock.network/privacy-policy');
       } else {
         // change the main page content
         this.currentPage = page;
