@@ -1,0 +1,438 @@
+{
+    "about_threat_slayer": {
+        "message": "关于ThreatSlayer",
+        "description": "Page title."
+    },
+    "about_us": {
+        "message": "关于我们",
+        "description": "Page title, also used in sidebar."
+    },
+    "about_us_paragraph_1": {
+        "message": "在网络威胁变得越来越复杂和普遍的世界里，拥有一个不仅能迅速反应，而且能主动预防威胁的解决方案至关重要。",
+        "description": "The first paragraph of text on the About Us page."
+    },
+    "about_us_paragraph_2": {
+        "message": "ThreatSlayer不仅仅是另一款网络安全产品，它是一个全面的安全伴侣，能够实时运行，检测并中和威胁，以防止它们造成任何损害。",
+        "description": "The second paragraph of text on the About Us page."
+    },
+    "about_us_paragraph_3": {
+        "message": "ThreatSlayer易于安装，能够保护您免受web2和web3空间中的威胁，它是浏览器安全的未来。它在后台运行，保护您免受恶意资产或危险页面的侵害，而不会中断您的工作流程。",
+        "description": "The third paragraph of text on the About Us page."
+    },
+    "about_us_paragraph_4": {
+        "message": "结合为共享匿名安全数据的用户提供奖励，您将获得一种双赢的解决方案，可以在保持在线安全的同时，为更广泛的互联网安全生态系统做出贡献。",
+        "description": "The fourth and last paragraph of text on the About Us page."
+    },
+    "account_info": {
+        "message": "账户信息",
+        "description": "Page header for not-logged-in Account page."
+    },
+    "account_info_for": {
+        "message": "账户信息：",
+        "description": "Page header for Account page."
+    },
+    "add_blockchain_address": {
+        "message": "添加区块链地址",
+        "description": "Header text on Account page."
+    },
+    "address_aleph": {
+        "message": "兼容Aleph Zero的钱包地址",
+        "description": "Header on a page listing wallet addresses."
+    },
+    "address_pdot": {
+        "message": "Moonbeam钱包地址",
+        "description": "Header on a page listing wallet addresses."
+    },
+    "affirm_not_us_citizen": {
+        "message": "确认您不是美国公民或居民。",
+        "description": "Instruction for registering an account."
+    },
+    "agree_to_our": {
+        "message": "同意我们的",
+        "description": "Instruction for registering an account."
+    },
+    "allowlist_explanation": {
+        "message": "您标记这些为安全。ThreatSlayer不会阻止它们。",
+        "description": "Explanation on the allowlist table."
+    },
+    "already_have_one": {
+        "message": "已经有账户了吗？",
+        "description": "Instruction for logging in."
+    },
+    "already_have_a_wallet": {
+        "message": "已经有钱包了吗？",
+        "description": "Instruction for registering."
+    },
+    "amount_to_stake": {
+        "message": "要质押的金额",
+        "description": "Info text on the Security Staking page."
+    },
+    "appDesc": {
+        "message": "为您的个人浏览器提供免费的企业级保护。",
+        "description": "The description of the extension, displayed in the user's browser."
+    },
+    "cancel": {
+        "message": "取消",
+        "description": "Generic cancel option."
+    },
+    "change_password": {
+        "message": "更改密码",
+        "description": "The text used on change password button."
+    },
+    "click_to_create_wallet": {
+        "message": "请点击'创建钱包'，将跳转至Chrome浏览器扩展程序以创建SubWallet。",
+        "description": "Page title, also used in sidebar."
+    },
+    "close": {
+        "message": "关闭",
+        "description": "The text used on the close button."
+    },
+    "confirm_are_you_sure": {
+        "message": "您确定吗？",
+        "description": "Confirmation for user actions."
+    },
+    "create_one": {
+        "message": "创建一个",
+        "description": "Instruction for creating a wallet address."
+    },
+    "create_wallet": {
+        "message": "创建钱包",
+        "description": "Page title, also used in sidebar."
+    },
+    "crypto_us_warning": {
+        "message": "在美国，加密货币被视为一种证券，因此大多数美国居民不能购买它们。",
+        "description": "Warning for USians about cryptocurrency."
+    },
+    "delete_account": {
+        "message": "删除账户",
+        "description": "Text for the Delete Account button."
+    },
+    "delete_account_permanent": {
+        "message": "永久删除账户",
+        "description": "Text for the Delete Account button."
+    },
+    "deleting_account": {
+        "message": "刪除帳戶",
+        "description": "Text for the Delete Account button."
+    },
+    "description": {
+        "message": "為您的個人瀏覽器提供免費的企業級安全保護。",
+        "description": "The description in the manifest."
+    },
+    "dont_have_an_account": {
+        "message": "還沒有帳戶？",
+        "description": "Instruction for creating an account."
+    },
+    "dont_have_one": {
+        "message": "還沒有錢包？",
+        "description": "Instruction for creating a wallet address."
+    },
+    "done": {
+        "message": "完成",
+        "description": "Generic button text."
+    },
+    "email": {
+        "message": "電子郵件",
+        "description": "Section header for the Account page."
+    },
+    "enable_beta_option": {
+        "message": "啟用 beta AI 威脅檢測（僅限開發者）",
+        "description": "Options page option."
+    },
+    "enter_a_password": {
+        "message": "輸入至少12個字符的密碼",
+        "description": "Instruction for registering an account."
+    },
+    "enter_a_username": {
+        "message": "輸入一個用戶名",
+        "description": "Instruction for registering an account."
+    },
+    "enter_your_username": {
+        "message": "輸入你的用戶名",
+        "description": "Instruction for logging into an account."
+    },
+    "enter_password_again": {
+        "message": "再次輸入您的密碼",
+        "description": "Instruction for registering an account."
+    },
+    "enter_referrer_name": {
+        "message": "可選：輸入推薦人用戶名",
+        "description": "Instruction for registering an account."
+    },
+    "enter_azero_wallet_address": {
+        "message": "粘貼您的 Aleph Zero 兼容錢包地址",
+        "description": "Instruction for registering an account."
+    },
+    "enter_pdot_wallet_address": {
+        "message": "或者在這裡粘貼您的 Moonbeam 錢包地址",
+        "description": "Instruction for registering an account."
+    },
+    "enter_azero_wallet_address_optional": {
+        "message": "可選：粘貼您的 Aleph Zero 兼容錢包地址",
+        "description": "Instruction for registering an account."
+    },
+    "enter_new_wallet_address": {
+        "message": "輸入您的新錢包地址。",
+        "description": "Instruction for Account page."
+    },
+    "enter_your_email": {
+        "message": "輸入您的電子郵件",
+        "description": "Instruction for registering an account."
+    },
+    "enter_email_to_change_password": {
+        "message": "輸入您的電子郵件以更改密碼",
+        "description": "Instruction for changing password."
+    },
+    "enter_password_to_delete_account": {
+        "message": "輸入密碼以刪除帳戶",
+        "description": "Instruction for deleting account."
+    },
+    "enter_password_to_update_wallet_address": {
+        "message": "輸入您的密碼以更新您的錢包地址。",
+        "description": "Instruction for updating wallet address."
+    },
+    "error": {
+        "message": "錯誤",
+        "description": "Generic error message."
+    },
+    "error_deleting_account_generic": {
+        "message": "刪除帳戶出錯。請稍後再試。",
+        "description": "Generic login error message."
+    },
+    "error_invalid_email_generic": {
+        "message": "無效的電子郵件地址。",
+        "description": "Generic registering error message."
+    },
+    "error_login_generic": {
+        "message": "登錄出錯。請稍後再試。",
+        "description": "Generic login error message."
+    },
+    "error_password_too_long": {
+        "message": "密碼不能超過 512 個字符。",
+        "description": "Registering error message."
+    },
+    "error_password_too_short": {
+        "message": "密碼必須至少 12 個字符。",
+        "description": "Registering error message."
+    },
+    "error_passwords_dont_match": {
+        "message": "你的密碼不匹配。",
+        "description": "Registering error message."
+    },
+    "register": {
+        "message": "註冊",
+        "description": "Instruction for users."
+    },
+    "security_staking": {
+        "message": "安全押注",
+        "description": "Page title, also used in sidebar."
+    },
+    "select_from_the_following": {
+        "message": "從以下選擇：",
+        "description": "Header for the options on the Options page."
+    },
+    "sign_up_for_threat_slayer": {
+        "message": "註冊 ThreatSlayer",
+        "description": "Page title."
+    },
+    "slay_count": {
+        "message": "SlayCount",
+        "description": "Page title, also used in sidebar."
+    },
+    "slay_count_copy": {
+        "message": "複製 SlayCount 到剪貼簿",
+        "description": "Info for SlayCount page."
+    },
+    "slay_count_download": {
+        "message": "下載 SlayCount",
+        "description": "Info for SlayCount page."
+    },
+    "stake_state_neutral": {
+        "message": "你將是第一個押注這個 URL 的人。",
+        "description": "Explanation of security staking state."
+    },
+    "stake_state_pending": {
+        "message": "有人已經嘗試押注這個 URL。如果被批准，你的押注將被加到他們的押注上。如果被拒絕，你將不會失去任何 $$ILOCK。",
+        "description": "Explanation of security staking state."
+    },
+    "stake_state_resolved": {
+        "message": "目前無人可以對這個 URL 進行押注。",
+        "description": "Explanation of security staking state."
+    },
+    "staking": {
+        "message": "賺取的機會",
+        "description": "The text used on the staking text box."
+    },
+    "start_earning": {
+        "message": "開始賺錢",
+        "description": "Page title, also used in sidebar."
+    },
+    "stake_this_url": {
+        "message": "對這個 URL 進行押注",
+        "description": "The text used in the staking button."
+    },
+    "staking_explanation": {
+        "message": "你已解鎖賺取 $$ILOCK 代幣的機會！",
+        "description": "The explanatory text used in the staking text box."
+    },
+    "SLAY_COUNT": {
+        "message": "SLAY COUNT",
+        "description": "Text for SlayCount exported image."
+    },
+    "submit": {
+        "message": "提交",
+        "description": "Button text."
+    },
+    "submit_new_wallet_address": {
+        "message": "提交新地址",
+        "description": "Instruction for changing wallet address."
+    },
+    "success": {
+        "message": "成功！",
+        "description": "Generic button text."
+    },
+    "take_to_safety": {
+        "message": "帶我到安全的地方",
+        "description": "The text used in the take me to safety button."
+    },
+    "terms_of_service": {
+        "message": "服務條款",
+        "description": "Instruction for registering an account."
+    },
+    "test": {
+        "message": "測試",
+        "description": "Test message, for testing purposes only."
+    },
+    "threat_slayer": {
+        "message": "ThreatSlayer",
+        "description": "Name of the app."
+    },
+    "trust_this_url": {
+        "message": "信任這個 URL",
+        "description": "The text used in the trust this URL button."
+    },
+    "try_again_later": {
+        "message": "稍後再試",
+        "description": "Generic button text."
+    },
+    "unique_urls_scanned": {
+        "message": "獨特的 URLs 已掃描",
+        "description": "The text used to show how many unique URLs are scanned on the dashboard."
+    },
+    "update_wallet_address": {
+        "message": "更新地址",
+        "description": "Instruction for changing wallet address."
+    },
+    "urls_scanned": {
+        "message": "URLs 已掃描",
+        "description": "The text used to show how many URLs are scanned on the dashboard."
+    },
+    "url_to_stake": {
+        "message": "要押注的 URL",
+        "description": "Info text on the Security Staking page."
+    },
+    "url_staking_status": {
+        "message": "URL 投注狀態",
+        "description": "Info text on the Security Staking page."
+    },
+    "username_or_email": {
+        "message": "使用者名稱或電子郵件",
+        "description": "Instructions to fill in a field."
+    },
+    "users_referred": {
+        "message": "推薦的使用者",
+        "description": "Section header for the Account page."
+    },
+    "view_wallet_info": {
+        "message": "查看錢包信息",
+        "description": "Button text for viewing wallet information."
+    },
+    "waiting": {
+        "message": "等待中...",
+        "description": "Button text."
+    },
+    "wallet_address": {
+        "message": "錢包地址",
+        "description": "Section header for the Account page."
+    },
+    "warning": {
+        "message": "警告！",
+        "description": "The text used in the warning banner."
+    },
+    "warning_account_will_be_deleted": {
+        "message": "您的帳戶將被永久刪除。",
+        "description": "Warning text for deleting user account."
+    },
+    "warning_address_not_azero": {
+        "message": "這不是一個 Aleph Zero 地址。",
+        "description": "Warning text for user wallet type."
+    },
+    "warning_address_not_moonbeam": {
+        "message": "這不是一個 Moonbeam 地址。",
+        "description": "Warning text for user wallet type."
+    },
+    "warning_changing_wallet_address": {
+        "message": "警告：更改現有錢包地址可能會延遲訪問先前存放的 $$ILOCK。",
+        "description": "Warning text used for changing a wallet address."
+    },
+    "warning_header": {
+        "message": "該網站可能是惡意的。",
+        "description": "The text used in the warning banner."
+    },
+    "warning_ilock_will_be_lost": {
+        "message": "未轉移到錢包的 $$ILOCK 將會丟失。",
+        "description": "Warning text for deleting user account."
+    },
+    "warning_must_add_wallet_address": {
+        "message": "您必須添加一個錢包地址以接收 $$ILOCK 代幣。",
+        "description": "Warning text used on the Account page."
+    },
+    "warning_must_login_before_staking": {
+        "message": "您必須在投注 URL 前登錄。",
+        "description": "The text used in a warning box."
+    },
+    "warning_must_login_to_earn_etc": {
+        "message": "警告：您必須註冊或登錄才能賺取 $$ILOCK 並使用 ThreatSlayer 的所有功能。",
+        "description": "The text used in a warning box."
+    },
+    "warning_must_register_before_staking": {
+        "message": "您必須在投注 URL 之前註冊。",
+        "description": "The text used in a warning box."
+    },
+    "warning_possible_malicious_url_detected": {
+        "message": "檢測到可能的惡意 URL：",
+        "description": "The text used in a warning box."
+    },
+    "warning_staking_not_available": {
+        "message": "安全投注功能即將推出！",
+        "description": "The text used in a warning box."
+    },
+    "warning_text": {
+        "message": "除非您確定這個網站是安全的，否則請關閉這個標籤頁！",
+        "description": "The text used in the warning banner."
+    },
+    "warning_username_contains_illegal_characters": {
+        "message": "用戶名包含非法字符：",
+        "description": "Text used in warning box for username input."
+    },
+    "warning_username_too_long": {
+        "message": "用戶名太長：最大長度是 16 個字符。",
+        "description": "Text used in warning box for username input."
+    },
+    "warning_username_too_short": {
+        "message": "用戶名太短：最小長度是 5 個字符。",
+        "description": "Text used in warning box for username input."
+    },
+    "what_does_threat_slayer_collect": {
+        "message": "ThreatSlayer 收集哪些數據？",
+        "description": "Question on the FAQ page."
+    },
+    "what_does_threat_slayer_collect_answer": {
+        "message": "我們使用我們的威脅檢測 AI 掃描您瀏覽器的 URL。我們將 URL 與您的帳戶關聯，以便我們可以向您獎勵 $$ILOCK。就是這樣！",
+        "description": "Answer to question on the FAQ page."
+    },
+    "why_choose_threat_slayer": {
+        "message": "為什麼選擇 ThreatSlayer？",
+        "description": "The text used on the About Us page."
+    }
+}
