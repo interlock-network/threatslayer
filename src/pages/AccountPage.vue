@@ -19,14 +19,18 @@
     <WalletInfoModal v-bind="{ azeroAddress, apiKey, checkState, fadeAccountPage, pdotAddress, selectPage, username }"
         style="opacity: 1" />
     <div :style="computedStyle">
-        <br />
-        <!-- Number of users referred -->
-        <!-- TODO update for array -->
-        <div v-if="!pageFaded && referred !== -1">
-            <TextComponent class="left-label" :msg="$i18n('users_referred')" bold />
-            <TextComponent :msg="referred" bigmono /> <br />
+        <!-- Names of user who referred this user -->
+        <div v-if="!pageFaded && referrer.length">
+            <!-- TODO add to translations -->
+            <TextComponent class="left-label" msg="Referred By:" bold />
+            <TextComponent :msg="referrer" bigmono />
         </div>
         <br />
+        <!-- Names of users referred -->
+        <div v-if="!pageFaded && referred?.length">
+            <TextComponent class="left-label" :msg="$i18n('users_referred')" bold /><br />
+            <TextComponent :msg="referredList" bigmono />
+        </div>
         <!-- Tabe of allowlisted URLs -->
         <AllowlistTable v-if="!pageFaded" :apiKey="apiKey" />
     </div>
@@ -67,7 +71,8 @@ export default {
         return {
             allowlistSet: false,
             pageFaded: false,
-            referred: 0,
+            referred: [],
+            referrer: '',
             tokensEarned: 0,
             tokensEarnedTotal: 0
         };
@@ -83,6 +88,9 @@ export default {
             const tokenTotal = this.tokensEarned + this.tokensEarnedTotal;
 
             return tokenTotal;
+        },
+        referredList() {
+            return this.referred.join(', ');
         }
     },
     methods: {
