@@ -1,6 +1,6 @@
 <template>
     <input id="username-input" @input="validateUsername" v-model.trim="username" required :tabindex="tabindex"
-        :placeholder="$i18n('enter_a_username')" :class="usernameInputClass" />
+        :placeholder="$i18n(placeholderText)" :class="usernameInputClass" />
     <ErrorMessage v-if="errorMessage.length" :msg="$i18n(errorMessage)" :secondMsg="illegalChars" single />
 </template>
 
@@ -16,6 +16,7 @@ export default {
     },
     props: {
         focus: { type: Boolean, default: false },
+        placeholderI18n: { type: String, default: undefined },
         tabindex: { type: Number, default: 2 }
     },
     data() {
@@ -31,6 +32,12 @@ export default {
         }
     },
     computed: {
+        placeholderText() {
+            const { placeholderI18n } = this;
+            const defaultPlaceholder = 'enter_a_username';
+
+            return placeholderI18n ? placeholderI18n : defaultPlaceholder;
+        },
         usernameInputClass() {
             return this.errorMessage?.length ? 'generic-error' : '';
         }
