@@ -31,7 +31,7 @@ export function clearChromeStorage(key) {
  * @returns {{errors: Array.<string>, status: number}} An object with the errors array and server status code
  */
 export function extractFromError(errorObj = {}) {
-    const { response: { data: { error_message: errors = [] } = {}, status } = {} } = errorObj;
+    const { response: { data: { errors = [] } = {}, status } = {} } = errorObj;
     const result = { errors, status };
 
     return result;
