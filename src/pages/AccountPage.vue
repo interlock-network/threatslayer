@@ -73,8 +73,8 @@ export default {
             pageFaded: false,
             referred: [],
             referrer: '',
-            tokensEarned: 0,
-            tokensEarnedTotal: 0
+            tokenEarnedBalance: 0,
+            tokenEarnedTotal: 0
         };
     },
     mounted() {
@@ -85,7 +85,7 @@ export default {
             return this.pageFaded ? { 'opacity': '5%', 'pointer-events': 'none' } : {};
         },
         ilockEarned() {
-            const tokenTotal = this.tokensEarned + this.tokensEarnedTotal;
+            const tokenTotal = this.tokenEarned + this.tokenEarnedTotal;
 
             return tokenTotal;
         },
@@ -103,11 +103,11 @@ export default {
             axios.post(`${baseUrl}/user-get`, { key: apiKey, username })
                 .then(async response => {
                     const { address = '', allowlist = [], email, malicious_urls = 0, next_token_drop = 0, referred = [], referrer = '', slay_count = 0,
-                        token_earned_balance = 0, tokens_earned_total = 0, unique_urls = 0, unlocked_urls_confirmed = 0, user_since = 0 } = response?.data;
+                        token_earned_balance = 0, token_earned_total = 0, unique_urls = 0, unlocked_urls_confirmed = 0, user_since = 0 } = response?.data;
 
                     this.referred = referred;
-                    this.tokensEarned = tokens_earned;
-                    this.tokensEarnedTotal = tokens_earned_total;
+                    this.tokenEarnedBalance = token_earned_balance;
+                    this.tokenEarnedTotal = token_earned_total;
                 })
                 .catch(error => {
                     const { errors, status } = extractFromError(error);
