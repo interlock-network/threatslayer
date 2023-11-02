@@ -19,7 +19,8 @@
     <AzeroAddressInput @currentAzeroAddress="getAzeroAddress" @azeroAddressHasError="getAzeroAddressHasError"
         tabindex="10" />
     <!-- referrer (optional) -->
-    <input v-model.trim="referrer" tabindex="14" :placeholder="$i18n('enter_referrer_name')" />
+    <UsernameInput placeholderI18n="enter_referrer_name" @currentUsername="getReferrer"
+        @usernameHasError="getReferrerHasError" tabindex="14" />
     <div class="checkbox-container" style="margin-top: 0.8rem;" @click="focusNextCheckbox">
         <input id="first-box" type="checkbox" v-model="termsOfService" tabindex="16">
         <label for="first-box">{{ $i18n('agree_to_our') }}
@@ -91,6 +92,7 @@ export default {
             reenteredPassword: '',
             reenteredPasswordErrorMessage: '',
             referrer: '',
+            referrerHasError: false,
             termsOfService: false,
             unitedStates: false,
             username: '',
@@ -104,13 +106,14 @@ export default {
     },
     computed: {
         createUserDisabled() {
-            const { azeroAddressHasError, email, emailHasError, password, passwordHasError, termsOfService, unitedStates, username, usernameHasError } = this;
+            const { azeroAddressHasError, email, emailHasError, password, passwordHasError, referrerHasError,
+                termsOfService, unitedStates, username, usernameHasError } = this;
 
-            const missingFields = !email.length || !password.length || !username.length;
             const boxesUnchecked = !termsOfService || !unitedStates;
-            const hasErrors = azeroAddressHasError || emailHasError || passwordHasError || usernameHasError;
+            const hasErrors = azeroAddressHasError || emailHasError || passwordHasError || referrerHasError || usernameHasError;
+            const missingFields = !email.length || !password.length || !username.length;
 
-            return missingFields || boxesUnchecked || hasErrors;
+            return boxesUnchecked || hasErrors || missingFields;
         },
         reenteredPasswordInputClass() {
             return this.reenteredPasswordErrorMessage?.length ? 'generic-error' : '';
@@ -146,6 +149,12 @@ export default {
         },
         getInputType(inputType) {
             this.passwordInputType = inputType;
+        },
+        getReferrer(referrer) {
+            this.referrer = referrer;
+        },
+        getReferrerHasError(errorBool) {
+            this.referrerHasError = errorBool;
         },
         getUsername(username) {
             this.username = username;
