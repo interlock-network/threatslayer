@@ -59,7 +59,7 @@
             </linearGradient>
         </defs>
         <defs>
-            <linearGradient id="rainbow" x1="0" x2="0" y1="0" y2="10%" gradientUnits="userSpaceOnUse">
+            <linearGradient id="rainbow" x1="2" x2="0" y1="0" y2="10%" gradientUnits="userSpaceOnUse">
                 <stop stop-color="#1f90f1" offset="30%" />
                 <stop stop-color="#c417e0" offset="50%" />
                 <stop stop-color="#e56a7a" offset="80%" />
@@ -74,21 +74,23 @@
                 d="M182.5 356.5C280.807 356.5 360.5 276.807 360.5 178.5C360.5 80.1933 280.807 0.5 182.5 0.5C84.1933 0.5 4.5 80.1933 4.5 178.5C4.5 276.807 84.1933 356.5 182.5 356.5ZM326.731 178.5C326.731 258.156 262.156 322.731 182.5 322.731C102.844 322.731 38.2692 258.156 38.2692 178.5C38.2692 98.8436 102.844 34.2692 182.5 34.2692C262.156 34.2692 326.731 98.8436 326.731 178.5Z"
                 stroke="black" />
         </g>
-        <text id="credit" x="38" y="64" font-size="14px" font-family="THICCCBOI" font-weight="bold" fill="white">
-            {{ $i18n('powered_by_interlock') }}
-        </text>
-        <text id="threatslayer" x="32" y="42" font-size="36px" font-family="THICCCBOI" font-weight="bold"
-            fill="url(#rainbow)">
+        <text id="threatslayer" x="50%" y="38" dominant-baseline="middle" text-anchor="middle" font-size="36px"
+            font-family="THICCCBOI" font-weight="bold" fill="url(#rainbow)">
             {{ $i18n('threat_slayer') }}
         </text>
-        <text id="slay-count" x="50%" y="55%" class="count" font-family="THICCCBOI" font-weight="bold"
+        <text id="credit" x="50%" y="66" dominant-baseline="middle" text-anchor="middle" font-size="14px"
+            font-family="THICCCBOI" font-weight="bold" fill="white">
+            {{ $i18n('powered_by_interlock') }}
+        </text>
+        <text id="slay-count" x="50%" y="53%" class="count" font-family="THICCCBOI" font-weight="bold"
             :font-size="totalVisitedFontSize" text-anchor="middle" dominant-baseline="middle" stroke="white" fill="white"
             stroke-width="2px">
             {{ totalURLsVisited }}
         </text>
-        <text x="48%" y="72%" font-style="italic" font-size="64px" font-family="THICCCBOI" font-weight="bold"
-            text-anchor="middle" stroke="black" fill="red" stroke-width="1px" dominant-baseline="middle">
-            {{ $i18n('SLAY_COUNT') }}
+        <image x="32%" y="64%" width="33" height="33" href="/src/assets/images/crossed_swords.png" />
+        <text x="54%" y="68%" font-size="32px" font-family="THICCCBOI" text-anchor="middle" fill="white"
+            dominant-baseline="middle">
+            {{ $i18n('slay_count') }}
         </text>
     </svg>
 </template>
