@@ -11,12 +11,13 @@ export default {
         instruction: { type: Boolean, default: false },
         mono: { type: Boolean, default: false },
         msg: { type: String, required: true },
-        subinstruction: { type: Boolean, default: false }
+        subinstruction: { type: Boolean, default: false },
+        wallet: { type: Boolean, default: false }
     },
     computed: {
         style() {
             let result = {};
-            const { bold, footer, mono, subinstruction } = this;
+            const { bold, footer, mono, subinstruction, wallet } = this;
 
             switch (true) {
                 case bold:
@@ -37,6 +38,12 @@ export default {
                     break;
                 case subinstruction:
                     result = { 'font-size': '1rem' };
+                    break;
+                case wallet:
+                    result = {
+                        'font-family': 'monospace',
+                        'font-size': '0.75rem'
+                    };
                     break;
                 default:
                     result = { 'width': "100%" };
