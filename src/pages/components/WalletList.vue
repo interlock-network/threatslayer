@@ -1,12 +1,7 @@
 <template>
     <div v-if="azeroAddress?.length && !changeAddressSelected">
-        <TextComponent :msg="$i18n('address_aleph')" bold /> <br />
-        <TextComponent :msg="azeroAddress" mono /><br />
-        <br />
-    </div>
-    <div v-if="pdotAddress?.length && !changeAddressSelected">
-        <TextComponent :msg="$i18n('address_pdot')" bold /> <br />
-        <TextComponent :msg="pdotAddress" mono /><br />
+        <TextComponent :msg="$i18n('wallet_address')" bold /> <br />
+        <TextComponent :msg="azeroAddress" wallet /><br />
         <br />
     </div>
 </template>
@@ -18,8 +13,7 @@ export default {
     name: "WalletList",
     props: {
         azeroAddress: { type: String, default: '' },
-        changeAddressSelected: { type: Boolean, required: true },
-        pdotAddress: { type: String, default: '' }
+        changeAddressSelected: { type: Boolean, required: true }
     },
     components: {
         TextComponent

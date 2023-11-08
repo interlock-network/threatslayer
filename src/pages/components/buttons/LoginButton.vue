@@ -61,8 +61,8 @@ export default {
     },
     methods: {
         extractLoginValues(response) {
-            const { status, data: { allowlist = [], azero_wallet_id: azeroAddress, email, key, pdot_wallet_id: pdotAddress, username } = {} } = response;
-            const result = { allowlist, azeroAddress, email, key, pdotAddress, status, username };
+            const { status, data: { allowlist = [], email, key, username, wallet } = {} } = response;
+            const result = { allowlist, email, key, status, username, wallet };
 
             return result;
         },
@@ -74,7 +74,7 @@ export default {
 
             axios.post(`${baseUrl}/user-login`, requestBody)
                 .then(async response => {
-                    const { allowlist, azeroAddress, email, key, pdotAddress, status } = this.extractLoginValues(response);
+                    const { allowlist, email, key, status, wallet } = this.extractLoginValues(response);
 
                     this.status = status;
                     this.loggedIn = true;
@@ -82,13 +82,12 @@ export default {
 
                     // set API key with user's unique key and other values
                     const allowlistSet = await setChromeStorage({ allowlist });
-                    const azeroWalletSet = await setChromeStorage({ azeroAddress });
+                    const azeroWalletSet = await setChromeStorage({ azeroAddress: wallet });
                     const emailSet = await setChromeStorage({ email });
                     const keySet = await setChromeStorage({ apiKey: key });
-                    const pdotWalletSet = await setChromeStorage({ pdotAddress });
                     const setUsername = await setChromeStorage({ username });
 
-                    if (allowlistSet && azeroWalletSet && emailSet && keySet && pdotWalletSet && setUsername) {
+                    if (allowlistSet && azeroWalletSet && emailSet && keySet && setUsername) {
                         const registeredSynched = await setChromeStorage({ registered: true });
                         const loggedInSynched = await setChromeStorage({ loggedIn: true });
 

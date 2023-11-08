@@ -21,8 +21,7 @@ export default {
         apiKey: { type: String, required: true },
         checkState: { type: Function, required: true },
         hasError: { type: Boolean, required: true },
-        newAzeroAddress: { type: String, default: '' },
-        newPdotAddress: { type: String, default: '' },
+        newWallet: { type: String, default: '' },
         password: { type: String, default: '' },
         username: { type: String, default: '' }
     },
@@ -50,9 +49,9 @@ export default {
             return className;
         },
         disabled() {
-            const { hasError, newAzeroAddress, newPdotAddress, submitting, submitted } = this;
+            const { hasError, newWallet, submitting, submitted } = this;
 
-            return (hasError || (!newAzeroAddress.length && !newPdotAddress.length) || submitting || submitted);
+            return (hasError || (!newWallet.length) || submitting || submitted);
         },
         submitButtonText() {
             const { errorArr, submitted, submitting, status } = this;
@@ -67,28 +66,23 @@ export default {
             this.errorArr = [];
             this.submitting = true;
 
-            const { apiKey: key, newAzeroAddress, newPdotAddress, password, username } = this;
+            const { apiKey: key, newWallet, password, username } = this;
 
-            axios.post(`${baseUrl}/user-bcaddr-reset`,
-                { azero_wallet_id: newAzeroAddress, key, password, pdot_wallet_id: newPdotAddress, username })
+            axios.post(`${baseUrl}/user-bcaddr-reset`, { key, password, username, wallet: newWallet })
                 .then(async response => {
                     const { status } = response.data;
                     let setAzeroAddress = false;
-                    let setPdotAddress = false;
 
                     this.status = status;
                     this.submitted = true;
                     this.submitting = false;
 
                     // set wallet address in state with user's new address
-                    if (newAzeroAddress?.length) {
-                        setAzeroAddress = await setChromeStorage({ azeroAddress: newAzeroAddress });
-                    }
-                    if (newPdotAddress?.length) {
-                        setPdotAddress = await setChromeStorage({ pdotAddress: newPdotAddress });
+                    if (newWallet?.length) {
+                        setAzeroAddress = await setChromeStorage({ azeroAddress: newWallet });
                     }
 
-                    if (setAzeroAddress || setPdotAddress) {
+                    if (setAzeroAddress) {
                         this.checkState();
                     } else {
                         this.errorArr.push('error_updating_wallet_address_generic');

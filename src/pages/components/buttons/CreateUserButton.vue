@@ -17,7 +17,6 @@ import { baseUrl, extractFromError, formatErrorMessages, getChromeStorage, submi
 export default {
     name: "CreateUserButton",
     props: {
-        address: { type: String, default: '' },
         checkState: { type: Function, required: true },
         createUserDisabled: { type: Boolean, default: false },
         email: { type: String, default: '' },
@@ -26,7 +25,8 @@ export default {
         selectPage: { type: Function, required: true },
         termsOfService: { type: Boolean, default: false },
         unitedStates: { type: Boolean, default: false },
-        username: { type: String, default: '' }
+        username: { type: String, default: '' },
+        wallet: { type: String, default: '' },
     },
     components: {
         ErrorMessage,
@@ -68,7 +68,7 @@ export default {
             this.errorArr = [];
 
             const allowlist = await getChromeStorage('allowlist') || [];
-            const { address, email, password, referrer, termsOfService: terms_of_service, unitedStates: confirmed_not_united_states, username } = this;
+            const { email, password, referrer, termsOfService: terms_of_service, unitedStates: confirmed_not_united_states, username, wallet } = this;
             this.submitting = true;
 
             // needed bc this endpoint returns a 201 (create) rather than 200
@@ -77,7 +77,7 @@ export default {
             });
 
             instance.post(`${baseUrl}/user-create`,
-                { address, allowlist, email, password, referrer, terms_of_service, confirmed_not_united_states, username })
+                { allowlist, email, password, referrer, terms_of_service, confirmed_not_united_states, username, wallet })
                 .then(async response => {
                     const { status, data: { key } } = response;
 
@@ -89,7 +89,7 @@ export default {
                     const loggedInSynched = await setChromeStorage({ loggedIn: true });
                     const registeredSynched = await setChromeStorage({ registered: true });
                     const setApiKey = await setChromeStorage({ apiKey: key });
-                    const setAzeroAddress = await setChromeStorage({ azeroAddress: address });
+                    const setAzeroAddress = await setChromeStorage({ azeroAddress: wallet });
                     const setEmail = await setChromeStorage({ email });
                     const setUsername = await setChromeStorage({ username });
 

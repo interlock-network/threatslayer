@@ -34,7 +34,7 @@
         </label>
     </div>
     <CreateUserButton style="margin-top: 1.1rem;" tabindex="20"
-        v-bind="{ address, checkState, createUserDisabled, selectPage, email, password, referrer, termsOfService, unitedStates, username }" />
+        v-bind="{ checkState, createUserDisabled, selectPage, email, password, referrer, termsOfService, unitedStates, username, wallet }" />
 </template>
 
 <script>
@@ -80,7 +80,6 @@ export default {
     },
     data() {
         return {
-            address: '',
             azeroAddressHasError: '',
             connectAccountSelected: true,
             createAccountSelected: false,
@@ -96,7 +95,8 @@ export default {
             termsOfService: false,
             unitedStates: false,
             username: '',
-            usernameHasError: ''
+            usernameHasError: '',
+            wallet: '',
         };
     },
     async mounted() {
@@ -129,8 +129,8 @@ export default {
                 secondCheckBox.focus();
             }
         },
-        getAzeroAddress(walletAddress) {
-            this.address = walletAddress;
+        getAzeroAddress(wallet) {
+            this.wallet = wallet;
         },
         getAzeroAddressHasError(errorBool) {
             this.azeroAddressHasError = errorBool;
@@ -162,12 +162,12 @@ export default {
         getUsernameHasError(errorBool) {
             this.usernameHasError = errorBool;
         },
-        legitPolkadot(address) {
+        legitPolkadot(wallet) {
             try {
                 encodeAddress(
-                    isHex(address)
-                        ? hexToU8a(address)
-                        : decodeAddress(address)
+                    isHex(wallet)
+                        ? hexToU8a(wallet)
+                        : decodeAddress(wallet)
                 );
 
                 return true;

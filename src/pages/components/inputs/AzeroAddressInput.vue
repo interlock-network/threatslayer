@@ -1,5 +1,5 @@
 <template>
-    <input @input="validateWalletAddress" v-model.trim="walletAddress" required :class="inputClass"
+    <input @input="validateWalletAddress" v-model.trim="wallet" required :class="inputClass"
         :placeholder="$i18n(placeholder)" :tabindex="tabindex" />
     <ErrorMessage v-if="errorMessage.length" :msg="$i18n(errorMessage)" single />
 </template>
@@ -22,8 +22,8 @@ export default {
     },
     data() {
         return {
-            walletAddress: '',
-            errorMessage: ''
+            errorMessage: '',
+            wallet: ''
         }
     },
     computed: {
@@ -32,11 +32,11 @@ export default {
         }
     },
     methods: {
-        validateAzero(address = '') {
+        validateAzero(wallet = '') {
             let result = true;
             const azeroRegex = /^5.*/;
 
-            if (address.length && !azeroRegex.test(address)) {
+            if (wallet?.length && !azeroRegex.test(wallet)) {
                 result = false;
             }
 
@@ -44,14 +44,14 @@ export default {
         },
         validateWalletAddress: debounce(function () {
             let result = 'error';
-            const walletAddress = this.walletAddress;
+            const wallet = this.wallet;
 
-            if (!walletAddress || !walletAddress.length) {
+            if (!wallet?.length) {
                 result = '';
             } else {
-                const addressIsValid = this.validPolkadot(walletAddress);
+                const addressIsValid = this.validPolkadot(wallet);
 
-                if (!this.validateAzero(walletAddress)) {
+                if (!this.validateAzero(wallet)) {
                     result = 'warning_address_not_azero';
                 }
                 // happy case
@@ -65,15 +65,15 @@ export default {
             const hasError = !!result.length;
 
             this.errorMessage = result;
-            this.$emit('currentAzeroAddress', walletAddress);
+            this.$emit('currentAzeroAddress', wallet);
             this.$emit('azeroAddressHasError', hasError);
         }, 250),
-        validPolkadot(address) {
+        validPolkadot(wallet) {
             try {
                 encodeAddress(
-                    isHex(address)
-                        ? hexToU8a(address)
-                        : decodeAddress(address)
+                    isHex(wallet)
+                        ? hexToU8a(wallet)
+                        : decodeAddress(wallet)
                 );
 
                 return true;

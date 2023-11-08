@@ -16,7 +16,7 @@
         <br />
     </div>
     <!-- view wallet information modal -->
-    <WalletInfoModal v-bind="{ azeroAddress, apiKey, checkState, fadeAccountPage, pdotAddress, selectPage, username }"
+    <WalletInfoModal v-bind="{ azeroAddress, apiKey, checkState, fadeAccountPage, selectPage, username }"
         style="opacity: 1" />
     <div :style="computedStyle">
         <!-- Names of user who referred this user -->
@@ -63,7 +63,6 @@ export default {
         apiKey: { type: String, default: '' },
         checkState: { type: Function, required: true },
         email: { type: String, default: '' },
-        pdotAddress: { type: String, default: '' },
         selectPage: { type: Function, required: true },
         username: { type: String, default: '' }
     },
@@ -102,7 +101,7 @@ export default {
 
             axios.post(`${baseUrl}/user-get`, { key: apiKey, username })
                 .then(async response => {
-                    const { address = '', allowlist = [], email, malicious_urls = 0, next_token_drop = 0, referred = [], referrer = '', slay_count = 0,
+                    const { wallet = '', allowlist = [], email, malicious_urls = 0, next_token_drop = 0, referred = [], referrer = '', slay_count = 0,
                         token_earned_balance = 0, token_earned_total = 0, unique_urls = 0, unlocked_urls_confirmed = 0, user_since = 0 } = response?.data;
 
                     this.referred = referred;

@@ -64,14 +64,13 @@ export default {
                 const azeroAddressClearedFromState = await clearChromeStorage('azeroAddress');
                 const emailClearedFromState = await clearChromeStorage('email');
                 const keyClearedFromState = await clearChromeStorage('apiKey');
-                const pdotAddressClearedFromState = await clearChromeStorage('pdotAddress');
                 const usernameClearedFromState = await clearChromeStorage('username');
 
                 // this happens last
                 const loggedOut = await setChromeStorage({ loggedIn: false });
 
                 const loggedOutSynched = azeroAddressClearedFromState && emailClearedFromState && keyClearedFromState
-                    && loggedOut && pdotAddressClearedFromState && usernameClearedFromState;
+                    && loggedOut && usernameClearedFromState;
 
                 if (!loggedOutSynched) {
                     this.errorArr.push('Error logging in. Please try again later.')
