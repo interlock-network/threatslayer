@@ -256,12 +256,14 @@ export default {
         async getSlayCountStats() {
             // this value is only stored locally
             this.useExtensionState('totalMaliciousURLsVisited');
+            this.useExtensionState('totalURLsVisited');
 
-            if (this.apiKey?.length && this.username?.length) {
-                this.getStatsFromApi();
-            } else {
-                this.useExtensionState('totalURLsVisited');
-            }
+            // TODO uncomment when Galactus returns slay count
+            // if (this.apiKey?.length && this.username?.length) {
+            //     this.getStatsFromApi();
+            // } else {
+            //     this.useExtensionState('totalURLsVisited');
+            // }
         },
         async useExtensionState(key) {
             try {
@@ -284,12 +286,13 @@ export default {
             const { apiKey, username } = this;
 
             axios.post(`${baseUrl}/user-get`, { key: apiKey, username })
-                .then(response => {
-                    const { lookups = 0, lookups_total = 0 } = response?.data;
-                    const totalURLsVisited = lookups + lookups_total;
+                // TODO uncomment when Galactus returns slay count
+                .then(_response => {
+                    // const { lookups = 0, lookups_total = 0 } = response?.data;
+                    // const totalURLsVisited = lookups + lookups_total;
 
-                    this.rawTotalUrlsVisited = totalURLsVisited;
-                    setChromeStorage({ totalURLsVisited });
+                    // this.rawTotalUrlsVisited = totalURLsVisited;
+                    // setChromeStorage({ totalURLsVisited });
                 })
                 .catch(error => {
                     const { errors, status } = extractFromError(error);
