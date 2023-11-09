@@ -12,7 +12,8 @@
             <!-- prompt to add wallet address if there is none -->
             <AddWallet v-if="addWallet"
                 v-bind="{ apiKey, azeroAddress, checkState, selectChangeAddress, updateAddressMsg, username }" />
-            <DeleteWallet v-if="deleteWallet" v-bind="{ apiKey, azeroAddress, deleteWalletSelected, username }" />
+            <DeleteWallet v-if="deleteWallet"
+                v-bind="{ apiKey, azeroAddress, checkState, deleteWalletSelected, username }" />
             <div v-if="showChangeAddressButton">
                 <button @click="selectChangeAddress(true)" id="update-address-button" class="modal-button" tabindex="12">
                     {{ $i18n('update_wallet_address') }}

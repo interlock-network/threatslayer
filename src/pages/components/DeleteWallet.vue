@@ -37,6 +37,7 @@ export default {
     props: {
         apiKey: { type: String, default: '' },
         azeroAddress: { type: String, default: '' },
+        checkState: { type: Function, required: true },
         deleteWalletSelected: { type: Function, required: true },
         username: { type: String, default: '' }
     },
