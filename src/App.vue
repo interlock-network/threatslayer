@@ -14,7 +14,7 @@
         <FAQPage v-if="currentPage === 'faq'" />
         <!-- <OptionsPage v-if="currentPage === 'options'" /> -->
         <AccountPage v-if="currentPage === 'account'"
-          v-bind="{ azeroAddress, apiKey, checkState, email, pdotAddress, selectPage, username }" />
+          v-bind="{ azeroAddress, apiKey, checkState, email, selectPage, username }" />
         <NoAccountPage v-if="currentPage === 'noAccount'" v-bind="{ checkState, selectPage }" />
       </div>
     </div>
@@ -64,7 +64,6 @@ export default {
       email: null,
       loggedIn: false,
       maliciousUrlObjects: null,
-      pdotAddress: null,
       registered: false,
       urlToStake: null,
       username: null
@@ -82,7 +81,6 @@ export default {
       const isRegistered = await getChromeStorage('registered');
       const loggedIn = await getChromeStorage('loggedIn');
       const maliciousUrlObjects = await getChromeStorage('maliciousUrlObjects');
-      const pdotAddress = await getChromeStorage('pdotAddress'); // optional, may be missing
       const urlToStake = await getChromeStorage('urlToStake');
       const username = await getChromeStorage('username');
 
@@ -99,7 +97,6 @@ export default {
         this.apiKey = apiKey;
         this.azeroAddress = azeroAddress;
         this.email = email;
-        this.pdotAddress = pdotAddress;
         this.username = username;
 
         if (urlToStake) {
