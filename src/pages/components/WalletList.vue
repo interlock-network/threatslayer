@@ -30,20 +30,4 @@ export default {
     padding-bottom: 3px;
     padding-left: 5px;
 }
-
-#delete-address-button {
-    background-color: #0F0818;
-    border: none;
-    color: #9000CB;
-    font-size: 1rem;
-    height: 2rem;
-    margin-bottom: 2rem;
-    padding: 0.5rem 0.75rem;
-    pointer-events: initial;
-    width: 400px;
-}
-
-#delete-address-button:hover {
-    background-color: #4A0064;
-}
 </style>
