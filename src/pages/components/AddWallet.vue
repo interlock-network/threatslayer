@@ -12,7 +12,7 @@
         style="margin-top: 3rem;" />
     <UpdateAddressButton tabindex="4" style="margin-top: 3rem; margin-bottom: 1rem;"
         v-bind="{ apiKey, checkState, hasError, newWallet, password, username }" />
-    <button @click="selectChangeAddress(false)" id="done-button" class="modal-button" tabindex="6">
+    <button @click="selectChangeAddress(false)" id="cancel-button" class="modal-button" tabindex="6">
         {{ $i18n('cancel') }}
     </button>
 </template>
@@ -75,26 +75,21 @@ export default {
 </script>
 
 <style>
-#clear-wallet-button {
-    background: inherit;
-    border: none;
-    padding-bottom: 3px;
-    padding-left: 5px;
-}
-
-#delete-address-button {
+#cancel-button {
     background-color: #0F0818;
     border: none;
-    color: #9000CB;
+    border-radius: 6px;
+    color: red;
     font-size: 1rem;
-    height: 2rem;
-    margin-bottom: 2rem;
-    padding: 0.5rem 0.75rem;
-    pointer-events: initial;
+    line-height: 2rem;
     width: 400px;
 }
 
-#delete-address-button:hover {
+#cancel-button:hover {
     background-color: #4A0064;
+}
+
+#cancel-button:active {
+    background-color: #261142;
 }
 </style>
