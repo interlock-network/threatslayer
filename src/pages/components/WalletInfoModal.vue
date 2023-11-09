@@ -7,31 +7,20 @@
     <div v-if="active" id="modal-overlay" @keydown.esc="doneAction">
         <div id="modal-container" :style="active ? 'bottom: 40%' : 'display: none'">
             <!-- List of existing wallet addresses, if any -->
-            <WalletList v-bind="{ azeroAddress, changeAddressSelected }" />
+            <WalletList v-bind="{ apiKey, azeroAddress, changeAddressSelected, deleteWalletSelected, username }"
+                @deleteWalletSelected="getDeleteWalletSelected" />
             <!-- prompt to add wallet address if there is none -->
-            <div v-if="showAddressInput">
-                <TextComponent :msg="$i18n(updateAddressMsg)" subinstruction /><br />
-                <br />
-                <AzeroAddressInput @currentAzeroAddress="getAzeroAddress" @azeroAddressHasError="getAzeroAddressHasError"
-                    tabindex="2" />
-                <div style="position: absolute;">
-                    <SinglePasswordInput @currentPassword="getPassword" @passwordHasError="getPasswordHasError" />
-                </div>
-                <div v-if="active">
-                    <br />
-                    <WarningTextBox v-if="showAddressChangeWarning" :msg="$i18n('warning_changing_wallet_address')" />
-                </div>
-                <UpdateAddressButton tabindex="10" style="margin-top: 3rem; margin-bottom: 1rem;"
-                    v-bind="{ apiKey, checkState, hasError, newWallet, password, username }" />
-            </div>
-            <div v-if="!showAddressInput">
+            <AddWallet v-if="addWallet"
+                v-bind="{ apiKey, azeroAddress, checkState, selectChangeAddress, updateAddressMsg, username }" />
+            <DeleteWallet v-if="deleteWallet" v-bind="{ apiKey, azeroAddress, deleteWalletSelected, username }" />
+            <div v-if="changeAddress">
                 <button @click="selectChangeAddress(true)" id="update-address-button" class="modal-button" tabindex="12">
                     {{ $i18n('update_wallet_address') }}
-                </button><br />
-                <br />
+                </button><br /> <br />
             </div>
-            <button @click="doneAction" id="done-button" class="modal-button" tabindex="14">
-                {{ $i18n(cancelDoneButtonText) }}
+            <button v-if="!addWallet && !deleteWallet" @click="doneAction" id="done-button" class="modal-button"
+                tabindex="14">
+                {{ $i18n('done') }}
             </button>
         </div>
     </div>
@@ -42,8 +31,9 @@ import { debounce } from 'debounce';
 import { decodeAddress, encodeAddress } from '@polkadot/keyring';
 import { hexToU8a, isHex } from '@polkadot/util';
 
+import AddWallet from "./AddWallet.vue";
 import AzeroAddressInput from "./inputs/AzeroAddressInput.vue";
-import ErrorMessage from "./ErrorMessage.vue";
+import DeleteWallet from "./DeleteWallet.vue";
 import SinglePasswordInput from "./inputs/SinglePasswordInput.vue";
 import TextComponent from "./TextComponent.vue";
 import UpdateAddressButton from "./buttons/UpdateAddressButton.vue";
@@ -61,8 +51,9 @@ export default {
         username: { type: String, default: '' }
     },
     components: {
+        AddWallet,
         AzeroAddressInput,
-        ErrorMessage,
+        DeleteWallet,
         SinglePasswordInput,
         TextComponent,
         UpdateAddressButton,
@@ -74,6 +65,7 @@ export default {
             active: false,
             changeAddressSelected: false,
             confirm: false,
+            deleteWallet: false,
             deleting: false,
             errorArr: [],
             newWallet: '',
@@ -91,8 +83,13 @@ export default {
         }
     },
     computed: {
-        cancelDoneButtonText() {
-            return this.changeAddressSelected ? 'cancel' : 'done';
+        addWallet() {
+            const { azeroAddress, changeAddressSelected } = this;
+
+            return !azeroAddress?.length || changeAddressSelected;
+        },
+        changeAddress() {
+            return !this.addWallet && !this.deleteWallet;
         },
         computedClass() {
             return this.errorArr.length || this.active ? 'submit-button-error' : '';
@@ -116,22 +113,17 @@ export default {
         headerText() {
             return !this.azeroAddress?.length ? 'add_blockchain_address' : 'view_wallet_info';
         },
-        showAddress(wallet) {
-            return wallet?.length && !this.changeAddressSelected;
-        },
         showAddressChangeWarning() {
             return this.azeroAddress?.length;
         },
-        showAddressInput() {
-            const { azeroAddress, changeAddressSelected } = this;
-
-            return !azeroAddress?.length || changeAddressSelected;
-        },
         updateAddressMsg() {
-            return !this.wallet?.length ? 'warning_must_add_wallet_address' : 'enter_new_wallet_address';
+            return !this.azeroAddress?.length ? 'warning_must_add_wallet_address' : 'enter_new_wallet_address';
         }
     },
     methods: {
+        deleteWalletSelected(bool) {
+            this.deleteWallet = bool;
+        },
         doneAction() {
             this.newWallet = '';
             this.newAzeroAddressHasError = '';
@@ -139,12 +131,6 @@ export default {
             this.active = false;
             this.fadeAccountPage(false);
             this.selectChangeAddress(false);
-        },
-        getAzeroAddress(wallet) {
-            this.newWallet = wallet;
-        },
-        getAzeroAddressHasError(errorBool) {
-            this.newAzeroAddressHasError = errorBool;
         },
         getPassword(password) {
             this.password = password;
