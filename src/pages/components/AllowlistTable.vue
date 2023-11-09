@@ -139,13 +139,6 @@ export default {
     width: 400px;
 }
 
-#clear-url-button {
-    background: inherit;
-    border: none;
-    padding-bottom: 3px;
-    padding-left: 5px;
-}
-
 #url-container::-webkit-scrollbar {
     -webkit-appearance: none;
     width: 4px;

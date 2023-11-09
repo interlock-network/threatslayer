@@ -26,4 +26,11 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+#clear-url-button {
+    background: inherit;
+    border: none;
+    padding-bottom: 3px;
+    padding-left: 5px;
+}
+</style>
