@@ -1,7 +1,7 @@
 <template>
     <input id="login-password" class="password-input" @input="validatePassword" :type="passwordInputType"
         v-model.trim="password" :placeholder="$i18n(placeholder)" :tabindex="tabindex" :class="passwordInputClass" />
-    <button @click="togglePasswordInputType" id="show-password-toggle-button" :tabindex="showButtonIndex">
+    <button @click="togglePasswordInputType" id="show-password-toggle-button" :tabindex="showButtonIndex" :style="style">
         {{ passwordInputType === 'password' ? $i18n('password_show') : $i18n('password_hide') }}
     </button>
     <ErrorMessage :msg="$i18n(errorMessage)" single v-if="errorMessage.length" />
@@ -18,6 +18,7 @@ export default {
         ErrorMessage
     },
     props: {
+        modal: { type: Boolean, default: false },
         placeholder: { type: String, default: 'password' },
         tabindex: { type: Number, default: 4 }
     },
@@ -29,6 +30,19 @@ export default {
         };
     },
     computed: {
+        style() {
+            let result = { 'margin-right': '4.25rem' };
+
+            const { modal } = this;
+
+            switch (true) {
+                case modal:
+                    result = { 'margin-right': '0.25rem' };
+                    break;
+            }
+
+            return result;
+        },
         passwordInputClass() {
             return this.errorMessage.length ? 'generic-error' : '';
         },
@@ -79,7 +93,6 @@ export default {
     border: none;
     color: #963cf5;
     float: right;
-    margin-right: 4.25rem;
     margin-top: -2.25rem;
     pointer-events: initial;
     cursor: pointer;
