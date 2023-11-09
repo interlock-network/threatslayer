@@ -17,7 +17,7 @@
                 v-bind="{ active, checkState, disableDeleteButton, fadeAccountPage, password, setActive, username }" />
             <ErrorMessage v-for="errorMessage in errorArr" :msg="errorMessage" single style="margin-top: 1rem;" />
             <!-- cancel button -->
-            <button @click="cancelAction" id="cancel-delete-user-button" style="color: #963cf5 ">
+            <button @click="cancelAction" class="secondary-hollow-button">
                 {{ $i18n('cancel') }}
             </button>
         </div>
@@ -87,26 +87,6 @@ export default {
 </script>
 
 <style>
-#cancel-delete-user-button {
-    font-size: 1.25rem;
-    background-color: #0F0818;
-    border: none;
-    border-radius: 6px;
-    color: #963cf5;
-    cursor: pointer;
-    line-height: 2rem;
-    font-size: 1.25rem;
-    width: 400px;
-}
-
-#cancel-delete-user-button:hover {
-    background-color: #4A0064;
-}
-
-#cancel-delete-user-button:active {
-    background-color: #261142;
-}
-
 #delete-user-modal-container {
     background-color: #0F0818;
     border-radius: 12px;
