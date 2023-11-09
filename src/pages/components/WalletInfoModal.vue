@@ -13,13 +13,12 @@
             <AddWallet v-if="addWallet"
                 v-bind="{ apiKey, azeroAddress, checkState, selectChangeAddress, updateAddressMsg, username }" />
             <DeleteWallet v-if="deleteWallet" v-bind="{ apiKey, azeroAddress, deleteWalletSelected, username }" />
-            <div v-if="changeAddress">
+            <div v-if="showChangeAddressButton">
                 <button @click="selectChangeAddress(true)" id="update-address-button" class="modal-button" tabindex="12">
                     {{ $i18n('update_wallet_address') }}
                 </button><br /> <br />
             </div>
-            <button v-if="!addWallet && !deleteWallet" @click="doneAction" id="done-button" class="modal-button"
-                tabindex="14">
+            <button v-if="!addWallet && !deleteWallet" @click="doneAction" class="secondary-hollow-button" tabindex="14">
                 {{ $i18n('done') }}
             </button>
         </div>
@@ -88,7 +87,7 @@ export default {
 
             return !azeroAddress?.length || changeAddressSelected;
         },
-        changeAddress() {
+        showChangeAddressButton() {
             return !this.addWallet && !this.deleteWallet;
         },
         computedClass() {
@@ -200,24 +199,6 @@ export default {
     text-align: center;
 }
 
-#done-button {
-    background-color: #0F0818;
-    border: none;
-    border-radius: 6px;
-    color: red;
-    font-size: 1rem;
-    line-height: 2rem;
-    width: 400px;
-}
-
-#done-button:hover {
-    background-color: #4A0064;
-}
-
-#done-button:active {
-    background-color: #261142;
-}
-
 #delete-user-password-input {
     margin-top: 1rem;
     position: absolute;
@@ -257,6 +238,10 @@ export default {
 
 #update-address-button:hover {
     background-color: #4A0064;
+}
+
+#update-address-button:active {
+    background-color: #261142;
 }
 
 #view-wallet-info-button {
