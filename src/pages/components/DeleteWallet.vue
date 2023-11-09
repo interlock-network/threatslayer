@@ -12,7 +12,7 @@
             <!-- TODO translate this -->
             Delete Wallet Address
         </button> <br />
-        <button @click="deleteWalletSelected(false)" id="cancel-delete-address-button" class="modal-button" tabindex="6">
+        <button @click="deleteWalletSelected(false)" class="secondary-hollow-button" style="margin-top: 2rem;" tabindex="6">
             {{ $i18n('cancel') }}
         </button>
     </div>
@@ -92,17 +92,10 @@ export default {
 </script>
 
 <style>
-#clear-wallet-button {
-    background: inherit;
-    border: none;
-    padding-bottom: 3px;
-    padding-left: 5px;
-}
-
 #delete-address-button {
     background-color: #0F0818;
     border: none;
-    color: #9000CB;
+    color: red;
     font-size: 1rem;
     height: 2rem;
     margin-bottom: 2rem;
@@ -112,21 +105,6 @@ export default {
 }
 
 #delete-address-button:hover {
-    background-color: #4A0064;
-}
-
-#cancel-delete-address-button {
-    background-color: #0F0818;
-    border: none;
-    border-radius: 6px;
-    color: red;
-    font-size: 1rem;
-    line-height: 2rem;
-    margin-top: 1rem;
-    width: 400px;
-}
-
-#cancel-delete-address-button:hover {
     background-color: #4A0064;
 }
 </style>
