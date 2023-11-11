@@ -30,20 +30,13 @@ function handleAPIResponse(response) {
 }
 
 /**
- * This function returns the current URL.
- */
-function getFormattedUrl() {
-    return window.location.href;
-}
-
-/**
  * Due to security concerns in content scripts, Chrome requires us to
  * execute cross-origin XHR using a service worker. Therefore, we send
  * a message to our service worker, which then performs the request,
  * and asynchronously provides a response.
  */
 chrome.runtime.sendMessage(
-    { action: 'queryURL', url: getFormattedUrl() },
+    { action: 'queryURL', url: window.location.href },
     function (response) {
         if (response !== undefined && response !== '') {
             handleAPIResponse(response);
