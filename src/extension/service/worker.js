@@ -65,7 +65,8 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 
             // bail condition
             if (allowlist?.includes(url)) {
-                console.log('URL allowlisted by user:', url);
+                console.log(`URL allowlisted by user: ${url}`);
+
                 return;
             }
 
@@ -122,13 +123,6 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
                 .then(() => { console.log(`Total URLs set to: ${newTotalURLsVisited}`); });
         });
 
-        // uncomment when beta AI classifier is available to users again
-        // chrome.storage.sync.get('betaAISelected', async function (data) {
-        //     if (data.betaAISelected && data.betaAISelected === true) {
-        //         console.log(`Querying beta AI Threat Detection at: ${betaBaseAPIUrl}`);
-        //         selectedBaseAPIUrl = betaBaseAPIUrl;
-        //     }
-
         chrome.storage.local.get('apiKey').then((result) => {
             const body = { url };
             const key = result.apiKey;
@@ -143,11 +137,12 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
             })
                 .then((response) => response.json())
                 .then((response) => {
-                    sendResponse(response)
+                    sendResponse(response);
                 })
                 .catch((error) => { console.log(`Error getting malicious URL: ${error}`) });
         });
-        // });
+
+        return true;
     } else if (action === 'stakeUrl') {
         const urlToStake = request.url;
 
