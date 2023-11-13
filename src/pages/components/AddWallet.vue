@@ -79,7 +79,7 @@ export default {
     background-color: #0F0818;
     border: none;
     border-radius: 6px;
-    color: red;
+    color: #963cf5;
     font-size: 1rem;
     line-height: 2rem;
     width: 400px;
