@@ -20,6 +20,7 @@ const defaultConfig = {
  * @param {Object} sender - the error object returned by Axios
  * @param {Object} sender.tab - an object including the tab's numeric ID
  * @param {Number} sender.tab.id - unique ID number for a tab
+ * @param {Function} sendResponse - An optional callback, is called by passing 'true' at end of function request invokes
  */
 chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     const { action, url } = request;
