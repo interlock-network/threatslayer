@@ -4,14 +4,19 @@
     </PageBanner>
     <br />
     <div :style="computedStyle">
-        <TextComponent class="left-label" :msg="$i18n('ilock_earned')" bold />
-        <TextComponent v-if="ilockEarned > 0" :msg="ilockEarned" bigmono />
+        <TextComponent class="left-label" :msg="$i18n('ilock_earned')" bold />&nbsp;
+        <TextComponent v-if="ilockEarned > 0" :msg="ilockEarned" bigmono> $ILOCK</TextComponent>
         <div v-if="ilockEarned === 0">
             <TextComponent :msg="$i18n('ilock_keep_browsing_to_earn')" />
         </div>
         <br />
         <br />
-        <TextComponent class="left-label" :msg="$i18n('email')" bold />
+        <!-- TODO translate this -->
+        <TextComponent v-if="nextTokenDrop > 0" class="left-label" msg="Next $ILOCK Drop" bold />&nbsp;
+        <TextComponent v-if="nextTokenDrop > 0" :msg="nextTokenDropString" bigmono></TextComponent>
+        <br />
+        <br />
+        <TextComponent class="left-label" :msg="$i18n('email')" bold />&nbsp;
         <TextComponent :msg="email" bigmono /> <br />
         <br />
     </div>
@@ -69,6 +74,7 @@ export default {
     data() {
         return {
             allowlistSet: false,
+            nextTokenDrop: 0, // Unix timestamp
             pageFaded: false,
             referred: [],
             referrer: '',
@@ -84,9 +90,14 @@ export default {
             return this.pageFaded ? { 'opacity': '5%', 'pointer-events': 'none' } : {};
         },
         ilockEarned() {
-            const tokenTotal = this.tokenEarned + this.tokenEarnedTotal;
+            const tokenTotal = this.tokenEarnedBalance + this.tokenEarnedTotal;
 
             return tokenTotal;
+        },
+        nextTokenDropString() {
+            const date = new Date(this.nextTokenDrop * 1000);
+
+            return date.toLocaleString();
         },
         referredList() {
             return this.referred.join(', ');
@@ -105,8 +116,13 @@ export default {
                         token_earned_balance = 0, token_earned_total = 0, unique_urls = 0, unlocked_urls_confirmed = 0, user_since = 0 } = response?.data;
 
                     this.referred = referred;
+                    // TODO delete this
+                    // this.tokenEarnedBalance = 0;
+                    // this.tokenEarnedTotal = 1337;
+                    // this.nextTokenDrop = 1698508800;
                     this.tokenEarnedBalance = token_earned_balance;
                     this.tokenEarnedTotal = token_earned_total;
+                    this.nextTokenDrop = next_token_drop;
                 })
                 .catch(error => {
                     const { errors, status } = extractFromError(error);
