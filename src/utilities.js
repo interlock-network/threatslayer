@@ -3,7 +3,7 @@ export const baseUrl = 'https://galactus.interlock.network';
 /**
  * This function clears a single value from Chrome local storage.
  * @param {string} key - The key for a value to set to null in Chrome local storage
- * @returns {boolean} Whether the value for key was cleared from Chrome local storage
+ * @returns {boolean} - Whether the value for key was cleared from Chrome local storage
  */
 export function clearChromeStorage(key) {
     try {
@@ -53,6 +53,19 @@ export function formatErrorMessages(errorArr) {
 }
 
 /**
+ * This function formats a value to be logged.
+ * @param {string|Object} item - The value to ultimately be console logged
+ * @returns {string} - Returns a string to be console logged
+ */
+const formatValue = (item) => {
+    const itemType = typeof item;
+
+    return itemType === 'undefined' ? 'undefined' :
+        itemType === 'object' ? JSON.stringify(item) :
+            item;
+}
+
+/**
  * This function gets a single value from Chrome local storage
  * @param {string} key - The key for a value in Chrome local storage
  * @returns {Promise} A promise object with the value for the key passed to the function
@@ -61,11 +74,12 @@ export function getChromeStorage(key) {
     try {
         return chrome.storage.local
             .get([key])
-            .then(async response => {
-                const result = await response[key];
-                console.log(`Chrome state retrieved for ${key}: ${result}`);
+            .then(response => {
+                const value = response[key];
 
-                return result;
+                console.log(`Chrome state retrieved for ${key}: ${formatValue(value)}`);
+
+                return value;
             });
     } catch (err) {
         console.log(`Error getting Chrome state for ${key}: ${err}`);
@@ -91,7 +105,7 @@ export function setChromeStorage(storageObj) {
                 const key = Object.keys(storageObj);
                 const value = storageObj[key];
 
-                console.log(`Chrome state set for ${key}: ${value}`);
+                console.log(`Chrome state set for ${key}: ${formatValue(value)}`);
 
                 return true;
             });
