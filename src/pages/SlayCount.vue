@@ -59,14 +59,14 @@
             </linearGradient>
         </defs>
         <defs>
-            <linearGradient id="rainbow" x1="2" x2="0" y1="0" y2="10%" gradientUnits="userSpaceOnUse">
+            <linearGradient id="rainbow" x1="2" x2="0" y1="0" y2="15%" gradientUnits="userSpaceOnUse">
                 <stop stop-color="#1f90f1" offset="30%" />
                 <stop stop-color="#c417e0" offset="50%" />
                 <stop stop-color="#e56a7a" offset="80%" />
                 <stop stop-color="#fca531" offset="100%" />
             </linearGradient>
         </defs>
-        <g filter="url(#filter0_d_622_766)" transform="translate(75, 90)">
+        <g filter="url(#filter0_d_622_766)" transform="translate(75, 115)">
             <path fill-rule="evenodd" clip-rule="evenodd"
                 d="M360 178.5C360 276.531 280.531 356 182.5 356C84.4695 356 5 276.531 5 178.5C5 80.4695 84.4695 1 182.5 1C280.531 1 360 80.4695 360 178.5ZM182.5 323.231C262.433 323.231 327.231 258.433 327.231 178.5C327.231 98.5674 262.433 33.7692 182.5 33.7692C102.567 33.7692 37.7692 98.5674 37.7692 178.5C37.7692 258.433 102.567 323.231 182.5 323.231Z"
                 fill="url(#paint0_linear_622_766)" />
@@ -74,15 +74,22 @@
                 d="M182.5 356.5C280.807 356.5 360.5 276.807 360.5 178.5C360.5 80.1933 280.807 0.5 182.5 0.5C84.1933 0.5 4.5 80.1933 4.5 178.5C4.5 276.807 84.1933 356.5 182.5 356.5ZM326.731 178.5C326.731 258.156 262.156 322.731 182.5 322.731C102.844 322.731 38.2692 258.156 38.2692 178.5C38.2692 98.8436 102.844 34.2692 182.5 34.2692C262.156 34.2692 326.731 98.8436 326.731 178.5Z"
                 stroke="black" />
         </g>
-        <image x="206" y="10" width="100" height="100" href="/src/assets/images/threatslayer_logo_with_alpha.png" />
-        <text id="slay-count" x="50%" y="53%" class="count" font-family="THICCCBOI" font-weight="bold"
+        <text id="threatslayer" x="50%" y="46" dominant-baseline="middle" text-anchor="middle" font-size="36px"
+            font-family="THICCCBOI" font-weight="bold" fill="url(#rainbow)">
+            {{ $i18n('threat_slayer') }}
+        </text>
+        <text id="credit" x="50%" y="74" dominant-baseline="middle" text-anchor="middle" font-size="14px"
+            font-family="THICCCBOI" font-weight="bold" fill="white">
+            {{ $i18n('powered_by_interlock') }}
+        </text>
+        <text id="slay-count" x="50%" y="57%" class="count" font-family="THICCCBOI" font-weight="bold"
             :font-size="totalVisitedFontSize" text-anchor="middle" dominant-baseline="middle" stroke="white" fill="white"
             stroke-width="2px">
             {{ totalURLsVisited }}
         </text>
-        <image x="32%" y="64%" width="33" height="33" href="/src/assets/images/threatslayer_logo_for_export.png" />
-        <image x="32%" y="64%" width="33" height="33" href="/src/assets/images/crossed_swords.png" />
-        <text x="54%" y="68%" font-size="32px" font-family="THICCCBOI" text-anchor="middle" fill="white"
+        <image x="32%" y="68%" width="33" height="33" href="/src/assets/images/threatslayer_logo_for_export.png" />
+        <image x="32%" y="68%" width="33" height="33" href="/src/assets/images/crossed_swords.png" />
+        <text x="54%" y="72%" font-size="32px" font-family="THICCCBOI" text-anchor="middle" fill="white"
             dominant-baseline="middle">
             {{ $i18n('slay_count') }}
         </text>
