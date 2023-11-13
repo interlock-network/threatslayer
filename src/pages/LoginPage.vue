@@ -8,12 +8,14 @@
     <br />
     <UsernameInput @currentUsername="getUsername" @usernameHasError="getUsernameHasError" tabindex="2" focus />
     <SinglePasswordInput @currentPassword="getPassword" @passwordHasError="getPasswordHasError" tabindex="4" />
-    <LoginButton v-bind="{ checkState, loginDisabled, password, selectPage, username }" />
+    <LoginButton v-bind="{ checkState, loginDisabled, password, selectPage, username }" style="margin-top: 0.75rem;" />
     <br />
     <br />
     <!-- Forgot username / password flow -->
     <div id="forgot-password-container">
         <TextComponent :msg="$i18n('forgot_password')" id="forgot-password-header" bold />
+        <br />
+        <br />
         <EmailInput placeholder="enter_email_to_change_password" @currentEmail="getEmail" tabindex="8"
             @emailHasError="getEmailHasError" />
         <ForgotPasswordButton :forgotPasswordDisabled="forgotPasswordDisabled" :email="email" style="margin-top: 0.75rem;"
