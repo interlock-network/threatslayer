@@ -1,5 +1,5 @@
 <template>
-    <TextComponent :msg="errorMessage" :class="computedClass" :style="computedStyle" />
+    <TextComponent :msg="errorMessage" :class="computedClass" :style="computedStyle" error />
 </template>
 
 <script>
