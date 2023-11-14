@@ -554,5 +554,53 @@
     "why_choose_threat_slayer": {
         "message": "Pourquoi Choisir ThreatSlayer ?",
         "description": "The text used on the About Us page."
+    },
+    "delete_wallet_address": {
+        "message": "Supprimer l'adresse du portefeuille",
+        "description": "Option on the wallet information modal."
+    },
+    "enter_password_to_delete_wallet_address": {
+        "message": "Entrez le mot de passe pour supprimer l'adresse du portefeuille.",
+        "description": "Instruction for deleting wallet address in the wallet information modal."
+    },
+    "error_confirm_must_be_true": {
+        "message": "Erreur : Vous devez confirmer avant de continuer.",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_invalid_credentials": {
+        "message": "Erreur : Identifiants invalides.",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_invalid_email": {
+        "message": "Erreur : Email invalide.",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_invalid_password": {
+        "message": "Erreur : Mot de passe invalide.",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_invalid_username": {
+        "message": "Erreur : Nom d'utilisateur invalide.",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_invalid_wallet_address": {
+        "message": "Erreur : Adresse de portefeuille invalide.",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_key_missing": {
+        "message": "Erreur : Information manquante.",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "next_ilock_drop": {
+        "message": "Prochaine Distribution de $$ILOCK",
+        "description": "Information on the Account page."
+    },
+    "referred_by": {
+        "message": "Référé par",
+        "description": "Information on the Account page."
+    },
+    "warning_need_wallet_to_withdraw_ilock": {
+        "message": "Avertissement : Sans une adresse de portefeuille, vous ne pourrez pas retirer $$ILOCK que vous avez gagné.",
+        "description": "Warning in the wallet information modal."
     }
 }

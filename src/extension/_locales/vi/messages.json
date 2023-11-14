@@ -554,5 +554,53 @@
     "why_choose_threat_slayer": {
         "message": "Tại sao chọn ThreatSlayer?",
         "description": "Văn bản được sử dụng trên trang Về Chúng Tôi."
+    },
+    "delete_wallet_address": {
+        "message": "Xóa Địa Chỉ Ví",
+        "description": "Option on the wallet information modal."
+    },
+    "enter_password_to_delete_wallet_address": {
+        "message": "Nhập mật khẩu để xóa địa chỉ ví.",
+        "description": "Instruction for deleting wallet address in the wallet information modal."
+    },
+    "error_confirm_must_be_true": {
+        "message": "Lỗi: Phải xác nhận trước khi tiếp tục.",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_invalid_credentials": {
+        "message": "Lỗi: Thông tin đăng nhập không hợp lệ.",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_invalid_email": {
+        "message": "Lỗi: Email không hợp lệ.",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_invalid_password": {
+        "message": "Lỗi: Mật khẩu không hợp lệ.",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_invalid_username": {
+        "message": "Lỗi: Tên đăng nhập không hợp lệ.",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_invalid_wallet_address": {
+        "message": "Lỗi: Địa chỉ ví không hợp lệ.",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_key_missing": {
+        "message": "Lỗi: Thiếu thông tin.",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "next_ilock_drop": {
+        "message": "Lần Phân Phối $$ILOCK Tiếp Theo",
+        "description": "Information on the Account page."
+    },
+    "referred_by": {
+        "message": "Giới thiệu bởi",
+        "description": "Information on the Account page."
+    },
+    "warning_need_wallet_to_withdraw_ilock": {
+        "message": "Cảnh báo: Không có địa chỉ ví, bạn không thể rút $$ILOCK mà bạn đã kiếm được.",
+        "description": "Warning in the wallet information modal."
     }
 }

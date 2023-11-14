@@ -56,11 +56,11 @@
         "description": "Explanation on the allowlist table."
     },
     "already_have_one": {
-        "message": "すでにアカウントをお持ちですか？",
+        "message": "すでにアカウントをお持ちですか?",
         "description": "Instruction for logging in."
     },
     "already_have_a_wallet": {
-        "message": "すでにウォレットをお持ちですか？",
+        "message": "すでにウォレットをお持ちですか?",
         "description": "Instruction for registering."
     },
     "amount_to_stake": {
@@ -88,7 +88,7 @@
         "description": "The text used on the close button."
     },
     "confirm_are_you_sure": {
-        "message": "本当によろしいですか？",
+        "message": "本当によろしいですか?",
         "description": "Confirmation for user actions."
     },
     "create_one": {
@@ -120,11 +120,11 @@
         "description": "マニフェスト内の説明。"
     },
     "dont_have_an_account": {
-        "message": "アカウントをお持ちでないですか？",
+        "message": "アカウントをお持ちでないですか?",
         "description": "アカウント作成の指示。"
     },
     "dont_have_one": {
-        "message": "ウォレットをお持ちでないですか？",
+        "message": "ウォレットをお持ちでないですか?",
         "description": "ウォレットアドレスの作成指示。"
     },
     "done": {
@@ -156,7 +156,7 @@
         "description": "アカウント登録の指示。"
     },
     "enter_referrer_name": {
-        "message": "任意：紹介者のユーザー名を入力してください",
+        "message": "任意: 紹介者のユーザー名を入力してください",
         "description": "アカウント登録の指示。"
     },
     "enter_azero_wallet_address": {
@@ -168,7 +168,7 @@
         "description": "アカウント登録の指示。"
     },
     "enter_azero_wallet_address_optional": {
-        "message": "任意：Aleph Zero互換ウォレットアドレスを貼り付けてください",
+        "message": "任意: Aleph Zero互換ウォレットアドレスを貼り付けてください",
         "description": "アカウント登録の指示。"
     },
     "enter_new_wallet_address": {
@@ -232,7 +232,7 @@
         "description": "ウォレットアドレス更新の一般的なエラーメッセージ。"
     },
     "error_username_too_long": {
-        "message": "ユーザー名が長すぎます：最大長は16文字です。",
+        "message": "ユーザー名が長すぎます: 最大長は16文字です。",
         "description": "登録エラーメッセージ。"
     },
     "extension_options": {
@@ -244,7 +244,7 @@
         "description": "ページのタイトル。サイドバーで使用されます。"
     },
     "forgot_password": {
-        "message": "パスワードをお忘れですか？",
+        "message": "パスワードをお忘れですか?",
         "description": "ログインページで使用されるテキスト。"
     },
     "frequently_asked_questions": {
@@ -252,11 +252,11 @@
         "description": "ページのタイトル。"
     },
     "how_does_threat_slayer_protect_me": {
-        "message": "ThreatSlayerはどのように私を保護しますか？",
+        "message": "ThreatSlayerはどのように私を保護しますか?",
         "description": "FAQページの質問。"
     },
     "how_does_threat_slayer_reward_me": {
-        "message": "ThreatSlayerはどのようにして$$ILOCKで私に報酬を提供しますか？",
+        "message": "ThreatSlayerはどのようにして$$ILOCKで私に報酬を提供しますか?",
         "description": "FAQページの質問。"
     },
     "how_does_threat_slayer_reward_me_answer": {
@@ -272,15 +272,15 @@
         "description": "アカウントページのセクションヘッダー。"
     },
     "ilock_keep_browsing_to_earn": {
-        "message": "ThreatSlayerでブラウジングを続けて$$ILOCKを稼ぎましょう！",
+        "message": "ThreatSlayerでブラウジングを続けて$$ILOCKを稼ぎましょう!",
         "description": "トークン獲得に関するユーザーメッセージ。"
     },
     "is_threat_slayer_open_source": {
-        "message": "ThreatSlayerはオープンソースですか？",
+        "message": "ThreatSlayerはオープンソースですか?",
         "description": "FAQページの質問。"
     },
     "is_threat_slayer_open_source_answer": {
-        "message": "私たちは、脅威を検出するAIでブラウザのURLをスキャンします。アカウントとURLを関連付けて、$$ILOCKで報酬を提供できるようにします。それだけです！",
+        "message": "私たちは、脅威を検出するAIでブラウザのURLをスキャンします。アカウントとURLを関連付けて、$$ILOCKで報酬を提供できるようにします。それだけです!",
         "description": "FAQページの質問に対する回答。"
     },
     "login": {
@@ -348,7 +348,7 @@
         "description": "ページのタイトル。サイドバーでも使用されます。"
     },
     "select_from_the_following": {
-        "message": "以下から選択してください：",
+        "message": "以下から選択してください: ",
         "description": "オプションページのオプションに関するヘッダー。"
     },
     "sign_up_for_threat_slayer": {
@@ -392,7 +392,7 @@
         "description": "ステーキングボタンで使用されるテキスト。"
     },
     "staking_explanation": {
-        "message": "$$ILOCKトークンを獲得するチャンスを解除しました！",
+        "message": "$$ILOCKトークンを獲得するチャンスを解除しました!",
         "description": "ステーキングテキストボックスで使用される説明テキスト。"
     },
     "SLAY_COUNT": {
@@ -408,7 +408,7 @@
         "description": "ウォレットアドレスを変更するための指示。"
     },
     "success": {
-        "message": "成功！",
+        "message": "成功!",
         "description": "一般的なボタンのテキスト。"
     },
     "take_to_safety": {
@@ -476,7 +476,7 @@
         "description": "アカウントページのセクションヘッダー。"
     },
     "warning": {
-        "message": "警告！",
+        "message": "警告!",
         "description": "警告バナーに使用されるテキスト。"
     },
     "warning_account_will_be_deleted": {
@@ -524,11 +524,11 @@
         "description": "The text used in a warning box."
     },
     "warning_staking_not_available": {
-        "message": "セキュリティステーキングは近日中に利用可能となります！",
+        "message": "セキュリティステーキングは近日中に利用可能となります!",
         "description": "The text used in a warning box."
     },
     "warning_text": {
-        "message": "このサイトが安全であることを知らない限り、タブを閉じてください！",
+        "message": "このサイトが安全であることを知らない限り、タブを閉じてください!",
         "description": "The text used in the warning banner."
     },
     "warning_username_contains_illegal_characters": {
@@ -544,15 +544,63 @@
         "description": "Text used in warning box for username input."
     },
     "what_does_threat_slayer_collect": {
-        "message": "ThreatSlayerは何を収集しますか？",
+        "message": "ThreatSlayerは何を収集しますか?",
         "description": "Question on the FAQ page."
     },
     "what_does_threat_slayer_collect_answer": {
-        "message": "私たちは、脅威を検出するAIでブラウザのURLをスキャンします。URLをアカウントと関連付けて、$$ILOCKを報酬として提供できるようにします。それだけです！",
+        "message": "私たちは、脅威を検出するAIでブラウザのURLをスキャンします。URLをアカウントと関連付けて、$$ILOCKを報酬として提供できるようにします。それだけです!",
         "description": "Answer to question on the FAQ page."
     },
     "why_choose_threat_slayer": {
-        "message": "なぜThreatSlayerを選ぶのか？",
+        "message": "なぜThreatSlayerを選ぶのか?",
         "description": "The text used on the About Us page."
+    },
+    "delete_wallet_address": {
+        "message": "ウォレットアドレスを削除",
+        "description": "Option on the wallet information modal."
+    },
+    "enter_password_to_delete_wallet_address": {
+        "message": "ウォレットアドレスを削除するためのパスワードを入力してください。",
+        "description": "Instruction for deleting wallet address in the wallet information modal."
+    },
+    "error_confirm_must_be_true": {
+        "message": "エラー: 続行する前に確認が必要です。",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_invalid_credentials": {
+        "message": "エラー: 無効な認証情報。",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_invalid_email": {
+        "message": "エラー: 無効なメールアドレス。",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_invalid_password": {
+        "message": "エラー: 無効なパスワード。",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_invalid_username": {
+        "message": "エラー: 無効なユーザー名。",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_invalid_wallet_address": {
+        "message": "エラー: 無効なウォレットアドレス。",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_key_missing": {
+        "message": "エラー: 情報が不足しています。",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "next_ilock_drop": {
+        "message": "次の$$ILOCKドロップ",
+        "description": "Information on the Account page."
+    },
+    "referred_by": {
+        "message": "紹介者",
+        "description": "Information on the Account page."
+    },
+    "warning_need_wallet_to_withdraw_ilock": {
+        "message": "警告: ウォレットアドレスがないと、獲得した$ILOCKを引き出すことができません。",
+        "description": "Warning in the wallet information modal."
     }
 }

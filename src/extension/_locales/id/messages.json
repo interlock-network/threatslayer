@@ -554,5 +554,53 @@
     "why_choose_threat_slayer": {
         "message": "Mengapa Memilih ThreatSlayer?",
         "description": "The text used on the About Us page."
+    },
+    "delete_wallet_address": {
+        "message": "Hapus Alamat Dompet",
+        "description": "Option on the wallet information modal."
+    },
+    "enter_password_to_delete_wallet_address": {
+        "message": "Masukkan kata sandi untuk menghapus alamat dompet.",
+        "description": "Instruction for deleting wallet address in the wallet information modal."
+    },
+    "error_confirm_must_be_true": {
+        "message": "Error: Harus konfirmasi sebelum melanjutkan.",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_invalid_credentials": {
+        "message": "Error: Kredensial tidak valid.",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_invalid_email": {
+        "message": "Error: Email tidak valid.",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_invalid_password": {
+        "message": "Error: Kata sandi tidak valid.",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_invalid_username": {
+        "message": "Error: Nama pengguna tidak valid.",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_invalid_wallet_address": {
+        "message": "Error: Alamat dompet tidak valid.",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_key_missing": {
+        "message": "Error: Informasi hilang.",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "next_ilock_drop": {
+        "message": "Penurunan $$ILOCK Berikutnya",
+        "description": "Information on the Account page."
+    },
+    "referred_by": {
+        "message": "Dirujuk Oleh",
+        "description": "Information on the Account page."
+    },
+    "warning_need_wallet_to_withdraw_ilock": {
+        "message": "Peringatan: Tanpa alamat dompet, Anda tidak dapat menarik $$ILOCK yang telah Anda peroleh.",
+        "description": "Warning in the wallet information modal."
     }
 }

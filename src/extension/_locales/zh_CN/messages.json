@@ -8,19 +8,19 @@
         "description": "Page title, also used in sidebar."
     },
     "about_us_paragraph_1": {
-        "message": "在网络威胁日益复杂和常见的世界中，拥有一个不仅能迅速反应，而且能主动预防威胁的解决方案是至关重要的。",
+        "message": "在网络威胁日益复杂和常见的世界中, 拥有一个不仅能迅速反应, 而且能主动预防威胁的解决方案是至关重要的。",
         "description": "The first paragraph of text on the About Us page."
     },
     "about_us_paragraph_2": {
-        "message": "ThreatSlayer不仅仅是另一款网络安全产品，它是一个全面的安全伴侣，能够实时运行，检测并中和威胁，防止它们造成任何损害。",
+        "message": "ThreatSlayer不仅仅是另一款网络安全产品, 它是一个全面的安全伴侣, 能够实时运行, 检测并中和威胁, 防止它们造成任何损害。",
         "description": "The second paragraph of text on the About Us page."
     },
     "about_us_paragraph_3": {
-        "message": "ThreatSlayer易于安装，并且具备在web2和web3空间保护您免受威胁的能力，是浏览器安全的未来。它在后台运行，保护您免受恶意资产或危险页面的侵害，而不会中断您的工作流程。",
+        "message": "ThreatSlayer易于安装, 并且具备在web2和web3空间保护您免受威胁的能力, 是浏览器安全的未来。它在后台运行, 保护您免受恶意资产或危险页面的侵害, 而不会中断您的工作流程。",
         "description": "The third paragraph of text on the About Us page."
     },
     "about_us_paragraph_4": {
-        "message": "将这一切与奖励用户共享匿名安全数据的功能结合起来，您将获得一个双赢的解决方案，可以在保持在线安全的同时，为更广泛的互联网安全生态系统做出贡献。",
+        "message": "将这一切与奖励用户共享匿名安全数据的功能结合起来, 您将获得一个双赢的解决方案, 可以在保持在线安全的同时, 为更广泛的互联网安全生态系统做出贡献。",
         "description": "The fourth and last paragraph of text on the About Us page."
     },
     "account_info": {
@@ -56,11 +56,11 @@
         "description": "Explanation on the allowlist table."
     },
     "already_have_one": {
-        "message": "已经有账户了吗？",
+        "message": "已经有账户了吗?",
         "description": "Instruction for logging in."
     },
     "already_have_a_wallet": {
-        "message": "已经有钱包了吗？",
+        "message": "已经有钱包了吗?",
         "description": "Instruction for registering."
     },
     "amount_to_stake": {
@@ -80,7 +80,7 @@
         "description": "The text used on change password button."
     },
     "click_to_create_wallet": {
-        "message": "请点击'创建钱包'，将重定向至Chrome浏览器扩展以创建SubWallet。",
+        "message": "请点击'创建钱包', 将重定向至Chrome浏览器扩展以创建SubWallet。",
         "description": "Page title, also used in sidebar."
     },
     "close": {
@@ -88,7 +88,7 @@
         "description": "The text used on the close button."
     },
     "confirm_are_you_sure": {
-        "message": "您确定吗？",
+        "message": "您确定吗?",
         "description": "Confirmation for user actions."
     },
     "create_one": {
@@ -100,7 +100,7 @@
         "description": "Page title, also used in sidebar."
     },
     "crypto_us_warning": {
-        "message": "在美国，加密货币被视为一种证券，因此大多数美国居民无法购买。",
+        "message": "在美国, 加密货币被视为一种证券, 因此大多数美国居民无法购买。",
         "description": "Warning for USians about cryptocurrency."
     },
     "delete_account": {
@@ -120,11 +120,11 @@
         "description": "The description in the manifest."
     },
     "dont_have_an_account": {
-        "message": "没有账户？",
+        "message": "没有账户?",
         "description": "Instruction for creating an account."
     },
     "dont_have_one": {
-        "message": "没有钱包？",
+        "message": "没有钱包?",
         "description": "Instruction for creating a wallet address."
     },
     "done": {
@@ -156,7 +156,7 @@
         "description": "Instruction for registering an account."
     },
     "enter_referrer_name": {
-        "message": "可选：输入推荐人用户名",
+        "message": "可选: 输入推荐人用户名",
         "description": "Instruction for registering an account."
     },
     "enter_azero_wallet_address": {
@@ -168,7 +168,7 @@
         "description": "Instruction for registering an account."
     },
     "enter_azero_wallet_address_optional": {
-        "message": "可选：粘贴你的Aleph Zero兼容钱包地址",
+        "message": "可选: 粘贴你的Aleph Zero兼容钱包地址",
         "description": "Instruction for registering an account."
     },
     "enter_new_wallet_address": {
@@ -232,7 +232,7 @@
         "description": "Generic updating wallet address error message."
     },
     "error_username_too_long": {
-        "message": "用户名过长：最大长度为16个字符。",
+        "message": "用户名过长: 最大长度为16个字符。",
         "description": "Registering error message."
     },
     "extension_options": {
@@ -244,7 +244,7 @@
         "description": "Page title, also used in sidebar."
     },
     "forgot_password": {
-        "message": "忘记密码？",
+        "message": "忘记密码?",
         "description": "The text used on login page."
     },
     "frequently_asked_questions": {
@@ -252,15 +252,15 @@
         "description": "Page title."
     },
     "how_does_threat_slayer_protect_me": {
-        "message": "ThreatSlayer是如何保护我的？",
+        "message": "ThreatSlayer是如何保护我的?",
         "description": "Question on the FAQ page."
     },
     "how_does_threat_slayer_reward_me": {
-        "message": "ThreatSlayer如何通过$$ILOCK奖励我？",
+        "message": "ThreatSlayer如何通过$$ILOCK奖励我?",
         "description": "Question on the FAQ page."
     },
     "how_does_threat_slayer_reward_me_answer": {
-        "message": "ThreatSlayer的用户有机会在他们访问的每个URL上获得奖励。你浏览的网站越多，获得$$ILOCK的机会就越多。",
+        "message": "ThreatSlayer的用户有机会在他们访问的每个URL上获得奖励。你浏览的网站越多, 获得$$ILOCK的机会就越多。",
         "description": "Answer to question on the FAQ page."
     },
     "ilock_available_to_stake": {
@@ -272,15 +272,15 @@
         "description": "Section header for the Account page."
     },
     "ilock_keep_browsing_to_earn": {
-        "message": "继续使用ThreatSlayer浏览以赚取$$ILOCK！",
+        "message": "继续使用ThreatSlayer浏览以赚取$$ILOCK!",
         "description": "Message to user about earning token."
     },
     "is_threat_slayer_open_source": {
-        "message": "ThreatSlayer是开源的吗？",
+        "message": "ThreatSlayer是开源的吗?",
         "description": "Question on the FAQ page."
     },
     "is_threat_slayer_open_source_answer": {
-        "message": "我们扫描您浏览器的URL，通过我们的威胁检测AI将URL与您的账户关联，以便我们可以奖励您$$ILOCK。就这样！",
+        "message": "我们扫描您浏览器的URL, 通过我们的威胁检测AI将URL与您的账户关联, 以便我们可以奖励您$$ILOCK。就这样!",
         "description": "Answer to question on the FAQ page."
     },
     "login": {
@@ -304,7 +304,7 @@
         "description": "The text used to show how many malicious URLs are scanned on the dashboard."
     },
     "must_create_azero_wallet": {
-        "message": "为了使用ThreatSlayer，您需要创建一个兼容Aleph Zero的钱包。",
+        "message": "为了使用ThreatSlayer, 您需要创建一个兼容Aleph Zero的钱包。",
         "description": "Instruction for creating a wallet."
     },
     "no_allowlisted_sites": {
@@ -348,7 +348,7 @@
         "description": "Page title, also used in sidebar."
     },
     "select_from_the_following": {
-        "message": "从以下选项中选择：",
+        "message": "从以下选项中选择: ",
         "description": "Header for the options on the Options page."
     },
     "sign_up_for_threat_slayer": {
@@ -372,7 +372,7 @@
         "description": "Explanation of security staking state."
     },
     "stake_state_pending": {
-        "message": "有其他人已尝试质押这个URL。如果被批准，您的质押将加到他们的质押上。如果被拒绝，您不会失去任何$$ILOCK。",
+        "message": "有其他人已尝试质押这个URL。如果被批准, 您的质押将加到他们的质押上。如果被拒绝, 您不会失去任何$$ILOCK。",
         "description": "Explanation of security staking state."
     },
     "stake_state_resolved": {
@@ -392,7 +392,7 @@
         "description": "The text used in the staking button."
     },
     "staking_explanation": {
-        "message": "你已解锁赚取$$ILOCK代币的机会！",
+        "message": "你已解锁赚取$$ILOCK代币的机会!",
         "description": "The explanatory text used in the staking text box."
     },
     "SLAY_COUNT": {
@@ -408,7 +408,7 @@
         "description": "Instruction for changing wallet address."
     },
     "success": {
-        "message": "成功！",
+        "message": "成功!",
         "description": "Generic button text."
     },
     "take_to_safety": {
@@ -476,7 +476,7 @@
         "description": "Section header for the Account page."
     },
     "warning": {
-        "message": "警告！",
+        "message": "警告!",
         "description": "The text used in the warning banner."
     },
     "warning_account_will_be_deleted": {
@@ -492,7 +492,7 @@
         "description": "Warning text for user wallet type."
     },
     "warning_changing_wallet_address": {
-        "message": "警告：更改现有钱包地址可能会延迟访问以前存入的$$ILOCK。",
+        "message": "警告: 更改现有钱包地址可能会延迟访问以前存入的$$ILOCK。",
         "description": "Warning text used for changing a wallet address."
     },
     "warning_header": {
@@ -512,7 +512,7 @@
         "description": "The text used in a warning box."
     },
     "warning_must_login_to_earn_etc": {
-        "message": "警告：您必须注册或登录才能赚取$$ILOCK并使用ThreatSlayer的所有功能。",
+        "message": "警告: 您必须注册或登录才能赚取$$ILOCK并使用ThreatSlayer的所有功能。",
         "description": "The text used in a warning box."
     },
     "warning_must_register_before_staking": {
@@ -520,39 +520,87 @@
         "description": "The text used in a warning box."
     },
     "warning_possible_malicious_url_detected": {
-        "message": "可能检测到恶意URL：",
+        "message": "可能检测到恶意URL: ",
         "description": "The text used in a warning box."
     },
     "warning_staking_not_available": {
-        "message": "安全质押即将上线！",
+        "message": "安全质押即将上线!",
         "description": "The text used in a warning box."
     },
     "warning_text": {
-        "message": "除非你知道这个网站是安全的，否则请关闭这个标签页！",
+        "message": "除非你知道这个网站是安全的, 否则请关闭这个标签页!",
         "description": "The text used in the warning banner."
     },
     "warning_username_contains_illegal_characters": {
-        "message": "用户名包含非法字符：",
+        "message": "用户名包含非法字符: ",
         "description": "Text used in warning box for username input."
     },
     "warning_username_too_long": {
-        "message": "用户名过长：最大长度为16个字符。",
+        "message": "用户名过长: 最大长度为16个字符。",
         "description": "Text used in warning box for username input."
     },
     "warning_username_too_short": {
-        "message": "用户名过短：最小长度为5个字符。",
+        "message": "用户名过短: 最小长度为5个字符。",
         "description": "Text used in warning box for username input."
     },
     "what_does_threat_slayer_collect": {
-        "message": "ThreatSlayer收集哪些数据？",
+        "message": "ThreatSlayer收集哪些数据?",
         "description": "Question on the FAQ page."
     },
     "what_does_threat_slayer_collect_answer": {
-        "message": "我们使用我们的威胁检测AI扫描您浏览器的URL。我们将URL与您的账户关联，以便我们可以奖励您$$ILOCK。就是这样！",
+        "message": "我们使用我们的威胁检测AI扫描您浏览器的URL。我们将URL与您的账户关联, 以便我们可以奖励您$$ILOCK。就是这样!",
         "description": "Answer to question on the FAQ page."
     },
     "why_choose_threat_slayer": {
-        "message": "为什么选择ThreatSlayer？",
+        "message": "为什么选择ThreatSlayer?",
         "description": "The text used on the About Us page."
+    },
+    "delete_wallet_address": {
+        "message": "删除钱包地址",
+        "description": "Option on the wallet information modal."
+    },
+    "enter_password_to_delete_wallet_address": {
+        "message": "输入密码以删除钱包地址。",
+        "description": "Instruction for deleting wallet address in the wallet information modal."
+    },
+    "error_confirm_must_be_true": {
+        "message": "错误: 必须确认才能继续。",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_invalid_credentials": {
+        "message": "错误: 凭证无效。",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_invalid_email": {
+        "message": "错误: 无效的电子邮件。",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_invalid_password": {
+        "message": "错误: 密码无效。",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_invalid_username": {
+        "message": "错误: 用户名无效。",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_invalid_wallet_address": {
+        "message": "错误: 钱包地址无效。",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_key_missing": {
+        "message": "错误: 缺少信息。",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "next_ilock_drop": {
+        "message": "下一次$$ILOCK分发",
+        "description": "Information on the Account page."
+    },
+    "referred_by": {
+        "message": "推荐人",
+        "description": "Information on the Account page."
+    },
+    "warning_need_wallet_to_withdraw_ilock": {
+        "message": "警告: 没有钱包地址, 您将无法提取您赚取的$$ILOCK。",
+        "description": "Warning in the wallet information modal."
     }
 }

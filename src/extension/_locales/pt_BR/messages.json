@@ -554,5 +554,53 @@
     "why_choose_threat_slayer": {
         "message": "Por que Escolher o ThreatSlayer?",
         "description": "The text used on the About Us page."
+    },
+    "delete_wallet_address": {
+        "message": "Excluir Endereço da Carteira",
+        "description": "Option on the wallet information modal."
+    },
+    "enter_password_to_delete_wallet_address": {
+        "message": "Digite a senha para excluir o endereço da carteira.",
+        "description": "Instruction for deleting wallet address in the wallet information modal."
+    },
+    "error_confirm_must_be_true": {
+        "message": "Erro: É necessário confirmar antes de continuar.",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_invalid_credentials": {
+        "message": "Erro: Credenciais inválidas.",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_invalid_email": {
+        "message": "Erro: Email inválido.",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_invalid_password": {
+        "message": "Erro: Senha inválida.",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_invalid_username": {
+        "message": "Erro: Nome de usuário inválido.",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_invalid_wallet_address": {
+        "message": "Erro: Endereço da carteira inválido.",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_key_missing": {
+        "message": "Erro: Informação faltando.",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "next_ilock_drop": {
+        "message": "Próximo Lançamento de $$ILOCK",
+        "description": "Information on the Account page."
+    },
+    "referred_by": {
+        "message": "Indicado por",
+        "description": "Information on the Account page."
+    },
+    "warning_need_wallet_to_withdraw_ilock": {
+        "message": "Aviso: Sem um endereço de carteira, você não pode retirar $$ILOCK que você ganhou.",
+        "description": "Warning in the wallet information modal."
     }
 }

@@ -196,7 +196,7 @@
         "description": "Generic error message."
     },
     "error_deleting_account_generic": {
-        "message": "Error deleting account in. Please try again later.",
+        "message": "Error deleting account. Please try again later.",
         "description": "Generic login error message."
     },
     "error_invalid_email_generic": {
@@ -554,5 +554,53 @@
     "why_choose_threat_slayer": {
         "message": "Why Choose ThreatSlayer?",
         "description": "The text used on the About Us page."
+    },
+    "delete_wallet_address": {
+        "message": "Delete Wallet Address",
+        "description": "Option on the wallet information modal."
+    },
+    "enter_password_to_delete_wallet_address": {
+        "message": "Enter password to delete wallet address.",
+        "description": "Instruction for deleting wallet address in the wallet information modal."
+    },
+    "error_confirm_must_be_true": {
+        "message": "Error: Must confirm before continuing.",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_invalid_credentials": {
+        "message": "Error: Invalid credentials.",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_invalid_email": {
+        "message": "Error: Invalid email.",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_invalid_password": {
+        "message": "Error: Invalid password.",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_invalid_username": {
+        "message": "Error: Invalid username.",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_invalid_wallet_address": {
+        "message": "Error: Invalid wallet address.",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_key_missing": {
+        "message": "Error: Missing information.",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "next_ilock_drop": {
+        "message": "Next $$ILOCK Drop",
+        "description": "Information on the Account page."
+    },
+    "referred_by": {
+        "message": "Referred By",
+        "description": "Information on the Account page."
+    },
+    "warning_need_wallet_to_withdraw_ilock": {
+        "message": "Warning: Without a wallet address you cannot withdraw $$ILOCK that you have earned.",
+        "description": "Warning in the wallet information modal."
     }
 }
