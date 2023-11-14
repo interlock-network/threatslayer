@@ -6,7 +6,6 @@
     <div style="position: absolute;">
         <SinglePasswordInput @currentPassword="getPassword" @passwordHasError="getPasswordHasError" />
     </div>
-    <!-- TODO test this -->
     <br />
     <WarningTextBox v-if="showAddressChangeWarning" :msg="$i18n('warning_changing_wallet_address')"
         style="margin-top: 3rem;" />

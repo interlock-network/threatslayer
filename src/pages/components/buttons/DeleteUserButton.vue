@@ -4,7 +4,7 @@
             {{ $i18n(deleteUserButtonText) }}
         </button>
     </div>
-    <ErrorMessage v-for="errorMessage in errorArr" :msg="errorMessage" style="margin-top: 1rem;" single />
+    <ErrorMessage v-for="error in errorArr" :msg="error" style="margin-top: 1rem;" single />
 </template>
 
 <script>
