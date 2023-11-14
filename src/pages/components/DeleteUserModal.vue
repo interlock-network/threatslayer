@@ -15,7 +15,7 @@
             </div>
             <DeleteUserButton v-if="active"
                 v-bind="{ active, checkState, disableDeleteButton, fadeAccountPage, password, setActive, username }" />
-            <ErrorMessage v-for="errorMessage in errorArr" :msg="errorMessage" single style="margin-top: 1rem;" />
+            <ErrorMessage v-for="error in errorArr" :msg="$i18n(error)" single style="margin-top: 1rem;" />
             <!-- cancel button -->
             <button @click="cancelAction" class="secondary-hollow-button">
                 {{ $i18n('cancel') }}

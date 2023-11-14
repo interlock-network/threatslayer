@@ -1,16 +1,13 @@
 <template>
-    <!-- TODO translate this -->
-    <WarningTextBox msg="Warning: Without a wallet address you cannot withdraw $ILOCK that you have earned."
-        style="margin-top: 0rem;" />
+    <WarningTextBox :msg="$i18n('warning_need_wallet_to_withdraw_ilock')" style="margin-top: 0rem;" />
     <div>
-        <TextComponent msg="Enter password to delete wallet address." /><br />
+        <TextComponent :msg="$i18n('enter_password_to_delete_wallet_address')" /><br />
         <br />
         <SinglePasswordInput @currentPassword="getPassword" @passwordHasError="getPasswordHasError" modal tabindex="2" />
-        <ErrorMessage v-if="deleteWalletErrors?.length" v-for="error in deleteWalletErrors" :msg="error" single />
+        <ErrorMessage v-if="deleteWalletErrors?.length" v-for="error in deleteWalletErrors" :msg="$i18n(error)" single />
         <br />
         <button @click="clearWallet" id="delete-address-button" class="modal-button" :disabled="disabled" tabindex="4">
-            <!-- TODO translate this -->
-            Delete Wallet Address
+            {{ $i18n('delete_wallet_address') }}
         </button> <br />
         <button @click="deleteWalletSelected(false)" class="secondary-hollow-button" style="margin-top: 2rem;" tabindex="6">
             {{ $i18n('cancel') }}

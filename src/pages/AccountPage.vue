@@ -11,8 +11,7 @@
         </div>
         <br />
         <br />
-        <!-- TODO translate this -->
-        <TextComponent v-if="nextTokenDrop > 0" class="left-label" msg="Next $ILOCK Drop" bold />&nbsp;
+        <TextComponent v-if="nextTokenDrop > 0" class="left-label" :msg="$i18n('next_ilock_drop')" bold />&nbsp;
         <TextComponent v-if="nextTokenDrop > 0" :msg="nextTokenDropString" bigmono></TextComponent>
         <br />
         <br />
@@ -26,8 +25,7 @@
     <div :style="computedStyle">
         <!-- Names of user who referred this user -->
         <div v-if="!pageFaded && referrer.length">
-            <!-- TODO add to translations -->
-            <TextComponent class="left-label" msg="Referred By:" bold />
+            <TextComponent class="left-label" :msg="$i18n('referred_by')" bold />
             <TextComponent :msg="referrer" bigmono />
         </div>
         <br />
