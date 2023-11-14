@@ -6,7 +6,7 @@
         </button>
         <br />
         <br />
-        <ErrorMessage v-for="errorMessage in errorArr" :msg="errorMessage" single />
+        <ErrorMessage v-for="error in errorArr" :msg="error" single />
     </div>
 </template>
 
