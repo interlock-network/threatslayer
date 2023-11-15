@@ -2,8 +2,10 @@
     <div>
         <button @click="submitCreateUser" class="submit-button" :class="computedClass" :disabled="disabled">
             {{ $i18n(submitButtonText) }}
-        </button>
-        <ErrorMessage v-for="error in errorArr" :msg="error" style="padding-top: 3rem;" single />
+        </button><br />
+        <br />
+        <br />
+        <ErrorMessage v-for="error in errorArr" :msg="$i18n(error)" style="padding-top: 3rem;" single />
     </div>
 </template>
 
@@ -26,7 +28,7 @@ export default {
         termsOfService: { type: Boolean, default: false },
         unitedStates: { type: Boolean, default: false },
         username: { type: String, default: '' },
-        wallet: { type: String, default: '' },
+        wallet: { type: String, default: '' }
     },
     components: {
         ErrorMessage,
