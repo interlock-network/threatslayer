@@ -59,7 +59,7 @@
             </linearGradient>
         </defs>
         <defs>
-            <linearGradient id="rainbow" x1="2" x2="0" y1="0" y2="15%" gradientUnits="userSpaceOnUse">
+            <linearGradient id="rainbow" x1="2" x2="0" y1="0" y2="20%" gradientUnits="userSpaceOnUse">
                 <stop stop-color="#1f90f1" offset="30%" />
                 <stop stop-color="#c417e0" offset="50%" />
                 <stop stop-color="#e56a7a" offset="80%" />
@@ -74,23 +74,22 @@
                 d="M182.5 356.5C280.807 356.5 360.5 276.807 360.5 178.5C360.5 80.1933 280.807 0.5 182.5 0.5C84.1933 0.5 4.5 80.1933 4.5 178.5C4.5 276.807 84.1933 356.5 182.5 356.5ZM326.731 178.5C326.731 258.156 262.156 322.731 182.5 322.731C102.844 322.731 38.2692 258.156 38.2692 178.5C38.2692 98.8436 102.844 34.2692 182.5 34.2692C262.156 34.2692 326.731 98.8436 326.731 178.5Z"
                 stroke="black" />
         </g>
-        <text id="threatslayer" x="50%" y="46" dominant-baseline="middle" text-anchor="middle" font-size="36px"
-            font-family="THICCCBOI" font-weight="bold" fill="url(#rainbow)">
+        <text id="threatslayer" x="50%" y="12%" text-anchor="middle" font-family="Helvetica, sans-serif" font-weight="bold"
+            font-size="36px" fill="url(#rainbow)">
             {{ $i18n('threat_slayer') }}
         </text>
-        <text id="credit" x="50%" y="74" dominant-baseline="middle" text-anchor="middle" font-size="14px"
-            font-family="THICCCBOI" font-weight="bold" fill="white">
+        <text id="credit" x="50%" y="17%" text-anchor="middle" font-family="Helvetica, sans-serif" font-weight="bold"
+            font-size="14px" fill="white">
             {{ $i18n('powered_by_interlock') }}
         </text>
-        <text id="slay-count" x="50%" y="57%" class="count" font-family="THICCCBOI" font-weight="bold"
-            :font-size="totalVisitedFontSize" text-anchor="middle" dominant-baseline="middle" stroke="white" fill="white"
-            stroke-width="2px">
+        <text id="slay-count" x="50%" y="62%" class="count" font-family="Helvetica, sans-serif" font-weight="bold"
+            :font-size="totalVisitedFontSize" text-anchor="middle" stroke="white" fill="white" stroke-width="2px">
             {{ totalURLsVisited }}
         </text>
         <image x="32%" y="68%" width="33" height="33" href="/src/assets/images/threatslayer_logo_for_export.png" />
         <image x="32%" y="68%" width="33" height="33" href="/src/assets/images/crossed_swords.png" />
-        <text x="54%" y="72%" font-size="32px" font-family="THICCCBOI" text-anchor="middle" fill="white"
-            dominant-baseline="middle">
+        <text x="54%" y="74%" font-family="Helvetica, sans-serif" font-weight="normal" font-size="32px" text-anchor="middle"
+            fill="white">
             {{ $i18n('slay_count') }}
         </text>
     </svg>
@@ -390,20 +389,5 @@ export default {
     display: block;
     font-family: "THICCCBOI";
     color: white;
-}
-
-#slay-count {
-    font: bold 120px sans-serif;
-    dominant-baseline: middle;
-    text-anchor: middle;
-}
-
-#threatslayer {
-    font: bold 36px sans-serif;
-}
-
-#credit {
-    color: white;
-    font: bold 14px sans-serif;
 }
 </style>
