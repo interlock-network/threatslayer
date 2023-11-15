@@ -137,14 +137,6 @@ export default {
   font-style: normal;
 }
 
-/* @font-face {
-  font-family: "THICCCBOI";
-  src: local("THICCCBOI-ExtraBold");
-  src: url('./assets/fonts/TTF/THICCCBOI-ExtraBold.ttf') format('truetype');
-  font-weight: bold;
-  font-style: normal;
-} */
-
 #app {
   font-family: "THICCCBOI", Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -152,7 +144,12 @@ export default {
 }
 
 * {
-  font-family: "THICCCBOI";
+  font-family: "THICCCBOI", Helvetica, sans-serif;
+}
+
+svg text {
+  font-family: "THICCCBOI", Helvetica, sans-serif;
+  fill: white;
 }
 
 a {
