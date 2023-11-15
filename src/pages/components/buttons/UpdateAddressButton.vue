@@ -5,7 +5,7 @@
             {{ $i18n(submitButtonText) }}
         </button>
         <br />
-        <ErrorMessage v-for="error in errorArr" :msg="error" stacked />
+        <ErrorMessage v-for="error in errorArr" :msg="$i18n(error)" stacked />
     </div>
 </template>
 
