@@ -13,14 +13,14 @@ const bannerStyles = {
 
 const bannerBodyStyles = {
     'background-color': '#0F0818',
-    'color': ' #FFFFFF',
+    'color': '#fff',
     'font-family': 'sans-serif',
-    'font-size': '1.1rem !important',
-    'font-weight': 'lighter !important',
+    'font-size': '1.1rem',
+    'font-weight': 'lighter',
     'margin': 0,
     'opacity': 1,
     'padding': 0,
-    'position': 'relative !important',
+    'position': 'relative',
     'z-index': '2147483645'
 };
 
@@ -50,10 +50,10 @@ const boxStyles = {
 };
 
 const headlineStyles = {
+    'color': '#fff',
     'font-family': 'sans-serif',
     'font-size': '2rem',
     'font-weight': 'bold',
-    'color': 'white',
     'padding-bottom': '1.75rem',
     'width': '100%'
 };
@@ -66,7 +66,7 @@ const primaryButtonStyles = {
     'background': 'linear-gradient(216.99deg, #9000CB 22.5%, #51066B 112.78%)',
     'border': 'none',
     'border-radius': '1.5rem',
-    'color': '#FFFFFF',
+    'color': '#fff',
     'cursor': 'pointer',
     'font-size': '0.9rem',
     'margin-top': '1rem',
@@ -80,7 +80,7 @@ const secondaryButtonStyles = {
     'background-color': '#0F0818',
     'border': '#9000CB solid 1px',
     'border-radius': '1.5rem',
-    'color': '#FFFFFF',
+    'color': '#fff',
     'cursor': 'pointer',
     'font-size': '0.9rem',
     'margin-top': '1rem',
@@ -100,7 +100,7 @@ const textBoxStyles = {
     'background-color': '#0F0818',
     'border': '#242424 solid 1px',
     'border-radius': '8px',
-    'color': 'white',
+    'color': '#fff',
     'font-family': 'sans-serif',
     'margin': '0 auto',
     'padding-top': '1.5rem',
@@ -114,7 +114,7 @@ const textBoxStyles = {
 };
 
 const textStyles = {
-    'color': 'white',
+    'color': '#fff !important',
     'display': 'block',
     'font-family': 'sans-serif',
     'font-size': '1rem',
@@ -242,6 +242,11 @@ const threatSlayerLogoStyles = {
     // insert box and banner into page
     bannerBody.insertBefore(bannerWrapper, bannerBody.childNodes[0]);
     bannerBody.insertBefore(boxWrapper, bannerBody.childNodes[0]);
+
+    const styleElement = document.createElement('style');
+    const cssRule = document.createTextNode('button { color: white !important; } h1 { color: white !important; } p { color: white !important; }');
+    styleElement.appendChild(cssRule);
+    document.head.appendChild(styleElement);
 
     // on clicking 'Take Me to Safety', go to Google
     googleButton.onclick = function () {
