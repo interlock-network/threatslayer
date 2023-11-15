@@ -11,8 +11,9 @@
     <LoginButton v-bind="{ checkState, loginDisabled, password, selectPage, username }" style="margin-top: 0.75rem;" />
     <br />
     <br />
+    <!-- TODO uncomment when available -->
     <!-- Forgot username / password flow -->
-    <div id="forgot-password-container">
+    <!-- <div id="forgot-password-container">
         <TextComponent :msg="$i18n('forgot_password')" id="forgot-password-header" bold />
         <br />
         <br />
@@ -20,7 +21,7 @@
             @emailHasError="getEmailHasError" />
         <ForgotPasswordButton :forgotPasswordDisabled="forgotPasswordDisabled" :email="email" style="margin-top: 0.75rem;"
             tabindex="10" />
-    </div>
+    </div> -->
 </template>
 
 <script>
