@@ -303,7 +303,7 @@ export default {
                 .catch(error => {
                     const { errors, status } = extractFromError(error);
 
-                    console.log(`Error getting user stats from API. Status: ${status}. Error: ${errors}`);
+                    // console.log(`Error getting user stats from API. Status: ${status}. Error: ${errors}`);
                 });
         }
     }
