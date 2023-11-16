@@ -1,4 +1,3 @@
-
 /**
  * This script is injected into website if url is found to be malicious.
  */
@@ -118,7 +117,6 @@ const textStyles = {
     'display': 'block',
     'font-family': 'sans-serif',
     'font-size': '1rem',
-    'font-weight': 'bold',
     'margin-bottom': '0',
     'z-index': '2147483647'
 };
@@ -243,10 +241,23 @@ const threatSlayerLogoStyles = {
     bannerBody.insertBefore(bannerWrapper, bannerBody.childNodes[0]);
     bannerBody.insertBefore(boxWrapper, bannerBody.childNodes[0]);
 
-    const styleElement = document.createElement('style');
-    const cssRule = document.createTextNode('button { color: white !important; } h1 { color: white !important; } p { color: white !important; }');
-    styleElement.appendChild(cssRule);
-    document.head.appendChild(styleElement);
+    // helper function to add !important flag to important element styling
+    const addImportant = function (className) {
+        const elements = document.getElementsByClassName(className);
+
+        for (let i = 0; i < elements.length; i++) {
+            const element = elements[i];
+            const display = element.style.display;
+            const fontSize = element.style['font-size'];
+
+            element.style.setProperty('color', 'white', 'important');
+            element.style.setProperty('font-size', display, 'important');
+            element.style.setProperty('font-size', fontSize, 'important');
+        }
+    }
+
+    addImportant(firstRandomClassName);
+    addImportant(secondRandomClassName);
 
     // on clicking 'Take Me to Safety', go to Google
     googleButton.onclick = function () {
