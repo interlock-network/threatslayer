@@ -86,7 +86,7 @@
             :font-size="totalVisitedFontSize" text-anchor="middle" stroke="white" fill="white" stroke-width="2px">
             {{ totalURLsVisited }}
         </text>
-        <image x="32%" y="68%" width="33" height="33" href="/src/assets/images/threatslayer_logo_for_export.png" />
+        <!-- <image x="32%" y="68%" width="33" height="33" href="/src/assets/images/threatslayer_logo_for_export.png" /> -->
         <image x="32%" y="68%" width="33" height="33" href="/src/assets/images/crossed_swords.png" />
         <text x="54%" y="74%" font-family="Helvetica, sans-serif" font-weight="normal" font-size="32px" text-anchor="middle"
             fill="white">
