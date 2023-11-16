@@ -1,0 +1,50 @@
+{
+    "manifest_version": 3,
+    "name": "ThreatSlayer: AI Threat Detection for Web3",
+    "description": "__MSG_appDesc__",
+    "default_locale": "en",
+    "author": "Interlock",
+    "version": "1.0.0",
+    "icons": {
+        "128": "assets/icons/icon128.png"
+    },
+    "action": {
+        "default_icon": {
+            "128": "assets/icons/icon128.png"
+        }
+    },
+    "content_scripts": [
+        {
+            "js": [
+                "content/script.js"
+            ],
+            "matches": [
+                "*://*/*"
+            ]
+        }
+    ],
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "grid_background.png",
+                "threatslayer_logo.png"
+            ],
+            "matches": [
+                "*://*/*"
+            ]
+        }
+    ],
+    "background": {
+        "service_worker": "service/worker.js",
+        "type": "module"
+    },
+    "permissions": [
+        "scripting",
+        "storage",
+        "downloads",
+        "tabs"
+    ],
+    "host_permissions": [
+        "<all_urls>"
+    ]
+}

@@ -1,5 +1,13 @@
 # Ignore ZIP files
 *.zip
-node_modules
+node_modules/
+/dist
+/public
 .DS_Store
-dist
+dist.crx
+dist.pem
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

@@ -6,7 +6,13 @@ help:
 	@cat HELP
 
 clean:
-	rm threatslayer.zip
+	rm -rf dist
 
 all:
-	zip -r threatslayer.zip source/
+	npm run build
+	cp -r src/extension/* dist
+
+deploy:
+	npm run build
+	cp -r src/extension/* dist
+	zip -r threatslayer.zip dist/
