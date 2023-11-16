@@ -10,7 +10,7 @@
     </WarningTextBox>
     <br />
     <div>
-        <TextComponent class="left-label" :msg="$i18n('ilock_available_to_stake')" bold />
+        <TextComponent class="left-label" :msg="$i18n('ilock_available_to_stake')" bold />&nbsp;
         <TextComponent msg="TBD" bigmono /> <br />
         <br />
         <br />
