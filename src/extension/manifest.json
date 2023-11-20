@@ -4,7 +4,7 @@
     "description": "__MSG_appDesc__",
     "default_locale": "en",
     "author": "Interlock",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "icons": {
         "128": "assets/icons/icon128.png"
     },
@@ -40,8 +40,7 @@
     },
     "permissions": [
         "scripting",
-        "storage",
-        "tabs"
+        "storage"
     ],
     "host_permissions": [
         "<all_urls>"
