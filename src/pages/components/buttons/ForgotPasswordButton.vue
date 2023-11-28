@@ -1,7 +1,7 @@
 <template>
     <div class="login-page-submit-button-container">
         <button class="secondary-hollow-button" @click="submitForgotPassword" :class="computedClass"
-            :disabled="forgotPasswordDisabled" tabindex="99">
+            :disabled="forgotPasswordDisabled" tabindex="10">
             {{ $i18n(forgotPasswordButtonText) }}
         </button>
         <br />
@@ -12,7 +12,6 @@
 
 <script>
 import ErrorMessage from '../ErrorMessage.vue';
-import TextComponent from '../TextComponent.vue';
 
 import axios from 'axios';
 import { baseUrl, extractFromError, formatErrorMessages, submitButtonLabels } from '../../../utilities.js';
@@ -20,8 +19,8 @@ import { baseUrl, extractFromError, formatErrorMessages, submitButtonLabels } fr
 export default {
     name: "ForgotPasswordButton",
     props: {
+        email: { type: String, default: '' },
         forgotPasswordDisabled: { type: Boolean, required: true },
-        email: { type: String, default: '' }
     },
     components: {
         ErrorMessage,
