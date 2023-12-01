@@ -129,11 +129,13 @@ export function setChromeStorage(storageObj) {
  * @returns {string} A translation key string to show on the submit button
  */
 export function submitButtonLabels(
-    { errorArr, errorMsg = 'error', initialMsg, submitted, submittedMsg = 'success', submitting, submittingMsg = 'waiting', status }
+    { errorArr, errorMsg = 'error', initialMsg, reset = false, submitted, submittedMsg = 'success', submitting, submittingMsg = 'waiting', status }
 ) {
     let result = '';
 
-    if (submitted) {
+    if (reset) {
+        result = initialMsg;
+    } else if (submitted) {
         result = submittedMsg;
     } else if (submitting) {
         result = submittingMsg;
