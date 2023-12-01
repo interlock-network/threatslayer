@@ -20,18 +20,19 @@ export default {
     name: "ForgotPasswordButton",
     props: {
         email: { type: String, default: '' },
+        fadeLoginPage: { type: Function, required: true },
         forgotPasswordDisabled: { type: Boolean, required: true },
+        resetButtonText: { type: Boolean, required: true }
     },
     components: {
-        ErrorMessage,
-        TextComponent
+        ErrorMessage
     },
     data() {
         return {
             errorArr: [],
+            status: 200,
             submitted: false,
-            submitting: false,
-            status: 200
+            submitting: false
         }
     },
     computed: {
@@ -47,9 +48,9 @@ export default {
             return result;
         },
         forgotPasswordButtonText() {
-            const { errorArr, submitted, submitting, status } = this;
+            const { errorArr, resetButtonText, submitted, submitting, status } = this;
 
-            return submitButtonLabels({ errorArr, initialMsg: 'change_password', submitted, submitting, status });
+            return submitButtonLabels({ errorArr, initialMsg: 'change_password', reset: resetButtonText, submitted, submitting, status });
         }
     },
     methods: {
@@ -64,6 +65,8 @@ export default {
                     this.status = status;
                     this.submitted = true;
                     this.submitting = false;
+
+                    this.fadeLoginPage(true);
                 })
                 .catch((error) => {
                     const { errors, status } = extractFromError(error);
@@ -74,10 +77,14 @@ export default {
                     this.status = status;
                     this.submitted = false;
                     this.submitting = false;
-                });
+                })
+                // TODO delete this 
+                .finally(() => {
+                    this.fadeLoginPage(true)
+                })
         }
     }
-};
+}
 </script>
 
 <style></style>
