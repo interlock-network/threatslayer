@@ -195,6 +195,11 @@ input {
   width: 100%;
 }
 
+#modal-password-input {
+  margin-top: 2rem;
+  position: absolute;
+}
+
 #view-container {
   background-color: #0F0818;
   float: right;
