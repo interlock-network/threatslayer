@@ -9,7 +9,7 @@
             <TextComponent :msg="$i18n('confirm_are_you_sure')" id="delete-user-confirm-text" /><br />
             <TextComponent :msg="$i18n('warning_account_will_be_deleted')" /><br />
             <TextComponent :msg="$i18n('warning_ilock_will_be_lost')" /><br />
-            <div id="delete-user-password-input">
+            <div id="modal-password-input">
                 <SinglePasswordInput placeholder="enter_password_to_delete_account" @currentPassword="getPassword"
                     @passwordHasError="getPasswordHasError" />
             </div>
@@ -122,11 +122,6 @@ export default {
 
 #delete-user-button:active {
     background-color: #261142;
-}
-
-#delete-user-password-input {
-    margin-top: 2rem;
-    position: relative;
 }
 
 #delete-user-toggle-button {

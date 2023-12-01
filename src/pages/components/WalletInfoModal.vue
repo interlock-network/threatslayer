@@ -200,11 +200,6 @@ export default {
     text-align: center;
 }
 
-#delete-user-password-input {
-    margin-top: 1rem;
-    position: absolute;
-}
-
 #delete-user-toggle-button {
     background-color: #0F0818;
     border: none;

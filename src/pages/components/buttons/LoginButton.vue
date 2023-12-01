@@ -1,7 +1,7 @@
 <template>
     <div class="login-page-submit-button-container">
         <button class='submit-button' @click="submitLogin" :class="computedClass" :disabled="disabled"
-            style="margin-bottom: 1rem;" tabindex="6">
+            style="margin-bottom: 1rem;">
             {{ $i18n(loginButtonText) }}
         </button>
         <br />
@@ -114,4 +114,10 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.login-active {
+    border: none;
+    color: #963cf5;
+    pointer-events: initial;
+}
+</style>
