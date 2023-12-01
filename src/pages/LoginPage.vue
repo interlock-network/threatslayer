@@ -8,31 +8,21 @@
     <br />
     <UsernameInput @currentUsername="getUsername" @usernameHasError="getUsernameHasError" tabindex="2" focus />
     <SinglePasswordInput @currentPassword="getPassword" @passwordHasError="getPasswordHasError" tabindex="4" />
-    <LoginButton v-bind="{ checkState, loginDisabled, password, selectPage, username }" style="margin-top: 0.75rem;" />
+    <div tabindex="6">
+        <LoginButton v-bind="{ checkState, loginDisabled, password, selectPage, username }" style="margin-top: 0.75rem;" />
+    </div>
     <br />
-    <br />
-    <!-- TODO uncomment when available -->
-    <!-- Forgot username / password flow -->
-    <!-- <div id="forgot-password-container">
-        <TextComponent :msg="$i18n('forgot_password')" id="forgot-password-header" bold />
-        <br />
-        <br />
-        <EmailInput placeholder="enter_email_to_change_password" @currentEmail="getEmail" tabindex="8"
-            @emailHasError="getEmailHasError" />
-        <ForgotPasswordButton :forgotPasswordDisabled="forgotPasswordDisabled" :email="email" style="margin-top: 0.75rem;"
-            tabindex="10" />
-    </div> -->
+    <ForgotPassword v-bind="{ checkState, fadeLoginPage, resetButtonText, selectPage }" />
+    <NewPasswordModal v-if="active" v-bind="{ checkState, fadeLoginPage, selectPage, username }" />
 </template>
 
 <script>
-import EmailInput from "./components/inputs/EmailInput.vue";
-import ErrorMessage from "./components/ErrorMessage.vue";
-import ForgotPasswordButton from "./components/buttons/ForgotPasswordButton.vue";
+import ForgotPassword from "./components/ForgotPassword.vue";
 import LoginButton from "./components/buttons/LoginButton.vue";
+import NewPasswordModal from "./components/NewPasswordModal.vue";
 import PageBanner from "./components/PageBanner.vue";
 import RegisterLine from './components/RegisterLine.vue';
 import SinglePasswordInput from "./components/inputs/SinglePasswordInput.vue";
-import TextComponent from "./components/TextComponent.vue";
 import UsernameInput from "./components/inputs/UsernameInput.vue";
 import WarningTextBox from "./components/WarningTextBox.vue";
 
@@ -44,31 +34,26 @@ export default {
         urlToStake: { type: String, default: '' }
     },
     components: {
-        EmailInput,
-        ErrorMessage,
-        ForgotPasswordButton,
+        ForgotPassword,
         LoginButton,
+        NewPasswordModal,
         PageBanner,
         RegisterLine,
         SinglePasswordInput,
-        TextComponent,
         UsernameInput,
         WarningTextBox
     },
     data() {
         return {
-            email: '',
-            emailHasError: '',
+            active: false,
             password: '',
             passwordHasError: false,
+            resetButtonText: false,
             username: '',
             usernameHasError: ''
         };
     },
     computed: {
-        forgotPasswordDisabled() {
-            return !this.email || this.emailHasError;
-        },
         loginDisabled() {
             const { password, passwordHasError, username, usernameHasError } = this;
 
@@ -79,11 +64,12 @@ export default {
         }
     },
     methods: {
-        getEmail(email) {
-            this.email = email;
-        },
-        getEmailHasError(errorBool) {
-            this.emailHasError = errorBool;
+        fadeLoginPage(bool) {
+            this.active = bool;
+
+            if (bool === true) {
+                this.resetButtonText = true;
+            }
         },
         getPassword(password) {
             this.password = password;
@@ -107,31 +93,8 @@ input:focus {
     outline: none;
 }
 
-#forgot-password-container {
-    bottom: 30vh;
-    position: absolute;
-}
-
-#forgot-password-header {
-    margin-top: 3rem;
-    margin-bottom: 1rem;
-    display: block;
-}
-
 .login-page-submit-button-container {
     color: #FFFFFF;
     width: 400px;
-}
-
-.disabled {
-    border: 1px solid #d0d4d9;
-    opacity: 0.3;
-    pointer-events: none;
-}
-
-.login-active {
-    border: none;
-    color: #963cf5;
-    pointer-events: initial;
 }
 </style>
