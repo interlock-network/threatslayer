@@ -1,23 +1,24 @@
 <template>
-    <TextComponent :msg="$i18n(updateAddressMsg)" subinstruction /><br />
-    <br />
-    <AzeroAddressInput @currentAzeroAddress="getAzeroAddress" @azeroAddressHasError="getAzeroAddressHasError"
-        tabindex="2" />
-    <div style="position: absolute;">
-        <SinglePasswordInput @currentPassword="getPassword" @passwordHasError="getPasswordHasError" />
+    <div @keydown.esc="selectChangeAddress(false)">
+        <TextComponent :msg="$i18n(updateAddressMsg)" subinstruction /><br />
+        <br />
+        <AddressInput @currentAddress="getAddress" @addressHasError="getaddressHasError" tabindex="2" />
+        <div style="position: absolute;">
+            <SinglePasswordInput @currentPassword="getPassword" @passwordHasError="getPasswordHasError" />
+        </div>
+        <br />
+        <WarningTextBox v-if="showAddressChangeWarning" :msg="$i18n('warning_changing_wallet_address')"
+            style="margin-top: 3rem;" />
+        <UpdateAddressButton tabindex="4" style="margin-top: 3rem; margin-bottom: 1rem;"
+            v-bind="{ apiKey, checkState, hasError, newWallet, password, username }" />
+        <button @click="selectChangeAddress(false)" id="cancel-button" class="modal-button" tabindex="6">
+            {{ $i18n('cancel') }}
+        </button>
     </div>
-    <br />
-    <WarningTextBox v-if="showAddressChangeWarning" :msg="$i18n('warning_changing_wallet_address')"
-        style="margin-top: 3rem;" />
-    <UpdateAddressButton tabindex="4" style="margin-top: 3rem; margin-bottom: 1rem;"
-        v-bind="{ apiKey, checkState, hasError, newWallet, password, username }" />
-    <button @click="selectChangeAddress(false)" id="cancel-button" class="modal-button" tabindex="6">
-        {{ $i18n('cancel') }}
-    </button>
 </template>
 
 <script>
-import AzeroAddressInput from "./inputs/AzeroAddressInput.vue";
+import AddressInput from "./inputs/AddressInput.vue";
 import SinglePasswordInput from "./inputs/SinglePasswordInput.vue";
 import TextComponent from "./TextComponent.vue";
 import UpdateAddressButton from "./buttons/UpdateAddressButton.vue";
@@ -26,7 +27,7 @@ import WarningTextBox from "./WarningTextBox.vue";
 export default {
     name: "AddWallet",
     components: {
-        AzeroAddressInput,
+        AddressInput,
         SinglePasswordInput,
         TextComponent,
         UpdateAddressButton,
@@ -34,7 +35,7 @@ export default {
     },
     props: {
         apiKey: { type: String, default: '' },
-        azeroAddress: { type: String, default: '' },
+        walletAddress: { type: String, default: '' },
         checkState: { type: Function, required: true },
         selectChangeAddress: { type: Function, required: true },
         updateAddressMsg: { type: String, default: '' },
@@ -50,18 +51,18 @@ export default {
     },
     computed: {
         hasError() {
-            return this.newAzeroAddressHasError || this.passwordHasError;
+            return this.newaddressHasError || this.passwordHasError;
         },
         showAddressChangeWarning() {
-            return this.azeroAddress?.length;
+            return this.walletAddress?.length;
         }
     },
     methods: {
-        getAzeroAddress(wallet) {
+        getAddress(wallet) {
             this.newWallet = wallet;
         },
-        getAzeroAddressHasError(errorBool) {
-            this.newAzeroAddressHasError = errorBool;
+        getaddressHasError(errorBool) {
+            this.newaddressHasError = errorBool;
         },
         getPassword(password) {
             this.password = password;

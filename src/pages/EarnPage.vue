@@ -16,8 +16,7 @@
         :class="reenteredPasswordInputClass" v-model.trim="reenteredPassword" :placeholder="$i18n('enter_password_again')"
         tabindex="8" required />
     <ErrorMessage v-if="reenteredPasswordErrorMessage.length" :msg="$i18n(reenteredPasswordErrorMessage)" single />
-    <AzeroAddressInput @currentAzeroAddress="getAzeroAddress" @azeroAddressHasError="getAzeroAddressHasError"
-        tabindex="10" />
+    <AddressInput @currentAddress="getAddress" @addressHasError="getaddressHasError" tabindex="10" />
     <!-- referrer (optional) -->
     <UsernameInput placeholderI18n="enter_referrer_name" @currentUsername="getReferrer"
         @usernameHasError="getReferrerHasError" tabindex="14" />
@@ -42,7 +41,7 @@ import { debounce } from 'debounce';
 import { decodeAddress, encodeAddress } from '@polkadot/keyring';
 import { hexToU8a, isHex } from '@polkadot/util';
 
-import AzeroAddressInput from "./components/inputs/AzeroAddressInput.vue";
+import AddressInput from "./components/inputs/AddressInput.vue";
 import CreateUserButton from "./components/buttons/CreateUserButton.vue";
 import CreateWalletLine from './components/CreateWalletLine.vue';
 import EmailInput from "./components/inputs/EmailInput.vue";
@@ -64,7 +63,7 @@ export default {
         urlToStake: { type: String, default: '' }
     },
     components: {
-        AzeroAddressInput,
+        AddressInput,
         CreateUserButton,
         CreateWalletLine,
         EmailInput,
@@ -80,7 +79,7 @@ export default {
     },
     data() {
         return {
-            azeroAddressHasError: '',
+            addressHasError: '',
             connectAccountSelected: true,
             createAccountSelected: false,
             email: '',
@@ -106,11 +105,11 @@ export default {
     },
     computed: {
         createUserDisabled() {
-            const { azeroAddressHasError, email, emailHasError, password, passwordHasError, referrerHasError,
+            const { addressHasError, email, emailHasError, password, passwordHasError, referrerHasError,
                 termsOfService, unitedStates, username, usernameHasError } = this;
 
             const boxesUnchecked = !termsOfService || !unitedStates;
-            const hasErrors = azeroAddressHasError || emailHasError || passwordHasError || referrerHasError || usernameHasError;
+            const hasErrors = addressHasError || emailHasError || passwordHasError || referrerHasError || usernameHasError;
             const missingFields = !email.length || !password.length || !username.length;
 
             return boxesUnchecked || hasErrors || missingFields;
@@ -129,11 +128,11 @@ export default {
                 secondCheckBox.focus();
             }
         },
-        getAzeroAddress(wallet) {
+        getAddress(wallet) {
             this.wallet = wallet;
         },
-        getAzeroAddressHasError(errorBool) {
-            this.azeroAddressHasError = errorBool;
+        getaddressHasError(errorBool) {
+            this.addressHasError = errorBool;
         },
         getEmail(email) {
             this.email = email;
