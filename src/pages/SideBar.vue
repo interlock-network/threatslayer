@@ -1,17 +1,17 @@
 <template>
     <div id="sidebar-nav">
         <img id="threatslayer-logo" src="/src/assets/images/threatslayer_logo.png">
-        <div id="sidebar-earn" v-if="showRegisterPage" class="sidebar-item"
+        <div id="sidebar-earn" v-if="showRegisterNavButton" class="sidebar-item"
             :class="currentPage === 'earn' ? 'selected-sidebar-item' : ''" @click="selectPage('earn')">
             <img class="sidebar-icon" src="/src/assets/images/start_earning.png"><span class=sidebar-text>{{
                 $i18n('start_earning') }}</span>
         </div>
-        <div id="sidebar-wallet" v-if="showRegisterPage" class="sidebar-item"
+        <div id="sidebar-wallet" v-if="showCreateWalletNavButton" class="sidebar-item"
             :class="currentPage === 'wallet' ? 'selected-sidebar-item' : ''" @click="selectPage('wallet')">
             <img class="sidebar-icon" src="/src/assets/images/wallet.png"><span class=sidebar-text>{{ $i18n('create_wallet')
             }}</span>
         </div>
-        <div id="sidebar-login" v-if="showLoginPage" class="sidebar-item"
+        <div id="sidebar-login" v-if="showLoginNavButton" class="sidebar-item"
             :class="currentPage === 'login' ? 'selected-sidebar-item' : ''" @click="selectPage('login')">
             <div style="position: relative">
                 <img class="sidebar-icon" src="/src/assets/images/login.png"><span class="sidebar-text">{{ $i18n('login')
@@ -72,7 +72,8 @@ export default {
         registered: { type: Boolean, required: true },
         selectPage: { type: Function, required: true },
         urlToStake: { type: String, default: '' },
-        username: { type: String, default: '' }
+        username: { type: String, default: '' },
+        walletAddress: { type: String, default: '' }
     },
     components: {
         LogoutButton
@@ -81,11 +82,14 @@ export default {
         this.checkState();
     },
     computed: {
-        showRegisterPage() {
-            return !this.registered && !this.loggedIn;
+        showCreateWalletNavButton() {
+            return !this.walletAddress?.length;
         },
-        showLoginPage() {
+        showLoginNavButton() {
             return !this.loggedIn;
+        },
+        showRegisterNavButton() {
+            return !this.registered && !this.loggedIn;
         },
         showLogoutButton() {
             return this.loggedIn;
