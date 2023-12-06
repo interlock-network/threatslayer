@@ -3,7 +3,8 @@
     <MaliciousWarningBanner v-if="maliciousUrlObjects?.length" :checkState="checkState"
       :maliciousUrlObjects="maliciousUrlObjects" />
     <div id="top-container">
-      <SideBar v-bind="{ apiKey, checkState, currentPage, loggedIn, registered, selectPage, urlToStake, username }" />
+      <SideBar
+        v-bind="{ apiKey, checkState, currentPage, loggedIn, registered, selectPage, urlToStake, username, walletAddress }" />
       <div id="view-container">
         <StakingPage v-if="currentPage === 'staking'" v-bind="{ apiKey, checkState, loggedIn, registered, selectPage }" />
         <EarnPage v-if="currentPage === 'earn'" v-bind="{ checkState, selectPage, urlToStake }" />
@@ -14,7 +15,7 @@
         <FAQPage v-if="currentPage === 'faq'" />
         <!-- <OptionsPage v-if="currentPage === 'options'" /> -->
         <AccountPage v-if="currentPage === 'account'"
-          v-bind="{ azeroAddress, apiKey, checkState, email, selectPage, username }" />
+          v-bind="{ walletAddress, apiKey, checkState, email, selectPage, username }" />
         <NoAccountPage v-if="currentPage === 'noAccount'" v-bind="{ checkState, selectPage }" />
       </div>
     </div>
@@ -59,7 +60,7 @@ export default {
   data() {
     return {
       apiKey: null,
-      azeroAddress: null,
+      walletAddress: null,
       currentPage: 'account',
       email: null,
       loggedIn: false,
@@ -76,7 +77,7 @@ export default {
     async checkState() {
       // these values will all be undefined on first installation
       const apiKey = await getChromeStorage('apiKey') || 'threatslayer-api-key';
-      const azeroAddress = await getChromeStorage('azeroAddress'); // optional, may be missing
+      const walletAddress = await getChromeStorage('walletAddress'); // optional, may be missing
       const email = await getChromeStorage('email');
       const isRegistered = await getChromeStorage('registered');
       const loggedIn = await getChromeStorage('loggedIn');
@@ -95,7 +96,7 @@ export default {
         this.selectPage('login');
       } else if (apiKey && email && username) {
         this.apiKey = apiKey;
-        this.azeroAddress = azeroAddress;
+        this.walletAddress = walletAddress;
         this.email = email;
         this.username = username;
 
