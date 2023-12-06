@@ -33,7 +33,7 @@ export default {
     },
     props: {
         apiKey: { type: String, default: '' },
-        azeroAddress: { type: String, default: '' },
+        walletAddress: { type: String, default: '' },
         checkState: { type: Function, required: true },
         deleteWalletSelected: { type: Function, required: true },
         username: { type: String, default: '' }
@@ -54,17 +54,17 @@ export default {
     },
     methods: {
         async clearWallet() {
-            const { apiKey, azeroAddress, password, username } = this;
+            const { apiKey, walletAddress, password, username } = this;
 
             this.isClicked = false;
 
-            axios.post(`${baseUrl}/user-bcaddr-delete`, { key: apiKey, password, username, wallet: azeroAddress })
+            axios.post(`${baseUrl}/user-bcaddr-delete`, { key: apiKey, password, username, wallet: walletAddress })
                 .then(async _response => {
 
                     // set wallet address in state with user's new address
-                    const setAzeroAddress = await setChromeStorage({ azeroAddress: null });
+                    const setAddress = await setChromeStorage({ walletAddress: null });
 
-                    if (setAzeroAddress) {
+                    if (setAddress) {
                         this.checkState();
                     } else {
                         // TODO update this error message

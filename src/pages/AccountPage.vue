@@ -20,7 +20,7 @@
         <br />
     </div>
     <!-- view wallet information modal -->
-    <WalletInfoModal v-bind="{ azeroAddress, apiKey, checkState, fadeAccountPage, selectPage, username }"
+    <WalletInfoModal v-bind="{ walletAddress, apiKey, checkState, fadeAccountPage, selectPage, username }"
         style="opacity: 1" />
     <div :style="computedStyle">
         <!-- Names of user who referred this user -->
@@ -62,7 +62,7 @@ export default {
         WalletInfoModal
     },
     props: {
-        azeroAddress: { type: String, default: '' },
+        walletAddress: { type: String, default: '' },
         apiKey: { type: String, default: '' },
         checkState: { type: Function, required: true },
         email: { type: String, default: '' },
