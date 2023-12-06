@@ -2,7 +2,6 @@
     <PageBanner :msg="$i18n('create_wallet')">
         <img class="banner-icon" src="/src/assets/images/wallet.png">
     </PageBanner>
-    <br />
     <div class="generic-text-container">
         <TextComponent :msg="$i18n('must_create_wallet')" /><br />
         <br />
