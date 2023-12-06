@@ -3,9 +3,6 @@
         <a href="https://discord.com/invite/8M5QfHqzfA" target="_blank">
             <img class="footer-icon" src="/src/assets/images/discord.png">
         </a>
-        <a href="https://interlockweb3.medium.com/" target="_blank">
-            <img class="footer-icon" src="/src/assets/images/medium.png">
-        </a>
         <a href="https://www.linkedin.com/company/interlocknetwork" target="_blank">
             <img class="footer-icon" src="/src/assets/images/linkedin.png">
         </a>
