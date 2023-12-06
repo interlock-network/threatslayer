@@ -7,13 +7,13 @@
     <div v-if="active" id="modal-overlay" @keydown.esc="doneAction">
         <div id="modal-container" :style="active ? 'bottom: 40%' : 'display: none'">
             <!-- List of existing wallet addresses, if any -->
-            <WalletList v-bind="{ apiKey, azeroAddress, changeAddressSelected, deleteWalletSelected, username }"
+            <WalletList v-bind="{ apiKey, walletAddress, changeAddressSelected, deleteWalletSelected, username }"
                 @deleteWalletSelected="getDeleteWalletSelected" />
             <!-- prompt to add wallet address if there is none -->
             <AddWallet v-if="addWallet"
-                v-bind="{ apiKey, azeroAddress, checkState, selectChangeAddress, updateAddressMsg, username }" />
+                v-bind="{ apiKey, walletAddress, checkState, selectChangeAddress, updateAddressMsg, username }" />
             <DeleteWallet v-if="deleteWallet"
-                v-bind="{ apiKey, azeroAddress, checkState, deleteWalletSelected, username }" />
+                v-bind="{ apiKey, walletAddress, checkState, deleteWalletSelected, username }" />
             <div v-if="showChangeAddressButton">
                 <button @click="selectChangeAddress(true)" id="update-address-button" class="modal-button" tabindex="12">
                     {{ $i18n('update_wallet_address') }}
@@ -32,7 +32,6 @@ import { decodeAddress, encodeAddress } from '@polkadot/keyring';
 import { hexToU8a, isHex } from '@polkadot/util';
 
 import AddWallet from "./AddWallet.vue";
-import AzeroAddressInput from "./inputs/AzeroAddressInput.vue";
 import DeleteWallet from "./DeleteWallet.vue";
 import SinglePasswordInput from "./inputs/SinglePasswordInput.vue";
 import TextComponent from "./TextComponent.vue";
@@ -44,7 +43,7 @@ export default {
     name: "WalletInfoModal",
     props: {
         apiKey: { type: String, default: '' },
-        azeroAddress: { type: String, default: '' },
+        walletAddress: { type: String, default: '' },
         checkState: { type: Function, required: true },
         fadeAccountPage: { type: Function, required: true },
         selectPage: { type: Function, required: true },
@@ -52,7 +51,6 @@ export default {
     },
     components: {
         AddWallet,
-        AzeroAddressInput,
         DeleteWallet,
         SinglePasswordInput,
         TextComponent,
@@ -69,14 +67,14 @@ export default {
             deleting: false,
             errorArr: [],
             newWallet: '',
-            newAzeroAddressHasError: '',
+            newaddressHasError: '',
             password: '',
             passwordHasError: false
         }
     },
     mounted() {
         // focus this element to encourage users to add their wallet address
-        if (!this.azeroAddress?.length) {
+        if (!this.walletAddress?.length) {
             const firstInput = document.getElementById('view-wallet-info-button');
 
             firstInput.focus();
@@ -84,9 +82,9 @@ export default {
     },
     computed: {
         addWallet() {
-            const { azeroAddress, changeAddressSelected } = this;
+            const { walletAddress, changeAddressSelected } = this;
 
-            return !azeroAddress?.length || changeAddressSelected;
+            return !walletAddress?.length || changeAddressSelected;
         },
         showChangeAddressButton() {
             return !this.addWallet && !this.deleteWallet;
@@ -108,16 +106,16 @@ export default {
             return result;
         },
         hasError() {
-            return this.newAzeroAddressHasError || this.passwordHasError;
+            return this.newaddressHasError || this.passwordHasError;
         },
         headerText() {
-            return !this.azeroAddress?.length ? 'add_blockchain_address' : 'view_wallet_info';
+            return !this.walletAddress?.length ? 'add_blockchain_address' : 'view_wallet_info';
         },
         showAddressChangeWarning() {
-            return this.azeroAddress?.length;
+            return this.walletAddress?.length;
         },
         updateAddressMsg() {
-            return !this.azeroAddress?.length ? 'warning_must_add_wallet_address' : 'enter_new_wallet_address';
+            return !this.walletAddress?.length ? 'warning_must_add_wallet_address' : 'enter_new_wallet_address';
         }
     },
     methods: {
@@ -126,7 +124,7 @@ export default {
         },
         doneAction() {
             this.newWallet = '';
-            this.newAzeroAddressHasError = '';
+            this.newaddressHasError = '';
             this.password = '';
             this.active = false;
             this.fadeAccountPage(false);
@@ -151,12 +149,13 @@ export default {
                 return false;
             }
         },
-        openWalletInfoModal() {
-            this.fadeAccountPage(true);
-            this.active = true;
+        openWalletInfoModal(bool) {
+            this.fadeAccountPage(bool);
+            this.active = bool;
         },
         selectChangeAddress(bool) {
             this.changeAddressSelected = bool;
+            this.openWalletInfoModal(bool);
         },
         validateAddress: debounce(function (event, errorKeyName) {
             const wallet = event?.target?.value;
