@@ -2,13 +2,9 @@
     <PageBanner :msg="$i18n('create_wallet')">
         <img class="banner-icon" src="/src/assets/images/wallet.png">
     </PageBanner>
-    <TextComponent :msg="$i18n('already_have_a_wallet')" subinstruction />
-    <button class="login-button" @click="selectPage('earn')">{{ $i18n('register') }}</button>
-    <br />
     <br />
     <div class="generic-text-container">
-        <TextComponent :msg="$i18n('must_create_azero_wallet')" />
-        <br />
+        <TextComponent :msg="$i18n('must_create_wallet')" /><br />
         <br />
         <TextComponent :msg="$i18n('click_to_create_wallet')" />
     </div>
