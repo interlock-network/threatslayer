@@ -91,11 +91,11 @@ export default {
                     const loggedInSynched = await setChromeStorage({ loggedIn: true });
                     const registeredSynched = await setChromeStorage({ registered: true });
                     const setApiKey = await setChromeStorage({ apiKey: key });
-                    const setAzeroAddress = await setChromeStorage({ azeroAddress: wallet });
+                    const setAddress = await setChromeStorage({ walletAddress: wallet });
                     const setEmail = await setChromeStorage({ email });
                     const setUsername = await setChromeStorage({ username });
 
-                    if (loggedInSynched & registeredSynched && setApiKey && setAzeroAddress && setEmail && setUsername) {
+                    if (loggedInSynched & registeredSynched && setApiKey && setAddress && setEmail && setUsername) {
                         this.checkState();
                     }
                 })

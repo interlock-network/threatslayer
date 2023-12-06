@@ -71,7 +71,7 @@ export default {
             axios.post(`${baseUrl}/user-bcaddr-reset`, { key, password, username, wallet: newWallet })
                 .then(async response => {
                     const { status } = response.data;
-                    let setAzeroAddress = false;
+                    let setAddress = false;
 
                     this.status = status;
                     this.submitted = true;
@@ -79,10 +79,10 @@ export default {
 
                     // set wallet address in state with user's new address
                     if (newWallet?.length) {
-                        setAzeroAddress = await setChromeStorage({ azeroAddress: newWallet });
+                        setAddress = await setChromeStorage({ walletAddress: newWallet });
                     }
 
-                    if (setAzeroAddress) {
+                    if (setAddress) {
                         this.checkState();
                     } else {
                         this.errorArr.push('error_updating_wallet_address_generic');

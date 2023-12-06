@@ -1,9 +1,9 @@
 <template>
-    <div v-if="azeroAddress?.length && !changeAddressSelected">
+    <div v-if="walletAddress?.length && !changeAddressSelected">
         <TextComponent :msg="$i18n('wallet_address')" bold /> <br />
         <button id="clear-wallet-button"><img @click="deleteWalletSelected(true)" class="sidebar-icon"
                 src="/src/assets/images/x-icon.png"></button>
-        <TextComponent :msg="azeroAddress" wallet /><br /><br />
+        <TextComponent :msg="walletAddress" wallet /><br /><br />
     </div>
 </template>
 
@@ -16,9 +16,9 @@ export default {
         TextComponent
     },
     props: {
-        azeroAddress: { type: String, default: '' },
         changeAddressSelected: { type: Boolean, required: true },
-        deleteWalletSelected: { type: Function, required: true }
+        deleteWalletSelected: { type: Function, required: true },
+        walletAddress: { type: String, default: '' }
     }
 };
 </script>

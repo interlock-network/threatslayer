@@ -61,7 +61,7 @@ export default {
             } else {
                 this.loggedOut = true;
 
-                const azeroAddressClearedFromState = await clearChromeStorage('azeroAddress');
+                const addressClearedFromState = await clearChromeStorage('walletAddress');
                 const emailClearedFromState = await clearChromeStorage('email');
                 const keyClearedFromState = await clearChromeStorage('apiKey');
                 const usernameClearedFromState = await clearChromeStorage('username');
@@ -69,7 +69,7 @@ export default {
                 // this happens last
                 const loggedOut = await setChromeStorage({ loggedIn: false });
 
-                const loggedOutSynched = azeroAddressClearedFromState && emailClearedFromState && keyClearedFromState
+                const loggedOutSynched = addressClearedFromState && emailClearedFromState && keyClearedFromState
                     && loggedOut && usernameClearedFromState;
 
                 if (!loggedOutSynched) {
