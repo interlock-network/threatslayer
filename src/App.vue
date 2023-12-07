@@ -7,7 +7,7 @@
         v-bind="{ apiKey, checkState, currentPage, loggedIn, registered, selectPage, urlToStake, username, walletAddress }" />
       <div id="view-container">
         <StakingPage v-if="currentPage === 'staking'" v-bind="{ apiKey, checkState, loggedIn, registered, selectPage }" />
-        <EarnPage v-if="currentPage === 'earn'" v-bind="{ checkState, selectPage, urlToStake }" />
+        <EarnPage v-if="currentPage === 'earn'" v-bind="{ checkState, justInstalled, selectPage, urlToStake }" />
         <WalletPage v-if="currentPage === 'wallet'" :selectPage="selectPage" />
         <LoginPage v-if="currentPage === 'login'" v-bind="{ checkState, selectPage, urlToStake }" />
         <SlayCount v-if="currentPage === 'slayCount'" :apiKey="apiKey" :username="username" />
@@ -63,6 +63,7 @@ export default {
       walletAddress: null,
       currentPage: 'account',
       email: null,
+      justInstalled: false,
       loggedIn: false,
       maliciousUrlObjects: null,
       registered: false,
@@ -75,6 +76,9 @@ export default {
   },
   methods: {
     async checkState() {
+      // this should be true on first installation only
+      const justInstalled = await getChromeStorage('justInstalled');
+
       // these values will all be undefined on first installation
       const apiKey = await getChromeStorage('apiKey') || 'threatslayer-api-key';
       const walletAddress = await getChromeStorage('walletAddress'); // optional, may be missing
@@ -85,6 +89,7 @@ export default {
       const urlToStake = await getChromeStorage('urlToStake');
       const username = await getChromeStorage('username');
 
+      this.justInstalled = justInstalled;
       this.loggedIn = loggedIn;
       this.maliciousUrlObjects = maliciousUrlObjects;
       this.registered = isRegistered;
@@ -196,13 +201,15 @@ input {
   width: 100%;
 }
 
-#view-container {
-  background-color: #0F0818;
-  float: right;
-  height: 90vh;
-  padding-left: 2rem;
-  margin-top: 1rem;
-  width: 450px;
+#modal-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  background-color: #000000da;
 }
 
 #top-container {
@@ -214,6 +221,15 @@ input {
   min-height: 25vh;
   overflow-y: scroll;
   margin-bottom: 4rem;
+}
+
+#view-container {
+  background-color: #0F0818;
+  float: right;
+  height: 90vh;
+  padding-left: 2rem;
+  margin-top: 1rem;
+  width: 450px;
 }
 
 .login-button {
