@@ -164,7 +164,9 @@ chrome.runtime.setUninstallURL(surveyUrl);
  * This listener opens the release notes in a new tab when users update the extension
  */
 chrome.runtime.onInstalled.addListener(function (details) {
-    if (details.reason == 'update') {
+    if (details.reason == 'install') {
+        chrome.storage.local.set({ justInstalled: true });
+    } else if (details.reason == 'update') {
         chrome.tabs.create({ url: releaseNotes });
     }
 });
