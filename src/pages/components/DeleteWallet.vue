@@ -67,7 +67,6 @@ export default {
                     if (setAddress) {
                         this.checkState();
                     } else {
-                        // TODO update this error message
                         this.deleteWalletErrors = ['error_updating_wallet_address_generic'];
                     }
                 })

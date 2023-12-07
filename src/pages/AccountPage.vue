@@ -20,7 +20,7 @@
         <br />
     </div>
     <!-- view wallet information modal -->
-    <WalletInfoModal v-bind="{ walletAddress, apiKey, checkState, fadeAccountPage, selectPage, username }"
+    <WalletInfoModal v-bind="{ apiKey, checkState, fadeAccountPage, selectPage, username, walletAddress }"
         style="opacity: 1" />
     <div :style="computedStyle">
         <!-- Names of user who referred this user -->
