@@ -4,7 +4,7 @@
     "description": "__MSG_appDesc__",
     "default_locale": "en",
     "author": "Interlock",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "icons": {
         "128": "assets/icons/icon128.png"
     },
