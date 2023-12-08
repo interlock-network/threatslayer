@@ -8,7 +8,7 @@
 import { debounce } from 'debounce';
 import { decodeAddress, encodeAddress } from '@polkadot/keyring';
 import { hexToU8a, isHex } from '@polkadot/util';
-import { isAddress } from 'web3-validator';
+import { isAddress } from 'ethers';
 
 import ErrorMessage from "../ErrorMessage.vue";
 
@@ -32,6 +32,9 @@ export default {
         }
     },
     methods: {
+        validateArbitrumAddress(wallet) {
+            return isAddress(wallet);
+        },
         validateAzero(wallet = '') {
             let result = true;
             const azeroRegex = /^5.*/;
@@ -42,9 +45,6 @@ export default {
 
             return result;
         },
-        validateArbitrum(wallet) {
-            return isAddress(wallet);
-        },
         validateWalletAddress: debounce(function () {
             let result = 'error';
             const wallet = this.wallet;
@@ -52,15 +52,14 @@ export default {
             if (!wallet?.length) {
                 result = '';
             } else {
-                const isArbitrum = this.validateArbitrum(wallet);
-                const isAzero = this.validPolkadot(wallet);
+                const isArbitrum = this.validateArbitrumAddress(wallet);
+                const isAzero = this.validateAlephZeroAddress(wallet);
 
-                if (!this.validateAzero(wallet) && !isArbitrum) {
-                    result = 'warning_invalid_address';
-                }
                 // happy case
-                else if (isArbitrum || isAzero) {
+                if (isArbitrum || isAzero) {
                     result = '';
+                } else if (!this.isAzero && !isArbitrum) {
+                    result = 'warning_invalid_address';
                 } else {
                     result = 'error_registering_wallet_address';
                 }
@@ -72,13 +71,13 @@ export default {
             this.$emit('currentAddress', wallet);
             this.$emit('addressHasError', hasError);
         }, 250),
-        validPolkadot(wallet) {
+        validateAlephZeroAddress(wallet) {
             try {
                 encodeAddress(
                     isHex(wallet)
                         ? hexToU8a(wallet)
                         : decodeAddress(wallet)
-                );
+                ) && this.validateAzero(wallet);
 
                 return true;
             } catch (_error) {
