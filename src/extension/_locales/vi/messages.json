@@ -35,14 +35,6 @@
         "message": "Thêm Địa Chỉ Blockchain",
         "description": "Header text on Account page."
     },
-    "address_aleph": {
-        "message": "Địa Chỉ Ví Tương Thích với Aleph Zero",
-        "description": "Header on a page listing wallet addresses."
-    },
-    "address_pdot": {
-        "message": "Địa Chỉ Ví Moonbeam",
-        "description": "Header on a page listing wallet addresses."
-    },
     "affirm_not_us_citizen": {
         "message": "Xác nhận rằng bạn không phải là công dân hoặc cư dân của Hoa Kỳ.",
         "description": "Instruction for registering an account."
@@ -78,10 +70,6 @@
     "change_password": {
         "message": "Đổi Mật Khẩu",
         "description": "The text used on change password button."
-    },
-    "click_to_create_wallet": {
-        "message": "Vui lòng nhấp 'Tạo Ví' để được chuyển hướng đến tiện ích mở rộng trình duyệt Chrome để tạo SubWallet.",
-        "description": "Page title, also used in sidebar."
     },
     "close": {
         "message": "Đóng",
@@ -157,18 +145,6 @@
     },
     "enter_referrer_name": {
         "message": "Tùy chọn: Nhập tên đăng nhập của người giới thiệu",
-        "description": "Instruction for registering an account."
-    },
-    "enter_azero_wallet_address": {
-        "message": "Dán địa chỉ ví tương thích với Aleph Zero của bạn",
-        "description": "Instruction for registering an account."
-    },
-    "enter_pdot_wallet_address": {
-        "message": "Hoặc dán địa chỉ ví Moonbeam của bạn vào đây",
-        "description": "Instruction for registering an account."
-    },
-    "enter_azero_wallet_address_optional": {
-        "message": "Tùy chọn: Dán địa chỉ ví tương thích với Aleph Zero của bạn",
         "description": "Instruction for registering an account."
     },
     "enter_new_wallet_address": {
@@ -302,10 +278,6 @@
     "malicious_sites_detected": {
         "message": "Các Trang Web Độc Hại Đã Được Phát Hiện",
         "description": "Văn bản được sử dụng để hiển thị số lượng URL độc hại được quét trên bảng điều khiển."
-    },
-    "must_create_azero_wallet": {
-        "message": "Để sử dụng ThreatSlayer, bạn cần tạo một ví tương thích với Aleph Zero.",
-        "description": "Hướng dẫn tạo ví."
     },
     "no_allowlisted_sites": {
         "message": "Không có trang web nào được cho phép để hiển thị.",
@@ -483,14 +455,6 @@
         "message": "Tài khoản của bạn sẽ bị xóa vĩnh viễn.",
         "description": "Văn bản cảnh báo khi xóa tài khoản người dùng."
     },
-    "warning_address_not_azero": {
-        "message": "Đây không phải là địa chỉ Aleph Zero.",
-        "description": "Văn bản cảnh báo cho loại ví người dùng."
-    },
-    "warning_address_not_moonbeam": {
-        "message": "Đây không phải là địa chỉ Moonbeam.",
-        "description": "Văn bản cảnh báo cho loại ví người dùng."
-    },
     "warning_changing_wallet_address": {
         "message": "Cảnh báo: Việc thay đổi địa chỉ ví hiện tại của bạn có thể làm trễ quá trình truy cập vào $$ILOCK đã gửi trước đó.",
         "description": "Văn bản cảnh báo được sử dụng khi thay đổi địa chỉ ví."
@@ -602,5 +566,29 @@
     "warning_need_wallet_to_withdraw_ilock": {
         "message": "Cảnh báo: Không có địa chỉ ví, bạn không thể rút $$ILOCK mà bạn đã kiếm được.",
         "description": "Warning in the wallet information modal."
+    },
+    "click_to_create_wallet": {
+        "message": "Nếu bạn chưa có, hãy nhấp vào 'Tạo Ví' để được chuyển hướng đến tiện ích mở rộng SubWallet trên Chrome. SubWallet tương thích với cả phần thưởng $$ILOCK của Ethereum và Aleph Zero.",
+        "description": "Instruction on wallet page."
+    },
+    "do_this_to_be_protected": {
+        "message": "Làm điều này để được bảo vệ hoàn toàn bởi ThreatSlayer:",
+        "description": "Instruction on wallet page."
+    },
+    "got_it": {
+        "message": "Hiểu rồi!",
+        "description": "Generic button text."
+    },
+    "enter_wallet_address_optional": {
+        "message": "Tùy chọn: địa chỉ ví tương thích với Ethereum hoặc Aleph Zero",
+        "description": "Instruction for registering an account."
+    },
+    "must_create_wallet": {
+        "message": "Để nhận phần thưởng token $$ILOCK của bạn khi duyệt web, bạn phải tạo một ví tương thích với Ethereum hoặc Aleph Zero.",
+        "description": "Instruction on wallet page."
+    },
+    "warning_invalid_address": {
+        "message": "Đây không phải là địa chỉ Ethereum hoặc Aleph Zero.",
+        "description": "Warning text for user wallet type."
     }
 }

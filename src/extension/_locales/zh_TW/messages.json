@@ -35,14 +35,6 @@
         "message": "添加区块链地址",
         "description": "Header text on Account page."
     },
-    "address_aleph": {
-        "message": "兼容Aleph Zero的钱包地址",
-        "description": "Header on a page listing wallet addresses."
-    },
-    "address_pdot": {
-        "message": "Moonbeam钱包地址",
-        "description": "Header on a page listing wallet addresses."
-    },
     "affirm_not_us_citizen": {
         "message": "确认您不是美国公民或居民。",
         "description": "Instruction for registering an account."
@@ -78,10 +70,6 @@
     "change_password": {
         "message": "更改密码",
         "description": "The text used on change password button."
-    },
-    "click_to_create_wallet": {
-        "message": "请点击'创建钱包', 将跳转至Chrome浏览器扩展程序以创建SubWallet。",
-        "description": "Page title, also used in sidebar."
     },
     "close": {
         "message": "关闭",
@@ -157,18 +145,6 @@
     },
     "enter_referrer_name": {
         "message": "可選: 輸入推薦人用戶名",
-        "description": "Instruction for registering an account."
-    },
-    "enter_azero_wallet_address": {
-        "message": "粘貼您的 Aleph Zero 兼容錢包地址",
-        "description": "Instruction for registering an account."
-    },
-    "enter_pdot_wallet_address": {
-        "message": "或者在這裡粘貼您的 Moonbeam 錢包地址",
-        "description": "Instruction for registering an account."
-    },
-    "enter_azero_wallet_address_optional": {
-        "message": "可選: 粘貼您的 Aleph Zero 兼容錢包地址",
         "description": "Instruction for registering an account."
     },
     "enter_new_wallet_address": {
@@ -363,14 +339,6 @@
         "message": "您的帳戶將被永久刪除。",
         "description": "Warning text for deleting user account."
     },
-    "warning_address_not_azero": {
-        "message": "這不是一個 Aleph Zero 地址。",
-        "description": "Warning text for user wallet type."
-    },
-    "warning_address_not_moonbeam": {
-        "message": "這不是一個 Moonbeam 地址。",
-        "description": "Warning text for user wallet type."
-    },
     "warning_changing_wallet_address": {
         "message": "警告: 更改現有錢包地址可能會延遲訪問先前存放的 $$ILOCK。",
         "description": "Warning text used for changing a wallet address."
@@ -482,5 +450,29 @@
     "warning_need_wallet_to_withdraw_ilock": {
         "message": "警告: 沒有錢包地址, 您將無法提取您賺取的$$ILOCK。",
         "description": "Warning in the wallet information modal."
+    },
+    "click_to_create_wallet": {
+        "message": "如果您还没有钱包，点击'创建钱包'将跳转到SubWallet Chrome扩展。SubWallet兼容以太坊和Aleph Zero的$$ILOCK奖励。",
+        "description": "Instruction on wallet page."
+    },
+    "do_this_to_be_protected": {
+        "message": "执行以下操作以获得ThreatSlayer的全面保护：",
+        "description": "Instruction on wallet page."
+    },
+    "got_it": {
+        "message": "明白了！",
+        "description": "Generic button text."
+    },
+    "enter_wallet_address_optional": {
+        "message": "可选：以太坊或Aleph Zero兼容的钱包地址",
+        "description": "Instruction for registering an account."
+    },
+    "must_create_wallet": {
+        "message": "为了接收您浏览时的$$ILOCK代币奖励，您必须创建一个以太坊或Aleph Zero兼容的钱包。",
+        "description": "Instruction on wallet page."
+    },
+    "warning_invalid_address": {
+        "message": "这不是一个以太坊或Aleph Zero地址。",
+        "description": "Warning text for user wallet type."
     }
 }

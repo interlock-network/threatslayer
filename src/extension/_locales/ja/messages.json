@@ -35,14 +35,6 @@
         "message": "ブロックチェーンアドレスを追加",
         "description": "Header text on Account page."
     },
-    "address_aleph": {
-        "message": "Aleph Zero対応ウォレットアドレス",
-        "description": "Header on a page listing wallet addresses."
-    },
-    "address_pdot": {
-        "message": "Moonbeamウォレットアドレス",
-        "description": "Header on a page listing wallet addresses."
-    },
     "affirm_not_us_citizen": {
         "message": "あなたがアメリカ市民または居住者でないことを確認してください。",
         "description": "Instruction for registering an account."
@@ -78,10 +70,6 @@
     "change_password": {
         "message": "パスワードを変更",
         "description": "The text used on change password button."
-    },
-    "click_to_create_wallet": {
-        "message": "'ウォレットを作成'をクリックして、SubWalletを作成するためのChromeブラウザ拡張機能にリダイレクトされてください。",
-        "description": "Page title, also used in sidebar."
     },
     "close": {
         "message": "閉じる",
@@ -157,18 +145,6 @@
     },
     "enter_referrer_name": {
         "message": "任意: 紹介者のユーザー名を入力してください",
-        "description": "アカウント登録の指示。"
-    },
-    "enter_azero_wallet_address": {
-        "message": "Aleph Zero互換ウォレットアドレスを貼り付けてください",
-        "description": "アカウント登録の指示。"
-    },
-    "enter_pdot_wallet_address": {
-        "message": "または、Moonbeamウォレットアドレスをここに貼り付けてください",
-        "description": "アカウント登録の指示。"
-    },
-    "enter_azero_wallet_address_optional": {
-        "message": "任意: Aleph Zero互換ウォレットアドレスを貼り付けてください",
         "description": "アカウント登録の指示。"
     },
     "enter_new_wallet_address": {
@@ -302,10 +278,6 @@
     "malicious_sites_detected": {
         "message": "検出された悪意のあるサイト",
         "description": "ダッシュボードでスキャンされた悪意のあるURLの数を示すテキスト。"
-    },
-    "must_create_azero_wallet": {
-        "message": "ThreatSlayerを利用するためには、Aleph Zero対応のウォレットを作成する必要があります。",
-        "description": "ウォレット作成の説明。"
     },
     "no_allowlisted_sites": {
         "message": "表示する許可リストに追加されたサイトはありません。",
@@ -483,14 +455,6 @@
         "message": "アカウントは完全に削除されます。",
         "description": "ユーザーアカウントを削除する際の警告テキスト。"
     },
-    "warning_address_not_azero": {
-        "message": "これはAleph Zeroアドレスではありません。",
-        "description": "ユーザーのウォレットタイプに関する警告テキスト。"
-    },
-    "warning_address_not_moonbeam": {
-        "message": "これはMoonbeamアドレスではありません。",
-        "description": "ユーザーのウォレットタイプに関する警告テキスト。"
-    },
     "warning_changing_wallet_address": {
         "message": "警告: 既存のウォレットアドレスを変更すると、以前に預け入れた$$ILOCKへのアクセスが遅延する可能性があります。",
         "description": "ウォレットアドレスを変更する際に使用される警告テキスト。"
@@ -602,5 +566,29 @@
     "warning_need_wallet_to_withdraw_ilock": {
         "message": "警告: ウォレットアドレスがないと、獲得した$ILOCKを引き出すことができません。",
         "description": "Warning in the wallet information modal."
+    },
+    "click_to_create_wallet": {
+        "message": "まだお持ちでない場合は、「ウォレットを作成」をクリックしてSubWalletのChrome拡張機能にリダイレクトしてください。SubWalletはEthereumおよびAleph Zeroの$$ILOCK報酬に対応しています。",
+        "description": "Instruction on wallet page."
+    },
+    "do_this_to_be_protected": {
+        "message": "ThreatSlayerによる完全な保護を受けるためにこれを行ってください：",
+        "description": "Instruction on wallet page."
+    },
+    "got_it": {
+        "message": "了解しました！",
+        "description": "Generic button text."
+    },
+    "enter_wallet_address_optional": {
+        "message": "オプション：EthereumまたはAleph Zero互換のウォレットアドレス",
+        "description": "Instruction for registering an account."
+    },
+    "must_create_wallet": {
+        "message": "ブラウジングで$$ILOCKトークン報酬を受け取るためには、EthereumまたはAleph Zero互換のウォレットを作成する必要があります。",
+        "description": "Instruction on wallet page."
+    },
+    "warning_invalid_address": {
+        "message": "これはEthereumまたはAleph Zeroのアドレスではありません。",
+        "description": "Warning text for user wallet type."
     }
 }

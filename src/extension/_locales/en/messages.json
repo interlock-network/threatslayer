@@ -35,14 +35,6 @@
         "message": "Add Blockchain Address",
         "description": "Header text on Account page."
     },
-    "address_aleph": {
-        "message": "Aleph Zero-compatible Wallet Address",
-        "description": "Header on a page listing wallet addresses."
-    },
-    "address_pdot": {
-        "message": "Moonbeam Wallet Address",
-        "description": "Header on a page listing wallet addresses."
-    },
     "affirm_not_us_citizen": {
         "message": "Affirm you are not a US citizen or resident.",
         "description": "Instruction for registering an account."
@@ -78,10 +70,6 @@
     "change_password": {
         "message": "Change Password",
         "description": "The text used on change password button."
-    },
-    "click_to_create_wallet": {
-        "message": "Please click 'Create Wallet' to be redirected to a Chrome browser extension to create a SubWallet.",
-        "description": "Page title, also used in sidebar."
     },
     "close": {
         "message": "Close",
@@ -157,18 +145,6 @@
     },
     "enter_referrer_name": {
         "message": "Optional: Enter referrer username",
-        "description": "Instruction for registering an account."
-    },
-    "enter_azero_wallet_address": {
-        "message": "Paste your Aleph Zero-compatible wallet address",
-        "description": "Instruction for registering an account."
-    },
-    "enter_pdot_wallet_address": {
-        "message": "Or paste your Moonbeam wallet address here",
-        "description": "Instruction for registering an account."
-    },
-    "enter_azero_wallet_address_optional": {
-        "message": "Optional: Paste your Aleph Zero-compatible wallet address",
         "description": "Instruction for registering an account."
     },
     "enter_new_wallet_address": {
@@ -302,10 +278,6 @@
     "malicious_sites_detected": {
         "message": "Malicious Sites Detected",
         "description": "The text used to show how many malicious URLs are scanned on the dashboard."
-    },
-    "must_create_azero_wallet": {
-        "message": "In order to use ThreatSlayer, you will need to create an Aleph Zero-compatible wallet.",
-        "description": "Instruction for creating a wallet."
     },
     "no_allowlisted_sites": {
         "message": "No allowlisted sites to show.",
@@ -483,14 +455,6 @@
         "message": "Your account will be deleted forever.",
         "description": "Warning text for deleting user account."
     },
-    "warning_address_not_azero": {
-        "message": "This is not an Aleph Zero address.",
-        "description": "Warning text for user wallet type."
-    },
-    "warning_address_not_moonbeam": {
-        "message": "This is not a Moonbeam address.",
-        "description": "Warning text for user wallet type."
-    },
     "warning_changing_wallet_address": {
         "message": "Warning: Changing your existing wallet address may delay access to previously deposited $$ILOCK.",
         "description": "Warning text used for changing a wallet address."
@@ -602,5 +566,29 @@
     "warning_need_wallet_to_withdraw_ilock": {
         "message": "Warning: Without a wallet address you cannot withdraw $$ILOCK that you have earned.",
         "description": "Warning in the wallet information modal."
+    },
+    "click_to_create_wallet": {
+        "message": "If you don't already have one, click 'Create Wallet' to be redirected to the SubWallet Chrome extension. SubWallet is compatible with both Ethereum and Aleph Zero $$ILOCK rewards.",
+        "description": "Instruction on wallet page."
+    },
+    "do_this_to_be_protected": {
+        "message": "Do this to be fully protected by ThreatSlayer:",
+        "description": "Instruction on wallet page."
+    },
+    "got_it": {
+        "message": "Got It!",
+        "description": "Generic button text."
+    },
+    "enter_wallet_address_optional": {
+        "message": "Optional: Ethereum or Aleph Zero-compatible wallet address",
+        "description": "Instruction for registering an account."
+    },
+    "must_create_wallet": {
+        "message": "To receive your $$ILOCK token rewards for browsing, you must create an Ethereum- or Aleph Zero-compatible wallet.",
+        "description": "Instruction on wallet page."
+    },
+    "warning_invalid_address": {
+        "message": "This is not an Ethereum or Aleph Zero address.",
+        "description": "Warning text for user wallet type."
     }
 }

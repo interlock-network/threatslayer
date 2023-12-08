@@ -35,14 +35,6 @@
         "message": "Tambahkan Alamat Blockchain",
         "description": "Header text on Account page."
     },
-    "address_aleph": {
-        "message": "Alamat Wallet yang Kompatibel dengan Aleph Zero",
-        "description": "Header on a page listing wallet addresses."
-    },
-    "address_pdot": {
-        "message": "Alamat Wallet Moonbeam",
-        "description": "Header on a page listing wallet addresses."
-    },
     "affirm_not_us_citizen": {
         "message": "Tegaskan bahwa Anda bukan warga negara atau penduduk AS.",
         "description": "Instruction for registering an account."
@@ -78,10 +70,6 @@
     "change_password": {
         "message": "Ubah Kata Sandi",
         "description": "The text used on change password button."
-    },
-    "click_to_create_wallet": {
-        "message": "Silakan klik 'Buat Dompet' untuk diarahkan ke ekstensi browser Chrome untuk membuat SubWallet.",
-        "description": "Page title, also used in sidebar."
     },
     "close": {
         "message": "Tutup",
@@ -157,18 +145,6 @@
     },
     "enter_referrer_name": {
         "message": "Pilihan: Masukkan nama pengguna pengenalan",
-        "description": "Instruction for registering an account."
-    },
-    "enter_azero_wallet_address": {
-        "message": "Tampal alamat dompet yang serasi dengan Aleph Zero anda",
-        "description": "Instruction for registering an account."
-    },
-    "enter_pdot_wallet_address": {
-        "message": "Atau tampal alamat dompet Moonbeam anda di sini",
-        "description": "Instruction for registering an account."
-    },
-    "enter_azero_wallet_address_optional": {
-        "message": "Pilihan: Tampal alamat dompet yang serasi dengan Aleph Zero anda",
         "description": "Instruction for registering an account."
     },
     "enter_new_wallet_address": {
@@ -302,10 +278,6 @@
     "malicious_sites_detected": {
         "message": "Laman Web Berniat Jahat Dikesan",
         "description": "The text used to show how many malicious URLs are scanned on the dashboard."
-    },
-    "must_create_azero_wallet": {
-        "message": "Untuk menggunakan ThreatSlayer, anda perlu membuat dompet yang serasi dengan Aleph Zero.",
-        "description": "Instruction for creating a wallet."
     },
     "no_allowlisted_sites": {
         "message": "Tiada laman web yang disenaraikan putih untuk dipaparkan.",
@@ -483,14 +455,6 @@
         "message": "Akaun anda akan dipadamkan selama-lamanya.",
         "description": "Warning text for deleting user account."
     },
-    "warning_address_not_azero": {
-        "message": "Ini bukan alamat Aleph Zero.",
-        "description": "Warning text for user wallet type."
-    },
-    "warning_address_not_moonbeam": {
-        "message": "Ini bukan alamat Moonbeam.",
-        "description": "Warning text for user wallet type."
-    },
     "warning_changing_wallet_address": {
         "message": "Amaran: Mengubah alamat dompet sedia ada anda mungkin melambatkan akses ke $$ILOCK yang telah didepositkan sebelumnya.",
         "description": "Warning text used for changing a wallet address."
@@ -602,5 +566,29 @@
     "warning_need_wallet_to_withdraw_ilock": {
         "message": "Amaran: Tanpa alamat dompet, anda tidak dapat mengeluarkan $$ILOCK yang anda telah peroleh.",
         "description": "Warning in the wallet information modal."
+    },
+    "click_to_create_wallet": {
+        "message": "Jika anda belum memilikinya, klik 'Buat Dompet' untuk dialihkan ke ekstensi Chrome SubWallet. SubWallet serasi dengan kedua-dua ganjaran Ethereum dan Aleph Zero $$ILOCK.",
+        "description": "Instruction on wallet page."
+    },
+    "do_this_to_be_protected": {
+        "message": "Lakukan ini untuk dilindungi sepenuhnya oleh ThreatSlayer:",
+        "description": "Instruction on wallet page."
+    },
+    "got_it": {
+        "message": "Faham!",
+        "description": "Generic button text."
+    },
+    "enter_wallet_address_optional": {
+        "message": "Opsional: Alamat dompet yang serasi dengan Ethereum atau Aleph Zero",
+        "description": "Instruction for registering an account."
+    },
+    "must_create_wallet": {
+        "message": "Untuk menerima ganjaran token $$ILOCK anda untuk melayari, anda mesti membuat dompet yang serasi dengan Ethereum atau Aleph Zero.",
+        "description": "Instruction on wallet page."
+    },
+    "warning_invalid_address": {
+        "message": "Ini bukan alamat Ethereum atau Aleph Zero.",
+        "description": "Warning text for user wallet type."
     }
 }

@@ -35,14 +35,6 @@
         "message": "Ajouter une adresse Blockchain",
         "description": "Header text on Account page."
     },
-    "address_aleph": {
-        "message": "Adresse de portefeuille compatible avec Aleph Zero",
-        "description": "Header on a page listing wallet addresses."
-    },
-    "address_pdot": {
-        "message": "Adresse de portefeuille Moonbeam",
-        "description": "Header on a page listing wallet addresses."
-    },
     "affirm_not_us_citizen": {
         "message": "Affirmez que vous n'êtes pas citoyen ou résident des États-Unis.",
         "description": "Instruction for registering an account."
@@ -78,10 +70,6 @@
     "change_password": {
         "message": "Changer le mot de passe",
         "description": "The text used on change password button."
-    },
-    "click_to_create_wallet": {
-        "message": "Veuillez cliquer sur 'Créer un portefeuille' pour être redirigé vers une extension de navigateur Chrome afin de créer un SubWallet.",
-        "description": "Page title, also used in sidebar."
     },
     "close": {
         "message": "Fermer",
@@ -157,18 +145,6 @@
     },
     "enter_referrer_name": {
         "message": "Optionnel : Entrez le nom d'utilisateur de votre parrain",
-        "description": "Instruction for registering an account."
-    },
-    "enter_azero_wallet_address": {
-        "message": "Collez votre adresse de portefeuille compatible avec Aleph Zero",
-        "description": "Instruction for registering an account."
-    },
-    "enter_pdot_wallet_address": {
-        "message": "Ou collez votre adresse de portefeuille Moonbeam ici",
-        "description": "Instruction for registering an account."
-    },
-    "enter_azero_wallet_address_optional": {
-        "message": "Optionnel : Collez votre adresse de portefeuille compatible avec Aleph Zero",
         "description": "Instruction for registering an account."
     },
     "enter_new_wallet_address": {
@@ -302,10 +278,6 @@
     "malicious_sites_detected": {
         "message": "Sites Malveillants Détectés",
         "description": "The text used to show how many malicious URLs are scanned on the dashboard."
-    },
-    "must_create_azero_wallet": {
-        "message": "Pour utiliser ThreatSlayer, vous devez créer un portefeuille compatible avec Aleph Zero.",
-        "description": "Instruction for creating a wallet."
     },
     "no_allowlisted_sites": {
         "message": "Aucun site autorisé à afficher.",
@@ -483,14 +455,6 @@
         "message": "Votre compte sera supprimé définitivement.",
         "description": "Warning text for deleting user account."
     },
-    "warning_address_not_azero": {
-        "message": "Ce n'est pas une adresse Aleph Zero.",
-        "description": "Warning text for user wallet type."
-    },
-    "warning_address_not_moonbeam": {
-        "message": "Ce n'est pas une adresse Moonbeam.",
-        "description": "Warning text for user wallet type."
-    },
     "warning_changing_wallet_address": {
         "message": "Avertissement : Changer votre adresse de portefeuille existante peut retarder l'accès aux $$ILOCK précédemment déposés.",
         "description": "Warning text used for changing a wallet address."
@@ -602,5 +566,29 @@
     "warning_need_wallet_to_withdraw_ilock": {
         "message": "Avertissement : Sans une adresse de portefeuille, vous ne pourrez pas retirer $$ILOCK que vous avez gagné.",
         "description": "Warning in the wallet information modal."
+    },
+    "click_to_create_wallet": {
+        "message": "Si vous n'en avez pas déjà un, cliquez sur 'Créer un portefeuille' pour être redirigé vers l'extension Chrome SubWallet. SubWallet est compatible avec les récompenses Ethereum et Aleph Zero $$ILOCK.",
+        "description": "Instruction on wallet page."
+    },
+    "do_this_to_be_protected": {
+        "message": "Faites ceci pour être entièrement protégé par ThreatSlayer :",
+        "description": "Instruction on wallet page."
+    },
+    "got_it": {
+        "message": "Compris !",
+        "description": "Generic button text."
+    },
+    "enter_wallet_address_optional": {
+        "message": "Facultatif : Adresse de portefeuille compatible Ethereum ou Aleph Zero",
+        "description": "Instruction for registering an account."
+    },
+    "must_create_wallet": {
+        "message": "Pour recevoir vos récompenses en jetons $$ILOCK pour la navigation, vous devez créer un portefeuille compatible Ethereum ou Aleph Zero.",
+        "description": "Instruction on wallet page."
+    },
+    "warning_invalid_address": {
+        "message": "Ceci n'est pas une adresse Ethereum ou Aleph Zero.",
+        "description": "Warning text for user wallet type."
     }
 }
