@@ -7,7 +7,7 @@
         v-bind="{ apiKey, checkState, currentPage, loggedIn, registered, selectPage, urlToStake, username, walletAddress }" />
       <div id="view-container">
         <StakingPage v-if="currentPage === 'staking'" v-bind="{ apiKey, checkState, loggedIn, registered, selectPage }" />
-        <EarnPage v-if="currentPage === 'earn'" v-bind="{ checkState, justInstalled, selectPage, urlToStake }" />
+        <EarnPage v-if="currentPage === 'earn'" v-bind="{ checkState, selectPage, urlToStake }" />
         <WalletPage v-if="currentPage === 'wallet'" :selectPage="selectPage" />
         <LoginPage v-if="currentPage === 'login'" v-bind="{ checkState, selectPage, urlToStake }" />
         <SlayCount v-if="currentPage === 'slayCount'" :apiKey="apiKey" :username="username" />
@@ -63,7 +63,6 @@ export default {
       walletAddress: null,
       currentPage: 'account',
       email: null,
-      justInstalled: false,
       loggedIn: false,
       maliciousUrlObjects: null,
       registered: false,
@@ -76,9 +75,6 @@ export default {
   },
   methods: {
     async checkState() {
-      // this should be true on first installation only
-      const justInstalled = await getChromeStorage('justInstalled');
-
       // these values will all be undefined on first installation
       const apiKey = await getChromeStorage('apiKey') || 'threatslayer-api-key';
       const walletAddress = await getChromeStorage('walletAddress'); // optional, may be missing
@@ -89,7 +85,6 @@ export default {
       const urlToStake = await getChromeStorage('urlToStake');
       const username = await getChromeStorage('username');
 
-      this.justInstalled = justInstalled;
       this.loggedIn = loggedIn;
       this.maliciousUrlObjects = maliciousUrlObjects;
       this.registered = isRegistered;

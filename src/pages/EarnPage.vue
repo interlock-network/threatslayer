@@ -26,7 +26,8 @@
             <input id="first-box" type="checkbox" v-model="termsOfService" tabindex="16">
             <label for="first-box">{{ $i18n('agree_to_our') }}
                 <a href="https://www.interlock.network/terms-of-service" target="_blank">
-                    {{ $i18n('terms_of_service') }} </a></label>
+                    {{ $i18n('terms_of_service') }} </a>
+            </label>
         </div>
         <div class="checkbox-container">
             <input id="second-box" type="checkbox" v-model="unitedStates" tabindex="18">
@@ -42,6 +43,7 @@
 <script>
 import { debounce } from 'debounce';
 import { decodeAddress, encodeAddress } from '@polkadot/keyring';
+import { getChromeStorage } from '../utilities.js';
 import { hexToU8a, isHex } from '@polkadot/util';
 
 import AddressInput from "./components/inputs/AddressInput.vue";
@@ -63,7 +65,6 @@ export default {
     name: 'EarnPage',
     props: {
         checkState: { type: Function, required: true },
-        justInstalled: { type: Boolean, default: false },
         selectPage: { type: Function, required: true },
         urlToStake: { type: String, default: '' }
     },
@@ -106,14 +107,16 @@ export default {
         };
     },
     async mounted() {
-        if (this.justInstalled) {
+        // this should be true on first installation only
+        const justInstalled = await getChromeStorage('justInstalled');
+
+        if (justInstalled) {
             this.fadeEarnPage(true);
         } else {
             const firstInput = document.getElementById('username-input');
 
             firstInput.focus();
         }
-
     },
     computed: {
         computedStyle() {
