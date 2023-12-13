@@ -7,7 +7,7 @@
                 alt="Animation showing how to pin the ThreatSlayer icon" />
             <br /><br /><br />
             <!-- close button -->
-            <button @click="fadeEarnPage(false)" class="submit-button">
+            <button @click="gotItAction" class="submit-button">
                 {{ $i18n('got_it') }}
             </button>
         </div>
@@ -15,6 +15,8 @@
 </template>
 
 <script>
+import { setChromeStorage } from '../../utilities.js';
+
 import TextComponent from "./TextComponent.vue";
 
 export default {
@@ -26,8 +28,14 @@ export default {
     components: {
         TextComponent
     },
-    async mounted() {
-        chrome.storage.local.set({ justInstalled: false });
+    methods: {
+        async gotItAction() {
+            const justInstalledUpdated = await setChromeStorage({ justInstalled: false });
+
+            if (justInstalledUpdated) {
+                this.fadeEarnPage(false)
+            }
+        }
     }
 };
 </script>
