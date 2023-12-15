@@ -75,6 +75,10 @@
         "message": "Tutup",
         "description": "The text used on the close button."
     },
+    "coming_soon": {
+        "message": "Segera Hadir!",
+        "description": "Generic heading text."
+    },
     "confirm_are_you_sure": {
         "message": "Anda yakin?",
         "description": "Confirmation for user actions."

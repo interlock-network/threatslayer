@@ -75,6 +75,10 @@
         "message": "Đóng",
         "description": "The text used on the close button."
     },
+    "coming_soon": {
+        "message": "Sắp ra mắt!",
+        "description": "Generic heading text."
+    },
     "confirm_are_you_sure": {
         "message": "Bạn có chắc chắn không?",
         "description": "Confirmation for user actions."

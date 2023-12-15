@@ -75,6 +75,10 @@
         "message": "关闭",
         "description": "The text used on the close button."
     },
+    "coming_soon": {
+        "message": "即将推出！",
+        "description": "Generic heading text."
+    },
     "confirm_are_you_sure": {
         "message": "您确定吗?",
         "description": "Confirmation for user actions."

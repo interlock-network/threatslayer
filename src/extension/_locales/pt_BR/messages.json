@@ -75,6 +75,10 @@
         "message": "Fechar",
         "description": "The text used on the close button."
     },
+    "coming_soon": {
+        "message": "Em Breve!",
+        "description": "Generic heading text."
+    },
     "confirm_are_you_sure": {
         "message": "Você tem certeza?",
         "description": "Confirmation for user actions."

@@ -75,6 +75,10 @@
         "message": "閉じる",
         "description": "The text used on the close button."
     },
+    "coming_soon": {
+        "message": "近日公開！",
+        "description": "Generic heading text."
+    },
     "confirm_are_you_sure": {
         "message": "本当によろしいですか?",
         "description": "Confirmation for user actions."
