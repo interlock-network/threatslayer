@@ -34,7 +34,7 @@ export default {
     computed: {
         placeholderText() {
             const { placeholderI18n } = this;
-            const defaultPlaceholder = 'enter_a_username';
+            const defaultPlaceholder = 'enter_username';
 
             return placeholderI18n ? placeholderI18n : defaultPlaceholder;
         },
