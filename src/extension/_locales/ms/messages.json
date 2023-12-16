@@ -71,6 +71,10 @@
         "message": "Ubah Kata Sandi",
         "description": "The text used on change password button."
     },
+    "click_to_create_wallet": {
+        "message": "Jika anda belum memilikinya, klik 'Buat Dompet' untuk dialihkan ke ekstensi Chrome SubWallet. SubWallet serasi dengan kedua-dua ganjaran Ethereum dan Aleph Zero $$ILOCK.",
+        "description": "Instruction on wallet page."
+    },
     "close": {
         "message": "Tutup",
         "description": "The text used on the close button."
@@ -103,6 +107,10 @@
         "message": "Hapus Akun (Permanen)",
         "description": "Text for the Delete Account button."
     },
+    "delete_wallet_address": {
+        "message": "Padam Alamat Dompet",
+        "description": "Option on the wallet information modal."
+    },
     "deleting_account": {
         "message": "Menghapus Akun",
         "description": "Text for the Delete Account button."
@@ -110,6 +118,10 @@
     "description": {
         "message": "Keamanan gratis tingkat perusahaan untuk browser pribadi Anda.",
         "description": "The description in the manifest."
+    },
+    "do_this_to_be_protected": {
+        "message": "Lakukan ini untuk dilindungi sepenuhnya oleh ThreatSlayer:",
+        "description": "Instruction on wallet page."
     },
     "dont_have_an_account": {
         "message": "Tidak punya akun?",
@@ -131,31 +143,7 @@
         "message": "Aktifkan Deteksi Ancaman AI beta (hanya untuk pengembang)",
         "description": "Options page option."
     },
-    "enter_a_password": {
-        "message": "Masukkan kata laluan sekurang-kurangnya 12 aksara",
-        "description": "Instruction for registering an account."
-    },
-    "enter_a_username": {
-        "message": "Masukkan nama pengguna",
-        "description": "Instruction for registering an account."
-    },
-    "enter_your_username": {
-        "message": "Masukkan nama pengguna anda",
-        "description": "Instruction for logging into an account."
-    },
-    "enter_password_again": {
-        "message": "Masukkan semula kata laluan anda",
-        "description": "Instruction for registering an account."
-    },
-    "enter_referrer_name": {
-        "message": "Pilihan: Masukkan nama pengguna pengenalan",
-        "description": "Instruction for registering an account."
-    },
-    "enter_new_wallet_address": {
-        "message": "Masukkan alamat dompet baru anda.",
-        "description": "Instruction for Account page."
-    },
-    "enter_your_email": {
+    "enter_email": {
         "message": "Masukkan emel anda",
         "description": "Instruction for registering an account."
     },
@@ -163,25 +151,77 @@
         "message": "Masukkan emel anda untuk menukar kata laluan anda",
         "description": "Instruction for changing password."
     },
+    "enter_new_wallet_address": {
+        "message": "Masukkan alamat dompet baru anda.",
+        "description": "Instruction for Account page."
+    },
+    "enter_password_again": {
+        "message": "Masukkan semula kata laluan anda",
+        "description": "Instruction for registering an account."
+    },
     "enter_password_to_delete_account": {
         "message": "Masukkan kata laluan untuk memadam akaun",
         "description": "Instruction for deleting account."
+    },
+    "enter_password_to_delete_wallet_address": {
+        "message": "Masukkan kata laluan untuk memadam alamat dompet.",
+        "description": "Instruction for deleting wallet address in the wallet information modal."
     },
     "enter_password_to_update_wallet_address": {
         "message": "Masukkan kata laluan anda untuk mengemaskini alamat dompet anda.",
         "description": "Instruction for updating wallet address."
     },
+    "enter_referrer_name": {
+        "message": "Pilihan: Masukkan nama pengguna pengenalan",
+        "description": "Instruction for registering an account."
+    },
+    "enter_username": {
+        "message": "Masukkan nama pengguna",
+        "description": "Instruction for registering an account."
+    },
+    "enter_wallet_address_optional": {
+        "message": "Opsional: Alamat dompet yang serasi dengan Ethereum atau Aleph Zero",
+        "description": "Instruction for registering an account."
+    },
     "error": {
         "message": "Ralat",
         "description": "Generic error message."
+    },
+    "error_confirm_must_be_true": {
+        "message": "Ralat: Mesti mengesahkan sebelum meneruskan.",
+        "description": "Server-side authentication error. This string is not found in extension code."
     },
     "error_deleting_account_generic": {
         "message": "Ralat memadam akaun. Sila cuba lagi nanti.",
         "description": "Generic login error message."
     },
+    "error_invalid_credentials": {
+        "message": "Ralat: Kelayakan tidak sah.",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_invalid_email": {
+        "message": "Ralat: Emel tidak sah.",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
     "error_invalid_email_generic": {
         "message": "Alamat emel tidak sah.",
         "description": "Generic registering error message."
+    },
+    "error_invalid_password": {
+        "message": "Ralat: Kata laluan tidak sah.",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_invalid_username": {
+        "message": "Ralat: Nama pengguna tidak sah.",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_invalid_wallet_address": {
+        "message": "Ralat: Alamat dompet tidak sah.",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_key_missing": {
+        "message": "Ralat: Maklumat hilang.",
+        "description": "Server-side authentication error. This string is not found in extension code."
     },
     "error_login_generic": {
         "message": "Ralat log masuk. Sila cuba lagi nanti.",
@@ -230,6 +270,10 @@
     "frequently_asked_questions": {
         "message": "Soalan Lazim",
         "description": "Page title."
+    },
+    "got_it": {
+        "message": "Faham!",
+        "description": "Generic button text."
     },
     "how_does_threat_slayer_protect_me": {
         "message": "Bagaimanakah ThreatSlayer melindungi saya?",
@@ -283,6 +327,14 @@
         "message": "Laman Web Berniat Jahat Dikesan",
         "description": "The text used to show how many malicious URLs are scanned on the dashboard."
     },
+    "must_create_wallet": {
+        "message": "Untuk menerima ganjaran token $$ILOCK anda untuk melayari, anda mesti membuat dompet yang serasi dengan Ethereum atau Aleph Zero.",
+        "description": "Instruction on wallet page."
+    },
+    "next_ilock_drop": {
+        "message": "Pelepasan $$ILOCK seterusnya",
+        "description": "Information on the Account page."
+    },
     "no_allowlisted_sites": {
         "message": "Tiada laman web yang disenaraikan putih untuk dipaparkan.",
         "description": "Info text on the allowlist table."
@@ -314,6 +366,10 @@
     "privacy": {
         "message": "Privasi",
         "description": "Page title, also used in sidebar."
+    },
+    "referred_by": {
+        "message": "Dirujuk oleh",
+        "description": "Information on the Account page."
     },
     "register": {
         "message": "Daftar",
@@ -467,6 +523,10 @@
         "message": "Laman web ini mungkin jahat.",
         "description": "The text used in the warning banner."
     },
+    "warning_invalid_address": {
+        "message": "Ini bukan alamat Ethereum atau Aleph Zero.",
+        "description": "Warning text for user wallet type."
+    },
     "warning_ilock_will_be_lost": {
         "message": "Anda akan kehilangan sebarang $$ILOCK yang tidak dipindahkan ke dompet.",
         "description": "Warning text for deleting user account."
@@ -486,6 +546,10 @@
     "warning_must_register_before_staking": {
         "message": "Anda mesti mendaftar sebelum anda boleh menyertai pada URL.",
         "description": "The text used in a warning box."
+    },
+    "warning_need_wallet_to_withdraw_ilock": {
+        "message": "Amaran: Tanpa alamat dompet, anda tidak dapat mengeluarkan $$ILOCK yang anda telah peroleh.",
+        "description": "Warning in the wallet information modal."
     },
     "warning_possible_malicious_url_detected": {
         "message": "URL yang mungkin jahat dikesan:",
@@ -522,77 +586,5 @@
     "why_choose_threat_slayer": {
         "message": "Mengapa Memilih ThreatSlayer?",
         "description": "The text used on the About Us page."
-    },
-    "delete_wallet_address": {
-        "message": "Padam Alamat Dompet",
-        "description": "Option on the wallet information modal."
-    },
-    "enter_password_to_delete_wallet_address": {
-        "message": "Masukkan kata laluan untuk memadam alamat dompet.",
-        "description": "Instruction for deleting wallet address in the wallet information modal."
-    },
-    "error_confirm_must_be_true": {
-        "message": "Ralat: Mesti mengesahkan sebelum meneruskan.",
-        "description": "Server-side authentication error. This string is not found in extension code."
-    },
-    "error_invalid_credentials": {
-        "message": "Ralat: Kelayakan tidak sah.",
-        "description": "Server-side authentication error. This string is not found in extension code."
-    },
-    "error_invalid_email": {
-        "message": "Ralat: Emel tidak sah.",
-        "description": "Server-side authentication error. This string is not found in extension code."
-    },
-    "error_invalid_password": {
-        "message": "Ralat: Kata laluan tidak sah.",
-        "description": "Server-side authentication error. This string is not found in extension code."
-    },
-    "error_invalid_username": {
-        "message": "Ralat: Nama pengguna tidak sah.",
-        "description": "Server-side authentication error. This string is not found in extension code."
-    },
-    "error_invalid_wallet_address": {
-        "message": "Ralat: Alamat dompet tidak sah.",
-        "description": "Server-side authentication error. This string is not found in extension code."
-    },
-    "error_key_missing": {
-        "message": "Ralat: Maklumat hilang.",
-        "description": "Server-side authentication error. This string is not found in extension code."
-    },
-    "next_ilock_drop": {
-        "message": "Pelepasan $$ILOCK seterusnya",
-        "description": "Information on the Account page."
-    },
-    "referred_by": {
-        "message": "Dirujuk oleh",
-        "description": "Information on the Account page."
-    },
-    "warning_need_wallet_to_withdraw_ilock": {
-        "message": "Amaran: Tanpa alamat dompet, anda tidak dapat mengeluarkan $$ILOCK yang anda telah peroleh.",
-        "description": "Warning in the wallet information modal."
-    },
-    "click_to_create_wallet": {
-        "message": "Jika anda belum memilikinya, klik 'Buat Dompet' untuk dialihkan ke ekstensi Chrome SubWallet. SubWallet serasi dengan kedua-dua ganjaran Ethereum dan Aleph Zero $$ILOCK.",
-        "description": "Instruction on wallet page."
-    },
-    "do_this_to_be_protected": {
-        "message": "Lakukan ini untuk dilindungi sepenuhnya oleh ThreatSlayer:",
-        "description": "Instruction on wallet page."
-    },
-    "got_it": {
-        "message": "Faham!",
-        "description": "Generic button text."
-    },
-    "enter_wallet_address_optional": {
-        "message": "Opsional: Alamat dompet yang serasi dengan Ethereum atau Aleph Zero",
-        "description": "Instruction for registering an account."
-    },
-    "must_create_wallet": {
-        "message": "Untuk menerima ganjaran token $$ILOCK anda untuk melayari, anda mesti membuat dompet yang serasi dengan Ethereum atau Aleph Zero.",
-        "description": "Instruction on wallet page."
-    },
-    "warning_invalid_address": {
-        "message": "Ini bukan alamat Ethereum atau Aleph Zero.",
-        "description": "Warning text for user wallet type."
     }
 }

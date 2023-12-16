@@ -71,6 +71,10 @@
         "message": "更改密码",
         "description": "The text used on change password button."
     },
+    "click_to_create_wallet": {
+        "message": "如果您还没有钱包，点击'创建钱包'将跳转到SubWallet Chrome扩展。SubWallet兼容以太坊和Aleph Zero的$$ILOCK奖励。",
+        "description": "Instruction on wallet page."
+    },
     "close": {
         "message": "关闭",
         "description": "The text used on the close button."
@@ -103,6 +107,10 @@
         "message": "永久删除账户",
         "description": "Text for the Delete Account button."
     },
+    "delete_wallet_address": {
+        "message": "刪除錢包地址",
+        "description": "Option on the wallet information modal."
+    },
     "deleting_account": {
         "message": "刪除帳戶",
         "description": "Text for the Delete Account button."
@@ -110,6 +118,10 @@
     "description": {
         "message": "為您的個人瀏覽器提供免費的企業級安全保護。",
         "description": "The description in the manifest."
+    },
+    "do_this_to_be_protected": {
+        "message": "执行以下操作以获得ThreatSlayer的全面保护：",
+        "description": "Instruction on wallet page."
     },
     "dont_have_an_account": {
         "message": "還沒有帳戶?",
@@ -131,31 +143,7 @@
         "message": "啟用 beta AI 威脅檢測（僅限開發者）",
         "description": "Options page option."
     },
-    "enter_a_password": {
-        "message": "輸入至少12個字符的密碼",
-        "description": "Instruction for registering an account."
-    },
-    "enter_a_username": {
-        "message": "輸入一個用戶名",
-        "description": "Instruction for registering an account."
-    },
-    "enter_your_username": {
-        "message": "輸入你的用戶名",
-        "description": "Instruction for logging into an account."
-    },
-    "enter_password_again": {
-        "message": "再次輸入您的密碼",
-        "description": "Instruction for registering an account."
-    },
-    "enter_referrer_name": {
-        "message": "可選: 輸入推薦人用戶名",
-        "description": "Instruction for registering an account."
-    },
-    "enter_new_wallet_address": {
-        "message": "輸入您的新錢包地址。",
-        "description": "Instruction for Account page."
-    },
-    "enter_your_email": {
+    "enter_email": {
         "message": "輸入您的電子郵件",
         "description": "Instruction for registering an account."
     },
@@ -163,25 +151,77 @@
         "message": "輸入您的電子郵件以更改密碼",
         "description": "Instruction for changing password."
     },
+    "enter_new_wallet_address": {
+        "message": "輸入您的新錢包地址。",
+        "description": "Instruction for Account page."
+    },
+    "enter_password_again": {
+        "message": "再次輸入您的密碼",
+        "description": "Instruction for registering an account."
+    },
     "enter_password_to_delete_account": {
         "message": "輸入密碼以刪除帳戶",
         "description": "Instruction for deleting account."
+    },
+    "enter_password_to_delete_wallet_address": {
+        "message": "輸入密碼以刪除錢包地址。",
+        "description": "Instruction for deleting wallet address in the wallet information modal."
     },
     "enter_password_to_update_wallet_address": {
         "message": "輸入您的密碼以更新您的錢包地址。",
         "description": "Instruction for updating wallet address."
     },
+    "enter_referrer_name": {
+        "message": "可選: 輸入推薦人用戶名",
+        "description": "Instruction for registering an account."
+    },
+    "enter_username": {
+        "message": "輸入一個用戶名",
+        "description": "Instruction for registering an account."
+    },
+    "enter_wallet_address_optional": {
+        "message": "可选：以太坊或Aleph Zero兼容的钱包地址",
+        "description": "Instruction for registering an account."
+    },
     "error": {
         "message": "錯誤",
         "description": "Generic error message."
+    },
+    "error_confirm_must_be_true": {
+        "message": "錯誤: 必須確認才能繼續。",
+        "description": "Server-side authentication error. This string is not found in extension code."
     },
     "error_deleting_account_generic": {
         "message": "刪除帳戶出錯。請稍後再試。",
         "description": "Generic login error message."
     },
+    "error_invalid_credentials": {
+        "message": "錯誤: 憑證無效。",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_invalid_email": {
+        "message": "錯誤: 無效的電子郵件。",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
     "error_invalid_email_generic": {
         "message": "無效的電子郵件地址。",
         "description": "Generic registering error message."
+    },
+    "error_invalid_password": {
+        "message": "錯誤: 密碼無效。",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_invalid_username": {
+        "message": "錯誤: 用戶名無效。",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_invalid_wallet_address": {
+        "message": "錯誤: 錢包地址無效。",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_key_missing": {
+        "message": "錯誤: 缺少信息。",
+        "description": "Server-side authentication error. This string is not found in extension code."
     },
     "error_login_generic": {
         "message": "登錄出錯。請稍後再試。",
@@ -198,6 +238,22 @@
     "error_passwords_dont_match": {
         "message": "你的密碼不匹配。",
         "description": "Registering error message."
+    },
+    "got_it": {
+        "message": "明白了！",
+        "description": "Generic button text."
+    },
+    "must_create_wallet": {
+        "message": "为了接收您浏览时的$$ILOCK代币奖励，您必须创建一个以太坊或Aleph Zero兼容的钱包。",
+        "description": "Instruction on wallet page."
+    },
+    "next_ilock_drop": {
+        "message": "下一次$$ILOCK分發",
+        "description": "Information on the Account page."
+    },
+    "referred_by": {
+        "message": "推薦人",
+        "description": "Information on the Account page."
     },
     "register": {
         "message": "註冊",
@@ -355,6 +411,10 @@
         "message": "未轉移到錢包的 $$ILOCK 將會丟失。",
         "description": "Warning text for deleting user account."
     },
+    "warning_invalid_address": {
+        "message": "这不是一个以太坊或Aleph Zero地址。",
+        "description": "Warning text for user wallet type."
+    },
     "warning_must_add_wallet_address": {
         "message": "您必須添加一個錢包地址以接收 $$ILOCK 代幣。",
         "description": "Warning text used on the Account page."
@@ -370,6 +430,10 @@
     "warning_must_register_before_staking": {
         "message": "您必須在投注 URL 之前註冊。",
         "description": "The text used in a warning box."
+    },
+    "warning_need_wallet_to_withdraw_ilock": {
+        "message": "警告: 沒有錢包地址, 您將無法提取您賺取的$$ILOCK。",
+        "description": "Warning in the wallet information modal."
     },
     "warning_possible_malicious_url_detected": {
         "message": "檢測到可能的惡意 URL: ",
@@ -406,77 +470,5 @@
     "why_choose_threat_slayer": {
         "message": "為什麼選擇 ThreatSlayer?",
         "description": "The text used on the About Us page."
-    },
-    "delete_wallet_address": {
-        "message": "刪除錢包地址",
-        "description": "Option on the wallet information modal."
-    },
-    "enter_password_to_delete_wallet_address": {
-        "message": "輸入密碼以刪除錢包地址。",
-        "description": "Instruction for deleting wallet address in the wallet information modal."
-    },
-    "error_confirm_must_be_true": {
-        "message": "錯誤: 必須確認才能繼續。",
-        "description": "Server-side authentication error. This string is not found in extension code."
-    },
-    "error_invalid_credentials": {
-        "message": "錯誤: 憑證無效。",
-        "description": "Server-side authentication error. This string is not found in extension code."
-    },
-    "error_invalid_email": {
-        "message": "錯誤: 無效的電子郵件。",
-        "description": "Server-side authentication error. This string is not found in extension code."
-    },
-    "error_invalid_password": {
-        "message": "錯誤: 密碼無效。",
-        "description": "Server-side authentication error. This string is not found in extension code."
-    },
-    "error_invalid_username": {
-        "message": "錯誤: 用戶名無效。",
-        "description": "Server-side authentication error. This string is not found in extension code."
-    },
-    "error_invalid_wallet_address": {
-        "message": "錯誤: 錢包地址無效。",
-        "description": "Server-side authentication error. This string is not found in extension code."
-    },
-    "error_key_missing": {
-        "message": "錯誤: 缺少信息。",
-        "description": "Server-side authentication error. This string is not found in extension code."
-    },
-    "next_ilock_drop": {
-        "message": "下一次$$ILOCK分發",
-        "description": "Information on the Account page."
-    },
-    "referred_by": {
-        "message": "推薦人",
-        "description": "Information on the Account page."
-    },
-    "warning_need_wallet_to_withdraw_ilock": {
-        "message": "警告: 沒有錢包地址, 您將無法提取您賺取的$$ILOCK。",
-        "description": "Warning in the wallet information modal."
-    },
-    "click_to_create_wallet": {
-        "message": "如果您还没有钱包，点击'创建钱包'将跳转到SubWallet Chrome扩展。SubWallet兼容以太坊和Aleph Zero的$$ILOCK奖励。",
-        "description": "Instruction on wallet page."
-    },
-    "do_this_to_be_protected": {
-        "message": "执行以下操作以获得ThreatSlayer的全面保护：",
-        "description": "Instruction on wallet page."
-    },
-    "got_it": {
-        "message": "明白了！",
-        "description": "Generic button text."
-    },
-    "enter_wallet_address_optional": {
-        "message": "可选：以太坊或Aleph Zero兼容的钱包地址",
-        "description": "Instruction for registering an account."
-    },
-    "must_create_wallet": {
-        "message": "为了接收您浏览时的$$ILOCK代币奖励，您必须创建一个以太坊或Aleph Zero兼容的钱包。",
-        "description": "Instruction on wallet page."
-    },
-    "warning_invalid_address": {
-        "message": "这不是一个以太坊或Aleph Zero地址。",
-        "description": "Warning text for user wallet type."
     }
 }

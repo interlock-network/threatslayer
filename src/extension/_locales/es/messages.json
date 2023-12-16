@@ -71,6 +71,10 @@
         "message": "Cambiar Contraseña",
         "description": "The text used on change password button."
     },
+    "click_to_create_wallet": {
+        "message": "Si aún no tienes una, haz clic en 'Crear Monedero' para ser redirigido a la extensión de Chrome de SubWallet. SubWallet es compatible con las recompensas de Ethereum y Aleph Zero $$ILOCK.",
+        "description": "Instruction on wallet page."
+    },
     "close": {
         "message": "Cerrar",
         "description": "The text used on the close button."
@@ -99,6 +103,10 @@
         "message": "Eliminar Cuenta",
         "description": "Text for the Delete Account button."
     },
+    "delete_wallet_address": {
+        "message": "Eliminar Dirección de la Cartera",
+        "description": "Option on the wallet information modal."
+    },
     "delete_account_permanent": {
         "message": "Eliminar Cuenta (Permanente)",
         "description": "Text for the Delete Account button."
@@ -110,6 +118,10 @@
     "description": {
         "message": "Seguridad de nivel empresarial gratuita para tu navegador personal.",
         "description": "The description in the manifest."
+    },
+    "do_this_to_be_protected": {
+        "message": "Haz esto para estar completamente protegido por ThreatSlayer:",
+        "description": "Instruction on wallet page."
     },
     "dont_have_an_account": {
         "message": "¿No tienes una cuenta?",
@@ -131,31 +143,7 @@
         "message": "Habilitar la detección de amenazas AI en versión beta (solo para desarrolladores)",
         "description": "Options page option."
     },
-    "enter_a_password": {
-        "message": "Ingresa una contraseña de al menos 12 caracteres",
-        "description": "Instruction for registering an account."
-    },
-    "enter_a_username": {
-        "message": "Ingresa un nombre de usuario",
-        "description": "Instruction for registering an account."
-    },
-    "enter_your_username": {
-        "message": "Ingresa tu nombre de usuario",
-        "description": "Instruction for logging into an account."
-    },
-    "enter_password_again": {
-        "message": "Ingresa tu contraseña nuevamente",
-        "description": "Instruction for registering an account."
-    },
-    "enter_referrer_name": {
-        "message": "Opcional: Ingresa el nombre de usuario del referidor",
-        "description": "Instruction for registering an account."
-    },
-    "enter_new_wallet_address": {
-        "message": "Ingresa tu nueva dirección de billetera.",
-        "description": "Instruction for Account page."
-    },
-    "enter_your_email": {
+    "enter_email": {
         "message": "Ingresa tu correo electrónico",
         "description": "Instruction for registering an account."
     },
@@ -163,25 +151,77 @@
         "message": "Ingresa tu correo electrónico para cambiar tu contraseña",
         "description": "Instruction for changing password."
     },
+    "enter_new_wallet_address": {
+        "message": "Ingresa tu nueva dirección de billetera.",
+        "description": "Instruction for Account page."
+    },
+    "enter_password_again": {
+        "message": "Ingresa tu contraseña nuevamente",
+        "description": "Instruction for registering an account."
+    },
     "enter_password_to_delete_account": {
         "message": "Ingresa la contraseña para eliminar la cuenta",
         "description": "Instruction for deleting account."
+    },
+    "enter_password_to_delete_wallet_address": {
+        "message": "Introduzca la contraseña para eliminar la dirección de la cartera.",
+        "description": "Instruction for deleting wallet address in the wallet information modal."
     },
     "enter_password_to_update_wallet_address": {
         "message": "Ingresa tu contraseña para actualizar tu dirección de billetera.",
         "description": "Instruction for updating wallet address."
     },
+    "enter_referrer_name": {
+        "message": "Opcional: Ingresa el nombre de usuario del referidor",
+        "description": "Instruction for registering an account."
+    },
+    "enter_username": {
+        "message": "Ingresa un nombre de usuario",
+        "description": "Instruction for registering an account."
+    },
+    "enter_wallet_address_optional": {
+        "message": "Opcional: Dirección de monedero compatible con Ethereum o Aleph Zero",
+        "description": "Instruction for registering an account."
+    },
     "error": {
         "message": "Error",
         "description": "Generic error message."
+    },
+    "error_confirm_must_be_true": {
+        "message": "Error: Debe confirmar antes de continuar.",
+        "description": "Server-side authentication error. This string is not found in extension code."
     },
     "error_deleting_account_generic": {
         "message": "Error al eliminar la cuenta. Por favor, inténtalo de nuevo más tarde.",
         "description": "Generic login error message."
     },
+    "error_invalid_credentials": {
+        "message": "Error: Credenciales inválidas.",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_invalid_email": {
+        "message": "Error: Correo electrónico inválido.",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
     "error_invalid_email_generic": {
         "message": "Dirección de correo electrónico no válida.",
         "description": "Generic registering error message."
+    },
+    "error_invalid_password": {
+        "message": "Error: Contraseña inválida.",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_invalid_username": {
+        "message": "Error: Nombre de usuario inválido.",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_invalid_wallet_address": {
+        "message": "Error: Dirección de cartera inválida.",
+        "description": "Server-side authentication error. This string is not found in extension code."
+    },
+    "error_key_missing": {
+        "message": "Error: Falta información.",
+        "description": "Server-side authentication error. This string is not found in extension code."
     },
     "error_login_generic": {
         "message": "Error al iniciar sesión. Por favor, inténtalo de nuevo más tarde.",
@@ -230,6 +270,10 @@
     "frequently_asked_questions": {
         "message": "Preguntas Frecuentes",
         "description": "Page title."
+    },
+    "got_it": {
+        "message": "¡Entendido!",
+        "description": "Generic button text."
     },
     "how_does_threat_slayer_protect_me": {
         "message": "¿Cómo me protege ThreatSlayer?",
@@ -283,6 +327,14 @@
         "message": "Sitios Maliciosos Detectados",
         "description": "The text used to show how many malicious URLs are scanned on the dashboard."
     },
+    "must_create_wallet": {
+        "message": "Para recibir tus recompensas en token $$ILOCK por navegar, debes crear un monedero compatible con Ethereum o Aleph Zero.",
+        "description": "Instruction on wallet page."
+    },
+    "next_ilock_drop": {
+        "message": "Próxima Entrega de $$ILOCK",
+        "description": "Information on the Account page."
+    },
     "no_allowlisted_sites": {
         "message": "No hay sitios en la lista de permitidos para mostrar.",
         "description": "Info text on the allowlist table."
@@ -314,6 +366,10 @@
     "privacy": {
         "message": "Privacidad",
         "description": "Page title, also used in sidebar."
+    },
+    "referred_by": {
+        "message": "Referido Por",
+        "description": "Information on the Account page."
     },
     "register": {
         "message": "Registrarse",
@@ -471,6 +527,10 @@
         "message": "Perderás cualquier $$ILOCK que no haya sido transferido a una cartera.",
         "description": "Warning text for deleting user account."
     },
+    "warning_invalid_address": {
+        "message": "Esta no es una dirección de Ethereum o Aleph Zero.",
+        "description": "Warning text for user wallet type."
+    },
     "warning_must_add_wallet_address": {
         "message": "Debes agregar una dirección de cartera para recibir el token $$ILOCK.",
         "description": "Warning text used on the Account page."
@@ -486,6 +546,10 @@
     "warning_must_register_before_staking": {
         "message": "Debes registrarte antes de poder apostar en una URL.",
         "description": "The text used in a warning box."
+    },
+    "warning_need_wallet_to_withdraw_ilock": {
+        "message": "Advertencia: Sin una dirección de cartera no podrás retirar $$ILOCK que hayas ganado.",
+        "description": "Warning in the wallet information modal."
     },
     "warning_possible_malicious_url_detected": {
         "message": "Posibles URLs maliciosas detectadas:",
@@ -522,77 +586,5 @@
     "why_choose_threat_slayer": {
         "message": "¿Por qué elegir ThreatSlayer?",
         "description": "The text used on the About Us page."
-    },
-    "delete_wallet_address": {
-        "message": "Eliminar Dirección de la Cartera",
-        "description": "Option on the wallet information modal."
-    },
-    "enter_password_to_delete_wallet_address": {
-        "message": "Introduzca la contraseña para eliminar la dirección de la cartera.",
-        "description": "Instruction for deleting wallet address in the wallet information modal."
-    },
-    "error_confirm_must_be_true": {
-        "message": "Error: Debe confirmar antes de continuar.",
-        "description": "Server-side authentication error. This string is not found in extension code."
-    },
-    "error_invalid_credentials": {
-        "message": "Error: Credenciales inválidas.",
-        "description": "Server-side authentication error. This string is not found in extension code."
-    },
-    "error_invalid_email": {
-        "message": "Error: Correo electrónico inválido.",
-        "description": "Server-side authentication error. This string is not found in extension code."
-    },
-    "error_invalid_password": {
-        "message": "Error: Contraseña inválida.",
-        "description": "Server-side authentication error. This string is not found in extension code."
-    },
-    "error_invalid_username": {
-        "message": "Error: Nombre de usuario inválido.",
-        "description": "Server-side authentication error. This string is not found in extension code."
-    },
-    "error_invalid_wallet_address": {
-        "message": "Error: Dirección de cartera inválida.",
-        "description": "Server-side authentication error. This string is not found in extension code."
-    },
-    "error_key_missing": {
-        "message": "Error: Falta información.",
-        "description": "Server-side authentication error. This string is not found in extension code."
-    },
-    "next_ilock_drop": {
-        "message": "Próxima Entrega de $$ILOCK",
-        "description": "Information on the Account page."
-    },
-    "referred_by": {
-        "message": "Referido Por",
-        "description": "Information on the Account page."
-    },
-    "warning_need_wallet_to_withdraw_ilock": {
-        "message": "Advertencia: Sin una dirección de cartera no podrás retirar $$ILOCK que hayas ganado.",
-        "description": "Warning in the wallet information modal."
-    },
-    "click_to_create_wallet": {
-        "message": "Si aún no tienes una, haz clic en 'Crear Monedero' para ser redirigido a la extensión de Chrome de SubWallet. SubWallet es compatible con las recompensas de Ethereum y Aleph Zero $$ILOCK.",
-        "description": "Instruction on wallet page."
-    },
-    "do_this_to_be_protected": {
-        "message": "Haz esto para estar completamente protegido por ThreatSlayer:",
-        "description": "Instruction on wallet page."
-    },
-    "got_it": {
-        "message": "¡Entendido!",
-        "description": "Generic button text."
-    },
-    "enter_wallet_address_optional": {
-        "message": "Opcional: Dirección de monedero compatible con Ethereum o Aleph Zero",
-        "description": "Instruction for registering an account."
-    },
-    "must_create_wallet": {
-        "message": "Para recibir tus recompensas en token $$ILOCK por navegar, debes crear un monedero compatible con Ethereum o Aleph Zero.",
-        "description": "Instruction on wallet page."
-    },
-    "warning_invalid_address": {
-        "message": "Esta no es una dirección de Ethereum o Aleph Zero.",
-        "description": "Warning text for user wallet type."
     }
 }
