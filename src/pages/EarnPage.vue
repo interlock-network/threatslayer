@@ -42,9 +42,7 @@
 
 <script>
 import { debounce } from 'debounce';
-import { decodeAddress, encodeAddress } from '@polkadot/keyring';
 import { getChromeStorage } from '../utilities.js';
-import { hexToU8a, isHex } from '@polkadot/util';
 
 import AddressInput from "./components/inputs/AddressInput.vue";
 import CreateUserButton from "./components/buttons/CreateUserButton.vue";
@@ -181,19 +179,6 @@ export default {
         },
         getUsernameHasError(errorBool) {
             this.usernameHasError = errorBool;
-        },
-        legitPolkadot(wallet) {
-            try {
-                encodeAddress(
-                    isHex(wallet)
-                        ? hexToU8a(wallet)
-                        : decodeAddress(wallet)
-                );
-
-                return true;
-            } catch (_error) {
-                return false;
-            }
         },
         validateReenteredPassword: debounce(function () {
             const { password, reenteredPassword } = this;
