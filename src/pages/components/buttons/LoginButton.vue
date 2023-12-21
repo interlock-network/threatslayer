@@ -21,7 +21,7 @@ export default {
     name: "LoginButton",
     props: {
         checkState: { type: Function, required: true },
-        loginDisabled: { type: Boolean, required: true },
+        hasErrors: { type: Boolean, default: false },
         password: { type: String, default: '' },
         selectPage: { type: Function, required: true },
         username: { type: String, default: '' }
@@ -51,7 +51,7 @@ export default {
             return className;
         },
         disabled() {
-            return this.loginDisabled || this.loggedIn || this.loggingIn;
+            return this.loggedIn || this.loggingIn;
         },
         loginButtonText() {
             const { errorArr, loggedIn: submitted, loggingIn: submitting, status } = this;
@@ -67,48 +67,61 @@ export default {
             return result;
         },
         async submitLogin() {
-            this.loggingIn = true;
+            const { email = '', hasErrors, password, username } = this;
+
             this.errorArr = [];
-            const { email = '', password, username } = this;
-            const requestBody = { email, password, username };
 
-            axios.post(`${baseUrl}/user-login`, requestBody)
-                .then(async response => {
-                    const { allowlist, email, key, status, wallet } = this.extractLoginValues(response);
+            this.$emit('missingSubmitFields', false);
 
-                    this.status = status;
-                    this.loggedIn = true;
-                    this.loggingIn = false;
+            const fieldMissing = !password?.length || !username?.length;
 
-                    // set API key with user's unique key and other values
-                    const addressSet = await setChromeStorage({ walletAddress: wallet });
-                    const allowlistSet = await setChromeStorage({ allowlist });
-                    const emailSet = await setChromeStorage({ email });
-                    const keySet = await setChromeStorage({ apiKey: key });
-                    const setUsername = await setChromeStorage({ username });
+            if (hasErrors) {
+                this.errorArr.push('warning_has_errors');
+            } else if (fieldMissing) {
+                this.errorArr.push('warning_required_fields_missing');
+                this.$emit('missingSubmitFields', true);
+            } else {
+                const requestBody = { email, password, username };
+                this.loggingIn = true;
 
-                    if (addressSet && allowlistSet && emailSet && keySet && setUsername) {
-                        const registeredSynched = await setChromeStorage({ registered: true });
-                        const loggedInSynched = await setChromeStorage({ loggedIn: true });
+                axios.post(`${baseUrl}/user-login`, requestBody)
+                    .then(async response => {
+                        const { allowlist, email, key, status, wallet } = this.extractLoginValues(response);
 
-                        if (registeredSynched && loggedInSynched) {
-                            this.loggedIn = true;
-                            this.loggingIn = false;
+                        this.status = status;
+                        this.loggedIn = true;
+                        this.loggingIn = false;
 
-                            this.checkState();
+                        // set API key with user's unique key and other values
+                        const addressSet = await setChromeStorage({ walletAddress: wallet });
+                        const allowlistSet = await setChromeStorage({ allowlist });
+                        const emailSet = await setChromeStorage({ email });
+                        const keySet = await setChromeStorage({ apiKey: key });
+                        const setUsername = await setChromeStorage({ username });
+
+                        if (addressSet && allowlistSet && emailSet && keySet && setUsername) {
+                            const registeredSynched = await setChromeStorage({ registered: true });
+                            const loggedInSynched = await setChromeStorage({ loggedIn: true });
+
+                            if (registeredSynched && loggedInSynched) {
+                                this.loggedIn = true;
+                                this.loggingIn = false;
+
+                                this.checkState();
+                            }
                         }
-                    }
-                })
-                .catch(error => {
-                    const { errors, status } = extractFromError(error);
+                    })
+                    .catch(error => {
+                        const { errors, status } = extractFromError(error);
 
-                    console.log(`Login error. Status: ${status}. Error: ${errors}`);
+                        console.log(`Login error. Status: ${status}. Error: ${errors}`);
 
-                    this.errorArr = formatErrorMessages(errors);
-                    this.loggedIn = false;
-                    this.loggingIn = false;
-                    this.status = status;
-                });
+                        this.errorArr = formatErrorMessages(errors);
+                        this.loggedIn = false;
+                        this.loggingIn = false;
+                        this.status = status;
+                    });
+            }
         }
     }
 };
