@@ -83,7 +83,7 @@ export default {
                 this.errorArr.push('warning_has_errors');
             } else if (fieldMissing) {
                 // TODO translate this
-                this.errorArr.push('warnining_required_fields_missing');
+                this.errorArr.push('warning_required_fields_missing');
                 this.$emit('missingSubmitFields', true);
             } else {
                 const allowlist = await getChromeStorage('allowlist') || [];
