@@ -10,11 +10,11 @@
         <br />
         <br />
         <UsernameInput @currentUsername="getUsername" @usernameHasError="getUsernameHasError"
-            :missingSubmitFields=missingSubmitFields tabindex="2" />
-        <EmailInput @currentEmail="getEmail" @emailHasError="getEmailHasError" :missingSubmitFields=missingSubmitFields
+            :missingSubmitFields="missingSubmitFields" tabindex="2" />
+        <EmailInput @currentEmail="getEmail" @emailHasError="getEmailHasError" :missingSubmitFields="missingSubmitFields"
             tabindex="4" />
         <SinglePasswordInput @currentPassword="getPassword" @passwordHasError="getPasswordHasError"
-            @inputType="getInputType" :missingSubmitFields=missingSubmitFields tabindex="6" />
+            @inputType="getInputType" :missingSubmitFields="missingSubmitFields" tabindex="6" />
         <!-- password confirmation -->
         <input class="password-input" :type="passwordInputType" @input="validateReenteredPassword"
             :class="reenteredPasswordInputClass" v-model.trim="reenteredPassword"
