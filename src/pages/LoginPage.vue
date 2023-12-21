@@ -6,9 +6,12 @@
     <RegisterLine :checkState="checkState" :selectPage="selectPage" tabindex="12" />
     <br />
     <br />
-    <UsernameInput @currentUsername="getUsername" @usernameHasError="getUsernameHasError" tabindex="2" focus />
-    <SinglePasswordInput @currentPassword="getPassword" @passwordHasError="getPasswordHasError" tabindex="4" />
-    <LoginButton v-bind="{ checkState, loginDisabled, password, selectPage, username }" style="margin-top: 0.75rem;" />
+    <UsernameInput @currentUsername="getUsername" @usernameHasError="getUsernameHasError"
+        :missingSubmitFields="missingSubmitFields" tabindex="2" focus />
+    <SinglePasswordInput @currentPassword="getPassword" @passwordHasError="getPasswordHasError"
+        :missingSubmitFields="missingSubmitFields" tabindex="4" />
+    <LoginButton v-bind="{ checkState, hasErrors, password, selectPage, username }" style="margin-top: 0.75rem;"
+        @missingSubmitFields="getMissingSubmitFields" />
     <br />
     <br />
     <!-- TODO uncomment when available -->
@@ -58,24 +61,23 @@ export default {
     data() {
         return {
             email: '',
-            emailHasError: '',
+            emailHasError: false,
+            hasErrors: false,
+            missingSubmitFields: false,
             password: '',
             passwordHasError: false,
             username: '',
-            usernameHasError: ''
+            usernameHasError: false
         };
     },
     computed: {
         forgotPasswordDisabled() {
             return !this.email || this.emailHasError;
         },
-        loginDisabled() {
-            const { password, passwordHasError, username, usernameHasError } = this;
+        hasErrors() {
+            const { passwordHasError, usernameHasError } = this;
 
-            return !password || passwordHasError || !username.length || usernameHasError;
-        },
-        usernameInputClass() {
-            return this.usernameErrorMessage?.length ? 'generic-error' : '';
+            return passwordHasError || usernameHasError;
         }
     },
     methods: {
@@ -84,6 +86,9 @@ export default {
         },
         getEmailHasError(errorBool) {
             this.emailHasError = errorBool;
+        },
+        getMissingSubmitFields(errorBool) {
+            this.missingSubmitFields = errorBool;
         },
         getPassword(password) {
             this.password = password;
