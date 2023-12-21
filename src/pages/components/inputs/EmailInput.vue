@@ -14,6 +14,7 @@ export default {
         ErrorMessage
     },
     props: {
+        missingSubmitFields: { type: Boolean, default: false },
         placeholder: { type: String, default: 'enter_email' },
         tabindex: { type: Number, default: 4 }
     },
@@ -25,8 +26,19 @@ export default {
     },
     computed: {
         inputClass() {
-            return this.errorMessage?.length ? 'generic-error' : '';
-        },
+            const { email, errorMessage, missingSubmitFields } = this;
+
+            let result = '';
+
+            // error bc a required field is missing
+            if (missingSubmitFields && !email?.length) {
+                result = 'generic-error';
+            } else if (errorMessage?.length) {
+                result = 'generic-error';
+            }
+
+            return result;
+        }
     },
     methods: {
         findEmailError(email = '') {

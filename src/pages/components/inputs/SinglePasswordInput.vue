@@ -18,6 +18,7 @@ export default {
         ErrorMessage
     },
     props: {
+        missingSubmitFields: { type: Boolean, default: false },
         modal: { type: Boolean, default: false },
         placeholder: { type: String, default: 'password' },
         tabindex: { type: Number, default: 4 }
@@ -44,7 +45,18 @@ export default {
             return result;
         },
         passwordInputClass() {
-            return this.errorMessage.length ? 'generic-error' : '';
+            const { errorMessage, missingSubmitFields, password } = this;
+
+            let result = '';
+
+            // error bc a required field is missing
+            if (missingSubmitFields && !password?.length) {
+                result = 'generic-error';
+            } else if (errorMessage?.length) {
+                result = 'generic-error';
+            }
+
+            return result;
         },
         showButtonIndex() {
             return Number.parseInt(this.tabindex) + 1;

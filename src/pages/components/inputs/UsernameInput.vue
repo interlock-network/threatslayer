@@ -16,6 +16,7 @@ export default {
     },
     props: {
         focus: { type: Boolean, default: false },
+        missingSubmitFields: { type: Boolean, default: false },
         placeholderI18n: { type: String, default: undefined },
         tabindex: { type: Number, default: 2 }
     },
@@ -39,7 +40,18 @@ export default {
             return placeholderI18n ? placeholderI18n : defaultPlaceholder;
         },
         usernameInputClass() {
-            return this.errorMessage?.length ? 'generic-error' : '';
+            const { errorMessage, missingSubmitFields, username } = this;
+
+            let result = '';
+
+            // error bc a required field is missing
+            if (missingSubmitFields && !username?.length) {
+                result = 'generic-error';
+            } else if (errorMessage?.length) {
+                result = 'generic-error';
+            }
+
+            return result;
         }
     },
     methods: {
