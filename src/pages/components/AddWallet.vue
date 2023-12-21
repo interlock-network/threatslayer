@@ -2,7 +2,7 @@
     <div @keydown.esc="selectChangeAddress(false)">
         <TextComponent :msg="$i18n(updateAddressMsg)" subinstruction /><br />
         <br />
-        <AddressInput @currentAddress="getAddress" @addressHasError="getaddressHasError" tabindex="2" />
+        <AddressInput @currentAddress="getAddress" @addressHasError="getAddressHasError" tabindex="2" />
         <div style="position: absolute;">
             <SinglePasswordInput @currentPassword="getPassword" @passwordHasError="getPasswordHasError" />
         </div>
@@ -61,7 +61,7 @@ export default {
         getAddress(wallet) {
             this.newWallet = wallet;
         },
-        getaddressHasError(errorBool) {
+        getAddressHasError(errorBool) {
             this.newaddressHasError = errorBool;
         },
         getPassword(password) {

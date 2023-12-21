@@ -249,7 +249,7 @@ input {
 }
 
 .generic-error {
-  border: "3px solid red";
+  border: 1px solid red;
   color: 'red';
 }
 
