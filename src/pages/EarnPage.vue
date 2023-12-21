@@ -9,34 +9,40 @@
         <CreateWalletLine :selectPage="selectPage" tabindex="24" />
         <br />
         <br />
-        <UsernameInput @currentUsername="getUsername" @usernameHasError="getUsernameHasError" tabindex="2" />
-        <EmailInput @currentEmail="getEmail" @emailHasError="getEmailHasError" tabindex="4" />
+        <UsernameInput @currentUsername="getUsername" @usernameHasError="getUsernameHasError"
+            :missingSubmitFields=missingSubmitFields tabindex="2" />
+        <EmailInput @currentEmail="getEmail" @emailHasError="getEmailHasError" :missingSubmitFields=missingSubmitFields
+            tabindex="4" />
         <SinglePasswordInput @currentPassword="getPassword" @passwordHasError="getPasswordHasError"
-            @inputType="getInputType" tabindex="6" />
+            @inputType="getInputType" :missingSubmitFields=missingSubmitFields tabindex="6" />
         <!-- password confirmation -->
         <input class="password-input" :type="passwordInputType" @input="validateReenteredPassword"
             :class="reenteredPasswordInputClass" v-model.trim="reenteredPassword"
             :placeholder="$i18n('enter_password_again')" tabindex="8" required />
         <ErrorMessage v-if="reenteredPasswordErrorMessage.length" :msg="$i18n(reenteredPasswordErrorMessage)" single />
-        <AddressInput @currentAddress="getAddress" @addressHasError="getaddressHasError" tabindex="10" />
+        <AddressInput @currentAddress="getAddress" @addressHasError="getAddressHasError" tabindex="10" />
         <!-- referrer (optional) -->
         <UsernameInput placeholderI18n="enter_referrer_name" @currentUsername="getReferrer"
             @usernameHasError="getReferrerHasError" tabindex="14" />
-        <div class="checkbox-container" style="margin-top: 0.8rem;" @click="focusNextCheckbox">
-            <input id="first-box" type="checkbox" v-model="termsOfService" tabindex="16">
-            <label for="first-box">{{ $i18n('agree_to_our') }}
-                <a href="https://www.interlock.network/terms-of-service" target="_blank">
-                    {{ $i18n('terms_of_service') }} </a>
-            </label>
+        <div id="checkbox-parent-container" :class="checkboxClass">
+            <!-- TODO add missing field check here -->
+            <div class="checkbox-container" style="margin-top: 0.8rem;" @click="focusNextCheckbox">
+                <input id="first-box" type="checkbox" v-model="termsOfService" tabindex="16">
+                <label for="first-box">{{ $i18n('agree_to_our') }}
+                    <a href="https://www.interlock.network/terms-of-service" target="_blank">
+                        {{ $i18n('terms_of_service') }} </a>
+                </label>
+            </div>
+            <!-- TODO add missing field check here -->
+            <div class="checkbox-container">
+                <input id="second-box" type="checkbox" v-model="unitedStates" tabindex="18">
+                <label for="second-box" style="display: inline-flex;">{{ $i18n('affirm_not_us_citizen') }}
+                    <InfoTip :msg="$i18n('crypto_us_warning')" />
+                </label>
+            </div>
         </div>
-        <div class="checkbox-container">
-            <input id="second-box" type="checkbox" v-model="unitedStates" tabindex="18">
-            <label for="second-box" style="display: inline-flex;">{{ $i18n('affirm_not_us_citizen') }}
-                <InfoTip :msg="$i18n('crypto_us_warning')" />
-            </label>
-        </div>
-        <CreateUserButton style="margin-top: 1.1rem;" tabindex="20"
-            v-bind="{ checkState, createUserDisabled, selectPage, email, password, referrer, termsOfService, unitedStates, username, wallet }" />
+        <CreateUserButton style="margin-top: 1.1rem;" tabindex="20" @missingSubmitFields="getMissingSubmitFields"
+            v-bind="{ checkState, hasErrors, selectPage, email, password, referrer, termsOfService, unitedStates, username, wallet }" />
     </div>
 </template>
 
@@ -84,11 +90,12 @@ export default {
     },
     data() {
         return {
-            addressHasError: '',
+            addressHasError: false,
             connectAccountSelected: true,
             createAccountSelected: false,
             email: '',
             emailHasError: false,
+            missingSubmitFields: false,
             pageFaded: false,
             password: '',
             passwordHasError: false,
@@ -100,7 +107,7 @@ export default {
             termsOfService: false,
             unitedStates: false,
             username: '',
-            usernameHasError: '',
+            usernameHasError: false,
             wallet: '',
         };
     },
@@ -117,18 +124,24 @@ export default {
         }
     },
     computed: {
+        checkboxClass() {
+            const { missingSubmitFields, termsOfService, unitedStates } = this;
+
+            let result = '';
+
+            if (missingSubmitFields && (!termsOfService || !unitedStates)) {
+                result = 'generic-error';
+            }
+
+            return result;
+        },
         computedStyle() {
             return this.pageFaded ? { 'opacity': '5%', 'pointer-events': 'none' } : {};
         },
-        createUserDisabled() {
-            const { addressHasError, email, emailHasError, password, passwordHasError, referrerHasError,
-                termsOfService, unitedStates, username, usernameHasError } = this;
+        hasErrors() {
+            const { addressHasError, emailHasError, passwordHasError, referrerHasError, usernameHasError } = this;
 
-            const boxesUnchecked = !termsOfService || !unitedStates;
-            const hasErrors = addressHasError || emailHasError || passwordHasError || referrerHasError || usernameHasError;
-            const missingFields = !email.length || !password.length || !username.length;
-
-            return boxesUnchecked || hasErrors || missingFields;
+            return addressHasError || emailHasError || passwordHasError || referrerHasError || usernameHasError;
         },
         reenteredPasswordInputClass() {
             return this.reenteredPasswordErrorMessage?.length ? 'generic-error' : '';
@@ -150,7 +163,7 @@ export default {
         getAddress(wallet) {
             this.wallet = wallet;
         },
-        getaddressHasError(errorBool) {
+        getAddressHasError(errorBool) {
             this.addressHasError = errorBool;
         },
         getEmail(email) {
@@ -158,6 +171,9 @@ export default {
         },
         getEmailHasError(errorBool) {
             this.emailHasError = errorBool;
+        },
+        getMissingSubmitFields(errorBool) {
+            this.missingSubmitFields = errorBool;
         },
         getPassword(password) {
             this.password = password;
@@ -215,6 +231,11 @@ input:focus {
 
 #bail-container {
     display: block;
+}
+
+#checkbox-parent-container {
+    border-radius: 5px;
+    width: 400px;
 }
 
 #earn-page-top-line {
