@@ -20,7 +20,7 @@ export default {
     name: "CreateUserButton",
     props: {
         checkState: { type: Function, required: true },
-        createUserDisabled: { type: Boolean, default: false },
+        hasErrors: { type: Boolean, default: false },
         email: { type: String, default: '' },
         password: { type: String, default: '' },
         referrer: { type: String, default: '' },
@@ -60,55 +60,72 @@ export default {
             return submitButtonLabels({ errorArr, initialMsg: 'register', submitted, submitting, status });
         },
         disabled() {
-            const { createUserDisabled, submitting, submitted } = this;
+            const { submitting, submitted } = this;
 
-            return createUserDisabled || submitting || submitted;
+            return submitting || submitted;
         }
     },
     methods: {
+        hasMissingFields(fieldArr) {
+            return fieldArr.reduce(field => field === false || !field.length, false);
+        },
         async submitCreateUser() {
+            const { email, hasErrors, password, referrer, termsOfService: terms_of_service, unitedStates: confirmed_not_united_states, username, wallet } = this;
+
             this.errorArr = [];
 
-            const allowlist = await getChromeStorage('allowlist') || [];
-            const { email, password, referrer, termsOfService: terms_of_service, unitedStates: confirmed_not_united_states, username, wallet } = this;
-            this.submitting = true;
+            this.$emit('missingSubmitFields', false);
 
-            // needed bc this endpoint returns a 201 (create) rather than 200
-            const instance = axios.create({
-                validateStatus: (status) => status === 200 || status === 201
-            });
+            const fieldMissing = this.hasMissingFields([confirmed_not_united_states, email, password, terms_of_service, username]);
 
-            instance.post(`${baseUrl}/user-create`,
-                { allowlist, email, password, referrer, terms_of_service, confirmed_not_united_states, username, wallet })
-                .then(async response => {
-                    const { status, data: { key } } = response;
+            if (hasErrors) {
+                // TODO translate this
+                this.errorArr.push('warning_has_errors');
+            } else if (fieldMissing) {
+                // TODO translate this
+                this.errorArr.push('warnining_required_fields_missing');
+                this.$emit('missingSubmitFields', true);
+            } else {
+                const allowlist = await getChromeStorage('allowlist') || [];
+                this.submitting = true;
 
-                    this.status = status;
-                    this.submitted = true;
-                    this.submitting = false;
+                // needed bc this endpoint returns a 201 (create) rather than 200
+                const instance = axios.create({
+                    validateStatus: (status) => status === 200 || status === 201
+                });
 
-                    // set user's values in Chrome extension state unique key
-                    const loggedInSynched = await setChromeStorage({ loggedIn: true });
-                    const registeredSynched = await setChromeStorage({ registered: true });
-                    const setApiKey = await setChromeStorage({ apiKey: key });
-                    const setAddress = await setChromeStorage({ walletAddress: wallet });
-                    const setEmail = await setChromeStorage({ email });
-                    const setUsername = await setChromeStorage({ username });
+                instance.post(`${baseUrl}/user-create`,
+                    { allowlist, email, password, referrer, terms_of_service, confirmed_not_united_states, username, wallet })
+                    .then(async response => {
+                        const { status, data: { key } } = response;
 
-                    if (loggedInSynched & registeredSynched && setApiKey && setAddress && setEmail && setUsername) {
-                        this.checkState();
-                    }
-                })
-                .catch(error => {
-                    const { errors, status } = extractFromError(error);
+                        this.status = status;
+                        this.submitted = true;
+                        this.submitting = false;
 
-                    console.log(`Create user error. Status: ${status}. Error: ${errors}`);
+                        // set user's values in Chrome extension state unique key
+                        const loggedInSynched = await setChromeStorage({ loggedIn: true });
+                        const registeredSynched = await setChromeStorage({ registered: true });
+                        const setApiKey = await setChromeStorage({ apiKey: key });
+                        const setAddress = await setChromeStorage({ walletAddress: wallet });
+                        const setEmail = await setChromeStorage({ email });
+                        const setUsername = await setChromeStorage({ username });
 
-                    this.submitted = false;
-                    this.submitting = false;
-                    this.status = status;
-                    this.errorArr = formatErrorMessages(errors);
-                })
+                        if (loggedInSynched & registeredSynched && setApiKey && setAddress && setEmail && setUsername) {
+                            this.checkState();
+                        }
+                    })
+                    .catch(error => {
+                        const { errors, status } = extractFromError(error);
+
+                        console.log(`Create user error. Status: ${status}. Error: ${errors}`);
+
+                        this.submitted = false;
+                        this.submitting = false;
+                        this.status = status;
+                        this.errorArr = formatErrorMessages(errors);
+                    })
+            }
         }
     }
 };
