@@ -67,7 +67,7 @@ export default {
             deleting: false,
             errorArr: [],
             newWallet: '',
-            newaddressHasError: '',
+            newaddressHasError: false,
             password: '',
             passwordHasError: false
         }
