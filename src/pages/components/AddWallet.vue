@@ -2,7 +2,7 @@
     <div @keydown.esc="selectChangeAddress(false)">
         <TextComponent :msg="$i18n(updateAddressMsg)" subinstruction /><br />
         <br />
-        <AddressInput @currentAddress="getAddress" @addressHasError="getAddressHasError"
+        <AddressInput @currentAddress="getAddress" @addressHasError="getAddressHasError" placeholder="enter_wallet_address"
             :missingSubmitFields="missingSubmitFields" tabindex="2" />
         <div style="position: absolute;">
             <SinglePasswordInput @currentPassword="getPassword" @passwordHasError="getPasswordHasError"
