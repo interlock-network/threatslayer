@@ -22,7 +22,7 @@
         <ErrorMessage v-if="reenteredPasswordErrorMessage.length" :msg="$i18n(reenteredPasswordErrorMessage)" single />
         <AddressInput @currentAddress="getAddress" @addressHasError="getAddressHasError" tabindex="10" />
         <!-- referrer (optional) -->
-        <UsernameInput placeholderI18n="enter_referrer_name" @currentUsername="getReferrer"
+        <UsernameInput placeholder="enter_referrer_name" @currentUsername="getReferrer"
             @usernameHasError="getReferrerHasError" tabindex="14" />
         <div id="checkbox-parent-container" :class="checkboxClass">
             <!-- TODO add missing field check here -->

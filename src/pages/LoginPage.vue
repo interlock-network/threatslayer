@@ -7,7 +7,7 @@
     <br />
     <br />
     <UsernameInput @currentUsername="getUsername" @usernameHasError="getUsernameHasError"
-        :missingSubmitFields="missingSubmitFields" tabindex="2" focus />
+        :missingSubmitFields="missingSubmitFields" placeholder="username" tabindex="2" focus />
     <SinglePasswordInput @currentPassword="getPassword" @passwordHasError="getPasswordHasError"
         :missingSubmitFields="missingSubmitFields" tabindex="4" />
     <LoginButton v-bind="{ checkState, hasErrors, password, selectPage, username }" style="margin-top: 0.75rem;"
