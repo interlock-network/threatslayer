@@ -20,6 +20,7 @@ export default {
         checkState: { type: Function, required: true },
         disableDeleteButton: { type: Boolean, required: true },
         fadeAccountPage: { type: Function, required: true },
+        hasErrors: { type: Boolean, default: false },
         password: { type: String, default: '' },
         setActive: { type: Function, required: true },
         username: { type: String, default: '' }
@@ -48,52 +49,63 @@ export default {
             );
         },
         disabled() {
-            return this.deleting || this.disableDeleteButton;
+            return this.deleting || this.deleted;
         }
     },
     methods: {
         async submitDeleteUser() {
-            const { password, username } = this;
+            const { hasErrors, password, username } = this;
             this.errorArr = [];
 
-            if (password.length) {
-                this.deleting = true;
+            this.$emit('missingSubmitFields', false);
 
-                axios.post(`${baseUrl}/user-delete`, { confirm: true, password, username })
-                    .then(async response => {
-                        const { status } = response.data;
+            const fieldMissing = !password?.length || !username?.length;
 
-                        this.deleted = true;
-                        this.deleting = false;
-                        this.status = status;
+            if (hasErrors) {
+                this.errorArr.push('warning_has_errors');
+            } else if (fieldMissing) {
+                this.errorArr.push('warning_required_fields_missing');
+                this.$emit('missingSubmitFields', true);
+            } else {
+                if (password.length) {
+                    this.deleting = true;
 
-                        const keyClearedFromState = await clearChromeStorage('apiKey');
-                        const loggedOut = await setChromeStorage({ loggedIn: false });
-                        const usernameClearedFromState = await clearChromeStorage('username');
+                    axios.post(`${baseUrl}/user-delete`, { confirm: true, password, username })
+                        .then(async response => {
+                            const { status } = response.data;
 
-                        const deletedSynched = keyClearedFromState && loggedOut && usernameClearedFromState;
-
-                        if (deletedSynched) {
-                            this.setActive(false);
+                            this.deleted = true;
                             this.deleting = false;
+                            this.status = status;
 
-                            const unregistered = await setChromeStorage({ registered: false });
+                            const keyClearedFromState = await clearChromeStorage('apiKey');
+                            const loggedOut = await setChromeStorage({ loggedIn: false });
+                            const usernameClearedFromState = await clearChromeStorage('username');
 
-                            if (unregistered) {
-                                this.checkState();
+                            const deletedSynched = keyClearedFromState && loggedOut && usernameClearedFromState;
+
+                            if (deletedSynched) {
+                                this.setActive(false);
+                                this.deleting = false;
+
+                                const unregistered = await setChromeStorage({ registered: false });
+
+                                if (unregistered) {
+                                    this.checkState();
+                                }
                             }
-                        }
-                    })
-                    .catch(error => {
-                        const { errors, status } = extractFromError(error);
+                        })
+                        .catch(error => {
+                            const { errors, status } = extractFromError(error);
 
-                        console.log(`Delete user error. Status: ${status}. Error: ${errors}`);
+                            console.log(`Delete user error. Status: ${status}. Error: ${errors}`);
 
-                        this.deleting = false;
-                        this.errorArr = formatErrorMessages(errors);
-                        this.status = status;
-                        this.fadeAccountPage(false);
-                    });
+                            this.deleting = false;
+                            this.errorArr = formatErrorMessages(errors);
+                            this.status = status;
+                            this.fadeAccountPage(false);
+                        });
+                }
             }
         }
     }

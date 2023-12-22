@@ -10,11 +10,12 @@
             <TextComponent :msg="$i18n('warning_account_will_be_deleted')" /><br />
             <TextComponent :msg="$i18n('warning_ilock_will_be_lost')" /><br />
             <div id="delete-user-password-input">
-                <SinglePasswordInput placeholder="enter_password_to_delete_account" @currentPassword="getPassword"
+                <SinglePasswordInput placeholder="enter_password_to_delete_account"
+                    :missingSubmitFields="missingSubmitFields" @currentPassword="getPassword"
                     @passwordHasError="getPasswordHasError" />
             </div>
-            <DeleteUserButton v-if="active"
-                v-bind="{ active, checkState, disableDeleteButton, fadeAccountPage, password, setActive, username }" />
+            <DeleteUserButton v-if="active" @missingSubmitFields="getMissingSubmitFields"
+                v-bind="{ active, checkState, disableDeleteButton, fadeAccountPage, hasErrors, password, setActive, username }" />
             <ErrorMessage v-for="error in errorArr" :msg="$i18n(error)" single style="margin-top: 1rem;" />
             <!-- cancel button -->
             <button @click="cancelAction" class="secondary-hollow-button">
@@ -52,6 +53,8 @@ export default {
             errorArr: [],
             deleted: false,
             deleting: false,
+            hasErrors: false,
+            missingSubmitFields: false,
             password: '',
             passwordHasError: false,
             status: 200
@@ -60,6 +63,9 @@ export default {
     computed: {
         disableDeleteButton() {
             return !this.password.length || this.passwordHasError;
+        },
+        hasErrors() {
+            return this.passwordHasError;
         }
     },
     methods: {
@@ -68,6 +74,9 @@ export default {
             this.errorArr = [];
             this.fadeAccountPage(false);
             this.setActive(false);
+        },
+        getMissingSubmitFields(errorBool) {
+            this.missingSubmitFields = errorBool;
         },
         getPassword(password) {
             this.password = password;
