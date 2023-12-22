@@ -33,11 +33,7 @@ import { hexToU8a, isHex } from '@polkadot/util';
 
 import AddWallet from "./AddWallet.vue";
 import DeleteWallet from "./DeleteWallet.vue";
-import SinglePasswordInput from "./inputs/SinglePasswordInput.vue";
-import TextComponent from "./TextComponent.vue";
-import UpdateAddressButton from "./buttons/UpdateAddressButton.vue";
 import WalletList from "./WalletList.vue";
-import WarningTextBox from "./WarningTextBox.vue";
 
 export default {
     name: "WalletInfoModal",
@@ -52,11 +48,7 @@ export default {
     components: {
         AddWallet,
         DeleteWallet,
-        SinglePasswordInput,
-        TextComponent,
-        UpdateAddressButton,
-        WalletList,
-        WarningTextBox
+        WalletList
     },
     data() {
         return {
