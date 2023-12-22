@@ -1,5 +1,5 @@
 <template>
-    <span class="simple-text" :style="style">{{ msg }}</span>
+    <span class="simple-text" :style="computedStyle">{{ msg }}</span>
     <slot />
 </template>
 
@@ -8,7 +8,6 @@ export default {
     name: "TextComponent",
     props: {
         bold: { type: Boolean, default: false },
-        error: { type: Boolean, default: false },
         footer: { type: Boolean, default: false },
         instruction: { type: Boolean, default: false },
         mono: { type: Boolean, default: false },
@@ -17,16 +16,13 @@ export default {
         wallet: { type: Boolean, default: false }
     },
     computed: {
-        style() {
+        computedStyle() {
+            const { bold, footer, mono, subinstruction, wallet } = this;
             let result = {};
-            const { bold, error, footer, mono, subinstruction, wallet } = this;
 
             switch (true) {
                 case bold:
                     result = { "font-weight": "bold" };
-                    break;
-                case error:
-                    result = { "color": "red" };
                     break;
                 case footer:
                     result = {
