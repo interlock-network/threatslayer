@@ -59,7 +59,7 @@ export default {
 
             this.$emit('missingSubmitFields', false);
 
-            const fieldMissing = !password?.length || !username?.length;
+            const fieldMissing = !password?.length;
 
             if (hasErrors) {
                 this.errorArr.push('warning_has_errors');

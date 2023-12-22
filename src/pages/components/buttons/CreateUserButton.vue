@@ -2,9 +2,7 @@
     <div>
         <button @click="submitCreateUser" class="submit-button" :class="computedClass" :disabled="disabled">
             {{ $i18n(submitButtonText) }}
-        </button><br />
-        <br />
-        <br />
+        </button>
         <ErrorMessage v-for="error in errorArr" :msg="$i18n(error)" style="padding-top: 3rem;" single />
     </div>
 </template>
