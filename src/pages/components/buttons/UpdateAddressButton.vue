@@ -20,7 +20,7 @@ export default {
     props: {
         apiKey: { type: String, required: true },
         checkState: { type: Function, required: true },
-        hasError: { type: Boolean, required: true },
+        hasErrors: { type: Boolean, default: false },
         newWallet: { type: String, default: '' },
         password: { type: String, default: '' },
         username: { type: String, default: '' }
@@ -49,9 +49,7 @@ export default {
             return className;
         },
         disabled() {
-            const { hasError, newWallet, submitting, submitted } = this;
-
-            return (hasError || (!newWallet.length) || submitting || submitted);
+            return this.submitting || this.submitted;
         },
         submitButtonText() {
             const { errorArr, submitted, submitting, status } = this;
@@ -63,41 +61,53 @@ export default {
     },
     methods: {
         async submitUpdateAddress() {
+            const { apiKey: key, hasErrors, newWallet, password } = this;
+
             this.errorArr = [];
-            this.submitting = true;
 
-            const { apiKey: key, newWallet, password, username } = this;
+            this.$emit('missingSubmitFields', false);
 
-            axios.post(`${baseUrl}/user-bcaddr-reset`, { key, password, username, wallet: newWallet })
-                .then(async response => {
-                    const { status } = response.data;
-                    let setAddress = false;
+            const fieldMissing = !newWallet?.length || !password?.length;
 
-                    this.status = status;
-                    this.submitted = true;
-                    this.submitting = false;
+            if (hasErrors) {
+                this.errorArr.push('warning_has_errors');
+            } else if (fieldMissing) {
+                this.errorArr.push('warning_required_fields_missing');
+                this.$emit('missingSubmitFields', true);
+            } else {
+                this.submitting = true;
 
-                    // set wallet address in state with user's new address
-                    if (newWallet?.length) {
-                        setAddress = await setChromeStorage({ walletAddress: newWallet });
-                    }
+                axios.post(`${baseUrl}/user-bcaddr-reset`, { key, password, username, wallet: newWallet })
+                    .then(async response => {
+                        const { status } = response.data;
+                        let setAddress = false;
 
-                    if (setAddress) {
-                        this.checkState();
-                    } else {
-                        this.errorArr.push('error_updating_wallet_address_generic');
-                    }
-                })
-                .catch(error => {
-                    const { errors, status } = extractFromError(error);
+                        this.status = status;
+                        this.submitted = true;
+                        this.submitting = false;
 
-                    console.log(`Create user error. Status: ${status}. Error: ${errors}`);
+                        // set wallet address in state with user's new address
+                        if (newWallet?.length) {
+                            setAddress = await setChromeStorage({ walletAddress: newWallet });
+                        }
 
-                    this.errorArr = formatErrorMessages(errors);
-                    this.status = status;
-                    this.submitted = false;
-                    this.submitting = false;
-                });
+                        if (setAddress) {
+                            this.checkState();
+                        } else {
+                            this.errorArr.push('error_updating_wallet_address_generic');
+                        }
+                    })
+                    .catch(error => {
+                        const { errors, status } = extractFromError(error);
+
+                        console.log(`Create user error. Status: ${status}. Error: ${errors}`);
+
+                        this.errorArr = formatErrorMessages(errors);
+                        this.status = status;
+                        this.submitted = false;
+                        this.submitting = false;
+                    });
+            }
         }
     }
 };

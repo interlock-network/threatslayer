@@ -2,15 +2,18 @@
     <div @keydown.esc="selectChangeAddress(false)">
         <TextComponent :msg="$i18n(updateAddressMsg)" subinstruction /><br />
         <br />
-        <AddressInput @currentAddress="getAddress" @addressHasError="getAddressHasError" tabindex="2" />
+        <AddressInput @currentAddress="getAddress" @addressHasError="getAddressHasError"
+            :missingSubmitFields="missingSubmitFields" tabindex="2" />
         <div style="position: absolute;">
-            <SinglePasswordInput @currentPassword="getPassword" @passwordHasError="getPasswordHasError" />
+            <SinglePasswordInput @currentPassword="getPassword" @passwordHasError="getPasswordHasError"
+                :missingSubmitFields="missingSubmitFields" />
         </div>
         <br />
         <WarningTextBox v-if="showAddressChangeWarning" :msg="$i18n('warning_changing_wallet_address')"
             style="margin-top: 3rem;" />
         <UpdateAddressButton tabindex="4" style="margin-top: 3rem; margin-bottom: 1rem;"
-            v-bind="{ apiKey, checkState, hasError, newWallet, password, username }" />
+            v-bind="{ apiKey, checkState, hasErrors, newWallet, password, username }"
+            @missingSubmitFields="getMissingSubmitFields" />
         <button @click="selectChangeAddress(false)" id="cancel-button" class="modal-button" tabindex="6">
             {{ $i18n('cancel') }}
         </button>
@@ -43,14 +46,16 @@ export default {
     },
     data() {
         return {
+            hasErrors: false,
             isClicked: false,
             deleteWalletErrors: [],
+            missingSubmitFields: false,
             password: '',
-            passwordHasError: false,
+            passwordHasError: false
         }
     },
     computed: {
-        hasError() {
+        hasErrors() {
             return this.newaddressHasError || this.passwordHasError;
         },
         showAddressChangeWarning() {
@@ -63,6 +68,9 @@ export default {
         },
         getAddressHasError(errorBool) {
             this.newaddressHasError = errorBool;
+        },
+        getMissingSubmitFields(errorBool) {
+            this.missingSubmitFields = errorBool;
         },
         getPassword(password) {
             this.password = password;
