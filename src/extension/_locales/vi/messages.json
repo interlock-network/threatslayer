@@ -155,6 +155,10 @@
         "message": "Nhập địa chỉ ví mới của bạn.",
         "description": "Instruction for Account page."
     },
+    "enter_password": {
+        "message": "Nhập mật khẩu",
+        "description": "Instruction for registering an account."
+    },
     "enter_password_again": {
         "message": "Nhập lại mật khẩu của bạn",
         "description": "Instruction for registering an account."
@@ -177,6 +181,10 @@
     },
     "enter_username": {
         "message": "Nhập tên đăng nhập",
+        "description": "Instruction for registering an account."
+    },
+    "enter_wallet_address": {
+        "message": "địa chỉ ví tương thích với Ethereum hoặc Aleph Zero",
         "description": "Instruction for registering an account."
     },
     "enter_wallet_address_optional": {
@@ -487,6 +495,10 @@
         "message": "Trạng Thái Đặt Cược URL",
         "description": "Văn bản thông tin trên trang Security Staking."
     },
+    "username": {
+        "message": "Tên đăng nhập",
+        "description": "Hướng dẫn điền vào trường."
+    },
     "username_or_email": {
         "message": "Tên đăng nhập hoặc email",
         "description": "Hướng dẫn điền vào trường."
@@ -518,6 +530,10 @@
     "warning_changing_wallet_address": {
         "message": "Cảnh báo: Việc thay đổi địa chỉ ví hiện tại của bạn có thể làm trễ quá trình truy cập vào $$ILOCK đã gửi trước đó.",
         "description": "Văn bản cảnh báo được sử dụng khi thay đổi địa chỉ ví."
+    },
+    "warning_has_errors": {
+        "message": "Các lỗi phải được giải quyết.",
+        "description": "The text used in the warning banner."
     },
     "warning_header": {
         "message": "Trang web này có thể có hại.",
@@ -554,6 +570,10 @@
     "warning_possible_malicious_url_detected": {
         "message": "Phát hiện URL có khả năng gây hại:",
         "description": "Văn bản được sử dụng trong hộp cảnh báo."
+    },
+    "warning_required_fields_missing": {
+        "message": "Thiếu trường bắt buộc hoặc các trường bắt buộc.",
+        "description": "Warning text for a form."
     },
     "warning_staking_not_available": {
         "message": "Đặt cược bảo mật sẽ sớm được mở!",

@@ -155,6 +155,10 @@
         "message": "Ingresa tu nueva dirección de billetera.",
         "description": "Instruction for Account page."
     },
+    "enter_password": {
+        "message": "Ingresa tu contraseña",
+        "description": "Instruction for registering an account."
+    },
     "enter_password_again": {
         "message": "Ingresa tu contraseña nuevamente",
         "description": "Instruction for registering an account."
@@ -177,6 +181,10 @@
     },
     "enter_username": {
         "message": "Ingresa un nombre de usuario",
+        "description": "Instruction for registering an account."
+    },
+    "enter_wallet_address": {
+        "message": "Dirección de monedero compatible con Ethereum o Aleph Zero",
         "description": "Instruction for registering an account."
     },
     "enter_wallet_address_optional": {
@@ -487,6 +495,10 @@
         "message": "Estado de Staking de URL",
         "description": "Info text on the Security Staking page."
     },
+    "username": {
+        "message": "Nombre de usuario",
+        "description": "Instructions to fill in a field."
+    },
     "username_or_email": {
         "message": "Nombre de usuario o correo electrónico",
         "description": "Instructions to fill in a field."
@@ -518,6 +530,10 @@
     "warning_changing_wallet_address": {
         "message": "Advertencia: Cambiar tu dirección de cartera existente puede retrasar el acceso a $$ILOCK previamente depositados.",
         "description": "Warning text used for changing a wallet address."
+    },
+    "warning_has_errors": {
+        "message": "Los errores deben resolverse.",
+        "description": "The text used in the warning banner."
     },
     "warning_header": {
         "message": "Este sitio web puede ser malicioso.",
@@ -554,6 +570,10 @@
     "warning_possible_malicious_url_detected": {
         "message": "Posibles URLs maliciosas detectadas:",
         "description": "The text used in a warning box."
+    },
+    "warning_required_fields_missing": {
+        "message": "Falta campo o campos obligatorios.",
+        "description": "Warning text for a form."
     },
     "warning_staking_not_available": {
         "message": "¡El staking de seguridad estará disponible pronto!",

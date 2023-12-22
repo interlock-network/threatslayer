@@ -151,6 +151,10 @@
         "message": "输入你的电子邮件以更改密码",
         "description": "Instruction for changing password."
     },
+    "enter_password": {
+        "message": "输入密码",
+        "description": "Instruction for registering an account."
+    },
     "enter_password_again": {
         "message": "再次输入你的密码",
         "description": "Instruction for registering an account."
@@ -177,6 +181,10 @@
     },
     "enter_username": {
         "message": "輸入一個用戶名",
+        "description": "Instruction for registering an account."
+    },
+    "enter_wallet_address": {
+        "message": "以太坊或Aleph Zero兼容的钱包地址",
         "description": "Instruction for registering an account."
     },
     "enter_wallet_address_optional": {
@@ -487,6 +495,10 @@
         "message": "URL质押状态",
         "description": "Info text on the Security Staking page."
     },
+    "username": {
+        "message": "用户名",
+        "description": "Instructions to fill in a field."
+    },
     "username_or_email": {
         "message": "用户名或电子邮件",
         "description": "Instructions to fill in a field."
@@ -519,6 +531,10 @@
         "message": "警告: 更改现有钱包地址可能会延迟访问以前存入的$$ILOCK。",
         "description": "Warning text used for changing a wallet address."
     },
+    "warning_has_errors": {
+        "message": "必须解决错误。",
+        "description": "The text used in the warning banner."
+    },
     "warning_header": {
         "message": "这个网站可能是恶意的。",
         "description": "The text used in the warning banner."
@@ -546,6 +562,10 @@
     "warning_must_register_before_staking": {
         "message": "您必须注册后才能在URL上进行质押。",
         "description": "The text used in a warning box."
+    },
+    "warning_required_fields_missing": {
+        "message": "缺少必填字段。",
+        "description": "Warning text for a form."
     },
     "warning_need_wallet_to_withdraw_ilock": {
         "message": "警告: 没有钱包地址, 您将无法提取您赚取的$$ILOCK。",

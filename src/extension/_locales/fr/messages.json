@@ -155,6 +155,10 @@
         "message": "Entrez votre nouvelle adresse de portefeuille.",
         "description": "Instruction for Account page."
     },
+    "enter_password": {
+        "message": "Entrez un mot de passe",
+        "description": "Instruction for registering an account."
+    },
     "enter_password_again": {
         "message": "Entrez à nouveau votre mot de passe",
         "description": "Instruction for registering an account."
@@ -173,6 +177,10 @@
     },
     "enter_referrer_name": {
         "message": "Optionnel : Entrez le nom d'utilisateur de votre parrain",
+        "description": "Instruction for registering an account."
+    },
+    "enter_wallet_address": {
+        "message": "Adresse de portefeuille compatible Ethereum ou Aleph Zero",
         "description": "Instruction for registering an account."
     },
     "enter_wallet_address_optional": {
@@ -487,6 +495,10 @@
         "message": "Statut du Staking d'URL",
         "description": "Info text on the Security Staking page."
     },
+    "username": {
+        "message": "Nom d'utilisateur",
+        "description": "Instructions to fill in a field."
+    },
     "username_or_email": {
         "message": "Nom d'utilisateur ou email",
         "description": "Instructions to fill in a field."
@@ -518,6 +530,10 @@
     "warning_changing_wallet_address": {
         "message": "Avertissement : Changer votre adresse de portefeuille existante peut retarder l'accès aux $$ILOCK précédemment déposés.",
         "description": "Warning text used for changing a wallet address."
+    },
+    "warning_has_errors": {
+        "message": "Les erreurs doivent être résolues.",
+        "description": "The text used in the warning banner."
     },
     "warning_header": {
         "message": "Ce site Web peut être malveillant.",
@@ -554,6 +570,10 @@
     "warning_possible_malicious_url_detected": {
         "message": "URLs potentiellement malveillantes détectées :",
         "description": "The text used in a warning box."
+    },
+    "warning_required_fields_missing": {
+        "message": "Champ ou champs obligatoires manquants.",
+        "description": "Warning text for a form."
     },
     "warning_staking_not_available": {
         "message": "Le staking de sécurité sera bientôt disponible !",

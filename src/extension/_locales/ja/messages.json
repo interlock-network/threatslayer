@@ -155,6 +155,10 @@
         "message": "新しいウォレットアドレスを入力してください。",
         "description": "アカウントページの指示。"
     },
+    "enter_password": {
+        "message": "パスワードを入力してください",
+        "description": "アカウント登録の指示。"
+    },
     "enter_password_again": {
         "message": "パスワードをもう一度入力してください",
         "description": "アカウント登録の指示。"
@@ -178,6 +182,10 @@
     "enter_username": {
         "message": "ユーザー名を入力してください",
         "description": "アカウント登録の指示。"
+    },
+    "enter_wallet_address": {
+        "message": "EthereumまたはAleph Zero互換のウォレットアドレス",
+        "description": "Instruction for registering an account."
     },
     "enter_wallet_address_optional": {
         "message": "オプション：EthereumまたはAleph Zero互換のウォレットアドレス",
@@ -487,6 +495,10 @@
         "message": "URLステーキングの状態",
         "description": "セキュリティステーキングページ上の情報テキスト。"
     },
+    "username": {
+        "message": "ユーザーネーム",
+        "description": "フィールドに入力するための指示。"
+    },
     "username_or_email": {
         "message": "ユーザーネームまたはメールアドレス",
         "description": "フィールドに入力するための指示。"
@@ -518,6 +530,10 @@
     "warning_changing_wallet_address": {
         "message": "警告: 既存のウォレットアドレスを変更すると、以前に預け入れた$$ILOCKへのアクセスが遅延する可能性があります。",
         "description": "ウォレットアドレスを変更する際に使用される警告テキスト。"
+    },
+    "warning_has_errors": {
+        "message": "エラーを解決する必要があります。",
+        "description": "The text used in the warning banner."
     },
     "warning_header": {
         "message": "このウェブサイトは悪意のあるものかもしれません。",
@@ -554,6 +570,10 @@
     "warning_possible_malicious_url_detected": {
         "message": "悪意のあるURLが検出されました:",
         "description": "The text used in a warning box."
+    },
+    "warning_required_fields_missing": {
+        "message": "必須のフィールドが欠落しています。",
+        "description": "Warning text for a form."
     },
     "warning_staking_not_available": {
         "message": "セキュリティステーキングは近日中に利用可能となります!",

@@ -147,6 +147,10 @@
         "message": "Masukkan alamat dompet baru Anda.",
         "description": "Instruction for Account page."
     },
+    "enter_password": {
+        "message": "Masukkan kata sandi",
+        "description": "Instruction for registering an account."
+    },
     "enter_password_again": {
         "message": "Masukkan kata sandi Anda lagi",
         "description": "Instruction for registering an account."
@@ -177,6 +181,10 @@
     },
     "enter_username": {
         "message": "Masukkan nama pengguna",
+        "description": "Instruction for registering an account."
+    },
+    "enter_wallet_address": {
+        "message": "Alamat dompet yang kompatibel dengan Ethereum atau Aleph Zero",
         "description": "Instruction for registering an account."
     },
     "enter_wallet_address_optional": {
@@ -487,6 +495,10 @@
         "message": "Status Staking URL",
         "description": "Info text on the Security Staking page."
     },
+    "username": {
+        "message": "Nama Pengguna",
+        "description": "Instructions to fill in a field."
+    },
     "username_or_email": {
         "message": "Nama Pengguna atau Email",
         "description": "Instructions to fill in a field."
@@ -518,6 +530,10 @@
     "warning_changing_wallet_address": {
         "message": "Peringatan: Mengubah alamat dompet yang ada dapat menunda akses ke $$ILOCK yang telah disetorkan sebelumnya.",
         "description": "Warning text used for changing a wallet address."
+    },
+    "warning_has_errors": {
+        "message": "Kesalahan harus diperbaiki.",
+        "description": "The text used in the warning banner."
     },
     "warning_header": {
         "message": "Situs web ini mungkin berbahaya.",
@@ -554,6 +570,10 @@
     "warning_possible_malicious_url_detected": {
         "message": "URL yang mungkin berbahaya terdeteksi:",
         "description": "The text used in a warning box."
+    },
+    "warning_required_fields_missing": {
+        "message": "Kolom atau kolom wajib kosong.",
+        "description": "Warning text for a form."
     },
     "warning_staking_not_available": {
         "message": "Staking keamanan akan segera tersedia!",

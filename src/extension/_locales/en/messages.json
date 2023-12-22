@@ -155,6 +155,10 @@
         "message": "Enter your new wallet address.",
         "description": "Instruction for Account page."
     },
+    "enter_password": {
+        "message": "Enter your password",
+        "description": "Instruction for registering an account."
+    },
     "enter_password_again": {
         "message": "Enter your password again",
         "description": "Instruction for registering an account."
@@ -177,6 +181,10 @@
     },
     "enter_username": {
         "message": "Enter a username",
+        "description": "Instruction for registering an account."
+    },
+    "enter_wallet_address": {
+        "message": "Ethereum or Aleph Zero-compatible wallet address",
         "description": "Instruction for registering an account."
     },
     "enter_wallet_address_optional": {
@@ -487,6 +495,10 @@
         "message": "URL Staking Status",
         "description": "Info text on the Security Staking page."
     },
+    "username": {
+        "message": "Username",
+        "description": "Instructions to fill in a field."
+    },
     "username_or_email": {
         "message": "Username or email",
         "description": "Instructions to fill in a field."
@@ -518,6 +530,10 @@
     "warning_changing_wallet_address": {
         "message": "Warning: Changing your existing wallet address may delay access to previously deposited $$ILOCK.",
         "description": "Warning text used for changing a wallet address."
+    },
+    "warning_has_errors": {
+        "message": "Errors must be resolved.",
+        "description": "The text used in the warning banner."
     },
     "warning_header": {
         "message": "This website may be malicious.",
@@ -554,6 +570,10 @@
     "warning_possible_malicious_url_detected": {
         "message": "Possible malicious URLs detected:",
         "description": "The text used in a warning box."
+    },
+    "warning_required_fields_missing": {
+        "message": "Required field or fields are missing.",
+        "description": "Warning text for a form."
     },
     "warning_staking_not_available": {
         "message": "Security staking will be available soon!",

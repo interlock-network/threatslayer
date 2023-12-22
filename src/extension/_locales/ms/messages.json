@@ -155,6 +155,10 @@
         "message": "Masukkan alamat dompet baru anda.",
         "description": "Instruction for Account page."
     },
+    "enter_password": {
+        "message": "Masukkan kata laluan",
+        "description": "Instruction for registering an account."
+    },
     "enter_password_again": {
         "message": "Masukkan semula kata laluan anda",
         "description": "Instruction for registering an account."
@@ -177,6 +181,10 @@
     },
     "enter_username": {
         "message": "Masukkan nama pengguna",
+        "description": "Instruction for registering an account."
+    },
+    "enter_wallet_address": {
+        "message": "Alamat dompet yang serasi dengan Ethereum atau Aleph Zero",
         "description": "Instruction for registering an account."
     },
     "enter_wallet_address_optional": {
@@ -487,6 +495,10 @@
         "message": "Status Penyertaan URL",
         "description": "Info text on the Security Staking page."
     },
+    "username": {
+        "message": "Nama pengguna",
+        "description": "Instructions to fill in a field."
+    },
     "username_or_email": {
         "message": "Nama pengguna atau emel",
         "description": "Instructions to fill in a field."
@@ -518,6 +530,10 @@
     "warning_changing_wallet_address": {
         "message": "Amaran: Mengubah alamat dompet sedia ada anda mungkin melambatkan akses ke $$ILOCK yang telah didepositkan sebelumnya.",
         "description": "Warning text used for changing a wallet address."
+    },
+    "warning_has_errors": {
+        "message": "Ralat harus diselesaikan.",
+        "description": "The text used in the warning banner."
     },
     "warning_header": {
         "message": "Laman web ini mungkin jahat.",
@@ -554,6 +570,10 @@
     "warning_possible_malicious_url_detected": {
         "message": "URL yang mungkin jahat dikesan:",
         "description": "The text used in a warning box."
+    },
+    "warning_required_fields_missing": {
+        "message": "Medan wajib atau medan hilang.",
+        "description": "Warning text for a form."
     },
     "warning_staking_not_available": {
         "message": "Penyertaan keselamatan akan tersedia tidak lama lagi!",
