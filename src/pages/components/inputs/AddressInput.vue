@@ -1,5 +1,5 @@
 <template>
-    <input @input="validateWalletAddress" v-model.trim="wallet" required :class="inputClass"
+    <input @input="validateWalletAddress" v-model.trim="wallet" required :class="addressInputClass"
         :placeholder="$i18n('enter_wallet_address_optional')" :tabindex="tabindex" />
     <ErrorMessage v-if="errorMessage.length" :msg="$i18n(errorMessage)" single />
 </template>
@@ -18,6 +18,7 @@ export default {
         ErrorMessage
     },
     props: {
+        missingSubmitFields: { type: Boolean, default: false },
         tabindex: { type: Number, default: 4 }
     },
     data() {
@@ -27,8 +28,22 @@ export default {
         }
     },
     computed: {
-        inputClass() {
-            return this.errorMessage?.length ? 'generic-error' : '';
+        addressInputClass() {
+            const { errorMessage, missingSubmitFields, wallet } = this;
+
+            console.log('missingSubmitFields, wallet', missingSubmitFields, wallet);
+            let result = '';
+
+            // error bc a required field is missing
+            if (missingSubmitFields && !wallet?.length) {
+                console.log('here');
+                result = 'generic-error';
+            } else if (errorMessage?.length) {
+                result = 'generic-error';
+            }
+
+            console.log('result', result);
+            return result;
         }
     },
     methods: {
