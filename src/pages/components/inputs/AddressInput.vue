@@ -1,6 +1,6 @@
 <template>
     <input @input="validateWalletAddress" v-model.trim="wallet" required :class="addressInputClass"
-        :placeholder="$i18n('enter_wallet_address_optional')" :tabindex="tabindex" />
+        :placeholder="$i18n(placeholder)" :tabindex="tabindex" />
     <ErrorMessage v-if="errorMessage.length" :msg="$i18n(errorMessage)" single />
 </template>
 
@@ -19,6 +19,7 @@ export default {
     },
     props: {
         missingSubmitFields: { type: Boolean, default: false },
+        placeholder: { type: String, default: 'enter_wallet_address_optional' },
         tabindex: { type: Number, default: 4 }
     },
     data() {
