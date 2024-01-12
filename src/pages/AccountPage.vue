@@ -114,10 +114,6 @@ export default {
                         token_earned_balance = 0, token_earned_total = 0, unique_urls = 0, unlocked_urls_confirmed = 0, user_since = 0 } = response?.data;
 
                     this.referred = referred;
-                    // TODO delete this
-                    // this.tokenEarnedBalance = 0;
-                    // this.tokenEarnedTotal = 1337;
-                    // this.nextTokenDrop = 1698508800;
                     this.tokenEarnedBalance = token_earned_balance;
                     this.tokenEarnedTotal = token_earned_total;
                     this.nextTokenDrop = next_token_drop;

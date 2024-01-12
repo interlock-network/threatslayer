@@ -32,18 +32,15 @@ export default {
         addressInputClass() {
             const { errorMessage, missingSubmitFields, wallet } = this;
 
-            console.log('missingSubmitFields, wallet', missingSubmitFields, wallet);
             let result = '';
 
             // error bc a required field is missing
             if (missingSubmitFields && !wallet?.length) {
-                console.log('here');
                 result = 'generic-error';
             } else if (errorMessage?.length) {
                 result = 'generic-error';
             }
 
-            console.log('result', result);
             return result;
         }
     },

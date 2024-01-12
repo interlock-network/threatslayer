@@ -38,7 +38,7 @@ export default {
             chrome.storage.local
                 .set({ maliciousUrlObjects: [] })
                 .then(() => {
-                    console.log('Cleared queue of malicious URL objects.');
+                    console.log(`Cleared queue of malicious URL objects.`);
                 });
 
             this.checkState();
