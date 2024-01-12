@@ -61,7 +61,7 @@ export default {
     },
     methods: {
         async submitUpdateAddress() {
-            const { apiKey: key, hasErrors, newWallet, password } = this;
+            const { apiKey: key, hasErrors, newWallet, password, username } = this;
 
             this.errorArr = [];
 
