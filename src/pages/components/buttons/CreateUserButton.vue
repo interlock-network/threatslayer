@@ -64,8 +64,8 @@ export default {
         }
     },
     methods: {
-        hasMissingFields(fieldArr) {
-            return fieldArr.reduce(field => field === false || !field.length, false);
+        hasMissingText(fieldArr) {
+            return fieldArr.some(field => !field?.length);
         },
         async submitCreateUser() {
             const { email, hasErrors, password, referrer, termsOfService: terms_of_service, unitedStates: confirmed_not_united_states, username, wallet } = this;
@@ -74,13 +74,13 @@ export default {
 
             this.$emit('missingSubmitFields', false);
 
-            const fieldMissing = this.hasMissingFields([confirmed_not_united_states, email, password, terms_of_service, username]);
+            const missingCheck = !confirmed_not_united_states || !terms_of_service;
+            const missingText = this.hasMissingText([email, password, username]);
+            const missingField = missingCheck || missingText;
 
             if (hasErrors) {
-                // TODO translate this
                 this.errorArr.push('warning_has_errors');
-            } else if (fieldMissing) {
-                // TODO translate this
+            } else if (missingField) {
                 this.errorArr.push('warning_required_fields_missing');
                 this.$emit('missingSubmitFields', true);
             } else {
